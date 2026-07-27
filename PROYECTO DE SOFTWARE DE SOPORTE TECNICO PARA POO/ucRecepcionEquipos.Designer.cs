@@ -36,18 +36,26 @@
             lblOrden = new Label();
             pnlCentral = new Panel();
             mcReparacion = new ReaLTaiizor.Controls.MaterialCard();
+            lblReparacion = new Label();
             airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             mcDispositivo = new ReaLTaiizor.Controls.MaterialCard();
+            cmbEstado = new ComboBox();
+            textBox3 = new TextBox();
+            txtSerieImei = new TextBox();
+            txtMarca = new TextBox();
+            txtModelo = new TextBox();
+            lblDispositivo = new Label();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             mcCliente = new ReaLTaiizor.Controls.MaterialCard();
+            lblCliente = new Label();
             txtCorreo = new TextBox();
             txtNumeroTelefonico = new TextBox();
             txtNombre = new TextBox();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             pnlInferior = new Panel();
+            btnCancelar = new FontAwesome.Sharp.IconButton();
             btnGuardarRegistro = new FontAwesome.Sharp.IconButton();
             btnLimpiar = new Button();
-            btnCancelar = new FontAwesome.Sharp.IconButton();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
@@ -145,6 +153,7 @@
             // mcReparacion
             // 
             mcReparacion.BackColor = Color.FromArgb(255, 255, 255);
+            mcReparacion.Controls.Add(lblReparacion);
             mcReparacion.Controls.Add(airSeparator3);
             mcReparacion.Depth = 0;
             mcReparacion.ForeColor = Color.FromArgb(222, 0, 0, 0);
@@ -156,10 +165,19 @@
             mcReparacion.Size = new Size(299, 377);
             mcReparacion.TabIndex = 1;
             // 
+            // lblReparacion
+            // 
+            lblReparacion.AutoSize = true;
+            lblReparacion.Location = new Point(45, 14);
+            lblReparacion.Name = "lblReparacion";
+            lblReparacion.Size = new Size(127, 15);
+            lblReparacion.TabIndex = 6;
+            lblReparacion.Text = "Datos de la Reparación";
+            // 
             // airSeparator3
             // 
             airSeparator3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            airSeparator3.BackColor = Color.FromArgb(15, 144, 157);
+            airSeparator3.BackColor = Color.FromArgb(142, 113, 30);
             airSeparator3.Customization = "";
             airSeparator3.Font = new Font("Verdana", 8F);
             airSeparator3.Image = null;
@@ -174,6 +192,12 @@
             // mcDispositivo
             // 
             mcDispositivo.BackColor = Color.FromArgb(255, 255, 255);
+            mcDispositivo.Controls.Add(cmbEstado);
+            mcDispositivo.Controls.Add(textBox3);
+            mcDispositivo.Controls.Add(txtSerieImei);
+            mcDispositivo.Controls.Add(txtMarca);
+            mcDispositivo.Controls.Add(txtModelo);
+            mcDispositivo.Controls.Add(lblDispositivo);
             mcDispositivo.Controls.Add(airSeparator2);
             mcDispositivo.Depth = 0;
             mcDispositivo.ForeColor = Color.FromArgb(222, 0, 0, 0);
@@ -185,10 +209,66 @@
             mcDispositivo.Size = new Size(299, 377);
             mcDispositivo.TabIndex = 1;
             // 
+            // cmbEstado
+            // 
+            cmbEstado.DisplayMember = "Seleccionar estado...";
+            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
+            cmbEstado.Location = new Point(23, 184);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(256, 23);
+            cmbEstado.TabIndex = 12;
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(157, 135);
+            textBox3.MaxLength = 255;
+            textBox3.Name = "textBox3";
+            textBox3.PlaceholderText = "Ej. Samsung";
+            textBox3.Size = new Size(122, 23);
+            textBox3.TabIndex = 11;
+            // 
+            // txtSerieImei
+            // 
+            txtSerieImei.Location = new Point(23, 135);
+            txtSerieImei.MaxLength = 255;
+            txtSerieImei.Name = "txtSerieImei";
+            txtSerieImei.PlaceholderText = "15 digitos";
+            txtSerieImei.Size = new Size(122, 23);
+            txtSerieImei.TabIndex = 10;
+            // 
+            // txtMarca
+            // 
+            txtMarca.Location = new Point(23, 91);
+            txtMarca.MaxLength = 255;
+            txtMarca.Name = "txtMarca";
+            txtMarca.PlaceholderText = "Ej. Samsung";
+            txtMarca.Size = new Size(122, 23);
+            txtMarca.TabIndex = 9;
+            // 
+            // txtModelo
+            // 
+            txtModelo.Location = new Point(157, 91);
+            txtModelo.MaxLength = 255;
+            txtModelo.Name = "txtModelo";
+            txtModelo.PlaceholderText = "Ej. Galaxy S22";
+            txtModelo.Size = new Size(122, 23);
+            txtModelo.TabIndex = 8;
+            // 
+            // lblDispositivo
+            // 
+            lblDispositivo.AutoSize = true;
+            lblDispositivo.Location = new Point(45, 14);
+            lblDispositivo.Name = "lblDispositivo";
+            lblDispositivo.Size = new Size(117, 15);
+            lblDispositivo.TabIndex = 5;
+            lblDispositivo.Text = "Datos del Dispositivo";
+            // 
             // airSeparator2
             // 
             airSeparator2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            airSeparator2.BackColor = Color.FromArgb(15, 144, 157);
+            airSeparator2.BackColor = Color.FromArgb(98, 86, 159);
             airSeparator2.Customization = "";
             airSeparator2.Font = new Font("Verdana", 8F);
             airSeparator2.Image = null;
@@ -204,6 +284,7 @@
             // mcCliente
             // 
             mcCliente.BackColor = Color.FromArgb(255, 255, 255);
+            mcCliente.Controls.Add(lblCliente);
             mcCliente.Controls.Add(txtCorreo);
             mcCliente.Controls.Add(txtNumeroTelefonico);
             mcCliente.Controls.Add(txtNombre);
@@ -218,9 +299,18 @@
             mcCliente.Size = new Size(299, 377);
             mcCliente.TabIndex = 0;
             // 
+            // lblCliente
+            // 
+            lblCliente.AutoSize = true;
+            lblCliente.Location = new Point(45, 14);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(96, 15);
+            lblCliente.TabIndex = 4;
+            lblCliente.Text = "Datos del Cliente";
+            // 
             // txtCorreo
             // 
-            txtCorreo.Location = new Point(23, 227);
+            txtCorreo.Location = new Point(23, 184);
             txtCorreo.MaxLength = 255;
             txtCorreo.Name = "txtCorreo";
             txtCorreo.PlaceholderText = "correo@ejemplo.com";
@@ -229,7 +319,7 @@
             // 
             // txtNumeroTelefonico
             // 
-            txtNumeroTelefonico.Location = new Point(23, 177);
+            txtNumeroTelefonico.Location = new Point(23, 135);
             txtNumeroTelefonico.MaxLength = 10;
             txtNumeroTelefonico.Name = "txtNumeroTelefonico";
             txtNumeroTelefonico.PlaceholderText = "099 342 5009";
@@ -238,7 +328,7 @@
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(23, 139);
+            txtNombre.Location = new Point(23, 91);
             txtNombre.MaxLength = 255;
             txtNombre.Name = "txtNombre";
             txtNombre.PlaceholderText = "Nombres y apellidos";
@@ -272,6 +362,25 @@
             pnlInferior.Size = new Size(1025, 85);
             pnlInferior.TabIndex = 3;
             // 
+            // btnCancelar
+            // 
+            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCancelar.BackColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.ForeColor = Color.Red;
+            btnCancelar.IconChar = FontAwesome.Sharp.IconChar.Close;
+            btnCancelar.IconColor = Color.Red;
+            btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            btnCancelar.IconSize = 30;
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(760, 22);
+            btnCancelar.Margin = new Padding(0);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(98, 51);
+            btnCancelar.TabIndex = 4;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnCancelar.UseVisualStyleBackColor = false;
+            // 
             // btnGuardarRegistro
             // 
             btnGuardarRegistro.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -294,31 +403,12 @@
             // 
             btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnLimpiar.BackColor = Color.Transparent;
-            btnLimpiar.Location = new Point(592, 22);
+            btnLimpiar.Location = new Point(640, 22);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(108, 51);
             btnLimpiar.TabIndex = 0;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
-            // 
-            // btnCancelar
-            // 
-            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCancelar.BackColor = Color.FromArgb(0, 150, 137);
-            btnCancelar.ForeColor = Color.Red;
-            btnCancelar.IconChar = FontAwesome.Sharp.IconChar.Close;
-            btnCancelar.IconColor = Color.Red;
-            btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            btnCancelar.IconSize = 30;
-            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(756, 22);
-            btnCancelar.Margin = new Padding(0);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(98, 51);
-            btnCancelar.TabIndex = 4;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnCancelar.UseVisualStyleBackColor = false;
             // 
             // ucRecepcionEquipos
             // 
@@ -336,7 +426,9 @@
             pnlInformacion.ResumeLayout(false);
             pnlCentral.ResumeLayout(false);
             mcReparacion.ResumeLayout(false);
+            mcReparacion.PerformLayout();
             mcDispositivo.ResumeLayout(false);
+            mcDispositivo.PerformLayout();
             mcCliente.ResumeLayout(false);
             mcCliente.PerformLayout();
             pnlInferior.ResumeLayout(false);
@@ -366,5 +458,13 @@
         private TextBox txtNumeroTelefonico;
         private TextBox txtNombre;
         private FontAwesome.Sharp.IconButton btnCancelar;
+        private Label lblReparacion;
+        private Label lblDispositivo;
+        private Label lblCliente;
+        private TextBox textBox3;
+        private TextBox txtSerieImei;
+        private TextBox txtMarca;
+        private TextBox txtModelo;
+        private ComboBox cmbEstado;
     }
 }
