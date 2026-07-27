@@ -30,12 +30,12 @@
         {
             pnlIzquierda = new Panel();
             pnlDerecha = new Panel();
+            lblContraseña = new Label();
+            lblUsuario = new Label();
+            txtContraseña = new TextBox();
+            txtUsuario = new TextBox();
             btnAcceder = new Button();
             lblInicioSesion = new Label();
-            txtUsuario = new TextBox();
-            txtContraseña = new TextBox();
-            lblUsuario = new Label();
-            lblContraseña = new Label();
             pnlDerecha.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,6 +59,43 @@
             pnlDerecha.Size = new Size(442, 511);
             pnlDerecha.TabIndex = 1;
             // 
+            // lblContraseña
+            // 
+            lblContraseña.AutoSize = true;
+            lblContraseña.Location = new Point(50, 249);
+            lblContraseña.Name = "lblContraseña";
+            lblContraseña.Size = new Size(67, 15);
+            lblContraseña.TabIndex = 5;
+            lblContraseña.Text = "Contraseña";
+            // 
+            // lblUsuario
+            // 
+            lblUsuario.AutoSize = true;
+            lblUsuario.Location = new Point(50, 186);
+            lblUsuario.Name = "lblUsuario";
+            lblUsuario.Size = new Size(47, 15);
+            lblUsuario.TabIndex = 4;
+            lblUsuario.Text = "Usuario";
+            // 
+            // txtContraseña
+            // 
+            txtContraseña.Location = new Point(52, 269);
+            txtContraseña.MaxLength = 32;
+            txtContraseña.Name = "txtContraseña";
+            txtContraseña.PlaceholderText = "Contraseña";
+            txtContraseña.Size = new Size(343, 23);
+            txtContraseña.TabIndex = 3;
+            txtContraseña.UseSystemPasswordChar = true;
+            // 
+            // txtUsuario
+            // 
+            txtUsuario.Location = new Point(52, 206);
+            txtUsuario.MaxLength = 32;
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.PlaceholderText = "Usuario";
+            txtUsuario.Size = new Size(343, 23);
+            txtUsuario.TabIndex = 2;
+            // 
             // btnAcceder
             // 
             btnAcceder.Location = new Point(164, 300);
@@ -77,42 +114,6 @@
             lblInicioSesion.Size = new Size(108, 15);
             lblInicioSesion.TabIndex = 0;
             lblInicioSesion.Text = "Accede a tu cuenta";
-            // 
-            // txtUsuario
-            // 
-            txtUsuario.Location = new Point(52, 206);
-            txtUsuario.MaxLength = 32;
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.PlaceholderText = "Usuario";
-            txtUsuario.Size = new Size(343, 23);
-            txtUsuario.TabIndex = 2;
-            // 
-            // txtContraseña
-            // 
-            txtContraseña.Location = new Point(52, 269);
-            txtContraseña.MaxLength = 32;
-            txtContraseña.Name = "txtContraseña";
-            txtContraseña.PlaceholderText = "Contraseña";
-            txtContraseña.Size = new Size(343, 23);
-            txtContraseña.TabIndex = 3;
-            // 
-            // lblUsuario
-            // 
-            lblUsuario.AutoSize = true;
-            lblUsuario.Location = new Point(50, 186);
-            lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(47, 15);
-            lblUsuario.TabIndex = 4;
-            lblUsuario.Text = "Usuario";
-            // 
-            // lblContraseña
-            // 
-            lblContraseña.AutoSize = true;
-            lblContraseña.Location = new Point(50, 249);
-            lblContraseña.Name = "lblContraseña";
-            lblContraseña.Size = new Size(67, 15);
-            lblContraseña.TabIndex = 5;
-            lblContraseña.Text = "Contraseña";
             // 
             // frmInicioSesion
             // 
