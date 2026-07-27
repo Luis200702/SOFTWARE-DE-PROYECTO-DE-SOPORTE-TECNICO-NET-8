@@ -306,57 +306,64 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnRecepcionEquipos_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucRecepcionEquipos());
         }
 
         private void btnSeguimientoReparaciones_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucSeguimientoReparaciones());
         }
 
         private void btnDevoluciónEntrega_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucDevolucion());
         }
 
         private void btnGestionStock_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucStock());
         }
 
         private void btnDerivacionOrdenes_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucDerivacion());
         }
 
         private void btnVentaDispositivos_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucVentaDispositivos());
         }
 
         private void btnTradeIn_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucTradeIn());
         }
 
         private void btnHistorialCliente_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucHistorialClientes());
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucReportes());
         }
 
         private void btnGestionUsuarios_Click(object sender, EventArgs e)
         {
-
+            AbrirUserControl(new ucGestionUsuarios());
         }
 
         private void btnConfiguracionGeneral_Click(object sender, EventArgs e)
         {
+            AbrirUserControl(new ucConfiguracion());
+        }
 
+        private void AbrirUserControl(UserControl uc)
+        {
+            pnlInterfaces.Controls.Clear();
+            uc.Dock = DockStyle.Fill;
+            pnlInterfaces.Controls.Add(uc);
         }
 
         private void btnSalirApp_Click(object sender, EventArgs e)

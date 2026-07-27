@@ -48,7 +48,7 @@
             pnlContenedorLogotipo = new Panel();
             pnlContenedorSalir = new Panel();
             btnSalirApp = new ReaLTaiizor.Controls.CyberButton();
-            panel1 = new Panel();
+            pnlInterfaces = new Panel();
             timerDesplazamiento = new System.Windows.Forms.Timer(components);
             pnlContenedorMenu.SuspendLayout();
             pnlContenedorSalir.SuspendLayout();
@@ -56,6 +56,8 @@
             // 
             // pnlContenedorMenu
             // 
+            pnlContenedorMenu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            pnlContenedorMenu.AutoSize = true;
             pnlContenedorMenu.BackColor = Color.FromArgb(11, 17, 30);
             pnlContenedorMenu.Controls.Add(label2);
             pnlContenedorMenu.Controls.Add(lblAdministracion);
@@ -74,7 +76,7 @@
             pnlContenedorMenu.Controls.Add(label1);
             pnlContenedorMenu.Location = new Point(0, 77);
             pnlContenedorMenu.Name = "pnlContenedorMenu";
-            pnlContenedorMenu.Size = new Size(220, 535);
+            pnlContenedorMenu.Size = new Size(223, 535);
             pnlContenedorMenu.TabIndex = 0;
             // 
             // label2
@@ -296,6 +298,7 @@
             // 
             // pnlContenedorSalir
             // 
+            pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorSalir.BackColor = Color.FromArgb(11, 17, 30);
             pnlContenedorSalir.Controls.Add(btnSalirApp);
             pnlContenedorSalir.Location = new Point(0, 612);
@@ -344,12 +347,14 @@
             btnSalirApp.Timer_RGB = 300;
             btnSalirApp.Click += btnSalirApp_Click;
             // 
-            // panel1
+            // pnlInterfaces
             // 
-            panel1.Location = new Point(236, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1008, 686);
-            panel1.TabIndex = 3;
+            pnlInterfaces.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlInterfaces.AutoSize = true;
+            pnlInterfaces.Location = new Point(220, 0);
+            pnlInterfaces.Name = "pnlInterfaces";
+            pnlInterfaces.Size = new Size(1024, 686);
+            pnlInterfaces.TabIndex = 3;
             // 
             // timerDesplazamiento
             // 
@@ -361,7 +366,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 28, 44);
             ClientSize = new Size(1242, 686);
-            Controls.Add(panel1);
+            Controls.Add(pnlInterfaces);
             Controls.Add(pnlContenedorSalir);
             Controls.Add(pnlContenedorLogotipo);
             Controls.Add(pnlContenedorMenu);
@@ -371,6 +376,7 @@
             pnlContenedorMenu.ResumeLayout(false);
             pnlContenedorSalir.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -394,7 +400,7 @@
         private Label label1;
         private Label label2;
         private ReaLTaiizor.Controls.CyberButton btnSalirApp;
-        private Panel panel1;
+        private Panel pnlInterfaces;
         private System.Windows.Forms.Timer timerDesplazamiento;
     }
 }

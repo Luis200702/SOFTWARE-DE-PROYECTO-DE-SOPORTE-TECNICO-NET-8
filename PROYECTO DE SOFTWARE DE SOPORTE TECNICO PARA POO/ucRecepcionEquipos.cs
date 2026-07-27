@@ -16,5 +16,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             InitializeComponent();
         }
+
+        private void ucRecepcionEquipos_Load(object sender, EventArgs e)
+        {
+            lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
+        }
     }
 }
