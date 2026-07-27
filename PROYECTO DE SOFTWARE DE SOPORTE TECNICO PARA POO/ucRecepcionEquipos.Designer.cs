@@ -1,16 +1,16 @@
 ﻿namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
-    partial class frmMenu
+    partial class ucRecepcionEquipos
     {
-        /// <summary>
-        /// Required designer variable.
+        /// <summary> 
+        /// Variable del diseñador necesaria.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
+        /// <summary> 
+        /// Limpiar los recursos que se estén usando.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,25 +20,22 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Código generado por el Diseñador de componentes
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// <summary> 
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido de este método con el editor de código.
         /// </summary>
         private void InitializeComponent()
         {
             SuspendLayout();
             // 
-            // frmMenu
+            // ucRecepcionEquipos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
-            ClientSize = new Size(1242, 686);
-            Name = "frmMenu";
-            Text = "Menu Principal";
-            FormClosing += frmMenu_FormClosing;
+            Name = "ucRecepcionEquipos";
+            Size = new Size(1025, 686);
             ResumeLayout(false);
         }
 
