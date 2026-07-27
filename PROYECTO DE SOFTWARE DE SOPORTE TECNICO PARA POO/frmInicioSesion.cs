@@ -9,9 +9,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-            frmMenu menuPrincipal = new frmMenu();
-            menuPrincipal.Show();
-            this.Hide();
+            if (txtUsuario.Text == "admin" && txtContraseña.Text == "admin")
+            {
+                frmMenu menuPrincipal = new frmMenu();
+                menuPrincipal.Show();
+                this.Hide();
+
+            }
+            else
+            {
+                MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }

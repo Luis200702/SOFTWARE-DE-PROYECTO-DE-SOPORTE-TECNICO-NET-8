@@ -30,8 +30,12 @@
         {
             pnlIzquierda = new Panel();
             pnlDerecha = new Panel();
-            lblInicioSesion = new Label();
             btnAcceder = new Button();
+            lblInicioSesion = new Label();
+            txtUsuario = new TextBox();
+            txtContraseña = new TextBox();
+            lblUsuario = new Label();
+            lblContraseña = new Label();
             pnlDerecha.SuspendLayout();
             SuspendLayout();
             // 
@@ -44,21 +48,16 @@
             // 
             // pnlDerecha
             // 
+            pnlDerecha.Controls.Add(lblContraseña);
+            pnlDerecha.Controls.Add(lblUsuario);
+            pnlDerecha.Controls.Add(txtContraseña);
+            pnlDerecha.Controls.Add(txtUsuario);
             pnlDerecha.Controls.Add(btnAcceder);
             pnlDerecha.Controls.Add(lblInicioSesion);
             pnlDerecha.Location = new Point(442, 0);
             pnlDerecha.Name = "pnlDerecha";
             pnlDerecha.Size = new Size(442, 511);
             pnlDerecha.TabIndex = 1;
-            // 
-            // lblInicioSesion
-            // 
-            lblInicioSesion.AutoSize = true;
-            lblInicioSesion.Location = new Point(161, 53);
-            lblInicioSesion.Name = "lblInicioSesion";
-            lblInicioSesion.Size = new Size(108, 15);
-            lblInicioSesion.TabIndex = 0;
-            lblInicioSesion.Text = "Accede a tu cuenta";
             // 
             // btnAcceder
             // 
@@ -69,6 +68,51 @@
             btnAcceder.Text = "Acceder";
             btnAcceder.UseVisualStyleBackColor = true;
             btnAcceder.Click += btnAcceder_Click;
+            // 
+            // lblInicioSesion
+            // 
+            lblInicioSesion.AutoSize = true;
+            lblInicioSesion.Location = new Point(161, 53);
+            lblInicioSesion.Name = "lblInicioSesion";
+            lblInicioSesion.Size = new Size(108, 15);
+            lblInicioSesion.TabIndex = 0;
+            lblInicioSesion.Text = "Accede a tu cuenta";
+            // 
+            // txtUsuario
+            // 
+            txtUsuario.Location = new Point(52, 206);
+            txtUsuario.MaxLength = 32;
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.PlaceholderText = "Usuario";
+            txtUsuario.Size = new Size(343, 23);
+            txtUsuario.TabIndex = 2;
+            // 
+            // txtContraseña
+            // 
+            txtContraseña.Location = new Point(52, 269);
+            txtContraseña.MaxLength = 32;
+            txtContraseña.Name = "txtContraseña";
+            txtContraseña.PlaceholderText = "Contraseña";
+            txtContraseña.Size = new Size(343, 23);
+            txtContraseña.TabIndex = 3;
+            // 
+            // lblUsuario
+            // 
+            lblUsuario.AutoSize = true;
+            lblUsuario.Location = new Point(50, 186);
+            lblUsuario.Name = "lblUsuario";
+            lblUsuario.Size = new Size(47, 15);
+            lblUsuario.TabIndex = 4;
+            lblUsuario.Text = "Usuario";
+            // 
+            // lblContraseña
+            // 
+            lblContraseña.AutoSize = true;
+            lblContraseña.Location = new Point(50, 249);
+            lblContraseña.Name = "lblContraseña";
+            lblContraseña.Size = new Size(67, 15);
+            lblContraseña.TabIndex = 5;
+            lblContraseña.Text = "Contraseña";
             // 
             // frmInicioSesion
             // 
@@ -91,5 +135,9 @@
         private Panel pnlDerecha;
         private Label lblInicioSesion;
         private Button btnAcceder;
+        private Label lblContraseña;
+        private Label lblUsuario;
+        private TextBox txtContraseña;
+        private TextBox txtUsuario;
     }
 }
