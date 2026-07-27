@@ -87,6 +87,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 botonActivo = btn;
                 botonActivo.ForeColor = Color.White; // Destacar texto del botón seleccionado
+                progresoAnchoObjetivo = 0f;          // Ocultar hover inmediatamente al hacer clic
                 pnlContenedorMenu.Invalidate();      // Redibujar panel para mostrar el degradado
             }
         }
@@ -105,27 +106,23 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             // =========================================================================
             if (botonActivo != null)
             {
-                int altoActivo = botonActivo.Height;
-                int radioActivo = altoActivo;
-                float rCornerBaseActivo = 16f;
-                int xObjetivoActivo = botonActivo.Left;
+                float xActivo = botonActivo.Left;
                 float yActivo = botonActivo.Top;
+                float anchoActivo = botonActivo.Width;
+                float altoActivo = botonActivo.Height;
+                float radioActivo = altoActivo / 2f;
 
-                float distanciaDisponibleActiva = anchoTotal - (xObjetivoActivo + radioActivo / 2f);
-                float rCornerActivo = Math.Max(0f, Math.Min(rCornerBaseActivo, distanciaDisponibleActiva));
-
-                using (GraphicsPath pathActivo = CrearPathCapsula(xObjetivoActivo, yActivo, altoActivo, radioActivo, rCornerActivo, anchoTotal))
+                using (GraphicsPath pathActivo = CrearPathHoverBoton(xActivo, yActivo, anchoActivo, altoActivo, radioActivo))
                 {
-                    RectangleF rectGradiente = new RectangleF(xObjetivoActivo, yActivo, anchoTotal - xObjetivoActivo, altoActivo);
+                    RectangleF rectGradiente = new RectangleF(xActivo, yActivo, anchoActivo, altoActivo);
                     if (rectGradiente.Width > 1)
                     {
-                        Color colorInicio = ColorTranslator.FromHtml("#52C4B1"); // Color claro/brillante       El original si quiero = #6FE6D0
-                        Color colorFin = Color.FromArgb(0, 74, 92, 92);         // Transparente a la derecha
+                        Color colorInicio = ColorTranslator.FromHtml("#2F7C70"); // Color claro/brillante             Otro si quiero: #3E9B8B
+                        Color colorFin = Color.FromArgb(0, 74, 92, 98);         // Transparente a la derecha
 
                         using (LinearGradientBrush brushGradiente = new LinearGradientBrush(
                             rectGradiente, colorInicio, colorFin, LinearGradientMode.Horizontal))
                         {
-                            // Coloreado más de la mitad (55%) y luego se va desvaneciendo progresivamente
                             ColorBlend blend = new ColorBlend();
                             blend.Colors = new Color[] {
                                 colorInicio,
@@ -142,27 +139,26 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
 
             // =========================================================================
-            // 2. DIBUJAR ANIMACIÓN FLOTANTE ORIGINAL (HOVER AL PASAR EL CURSOR)
+            // 2. DIBUJAR ANIMACIÓN FLOTANTE (HOVER) LIMITADA EXCLUSIVAMENTE AL ÁREA DEL BOTÓN
             // =========================================================================
             if (progresoAncho > 0.001f)
             {
                 System.Windows.Forms.Button btn = botonSeleccionado ?? ultimoBotonActivo;
-                if (btn != null)
+                if (btn != null && btn != botonActivo)
                 {
-                    int alto = btn.Height;
-                    int radio = alto;
-                    float rCornerBase = 16f;
-                    int xObjetivo = btn.Left;
-
-                    float xCalculado = anchoTotal - (anchoTotal - xObjetivo) * progresoAncho;
+                    float xBtn = btn.Left;
                     float y = posicionActualY;
+                    float anchoMax = btn.Width;
+                    float alto = btn.Height;
 
-                    float distanciaDisponible = anchoTotal - (xCalculado + radio / 2f);
-                    float rCorner = Math.Max(0f, Math.Min(rCornerBase * progresoAncho, distanciaDisponible));
+                    // Animación de ancho y desplazamiento dentro del botón (retracción a la derecha / entrada a la izquierda)
+                    float anchoActual = anchoMax * progresoAncho;
+                    float xActual = xBtn + (anchoMax - anchoActual);
+                    float radio = alto / 2f;
 
-                    Color colorCapsula = Color.FromArgb(26, 28, 44); // Color original
+                    Color colorCapsula = Color.FromArgb(25, 255, 255, 255); // Blanco leve y translúcido
 
-                    using (GraphicsPath pathHover = CrearPathCapsula(xCalculado, y, alto, radio, rCorner, anchoTotal))
+                    using (GraphicsPath pathHover = CrearPathHoverBoton(xActual, y, anchoActual, alto, radio))
                     {
                         using (SolidBrush brush = new SolidBrush(colorCapsula))
                         {
@@ -175,7 +171,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             e.Graphics.ResetClip();
         }
 
-        // Método auxiliar para construir la figura geométrica cóncava original
+        // Método auxiliar para la figura cóncava original del Click (Conservado por compatibilidad)
         private GraphicsPath CrearPathCapsula(float xCalculado, float y, int alto, int radio, float rCorner, int anchoTotal)
         {
             GraphicsPath path = new GraphicsPath();
@@ -183,16 +179,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             if (rCorner > 0.5f)
             {
-                // 1. Curva cóncava superior derecha
                 path.AddArc(anchoTotal - 2 * rCorner, y - 2 * rCorner, 2 * rCorner, 2 * rCorner, 0, 90);
-
-                // 2. Semicírculo del extremo izquierdo
                 path.AddArc(xCalculado, y, radio, radio, 270, -180);
-
-                // 3. Curva cóncava inferior derecha
                 path.AddArc(anchoTotal - 2 * rCorner, y + alto, 2 * rCorner, 2 * rCorner, 270, 90);
-
-                // 4. Cierre del borde derecho vertical
                 path.AddLine(anchoTotal, y + alto + rCorner, anchoTotal, y - rCorner);
             }
             else
@@ -207,17 +196,46 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             return path;
         }
 
-        // EVENTO MOUSE ENTER: Activa y despliega la pestaña original al posicionarse en un botón del menú
+        // Método auxiliar para construir la forma redondeada del Hover exclusivamente dentro del botón
+        private GraphicsPath CrearPathHoverBoton(float x, float y, float ancho, float alto, float radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+            if (ancho <= 0 || alto <= 0) return path;
+
+            radio = Math.Min(radio, Math.Min(ancho / 2f, alto / 2f));
+            if (radio < 0) radio = 0;
+
+            path.StartFigure();
+            path.AddArc(x, y, 2 * radio, 2 * radio, 90, 180);
+            path.AddLine(x + radio, y, x + ancho - radio, y);
+            path.AddArc(x + ancho - 2 * radio, y, 2 * radio, 2 * radio, 270, 180);
+            path.AddLine(x + ancho - radio, y + alto, x + radio, y + alto);
+            path.CloseFigure();
+            return path;
+        }
+
+        // EVENTO MOUSE ENTER: Activa y despliega la pestaña al posicionarse en un botón del menú
         private void BotonMenu_MouseEnter(object sender, EventArgs e)
         {
             if (sender is System.Windows.Forms.Button btn)
             {
+                if (btn == botonActivo)
+                {
+                    if (botonSeleccionado != null && botonSeleccionado != botonActivo)
+                    {
+                        botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#9BA8AB");
+                    }
+                    botonSeleccionado = null;
+                    progresoAnchoObjetivo = 0f;
+                    timerDesplazamiento.Start();
+                    return;
+                }
+
                 if (botonSeleccionado != null && botonSeleccionado != btn && botonSeleccionado != botonActivo)
                 {
                     botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#9BA8AB");
                 }
 
-                // Si viene de estar completamente oculto, ajusta la altura Y inmediatamente al botón
                 if (progresoAnchoObjetivo == 0f && progresoAncho == 0f)
                 {
                     posicionActualY = btn.Top;
@@ -232,7 +250,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
 
                 posicionObjetivoY = btn.Top;
-                progresoAnchoObjetivo = 1.0f; // Expandir a la izquierda
+                progresoAnchoObjetivo = 1.0f; // Expandir
 
                 timerDesplazamiento.Start();
             }
@@ -241,11 +259,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // ANIMACIÓN Y VALIDACIÓN CONTINUA DEL MOUSE
         private void timerDesplazamiento_Tick(object sender, EventArgs e)
         {
-            // Validar de forma directa si el cursor físico está dentro de pnlContenedorMenu
             Point posicionMouse = pnlContenedorMenu.PointToClient(Cursor.Position);
             bool estaDentroDelPanel = pnlContenedorMenu.ClientRectangle.Contains(posicionMouse);
 
-            // Si el cursor NO está dentro del panel, forzar contraer a la derecha
             if (!estaDentroDelPanel)
             {
                 if (botonSeleccionado != null && botonSeleccionado != botonActivo)
@@ -253,7 +269,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#9BA8AB");
                     botonSeleccionado = null;
                 }
-                progresoAnchoObjetivo = 0.0f; // Recoger hacia la derecha
+                progresoAnchoObjetivo = 0.0f; // Contraer
             }
 
             bool huboMovimiento = false;
@@ -282,7 +298,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 progresoAncho = progresoAnchoObjetivo;
             }
 
-            // Cuando la pestaña se repliega por completo (0.0) y el mouse sigue fuera, apagamos el Timer
             if (progresoAncho <= 0.001f && progresoAnchoObjetivo == 0f)
             {
                 progresoAncho = 0f;
@@ -292,7 +307,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            // Redibujar solo mientras haya movimiento activo
             if (huboMovimiento)
             {
                 pnlContenedorMenu.Invalidate();

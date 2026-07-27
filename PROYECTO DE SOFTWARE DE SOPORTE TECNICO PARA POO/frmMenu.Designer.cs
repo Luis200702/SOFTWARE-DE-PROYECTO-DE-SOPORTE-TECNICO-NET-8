@@ -35,6 +35,7 @@
             lblAdministracion = new Label();
             lblComercial = new Label();
             btnConfiguracionGeneral = new Button();
+            imageListBarrraMenu = new ImageList(components);
             btnGestionUsuarios = new Button();
             btnReportes = new Button();
             btnHistorialCliente = new Button();
@@ -45,7 +46,6 @@
             btnDevoluciónEntrega = new Button();
             btnSeguimientoReparaciones = new Button();
             btnRecepcionEquipos = new Button();
-            imageListBarrraMenu = new ImageList(components);
             label1 = new Label();
             pnlContenedorLogotipo = new Panel();
             pnlContenedorSalir = new Panel();
@@ -122,7 +122,7 @@
             btnConfiguracionGeneral.ForeColor = Color.FromArgb(155, 168, 171);
             btnConfiguracionGeneral.ImageIndex = 10;
             btnConfiguracionGeneral.ImageList = imageListBarrraMenu;
-            btnConfiguracionGeneral.Location = new Point(30, 490);
+            btnConfiguracionGeneral.Location = new Point(15, 490);
             btnConfiguracionGeneral.Name = "btnConfiguracionGeneral";
             btnConfiguracionGeneral.Size = new Size(190, 35);
             btnConfiguracionGeneral.TabIndex = 13;
@@ -131,186 +131,6 @@
             btnConfiguracionGeneral.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnConfiguracionGeneral.UseVisualStyleBackColor = false;
             btnConfiguracionGeneral.Click += btnConfiguracionGeneral_Click;
-            // 
-            // btnGestionUsuarios
-            // 
-            btnGestionUsuarios.BackColor = Color.Transparent;
-            btnGestionUsuarios.FlatStyle = FlatStyle.Flat;
-            btnGestionUsuarios.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnGestionUsuarios.ForeColor = Color.FromArgb(155, 168, 171);
-            btnGestionUsuarios.ImageIndex = 9;
-            btnGestionUsuarios.ImageList = imageListBarrraMenu;
-            btnGestionUsuarios.Location = new Point(30, 449);
-            btnGestionUsuarios.Name = "btnGestionUsuarios";
-            btnGestionUsuarios.Size = new Size(190, 35);
-            btnGestionUsuarios.TabIndex = 12;
-            btnGestionUsuarios.Text = "   Gestión de Usuarios            ";
-            btnGestionUsuarios.TextAlign = ContentAlignment.MiddleLeft;
-            btnGestionUsuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnGestionUsuarios.UseVisualStyleBackColor = false;
-            btnGestionUsuarios.Click += btnGestionUsuarios_Click;
-            // 
-            // btnReportes
-            // 
-            btnReportes.BackColor = Color.Transparent;
-            btnReportes.FlatStyle = FlatStyle.Flat;
-            btnReportes.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReportes.ForeColor = Color.FromArgb(155, 168, 171);
-            btnReportes.ImageIndex = 8;
-            btnReportes.ImageList = imageListBarrraMenu;
-            btnReportes.Location = new Point(30, 408);
-            btnReportes.Name = "btnReportes";
-            btnReportes.Size = new Size(190, 35);
-            btnReportes.TabIndex = 11;
-            btnReportes.Text = "   Reportes                                     ";
-            btnReportes.TextAlign = ContentAlignment.MiddleLeft;
-            btnReportes.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnReportes.UseVisualStyleBackColor = false;
-            btnReportes.Click += btnReportes_Click;
-            // 
-            // btnHistorialCliente
-            // 
-            btnHistorialCliente.BackColor = Color.Transparent;
-            btnHistorialCliente.FlatStyle = FlatStyle.Flat;
-            btnHistorialCliente.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnHistorialCliente.ForeColor = Color.FromArgb(155, 168, 171);
-            btnHistorialCliente.ImageIndex = 7;
-            btnHistorialCliente.ImageList = imageListBarrraMenu;
-            btnHistorialCliente.Location = new Point(30, 331);
-            btnHistorialCliente.Name = "btnHistorialCliente";
-            btnHistorialCliente.Size = new Size(190, 35);
-            btnHistorialCliente.TabIndex = 10;
-            btnHistorialCliente.Text = "   Historial de Clientes                ";
-            btnHistorialCliente.TextAlign = ContentAlignment.MiddleLeft;
-            btnHistorialCliente.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnHistorialCliente.UseVisualStyleBackColor = false;
-            btnHistorialCliente.Click += btnHistorialCliente_Click;
-            // 
-            // btnTradeIn
-            // 
-            btnTradeIn.BackColor = Color.Transparent;
-            btnTradeIn.FlatStyle = FlatStyle.Flat;
-            btnTradeIn.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnTradeIn.ForeColor = Color.FromArgb(155, 168, 171);
-            btnTradeIn.ImageIndex = 6;
-            btnTradeIn.ImageList = imageListBarrraMenu;
-            btnTradeIn.Location = new Point(30, 290);
-            btnTradeIn.Name = "btnTradeIn";
-            btnTradeIn.Size = new Size(190, 35);
-            btnTradeIn.TabIndex = 9;
-            btnTradeIn.Text = "   Trade-In                                         ";
-            btnTradeIn.TextAlign = ContentAlignment.MiddleLeft;
-            btnTradeIn.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnTradeIn.UseVisualStyleBackColor = false;
-            btnTradeIn.Click += btnTradeIn_Click;
-            // 
-            // btnVentaDispositivos
-            // 
-            btnVentaDispositivos.BackColor = Color.Transparent;
-            btnVentaDispositivos.FlatStyle = FlatStyle.Flat;
-            btnVentaDispositivos.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnVentaDispositivos.ForeColor = Color.FromArgb(155, 168, 171);
-            btnVentaDispositivos.ImageIndex = 5;
-            btnVentaDispositivos.ImageList = imageListBarrraMenu;
-            btnVentaDispositivos.Location = new Point(30, 249);
-            btnVentaDispositivos.Name = "btnVentaDispositivos";
-            btnVentaDispositivos.Size = new Size(190, 35);
-            btnVentaDispositivos.TabIndex = 8;
-            btnVentaDispositivos.Text = "   Venta de Dispositivos            ";
-            btnVentaDispositivos.TextAlign = ContentAlignment.MiddleLeft;
-            btnVentaDispositivos.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnVentaDispositivos.UseVisualStyleBackColor = false;
-            btnVentaDispositivos.Click += btnVentaDispositivos_Click;
-            // 
-            // btnDerivacionOrdenes
-            // 
-            btnDerivacionOrdenes.BackColor = Color.Transparent;
-            btnDerivacionOrdenes.FlatStyle = FlatStyle.Flat;
-            btnDerivacionOrdenes.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDerivacionOrdenes.ForeColor = Color.FromArgb(155, 168, 171);
-            btnDerivacionOrdenes.ImageIndex = 4;
-            btnDerivacionOrdenes.ImageList = imageListBarrraMenu;
-            btnDerivacionOrdenes.Location = new Point(30, 171);
-            btnDerivacionOrdenes.Name = "btnDerivacionOrdenes";
-            btnDerivacionOrdenes.Size = new Size(190, 35);
-            btnDerivacionOrdenes.TabIndex = 7;
-            btnDerivacionOrdenes.Text = "   Derivación entre Sucursales ";
-            btnDerivacionOrdenes.TextAlign = ContentAlignment.MiddleLeft;
-            btnDerivacionOrdenes.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnDerivacionOrdenes.UseVisualStyleBackColor = false;
-            btnDerivacionOrdenes.Click += btnDerivacionOrdenes_Click;
-            // 
-            // btnGestionStock
-            // 
-            btnGestionStock.BackColor = Color.Transparent;
-            btnGestionStock.FlatStyle = FlatStyle.Flat;
-            btnGestionStock.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnGestionStock.ForeColor = Color.FromArgb(155, 168, 171);
-            btnGestionStock.ImageIndex = 3;
-            btnGestionStock.ImageList = imageListBarrraMenu;
-            btnGestionStock.Location = new Point(30, 130);
-            btnGestionStock.Name = "btnGestionStock";
-            btnGestionStock.Size = new Size(190, 35);
-            btnGestionStock.TabIndex = 6;
-            btnGestionStock.Text = "   Control de Stock                            ";
-            btnGestionStock.TextAlign = ContentAlignment.MiddleLeft;
-            btnGestionStock.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnGestionStock.UseVisualStyleBackColor = false;
-            btnGestionStock.Click += btnGestionStock_Click;
-            // 
-            // btnDevoluciónEntrega
-            // 
-            btnDevoluciónEntrega.BackColor = Color.Transparent;
-            btnDevoluciónEntrega.FlatStyle = FlatStyle.Flat;
-            btnDevoluciónEntrega.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDevoluciónEntrega.ForeColor = Color.FromArgb(155, 168, 171);
-            btnDevoluciónEntrega.ImageIndex = 2;
-            btnDevoluciónEntrega.ImageList = imageListBarrraMenu;
-            btnDevoluciónEntrega.Location = new Point(30, 89);
-            btnDevoluciónEntrega.Name = "btnDevoluciónEntrega";
-            btnDevoluciónEntrega.Size = new Size(190, 35);
-            btnDevoluciónEntrega.TabIndex = 5;
-            btnDevoluciónEntrega.Text = "   Devolución / Entrega                    ";
-            btnDevoluciónEntrega.TextAlign = ContentAlignment.MiddleLeft;
-            btnDevoluciónEntrega.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnDevoluciónEntrega.UseVisualStyleBackColor = false;
-            btnDevoluciónEntrega.Click += btnDevoluciónEntrega_Click;
-            // 
-            // btnSeguimientoReparaciones
-            // 
-            btnSeguimientoReparaciones.BackColor = Color.Transparent;
-            btnSeguimientoReparaciones.FlatStyle = FlatStyle.Flat;
-            btnSeguimientoReparaciones.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSeguimientoReparaciones.ForeColor = Color.FromArgb(155, 168, 171);
-            btnSeguimientoReparaciones.ImageIndex = 1;
-            btnSeguimientoReparaciones.ImageList = imageListBarrraMenu;
-            btnSeguimientoReparaciones.Location = new Point(30, 48);
-            btnSeguimientoReparaciones.Name = "btnSeguimientoReparaciones";
-            btnSeguimientoReparaciones.Size = new Size(190, 35);
-            btnSeguimientoReparaciones.TabIndex = 4;
-            btnSeguimientoReparaciones.Text = "   Seguimiento de Reparaciones";
-            btnSeguimientoReparaciones.TextAlign = ContentAlignment.MiddleLeft;
-            btnSeguimientoReparaciones.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnSeguimientoReparaciones.UseVisualStyleBackColor = false;
-            btnSeguimientoReparaciones.Click += btnSeguimientoReparaciones_Click;
-            // 
-            // btnRecepcionEquipos
-            // 
-            btnRecepcionEquipos.BackColor = Color.Transparent;
-            btnRecepcionEquipos.FlatStyle = FlatStyle.Flat;
-            btnRecepcionEquipos.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRecepcionEquipos.ForeColor = Color.FromArgb(155, 168, 171);
-            btnRecepcionEquipos.ImageIndex = 0;
-            btnRecepcionEquipos.ImageList = imageListBarrraMenu;
-            btnRecepcionEquipos.Location = new Point(30, 7);
-            btnRecepcionEquipos.Name = "btnRecepcionEquipos";
-            btnRecepcionEquipos.Size = new Size(190, 35);
-            btnRecepcionEquipos.TabIndex = 3;
-            btnRecepcionEquipos.Text = "    Recepción de Equipos             ";
-            btnRecepcionEquipos.TextAlign = ContentAlignment.MiddleLeft;
-            btnRecepcionEquipos.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnRecepcionEquipos.UseVisualStyleBackColor = false;
-            btnRecepcionEquipos.Click += btnRecepcionEquipos_Click;
             // 
             // imageListBarrraMenu
             // 
@@ -329,6 +149,186 @@
             imageListBarrraMenu.Images.SetKeyName(9, "FeatherUsers.png");
             imageListBarrraMenu.Images.SetKeyName(10, "AntDesignSettingOutlined.png");
             imageListBarrraMenu.Images.SetKeyName(11, "IconamoonExitLight.png");
+            // 
+            // btnGestionUsuarios
+            // 
+            btnGestionUsuarios.BackColor = Color.Transparent;
+            btnGestionUsuarios.FlatStyle = FlatStyle.Flat;
+            btnGestionUsuarios.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGestionUsuarios.ForeColor = Color.FromArgb(155, 168, 171);
+            btnGestionUsuarios.ImageIndex = 9;
+            btnGestionUsuarios.ImageList = imageListBarrraMenu;
+            btnGestionUsuarios.Location = new Point(15, 449);
+            btnGestionUsuarios.Name = "btnGestionUsuarios";
+            btnGestionUsuarios.Size = new Size(190, 35);
+            btnGestionUsuarios.TabIndex = 12;
+            btnGestionUsuarios.Text = "   Gestión de Usuarios            ";
+            btnGestionUsuarios.TextAlign = ContentAlignment.MiddleLeft;
+            btnGestionUsuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnGestionUsuarios.UseVisualStyleBackColor = false;
+            btnGestionUsuarios.Click += btnGestionUsuarios_Click;
+            // 
+            // btnReportes
+            // 
+            btnReportes.BackColor = Color.Transparent;
+            btnReportes.FlatStyle = FlatStyle.Flat;
+            btnReportes.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReportes.ForeColor = Color.FromArgb(155, 168, 171);
+            btnReportes.ImageIndex = 8;
+            btnReportes.ImageList = imageListBarrraMenu;
+            btnReportes.Location = new Point(15, 408);
+            btnReportes.Name = "btnReportes";
+            btnReportes.Size = new Size(190, 35);
+            btnReportes.TabIndex = 11;
+            btnReportes.Text = "   Reportes                                     ";
+            btnReportes.TextAlign = ContentAlignment.MiddleLeft;
+            btnReportes.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnReportes.UseVisualStyleBackColor = false;
+            btnReportes.Click += btnReportes_Click;
+            // 
+            // btnHistorialCliente
+            // 
+            btnHistorialCliente.BackColor = Color.Transparent;
+            btnHistorialCliente.FlatStyle = FlatStyle.Flat;
+            btnHistorialCliente.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnHistorialCliente.ForeColor = Color.FromArgb(155, 168, 171);
+            btnHistorialCliente.ImageIndex = 7;
+            btnHistorialCliente.ImageList = imageListBarrraMenu;
+            btnHistorialCliente.Location = new Point(15, 331);
+            btnHistorialCliente.Name = "btnHistorialCliente";
+            btnHistorialCliente.Size = new Size(190, 35);
+            btnHistorialCliente.TabIndex = 10;
+            btnHistorialCliente.Text = "   Historial de Clientes                ";
+            btnHistorialCliente.TextAlign = ContentAlignment.MiddleLeft;
+            btnHistorialCliente.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnHistorialCliente.UseVisualStyleBackColor = false;
+            btnHistorialCliente.Click += btnHistorialCliente_Click;
+            // 
+            // btnTradeIn
+            // 
+            btnTradeIn.BackColor = Color.Transparent;
+            btnTradeIn.FlatStyle = FlatStyle.Flat;
+            btnTradeIn.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnTradeIn.ForeColor = Color.FromArgb(155, 168, 171);
+            btnTradeIn.ImageIndex = 6;
+            btnTradeIn.ImageList = imageListBarrraMenu;
+            btnTradeIn.Location = new Point(15, 290);
+            btnTradeIn.Name = "btnTradeIn";
+            btnTradeIn.Size = new Size(190, 35);
+            btnTradeIn.TabIndex = 9;
+            btnTradeIn.Text = "   Trade-In                                         ";
+            btnTradeIn.TextAlign = ContentAlignment.MiddleLeft;
+            btnTradeIn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnTradeIn.UseVisualStyleBackColor = false;
+            btnTradeIn.Click += btnTradeIn_Click;
+            // 
+            // btnVentaDispositivos
+            // 
+            btnVentaDispositivos.BackColor = Color.Transparent;
+            btnVentaDispositivos.FlatStyle = FlatStyle.Flat;
+            btnVentaDispositivos.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnVentaDispositivos.ForeColor = Color.FromArgb(155, 168, 171);
+            btnVentaDispositivos.ImageIndex = 5;
+            btnVentaDispositivos.ImageList = imageListBarrraMenu;
+            btnVentaDispositivos.Location = new Point(15, 249);
+            btnVentaDispositivos.Name = "btnVentaDispositivos";
+            btnVentaDispositivos.Size = new Size(190, 35);
+            btnVentaDispositivos.TabIndex = 8;
+            btnVentaDispositivos.Text = "   Venta de Dispositivos            ";
+            btnVentaDispositivos.TextAlign = ContentAlignment.MiddleLeft;
+            btnVentaDispositivos.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnVentaDispositivos.UseVisualStyleBackColor = false;
+            btnVentaDispositivos.Click += btnVentaDispositivos_Click;
+            // 
+            // btnDerivacionOrdenes
+            // 
+            btnDerivacionOrdenes.BackColor = Color.Transparent;
+            btnDerivacionOrdenes.FlatStyle = FlatStyle.Flat;
+            btnDerivacionOrdenes.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDerivacionOrdenes.ForeColor = Color.FromArgb(155, 168, 171);
+            btnDerivacionOrdenes.ImageIndex = 4;
+            btnDerivacionOrdenes.ImageList = imageListBarrraMenu;
+            btnDerivacionOrdenes.Location = new Point(15, 171);
+            btnDerivacionOrdenes.Name = "btnDerivacionOrdenes";
+            btnDerivacionOrdenes.Size = new Size(190, 35);
+            btnDerivacionOrdenes.TabIndex = 7;
+            btnDerivacionOrdenes.Text = "   Derivación entre Sucursales ";
+            btnDerivacionOrdenes.TextAlign = ContentAlignment.MiddleLeft;
+            btnDerivacionOrdenes.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnDerivacionOrdenes.UseVisualStyleBackColor = false;
+            btnDerivacionOrdenes.Click += btnDerivacionOrdenes_Click;
+            // 
+            // btnGestionStock
+            // 
+            btnGestionStock.BackColor = Color.Transparent;
+            btnGestionStock.FlatStyle = FlatStyle.Flat;
+            btnGestionStock.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGestionStock.ForeColor = Color.FromArgb(155, 168, 171);
+            btnGestionStock.ImageIndex = 3;
+            btnGestionStock.ImageList = imageListBarrraMenu;
+            btnGestionStock.Location = new Point(15, 130);
+            btnGestionStock.Name = "btnGestionStock";
+            btnGestionStock.Size = new Size(190, 35);
+            btnGestionStock.TabIndex = 6;
+            btnGestionStock.Text = "   Control de Stock                            ";
+            btnGestionStock.TextAlign = ContentAlignment.MiddleLeft;
+            btnGestionStock.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnGestionStock.UseVisualStyleBackColor = false;
+            btnGestionStock.Click += btnGestionStock_Click;
+            // 
+            // btnDevoluciónEntrega
+            // 
+            btnDevoluciónEntrega.BackColor = Color.Transparent;
+            btnDevoluciónEntrega.FlatStyle = FlatStyle.Flat;
+            btnDevoluciónEntrega.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDevoluciónEntrega.ForeColor = Color.FromArgb(155, 168, 171);
+            btnDevoluciónEntrega.ImageIndex = 2;
+            btnDevoluciónEntrega.ImageList = imageListBarrraMenu;
+            btnDevoluciónEntrega.Location = new Point(15, 89);
+            btnDevoluciónEntrega.Name = "btnDevoluciónEntrega";
+            btnDevoluciónEntrega.Size = new Size(190, 35);
+            btnDevoluciónEntrega.TabIndex = 5;
+            btnDevoluciónEntrega.Text = "   Devolución / Entrega                    ";
+            btnDevoluciónEntrega.TextAlign = ContentAlignment.MiddleLeft;
+            btnDevoluciónEntrega.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnDevoluciónEntrega.UseVisualStyleBackColor = false;
+            btnDevoluciónEntrega.Click += btnDevoluciónEntrega_Click;
+            // 
+            // btnSeguimientoReparaciones
+            // 
+            btnSeguimientoReparaciones.BackColor = Color.Transparent;
+            btnSeguimientoReparaciones.FlatStyle = FlatStyle.Flat;
+            btnSeguimientoReparaciones.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSeguimientoReparaciones.ForeColor = Color.FromArgb(155, 168, 171);
+            btnSeguimientoReparaciones.ImageIndex = 1;
+            btnSeguimientoReparaciones.ImageList = imageListBarrraMenu;
+            btnSeguimientoReparaciones.Location = new Point(15, 48);
+            btnSeguimientoReparaciones.Name = "btnSeguimientoReparaciones";
+            btnSeguimientoReparaciones.Size = new Size(190, 35);
+            btnSeguimientoReparaciones.TabIndex = 4;
+            btnSeguimientoReparaciones.Text = "   Seguimiento de Reparaciones";
+            btnSeguimientoReparaciones.TextAlign = ContentAlignment.MiddleLeft;
+            btnSeguimientoReparaciones.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnSeguimientoReparaciones.UseVisualStyleBackColor = false;
+            btnSeguimientoReparaciones.Click += btnSeguimientoReparaciones_Click;
+            // 
+            // btnRecepcionEquipos
+            // 
+            btnRecepcionEquipos.BackColor = Color.Transparent;
+            btnRecepcionEquipos.FlatStyle = FlatStyle.Flat;
+            btnRecepcionEquipos.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRecepcionEquipos.ForeColor = Color.FromArgb(155, 168, 171);
+            btnRecepcionEquipos.ImageIndex = 0;
+            btnRecepcionEquipos.ImageList = imageListBarrraMenu;
+            btnRecepcionEquipos.Location = new Point(15, 7);
+            btnRecepcionEquipos.Name = "btnRecepcionEquipos";
+            btnRecepcionEquipos.Size = new Size(190, 35);
+            btnRecepcionEquipos.TabIndex = 3;
+            btnRecepcionEquipos.Text = "    Recepción de Equipos             ";
+            btnRecepcionEquipos.TextAlign = ContentAlignment.MiddleLeft;
+            btnRecepcionEquipos.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnRecepcionEquipos.UseVisualStyleBackColor = false;
+            btnRecepcionEquipos.Click += btnRecepcionEquipos_Click;
             // 
             // label1
             // 
@@ -404,6 +404,7 @@
             // 
             pnlInterfaces.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlInterfaces.AutoSize = true;
+            pnlInterfaces.BackColor = Color.FromArgb(26, 28, 44);
             pnlInterfaces.Location = new Point(220, 0);
             pnlInterfaces.Name = "pnlInterfaces";
             pnlInterfaces.Size = new Size(1024, 686);
