@@ -119,7 +119,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     RectangleF rectGradiente = new RectangleF(xObjetivoActivo, yActivo, anchoTotal - xObjetivoActivo, altoActivo);
                     if (rectGradiente.Width > 1)
                     {
-                        Color colorInicio = ColorTranslator.FromHtml("#6FE6D0"); // Color claro/brillante
+                        Color colorInicio = ColorTranslator.FromHtml("#52C4B1"); // Color claro/brillante       El original si quiero = #6FE6D0
                         Color colorFin = Color.FromArgb(0, 74, 92, 92);         // Transparente a la derecha
 
                         using (LinearGradientBrush brushGradiente = new LinearGradientBrush(
