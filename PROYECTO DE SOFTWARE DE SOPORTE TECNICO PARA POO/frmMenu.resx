@@ -117,6 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="imageListBarrraMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>183, 17</value>
+  </metadata>
+  <data name="imageListBarrraMenu.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAEZTeXN0ZW0uV2luZG93cy5Gb3JtcywgQ3VsdHVyZT1uZXV0cmFs
+        LCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BQEAAAAmU3lzdGVtLldpbmRvd3MuRm9ybXMu
+        SW1hZ2VMaXN0U3RyZWFtZXIBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAdAMAAAJNU0Z0AUkBTAMBAQAB
+        GAEAARgBAAEQAQABEAEABP8BIQEACP8BQgFNATYHAAE2AwABKAMAAUADAAEQAwABAQEAASAGAAEQ/wD/
+        ACgAAYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf/w
+        AAGJAZYBAAH/5AABiAGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8B
+        iQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/8gAAYkB
+        lgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB
+        /wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/xAAB
+        iQGWAQAB/zAAAYkBlgEAAf8BiQGWAQAB/8QAAYkBlgEAAf8wAAGJAZYBAAH/AYkBlgEAAf/EAAGJAZYB
+        AAH/MAABiQGWAQAB/wGJAZYBAAH/xAABiQGWAQAB/zAAAYkBlgEAAf8BiQGWAQAB/8QAAYkBlgEAAf8w
+        AAGJAZYBAAH/AYkBlgEAAf/EAAGJAZYBAAH/MAABiQGWAQAB/wGJAZYBAAH/xAABiQGWAQAB/wGJAZYB
+        AAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8B
+        iQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AVQBVQFLAZ/IAAMYASABiQGWAQAB
+        /wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkBlgEAAf8BiQGWAQAB/wGJAZYBAAH/AYkB
+        lgEAAf8BiQGWAQAB/wGJAZYBAAH//wD/AMoAAUIBTQE+BwABPgMAASgDAAFAAwABEAMAAQEBAAEBBQAB
+        gBcAA/8BAAL/BgAC/wYAAfgBDwYAAf8BfwYAAcABAQYAAYAHAAG/AfwGAAG/AfwGAAG/AfwGAAG/AfwG
+        AAG/AfwGAAG/AfwGAAGABwABwAEDBgAC/wYAAv8GAAs=
+</value>
+  </data>
   <metadata name="timerDesplazamiento.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

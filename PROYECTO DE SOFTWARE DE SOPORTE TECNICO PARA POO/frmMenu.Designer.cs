@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             pnlContenedorMenu = new Panel();
             label2 = new Label();
             lblAdministracion = new Label();
@@ -44,6 +45,7 @@
             btnDevoluciónEntrega = new Button();
             btnSeguimientoReparaciones = new Button();
             btnRecepcionEquipos = new Button();
+            imageListBarrraMenu = new ImageList(components);
             label1 = new Label();
             pnlContenedorLogotipo = new Panel();
             pnlContenedorSalir = new Panel();
@@ -268,14 +270,23 @@
             btnRecepcionEquipos.FlatStyle = FlatStyle.Flat;
             btnRecepcionEquipos.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRecepcionEquipos.ForeColor = Color.FromArgb(155, 168, 171);
+            btnRecepcionEquipos.ImageList = imageListBarrraMenu;
             btnRecepcionEquipos.Location = new Point(30, 7);
             btnRecepcionEquipos.Name = "btnRecepcionEquipos";
             btnRecepcionEquipos.Size = new Size(190, 35);
             btnRecepcionEquipos.TabIndex = 3;
-            btnRecepcionEquipos.Text = "Recepción de Equipos";
+            btnRecepcionEquipos.Text = "    Recepción de Equipos      ";
             btnRecepcionEquipos.TextAlign = ContentAlignment.MiddleLeft;
+            btnRecepcionEquipos.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnRecepcionEquipos.UseVisualStyleBackColor = false;
             btnRecepcionEquipos.Click += btnRecepcionEquipos_Click;
+            // 
+            // imageListBarrraMenu
+            // 
+            imageListBarrraMenu.ColorDepth = ColorDepth.Depth32Bit;
+            imageListBarrraMenu.ImageStream = (ImageListStreamer)resources.GetObject("imageListBarrraMenu.ImageStream");
+            imageListBarrraMenu.TransparentColor = Color.Transparent;
+            imageListBarrraMenu.Images.SetKeyName(0, "GgScreen (1).png");
             // 
             // label1
             // 
@@ -402,5 +413,6 @@
         private ReaLTaiizor.Controls.CyberButton btnSalirApp;
         private Panel pnlInterfaces;
         private System.Windows.Forms.Timer timerDesplazamiento;
+        private ImageList imageListBarrraMenu;
     }
 }
