@@ -17,6 +17,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         public ucRecepcionEquipos()
         {
             InitializeComponent();
+
         }
 
         private void ucRecepcionEquipos_Load(object sender, EventArgs e)
