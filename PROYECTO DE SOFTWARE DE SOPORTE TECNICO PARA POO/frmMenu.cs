@@ -35,6 +35,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             //Crear e inicializar todos los componentes del diseño
             InitializeComponent();
 
+            // Se llama a la función para redondear todos los botones del formulario
+            this.RedondearBotones(40);
+
             // 1. Activar DoubleBuffer para evitar parpadeos en el panel
             typeof(System.Windows.Forms.Panel).InvokeMember("DoubleBuffered",
                 BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
