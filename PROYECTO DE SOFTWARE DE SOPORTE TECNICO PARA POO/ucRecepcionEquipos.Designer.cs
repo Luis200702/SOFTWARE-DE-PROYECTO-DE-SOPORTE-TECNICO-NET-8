@@ -73,6 +73,9 @@
             lblCliente = new Label();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             pnlCliente = new Panel();
+            uiTextBox3 = new Sunny.UI.UITextBox();
+            uiTextBox2 = new Sunny.UI.UITextBox();
+            uiTextBox1 = new Sunny.UI.UITextBox();
             pnlInferior = new Panel();
             pictureBox4 = new PictureBox();
             btnLimpiar = new Sunny.UI.UIButton();
@@ -80,9 +83,9 @@
             btnCancelar = new Sunny.UI.UIButton();
             pictureBox2 = new PictureBox();
             btnGuardarRegistro = new Sunny.UI.UIButton();
-            uiTextBox1 = new Sunny.UI.UITextBox();
-            uiTextBox2 = new Sunny.UI.UITextBox();
-            uiTextBox3 = new Sunny.UI.UITextBox();
+            pictureBox5 = new PictureBox();
+            pictureBox6 = new PictureBox();
+            pictureBox7 = new PictureBox();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
@@ -96,6 +99,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
             // 
             // pnlSuperior
@@ -185,6 +191,7 @@
             // mcReparacion
             // 
             mcReparacion.BackColor = Color.FromArgb(255, 255, 255);
+            mcReparacion.Controls.Add(pictureBox7);
             mcReparacion.Controls.Add(numericUpDown1);
             mcReparacion.Controls.Add(cmbSucursal);
             mcReparacion.Controls.Add(cmbTecnicos);
@@ -360,6 +367,7 @@
             // 
             mcDispositivo.AutoSize = true;
             mcDispositivo.BackColor = Color.FromArgb(255, 255, 255);
+            mcDispositivo.Controls.Add(pictureBox6);
             mcDispositivo.Controls.Add(lblEstado);
             mcDispositivo.Controls.Add(lblMarca);
             mcDispositivo.Controls.Add(label5);
@@ -641,6 +649,7 @@
             // pnlCliente
             // 
             pnlCliente.BackColor = Color.White;
+            pnlCliente.Controls.Add(pictureBox5);
             pnlCliente.Controls.Add(uiTextBox3);
             pnlCliente.Controls.Add(uiTextBox2);
             pnlCliente.Controls.Add(uiTextBox1);
@@ -648,6 +657,58 @@
             pnlCliente.Name = "pnlCliente";
             pnlCliente.Size = new Size(347, 416);
             pnlCliente.TabIndex = 2;
+            // 
+            // uiTextBox3
+            // 
+            uiTextBox3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiTextBox3.Location = new Point(50, 95);
+            uiTextBox3.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox3.MaxLength = 255;
+            uiTextBox3.Minimum = 0D;
+            uiTextBox3.MinimumSize = new Size(1, 16);
+            uiTextBox3.Name = "uiTextBox3";
+            uiTextBox3.Padding = new Padding(5);
+            uiTextBox3.Radius = 12;
+            uiTextBox3.ShowText = false;
+            uiTextBox3.Size = new Size(256, 23);
+            uiTextBox3.TabIndex = 14;
+            uiTextBox3.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox3.Watermark = "Nombre y apellidos";
+            // 
+            // uiTextBox2
+            // 
+            uiTextBox2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiTextBox2.Location = new Point(50, 150);
+            uiTextBox2.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox2.Maximum = 0D;
+            uiTextBox2.MaxLength = 10;
+            uiTextBox2.Minimum = 0D;
+            uiTextBox2.MinimumSize = new Size(1, 16);
+            uiTextBox2.Name = "uiTextBox2";
+            uiTextBox2.Padding = new Padding(5);
+            uiTextBox2.Radius = 12;
+            uiTextBox2.ShowText = false;
+            uiTextBox2.Size = new Size(256, 23);
+            uiTextBox2.TabIndex = 14;
+            uiTextBox2.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox2.Watermark = "0993425009";
+            // 
+            // uiTextBox1
+            // 
+            uiTextBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiTextBox1.Location = new Point(50, 204);
+            uiTextBox1.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox1.MaxLength = 255;
+            uiTextBox1.Minimum = 0D;
+            uiTextBox1.MinimumSize = new Size(1, 16);
+            uiTextBox1.Name = "uiTextBox1";
+            uiTextBox1.Padding = new Padding(5);
+            uiTextBox1.Radius = 12;
+            uiTextBox1.ShowText = false;
+            uiTextBox1.Size = new Size(256, 23);
+            uiTextBox1.TabIndex = 13;
+            uiTextBox1.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox1.Watermark = "correo@ejemplo.com";
             // 
             // pnlInferior
             // 
@@ -767,57 +828,41 @@
             btnGuardarRegistro.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnGuardarRegistro.TipsForeColor = Color.Black;
             // 
-            // uiTextBox1
+            // pictureBox5
             // 
-            uiTextBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox1.Location = new Point(50, 204);
-            uiTextBox1.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox1.MaxLength = 255;
-            uiTextBox1.Minimum = 0D;
-            uiTextBox1.MinimumSize = new Size(1, 16);
-            uiTextBox1.Name = "uiTextBox1";
-            uiTextBox1.Padding = new Padding(5);
-            uiTextBox1.Radius = 12;
-            uiTextBox1.ShowText = false;
-            uiTextBox1.Size = new Size(256, 23);
-            uiTextBox1.TabIndex = 13;
-            uiTextBox1.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox1.Watermark = "correo@ejemplo.com";
+            pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = Properties.Resources.LucideUser;
+            pictureBox5.Location = new Point(42, 30);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(30, 21);
+            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox5.TabIndex = 15;
+            pictureBox5.TabStop = false;
             // 
-            // uiTextBox2
+            // pictureBox6
             // 
-            uiTextBox2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox2.Location = new Point(50, 150);
-            uiTextBox2.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox2.Maximum = 0D;
-            uiTextBox2.MaxLength = 10;
-            uiTextBox2.Minimum = 0D;
-            uiTextBox2.MinimumSize = new Size(1, 16);
-            uiTextBox2.Name = "uiTextBox2";
-            uiTextBox2.Padding = new Padding(5);
-            uiTextBox2.Radius = 12;
-            uiTextBox2.ShowText = false;
-            uiTextBox2.Size = new Size(256, 23);
-            uiTextBox2.TabIndex = 14;
-            uiTextBox2.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox2.Watermark = "0993425009";
+            pictureBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox6.BackColor = Color.Transparent;
+            pictureBox6.Image = Properties.Resources.GgScreen;
+            pictureBox6.Location = new Point(17, 8);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(30, 21);
+            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox6.TabIndex = 18;
+            pictureBox6.TabStop = false;
             // 
-            // uiTextBox3
+            // pictureBox7
             // 
-            uiTextBox3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox3.Location = new Point(50, 95);
-            uiTextBox3.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox3.MaxLength = 255;
-            uiTextBox3.Minimum = 0D;
-            uiTextBox3.MinimumSize = new Size(1, 16);
-            uiTextBox3.Name = "uiTextBox3";
-            uiTextBox3.Padding = new Padding(5);
-            uiTextBox3.Radius = 12;
-            uiTextBox3.ShowText = false;
-            uiTextBox3.Size = new Size(256, 23);
-            uiTextBox3.TabIndex = 14;
-            uiTextBox3.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox3.Watermark = "Nombre y apellidos";
+            pictureBox7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox7.BackColor = Color.Transparent;
+            pictureBox7.Image = Properties.Resources.IconParkOutlineSpanner;
+            pictureBox7.Location = new Point(17, 8);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(30, 21);
+            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox7.TabIndex = 32;
+            pictureBox7.TabStop = false;
             // 
             // ucRecepcionEquipos
             // 
@@ -847,6 +892,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -909,5 +957,8 @@
         private Sunny.UI.UITextBox uiTextBox1;
         private Sunny.UI.UITextBox uiTextBox3;
         private Sunny.UI.UITextBox uiTextBox2;
+        private PictureBox pictureBox7;
+        private PictureBox pictureBox6;
+        private PictureBox pictureBox5;
     }
 }

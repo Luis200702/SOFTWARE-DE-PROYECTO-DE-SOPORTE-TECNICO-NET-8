@@ -30,17 +30,18 @@
         {
             pnlIzquierda = new Panel();
             pnlDerecha = new Panel();
+            txtContraseña = new Sunny.UI.UITextBox();
+            txtUsuario = new Sunny.UI.UITextBox();
             lblContraseña = new Label();
             lblUsuario = new Label();
-            txtContraseña = new TextBox();
-            txtUsuario = new TextBox();
-            btnAcceder = new Button();
             lblInicioSesion = new Label();
+            btnAcceder = new Sunny.UI.UIButton();
             pnlDerecha.SuspendLayout();
             SuspendLayout();
             // 
             // pnlIzquierda
             // 
+            pnlIzquierda.BackColor = Color.FromArgb(15, 23, 42);
             pnlIzquierda.Location = new Point(0, 0);
             pnlIzquierda.Name = "pnlIzquierda";
             pnlIzquierda.Size = new Size(442, 511);
@@ -48,73 +49,112 @@
             // 
             // pnlDerecha
             // 
-            pnlDerecha.Controls.Add(lblContraseña);
-            pnlDerecha.Controls.Add(lblUsuario);
+            pnlDerecha.BackColor = Color.FromArgb(30, 41, 59);
+            pnlDerecha.Controls.Add(btnAcceder);
             pnlDerecha.Controls.Add(txtContraseña);
             pnlDerecha.Controls.Add(txtUsuario);
-            pnlDerecha.Controls.Add(btnAcceder);
+            pnlDerecha.Controls.Add(lblContraseña);
+            pnlDerecha.Controls.Add(lblUsuario);
             pnlDerecha.Controls.Add(lblInicioSesion);
             pnlDerecha.Location = new Point(442, 0);
             pnlDerecha.Name = "pnlDerecha";
             pnlDerecha.Size = new Size(442, 511);
             pnlDerecha.TabIndex = 1;
             // 
+            // txtContraseña
+            // 
+            txtContraseña.BackColor = Color.Transparent;
+            txtContraseña.FillColor = Color.FromArgb(41, 53, 72);
+            txtContraseña.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtContraseña.ForeColor = Color.White;
+            txtContraseña.Location = new Point(52, 271);
+            txtContraseña.Margin = new Padding(4, 5, 4, 5);
+            txtContraseña.MaxLength = 255;
+            txtContraseña.Minimum = 0D;
+            txtContraseña.MinimumSize = new Size(1, 16);
+            txtContraseña.Name = "txtContraseña";
+            txtContraseña.Padding = new Padding(5);
+            txtContraseña.Radius = 12;
+            txtContraseña.ShowText = false;
+            txtContraseña.Size = new Size(343, 29);
+            txtContraseña.TabIndex = 15;
+            txtContraseña.TextAlignment = ContentAlignment.MiddleLeft;
+            txtContraseña.Watermark = "Contraseña";
+            // 
+            // txtUsuario
+            // 
+            txtUsuario.BackColor = Color.Transparent;
+            txtUsuario.FillColor = Color.FromArgb(41, 53, 72);
+            txtUsuario.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUsuario.ForeColor = Color.White;
+            txtUsuario.Location = new Point(52, 206);
+            txtUsuario.Margin = new Padding(4, 5, 4, 5);
+            txtUsuario.MaxLength = 255;
+            txtUsuario.Minimum = 0D;
+            txtUsuario.MinimumSize = new Size(1, 16);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Padding = new Padding(5);
+            txtUsuario.Radius = 12;
+            txtUsuario.ShowText = false;
+            txtUsuario.Size = new Size(343, 29);
+            txtUsuario.TabIndex = 14;
+            txtUsuario.TextAlignment = ContentAlignment.MiddleLeft;
+            txtUsuario.Watermark = "Usuario";
+            // 
             // lblContraseña
             // 
             lblContraseña.AutoSize = true;
-            lblContraseña.Location = new Point(50, 249);
+            lblContraseña.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblContraseña.ForeColor = Color.FromArgb(147, 162, 183);
+            lblContraseña.Location = new Point(50, 245);
             lblContraseña.Name = "lblContraseña";
-            lblContraseña.Size = new Size(67, 15);
+            lblContraseña.Size = new Size(96, 21);
             lblContraseña.TabIndex = 5;
             lblContraseña.Text = "Contraseña";
             // 
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
-            lblUsuario.Location = new Point(50, 186);
+            lblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblUsuario.ForeColor = Color.FromArgb(147, 162, 183);
+            lblUsuario.Location = new Point(50, 182);
             lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(47, 15);
+            lblUsuario.Size = new Size(69, 21);
             lblUsuario.TabIndex = 4;
             lblUsuario.Text = "Usuario";
-            // 
-            // txtContraseña
-            // 
-            txtContraseña.Location = new Point(52, 269);
-            txtContraseña.MaxLength = 32;
-            txtContraseña.Name = "txtContraseña";
-            txtContraseña.PlaceholderText = "Contraseña";
-            txtContraseña.Size = new Size(343, 23);
-            txtContraseña.TabIndex = 3;
-            txtContraseña.UseSystemPasswordChar = true;
-            // 
-            // txtUsuario
-            // 
-            txtUsuario.Location = new Point(52, 206);
-            txtUsuario.MaxLength = 32;
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.PlaceholderText = "Usuario";
-            txtUsuario.Size = new Size(343, 23);
-            txtUsuario.TabIndex = 2;
-            txtUsuario.TextChanged += txtUsuario_TextChanged;
-            // 
-            // btnAcceder
-            // 
-            btnAcceder.Location = new Point(164, 300);
-            btnAcceder.Name = "btnAcceder";
-            btnAcceder.Size = new Size(123, 54);
-            btnAcceder.TabIndex = 1;
-            btnAcceder.Text = "Acceder";
-            btnAcceder.UseVisualStyleBackColor = true;
-            btnAcceder.Click += btnAcceder_Click;
             // 
             // lblInicioSesion
             // 
             lblInicioSesion.AutoSize = true;
-            lblInicioSesion.Location = new Point(161, 53);
+            lblInicioSesion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblInicioSesion.ForeColor = Color.FromArgb(147, 162, 183);
+            lblInicioSesion.Location = new Point(143, 51);
             lblInicioSesion.Name = "lblInicioSesion";
-            lblInicioSesion.Size = new Size(108, 15);
+            lblInicioSesion.Size = new Size(154, 21);
             lblInicioSesion.TabIndex = 0;
             lblInicioSesion.Text = "Accede a tu cuenta";
+            // 
+            // btnAcceder
+            // 
+            btnAcceder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAcceder.BackColor = Color.Transparent;
+            btnAcceder.FillColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillHoverColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAcceder.Location = new Point(176, 308);
+            btnAcceder.MinimumSize = new Size(1, 1);
+            btnAcceder.Name = "btnAcceder";
+            btnAcceder.Radius = 12;
+            btnAcceder.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.Size = new Size(86, 36);
+            btnAcceder.TabIndex = 16;
+            btnAcceder.Text = "Acceder";
+            btnAcceder.TipsFont = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAcceder.TipsForeColor = Color.Black;
+            btnAcceder.Click += btnAcceder_Click;
             // 
             // frmInicioSesion
             // 
@@ -126,6 +166,7 @@
             MaximizeBox = false;
             Name = "frmInicioSesion";
             Text = "Inicio de Sesión";
+            Load += frmInicioSesion_Load;
             pnlDerecha.ResumeLayout(false);
             pnlDerecha.PerformLayout();
             ResumeLayout(false);
@@ -136,10 +177,10 @@
         private Panel pnlIzquierda;
         private Panel pnlDerecha;
         private Label lblInicioSesion;
-        private Button btnAcceder;
         private Label lblContraseña;
         private Label lblUsuario;
-        private TextBox txtContraseña;
-        private TextBox txtUsuario;
+        private Sunny.UI.UITextBox txtContraseña;
+        private Sunny.UI.UITextBox txtUsuario;
+        private Sunny.UI.UIButton btnAcceder;
     }
 }

@@ -73,6 +73,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GgScreen {
+            get {
+                object obj = ResourceManager.GetObject("GgScreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GgScreen__1_ {
             get {
                 object obj = ResourceManager.GetObject("GgScreen (1)", resourceCulture);
@@ -83,9 +93,29 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IconParkOutlineSpanner {
+            get {
+                object obj = ResourceManager.GetObject("IconParkOutlineSpanner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LineMdAlertCircleLoop {
             get {
                 object obj = ResourceManager.GetObject("LineMdAlertCircleLoop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LucideUser {
+            get {
+                object obj = ResourceManager.GetObject("LucideUser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
