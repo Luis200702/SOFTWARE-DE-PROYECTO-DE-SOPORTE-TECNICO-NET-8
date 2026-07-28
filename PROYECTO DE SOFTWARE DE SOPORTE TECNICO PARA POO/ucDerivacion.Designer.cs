@@ -34,16 +34,19 @@
             btnNuevaDerivacion = new Button();
             lblnumeroderivaciones = new Label();
             panel2 = new Panel();
+            dtgDetallesDerivacion = new DataGridView();
             panel3 = new Panel();
-            label3 = new Label();
+            label4 = new Label();
+            lblOrigenderivacion = new Label();
+            lblfechaderivacion = new Label();
+            lblGMarcaderivacion = new Label();
+            lblmarcaderivacion = new Label();
+            lblfallaDerivacion = new Label();
+            lblmotivoderivación = new Label();
+            lblDestinoderivacion = new Label();
+            lblUsarioderivaci = new Label();
             lbltipoderivacion = new Label();
             label2 = new Label();
-            label4 = new Label();
-            lblmotivoderivación = new Label();
-            lblfallaDerivacion = new Label();
-            lblmarcaderivacion = new Label();
-            lblGMarcaderivacion = new Label();
-            label6 = new Label();
             panel4 = new Panel();
             label5 = new Label();
             label7 = new Label();
@@ -66,6 +69,8 @@
             label23 = new Label();
             pnltituloderivacion.SuspendLayout();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dtgDetallesDerivacion).BeginInit();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel5.SuspendLayout();
@@ -73,7 +78,7 @@
             // 
             // pnltituloderivacion
             // 
-            pnltituloderivacion.BorderStyle = BorderStyle.Fixed3D;
+            pnltituloderivacion.BorderStyle = BorderStyle.FixedSingle;
             pnltituloderivacion.Controls.Add(label1);
             pnltituloderivacion.Location = new Point(0, 2);
             pnltituloderivacion.Name = "pnltituloderivacion";
@@ -93,7 +98,7 @@
             // 
             // panel1
             // 
-            panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(btnNuevaDerivacion);
             panel1.Controls.Add(lblnumeroderivaciones);
             panel1.Location = new Point(0, 84);
@@ -130,38 +135,140 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.Fixed3D;
+            panel2.Controls.Add(dtgDetallesDerivacion);
             panel2.Location = new Point(644, 84);
             panel2.Name = "panel2";
             panel2.Size = new Size(381, 602);
             panel2.TabIndex = 0;
             // 
+            // dtgDetallesDerivacion
+            // 
+            dtgDetallesDerivacion.BackgroundColor = Color.FromArgb(26, 28, 44);
+            dtgDetallesDerivacion.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgDetallesDerivacion.Location = new Point(-2, -4);
+            dtgDetallesDerivacion.Name = "dtgDetallesDerivacion";
+            dtgDetallesDerivacion.Size = new Size(381, 601);
+            dtgDetallesDerivacion.TabIndex = 0;
+            dtgDetallesDerivacion.CellContentClick += dtgDetallesDerivacion_CellContentClick;
+            // 
             // panel3
             // 
-            panel3.BorderStyle = BorderStyle.Fixed3D;
-            panel3.Controls.Add(label6);
+            panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(lblOrigenderivacion);
+            panel3.Controls.Add(lblfechaderivacion);
             panel3.Controls.Add(lblGMarcaderivacion);
             panel3.Controls.Add(lblmarcaderivacion);
             panel3.Controls.Add(lblfallaDerivacion);
             panel3.Controls.Add(lblmotivoderivación);
-            panel3.Controls.Add(label4);
-            panel3.Controls.Add(label3);
+            panel3.Controls.Add(lblDestinoderivacion);
+            panel3.Controls.Add(lblUsarioderivaci);
             panel3.Controls.Add(lbltipoderivacion);
             panel3.Controls.Add(label2);
             panel3.Location = new Point(0, 142);
             panel3.Name = "panel3";
             panel3.Size = new Size(645, 128);
             panel3.TabIndex = 2;
+            panel3.Click += panel3_Click;
+            panel3.Paint += panel3_Paint;
             // 
-            // label3
+            // label4
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(10, 31);
-            label3.Name = "label3";
-            label3.Size = new Size(258, 25);
-            label3.TabIndex = 2;
-            label3.Text = "Kevin Pinargote Balarezo   -";
+            label4.AutoSize = true;
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(174, 70);
+            label4.Name = "label4";
+            label4.Size = new Size(22, 15);
+            label4.TabIndex = 8;
+            label4.Text = "➔ ";
+            // 
+            // lblOrigenderivacion
+            // 
+            lblOrigenderivacion.AutoSize = true;
+            lblOrigenderivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblOrigenderivacion.ForeColor = SystemColors.ButtonShadow;
+            lblOrigenderivacion.Location = new Point(16, 65);
+            lblOrigenderivacion.Name = "lblOrigenderivacion";
+            lblOrigenderivacion.Size = new Size(130, 21);
+            lblOrigenderivacion.TabIndex = 7;
+            lblOrigenderivacion.Text = "Sucursal Centra  ";
+            // 
+            // lblfechaderivacion
+            // 
+            lblfechaderivacion.AutoSize = true;
+            lblfechaderivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblfechaderivacion.ForeColor = SystemColors.ButtonShadow;
+            lblfechaderivacion.Location = new Point(525, 65);
+            lblfechaderivacion.Name = "lblfechaderivacion";
+            lblfechaderivacion.Size = new Size(96, 21);
+            lblfechaderivacion.TabIndex = 4;
+            lblfechaderivacion.Text = "26/07/2026";
+            // 
+            // lblGMarcaderivacion
+            // 
+            lblGMarcaderivacion.AutoSize = true;
+            lblGMarcaderivacion.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGMarcaderivacion.ForeColor = Color.White;
+            lblGMarcaderivacion.Location = new Point(299, 31);
+            lblGMarcaderivacion.Name = "lblGMarcaderivacion";
+            lblGMarcaderivacion.Size = new Size(181, 25);
+            lblGMarcaderivacion.TabIndex = 6;
+            lblGMarcaderivacion.Text = "Redmi Poco x5 pro\r\n";
+            // 
+            // lblmarcaderivacion
+            // 
+            lblmarcaderivacion.AutoSize = true;
+            lblmarcaderivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblmarcaderivacion.ForeColor = Color.White;
+            lblmarcaderivacion.Location = new Point(299, 92);
+            lblmarcaderivacion.Name = "lblmarcaderivacion";
+            lblmarcaderivacion.Size = new Size(148, 21);
+            lblmarcaderivacion.TabIndex = 5;
+            lblmarcaderivacion.Text = "Redmi Poco x5 pro\r\n";
+            // 
+            // lblfallaDerivacion
+            // 
+            lblfallaDerivacion.AutoSize = true;
+            lblfallaDerivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblfallaDerivacion.ForeColor = Color.White;
+            lblfallaDerivacion.Location = new Point(161, 92);
+            lblfallaDerivacion.Name = "lblfallaDerivacion";
+            lblfallaDerivacion.Size = new Size(132, 21);
+            lblfallaDerivacion.TabIndex = 5;
+            lblfallaDerivacion.Text = "Conector USB-C ";
+            // 
+            // lblmotivoderivación
+            // 
+            lblmotivoderivación.AutoSize = true;
+            lblmotivoderivación.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblmotivoderivación.ForeColor = Color.White;
+            lblmotivoderivación.Location = new Point(10, 90);
+            lblmotivoderivación.Name = "lblmotivoderivación";
+            lblmotivoderivación.Size = new Size(162, 21);
+            lblmotivoderivación.TabIndex = 4;
+            lblmotivoderivación.Text = "Falta de repuesto  -   ";
+            // 
+            // lblDestinoderivacion
+            // 
+            lblDestinoderivacion.AutoSize = true;
+            lblDestinoderivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDestinoderivacion.ForeColor = SystemColors.ButtonShadow;
+            lblDestinoderivacion.Location = new Point(202, 65);
+            lblDestinoderivacion.Name = "lblDestinoderivacion";
+            lblDestinoderivacion.Size = new Size(120, 21);
+            lblDestinoderivacion.TabIndex = 3;
+            lblDestinoderivacion.Text = "  sucursal norte";
+            // 
+            // lblUsarioderivaci
+            // 
+            lblUsarioderivaci.AutoSize = true;
+            lblUsarioderivaci.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsarioderivaci.ForeColor = Color.White;
+            lblUsarioderivaci.Location = new Point(10, 31);
+            lblUsarioderivaci.Name = "lblUsarioderivaci";
+            lblUsarioderivaci.Size = new Size(258, 25);
+            lblUsarioderivaci.TabIndex = 2;
+            lblUsarioderivaci.Text = "Kevin Pinargote Balarezo   -";
             // 
             // lbltipoderivacion
             // 
@@ -187,75 +294,9 @@
             label2.Text = "ORD-2026_001";
             label2.Click += label2_Click;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = SystemColors.ButtonShadow;
-            label4.Location = new Point(10, 63);
-            label4.Name = "label4";
-            label4.Size = new Size(257, 21);
-            label4.TabIndex = 3;
-            label4.Text = "Sucursal Centra  ➔  sucursal norte";
-            // 
-            // lblmotivoderivación
-            // 
-            lblmotivoderivación.AutoSize = true;
-            lblmotivoderivación.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblmotivoderivación.ForeColor = Color.White;
-            lblmotivoderivación.Location = new Point(10, 90);
-            lblmotivoderivación.Name = "lblmotivoderivación";
-            lblmotivoderivación.Size = new Size(162, 21);
-            lblmotivoderivación.TabIndex = 4;
-            lblmotivoderivación.Text = "Falta de repuesto  -   ";
-            // 
-            // lblfallaDerivacion
-            // 
-            lblfallaDerivacion.AutoSize = true;
-            lblfallaDerivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblfallaDerivacion.ForeColor = Color.White;
-            lblfallaDerivacion.Location = new Point(161, 92);
-            lblfallaDerivacion.Name = "lblfallaDerivacion";
-            lblfallaDerivacion.Size = new Size(132, 21);
-            lblfallaDerivacion.TabIndex = 5;
-            lblfallaDerivacion.Text = "Conector USB-C ";
-            // 
-            // lblmarcaderivacion
-            // 
-            lblmarcaderivacion.AutoSize = true;
-            lblmarcaderivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblmarcaderivacion.ForeColor = Color.White;
-            lblmarcaderivacion.Location = new Point(299, 92);
-            lblmarcaderivacion.Name = "lblmarcaderivacion";
-            lblmarcaderivacion.Size = new Size(148, 21);
-            lblmarcaderivacion.TabIndex = 5;
-            lblmarcaderivacion.Text = "Redmi Poco x5 pro\r\n";
-            // 
-            // lblGMarcaderivacion
-            // 
-            lblGMarcaderivacion.AutoSize = true;
-            lblGMarcaderivacion.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblGMarcaderivacion.ForeColor = Color.White;
-            lblGMarcaderivacion.Location = new Point(299, 31);
-            lblGMarcaderivacion.Name = "lblGMarcaderivacion";
-            lblGMarcaderivacion.Size = new Size(181, 25);
-            lblGMarcaderivacion.TabIndex = 6;
-            lblGMarcaderivacion.Text = "Redmi Poco x5 pro\r\n";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = SystemColors.ButtonShadow;
-            label6.Location = new Point(525, 65);
-            label6.Name = "label6";
-            label6.Size = new Size(96, 21);
-            label6.TabIndex = 4;
-            label6.Text = "26/07/2026";
-            // 
             // panel4
             // 
-            panel4.BorderStyle = BorderStyle.Fixed3D;
+            panel4.BorderStyle = BorderStyle.FixedSingle;
             panel4.Controls.Add(label5);
             panel4.Controls.Add(label7);
             panel4.Controls.Add(label8);
@@ -275,7 +316,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = SystemColors.ButtonShadow;
-            label5.Location = new Point(525, 65);
+            label5.Location = new Point(526, 63);
             label5.Name = "label5";
             label5.Size = new Size(96, 21);
             label5.TabIndex = 4;
@@ -288,20 +329,20 @@
             label7.ForeColor = Color.White;
             label7.Location = new Point(299, 31);
             label7.Name = "label7";
-            label7.Size = new Size(181, 25);
+            label7.Size = new Size(188, 25);
             label7.TabIndex = 6;
-            label7.Text = "Redmi Poco x5 pro\r\n";
+            label7.Text = " Redmi note 60 pro ";
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(299, 92);
+            label8.Location = new Point(332, 92);
             label8.Name = "label8";
-            label8.Size = new Size(148, 21);
+            label8.Size = new Size(147, 21);
             label8.TabIndex = 5;
-            label8.Text = "Redmi Poco x5 pro\r\n";
+            label8.Text = "Remid note 60 pro\r\n";
             // 
             // label9
             // 
@@ -310,9 +351,9 @@
             label9.ForeColor = Color.White;
             label9.Location = new Point(161, 92);
             label9.Name = "label9";
-            label9.Size = new Size(132, 21);
+            label9.Size = new Size(165, 21);
             label9.TabIndex = 5;
-            label9.Text = "Conector USB-C ";
+            label9.Text = "Bateria no disponible";
             // 
             // label10
             // 
@@ -343,9 +384,9 @@
             label12.ForeColor = Color.White;
             label12.Location = new Point(10, 31);
             label12.Name = "label12";
-            label12.Size = new Size(258, 25);
+            label12.Size = new Size(174, 25);
             label12.TabIndex = 2;
-            label12.Text = "Kevin Pinargote Balarezo   -";
+            label12.Text = "Luiz Cruz Agual   -";
             // 
             // label13
             // 
@@ -366,13 +407,13 @@
             label14.ForeColor = Color.LightSeaGreen;
             label14.Location = new Point(10, 4);
             label14.Name = "label14";
-            label14.Size = new Size(92, 17);
+            label14.Size = new Size(94, 17);
             label14.TabIndex = 0;
-            label14.Text = "ORD-2026_001";
+            label14.Text = "ORD-2026_002";
             // 
             // panel5
             // 
-            panel5.BorderStyle = BorderStyle.Fixed3D;
+            panel5.BorderStyle = BorderStyle.FixedSingle;
             panel5.Controls.Add(label15);
             panel5.Controls.Add(label16);
             panel5.Controls.Add(label17);
@@ -405,9 +446,9 @@
             label16.ForeColor = Color.White;
             label16.Location = new Point(299, 31);
             label16.Name = "label16";
-            label16.Size = new Size(181, 25);
+            label16.Size = new Size(188, 25);
             label16.TabIndex = 6;
-            label16.Text = "Redmi Poco x5 pro\r\n";
+            label16.Text = "IPhone 15 Pro Max \r\n";
             // 
             // label17
             // 
@@ -418,7 +459,7 @@
             label17.Name = "label17";
             label17.Size = new Size(148, 21);
             label17.TabIndex = 5;
-            label17.Text = "Redmi Poco x5 pro\r\n";
+            label17.Text = "IPhone 15 Pro Max ";
             // 
             // label18
             // 
@@ -427,9 +468,9 @@
             label18.ForeColor = Color.White;
             label18.Location = new Point(161, 92);
             label18.Name = "label18";
-            label18.Size = new Size(132, 21);
+            label18.Size = new Size(66, 21);
             label18.TabIndex = 5;
-            label18.Text = "Conector USB-C ";
+            label18.Text = "Display ";
             // 
             // label19
             // 
@@ -460,9 +501,9 @@
             label21.ForeColor = Color.White;
             label21.Location = new Point(10, 31);
             label21.Name = "label21";
-            label21.Size = new Size(258, 25);
+            label21.Size = new Size(241, 25);
             label21.TabIndex = 2;
-            label21.Text = "Kevin Pinargote Balarezo   -";
+            label21.Text = "Justin Maldonado Cruz   -";
             // 
             // label22
             // 
@@ -483,9 +524,9 @@
             label23.ForeColor = Color.LightSeaGreen;
             label23.Location = new Point(10, 4);
             label23.Name = "label23";
-            label23.Size = new Size(92, 17);
+            label23.Size = new Size(94, 17);
             label23.TabIndex = 0;
-            label23.Text = "ORD-2026_001";
+            label23.Text = "ORD-2026_003";
             // 
             // ucDerivacion
             // 
@@ -504,6 +545,8 @@
             pnltituloderivacion.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dtgDetallesDerivacion).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
@@ -524,12 +567,12 @@
         private Button btnNuevaDerivacion;
         private Label label2;
         private Label lbltipoderivacion;
-        private Label label3;
-        private Label label4;
+        private Label lblUsarioderivaci;
+        private Label lblDestinoderivacion;
         private Label lblmotivoderivación;
         private Label lblmarcaderivacion;
         private Label lblfallaDerivacion;
-        private Label label6;
+        private Label lblfechaderivacion;
         private Label lblGMarcaderivacion;
         private Panel panel4;
         private Label label5;
@@ -551,5 +594,8 @@
         private Label label21;
         private Label label22;
         private Label label23;
+        private DataGridView dtgDetallesDerivacion;
+        private Label label4;
+        private Label lblOrigenderivacion;
     }
 }
