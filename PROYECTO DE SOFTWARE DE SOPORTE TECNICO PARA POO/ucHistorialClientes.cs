@@ -39,5 +39,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             btnNuevaDerivacion.FlatStyle = FlatStyle.Flat;
             btnNuevaDerivacion.FlatAppearance.BorderSize = 0;
         }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ibbuscarcliente_Click(object sender, EventArgs e)
+        {
+            ibbuscarcliente.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            ibbuscarcliente.IconColor = Color.White;
+            ibbuscarcliente.Text = "Buscar cliente";
+        }
     }
 }
