@@ -31,8 +31,9 @@
             panel1 = new Panel();
             panel3 = new Panel();
             panel2 = new Panel();
-            materialButton1 = new ReaLTaiizor.Controls.MaterialButton();
+            button1 = new Button();
             textBox1 = new TextBox();
+            materialButton1 = new ReaLTaiizor.Controls.MaterialButton();
             pictureBox1 = new PictureBox();
             label1 = new Label();
             panel1.SuspendLayout();
@@ -64,7 +65,7 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(materialButton1);
+            panel2.Controls.Add(button1);
             panel2.Controls.Add(textBox1);
             panel2.Location = new Point(3, 3);
             panel2.Name = "panel2";
@@ -72,8 +73,39 @@
             panel2.TabIndex = 0;
             panel2.Paint += panel2_Paint;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(20, 184, 166);
+            button1.BackgroundImageLayout = ImageLayout.None;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Image = Properties.Resources.buqueda_blanca;
+            button1.ImageAlign = ContentAlignment.MiddleLeft;
+            button1.Location = new Point(25, 45);
+            button1.Margin = new Padding(0);
+            button1.Name = "button1";
+            button1.Size = new Size(254, 36);
+            button1.TabIndex = 1;
+            button1.Text = "Buscar Cliente";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(51, 65, 85);
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(25, 3);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Nombre, número o correo";
+            textBox1.Size = new Size(254, 36);
+            textBox1.TabIndex = 0;
+            textBox1.TextAlign = HorizontalAlignment.Center;
+            // 
             // materialButton1
             // 
+            materialButton1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             materialButton1.BackColor = Color.FromArgb(20, 184, 166);
             materialButton1.CharacterCasing = ReaLTaiizor.Controls.MaterialButton.CharacterCasingEnum.Title;
             materialButton1.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Dense;
@@ -95,18 +127,6 @@
             materialButton1.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             materialButton1.UseAccentColor = true;
             materialButton1.UseVisualStyleBackColor = false;
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.FromArgb(51, 65, 85);
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(25, 3);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Nombre, número o correo";
-            textBox1.Size = new Size(254, 36);
-            textBox1.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -154,7 +174,7 @@
         private Label label1;
         private Panel panel2;
         private TextBox textBox1;
-        private ReaLTaiizor.Controls.MaterialButton materialButton1;
-        private Panel panel3;
+        private ReaLTaiizor.Controls.MaterialButton materialButton1; private Panel panel3;
+        private Button button1;
     }
 }
