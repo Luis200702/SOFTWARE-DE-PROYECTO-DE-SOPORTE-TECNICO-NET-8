@@ -36,9 +36,26 @@
             lblOrden = new Label();
             pnlCentral = new Panel();
             mcReparacion = new ReaLTaiizor.Controls.MaterialCard();
+            numericUpDown1 = new NumericUpDown();
+            cmbSucursal = new ComboBox();
+            cmbTecnicos = new ComboBox();
+            dateTimePicker1 = new DateTimePicker();
+            lblTecnico = new Label();
+            label6 = new Label();
+            lblCosto = new Label();
+            lblFechaEntrega = new Label();
+            label2 = new Label();
+            textBox1 = new TextBox();
+            label1 = new Label();
+            txtDescripcionProblema = new TextBox();
             lblReparacion = new Label();
             airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             mcDispositivo = new ReaLTaiizor.Controls.MaterialCard();
+            lblEstado = new Label();
+            lblMarca = new Label();
+            label5 = new Label();
+            lblColor = new Label();
+            label3 = new Label();
             cmbEstado = new ComboBox();
             txtColor = new TextBox();
             txtSerieImei = new TextBox();
@@ -47,34 +64,38 @@
             lblDispositivo = new Label();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             mcCliente = new ReaLTaiizor.Controls.MaterialCard();
+            lblTipoDispositivo = new Label();
+            lblCorreo = new Label();
+            lblTelefono = new Label();
+            lblDatosCliente = new Label();
             btnTelefono = new Sunny.UI.UIButton();
             btnComputadora = new Sunny.UI.UIButton();
             lblCliente = new Label();
-            txtCorreo = new TextBox();
-            txtNumeroTelefonico = new TextBox();
-            txtNombre = new TextBox();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
+            pnlCliente = new Panel();
             pnlInferior = new Panel();
-            btnCancelar = new FontAwesome.Sharp.IconButton();
-            btnGuardarRegistro = new FontAwesome.Sharp.IconButton();
-            btnLimpiar = new Button();
-            lblDatosCliente = new Label();
-            lblTelefono = new Label();
-            lblCorreo = new Label();
-            label3 = new Label();
-            lblColor = new Label();
-            label5 = new Label();
-            lblMarca = new Label();
-            lblEstado = new Label();
-            lblTipoDispositivo = new Label();
+            pictureBox4 = new PictureBox();
+            btnLimpiar = new Sunny.UI.UIButton();
+            pictureBox3 = new PictureBox();
+            btnCancelar = new Sunny.UI.UIButton();
+            pictureBox2 = new PictureBox();
+            btnGuardarRegistro = new Sunny.UI.UIButton();
+            uiTextBox1 = new Sunny.UI.UITextBox();
+            uiTextBox2 = new Sunny.UI.UITextBox();
+            uiTextBox3 = new Sunny.UI.UITextBox();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
             pnlCentral.SuspendLayout();
             mcReparacion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             mcDispositivo.SuspendLayout();
             mcCliente.SuspendLayout();
+            pnlCliente.SuspendLayout();
             pnlInferior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // pnlSuperior
@@ -164,6 +185,18 @@
             // mcReparacion
             // 
             mcReparacion.BackColor = Color.FromArgb(255, 255, 255);
+            mcReparacion.Controls.Add(numericUpDown1);
+            mcReparacion.Controls.Add(cmbSucursal);
+            mcReparacion.Controls.Add(cmbTecnicos);
+            mcReparacion.Controls.Add(dateTimePicker1);
+            mcReparacion.Controls.Add(lblTecnico);
+            mcReparacion.Controls.Add(label6);
+            mcReparacion.Controls.Add(lblCosto);
+            mcReparacion.Controls.Add(lblFechaEntrega);
+            mcReparacion.Controls.Add(label2);
+            mcReparacion.Controls.Add(textBox1);
+            mcReparacion.Controls.Add(label1);
+            mcReparacion.Controls.Add(txtDescripcionProblema);
             mcReparacion.Controls.Add(lblReparacion);
             mcReparacion.Controls.Add(airSeparator3);
             mcReparacion.Depth = 0;
@@ -175,6 +208,129 @@
             mcReparacion.Padding = new Padding(14);
             mcReparacion.Size = new Size(299, 377);
             mcReparacion.TabIndex = 1;
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.DecimalPlaces = 2;
+            numericUpDown1.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
+            numericUpDown1.Location = new Point(160, 300);
+            numericUpDown1.Maximum = new decimal(new int[] { 500, 0, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(122, 23);
+            numericUpDown1.TabIndex = 31;
+            // 
+            // cmbSucursal
+            // 
+            cmbSucursal.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cmbSucursal.DisplayMember = "Seleccionar estado...";
+            cmbSucursal.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSucursal.FormattingEnabled = true;
+            cmbSucursal.Items.AddRange(new object[] { "Seleccionar..." });
+            cmbSucursal.Location = new Point(157, 245);
+            cmbSucursal.Name = "cmbSucursal";
+            cmbSucursal.Size = new Size(122, 23);
+            cmbSucursal.TabIndex = 30;
+            // 
+            // cmbTecnicos
+            // 
+            cmbTecnicos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cmbTecnicos.DisplayMember = "Seleccionar estado...";
+            cmbTecnicos.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTecnicos.FormattingEnabled = true;
+            cmbTecnicos.Items.AddRange(new object[] { "Seleccionar..." });
+            cmbTecnicos.Location = new Point(23, 245);
+            cmbTecnicos.Name = "cmbTecnicos";
+            cmbTecnicos.Size = new Size(122, 23);
+            cmbTecnicos.TabIndex = 29;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(23, 300);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(122, 23);
+            dateTimePicker1.TabIndex = 28;
+            // 
+            // lblTecnico
+            // 
+            lblTecnico.AutoSize = true;
+            lblTecnico.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTecnico.Location = new Point(23, 227);
+            lblTecnico.Name = "lblTecnico";
+            lblTecnico.Size = new Size(100, 15);
+            lblTecnico.TabIndex = 27;
+            lblTecnico.Text = "Técnico asignado";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(157, 227);
+            label6.Name = "label6";
+            label6.Size = new Size(53, 15);
+            label6.TabIndex = 26;
+            label6.Text = "Sucursal";
+            // 
+            // lblCosto
+            // 
+            lblCosto.AutoSize = true;
+            lblCosto.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCosto.Location = new Point(157, 282);
+            lblCosto.Name = "lblCosto";
+            lblCosto.Size = new Size(110, 15);
+            lblCosto.TabIndex = 25;
+            lblCosto.Text = "Costo estimado ($)";
+            // 
+            // lblFechaEntrega
+            // 
+            lblFechaEntrega.AutoSize = true;
+            lblFechaEntrega.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFechaEntrega.Location = new Point(23, 282);
+            lblFechaEntrega.Name = "lblFechaEntrega";
+            lblFechaEntrega.Size = new Size(109, 15);
+            lblFechaEntrega.TabIndex = 24;
+            lblFechaEntrega.Text = "Fecha est. entrega";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(23, 144);
+            label2.Name = "label2";
+            label2.Size = new Size(106, 15);
+            label2.TabIndex = 19;
+            label2.Text = "Diagnóstico inicial";
+            // 
+            // textBox1
+            // 
+            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBox1.Location = new Point(21, 162);
+            textBox1.MaxLength = 255;
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Observaciones preliminares";
+            textBox1.Size = new Size(256, 52);
+            textBox1.TabIndex = 18;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(23, 55);
+            label1.Name = "label1";
+            label1.Size = new Size(119, 15);
+            label1.TabIndex = 17;
+            label1.Text = "Problema reportado";
+            // 
+            // txtDescripcionProblema
+            // 
+            txtDescripcionProblema.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtDescripcionProblema.Location = new Point(23, 73);
+            txtDescripcionProblema.MaxLength = 255;
+            txtDescripcionProblema.Multiline = true;
+            txtDescripcionProblema.Name = "txtDescripcionProblema";
+            txtDescripcionProblema.PlaceholderText = "Describe el problema tal como lo describe el cliente...";
+            txtDescripcionProblema.Size = new Size(256, 52);
+            txtDescripcionProblema.TabIndex = 10;
             // 
             // lblReparacion
             // 
@@ -202,6 +358,7 @@
             // 
             // mcDispositivo
             // 
+            mcDispositivo.AutoSize = true;
             mcDispositivo.BackColor = Color.FromArgb(255, 255, 255);
             mcDispositivo.Controls.Add(lblEstado);
             mcDispositivo.Controls.Add(lblMarca);
@@ -225,20 +382,72 @@
             mcDispositivo.Size = new Size(299, 377);
             mcDispositivo.TabIndex = 1;
             // 
+            // lblEstado
+            // 
+            lblEstado.AutoSize = true;
+            lblEstado.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEstado.Location = new Point(23, 164);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(113, 15);
+            lblEstado.TabIndex = 17;
+            lblEstado.Text = "Estado en que llega";
+            // 
+            // lblMarca
+            // 
+            lblMarca.AutoSize = true;
+            lblMarca.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMarca.Location = new Point(23, 55);
+            lblMarca.Name = "lblMarca";
+            lblMarca.Size = new Size(41, 15);
+            lblMarca.TabIndex = 16;
+            lblMarca.Text = "Marca";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(157, 55);
+            label5.Name = "label5";
+            label5.Size = new Size(49, 15);
+            label5.TabIndex = 15;
+            label5.Text = "Modelo";
+            // 
+            // lblColor
+            // 
+            lblColor.AutoSize = true;
+            lblColor.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblColor.Location = new Point(157, 110);
+            lblColor.Name = "lblColor";
+            lblColor.Size = new Size(36, 15);
+            lblColor.TabIndex = 14;
+            lblColor.Text = "Color";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(23, 110);
+            label3.Name = "label3";
+            label3.Size = new Size(72, 15);
+            label3.TabIndex = 13;
+            label3.Text = "Serie / IMEI";
+            // 
             // cmbEstado
             // 
+            cmbEstado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             cmbEstado.DisplayMember = "Seleccionar estado...";
             cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbEstado.FormattingEnabled = true;
             cmbEstado.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
-            cmbEstado.Location = new Point(23, 200);
+            cmbEstado.Location = new Point(23, 182);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(256, 23);
             cmbEstado.TabIndex = 12;
             // 
             // txtColor
             // 
-            txtColor.Location = new Point(157, 146);
+            txtColor.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtColor.Location = new Point(157, 128);
             txtColor.MaxLength = 255;
             txtColor.Name = "txtColor";
             txtColor.PlaceholderText = "Ej. Negro";
@@ -247,7 +456,8 @@
             // 
             // txtSerieImei
             // 
-            txtSerieImei.Location = new Point(23, 146);
+            txtSerieImei.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtSerieImei.Location = new Point(23, 128);
             txtSerieImei.MaxLength = 255;
             txtSerieImei.Name = "txtSerieImei";
             txtSerieImei.PlaceholderText = "15 digitos";
@@ -256,7 +466,8 @@
             // 
             // txtMarca
             // 
-            txtMarca.Location = new Point(23, 91);
+            txtMarca.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtMarca.Location = new Point(23, 73);
             txtMarca.MaxLength = 255;
             txtMarca.Name = "txtMarca";
             txtMarca.PlaceholderText = "Ej. Samsung";
@@ -265,7 +476,8 @@
             // 
             // txtModelo
             // 
-            txtModelo.Location = new Point(157, 91);
+            txtModelo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtModelo.Location = new Point(157, 73);
             txtModelo.MaxLength = 255;
             txtModelo.Name = "txtModelo";
             txtModelo.PlaceholderText = "Ej. Galaxy S22";
@@ -300,6 +512,7 @@
             // mcCliente
             // 
             mcCliente.BackColor = Color.FromArgb(255, 255, 255);
+            mcCliente.CausesValidation = false;
             mcCliente.Controls.Add(lblTipoDispositivo);
             mcCliente.Controls.Add(lblCorreo);
             mcCliente.Controls.Add(lblTelefono);
@@ -307,10 +520,8 @@
             mcCliente.Controls.Add(btnTelefono);
             mcCliente.Controls.Add(btnComputadora);
             mcCliente.Controls.Add(lblCliente);
-            mcCliente.Controls.Add(txtCorreo);
-            mcCliente.Controls.Add(txtNumeroTelefonico);
-            mcCliente.Controls.Add(txtNombre);
             mcCliente.Controls.Add(airSeparator1);
+            mcCliente.Controls.Add(pnlCliente);
             mcCliente.Depth = 0;
             mcCliente.ForeColor = Color.FromArgb(222, 0, 0, 0);
             mcCliente.Location = new Point(40, 40);
@@ -321,6 +532,47 @@
             mcCliente.Size = new Size(299, 377);
             mcCliente.TabIndex = 0;
             // 
+            // lblTipoDispositivo
+            // 
+            lblTipoDispositivo.AutoSize = true;
+            lblTipoDispositivo.BackColor = Color.Transparent;
+            lblTipoDispositivo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTipoDispositivo.Location = new Point(25, 229);
+            lblTipoDispositivo.Name = "lblTipoDispositivo";
+            lblTipoDispositivo.Size = new Size(110, 15);
+            lblTipoDispositivo.TabIndex = 10;
+            lblTipoDispositivo.Text = "Tipo de dispositivo";
+            // 
+            // lblCorreo
+            // 
+            lblCorreo.AutoSize = true;
+            lblCorreo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCorreo.Location = new Point(23, 164);
+            lblCorreo.Name = "lblCorreo";
+            lblCorreo.Size = new Size(111, 15);
+            lblCorreo.TabIndex = 9;
+            lblCorreo.Text = "Correo electrónico";
+            // 
+            // lblTelefono
+            // 
+            lblTelefono.AutoSize = true;
+            lblTelefono.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTelefono.Location = new Point(23, 110);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(105, 15);
+            lblTelefono.TabIndex = 8;
+            lblTelefono.Text = "Teléfono / Celular";
+            // 
+            // lblDatosCliente
+            // 
+            lblDatosCliente.AutoSize = true;
+            lblDatosCliente.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDatosCliente.Location = new Point(23, 55);
+            lblDatosCliente.Name = "lblDatosCliente";
+            lblDatosCliente.Size = new Size(109, 15);
+            lblDatosCliente.TabIndex = 7;
+            lblDatosCliente.Text = "Nombre completo";
+            // 
             // btnTelefono
             // 
             btnTelefono.FillColor = Color.FromArgb(22, 35, 52);
@@ -328,7 +580,7 @@
             btnTelefono.FillPressColor = Color.FromArgb(0, 150, 137);
             btnTelefono.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnTelefono.Font = new Font("Microsoft Sans Serif", 12F);
-            btnTelefono.Location = new Point(154, 263);
+            btnTelefono.Location = new Point(154, 245);
             btnTelefono.MinimumSize = new Size(1, 1);
             btnTelefono.Name = "btnTelefono";
             btnTelefono.Radius = 12;
@@ -347,7 +599,7 @@
             btnComputadora.FillPressColor = Color.FromArgb(0, 150, 137);
             btnComputadora.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnComputadora.Font = new Font("Microsoft Sans Serif", 12F);
-            btnComputadora.Location = new Point(25, 265);
+            btnComputadora.Location = new Point(25, 247);
             btnComputadora.MinimumSize = new Size(1, 1);
             btnComputadora.Name = "btnComputadora";
             btnComputadora.Radius = 12;
@@ -371,33 +623,6 @@
             lblCliente.TabIndex = 4;
             lblCliente.Text = "Datos del Cliente";
             // 
-            // txtCorreo
-            // 
-            txtCorreo.Location = new Point(23, 200);
-            txtCorreo.MaxLength = 255;
-            txtCorreo.Name = "txtCorreo";
-            txtCorreo.PlaceholderText = "correo@ejemplo.com";
-            txtCorreo.Size = new Size(256, 23);
-            txtCorreo.TabIndex = 3;
-            // 
-            // txtNumeroTelefonico
-            // 
-            txtNumeroTelefonico.Location = new Point(23, 146);
-            txtNumeroTelefonico.MaxLength = 10;
-            txtNumeroTelefonico.Name = "txtNumeroTelefonico";
-            txtNumeroTelefonico.PlaceholderText = "099 342 5009";
-            txtNumeroTelefonico.Size = new Size(256, 23);
-            txtNumeroTelefonico.TabIndex = 2;
-            // 
-            // txtNombre
-            // 
-            txtNombre.Location = new Point(23, 91);
-            txtNombre.MaxLength = 255;
-            txtNombre.Name = "txtNombre";
-            txtNombre.PlaceholderText = "Nombres y apellidos";
-            txtNombre.Size = new Size(256, 23);
-            txtNombre.TabIndex = 1;
-            // 
             // airSeparator1
             // 
             airSeparator1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -413,155 +638,186 @@
             airSeparator1.Text = "airSeparator1";
             airSeparator1.Transparent = false;
             // 
+            // pnlCliente
+            // 
+            pnlCliente.BackColor = Color.White;
+            pnlCliente.Controls.Add(uiTextBox3);
+            pnlCliente.Controls.Add(uiTextBox2);
+            pnlCliente.Controls.Add(uiTextBox1);
+            pnlCliente.Location = new Point(-25, -22);
+            pnlCliente.Name = "pnlCliente";
+            pnlCliente.Size = new Size(347, 416);
+            pnlCliente.TabIndex = 2;
+            // 
             // pnlInferior
             // 
             pnlInferior.BackColor = Color.FromArgb(30, 41, 59);
-            pnlInferior.Controls.Add(btnCancelar);
-            pnlInferior.Controls.Add(btnGuardarRegistro);
+            pnlInferior.Controls.Add(pictureBox4);
             pnlInferior.Controls.Add(btnLimpiar);
+            pnlInferior.Controls.Add(pictureBox3);
+            pnlInferior.Controls.Add(btnCancelar);
+            pnlInferior.Controls.Add(pictureBox2);
+            pnlInferior.Controls.Add(btnGuardarRegistro);
             pnlInferior.Dock = DockStyle.Bottom;
             pnlInferior.Location = new Point(0, 601);
             pnlInferior.Name = "pnlInferior";
             pnlInferior.Size = new Size(1025, 85);
             pnlInferior.TabIndex = 3;
             // 
-            // btnCancelar
+            // pictureBox4
             // 
-            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCancelar.BackColor = Color.FromArgb(0, 150, 137);
-            btnCancelar.ForeColor = Color.Red;
-            btnCancelar.IconChar = FontAwesome.Sharp.IconChar.Close;
-            btnCancelar.IconColor = Color.Red;
-            btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            btnCancelar.IconSize = 30;
-            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(760, 22);
-            btnCancelar.Margin = new Padding(0);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(98, 51);
-            btnCancelar.TabIndex = 4;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnCancelar.UseVisualStyleBackColor = false;
-            // 
-            // btnGuardarRegistro
-            // 
-            btnGuardarRegistro.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnGuardarRegistro.BackColor = Color.FromArgb(0, 150, 137);
-            btnGuardarRegistro.IconChar = FontAwesome.Sharp.IconChar.Save;
-            btnGuardarRegistro.IconColor = Color.Black;
-            btnGuardarRegistro.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            btnGuardarRegistro.IconSize = 30;
-            btnGuardarRegistro.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardarRegistro.Location = new Point(868, 22);
-            btnGuardarRegistro.Margin = new Padding(0);
-            btnGuardarRegistro.Name = "btnGuardarRegistro";
-            btnGuardarRegistro.Size = new Size(135, 51);
-            btnGuardarRegistro.TabIndex = 3;
-            btnGuardarRegistro.Text = "Guardar Registro";
-            btnGuardarRegistro.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnGuardarRegistro.UseVisualStyleBackColor = false;
+            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox4.BackColor = Color.FromArgb(0, 150, 137);
+            pictureBox4.Image = Properties.Resources.MaterialSymbolsRestartAltRounded1;
+            pictureBox4.Location = new Point(658, 35);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(30, 27);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 12;
+            pictureBox4.TabStop = false;
             // 
             // btnLimpiar
             // 
             btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnLimpiar.BackColor = Color.Transparent;
-            btnLimpiar.Location = new Point(640, 22);
+            btnLimpiar.FillColor = Color.FromArgb(0, 150, 137);
+            btnLimpiar.FillHoverColor = Color.FromArgb(0, 150, 137);
+            btnLimpiar.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnLimpiar.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnLimpiar.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLimpiar.Location = new Point(647, 22);
+            btnLimpiar.MinimumSize = new Size(1, 1);
             btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Radius = 12;
+            btnLimpiar.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnLimpiar.RectSelectedColor = Color.FromArgb(0, 150, 137);
             btnLimpiar.Size = new Size(108, 51);
-            btnLimpiar.TabIndex = 0;
+            btnLimpiar.TabIndex = 11;
             btnLimpiar.Text = "Limpiar";
-            btnLimpiar.UseVisualStyleBackColor = false;
+            btnLimpiar.TextAlign = ContentAlignment.MiddleRight;
+            btnLimpiar.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnLimpiar.TipsForeColor = Color.Black;
             // 
-            // lblDatosCliente
+            // pictureBox3
             // 
-            lblDatosCliente.AutoSize = true;
-            lblDatosCliente.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDatosCliente.Location = new Point(23, 73);
-            lblDatosCliente.Name = "lblDatosCliente";
-            lblDatosCliente.Size = new Size(109, 15);
-            lblDatosCliente.TabIndex = 7;
-            lblDatosCliente.Text = "Nombre completo";
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox3.BackColor = Color.FromArgb(0, 150, 137);
+            pictureBox3.Image = Properties.Resources.TablerX;
+            pictureBox3.Location = new Point(770, 35);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(30, 27);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 10;
+            pictureBox3.TabStop = false;
             // 
-            // lblTelefono
+            // btnCancelar
             // 
-            lblTelefono.AutoSize = true;
-            lblTelefono.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTelefono.Location = new Point(23, 128);
-            lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(105, 15);
-            lblTelefono.TabIndex = 8;
-            lblTelefono.Text = "Teléfono / Celular";
+            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCancelar.BackColor = Color.Transparent;
+            btnCancelar.FillColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.FillHoverColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCancelar.ForeColor = Color.FromArgb(225, 29, 72);
+            btnCancelar.Location = new Point(761, 22);
+            btnCancelar.MinimumSize = new Size(1, 1);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Radius = 12;
+            btnCancelar.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.Size = new Size(102, 51);
+            btnCancelar.TabIndex = 9;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TextAlign = ContentAlignment.MiddleRight;
+            btnCancelar.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnCancelar.TipsForeColor = Color.Black;
             // 
-            // lblCorreo
+            // pictureBox2
             // 
-            lblCorreo.AutoSize = true;
-            lblCorreo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCorreo.Location = new Point(23, 182);
-            lblCorreo.Name = "lblCorreo";
-            lblCorreo.Size = new Size(111, 15);
-            lblCorreo.TabIndex = 9;
-            lblCorreo.Text = "Correo electrónico";
+            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox2.BackColor = Color.FromArgb(0, 150, 137);
+            pictureBox2.Image = Properties.Resources.MaterialSymbolsSaveOutline;
+            pictureBox2.Location = new Point(874, 35);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(30, 27);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 8;
+            pictureBox2.TabStop = false;
             // 
-            // label3
+            // btnGuardarRegistro
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(23, 128);
-            label3.Name = "label3";
-            label3.Size = new Size(72, 15);
-            label3.TabIndex = 13;
-            label3.Text = "Serie / IMEI";
+            btnGuardarRegistro.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnGuardarRegistro.BackColor = Color.Transparent;
+            btnGuardarRegistro.FillColor = Color.FromArgb(0, 150, 137);
+            btnGuardarRegistro.FillHoverColor = Color.FromArgb(0, 150, 137);
+            btnGuardarRegistro.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnGuardarRegistro.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnGuardarRegistro.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnGuardarRegistro.Location = new Point(869, 22);
+            btnGuardarRegistro.MinimumSize = new Size(1, 1);
+            btnGuardarRegistro.Name = "btnGuardarRegistro";
+            btnGuardarRegistro.Radius = 12;
+            btnGuardarRegistro.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnGuardarRegistro.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnGuardarRegistro.Size = new Size(139, 51);
+            btnGuardarRegistro.TabIndex = 7;
+            btnGuardarRegistro.Text = "Guardar Registro";
+            btnGuardarRegistro.TextAlign = ContentAlignment.MiddleRight;
+            btnGuardarRegistro.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnGuardarRegistro.TipsForeColor = Color.Black;
             // 
-            // lblColor
+            // uiTextBox1
             // 
-            lblColor.AutoSize = true;
-            lblColor.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblColor.Location = new Point(157, 128);
-            lblColor.Name = "lblColor";
-            lblColor.Size = new Size(36, 15);
-            lblColor.TabIndex = 14;
-            lblColor.Text = "Color";
+            uiTextBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiTextBox1.Location = new Point(50, 204);
+            uiTextBox1.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox1.MaxLength = 255;
+            uiTextBox1.Minimum = 0D;
+            uiTextBox1.MinimumSize = new Size(1, 16);
+            uiTextBox1.Name = "uiTextBox1";
+            uiTextBox1.Padding = new Padding(5);
+            uiTextBox1.Radius = 12;
+            uiTextBox1.ShowText = false;
+            uiTextBox1.Size = new Size(256, 23);
+            uiTextBox1.TabIndex = 13;
+            uiTextBox1.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox1.Watermark = "correo@ejemplo.com";
             // 
-            // label5
+            // uiTextBox2
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(157, 73);
-            label5.Name = "label5";
-            label5.Size = new Size(49, 15);
-            label5.TabIndex = 15;
-            label5.Text = "Modelo";
+            uiTextBox2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiTextBox2.Location = new Point(50, 150);
+            uiTextBox2.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox2.Maximum = 0D;
+            uiTextBox2.MaxLength = 10;
+            uiTextBox2.Minimum = 0D;
+            uiTextBox2.MinimumSize = new Size(1, 16);
+            uiTextBox2.Name = "uiTextBox2";
+            uiTextBox2.Padding = new Padding(5);
+            uiTextBox2.Radius = 12;
+            uiTextBox2.ShowText = false;
+            uiTextBox2.Size = new Size(256, 23);
+            uiTextBox2.TabIndex = 14;
+            uiTextBox2.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox2.Watermark = "0993425009";
             // 
-            // lblMarca
+            // uiTextBox3
             // 
-            lblMarca.AutoSize = true;
-            lblMarca.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMarca.Location = new Point(23, 73);
-            lblMarca.Name = "lblMarca";
-            lblMarca.Size = new Size(41, 15);
-            lblMarca.TabIndex = 16;
-            lblMarca.Text = "Marca";
-            // 
-            // lblEstado
-            // 
-            lblEstado.AutoSize = true;
-            lblEstado.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEstado.Location = new Point(23, 182);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(113, 15);
-            lblEstado.TabIndex = 17;
-            lblEstado.Text = "Estado en que llega";
-            // 
-            // lblTipoDispositivo
-            // 
-            lblTipoDispositivo.AutoSize = true;
-            lblTipoDispositivo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTipoDispositivo.Location = new Point(25, 247);
-            lblTipoDispositivo.Name = "lblTipoDispositivo";
-            lblTipoDispositivo.Size = new Size(110, 15);
-            lblTipoDispositivo.TabIndex = 10;
-            lblTipoDispositivo.Text = "Tipo de dispositivo";
+            uiTextBox3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiTextBox3.Location = new Point(50, 95);
+            uiTextBox3.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox3.MaxLength = 255;
+            uiTextBox3.Minimum = 0D;
+            uiTextBox3.MinimumSize = new Size(1, 16);
+            uiTextBox3.Name = "uiTextBox3";
+            uiTextBox3.Padding = new Padding(5);
+            uiTextBox3.Radius = 12;
+            uiTextBox3.ShowText = false;
+            uiTextBox3.Size = new Size(256, 23);
+            uiTextBox3.TabIndex = 14;
+            uiTextBox3.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox3.Watermark = "Nombre y apellidos";
             // 
             // ucRecepcionEquipos
             // 
@@ -578,13 +834,19 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInformacion.ResumeLayout(false);
             pnlCentral.ResumeLayout(false);
+            pnlCentral.PerformLayout();
             mcReparacion.ResumeLayout(false);
             mcReparacion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             mcDispositivo.ResumeLayout(false);
             mcDispositivo.PerformLayout();
             mcCliente.ResumeLayout(false);
             mcCliente.PerformLayout();
+            pnlCliente.ResumeLayout(false);
             pnlInferior.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -595,22 +857,16 @@
         private Panel pnlInformacion;
         private Panel pnlCentral;
         private Panel pnlInferior;
-        private Button btnLimpiar;
-        private FontAwesome.Sharp.IconButton btnGuardarRegistro;
         private Label lblFecha;
         private Label lblOrden;
         private Label lblTitulo;
         private PictureBox pictureBox1;
         private ReaLTaiizor.Controls.MaterialCard mcReparacion;
         private ReaLTaiizor.Controls.MaterialCard mcDispositivo;
-        private ReaLTaiizor.Controls.MaterialCard mcCliente;
         private ReaLTaiizor.Controls.AirSeparator airSeparator3;
         private ReaLTaiizor.Controls.AirSeparator airSeparator2;
         private ReaLTaiizor.Controls.AirSeparator airSeparator1;
-        private TextBox txtCorreo;
-        private TextBox txtNumeroTelefonico;
-        private TextBox txtNombre;
-        private FontAwesome.Sharp.IconButton btnCancelar;
+        private FontAwesome.Sharp.IconButton uiButton1;
         private Label lblReparacion;
         private Label lblDispositivo;
         private Label lblCliente;
@@ -630,5 +886,28 @@
         private Label lblDatosCliente;
         private Label lblEstado;
         private Label lblTipoDispositivo;
+        private Label label2;
+        private TextBox textBox1;
+        private Label label1;
+        private TextBox txtDescripcionProblema;
+        private DateTimePicker dateTimePicker1;
+        private Label lblTecnico;
+        private Label label6;
+        private Label lblCosto;
+        private Label lblFechaEntrega;
+        private ComboBox cmbTecnicos;
+        private ComboBox cmbSucursal;
+        private NumericUpDown numericUpDown1;
+        private Sunny.UI.UIButton btnGuardarRegistro;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
+        private Sunny.UI.UIButton btnCancelar;
+        private PictureBox pictureBox4;
+        private Sunny.UI.UIButton btnLimpiar;
+        public ReaLTaiizor.Controls.MaterialCard mcCliente;
+        private Panel pnlCliente;
+        private Sunny.UI.UITextBox uiTextBox1;
+        private Sunny.UI.UITextBox uiTextBox3;
+        private Sunny.UI.UITextBox uiTextBox2;
     }
 }
