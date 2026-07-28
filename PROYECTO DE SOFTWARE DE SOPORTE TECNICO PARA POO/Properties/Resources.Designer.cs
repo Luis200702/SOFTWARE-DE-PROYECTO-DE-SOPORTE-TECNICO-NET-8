@@ -83,6 +83,26 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LineMdAlertCircleLoop {
+            get {
+                object obj = ResourceManager.GetObject("LineMdAlertCircleLoop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MaterialSymbolsInventory__1_ {
+            get {
+                object obj = ResourceManager.GetObject("MaterialSymbolsInventory (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MaterialSymbolsInventoryRounded {
             get {
                 object obj = ResourceManager.GetObject("MaterialSymbolsInventoryRounded", resourceCulture);
@@ -103,9 +123,89 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MaterialSymbolsSearch__1_ {
+            get {
+                object obj = ResourceManager.GetObject("MaterialSymbolsSearch (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MdiAlertCircleOutline {
+            get {
+                object obj = ResourceManager.GetObject("MdiAlertCircleOutline", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MdiAlertCircleOutline__1_ {
+            get {
+                object obj = ResourceManager.GetObject("MdiAlertCircleOutline (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TablerSearch {
+            get {
+                object obj = ResourceManager.GetObject("TablerSearch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tictoc {
             get {
                 object obj = ResourceManager.GetObject("tictoc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WeuiAdd2Filled {
+            get {
+                object obj = ResourceManager.GetObject("WeuiAdd2Filled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WeuiAdd2Outlined {
+            get {
+                object obj = ResourceManager.GetObject("WeuiAdd2Outlined", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WeuiAdd2Outlined1 {
+            get {
+                object obj = ResourceManager.GetObject("WeuiAdd2Outlined1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WhhAlertalt {
+            get {
+                object obj = ResourceManager.GetObject("WhhAlertalt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
