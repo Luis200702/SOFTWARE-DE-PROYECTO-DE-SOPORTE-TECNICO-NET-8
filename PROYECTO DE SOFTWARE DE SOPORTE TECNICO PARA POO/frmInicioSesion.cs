@@ -9,7 +9,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-            if (txtUsuario.Text == "admin" && txtContraseña.Text == "admin")
+            if (txtUsuario.Text == "admin" && txtContraseÃ±a.Text == "admin")
             {
                 frmMenu menuPrincipal = new frmMenu();
                 menuPrincipal.Show();
@@ -18,8 +18,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Usuario o contraseÃ±a incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

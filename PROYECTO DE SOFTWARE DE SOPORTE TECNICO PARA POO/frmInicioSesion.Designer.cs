@@ -95,6 +95,7 @@
             txtUsuario.PlaceholderText = "Usuario";
             txtUsuario.Size = new Size(343, 23);
             txtUsuario.TabIndex = 2;
+            txtUsuario.TextChanged += txtUsuario_TextChanged;
             // 
             // btnAcceder
             // 
