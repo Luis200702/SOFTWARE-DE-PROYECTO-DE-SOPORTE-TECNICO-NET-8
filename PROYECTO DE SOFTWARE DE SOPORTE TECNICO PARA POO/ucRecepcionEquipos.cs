@@ -1,24 +1,27 @@
 ﻿using FontAwesome.Sharp;
+using Sunny.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class ucRecepcionEquipos : UserControl
     {
+        private UIButton botonSeleccionado = null;
+
         public ucRecepcionEquipos()
         {
             InitializeComponent();
 
-            // Se llama a la función para redondear todos los botones del formulario
+
             this.RedondearBotones(40);
         }
 
@@ -27,6 +30,25 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
             cmbEstado.SelectedIndex = 0;
 
+        }
+
+      
+        private void SeleccionarBoton(UIButton boton)
+        {
+
+            if (botonSeleccionado != null)
+            {
+                botonSeleccionado.FillColor = Color.White;
+                botonSeleccionado.RectColor = Color.Gray;
+                botonSeleccionado.ForeColor = Color.Black;
+            }
+
+
+            boton.FillColor = Color.FromArgb(0, 150, 137);
+            boton.RectColor = Color.FromArgb(0, 150, 137);
+            boton.ForeColor = Color.White;
+
+            botonSeleccionado = boton;
         }
 
         private void pnlCentral_Resize(object sender, EventArgs e)
@@ -53,6 +75,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             mcCliente.Height = nuevaAltura;
             mcDispositivo.Height = nuevaAltura;
             mcReparacion.Height = nuevaAltura;
+        }
+
+        private void btnComputadora_Click(object sender, EventArgs e)
+        {
+            SeleccionarBoton(btnComputadora);
+        }
+
+        private void btnTelefono_Click(object sender, EventArgs e)
+        {
+            SeleccionarBoton(btnTelefono);
         }
     }
 }
