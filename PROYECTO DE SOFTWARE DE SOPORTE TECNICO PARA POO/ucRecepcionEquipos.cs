@@ -17,6 +17,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         public ucRecepcionEquipos()
         {
             InitializeComponent();
+
+            // Se llama a la función para redondear todos los botones del formulario
+            this.RedondearBotones(20);
         }
 
         private void ucRecepcionEquipos_Load(object sender, EventArgs e)
