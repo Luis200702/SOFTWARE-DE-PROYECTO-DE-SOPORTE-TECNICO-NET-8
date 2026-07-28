@@ -15,6 +15,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         public ucStock()
         {
             InitializeComponent();
+
+            // Se llama a la función para redondear todos los botones del formulario
+            this.RedondearBotones(40);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
