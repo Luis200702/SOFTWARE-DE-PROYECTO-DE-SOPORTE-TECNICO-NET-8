@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             pnlContenedorMenu = new Panel();
-            label2 = new Label();
+            lblSeparador2 = new Label();
             lblAdministracion = new Label();
             lblComercial = new Label();
             btnConfiguracionGeneral = new Button();
@@ -46,13 +46,15 @@
             btnDevoluciónEntrega = new Button();
             btnSeguimientoReparaciones = new Button();
             btnRecepcionEquipos = new Button();
-            label1 = new Label();
+            lblSeparador3 = new Label();
             pnlContenedorLogotipo = new Panel();
+            label1 = new Label();
             pnlContenedorSalir = new Panel();
             btnSalirApp = new ReaLTaiizor.Controls.CyberButton();
             pnlInterfaces = new Panel();
             timerDesplazamiento = new System.Windows.Forms.Timer(components);
             pnlContenedorMenu.SuspendLayout();
+            pnlContenedorLogotipo.SuspendLayout();
             pnlContenedorSalir.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,8 +62,8 @@
             // 
             pnlContenedorMenu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorMenu.AutoSize = true;
-            pnlContenedorMenu.BackColor = Color.FromArgb(11, 17, 30);
-            pnlContenedorMenu.Controls.Add(label2);
+            pnlContenedorMenu.BackColor = Color.FromArgb(10, 12, 30);
+            pnlContenedorMenu.Controls.Add(lblSeparador2);
             pnlContenedorMenu.Controls.Add(lblAdministracion);
             pnlContenedorMenu.Controls.Add(lblComercial);
             pnlContenedorMenu.Controls.Add(btnConfiguracionGeneral);
@@ -75,29 +77,29 @@
             pnlContenedorMenu.Controls.Add(btnDevoluciónEntrega);
             pnlContenedorMenu.Controls.Add(btnSeguimientoReparaciones);
             pnlContenedorMenu.Controls.Add(btnRecepcionEquipos);
-            pnlContenedorMenu.Controls.Add(label1);
-            pnlContenedorMenu.Location = new Point(0, 77);
+            pnlContenedorMenu.Controls.Add(lblSeparador3);
+            pnlContenedorMenu.Location = new Point(0, 90);
             pnlContenedorMenu.Name = "pnlContenedorMenu";
-            pnlContenedorMenu.Size = new Size(223, 535);
+            pnlContenedorMenu.Size = new Size(223, 619);
             pnlContenedorMenu.TabIndex = 0;
             // 
-            // label2
+            // lblSeparador2
             // 
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.FromArgb(155, 168, 171);
-            label2.Location = new Point(12, 209);
-            label2.Name = "label2";
-            label2.Size = new Size(202, 18);
-            label2.TabIndex = 16;
-            label2.Text = "___________________________";
+            lblSeparador2.BackColor = Color.Transparent;
+            lblSeparador2.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSeparador2.ForeColor = Color.FromArgb(155, 168, 171);
+            lblSeparador2.Location = new Point(12, 236);
+            lblSeparador2.Name = "lblSeparador2";
+            lblSeparador2.Size = new Size(202, 18);
+            lblSeparador2.TabIndex = 16;
+            lblSeparador2.Text = "___________________________";
             // 
             // lblAdministracion
             // 
             lblAdministracion.BackColor = Color.Transparent;
             lblAdministracion.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblAdministracion.ForeColor = Color.FromArgb(155, 168, 171);
-            lblAdministracion.Location = new Point(30, 387);
+            lblAdministracion.ForeColor = Color.DimGray;
+            lblAdministracion.Location = new Point(27, 448);
             lblAdministracion.Name = "lblAdministracion";
             lblAdministracion.Size = new Size(105, 15);
             lblAdministracion.TabIndex = 14;
@@ -107,8 +109,8 @@
             // 
             lblComercial.BackColor = Color.Transparent;
             lblComercial.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblComercial.ForeColor = Color.FromArgb(155, 168, 171);
-            lblComercial.Location = new Point(30, 228);
+            lblComercial.ForeColor = Color.DimGray;
+            lblComercial.Location = new Point(27, 264);
             lblComercial.Name = "lblComercial";
             lblComercial.Size = new Size(70, 15);
             lblComercial.TabIndex = 3;
@@ -122,7 +124,7 @@
             btnConfiguracionGeneral.ForeColor = Color.FromArgb(155, 168, 171);
             btnConfiguracionGeneral.ImageIndex = 10;
             btnConfiguracionGeneral.ImageList = imageListBarrraMenu;
-            btnConfiguracionGeneral.Location = new Point(15, 490);
+            btnConfiguracionGeneral.Location = new Point(14, 575);
             btnConfiguracionGeneral.Name = "btnConfiguracionGeneral";
             btnConfiguracionGeneral.Size = new Size(190, 35);
             btnConfiguracionGeneral.TabIndex = 13;
@@ -158,7 +160,7 @@
             btnGestionUsuarios.ForeColor = Color.FromArgb(155, 168, 171);
             btnGestionUsuarios.ImageIndex = 9;
             btnGestionUsuarios.ImageList = imageListBarrraMenu;
-            btnGestionUsuarios.Location = new Point(15, 449);
+            btnGestionUsuarios.Location = new Point(14, 514);
             btnGestionUsuarios.Name = "btnGestionUsuarios";
             btnGestionUsuarios.Size = new Size(190, 35);
             btnGestionUsuarios.TabIndex = 12;
@@ -176,7 +178,7 @@
             btnReportes.ForeColor = Color.FromArgb(155, 168, 171);
             btnReportes.ImageIndex = 8;
             btnReportes.ImageList = imageListBarrraMenu;
-            btnReportes.Location = new Point(15, 408);
+            btnReportes.Location = new Point(14, 473);
             btnReportes.Name = "btnReportes";
             btnReportes.Size = new Size(190, 35);
             btnReportes.TabIndex = 11;
@@ -194,7 +196,7 @@
             btnHistorialCliente.ForeColor = Color.FromArgb(155, 168, 171);
             btnHistorialCliente.ImageIndex = 7;
             btnHistorialCliente.ImageList = imageListBarrraMenu;
-            btnHistorialCliente.Location = new Point(15, 331);
+            btnHistorialCliente.Location = new Point(14, 371);
             btnHistorialCliente.Name = "btnHistorialCliente";
             btnHistorialCliente.Size = new Size(190, 35);
             btnHistorialCliente.TabIndex = 10;
@@ -212,7 +214,7 @@
             btnTradeIn.ForeColor = Color.FromArgb(155, 168, 171);
             btnTradeIn.ImageIndex = 6;
             btnTradeIn.ImageList = imageListBarrraMenu;
-            btnTradeIn.Location = new Point(15, 290);
+            btnTradeIn.Location = new Point(14, 330);
             btnTradeIn.Name = "btnTradeIn";
             btnTradeIn.Size = new Size(190, 35);
             btnTradeIn.TabIndex = 9;
@@ -230,7 +232,7 @@
             btnVentaDispositivos.ForeColor = Color.FromArgb(155, 168, 171);
             btnVentaDispositivos.ImageIndex = 5;
             btnVentaDispositivos.ImageList = imageListBarrraMenu;
-            btnVentaDispositivos.Location = new Point(15, 249);
+            btnVentaDispositivos.Location = new Point(14, 289);
             btnVentaDispositivos.Name = "btnVentaDispositivos";
             btnVentaDispositivos.Size = new Size(190, 35);
             btnVentaDispositivos.TabIndex = 8;
@@ -248,7 +250,7 @@
             btnDerivacionOrdenes.ForeColor = Color.FromArgb(155, 168, 171);
             btnDerivacionOrdenes.ImageIndex = 4;
             btnDerivacionOrdenes.ImageList = imageListBarrraMenu;
-            btnDerivacionOrdenes.Location = new Point(15, 171);
+            btnDerivacionOrdenes.Location = new Point(14, 188);
             btnDerivacionOrdenes.Name = "btnDerivacionOrdenes";
             btnDerivacionOrdenes.Size = new Size(190, 35);
             btnDerivacionOrdenes.TabIndex = 7;
@@ -266,7 +268,7 @@
             btnGestionStock.ForeColor = Color.FromArgb(155, 168, 171);
             btnGestionStock.ImageIndex = 3;
             btnGestionStock.ImageList = imageListBarrraMenu;
-            btnGestionStock.Location = new Point(15, 130);
+            btnGestionStock.Location = new Point(14, 147);
             btnGestionStock.Name = "btnGestionStock";
             btnGestionStock.Size = new Size(190, 35);
             btnGestionStock.TabIndex = 6;
@@ -284,7 +286,7 @@
             btnDevoluciónEntrega.ForeColor = Color.FromArgb(155, 168, 171);
             btnDevoluciónEntrega.ImageIndex = 2;
             btnDevoluciónEntrega.ImageList = imageListBarrraMenu;
-            btnDevoluciónEntrega.Location = new Point(15, 89);
+            btnDevoluciónEntrega.Location = new Point(14, 106);
             btnDevoluciónEntrega.Name = "btnDevoluciónEntrega";
             btnDevoluciónEntrega.Size = new Size(190, 35);
             btnDevoluciónEntrega.TabIndex = 5;
@@ -302,7 +304,7 @@
             btnSeguimientoReparaciones.ForeColor = Color.FromArgb(155, 168, 171);
             btnSeguimientoReparaciones.ImageIndex = 1;
             btnSeguimientoReparaciones.ImageList = imageListBarrraMenu;
-            btnSeguimientoReparaciones.Location = new Point(15, 48);
+            btnSeguimientoReparaciones.Location = new Point(14, 65);
             btnSeguimientoReparaciones.Name = "btnSeguimientoReparaciones";
             btnSeguimientoReparaciones.Size = new Size(190, 35);
             btnSeguimientoReparaciones.TabIndex = 4;
@@ -320,7 +322,7 @@
             btnRecepcionEquipos.ForeColor = Color.FromArgb(155, 168, 171);
             btnRecepcionEquipos.ImageIndex = 0;
             btnRecepcionEquipos.ImageList = imageListBarrraMenu;
-            btnRecepcionEquipos.Location = new Point(15, 7);
+            btnRecepcionEquipos.Location = new Point(14, 24);
             btnRecepcionEquipos.Name = "btnRecepcionEquipos";
             btnRecepcionEquipos.Size = new Size(190, 35);
             btnRecepcionEquipos.TabIndex = 3;
@@ -330,31 +332,43 @@
             btnRecepcionEquipos.UseVisualStyleBackColor = false;
             btnRecepcionEquipos.Click += btnRecepcionEquipos_Click;
             // 
+            // lblSeparador3
+            // 
+            lblSeparador3.BackColor = Color.Transparent;
+            lblSeparador3.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSeparador3.ForeColor = Color.FromArgb(155, 168, 171);
+            lblSeparador3.Location = new Point(12, 418);
+            lblSeparador3.Name = "lblSeparador3";
+            lblSeparador3.Size = new Size(202, 18);
+            lblSeparador3.TabIndex = 15;
+            lblSeparador3.Text = "___________________________";
+            // 
+            // pnlContenedorLogotipo
+            // 
+            pnlContenedorLogotipo.BackColor = Color.FromArgb(10, 12, 30);
+            pnlContenedorLogotipo.Controls.Add(label1);
+            pnlContenedorLogotipo.Location = new Point(0, 0);
+            pnlContenedorLogotipo.Name = "pnlContenedorLogotipo";
+            pnlContenedorLogotipo.Size = new Size(223, 90);
+            pnlContenedorLogotipo.TabIndex = 1;
+            // 
             // label1
             // 
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(155, 168, 171);
-            label1.Location = new Point(12, 369);
+            label1.Location = new Point(12, 72);
             label1.Name = "label1";
             label1.Size = new Size(202, 18);
-            label1.TabIndex = 15;
+            label1.TabIndex = 17;
             label1.Text = "___________________________";
-            // 
-            // pnlContenedorLogotipo
-            // 
-            pnlContenedorLogotipo.BackColor = Color.FromArgb(11, 17, 30);
-            pnlContenedorLogotipo.Location = new Point(0, 0);
-            pnlContenedorLogotipo.Name = "pnlContenedorLogotipo";
-            pnlContenedorLogotipo.Size = new Size(220, 78);
-            pnlContenedorLogotipo.TabIndex = 1;
             // 
             // pnlContenedorSalir
             // 
             pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            pnlContenedorSalir.BackColor = Color.FromArgb(11, 17, 30);
+            pnlContenedorSalir.BackColor = Color.FromArgb(10, 12, 30);
             pnlContenedorSalir.Controls.Add(btnSalirApp);
-            pnlContenedorSalir.Location = new Point(0, 612);
+            pnlContenedorSalir.Location = new Point(0, 707);
             pnlContenedorSalir.Name = "pnlContenedorSalir";
             pnlContenedorSalir.Size = new Size(220, 74);
             pnlContenedorSalir.TabIndex = 2;
@@ -366,11 +380,11 @@
             btnSalirApp.Background = true;
             btnSalirApp.Background_WidthPen = 4F;
             btnSalirApp.BackgroundPen = true;
-            btnSalirApp.ColorBackground = Color.FromArgb(6, 20, 27);
+            btnSalirApp.ColorBackground = Color.FromArgb(10, 12, 30);
             btnSalirApp.ColorBackground_1 = Color.FromArgb(50, 52, 68);
             btnSalirApp.ColorBackground_2 = Color.FromArgb(26, 28, 44);
-            btnSalirApp.ColorBackground_Pen = Color.FromArgb(6, 20, 27);
-            btnSalirApp.ColorLighting = Color.FromArgb(6, 20, 27);
+            btnSalirApp.ColorBackground_Pen = Color.FromArgb(10, 12, 30);
+            btnSalirApp.ColorLighting = Color.FromArgb(10, 12, 30);
             btnSalirApp.ColorPen_1 = Color.FromArgb(6, 20, 27);
             btnSalirApp.ColorPen_2 = Color.FromArgb(6, 20, 27);
             btnSalirApp.CyberButtonStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
@@ -385,7 +399,7 @@
             btnSalirApp.Lighting = false;
             btnSalirApp.LinearGradient_Background = true;
             btnSalirApp.LinearGradientPen = false;
-            btnSalirApp.Location = new Point(27, 11);
+            btnSalirApp.Location = new Point(27, 14);
             btnSalirApp.Name = "btnSalirApp";
             btnSalirApp.PenWidth = 15;
             btnSalirApp.Rounding = true;
@@ -404,10 +418,10 @@
             // 
             pnlInterfaces.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlInterfaces.AutoSize = true;
-            pnlInterfaces.BackColor = Color.FromArgb(26, 28, 44);
+            pnlInterfaces.BackColor = Color.FromArgb(24, 35, 54);
             pnlInterfaces.Location = new Point(220, 0);
             pnlInterfaces.Name = "pnlInterfaces";
-            pnlInterfaces.Size = new Size(1024, 686);
+            pnlInterfaces.Size = new Size(1024, 781);
             pnlInterfaces.TabIndex = 3;
             // 
             // timerDesplazamiento
@@ -418,8 +432,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(26, 28, 44);
-            ClientSize = new Size(1242, 686);
+            BackColor = Color.FromArgb(24, 35, 54);
+            ClientSize = new Size(1242, 781);
             Controls.Add(pnlInterfaces);
             Controls.Add(pnlContenedorSalir);
             Controls.Add(pnlContenedorLogotipo);
@@ -428,6 +442,7 @@
             Text = "Menu Principal";
             FormClosing += frmMenu_FormClosing;
             pnlContenedorMenu.ResumeLayout(false);
+            pnlContenedorLogotipo.ResumeLayout(false);
             pnlContenedorSalir.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -451,11 +466,12 @@
         private Button btnRecepcionEquipos;
         private Label lblComercial;
         private Label lblAdministracion;
-        private Label label1;
-        private Label label2;
+        private Label lblSeparador3;
+        private Label lblSeparador2;
         private ReaLTaiizor.Controls.CyberButton btnSalirApp;
         private Panel pnlInterfaces;
         private System.Windows.Forms.Timer timerDesplazamiento;
         private ImageList imageListBarrraMenu;
+        private Label label1;
     }
 }
