@@ -20,14 +20,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private float posicionActualY;
         private float posicionObjetivoY;
 
-        // Variables para la animación de extensión/retracción horizontal (0.0 a 1.0)
+        // Variables para la animación de extensión/retracción horizontal 
         private float progresoAncho = 0f;
         private float progresoAnchoObjetivo = 0f;
 
         private System.Windows.Forms.Button botonSeleccionado;
-        private System.Windows.Forms.Button ultimoBotonActivo; // Guarda la referencia mientras se repliega
+        private System.Windows.Forms.Button ultimoBotonActivo; 
 
-        // Variable para mantener el botón que recibió Clic (Sección actual)
+        // Variable para mantener el botón que recibió Clic 
         private System.Windows.Forms.Button botonActivo;
 
         public frmMenu()
@@ -89,9 +89,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
 
                 botonActivo = btn;
-                botonActivo.ForeColor = Color.White; // Destacar texto del botón seleccionado
-                progresoAnchoObjetivo = 0f;          // Ocultar hover inmediatamente al hacer clic
-                pnlContenedorMenu.Invalidate();      // Redibujar panel para mostrar el degradado
+                botonActivo.ForeColor = Color.White; // Destaca texto del botón seleccionado
+                progresoAnchoObjetivo = 0f;          // Oculta hover inmediatamente al hacer clic
+                pnlContenedorMenu.Invalidate();      // Redibuja panel para mostrar el degradado
             }
         }
 
@@ -120,7 +120,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     RectangleF rectGradiente = new RectangleF(xActivo, yActivo, anchoActivo, altoActivo);
                     if (rectGradiente.Width > 1)
                     {
-                        Color colorInicio = ColorTranslator.FromHtml("#2F7C70"); // Color claro/brillante             Otro si quiero: #3E9B8B
+                        Color colorInicio = ColorTranslator.FromHtml("#2F7C70"); // Color claro/brillante       Otro si quiero por si acaso: #3E9B8B
                         Color colorFin = Color.FromArgb(0, 74, 92, 98);         // Transparente a la derecha
 
                         using (LinearGradientBrush brushGradiente = new LinearGradientBrush(
@@ -154,7 +154,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     float anchoMax = btn.Width;
                     float alto = btn.Height;
 
-                    // Animación de ancho y desplazamiento dentro del botón (retracción a la derecha / entrada a la izquierda)
+                    // Animación de ancho y desplazamiento dentro del botón 
                     float anchoActual = anchoMax * progresoAncho;
                     float xActual = xBtn + (anchoMax - anchoActual);
                     float radio = alto / 2f;
@@ -174,7 +174,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             e.Graphics.ResetClip();
         }
 
-        // Método auxiliar para la figura cóncava original del Click (Conservado por compatibilidad)
+        // Método auxiliar para la figura cóncava original del Click 
         private GraphicsPath CrearPathCapsula(float xCalculado, float y, int alto, int radio, float rCorner, int anchoTotal)
         {
             GraphicsPath path = new GraphicsPath();
@@ -199,7 +199,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             return path;
         }
 
-        // Método auxiliar para construir la forma redondeada del Hover exclusivamente dentro del botón
+        // Método auxiliar para construir la forma redondeada dentro del botón
         private GraphicsPath CrearPathHoverBoton(float x, float y, float ancho, float alto, float radio)
         {
             GraphicsPath path = new GraphicsPath();

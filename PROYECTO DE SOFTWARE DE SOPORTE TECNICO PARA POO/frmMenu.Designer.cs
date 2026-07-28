@@ -48,14 +48,19 @@
             btnRecepcionEquipos = new Button();
             lblSeparador3 = new Label();
             pnlContenedorLogotipo = new Panel();
+            button1 = new Button();
+            ImagenListLogo = new ImageList(components);
             label1 = new Label();
             pnlContenedorSalir = new Panel();
             btnSalirApp = new ReaLTaiizor.Controls.CyberButton();
             pnlInterfaces = new Panel();
+            pictureBox1 = new PictureBox();
             timerDesplazamiento = new System.Windows.Forms.Timer(components);
             pnlContenedorMenu.SuspendLayout();
             pnlContenedorLogotipo.SuspendLayout();
             pnlContenedorSalir.SuspendLayout();
+            pnlInterfaces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pnlContenedorMenu
@@ -346,11 +351,33 @@
             // pnlContenedorLogotipo
             // 
             pnlContenedorLogotipo.BackColor = Color.FromArgb(10, 12, 30);
+            pnlContenedorLogotipo.Controls.Add(button1);
             pnlContenedorLogotipo.Controls.Add(label1);
             pnlContenedorLogotipo.Location = new Point(0, 0);
             pnlContenedorLogotipo.Name = "pnlContenedorLogotipo";
             pnlContenedorLogotipo.Size = new Size(223, 90);
             pnlContenedorLogotipo.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Transparent;
+            button1.Enabled = false;
+            button1.FlatAppearance.BorderColor = Color.FromArgb(10, 12, 30);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ImageIndex = 0;
+            button1.ImageList = ImagenListLogo;
+            button1.Location = new Point(67, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(82, 66);
+            button1.TabIndex = 18;
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // ImagenListLogo
+            // 
+            ImagenListLogo.ColorDepth = ColorDepth.Depth32Bit;
+            ImagenListLogo.ImageStream = (ImageListStreamer)resources.GetObject("ImagenListLogo.ImageStream");
+            ImagenListLogo.TransparentColor = Color.Transparent;
+            ImagenListLogo.Images.SetKeyName(0, "LogotipoProyectoSd.png");
             // 
             // label1
             // 
@@ -419,10 +446,21 @@
             pnlInterfaces.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlInterfaces.AutoSize = true;
             pnlInterfaces.BackColor = Color.FromArgb(24, 35, 54);
+            pnlInterfaces.Controls.Add(pictureBox1);
             pnlInterfaces.Location = new Point(220, 0);
             pnlInterfaces.Name = "pnlInterfaces";
-            pnlInterfaces.Size = new Size(1024, 781);
+            pnlInterfaces.Size = new Size(1025, 784);
             pnlInterfaces.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(1022, 781);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // timerDesplazamiento
             // 
@@ -444,6 +482,8 @@
             pnlContenedorMenu.ResumeLayout(false);
             pnlContenedorLogotipo.ResumeLayout(false);
             pnlContenedorSalir.ResumeLayout(false);
+            pnlInterfaces.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -473,5 +513,8 @@
         private System.Windows.Forms.Timer timerDesplazamiento;
         private ImageList imageListBarrraMenu;
         private Label label1;
+        private PictureBox pictureBox1;
+        private Button button1;
+        private ImageList ImagenListLogo;
     }
 }

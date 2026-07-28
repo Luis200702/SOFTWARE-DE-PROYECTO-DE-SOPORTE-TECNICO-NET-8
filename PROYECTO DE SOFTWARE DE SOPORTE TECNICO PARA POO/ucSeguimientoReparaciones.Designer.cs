@@ -33,24 +33,24 @@
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
             pnlInformacion = new Panel();
-            lblOrden = new Label();
-            dataGridView1 = new DataGridView();
-            txtNombre = new TextBox();
-            cmbEstado = new ComboBox();
             pictureBox2 = new PictureBox();
+            cmbEstado = new ComboBox();
+            lblOrden = new Label();
+            txtNombre = new TextBox();
+            dataGridView1 = new DataGridView();
             panel1 = new Panel();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
             label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -104,37 +104,15 @@
             pnlInformacion.Size = new Size(1025, 60);
             pnlInformacion.TabIndex = 2;
             // 
-            // lblOrden
+            // pictureBox2
             // 
-            lblOrden.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblOrden.ForeColor = Color.FromArgb(147, 162, 183);
-            lblOrden.Location = new Point(896, 20);
-            lblOrden.Name = "lblOrden";
-            lblOrden.Size = new Size(108, 23);
-            lblOrden.TabIndex = 0;
-            lblOrden.Text = "# órdenes";
-            lblOrden.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.BackgroundColor = Color.FromArgb(24, 35, 54);
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(0, 174);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1025, 509);
-            dataGridView1.TabIndex = 3;
-            // 
-            // txtNombre
-            // 
-            txtNombre.BackColor = Color.FromArgb(33, 41, 67);
-            txtNombre.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtNombre.Location = new Point(36, 13);
-            txtNombre.MaxLength = 255;
-            txtNombre.Multiline = true;
-            txtNombre.Name = "txtNombre";
-            txtNombre.PlaceholderText = "           Buscar orden, cliente...";
-            txtNombre.Size = new Size(307, 30);
-            txtNombre.TabIndex = 2;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(79, 20);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(16, 16);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 14;
+            pictureBox2.TabStop = false;
             // 
             // cmbEstado
             // 
@@ -148,15 +126,39 @@
             cmbEstado.Size = new Size(179, 29);
             cmbEstado.TabIndex = 13;
             // 
-            // pictureBox2
+            // lblOrden
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(50, 20);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(16, 16);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 14;
-            pictureBox2.TabStop = false;
+            lblOrden.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblOrden.ForeColor = Color.FromArgb(147, 162, 183);
+            lblOrden.Location = new Point(896, 20);
+            lblOrden.Name = "lblOrden";
+            lblOrden.Size = new Size(108, 23);
+            lblOrden.TabIndex = 0;
+            lblOrden.Text = "# órdenes";
+            lblOrden.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // txtNombre
+            // 
+            txtNombre.BackColor = Color.FromArgb(33, 41, 67);
+            txtNombre.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNombre.ForeColor = Color.White;
+            txtNombre.Location = new Point(71, 13);
+            txtNombre.MaxLength = 255;
+            txtNombre.Multiline = true;
+            txtNombre.Name = "txtNombre";
+            txtNombre.PlaceholderText = "    Buscar orden, cliente...";
+            txtNombre.Size = new Size(286, 30);
+            txtNombre.TabIndex = 2;
+            txtNombre.TextAlign = HorizontalAlignment.Center;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.BackgroundColor = Color.FromArgb(24, 35, 54);
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(0, 174);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(1025, 509);
+            dataGridView1.TabIndex = 3;
             // 
             // panel1
             // 
@@ -176,60 +178,16 @@
             panel1.Size = new Size(1025, 54);
             panel1.TabIndex = 4;
             // 
-            // label1
+            // label7
             // 
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(147, 162, 183);
-            label1.Location = new Point(20, 15);
-            label1.Name = "label1";
-            label1.Size = new Size(75, 23);
-            label1.TabIndex = 1;
-            label1.Text = "ORDEN";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.FromArgb(147, 162, 183);
-            label2.Location = new Point(163, 15);
-            label2.Name = "label2";
-            label2.Size = new Size(153, 23);
-            label2.TabIndex = 2;
-            label2.Text = "CLIENTE / DISPOSITIVO";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.FromArgb(147, 162, 183);
-            label3.Location = new Point(390, 15);
-            label3.Name = "label3";
-            label3.Size = new Size(66, 23);
-            label3.TabIndex = 3;
-            label3.Text = "TÉCNICO";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.FromArgb(147, 162, 183);
-            label4.Location = new Point(515, 15);
-            label4.Name = "label4";
-            label4.Size = new Size(66, 23);
-            label4.TabIndex = 4;
-            label4.Text = "ESTADO";
-            label4.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.FromArgb(147, 162, 183);
-            label5.Location = new Point(636, 15);
-            label5.Name = "label5";
-            label5.Size = new Size(66, 23);
-            label5.TabIndex = 5;
-            label5.Text = "INGRESO";
-            label5.TextAlign = ContentAlignment.MiddleCenter;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.FromArgb(147, 162, 183);
+            label7.Location = new Point(923, 15);
+            label7.Name = "label7";
+            label7.Size = new Size(63, 23);
+            label7.TabIndex = 7;
+            label7.Text = "TIEMPO";
+            label7.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label6
             // 
@@ -242,16 +200,60 @@
             label6.Text = "ENTRAGA EST.";
             label6.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // label5
             // 
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.FromArgb(147, 162, 183);
-            label7.Location = new Point(923, 15);
-            label7.Name = "label7";
-            label7.Size = new Size(63, 23);
-            label7.TabIndex = 7;
-            label7.Text = "TIEMPO";
-            label7.TextAlign = ContentAlignment.MiddleCenter;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.FromArgb(147, 162, 183);
+            label5.Location = new Point(636, 15);
+            label5.Name = "label5";
+            label5.Size = new Size(66, 23);
+            label5.TabIndex = 5;
+            label5.Text = "INGRESO";
+            label5.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(147, 162, 183);
+            label4.Location = new Point(515, 15);
+            label4.Name = "label4";
+            label4.Size = new Size(66, 23);
+            label4.TabIndex = 4;
+            label4.Text = "ESTADO";
+            label4.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(147, 162, 183);
+            label3.Location = new Point(390, 15);
+            label3.Name = "label3";
+            label3.Size = new Size(66, 23);
+            label3.TabIndex = 3;
+            label3.Text = "TÉCNICO";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(147, 162, 183);
+            label2.Location = new Point(163, 15);
+            label2.Name = "label2";
+            label2.Size = new Size(153, 23);
+            label2.TabIndex = 2;
+            label2.Text = "CLIENTE / DISPOSITIVO";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(147, 162, 183);
+            label1.Location = new Point(20, 15);
+            label1.Name = "label1";
+            label1.Size = new Size(75, 23);
+            label1.TabIndex = 1;
+            label1.Text = "ORDEN";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ucSeguimientoReparaciones
             // 
@@ -268,8 +270,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInformacion.ResumeLayout(false);
             pnlInformacion.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
