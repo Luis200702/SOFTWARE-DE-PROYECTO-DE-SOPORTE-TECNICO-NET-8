@@ -22,13 +22,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         );
 
         // Método individual para un botón
-        public static void Redondear(this Button boton, int radio = 20)
+        public static void Redondear(this Button boton, int radio = 40)
         {
             boton.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, boton.Width, boton.Height, radio, radio));
         }
 
         // Metodo recursivo que busca y redondea todos los botones de cualquier contenedor 
-        public static void RedondearBotones(this Control contenedor, int radio = 20)
+        public static void RedondearBotones(this Control contenedor, int radio = 40)
         {
             foreach (Control control in contenedor.Controls)
             {
