@@ -28,17 +28,271 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucSeguimientoReparaciones));
+            pnlSuperior = new Panel();
+            pictureBox1 = new PictureBox();
+            lblTitulo = new Label();
+            pnlInformacion = new Panel();
+            lblOrden = new Label();
+            dataGridView1 = new DataGridView();
+            txtNombre = new TextBox();
+            cmbEstado = new ComboBox();
+            pictureBox2 = new PictureBox();
+            panel1 = new Panel();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            pnlSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pnlInformacion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
+            // 
+            // pnlSuperior
+            // 
+            pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlSuperior.AutoSize = true;
+            pnlSuperior.BackColor = Color.FromArgb(30, 41, 59);
+            pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
+            pnlSuperior.Controls.Add(pictureBox1);
+            pnlSuperior.Controls.Add(lblTitulo);
+            pnlSuperior.Location = new Point(0, 0);
+            pnlSuperior.Name = "pnlSuperior";
+            pnlSuperior.Size = new Size(1025, 54);
+            pnlSuperior.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(35, 16);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(30, 24);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Dock = DockStyle.Left;
+            lblTitulo.Font = new Font("Nirmala UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.FromArgb(147, 162, 183);
+            lblTitulo.Location = new Point(0, 0);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(342, 52);
+            lblTitulo.TabIndex = 1;
+            lblTitulo.Text = "Recepción de Dispositivos";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pnlInformacion
+            // 
+            pnlInformacion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlInformacion.AutoSize = true;
+            pnlInformacion.BackColor = Color.FromArgb(30, 41, 59);
+            pnlInformacion.BorderStyle = BorderStyle.FixedSingle;
+            pnlInformacion.Controls.Add(pictureBox2);
+            pnlInformacion.Controls.Add(cmbEstado);
+            pnlInformacion.Controls.Add(lblOrden);
+            pnlInformacion.Controls.Add(txtNombre);
+            pnlInformacion.Location = new Point(0, 54);
+            pnlInformacion.Name = "pnlInformacion";
+            pnlInformacion.Size = new Size(1025, 60);
+            pnlInformacion.TabIndex = 2;
+            // 
+            // lblOrden
+            // 
+            lblOrden.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblOrden.ForeColor = Color.FromArgb(147, 162, 183);
+            lblOrden.Location = new Point(896, 20);
+            lblOrden.Name = "lblOrden";
+            lblOrden.Size = new Size(108, 23);
+            lblOrden.TabIndex = 0;
+            lblOrden.Text = "# órdenes";
+            lblOrden.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.BackgroundColor = Color.FromArgb(24, 35, 54);
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(0, 174);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(1025, 509);
+            dataGridView1.TabIndex = 3;
+            // 
+            // txtNombre
+            // 
+            txtNombre.BackColor = Color.FromArgb(33, 41, 67);
+            txtNombre.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNombre.Location = new Point(36, 13);
+            txtNombre.MaxLength = 255;
+            txtNombre.Multiline = true;
+            txtNombre.Name = "txtNombre";
+            txtNombre.PlaceholderText = "           Buscar orden, cliente...";
+            txtNombre.Size = new Size(307, 30);
+            txtNombre.TabIndex = 2;
+            // 
+            // cmbEstado
+            // 
+            cmbEstado.DisplayMember = "Seleccionar estado...";
+            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstado.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Items.AddRange(new object[] { "Todos los estados", "Recibido", "En diagnóstico", "En reparación", "Listo", "Entregado" });
+            cmbEstado.Location = new Point(363, 13);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(179, 29);
+            cmbEstado.TabIndex = 13;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(50, 20);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(16, 16);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 14;
+            pictureBox2.TabStop = false;
+            // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.AutoSize = true;
+            panel1.BackColor = Color.FromArgb(30, 41, 59);
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(label7);
+            panel1.Controls.Add(label6);
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(0, 114);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1025, 54);
+            panel1.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(147, 162, 183);
+            label1.Location = new Point(20, 15);
+            label1.Name = "label1";
+            label1.Size = new Size(75, 23);
+            label1.TabIndex = 1;
+            label1.Text = "ORDEN";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(147, 162, 183);
+            label2.Location = new Point(163, 15);
+            label2.Name = "label2";
+            label2.Size = new Size(153, 23);
+            label2.TabIndex = 2;
+            label2.Text = "CLIENTE / DISPOSITIVO";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(147, 162, 183);
+            label3.Location = new Point(390, 15);
+            label3.Name = "label3";
+            label3.Size = new Size(66, 23);
+            label3.TabIndex = 3;
+            label3.Text = "TÉCNICO";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(147, 162, 183);
+            label4.Location = new Point(515, 15);
+            label4.Name = "label4";
+            label4.Size = new Size(66, 23);
+            label4.TabIndex = 4;
+            label4.Text = "ESTADO";
+            label4.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.FromArgb(147, 162, 183);
+            label5.Location = new Point(636, 15);
+            label5.Name = "label5";
+            label5.Size = new Size(66, 23);
+            label5.TabIndex = 5;
+            label5.Text = "INGRESO";
+            label5.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.FromArgb(147, 162, 183);
+            label6.Location = new Point(773, 15);
+            label6.Name = "label6";
+            label6.Size = new Size(92, 23);
+            label6.TabIndex = 6;
+            label6.Text = "ENTRAGA EST.";
+            label6.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.FromArgb(147, 162, 183);
+            label7.Location = new Point(923, 15);
+            label7.Name = "label7";
+            label7.Size = new Size(63, 23);
+            label7.TabIndex = 7;
+            label7.Text = "TIEMPO";
+            label7.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ucSeguimientoReparaciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(24, 35, 54);
+            Controls.Add(panel1);
+            Controls.Add(dataGridView1);
+            Controls.Add(pnlInformacion);
+            Controls.Add(pnlSuperior);
             Name = "ucSeguimientoReparaciones";
             Size = new Size(1025, 686);
+            pnlSuperior.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            pnlInformacion.ResumeLayout(false);
+            pnlInformacion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Panel pnlSuperior;
+        private PictureBox pictureBox1;
+        private Label lblTitulo;
+        private Panel pnlInformacion;
+        private Label lblOrden;
+        private DataGridView dataGridView1;
+        private TextBox txtNombre;
+        private PictureBox pictureBox2;
+        private ComboBox cmbEstado;
+        private Panel panel1;
+        private Label label7;
+        private Label label6;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private Label label1;
     }
 }

@@ -40,13 +40,15 @@
             airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             mcDispositivo = new ReaLTaiizor.Controls.MaterialCard();
             cmbEstado = new ComboBox();
-            textBox3 = new TextBox();
+            txtColor = new TextBox();
             txtSerieImei = new TextBox();
             txtMarca = new TextBox();
             txtModelo = new TextBox();
             lblDispositivo = new Label();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             mcCliente = new ReaLTaiizor.Controls.MaterialCard();
+            btnTelefono = new Sunny.UI.UIButton();
+            btnComputadora = new Sunny.UI.UIButton();
             lblCliente = new Label();
             txtCorreo = new TextBox();
             txtNumeroTelefonico = new TextBox();
@@ -56,6 +58,15 @@
             btnCancelar = new FontAwesome.Sharp.IconButton();
             btnGuardarRegistro = new FontAwesome.Sharp.IconButton();
             btnLimpiar = new Button();
+            lblDatosCliente = new Label();
+            lblTelefono = new Label();
+            lblCorreo = new Label();
+            label3 = new Label();
+            lblColor = new Label();
+            label5 = new Label();
+            lblMarca = new Label();
+            lblEstado = new Label();
+            lblTipoDispositivo = new Label();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
@@ -192,8 +203,13 @@
             // mcDispositivo
             // 
             mcDispositivo.BackColor = Color.FromArgb(255, 255, 255);
+            mcDispositivo.Controls.Add(lblEstado);
+            mcDispositivo.Controls.Add(lblMarca);
+            mcDispositivo.Controls.Add(label5);
+            mcDispositivo.Controls.Add(lblColor);
+            mcDispositivo.Controls.Add(label3);
             mcDispositivo.Controls.Add(cmbEstado);
-            mcDispositivo.Controls.Add(textBox3);
+            mcDispositivo.Controls.Add(txtColor);
             mcDispositivo.Controls.Add(txtSerieImei);
             mcDispositivo.Controls.Add(txtMarca);
             mcDispositivo.Controls.Add(txtModelo);
@@ -215,23 +231,23 @@
             cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbEstado.FormattingEnabled = true;
             cmbEstado.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
-            cmbEstado.Location = new Point(23, 184);
+            cmbEstado.Location = new Point(23, 200);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(256, 23);
             cmbEstado.TabIndex = 12;
             // 
-            // textBox3
+            // txtColor
             // 
-            textBox3.Location = new Point(157, 135);
-            textBox3.MaxLength = 255;
-            textBox3.Name = "textBox3";
-            textBox3.PlaceholderText = "Ej. Samsung";
-            textBox3.Size = new Size(122, 23);
-            textBox3.TabIndex = 11;
+            txtColor.Location = new Point(157, 146);
+            txtColor.MaxLength = 255;
+            txtColor.Name = "txtColor";
+            txtColor.PlaceholderText = "Ej. Negro";
+            txtColor.Size = new Size(122, 23);
+            txtColor.TabIndex = 11;
             // 
             // txtSerieImei
             // 
-            txtSerieImei.Location = new Point(23, 135);
+            txtSerieImei.Location = new Point(23, 146);
             txtSerieImei.MaxLength = 255;
             txtSerieImei.Name = "txtSerieImei";
             txtSerieImei.PlaceholderText = "15 digitos";
@@ -284,6 +300,12 @@
             // mcCliente
             // 
             mcCliente.BackColor = Color.FromArgb(255, 255, 255);
+            mcCliente.Controls.Add(lblTipoDispositivo);
+            mcCliente.Controls.Add(lblCorreo);
+            mcCliente.Controls.Add(lblTelefono);
+            mcCliente.Controls.Add(lblDatosCliente);
+            mcCliente.Controls.Add(btnTelefono);
+            mcCliente.Controls.Add(btnComputadora);
             mcCliente.Controls.Add(lblCliente);
             mcCliente.Controls.Add(txtCorreo);
             mcCliente.Controls.Add(txtNumeroTelefonico);
@@ -299,6 +321,47 @@
             mcCliente.Size = new Size(299, 377);
             mcCliente.TabIndex = 0;
             // 
+            // btnTelefono
+            // 
+            btnTelefono.FillColor = Color.FromArgb(22, 35, 52);
+            btnTelefono.FillHoverColor = Color.Transparent;
+            btnTelefono.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnTelefono.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnTelefono.Font = new Font("Microsoft Sans Serif", 12F);
+            btnTelefono.Location = new Point(154, 263);
+            btnTelefono.MinimumSize = new Size(1, 1);
+            btnTelefono.Name = "btnTelefono";
+            btnTelefono.Radius = 12;
+            btnTelefono.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnTelefono.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnTelefono.Size = new Size(125, 26);
+            btnTelefono.TabIndex = 6;
+            btnTelefono.Text = "Teléfono";
+            btnTelefono.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnTelefono.Click += btnTelefono_Click;
+            // 
+            // btnComputadora
+            // 
+            btnComputadora.FillColor = Color.FromArgb(22, 35, 52);
+            btnComputadora.FillHoverColor = Color.Transparent;
+            btnComputadora.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnComputadora.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnComputadora.Font = new Font("Microsoft Sans Serif", 12F);
+            btnComputadora.Location = new Point(25, 265);
+            btnComputadora.MinimumSize = new Size(1, 1);
+            btnComputadora.Name = "btnComputadora";
+            btnComputadora.Radius = 12;
+            btnComputadora.RectColor = Color.FromArgb(22, 35, 52);
+            btnComputadora.RectHoverColor = Color.FromArgb(22, 35, 52);
+            btnComputadora.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnComputadora.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnComputadora.Size = new Size(125, 24);
+            btnComputadora.TabIndex = 5;
+            btnComputadora.Text = "Computadora";
+            btnComputadora.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnComputadora.TipsForeColor = Color.Transparent;
+            btnComputadora.Click += btnComputadora_Click;
+            // 
             // lblCliente
             // 
             lblCliente.AutoSize = true;
@@ -310,7 +373,7 @@
             // 
             // txtCorreo
             // 
-            txtCorreo.Location = new Point(23, 184);
+            txtCorreo.Location = new Point(23, 200);
             txtCorreo.MaxLength = 255;
             txtCorreo.Name = "txtCorreo";
             txtCorreo.PlaceholderText = "correo@ejemplo.com";
@@ -319,7 +382,7 @@
             // 
             // txtNumeroTelefonico
             // 
-            txtNumeroTelefonico.Location = new Point(23, 135);
+            txtNumeroTelefonico.Location = new Point(23, 146);
             txtNumeroTelefonico.MaxLength = 10;
             txtNumeroTelefonico.Name = "txtNumeroTelefonico";
             txtNumeroTelefonico.PlaceholderText = "099 342 5009";
@@ -410,6 +473,96 @@
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
             // 
+            // lblDatosCliente
+            // 
+            lblDatosCliente.AutoSize = true;
+            lblDatosCliente.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDatosCliente.Location = new Point(23, 73);
+            lblDatosCliente.Name = "lblDatosCliente";
+            lblDatosCliente.Size = new Size(109, 15);
+            lblDatosCliente.TabIndex = 7;
+            lblDatosCliente.Text = "Nombre completo";
+            // 
+            // lblTelefono
+            // 
+            lblTelefono.AutoSize = true;
+            lblTelefono.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTelefono.Location = new Point(23, 128);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(105, 15);
+            lblTelefono.TabIndex = 8;
+            lblTelefono.Text = "Teléfono / Celular";
+            // 
+            // lblCorreo
+            // 
+            lblCorreo.AutoSize = true;
+            lblCorreo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCorreo.Location = new Point(23, 182);
+            lblCorreo.Name = "lblCorreo";
+            lblCorreo.Size = new Size(111, 15);
+            lblCorreo.TabIndex = 9;
+            lblCorreo.Text = "Correo electrónico";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(23, 128);
+            label3.Name = "label3";
+            label3.Size = new Size(72, 15);
+            label3.TabIndex = 13;
+            label3.Text = "Serie / IMEI";
+            // 
+            // lblColor
+            // 
+            lblColor.AutoSize = true;
+            lblColor.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblColor.Location = new Point(157, 128);
+            lblColor.Name = "lblColor";
+            lblColor.Size = new Size(36, 15);
+            lblColor.TabIndex = 14;
+            lblColor.Text = "Color";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(157, 73);
+            label5.Name = "label5";
+            label5.Size = new Size(49, 15);
+            label5.TabIndex = 15;
+            label5.Text = "Modelo";
+            // 
+            // lblMarca
+            // 
+            lblMarca.AutoSize = true;
+            lblMarca.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMarca.Location = new Point(23, 73);
+            lblMarca.Name = "lblMarca";
+            lblMarca.Size = new Size(41, 15);
+            lblMarca.TabIndex = 16;
+            lblMarca.Text = "Marca";
+            // 
+            // lblEstado
+            // 
+            lblEstado.AutoSize = true;
+            lblEstado.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEstado.Location = new Point(23, 182);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(113, 15);
+            lblEstado.TabIndex = 17;
+            lblEstado.Text = "Estado en que llega";
+            // 
+            // lblTipoDispositivo
+            // 
+            lblTipoDispositivo.AutoSize = true;
+            lblTipoDispositivo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTipoDispositivo.Location = new Point(25, 247);
+            lblTipoDispositivo.Name = "lblTipoDispositivo";
+            lblTipoDispositivo.Size = new Size(110, 15);
+            lblTipoDispositivo.TabIndex = 10;
+            lblTipoDispositivo.Text = "Tipo de dispositivo";
+            // 
             // ucRecepcionEquipos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -461,10 +614,21 @@
         private Label lblReparacion;
         private Label lblDispositivo;
         private Label lblCliente;
-        private TextBox textBox3;
+        private TextBox txtColor;
         private TextBox txtSerieImei;
         private TextBox txtMarca;
         private TextBox txtModelo;
         private ComboBox cmbEstado;
+        private Sunny.UI.UIButton btnComputadora;
+        private Sunny.UI.UIButton btnTelefono;
+        private Label lblMarca;
+        private Label label5;
+        private Label lblColor;
+        private Label label3;
+        private Label lblCorreo;
+        private Label lblTelefono;
+        private Label lblDatosCliente;
+        private Label lblEstado;
+        private Label lblTipoDispositivo;
     }
 }
