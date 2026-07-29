@@ -36,6 +36,9 @@
             lblOrden = new Label();
             pnlCentral = new Panel();
             mcReparacion = new ReaLTaiizor.Controls.MaterialCard();
+            txtObservaciones = new Sunny.UI.UITextBox();
+            txtDescripcionProblemac = new Sunny.UI.UITextBox();
+            pictureBox7 = new PictureBox();
             numericUpDown1 = new NumericUpDown();
             cmbSucursal = new ComboBox();
             cmbTecnicos = new ComboBox();
@@ -45,22 +48,21 @@
             lblCosto = new Label();
             lblFechaEntrega = new Label();
             label2 = new Label();
-            textBox1 = new TextBox();
             label1 = new Label();
-            txtDescripcionProblema = new TextBox();
             lblReparacion = new Label();
             airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             mcDispositivo = new ReaLTaiizor.Controls.MaterialCard();
+            cmbEstadoDispositvo = new Sunny.UI.UIComboBox();
+            txtColorc = new Sunny.UI.UITextBox();
+            txtSerieImei = new Sunny.UI.UITextBox();
+            txtModelo = new Sunny.UI.UITextBox();
+            txtMarca = new Sunny.UI.UITextBox();
+            pictureBox6 = new PictureBox();
             lblEstado = new Label();
             lblMarca = new Label();
             label5 = new Label();
             lblColor = new Label();
             label3 = new Label();
-            cmbEstado = new ComboBox();
-            txtColor = new TextBox();
-            txtSerieImei = new TextBox();
-            txtMarca = new TextBox();
-            txtModelo = new TextBox();
             lblDispositivo = new Label();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             mcCliente = new ReaLTaiizor.Controls.MaterialCard();
@@ -73,9 +75,10 @@
             lblCliente = new Label();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             pnlCliente = new Panel();
-            uiTextBox3 = new Sunny.UI.UITextBox();
-            uiTextBox2 = new Sunny.UI.UITextBox();
-            uiTextBox1 = new Sunny.UI.UITextBox();
+            pictureBox5 = new PictureBox();
+            txtNombres = new Sunny.UI.UITextBox();
+            txtNumeroTelefonico = new Sunny.UI.UITextBox();
+            txtCorreo = new Sunny.UI.UITextBox();
             pnlInferior = new Panel();
             pictureBox4 = new PictureBox();
             btnLimpiar = new Sunny.UI.UIButton();
@@ -83,25 +86,22 @@
             btnCancelar = new Sunny.UI.UIButton();
             pictureBox2 = new PictureBox();
             btnGuardarRegistro = new Sunny.UI.UIButton();
-            pictureBox5 = new PictureBox();
-            pictureBox6 = new PictureBox();
-            pictureBox7 = new PictureBox();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
             pnlCentral.SuspendLayout();
             mcReparacion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             mcDispositivo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             mcCliente.SuspendLayout();
             pnlCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             pnlInferior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
             // 
             // pnlSuperior
@@ -191,6 +191,8 @@
             // mcReparacion
             // 
             mcReparacion.BackColor = Color.FromArgb(255, 255, 255);
+            mcReparacion.Controls.Add(txtObservaciones);
+            mcReparacion.Controls.Add(txtDescripcionProblemac);
             mcReparacion.Controls.Add(pictureBox7);
             mcReparacion.Controls.Add(numericUpDown1);
             mcReparacion.Controls.Add(cmbSucursal);
@@ -201,9 +203,7 @@
             mcReparacion.Controls.Add(lblCosto);
             mcReparacion.Controls.Add(lblFechaEntrega);
             mcReparacion.Controls.Add(label2);
-            mcReparacion.Controls.Add(textBox1);
             mcReparacion.Controls.Add(label1);
-            mcReparacion.Controls.Add(txtDescripcionProblema);
             mcReparacion.Controls.Add(lblReparacion);
             mcReparacion.Controls.Add(airSeparator3);
             mcReparacion.Depth = 0;
@@ -215,6 +215,54 @@
             mcReparacion.Padding = new Padding(14);
             mcReparacion.Size = new Size(299, 377);
             mcReparacion.TabIndex = 1;
+            // 
+            // txtObservaciones
+            // 
+            txtObservaciones.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtObservaciones.Location = new Point(23, 153);
+            txtObservaciones.Margin = new Padding(4, 5, 4, 5);
+            txtObservaciones.MaxLength = 255;
+            txtObservaciones.Minimum = 0D;
+            txtObservaciones.MinimumSize = new Size(1, 16);
+            txtObservaciones.Multiline = true;
+            txtObservaciones.Name = "txtObservaciones";
+            txtObservaciones.Padding = new Padding(5);
+            txtObservaciones.Radius = 12;
+            txtObservaciones.ShowText = false;
+            txtObservaciones.Size = new Size(256, 52);
+            txtObservaciones.TabIndex = 24;
+            txtObservaciones.TextAlignment = ContentAlignment.MiddleLeft;
+            txtObservaciones.Watermark = "Observaciones preliminares";
+            // 
+            // txtDescripcionProblemac
+            // 
+            txtDescripcionProblemac.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDescripcionProblemac.Location = new Point(23, 73);
+            txtDescripcionProblemac.Margin = new Padding(4, 5, 4, 5);
+            txtDescripcionProblemac.MaxLength = 255;
+            txtDescripcionProblemac.Minimum = 0D;
+            txtDescripcionProblemac.MinimumSize = new Size(1, 16);
+            txtDescripcionProblemac.Multiline = true;
+            txtDescripcionProblemac.Name = "txtDescripcionProblemac";
+            txtDescripcionProblemac.Padding = new Padding(5);
+            txtDescripcionProblemac.Radius = 12;
+            txtDescripcionProblemac.ShowText = false;
+            txtDescripcionProblemac.Size = new Size(256, 52);
+            txtDescripcionProblemac.TabIndex = 23;
+            txtDescripcionProblemac.TextAlignment = ContentAlignment.MiddleLeft;
+            txtDescripcionProblemac.Watermark = "Describe el problema tal como lo describe el cliente...";
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox7.BackColor = Color.Transparent;
+            pictureBox7.Image = Properties.Resources.IconParkOutlineSpanner;
+            pictureBox7.Location = new Point(17, 8);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(30, 21);
+            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox7.TabIndex = 32;
+            pictureBox7.TabStop = false;
             // 
             // numericUpDown1
             // 
@@ -301,22 +349,11 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(23, 144);
+            label2.Location = new Point(26, 136);
             label2.Name = "label2";
             label2.Size = new Size(106, 15);
             label2.TabIndex = 19;
             label2.Text = "Diagnóstico inicial";
-            // 
-            // textBox1
-            // 
-            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Location = new Point(21, 162);
-            textBox1.MaxLength = 255;
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Observaciones preliminares";
-            textBox1.Size = new Size(256, 52);
-            textBox1.TabIndex = 18;
             // 
             // label1
             // 
@@ -327,17 +364,6 @@
             label1.Size = new Size(119, 15);
             label1.TabIndex = 17;
             label1.Text = "Problema reportado";
-            // 
-            // txtDescripcionProblema
-            // 
-            txtDescripcionProblema.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtDescripcionProblema.Location = new Point(23, 73);
-            txtDescripcionProblema.MaxLength = 255;
-            txtDescripcionProblema.Multiline = true;
-            txtDescripcionProblema.Name = "txtDescripcionProblema";
-            txtDescripcionProblema.PlaceholderText = "Describe el problema tal como lo describe el cliente...";
-            txtDescripcionProblema.Size = new Size(256, 52);
-            txtDescripcionProblema.TabIndex = 10;
             // 
             // lblReparacion
             // 
@@ -367,28 +393,130 @@
             // 
             mcDispositivo.AutoSize = true;
             mcDispositivo.BackColor = Color.FromArgb(255, 255, 255);
+            mcDispositivo.Controls.Add(cmbEstadoDispositvo);
+            mcDispositivo.Controls.Add(txtColorc);
+            mcDispositivo.Controls.Add(txtSerieImei);
+            mcDispositivo.Controls.Add(txtModelo);
+            mcDispositivo.Controls.Add(txtMarca);
             mcDispositivo.Controls.Add(pictureBox6);
             mcDispositivo.Controls.Add(lblEstado);
             mcDispositivo.Controls.Add(lblMarca);
             mcDispositivo.Controls.Add(label5);
             mcDispositivo.Controls.Add(lblColor);
             mcDispositivo.Controls.Add(label3);
-            mcDispositivo.Controls.Add(cmbEstado);
-            mcDispositivo.Controls.Add(txtColor);
-            mcDispositivo.Controls.Add(txtSerieImei);
-            mcDispositivo.Controls.Add(txtMarca);
-            mcDispositivo.Controls.Add(txtModelo);
             mcDispositivo.Controls.Add(lblDispositivo);
             mcDispositivo.Controls.Add(airSeparator2);
             mcDispositivo.Depth = 0;
             mcDispositivo.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            mcDispositivo.Location = new Point(367, 40);
+            mcDispositivo.Location = new Point(354, 40);
             mcDispositivo.Margin = new Padding(14);
             mcDispositivo.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             mcDispositivo.Name = "mcDispositivo";
             mcDispositivo.Padding = new Padding(14);
-            mcDispositivo.Size = new Size(299, 377);
+            mcDispositivo.Size = new Size(321, 377);
             mcDispositivo.TabIndex = 1;
+            // 
+            // cmbEstadoDispositvo
+            // 
+            cmbEstadoDispositvo.DataSource = null;
+            cmbEstadoDispositvo.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            cmbEstadoDispositvo.FillColor = Color.White;
+            cmbEstadoDispositvo.Font = new Font("Microsoft Sans Serif", 12F);
+            cmbEstadoDispositvo.FormattingEnabled = true;
+            cmbEstadoDispositvo.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbEstadoDispositvo.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
+            cmbEstadoDispositvo.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbEstadoDispositvo.Location = new Point(23, 184);
+            cmbEstadoDispositvo.Margin = new Padding(4, 5, 4, 5);
+            cmbEstadoDispositvo.MinimumSize = new Size(63, 0);
+            cmbEstadoDispositvo.Name = "cmbEstadoDispositvo";
+            cmbEstadoDispositvo.Padding = new Padding(0, 0, 30, 2);
+            cmbEstadoDispositvo.Radius = 12;
+            cmbEstadoDispositvo.Size = new Size(278, 22);
+            cmbEstadoDispositvo.SymbolSize = 24;
+            cmbEstadoDispositvo.TabIndex = 23;
+            cmbEstadoDispositvo.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbEstadoDispositvo.Watermark = "";
+            // 
+            // txtColorc
+            // 
+            txtColorc.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtColorc.Location = new Point(157, 128);
+            txtColorc.Margin = new Padding(4, 5, 4, 5);
+            txtColorc.MaxLength = 255;
+            txtColorc.Minimum = 0D;
+            txtColorc.MinimumSize = new Size(1, 16);
+            txtColorc.Name = "txtColorc";
+            txtColorc.Padding = new Padding(5);
+            txtColorc.Radius = 12;
+            txtColorc.ShowText = false;
+            txtColorc.Size = new Size(144, 23);
+            txtColorc.TabIndex = 22;
+            txtColorc.TextAlignment = ContentAlignment.MiddleLeft;
+            txtColorc.Watermark = "Ej. Negro";
+            // 
+            // txtSerieImei
+            // 
+            txtSerieImei.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSerieImei.Location = new Point(23, 128);
+            txtSerieImei.Margin = new Padding(4, 5, 4, 5);
+            txtSerieImei.MaxLength = 255;
+            txtSerieImei.Minimum = 0D;
+            txtSerieImei.MinimumSize = new Size(1, 16);
+            txtSerieImei.Name = "txtSerieImei";
+            txtSerieImei.Padding = new Padding(5);
+            txtSerieImei.Radius = 12;
+            txtSerieImei.ShowText = false;
+            txtSerieImei.Size = new Size(130, 23);
+            txtSerieImei.TabIndex = 21;
+            txtSerieImei.TextAlignment = ContentAlignment.MiddleLeft;
+            txtSerieImei.Watermark = "15 digitos";
+            // 
+            // txtModelo
+            // 
+            txtModelo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtModelo.Location = new Point(157, 73);
+            txtModelo.Margin = new Padding(4, 5, 4, 5);
+            txtModelo.MaxLength = 255;
+            txtModelo.Minimum = 0D;
+            txtModelo.MinimumSize = new Size(1, 16);
+            txtModelo.Name = "txtModelo";
+            txtModelo.Padding = new Padding(5);
+            txtModelo.Radius = 12;
+            txtModelo.ShowText = false;
+            txtModelo.Size = new Size(144, 23);
+            txtModelo.TabIndex = 20;
+            txtModelo.TextAlignment = ContentAlignment.MiddleLeft;
+            txtModelo.Watermark = "Ej. Galaxy S22";
+            // 
+            // txtMarca
+            // 
+            txtMarca.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtMarca.Location = new Point(23, 73);
+            txtMarca.Margin = new Padding(4, 5, 4, 5);
+            txtMarca.MaxLength = 255;
+            txtMarca.Minimum = 0D;
+            txtMarca.MinimumSize = new Size(1, 16);
+            txtMarca.Name = "txtMarca";
+            txtMarca.Padding = new Padding(5);
+            txtMarca.Radius = 12;
+            txtMarca.ShowText = false;
+            txtMarca.Size = new Size(130, 23);
+            txtMarca.TabIndex = 19;
+            txtMarca.TextAlignment = ContentAlignment.MiddleLeft;
+            txtMarca.Watermark = "Ej. Samsung";
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox6.BackColor = Color.Transparent;
+            pictureBox6.Image = Properties.Resources.GgScreen;
+            pictureBox6.Location = new Point(19, 8);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(30, 21);
+            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox6.TabIndex = 18;
+            pictureBox6.TabStop = false;
             // 
             // lblEstado
             // 
@@ -440,58 +568,6 @@
             label3.TabIndex = 13;
             label3.Text = "Serie / IMEI";
             // 
-            // cmbEstado
-            // 
-            cmbEstado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            cmbEstado.DisplayMember = "Seleccionar estado...";
-            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbEstado.FormattingEnabled = true;
-            cmbEstado.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
-            cmbEstado.Location = new Point(23, 182);
-            cmbEstado.Name = "cmbEstado";
-            cmbEstado.Size = new Size(256, 23);
-            cmbEstado.TabIndex = 12;
-            // 
-            // txtColor
-            // 
-            txtColor.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtColor.Location = new Point(157, 128);
-            txtColor.MaxLength = 255;
-            txtColor.Name = "txtColor";
-            txtColor.PlaceholderText = "Ej. Negro";
-            txtColor.Size = new Size(122, 23);
-            txtColor.TabIndex = 11;
-            // 
-            // txtSerieImei
-            // 
-            txtSerieImei.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtSerieImei.Location = new Point(23, 128);
-            txtSerieImei.MaxLength = 255;
-            txtSerieImei.Name = "txtSerieImei";
-            txtSerieImei.PlaceholderText = "15 digitos";
-            txtSerieImei.Size = new Size(122, 23);
-            txtSerieImei.TabIndex = 10;
-            // 
-            // txtMarca
-            // 
-            txtMarca.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtMarca.Location = new Point(23, 73);
-            txtMarca.MaxLength = 255;
-            txtMarca.Name = "txtMarca";
-            txtMarca.PlaceholderText = "Ej. Samsung";
-            txtMarca.Size = new Size(122, 23);
-            txtMarca.TabIndex = 9;
-            // 
-            // txtModelo
-            // 
-            txtModelo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtModelo.Location = new Point(157, 73);
-            txtModelo.MaxLength = 255;
-            txtModelo.Name = "txtModelo";
-            txtModelo.PlaceholderText = "Ej. Galaxy S22";
-            txtModelo.Size = new Size(122, 23);
-            txtModelo.TabIndex = 8;
-            // 
             // lblDispositivo
             // 
             lblDispositivo.AutoSize = true;
@@ -512,7 +588,7 @@
             airSeparator2.Location = new Point(23, 34);
             airSeparator2.Name = "airSeparator2";
             airSeparator2.NoRounding = false;
-            airSeparator2.Size = new Size(256, 1);
+            airSeparator2.Size = new Size(278, 1);
             airSeparator2.TabIndex = 1;
             airSeparator2.Text = "airSeparator2";
             airSeparator2.Transparent = false;
@@ -650,65 +726,77 @@
             // 
             pnlCliente.BackColor = Color.White;
             pnlCliente.Controls.Add(pictureBox5);
-            pnlCliente.Controls.Add(uiTextBox3);
-            pnlCliente.Controls.Add(uiTextBox2);
-            pnlCliente.Controls.Add(uiTextBox1);
+            pnlCliente.Controls.Add(txtNombres);
+            pnlCliente.Controls.Add(txtNumeroTelefonico);
+            pnlCliente.Controls.Add(txtCorreo);
             pnlCliente.Location = new Point(-25, -22);
             pnlCliente.Name = "pnlCliente";
             pnlCliente.Size = new Size(347, 416);
             pnlCliente.TabIndex = 2;
             // 
-            // uiTextBox3
+            // pictureBox5
             // 
-            uiTextBox3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox3.Location = new Point(50, 95);
-            uiTextBox3.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox3.MaxLength = 255;
-            uiTextBox3.Minimum = 0D;
-            uiTextBox3.MinimumSize = new Size(1, 16);
-            uiTextBox3.Name = "uiTextBox3";
-            uiTextBox3.Padding = new Padding(5);
-            uiTextBox3.Radius = 12;
-            uiTextBox3.ShowText = false;
-            uiTextBox3.Size = new Size(256, 23);
-            uiTextBox3.TabIndex = 14;
-            uiTextBox3.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox3.Watermark = "Nombre y apellidos";
+            pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = Properties.Resources.LucideUser;
+            pictureBox5.Location = new Point(42, 30);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(30, 21);
+            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox5.TabIndex = 15;
+            pictureBox5.TabStop = false;
             // 
-            // uiTextBox2
+            // txtNombres
             // 
-            uiTextBox2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox2.Location = new Point(50, 150);
-            uiTextBox2.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox2.Maximum = 0D;
-            uiTextBox2.MaxLength = 10;
-            uiTextBox2.Minimum = 0D;
-            uiTextBox2.MinimumSize = new Size(1, 16);
-            uiTextBox2.Name = "uiTextBox2";
-            uiTextBox2.Padding = new Padding(5);
-            uiTextBox2.Radius = 12;
-            uiTextBox2.ShowText = false;
-            uiTextBox2.Size = new Size(256, 23);
-            uiTextBox2.TabIndex = 14;
-            uiTextBox2.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox2.Watermark = "0993425009";
+            txtNombres.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNombres.Location = new Point(50, 95);
+            txtNombres.Margin = new Padding(4, 5, 4, 5);
+            txtNombres.MaxLength = 255;
+            txtNombres.Minimum = 0D;
+            txtNombres.MinimumSize = new Size(1, 16);
+            txtNombres.Name = "txtNombres";
+            txtNombres.Padding = new Padding(5);
+            txtNombres.Radius = 12;
+            txtNombres.ShowText = false;
+            txtNombres.Size = new Size(256, 23);
+            txtNombres.TabIndex = 14;
+            txtNombres.TextAlignment = ContentAlignment.MiddleLeft;
+            txtNombres.Watermark = "Nombre y apellidos";
             // 
-            // uiTextBox1
+            // txtNumeroTelefonico
             // 
-            uiTextBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox1.Location = new Point(50, 204);
-            uiTextBox1.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox1.MaxLength = 255;
-            uiTextBox1.Minimum = 0D;
-            uiTextBox1.MinimumSize = new Size(1, 16);
-            uiTextBox1.Name = "uiTextBox1";
-            uiTextBox1.Padding = new Padding(5);
-            uiTextBox1.Radius = 12;
-            uiTextBox1.ShowText = false;
-            uiTextBox1.Size = new Size(256, 23);
-            uiTextBox1.TabIndex = 13;
-            uiTextBox1.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox1.Watermark = "correo@ejemplo.com";
+            txtNumeroTelefonico.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNumeroTelefonico.Location = new Point(50, 150);
+            txtNumeroTelefonico.Margin = new Padding(4, 5, 4, 5);
+            txtNumeroTelefonico.Maximum = 0D;
+            txtNumeroTelefonico.MaxLength = 10;
+            txtNumeroTelefonico.Minimum = 0D;
+            txtNumeroTelefonico.MinimumSize = new Size(1, 16);
+            txtNumeroTelefonico.Name = "txtNumeroTelefonico";
+            txtNumeroTelefonico.Padding = new Padding(5);
+            txtNumeroTelefonico.Radius = 12;
+            txtNumeroTelefonico.ShowText = false;
+            txtNumeroTelefonico.Size = new Size(256, 23);
+            txtNumeroTelefonico.TabIndex = 14;
+            txtNumeroTelefonico.TextAlignment = ContentAlignment.MiddleLeft;
+            txtNumeroTelefonico.Watermark = "0993425009";
+            // 
+            // txtCorreo
+            // 
+            txtCorreo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCorreo.Location = new Point(50, 204);
+            txtCorreo.Margin = new Padding(4, 5, 4, 5);
+            txtCorreo.MaxLength = 255;
+            txtCorreo.Minimum = 0D;
+            txtCorreo.MinimumSize = new Size(1, 16);
+            txtCorreo.Name = "txtCorreo";
+            txtCorreo.Padding = new Padding(5);
+            txtCorreo.Radius = 12;
+            txtCorreo.ShowText = false;
+            txtCorreo.Size = new Size(256, 23);
+            txtCorreo.TabIndex = 13;
+            txtCorreo.TextAlignment = ContentAlignment.MiddleLeft;
+            txtCorreo.Watermark = "correo@ejemplo.com";
             // 
             // pnlInferior
             // 
@@ -828,42 +916,6 @@
             btnGuardarRegistro.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnGuardarRegistro.TipsForeColor = Color.Black;
             // 
-            // pictureBox5
-            // 
-            pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = Properties.Resources.LucideUser;
-            pictureBox5.Location = new Point(42, 30);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(30, 21);
-            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox5.TabIndex = 15;
-            pictureBox5.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            pictureBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox6.BackColor = Color.Transparent;
-            pictureBox6.Image = Properties.Resources.GgScreen;
-            pictureBox6.Location = new Point(17, 8);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(30, 21);
-            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox6.TabIndex = 18;
-            pictureBox6.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            pictureBox7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox7.BackColor = Color.Transparent;
-            pictureBox7.Image = Properties.Resources.IconParkOutlineSpanner;
-            pictureBox7.Location = new Point(17, 8);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(30, 21);
-            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox7.TabIndex = 32;
-            pictureBox7.TabStop = false;
-            // 
             // ucRecepcionEquipos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -882,19 +934,19 @@
             pnlCentral.PerformLayout();
             mcReparacion.ResumeLayout(false);
             mcReparacion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             mcDispositivo.ResumeLayout(false);
             mcDispositivo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             mcCliente.ResumeLayout(false);
             mcCliente.PerformLayout();
             pnlCliente.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             pnlInferior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -918,10 +970,6 @@
         private Label lblReparacion;
         private Label lblDispositivo;
         private Label lblCliente;
-        private TextBox txtColor;
-        private TextBox txtSerieImei;
-        private TextBox txtMarca;
-        private TextBox txtModelo;
         private ComboBox cmbEstado;
         private Sunny.UI.UIButton btnComputadora;
         private Sunny.UI.UIButton btnTelefono;
@@ -935,9 +983,7 @@
         private Label lblEstado;
         private Label lblTipoDispositivo;
         private Label label2;
-        private TextBox textBox1;
         private Label label1;
-        private TextBox txtDescripcionProblema;
         private DateTimePicker dateTimePicker1;
         private Label lblTecnico;
         private Label label6;
@@ -954,11 +1000,18 @@
         private Sunny.UI.UIButton btnLimpiar;
         public ReaLTaiizor.Controls.MaterialCard mcCliente;
         private Panel pnlCliente;
-        private Sunny.UI.UITextBox uiTextBox1;
-        private Sunny.UI.UITextBox uiTextBox3;
-        private Sunny.UI.UITextBox uiTextBox2;
+        private Sunny.UI.UITextBox txtCorreo;
+        private Sunny.UI.UITextBox txtNombres;
+        private Sunny.UI.UITextBox txtNumeroTelefonico;
         private PictureBox pictureBox7;
         private PictureBox pictureBox6;
         private PictureBox pictureBox5;
+        private Sunny.UI.UITextBox txtMarca;
+        private Sunny.UI.UITextBox txtDescripcionProblemac;
+        private Sunny.UI.UITextBox txtColorc;
+        private Sunny.UI.UITextBox txtSerieImei;
+        private Sunny.UI.UITextBox txtModelo;
+        private Sunny.UI.UITextBox txtObservaciones;
+        private Sunny.UI.UIComboBox cmbEstadoDispositvo;
     }
 }
