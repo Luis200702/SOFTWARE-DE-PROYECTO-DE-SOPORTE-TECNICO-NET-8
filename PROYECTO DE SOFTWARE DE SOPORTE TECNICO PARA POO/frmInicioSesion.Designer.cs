@@ -30,12 +30,12 @@
         {
             pnlIzquierda = new Panel();
             pnlDerecha = new Panel();
+            btnAcceder = new Sunny.UI.UIButton();
             txtContraseña = new Sunny.UI.UITextBox();
             txtUsuario = new Sunny.UI.UITextBox();
             lblContraseña = new Label();
             lblUsuario = new Label();
             lblInicioSesion = new Label();
-            btnAcceder = new Sunny.UI.UIButton();
             pnlDerecha.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,6 +60,28 @@
             pnlDerecha.Name = "pnlDerecha";
             pnlDerecha.Size = new Size(442, 511);
             pnlDerecha.TabIndex = 1;
+            // 
+            // btnAcceder
+            // 
+            btnAcceder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAcceder.BackColor = Color.Transparent;
+            btnAcceder.FillColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillHoverColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAcceder.Location = new Point(176, 308);
+            btnAcceder.MinimumSize = new Size(1, 1);
+            btnAcceder.Name = "btnAcceder";
+            btnAcceder.Radius = 12;
+            btnAcceder.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.Size = new Size(86, 36);
+            btnAcceder.TabIndex = 16;
+            btnAcceder.Text = "Acceder";
+            btnAcceder.TipsFont = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAcceder.TipsForeColor = Color.Black;
+            btnAcceder.Click += btnAcceder_Click;
             // 
             // txtContraseña
             // 
@@ -117,7 +139,7 @@
             lblUsuario.AutoSize = true;
             lblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblUsuario.ForeColor = Color.FromArgb(147, 162, 183);
-            lblUsuario.Location = new Point(50, 182);
+            lblUsuario.Location = new Point(52, 180);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(69, 21);
             lblUsuario.TabIndex = 4;
@@ -134,28 +156,6 @@
             lblInicioSesion.TabIndex = 0;
             lblInicioSesion.Text = "Accede a tu cuenta";
             // 
-            // btnAcceder
-            // 
-            btnAcceder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAcceder.BackColor = Color.Transparent;
-            btnAcceder.FillColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.FillHoverColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.FillPressColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAcceder.Location = new Point(176, 308);
-            btnAcceder.MinimumSize = new Size(1, 1);
-            btnAcceder.Name = "btnAcceder";
-            btnAcceder.Radius = 12;
-            btnAcceder.RectPressColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.Size = new Size(86, 36);
-            btnAcceder.TabIndex = 16;
-            btnAcceder.Text = "Acceder";
-            btnAcceder.TipsFont = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAcceder.TipsForeColor = Color.Black;
-            btnAcceder.Click += btnAcceder_Click;
-            // 
             // frmInicioSesion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -165,6 +165,7 @@
             Controls.Add(pnlIzquierda);
             MaximizeBox = false;
             Name = "frmInicioSesion";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio de Sesión";
             Load += frmInicioSesion_Load;
             pnlDerecha.ResumeLayout(false);

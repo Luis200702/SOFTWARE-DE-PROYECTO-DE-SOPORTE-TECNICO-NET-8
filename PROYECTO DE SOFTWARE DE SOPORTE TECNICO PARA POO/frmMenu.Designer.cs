@@ -477,6 +477,7 @@
             Controls.Add(pnlContenedorLogotipo);
             Controls.Add(pnlContenedorMenu);
             Name = "frmMenu";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu Principal";
             FormClosing += frmMenu_FormClosing;
             pnlContenedorMenu.ResumeLayout(false);
