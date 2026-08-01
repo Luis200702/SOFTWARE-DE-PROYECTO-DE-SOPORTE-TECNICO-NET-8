@@ -28,20 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInicioSesion));
             pnlIzquierda = new Panel();
             pnlDerecha = new Panel();
+            label1 = new Label();
+            lblDerechos = new Label();
             btnAcceder = new Sunny.UI.UIButton();
             txtContraseña = new Sunny.UI.UITextBox();
             txtUsuario = new Sunny.UI.UITextBox();
             lblContraseña = new Label();
             lblUsuario = new Label();
             lblInicioSesion = new Label();
+            pictureBox1 = new PictureBox();
+            pnlIzquierda.SuspendLayout();
             pnlDerecha.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pnlIzquierda
             // 
             pnlIzquierda.BackColor = Color.FromArgb(15, 23, 42);
+            pnlIzquierda.Controls.Add(pictureBox1);
             pnlIzquierda.Location = new Point(0, 0);
             pnlIzquierda.Name = "pnlIzquierda";
             pnlIzquierda.Size = new Size(442, 511);
@@ -50,6 +57,8 @@
             // pnlDerecha
             // 
             pnlDerecha.BackColor = Color.FromArgb(30, 41, 59);
+            pnlDerecha.Controls.Add(label1);
+            pnlDerecha.Controls.Add(lblDerechos);
             pnlDerecha.Controls.Add(btnAcceder);
             pnlDerecha.Controls.Add(txtContraseña);
             pnlDerecha.Controls.Add(txtUsuario);
@@ -61,6 +70,28 @@
             pnlDerecha.Size = new Size(442, 511);
             pnlDerecha.TabIndex = 1;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(147, 162, 183);
+            label1.Location = new Point(52, 116);
+            label1.Name = "label1";
+            label1.Size = new Size(240, 17);
+            label1.TabIndex = 18;
+            label1.Text = "Ingresa tus credenciales para continuar.";
+            // 
+            // lblDerechos
+            // 
+            lblDerechos.AutoSize = true;
+            lblDerechos.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDerechos.ForeColor = Color.FromArgb(147, 162, 183);
+            lblDerechos.Location = new Point(131, 347);
+            lblDerechos.Name = "lblDerechos";
+            lblDerechos.Size = new Size(182, 17);
+            lblDerechos.TabIndex = 17;
+            lblDerechos.Text = "Versión 1.0 · TechDKV © 2026";
+            // 
             // btnAcceder
             // 
             btnAcceder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -70,13 +101,13 @@
             btnAcceder.FillPressColor = Color.FromArgb(0, 150, 137);
             btnAcceder.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnAcceder.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAcceder.Location = new Point(176, 308);
+            btnAcceder.Location = new Point(52, 308);
             btnAcceder.MinimumSize = new Size(1, 1);
             btnAcceder.Name = "btnAcceder";
             btnAcceder.Radius = 12;
             btnAcceder.RectPressColor = Color.FromArgb(0, 150, 137);
             btnAcceder.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.Size = new Size(86, 36);
+            btnAcceder.Size = new Size(343, 36);
             btnAcceder.TabIndex = 16;
             btnAcceder.Text = "Acceder";
             btnAcceder.TipsFont = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -150,11 +181,21 @@
             lblInicioSesion.AutoSize = true;
             lblInicioSesion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblInicioSesion.ForeColor = Color.FromArgb(147, 162, 183);
-            lblInicioSesion.Location = new Point(143, 51);
+            lblInicioSesion.Location = new Point(52, 95);
             lblInicioSesion.Name = "lblInicioSesion";
             lblInicioSesion.Size = new Size(154, 21);
             lblInicioSesion.TabIndex = 0;
             lblInicioSesion.Text = "Accede a tu cuenta";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(27, 76);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(377, 341);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
             // 
             // frmInicioSesion
             // 
@@ -168,8 +209,10 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio de Sesión";
             Load += frmInicioSesion_Load;
+            pnlIzquierda.ResumeLayout(false);
             pnlDerecha.ResumeLayout(false);
             pnlDerecha.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -183,5 +226,8 @@
         private Sunny.UI.UITextBox txtContraseña;
         private Sunny.UI.UITextBox txtUsuario;
         private Sunny.UI.UIButton btnAcceder;
+        private Label lblDerechos;
+        private Label label1;
+        private PictureBox pictureBox1;
     }
 }

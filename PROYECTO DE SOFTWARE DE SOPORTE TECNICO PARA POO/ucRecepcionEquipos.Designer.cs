@@ -36,9 +36,10 @@
             lblOrden = new Label();
             pnlCentral = new Panel();
             mcReparacion = new ReaLTaiizor.Controls.MaterialCard();
+            lblReparacion = new Label();
+            picReparacion = new PictureBox();
             txtObservaciones = new Sunny.UI.UITextBox();
             txtDescripcionProblemac = new Sunny.UI.UITextBox();
-            pictureBox7 = new PictureBox();
             numericUpDown1 = new NumericUpDown();
             cmbSucursal = new ComboBox();
             cmbTecnicos = new ComboBox();
@@ -49,7 +50,6 @@
             lblFechaEntrega = new Label();
             label2 = new Label();
             label1 = new Label();
-            lblReparacion = new Label();
             airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             mcDispositivo = new ReaLTaiizor.Controls.MaterialCard();
             cmbEstadoDispositvo = new Sunny.UI.UIComboBox();
@@ -91,7 +91,7 @@
             pnlInformacion.SuspendLayout();
             pnlCentral.SuspendLayout();
             mcReparacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picReparacion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             mcDispositivo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
@@ -191,9 +191,10 @@
             // mcReparacion
             // 
             mcReparacion.BackColor = Color.FromArgb(255, 255, 255);
+            mcReparacion.Controls.Add(lblReparacion);
+            mcReparacion.Controls.Add(picReparacion);
             mcReparacion.Controls.Add(txtObservaciones);
             mcReparacion.Controls.Add(txtDescripcionProblemac);
-            mcReparacion.Controls.Add(pictureBox7);
             mcReparacion.Controls.Add(numericUpDown1);
             mcReparacion.Controls.Add(cmbSucursal);
             mcReparacion.Controls.Add(cmbTecnicos);
@@ -204,7 +205,6 @@
             mcReparacion.Controls.Add(lblFechaEntrega);
             mcReparacion.Controls.Add(label2);
             mcReparacion.Controls.Add(label1);
-            mcReparacion.Controls.Add(lblReparacion);
             mcReparacion.Controls.Add(airSeparator3);
             mcReparacion.Depth = 0;
             mcReparacion.ForeColor = Color.FromArgb(222, 0, 0, 0);
@@ -215,6 +215,29 @@
             mcReparacion.Padding = new Padding(14);
             mcReparacion.Size = new Size(299, 377);
             mcReparacion.TabIndex = 1;
+            // 
+            // lblReparacion
+            // 
+            lblReparacion.AutoSize = true;
+            lblReparacion.BackColor = Color.Transparent;
+            lblReparacion.Location = new Point(45, 14);
+            lblReparacion.Name = "lblReparacion";
+            lblReparacion.Size = new Size(127, 15);
+            lblReparacion.TabIndex = 6;
+            lblReparacion.Text = "Datos de la Reparación";
+            lblReparacion.Click += lblReparacion_Click;
+            // 
+            // picReparacion
+            // 
+            picReparacion.BackColor = Color.Transparent;
+            picReparacion.Image = Properties.Resources.IconParkOutlineSpanner;
+            picReparacion.Location = new Point(19, 8);
+            picReparacion.Name = "picReparacion";
+            picReparacion.Size = new Size(30, 21);
+            picReparacion.SizeMode = PictureBoxSizeMode.Zoom;
+            picReparacion.TabIndex = 32;
+            picReparacion.TabStop = false;
+            picReparacion.Click += pictureBox7_Click;
             // 
             // txtObservaciones
             // 
@@ -251,18 +274,6 @@
             txtDescripcionProblemac.TabIndex = 23;
             txtDescripcionProblemac.TextAlignment = ContentAlignment.MiddleLeft;
             txtDescripcionProblemac.Watermark = "Describe el problema tal como lo describe el cliente...";
-            // 
-            // pictureBox7
-            // 
-            pictureBox7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox7.BackColor = Color.Transparent;
-            pictureBox7.Image = Properties.Resources.IconParkOutlineSpanner;
-            pictureBox7.Location = new Point(17, 8);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(30, 21);
-            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox7.TabIndex = 32;
-            pictureBox7.TabStop = false;
             // 
             // numericUpDown1
             // 
@@ -364,15 +375,6 @@
             label1.Size = new Size(119, 15);
             label1.TabIndex = 17;
             label1.Text = "Problema reportado";
-            // 
-            // lblReparacion
-            // 
-            lblReparacion.AutoSize = true;
-            lblReparacion.Location = new Point(45, 14);
-            lblReparacion.Name = "lblReparacion";
-            lblReparacion.Size = new Size(127, 15);
-            lblReparacion.TabIndex = 6;
-            lblReparacion.Text = "Datos de la Reparación";
             // 
             // airSeparator3
             // 
@@ -508,7 +510,6 @@
             // 
             // pictureBox6
             // 
-            pictureBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox6.BackColor = Color.Transparent;
             pictureBox6.Image = Properties.Resources.GgScreen;
             pictureBox6.Location = new Point(19, 8);
@@ -934,7 +935,7 @@
             pnlCentral.PerformLayout();
             mcReparacion.ResumeLayout(false);
             mcReparacion.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picReparacion).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             mcDispositivo.ResumeLayout(false);
             mcDispositivo.PerformLayout();
@@ -1003,7 +1004,7 @@
         private Sunny.UI.UITextBox txtCorreo;
         private Sunny.UI.UITextBox txtNombres;
         private Sunny.UI.UITextBox txtNumeroTelefonico;
-        private PictureBox pictureBox7;
+        private PictureBox picReparacion;
         private PictureBox pictureBox6;
         private PictureBox pictureBox5;
         private Sunny.UI.UITextBox txtMarca;
