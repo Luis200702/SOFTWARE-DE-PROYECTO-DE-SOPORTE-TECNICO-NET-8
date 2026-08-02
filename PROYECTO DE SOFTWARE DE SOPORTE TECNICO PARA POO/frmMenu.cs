@@ -36,7 +36,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             InitializeComponent();
 
             // Configurar el evento CheckedChanged del ToggleSwitch
-            toggleSwitch1.CheckedChanged += toggleSwitch1_CheckedChanged;
+            //toggleSwitch1.CheckedChanged += toggleSwitch1_CheckedChanged;
 
             // 1. Activar DoubleBuffer para evitar parpadeos en el panel
             typeof(System.Windows.Forms.Panel).InvokeMember("DoubleBuffered",
@@ -320,14 +320,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // ====================================================================
         // EVENTO DEL BOTÓN DE TEMA: Cambia entre Modo Oscuro y Modo Claro
         // ====================================================================
-        private void toggleSwitch1_CheckedChanged(object sender, EventArgs e)
-        {
-            // True = Modo Oscuro, False = Modo Claro
-            bool esOscuro = toggleSwitch1.Checked;
+        //private void toggleSwitch1_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    // True = Modo Oscuro, False = Modo Claro
+        //    bool esOscuro = toggleSwitch1.Checked;
 
-            // Aplica el tema a todo el formulario actual y sus controles/paneles internos
-            TemaManager.AplicarTema(this, esOscuro);
-        }
+        //    // Aplica el tema a todo el formulario actual y sus controles/paneles internos
+        //    TemaManager.AplicarTema(this, esOscuro);
+        //}
 
         // ====================================================================
         // EVENTOS DE LOS BOTONES DEL MENÚ: Abren los UserControls correspondientes

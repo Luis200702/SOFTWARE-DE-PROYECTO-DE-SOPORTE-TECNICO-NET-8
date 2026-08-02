@@ -52,7 +52,6 @@
             ImagenListLogoMenu = new ImageList(components);
             label1 = new Label();
             pnlContenedorSalir = new Panel();
-            toggleSwitch1 = new ToggleSwitch();
             btnSalirApp = new ReaLTaiizor.Controls.CyberButton();
             pnlInterfaces = new Panel();
             btnLogoPrincipal = new Button();
@@ -396,21 +395,11 @@
             // 
             pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorSalir.BackColor = Color.FromArgb(10, 12, 30);
-            pnlContenedorSalir.Controls.Add(toggleSwitch1);
             pnlContenedorSalir.Controls.Add(btnSalirApp);
             pnlContenedorSalir.Location = new Point(0, 686);
             pnlContenedorSalir.Name = "pnlContenedorSalir";
             pnlContenedorSalir.Size = new Size(220, 95);
             pnlContenedorSalir.TabIndex = 2;
-            // 
-            // toggleSwitch1
-            // 
-            toggleSwitch1.BackColor = Color.Transparent;
-            toggleSwitch1.Checked = false;
-            toggleSwitch1.Location = new Point(16, 5);
-            toggleSwitch1.Name = "toggleSwitch1";
-            toggleSwitch1.Size = new Size(140, 32);
-            toggleSwitch1.TabIndex = 17;
             // 
             // btnSalirApp
             // 
@@ -459,7 +448,6 @@
             pnlInterfaces.AutoSize = true;
             pnlInterfaces.BackColor = Color.FromArgb(24, 35, 54);
             pnlInterfaces.Controls.Add(btnLogoPrincipal);
-            pnlInterfaces.Enabled = false;
             pnlInterfaces.Location = new Point(220, 0);
             pnlInterfaces.Name = "pnlInterfaces";
             pnlInterfaces.Size = new Size(1025, 784);
@@ -539,6 +527,6 @@
         private ImageList ImagenListLogoMenu;
         private ImageList imageListLogoPrincipal;
         private Button btnLogoPrincipal;
-        private ToggleSwitch toggleSwitch1;
+        //private ToggleSwitch toggleSwitch1; =================================================================================================================
     }
 }
