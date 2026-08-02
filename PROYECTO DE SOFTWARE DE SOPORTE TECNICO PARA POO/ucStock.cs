@@ -77,5 +77,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
             }
         }
+
+        private void btnAlertas_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

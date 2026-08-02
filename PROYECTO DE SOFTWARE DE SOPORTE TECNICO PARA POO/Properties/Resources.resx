@@ -121,6 +121,12 @@
   <data name="WeuiAdd2Outlined" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WeuiAdd2Outlined.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="WeuiAdd2Outlined (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeuiAdd2Outlined (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SolarDangerOutline (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SolarDangerOutline (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="WeuiAdd2Filled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WeuiAdd2Filled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,8 +136,11 @@
   <data name="MaterialSymbolsRestartAltRounded1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsRestartAltRounded1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MaterialSymbolsSaveOutline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MaterialSymbolsSaveOutline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="GgScreen (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GgScreen (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MdiAlertCircleOutline (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MdiAlertCircleOutline (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MaterialSymbolsInventoryRounded" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsInventoryRounded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,20 +151,23 @@
   <data name="tictoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tictoc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GgScreen (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GgScreen (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SolarDangerOutline (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SolarDangerOutline (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GgScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GgScreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LineMdAlertCircleLoop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LineMdAlertCircleLoop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MdiAlertCircleOutline (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MdiAlertCircleOutline (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WhhAlertalt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhhAlertalt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TablerX" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TablerX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IconParkOutlineSpanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IconParkOutlineSpanner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MaterialSymbolsRestartAltRounded" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsRestartAltRounded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,13 +184,13 @@
   <data name="MaterialSymbolsInventory (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsInventory (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IconParkOutlineSpanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconParkOutlineSpanner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MaterialSymbolsSaveOutline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MaterialSymbolsSaveOutline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MdiAlertCircleOutline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MdiAlertCircleOutline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GgScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GgScreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeuiAdd2Outlined (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeuiAdd2Outlined (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
