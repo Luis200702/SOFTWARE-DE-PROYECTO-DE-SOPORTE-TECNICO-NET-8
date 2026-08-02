@@ -48,19 +48,20 @@
             btnRecepcionEquipos = new Button();
             lblSeparador3 = new Label();
             pnlContenedorLogotipo = new Panel();
-            button1 = new Button();
-            ImagenListLogo = new ImageList(components);
+            btnLogoMenu = new Button();
+            ImagenListLogoMenu = new ImageList(components);
             label1 = new Label();
             pnlContenedorSalir = new Panel();
+            toggleSwitch1 = new ToggleSwitch();
             btnSalirApp = new ReaLTaiizor.Controls.CyberButton();
             pnlInterfaces = new Panel();
-            pictureBox1 = new PictureBox();
+            btnLogoPrincipal = new Button();
+            imageListLogoPrincipal = new ImageList(components);
             timerDesplazamiento = new System.Windows.Forms.Timer(components);
             pnlContenedorMenu.SuspendLayout();
             pnlContenedorLogotipo.SuspendLayout();
             pnlContenedorSalir.SuspendLayout();
             pnlInterfaces.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pnlContenedorMenu
@@ -129,7 +130,7 @@
             btnConfiguracionGeneral.ForeColor = Color.FromArgb(155, 168, 171);
             btnConfiguracionGeneral.ImageIndex = 10;
             btnConfiguracionGeneral.ImageList = imageListBarrraMenu;
-            btnConfiguracionGeneral.Location = new Point(14, 575);
+            btnConfiguracionGeneral.Location = new Point(14, 555);
             btnConfiguracionGeneral.Name = "btnConfiguracionGeneral";
             btnConfiguracionGeneral.Size = new Size(190, 35);
             btnConfiguracionGeneral.TabIndex = 13;
@@ -351,33 +352,34 @@
             // pnlContenedorLogotipo
             // 
             pnlContenedorLogotipo.BackColor = Color.FromArgb(10, 12, 30);
-            pnlContenedorLogotipo.Controls.Add(button1);
+            pnlContenedorLogotipo.Controls.Add(btnLogoMenu);
             pnlContenedorLogotipo.Controls.Add(label1);
             pnlContenedorLogotipo.Location = new Point(0, 0);
             pnlContenedorLogotipo.Name = "pnlContenedorLogotipo";
             pnlContenedorLogotipo.Size = new Size(223, 90);
             pnlContenedorLogotipo.TabIndex = 1;
             // 
-            // button1
+            // btnLogoMenu
             // 
-            button1.BackColor = Color.Transparent;
-            button1.Enabled = false;
-            button1.FlatAppearance.BorderColor = Color.FromArgb(10, 12, 30);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ImageIndex = 0;
-            button1.ImageList = ImagenListLogo;
-            button1.Location = new Point(67, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(82, 66);
-            button1.TabIndex = 18;
-            button1.UseVisualStyleBackColor = false;
+            btnLogoMenu.BackColor = Color.Transparent;
+            btnLogoMenu.Enabled = false;
+            btnLogoMenu.FlatAppearance.BorderColor = Color.FromArgb(10, 12, 30);
+            btnLogoMenu.FlatStyle = FlatStyle.Flat;
+            btnLogoMenu.ImageIndex = 0;
+            btnLogoMenu.ImageList = ImagenListLogoMenu;
+            btnLogoMenu.Location = new Point(67, 12);
+            btnLogoMenu.Name = "btnLogoMenu";
+            btnLogoMenu.Size = new Size(82, 66);
+            btnLogoMenu.TabIndex = 18;
+            btnLogoMenu.UseVisualStyleBackColor = false;
             // 
-            // ImagenListLogo
+            // ImagenListLogoMenu
             // 
-            ImagenListLogo.ColorDepth = ColorDepth.Depth32Bit;
-            ImagenListLogo.ImageStream = (ImageListStreamer)resources.GetObject("ImagenListLogo.ImageStream");
-            ImagenListLogo.TransparentColor = Color.Transparent;
-            ImagenListLogo.Images.SetKeyName(0, "LogotipoProyectoSd.png");
+            ImagenListLogoMenu.ColorDepth = ColorDepth.Depth32Bit;
+            ImagenListLogoMenu.ImageStream = (ImageListStreamer)resources.GetObject("ImagenListLogoMenu.ImageStream");
+            ImagenListLogoMenu.TransparentColor = Color.Transparent;
+            ImagenListLogoMenu.Images.SetKeyName(0, "LogotipoProyectoSd.png");
+            ImagenListLogoMenu.Images.SetKeyName(1, "LogotipoProyecto.png");
             // 
             // label1
             // 
@@ -394,11 +396,21 @@
             // 
             pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorSalir.BackColor = Color.FromArgb(10, 12, 30);
+            pnlContenedorSalir.Controls.Add(toggleSwitch1);
             pnlContenedorSalir.Controls.Add(btnSalirApp);
-            pnlContenedorSalir.Location = new Point(0, 707);
+            pnlContenedorSalir.Location = new Point(0, 686);
             pnlContenedorSalir.Name = "pnlContenedorSalir";
-            pnlContenedorSalir.Size = new Size(220, 74);
+            pnlContenedorSalir.Size = new Size(220, 95);
             pnlContenedorSalir.TabIndex = 2;
+            // 
+            // toggleSwitch1
+            // 
+            toggleSwitch1.BackColor = Color.Transparent;
+            toggleSwitch1.Checked = false;
+            toggleSwitch1.Location = new Point(16, 5);
+            toggleSwitch1.Name = "toggleSwitch1";
+            toggleSwitch1.Size = new Size(140, 32);
+            toggleSwitch1.TabIndex = 17;
             // 
             // btnSalirApp
             // 
@@ -410,7 +422,7 @@
             btnSalirApp.ColorBackground = Color.FromArgb(10, 12, 30);
             btnSalirApp.ColorBackground_1 = Color.FromArgb(50, 52, 68);
             btnSalirApp.ColorBackground_2 = Color.FromArgb(26, 28, 44);
-            btnSalirApp.ColorBackground_Pen = Color.FromArgb(10, 12, 30);
+            btnSalirApp.ColorBackground_Pen = Color.FromArgb(29, 200, 238);
             btnSalirApp.ColorLighting = Color.FromArgb(10, 12, 30);
             btnSalirApp.ColorPen_1 = Color.FromArgb(6, 20, 27);
             btnSalirApp.ColorPen_2 = Color.FromArgb(6, 20, 27);
@@ -426,12 +438,12 @@
             btnSalirApp.Lighting = false;
             btnSalirApp.LinearGradient_Background = true;
             btnSalirApp.LinearGradientPen = false;
-            btnSalirApp.Location = new Point(27, 14);
+            btnSalirApp.Location = new Point(12, 43);
             btnSalirApp.Name = "btnSalirApp";
             btnSalirApp.PenWidth = 15;
             btnSalirApp.Rounding = true;
             btnSalirApp.RoundingInt = 80;
-            btnSalirApp.Size = new Size(159, 40);
+            btnSalirApp.Size = new Size(147, 40);
             btnSalirApp.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             btnSalirApp.TabIndex = 3;
             btnSalirApp.Tag = "Cyber";
@@ -446,21 +458,31 @@
             pnlInterfaces.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlInterfaces.AutoSize = true;
             pnlInterfaces.BackColor = Color.FromArgb(24, 35, 54);
-            pnlInterfaces.Controls.Add(pictureBox1);
+            pnlInterfaces.Controls.Add(btnLogoPrincipal);
+            pnlInterfaces.Enabled = false;
             pnlInterfaces.Location = new Point(220, 0);
             pnlInterfaces.Name = "pnlInterfaces";
             pnlInterfaces.Size = new Size(1025, 784);
             pnlInterfaces.TabIndex = 3;
             // 
-            // pictureBox1
+            // btnLogoPrincipal
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1022, 781);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            btnLogoPrincipal.FlatAppearance.BorderColor = Color.FromArgb(24, 35, 54);
+            btnLogoPrincipal.FlatStyle = FlatStyle.Flat;
+            btnLogoPrincipal.ImageIndex = 0;
+            btnLogoPrincipal.ImageList = imageListLogoPrincipal;
+            btnLogoPrincipal.Location = new Point(381, 255);
+            btnLogoPrincipal.Name = "btnLogoPrincipal";
+            btnLogoPrincipal.Size = new Size(252, 258);
+            btnLogoPrincipal.TabIndex = 0;
+            btnLogoPrincipal.UseVisualStyleBackColor = true;
+            // 
+            // imageListLogoPrincipal
+            // 
+            imageListLogoPrincipal.ColorDepth = ColorDepth.Depth32Bit;
+            imageListLogoPrincipal.ImageStream = (ImageListStreamer)resources.GetObject("imageListLogoPrincipal.ImageStream");
+            imageListLogoPrincipal.TransparentColor = Color.Transparent;
+            imageListLogoPrincipal.Images.SetKeyName(0, "LogotipoProyecto.png");
             // 
             // timerDesplazamiento
             // 
@@ -484,7 +506,6 @@
             pnlContenedorLogotipo.ResumeLayout(false);
             pnlContenedorSalir.ResumeLayout(false);
             pnlInterfaces.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -514,8 +535,10 @@
         private System.Windows.Forms.Timer timerDesplazamiento;
         private ImageList imageListBarrraMenu;
         private Label label1;
-        private PictureBox pictureBox1;
-        private Button button1;
-        private ImageList ImagenListLogo;
+        private Button btnLogoMenu;
+        private ImageList ImagenListLogoMenu;
+        private ImageList imageListLogoPrincipal;
+        private Button btnLogoPrincipal;
+        private ToggleSwitch toggleSwitch1;
     }
 }

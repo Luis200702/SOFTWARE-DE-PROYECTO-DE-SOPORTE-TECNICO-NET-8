@@ -23,8 +23,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             InitializeComponent();
 
             mcCliente.BackColor = Color.FromArgb(45, 45, 45);
-  
-            this.RedondearBotones(40);
         }
 
         private void ucRecepcionEquipos_Load(object sender, EventArgs e)
