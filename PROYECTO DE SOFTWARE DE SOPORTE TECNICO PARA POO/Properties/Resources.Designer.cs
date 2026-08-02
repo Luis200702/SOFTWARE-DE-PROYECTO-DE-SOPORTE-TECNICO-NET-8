@@ -203,9 +203,19 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SolarBoxOutline {
+        internal static System.Drawing.Bitmap SolarDangerOutline__1_ {
             get {
-                object obj = ResourceManager.GetObject("SolarBoxOutline", resourceCulture);
+                object obj = ResourceManager.GetObject("SolarDangerOutline (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SolarDangerOutline__2_ {
+            get {
+                object obj = ResourceManager.GetObject("SolarDangerOutline (2)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -256,6 +266,26 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO.Properties {
         internal static System.Drawing.Bitmap WeuiAdd2Outlined {
             get {
                 object obj = ResourceManager.GetObject("WeuiAdd2Outlined", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WeuiAdd2Outlined__1_ {
+            get {
+                object obj = ResourceManager.GetObject("WeuiAdd2Outlined (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WeuiAdd2Outlined__2_ {
+            get {
+                object obj = ResourceManager.GetObject("WeuiAdd2Outlined (2)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

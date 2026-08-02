@@ -38,9 +38,7 @@
             lblTitulo = new Label();
             panel1 = new Panel();
             lblAlertas = new Label();
-            pictureBox4 = new PictureBox();
             btnAgregar = new Button();
-            pictureBox3 = new PictureBox();
             btnAlertas = new Button();
             cmbCategorias = new ComboBox();
             txtBuscar = new TextBox();
@@ -57,8 +55,6 @@
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv4).BeginInit();
             SuspendLayout();
@@ -109,9 +105,7 @@
             panel1.BackColor = Color.FromArgb(30, 41, 59);
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(lblAlertas);
-            panel1.Controls.Add(pictureBox4);
             panel1.Controls.Add(btnAgregar);
-            panel1.Controls.Add(pictureBox3);
             panel1.Controls.Add(btnAlertas);
             panel1.Controls.Add(cmbCategorias);
             panel1.Controls.Add(txtBuscar);
@@ -129,74 +123,64 @@
             lblAlertas.FlatStyle = FlatStyle.Flat;
             lblAlertas.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAlertas.ForeColor = Color.FromArgb(147, 162, 183);
-            lblAlertas.Location = new Point(917, 24);
+            lblAlertas.Location = new Point(841, 18);
             lblAlertas.Name = "lblAlertas";
             lblAlertas.Size = new Size(27, 31);
             lblAlertas.TabIndex = 7;
             lblAlertas.Text = "0";
             // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = Properties.Resources.WeuiAdd2Outlined;
-            pictureBox4.Location = new Point(1028, 19);
-            pictureBox4.Margin = new Padding(3, 4, 3, 4);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(41, 40);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 6;
-            pictureBox4.TabStop = false;
-            // 
             // btnAgregar
             // 
             btnAgregar.BackColor = Color.FromArgb(62, 155, 139);
-            btnAgregar.BackgroundImageLayout = ImageLayout.Stretch;
+            btnAgregar.BackgroundImageLayout = ImageLayout.None;
+            btnAgregar.Cursor = Cursors.Hand;
+            btnAgregar.FlatAppearance.BorderColor = Color.FromArgb(30, 41, 59);
             btnAgregar.FlatStyle = FlatStyle.Flat;
             btnAgregar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAgregar.ForeColor = Color.Black;
-            btnAgregar.Location = new Point(1066, 18);
+            btnAgregar.Image = Properties.Resources.WeuiAdd2Outlined__2_;
+            btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAgregar.Location = new Point(1021, 14);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.RightToLeft = RightToLeft.No;
-            btnAgregar.Size = new Size(98, 41);
+            btnAgregar.Size = new Size(141, 41);
             btnAgregar.TabIndex = 5;
             btnAgregar.Text = "Agregar";
+            btnAgregar.TextAlign = ContentAlignment.MiddleRight;
             btnAgregar.UseVisualStyleBackColor = false;
             btnAgregar.Click += btnAgregar_Click;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = Properties.Resources.MdiAlertCircleOutline__1_;
-            pictureBox3.Location = new Point(776, 18);
-            pictureBox3.Margin = new Padding(3, 4, 3, 4);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(41, 40);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 4;
-            pictureBox3.TabStop = false;
             // 
             // btnAlertas
             // 
             btnAlertas.BackColor = Color.FromArgb(30, 41, 59);
             btnAlertas.BackgroundImageLayout = ImageLayout.Stretch;
+            btnAlertas.Cursor = Cursors.Hand;
+            btnAlertas.FlatAppearance.BorderColor = Color.FromArgb(30, 41, 59);
             btnAlertas.FlatStyle = FlatStyle.Flat;
             btnAlertas.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAlertas.ForeColor = Color.FromArgb(147, 162, 183);
-            btnAlertas.Location = new Point(813, 18);
+            btnAlertas.Image = Properties.Resources.SolarDangerOutline__2_;
+            btnAlertas.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAlertas.Location = new Point(701, 13);
             btnAlertas.Name = "btnAlertas";
             btnAlertas.RightToLeft = RightToLeft.No;
-            btnAlertas.Size = new Size(98, 41);
+            btnAlertas.Size = new Size(134, 41);
             btnAlertas.TabIndex = 3;
             btnAlertas.Text = "Alertas";
+            btnAlertas.TextAlign = ContentAlignment.MiddleRight;
             btnAlertas.UseVisualStyleBackColor = false;
+            btnAlertas.Click += btnAlertas_Click;
             // 
             // cmbCategorias
             // 
             cmbCategorias.BackColor = Color.FromArgb(30, 41, 59);
+            cmbCategorias.Cursor = Cursors.Hand;
             cmbCategorias.FlatStyle = FlatStyle.Flat;
             cmbCategorias.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cmbCategorias.ForeColor = Color.FromArgb(147, 162, 183);
             cmbCategorias.FormattingEnabled = true;
             cmbCategorias.Items.AddRange(new object[] { "Telefonos", "Computadoras", "Accesorios ", "Repuestos" });
-            cmbCategorias.Location = new Point(502, 18);
+            cmbCategorias.Location = new Point(472, 18);
             cmbCategorias.Name = "cmbCategorias";
             cmbCategorias.Size = new Size(211, 31);
             cmbCategorias.TabIndex = 2;
@@ -206,14 +190,15 @@
             // 
             txtBuscar.BackColor = Color.FromArgb(30, 41, 59);
             txtBuscar.BorderStyle = BorderStyle.FixedSingle;
+            txtBuscar.Cursor = Cursors.Hand;
             txtBuscar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtBuscar.ForeColor = Color.FromArgb(147, 162, 183);
             txtBuscar.Location = new Point(71, 18);
             txtBuscar.Multiline = true;
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(404, 36);
+            txtBuscar.PlaceholderText = "Buscar....";
+            txtBuscar.Size = new Size(385, 36);
             txtBuscar.TabIndex = 1;
-            txtBuscar.Text = "Buscar";
             // 
             // pictureBox2
             // 
@@ -353,8 +338,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv4).EndInit();
             ResumeLayout(false);
@@ -371,9 +354,7 @@
         private TextBox txtBuscar;
         private ComboBox cmbCategorias;
         private Button btnAlertas;
-        private PictureBox pictureBox4;
         private Button btnAgregar;
-        private PictureBox pictureBox3;
         private DataGridView dgv4;
         private Label lblAlertas;
         private DataGridViewTextBoxColumn Nomnre;
