@@ -35,7 +35,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Name = "ucConfiguracion";
-            Size = new Size(1025, 686);
+            Size = new Size(1022, 781);
             ResumeLayout(false);
         }
 
