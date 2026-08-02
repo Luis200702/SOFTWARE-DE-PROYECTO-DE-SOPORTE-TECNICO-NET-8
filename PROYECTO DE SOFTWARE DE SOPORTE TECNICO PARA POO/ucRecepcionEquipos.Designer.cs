@@ -114,7 +114,7 @@
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(-6, 0);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1040, 59);
+            pnlSuperior.Size = new Size(1037, 59);
             pnlSuperior.TabIndex = 0;
             // 
             // pictureBox1
@@ -148,7 +148,7 @@
             pnlInformacion.Controls.Add(lblOrden);
             pnlInformacion.Location = new Point(0, 59);
             pnlInformacion.Name = "pnlInformacion";
-            pnlInformacion.Size = new Size(1025, 59);
+            pnlInformacion.Size = new Size(1022, 59);
             pnlInformacion.TabIndex = 1;
             // 
             // lblFecha
@@ -184,7 +184,7 @@
             pnlCentral.Controls.Add(mcCliente);
             pnlCentral.Location = new Point(0, 118);
             pnlCentral.Name = "pnlCentral";
-            pnlCentral.Size = new Size(1025, 483);
+            pnlCentral.Size = new Size(1022, 578);
             pnlCentral.TabIndex = 2;
             pnlCentral.Resize += pnlCentral_Resize;
             // 
@@ -809,9 +809,9 @@
             pnlInferior.Controls.Add(pictureBox2);
             pnlInferior.Controls.Add(btnGuardarRegistro);
             pnlInferior.Dock = DockStyle.Bottom;
-            pnlInferior.Location = new Point(0, 601);
+            pnlInferior.Location = new Point(0, 696);
             pnlInferior.Name = "pnlInferior";
-            pnlInferior.Size = new Size(1025, 85);
+            pnlInferior.Size = new Size(1022, 85);
             pnlInferior.TabIndex = 3;
             // 
             // pictureBox4
@@ -819,7 +819,7 @@
             pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox4.BackColor = Color.FromArgb(0, 150, 137);
             pictureBox4.Image = Properties.Resources.MaterialSymbolsRestartAltRounded1;
-            pictureBox4.Location = new Point(658, 35);
+            pictureBox4.Location = new Point(655, 35);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(30, 27);
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
@@ -835,7 +835,7 @@
             btnLimpiar.FillPressColor = Color.FromArgb(0, 150, 137);
             btnLimpiar.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnLimpiar.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLimpiar.Location = new Point(647, 22);
+            btnLimpiar.Location = new Point(644, 22);
             btnLimpiar.MinimumSize = new Size(1, 1);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Radius = 12;
@@ -853,7 +853,7 @@
             pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackColor = Color.FromArgb(0, 150, 137);
             pictureBox3.Image = Properties.Resources.TablerX;
-            pictureBox3.Location = new Point(770, 35);
+            pictureBox3.Location = new Point(767, 35);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(30, 27);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -870,7 +870,7 @@
             btnCancelar.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnCancelar.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCancelar.ForeColor = Color.FromArgb(225, 29, 72);
-            btnCancelar.Location = new Point(761, 22);
+            btnCancelar.Location = new Point(758, 22);
             btnCancelar.MinimumSize = new Size(1, 1);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Radius = 12;
@@ -888,7 +888,7 @@
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.BackColor = Color.FromArgb(0, 150, 137);
             pictureBox2.Image = Properties.Resources.MaterialSymbolsSaveOutline;
-            pictureBox2.Location = new Point(874, 35);
+            pictureBox2.Location = new Point(871, 35);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(30, 27);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -904,7 +904,7 @@
             btnGuardarRegistro.FillPressColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnGuardarRegistro.Location = new Point(869, 22);
+            btnGuardarRegistro.Location = new Point(866, 22);
             btnGuardarRegistro.MinimumSize = new Size(1, 1);
             btnGuardarRegistro.Name = "btnGuardarRegistro";
             btnGuardarRegistro.Radius = 12;
@@ -926,7 +926,7 @@
             Controls.Add(pnlInformacion);
             Controls.Add(pnlSuperior);
             Name = "ucRecepcionEquipos";
-            Size = new Size(1025, 686);
+            Size = new Size(1022, 781);
             Load += ucRecepcionEquipos_Load;
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

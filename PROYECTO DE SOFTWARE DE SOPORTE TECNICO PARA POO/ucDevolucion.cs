@@ -19,5 +19,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             // Se llama a la función para redondear todos los botones del formulario
             this.RedondearBotones(40);
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            pnlResumen.Visible = true;
+            pnlTrabajoRealizado.Visible = true;
+            pnlDesgloseCosto.Visible = true;
+            pnlRegistrarEntrega.Visible = true;
+        }
+
     }
 }

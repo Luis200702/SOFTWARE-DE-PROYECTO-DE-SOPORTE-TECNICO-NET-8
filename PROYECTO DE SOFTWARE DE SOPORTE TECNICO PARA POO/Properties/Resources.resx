@@ -130,9 +130,6 @@
   <data name="MaterialSymbolsRestartAltRounded1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsRestartAltRounded1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MaterialSymbolsSaveOutline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MaterialSymbolsSaveOutline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="MaterialSymbolsInventoryRounded" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsInventoryRounded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -142,11 +139,14 @@
   <data name="tictoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tictoc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GgScreen (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GgScreen (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MaterialSymbolsRestartAltRounded" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MaterialSymbolsRestartAltRounded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LineMdAlertCircleLoop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LineMdAlertCircleLoop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LucideUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LucideUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MdiAlertCircleOutline (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MdiAlertCircleOutline (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,11 +157,14 @@
   <data name="TablerX" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TablerX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MaterialSymbolsRestartAltRounded" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MaterialSymbolsRestartAltRounded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="GgScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GgScreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LucideUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LucideUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MaterialSymbolsSaveOutline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MaterialSymbolsSaveOutline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GgScreen (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GgScreen (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MaterialSymbolsSearch (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsSearch (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,7 +181,7 @@
   <data name="MdiAlertCircleOutline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MdiAlertCircleOutline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GgScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GgScreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SolarBoxOutline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SolarBoxOutline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
