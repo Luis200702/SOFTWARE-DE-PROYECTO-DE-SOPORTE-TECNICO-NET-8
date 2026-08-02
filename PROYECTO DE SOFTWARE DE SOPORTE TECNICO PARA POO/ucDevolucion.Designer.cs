@@ -69,7 +69,6 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.SolarBoxOutline;
             pictureBox1.Location = new Point(34, 13);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(36, 30);
