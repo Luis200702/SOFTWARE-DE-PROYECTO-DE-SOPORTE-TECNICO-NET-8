@@ -23,6 +23,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             InitializeComponent();
 
             mcCliente.BackColor = Color.FromArgb(45, 45, 45);
+
+            this.RedondearBotones(40);
         }
 
         private void ucRecepcionEquipos_Load(object sender, EventArgs e)
@@ -32,11 +34,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             cmbSucursal.SelectedIndex = 0;
             cmbTecnicos.SelectedIndex = 0;
 
-          
+
 
         }
 
-      
+
         private void SeleccionarBoton(UIButton boton)
         {
 
@@ -89,6 +91,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void btnTelefono_Click(object sender, EventArgs e)
         {
             SeleccionarBoton(btnTelefono);
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblReparacion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
