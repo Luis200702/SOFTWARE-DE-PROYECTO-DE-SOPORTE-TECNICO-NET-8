@@ -25,7 +25,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
             cmbEstado.SelectedIndex = 0;
             cmbSucursal.SelectedIndex = 0;
-            cmbTecnicos.SelectedIndex = 0;
+            cmbTecnico.SelectedIndex = 0;
         }
 
         public void SeleccionarBoton(UIButton boton)

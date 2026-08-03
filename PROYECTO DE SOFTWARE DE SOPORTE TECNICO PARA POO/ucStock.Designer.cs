@@ -42,7 +42,6 @@
             txtBuscar = new Sunny.UI.UITextBox();
             lblAlertas = new Label();
             btnAlertas = new Button();
-            pictureBox2 = new PictureBox();
             dgv4 = new DataGridView();
             Nomnre = new DataGridViewTextBoxColumn();
             Categoria = new DataGridViewComboBoxColumn();
@@ -55,7 +54,6 @@
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv4).BeginInit();
             SuspendLayout();
             // 
@@ -107,7 +105,6 @@
             panel1.Controls.Add(txtBuscar);
             panel1.Controls.Add(lblAlertas);
             panel1.Controls.Add(btnAlertas);
-            panel1.Controls.Add(pictureBox2);
             panel1.Location = new Point(0, 59);
             panel1.Name = "panel1";
             panel1.Size = new Size(1021, 59);
@@ -166,7 +163,8 @@
             txtBuscar.FillColor = Color.FromArgb(41, 53, 72);
             txtBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtBuscar.ForeColor = Color.White;
-            txtBuscar.Location = new Point(64, 12);
+            txtBuscar.Icon = Properties.Resources.TablerSearch;
+            txtBuscar.Location = new Point(14, 12);
             txtBuscar.Margin = new Padding(4, 5, 4, 5);
             txtBuscar.MinimumSize = new Size(1, 16);
             txtBuscar.Name = "txtBuscar";
@@ -174,7 +172,7 @@
             txtBuscar.Radius = 12;
             txtBuscar.RectColor = Color.FromArgb(39, 53, 72);
             txtBuscar.ShowText = false;
-            txtBuscar.Size = new Size(295, 30);
+            txtBuscar.Size = new Size(345, 30);
             txtBuscar.TabIndex = 4;
             txtBuscar.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscar.Watermark = "Ej. ORD-2024-003";
@@ -213,16 +211,6 @@
             btnAlertas.TextAlign = ContentAlignment.MiddleRight;
             btnAlertas.UseVisualStyleBackColor = false;
             btnAlertas.Click += btnAlertas_Click;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.TablerSearch;
-            pictureBox2.Location = new Point(21, 10);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(36, 30);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
             // 
             // dgv4
             // 
@@ -351,7 +339,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv4).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -363,7 +350,6 @@
         private PictureBox pictureBox1;
         private Label lblTitulo;
         private Panel panel1;
-        private PictureBox pictureBox2;
         private Button btnAlertas;
         private DataGridView dgv4;
         private Label lblAlertas;

@@ -36,6 +36,22 @@
             lblOrden = new Label();
             pnlCentral = new Panel();
             uiPanel1 = new Sunny.UI.UIPanel();
+            txtCosto = new Sunny.UI.UITextBox();
+            dtmFecha = new Sunny.UI.UIDatetimePicker();
+            cmbSucursal = new Sunny.UI.UIComboBox();
+            cmbTecnico = new Sunny.UI.UIComboBox();
+            lblCosto = new Label();
+            txtObservaciones = new Sunny.UI.UITextBox();
+            lblFechaEntrega = new Label();
+            picReparacion = new PictureBox();
+            lblReparacion = new Label();
+            lblTecnico = new Label();
+            lblSucursal = new Label();
+            airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
+            txtDescripcionProblema = new Sunny.UI.UITextBox();
+            lblProblema = new Label();
+            lblDiagnostico = new Label();
+            pnlDatosCliente = new Sunny.UI.UIPanel();
             btnTelefono = new Sunny.UI.UIButton();
             lblTipoDispositivo = new Label();
             btnComputadora = new Sunny.UI.UIButton();
@@ -48,7 +64,7 @@
             lblCliente = new Label();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             lblDatosCliente = new Label();
-            pnlDispositivo2 = new Sunny.UI.UIPanel();
+            pnlDispositivo = new Sunny.UI.UIPanel();
             lblEstado = new Label();
             cmbEstado = new Sunny.UI.UIComboBox();
             txtModelo = new Sunny.UI.UITextBox();
@@ -62,22 +78,6 @@
             pictureBox7 = new PictureBox();
             label5 = new Label();
             airSeparator4 = new ReaLTaiizor.Controls.AirSeparator();
-            mcReparacion = new ReaLTaiizor.Controls.MaterialCard();
-            lblReparacion = new Label();
-            picReparacion = new PictureBox();
-            txtObservaciones = new Sunny.UI.UITextBox();
-            txtDescripcionProblemac = new Sunny.UI.UITextBox();
-            numericUpDown1 = new NumericUpDown();
-            cmbSucursal = new ComboBox();
-            cmbTecnicos = new ComboBox();
-            dateTimePicker1 = new DateTimePicker();
-            lblTecnico = new Label();
-            label6 = new Label();
-            lblCosto = new Label();
-            lblFechaEntrega = new Label();
-            label2 = new Label();
-            label1 = new Label();
-            airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             pnlInferior = new Panel();
             pictureBox4 = new PictureBox();
             pictureBox2 = new PictureBox();
@@ -90,12 +90,11 @@
             pnlInformacion.SuspendLayout();
             pnlCentral.SuspendLayout();
             uiPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            pnlDispositivo2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
-            mcReparacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picReparacion).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            pnlDatosCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            pnlDispositivo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             pnlInferior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -178,40 +177,319 @@
             pnlCentral.AutoSize = true;
             pnlCentral.BackColor = Color.FromArgb(15, 23, 42);
             pnlCentral.Controls.Add(uiPanel1);
-            pnlCentral.Controls.Add(pnlDispositivo2);
-            pnlCentral.Controls.Add(mcReparacion);
+            pnlCentral.Controls.Add(pnlDatosCliente);
+            pnlCentral.Controls.Add(pnlDispositivo);
             pnlCentral.Location = new Point(0, 118);
             pnlCentral.Name = "pnlCentral";
-            pnlCentral.Size = new Size(1022, 861);
+            pnlCentral.Size = new Size(1222, 861);
             pnlCentral.TabIndex = 3;
             // 
             // uiPanel1
             // 
-            uiPanel1.BackColor = Color.Transparent;
-            uiPanel1.Controls.Add(btnTelefono);
-            uiPanel1.Controls.Add(lblTipoDispositivo);
-            uiPanel1.Controls.Add(btnComputadora);
-            uiPanel1.Controls.Add(txtCorreo);
-            uiPanel1.Controls.Add(txtNumeroTelefonico);
-            uiPanel1.Controls.Add(lblCorreo);
-            uiPanel1.Controls.Add(txtNombres);
-            uiPanel1.Controls.Add(pictureBox5);
-            uiPanel1.Controls.Add(lblTelefono);
-            uiPanel1.Controls.Add(lblCliente);
-            uiPanel1.Controls.Add(airSeparator1);
-            uiPanel1.Controls.Add(lblDatosCliente);
+            uiPanel1.Controls.Add(txtCosto);
+            uiPanel1.Controls.Add(dtmFecha);
+            uiPanel1.Controls.Add(cmbSucursal);
+            uiPanel1.Controls.Add(cmbTecnico);
+            uiPanel1.Controls.Add(lblCosto);
+            uiPanel1.Controls.Add(txtObservaciones);
+            uiPanel1.Controls.Add(lblFechaEntrega);
+            uiPanel1.Controls.Add(picReparacion);
+            uiPanel1.Controls.Add(lblReparacion);
+            uiPanel1.Controls.Add(lblTecnico);
+            uiPanel1.Controls.Add(lblSucursal);
+            uiPanel1.Controls.Add(airSeparator3);
+            uiPanel1.Controls.Add(txtDescripcionProblema);
+            uiPanel1.Controls.Add(lblProblema);
+            uiPanel1.Controls.Add(lblDiagnostico);
             uiPanel1.FillColor = Color.FromArgb(30, 41, 59);
             uiPanel1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiPanel1.Location = new Point(46, 40);
+            uiPanel1.Location = new Point(690, 40);
             uiPanel1.Margin = new Padding(4, 5, 4, 5);
             uiPanel1.MinimumSize = new Size(1, 1);
             uiPanel1.Name = "uiPanel1";
             uiPanel1.Radius = 12;
             uiPanel1.RectColor = Color.FromArgb(39, 53, 72);
             uiPanel1.Size = new Size(299, 377);
-            uiPanel1.TabIndex = 3;
-            uiPanel1.Text = "299; 377";
+            uiPanel1.TabIndex = 4;
+            uiPanel1.Text = null;
             uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // txtCosto
+            // 
+            txtCosto.BackColor = Color.Transparent;
+            txtCosto.FillColor = Color.FromArgb(41, 53, 72);
+            txtCosto.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCosto.ForeColor = Color.White;
+            txtCosto.Location = new Point(154, 287);
+            txtCosto.Margin = new Padding(4, 5, 4, 5);
+            txtCosto.MaxLength = 255;
+            txtCosto.Minimum = 0D;
+            txtCosto.MinimumSize = new Size(1, 16);
+            txtCosto.Name = "txtCosto";
+            txtCosto.Padding = new Padding(5);
+            txtCosto.Radius = 12;
+            txtCosto.RectColor = Color.FromArgb(39, 53, 72);
+            txtCosto.ShowText = false;
+            txtCosto.Size = new Size(122, 23);
+            txtCosto.TabIndex = 47;
+            txtCosto.TextAlignment = ContentAlignment.MiddleLeft;
+            txtCosto.Watermark = "0$";
+            // 
+            // dtmFecha
+            // 
+            dtmFecha.DateCultureInfo = new System.Globalization.CultureInfo("es-ES");
+            dtmFecha.FillColor = Color.FromArgb(41, 53, 72);
+            dtmFecha.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtmFecha.ForeColor = Color.White;
+            dtmFecha.Location = new Point(20, 287);
+            dtmFecha.Margin = new Padding(4, 5, 4, 5);
+            dtmFecha.MaxLength = 19;
+            dtmFecha.MinimumSize = new Size(63, 0);
+            dtmFecha.Name = "dtmFecha";
+            dtmFecha.Padding = new Padding(0, 0, 30, 2);
+            dtmFecha.Radius = 12;
+            dtmFecha.RectColor = Color.FromArgb(148, 163, 184);
+            dtmFecha.Size = new Size(122, 23);
+            dtmFecha.SymbolDropDown = 61555;
+            dtmFecha.SymbolNormal = 61555;
+            dtmFecha.SymbolSize = 24;
+            dtmFecha.TabIndex = 46;
+            dtmFecha.Text = "2026-08-03 00:00:00";
+            dtmFecha.TextAlignment = ContentAlignment.MiddleLeft;
+            dtmFecha.Value = new DateTime(2026, 8, 3, 0, 0, 0, 0);
+            dtmFecha.Watermark = "";
+            // 
+            // cmbSucursal
+            // 
+            cmbSucursal.BackColor = Color.Transparent;
+            cmbSucursal.DataSource = null;
+            cmbSucursal.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            cmbSucursal.FillColor = Color.FromArgb(41, 53, 72);
+            cmbSucursal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbSucursal.ForeColor = Color.White;
+            cmbSucursal.FormattingEnabled = true;
+            cmbSucursal.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbSucursal.Items.AddRange(new object[] { "Seleccionar...", "Sucursal Centro", "Sucursal Sur" });
+            cmbSucursal.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbSucursal.Location = new Point(154, 239);
+            cmbSucursal.Margin = new Padding(4, 5, 4, 5);
+            cmbSucursal.MinimumSize = new Size(63, 0);
+            cmbSucursal.Name = "cmbSucursal";
+            cmbSucursal.Padding = new Padding(0, 0, 30, 2);
+            cmbSucursal.Radius = 12;
+            cmbSucursal.RectColor = Color.FromArgb(148, 163, 184);
+            cmbSucursal.Size = new Size(122, 23);
+            cmbSucursal.SymbolSize = 24;
+            cmbSucursal.TabIndex = 45;
+            cmbSucursal.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbSucursal.Watermark = "";
+            // 
+            // cmbTecnico
+            // 
+            cmbTecnico.BackColor = Color.Transparent;
+            cmbTecnico.DataSource = null;
+            cmbTecnico.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            cmbTecnico.FillColor = Color.FromArgb(41, 53, 72);
+            cmbTecnico.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbTecnico.ForeColor = Color.White;
+            cmbTecnico.FormattingEnabled = true;
+            cmbTecnico.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbTecnico.Items.AddRange(new object[] { "Seleccionar...", "Juan Pablo", "Raul Mendoza", "Fatima Benalcazar" });
+            cmbTecnico.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbTecnico.Location = new Point(20, 239);
+            cmbTecnico.Margin = new Padding(4, 5, 4, 5);
+            cmbTecnico.MinimumSize = new Size(63, 0);
+            cmbTecnico.Name = "cmbTecnico";
+            cmbTecnico.Padding = new Padding(0, 0, 30, 2);
+            cmbTecnico.Radius = 12;
+            cmbTecnico.RectColor = Color.FromArgb(148, 163, 184);
+            cmbTecnico.Size = new Size(122, 23);
+            cmbTecnico.SymbolSize = 24;
+            cmbTecnico.TabIndex = 44;
+            cmbTecnico.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbTecnico.Watermark = "";
+            // 
+            // lblCosto
+            // 
+            lblCosto.AutoSize = true;
+            lblCosto.BackColor = Color.Transparent;
+            lblCosto.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCosto.ForeColor = Color.White;
+            lblCosto.Location = new Point(154, 267);
+            lblCosto.Name = "lblCosto";
+            lblCosto.Size = new Size(110, 15);
+            lblCosto.TabIndex = 25;
+            lblCosto.Text = "Costo estimado ($)";
+            // 
+            // txtObservaciones
+            // 
+            txtObservaciones.BackColor = Color.Transparent;
+            txtObservaciones.FillColor = Color.FromArgb(41, 53, 72);
+            txtObservaciones.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtObservaciones.ForeColor = Color.White;
+            txtObservaciones.Location = new Point(23, 153);
+            txtObservaciones.Margin = new Padding(4, 5, 4, 5);
+            txtObservaciones.MaxLength = 255;
+            txtObservaciones.Minimum = 0D;
+            txtObservaciones.MinimumSize = new Size(1, 16);
+            txtObservaciones.Multiline = true;
+            txtObservaciones.Name = "txtObservaciones";
+            txtObservaciones.Padding = new Padding(5);
+            txtObservaciones.Radius = 12;
+            txtObservaciones.RectColor = Color.FromArgb(39, 53, 72);
+            txtObservaciones.ShowText = false;
+            txtObservaciones.Size = new Size(256, 52);
+            txtObservaciones.TabIndex = 24;
+            txtObservaciones.TextAlignment = ContentAlignment.MiddleLeft;
+            txtObservaciones.Watermark = "Observaciones preliminares";
+            // 
+            // lblFechaEntrega
+            // 
+            lblFechaEntrega.AutoSize = true;
+            lblFechaEntrega.BackColor = Color.Transparent;
+            lblFechaEntrega.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFechaEntrega.ForeColor = Color.White;
+            lblFechaEntrega.Location = new Point(20, 267);
+            lblFechaEntrega.Name = "lblFechaEntrega";
+            lblFechaEntrega.Size = new Size(109, 15);
+            lblFechaEntrega.TabIndex = 24;
+            lblFechaEntrega.Text = "Fecha est. entrega";
+            // 
+            // picReparacion
+            // 
+            picReparacion.BackColor = Color.Transparent;
+            picReparacion.Image = Properties.Resources.IconParkOutlineSpanner;
+            picReparacion.Location = new Point(20, 10);
+            picReparacion.Name = "picReparacion";
+            picReparacion.Size = new Size(30, 21);
+            picReparacion.SizeMode = PictureBoxSizeMode.Zoom;
+            picReparacion.TabIndex = 32;
+            picReparacion.TabStop = false;
+            // 
+            // lblReparacion
+            // 
+            lblReparacion.AutoSize = true;
+            lblReparacion.BackColor = Color.Transparent;
+            lblReparacion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblReparacion.ForeColor = Color.White;
+            lblReparacion.Location = new Point(45, 14);
+            lblReparacion.Name = "lblReparacion";
+            lblReparacion.Size = new Size(133, 15);
+            lblReparacion.TabIndex = 6;
+            lblReparacion.Text = "Datos de la Reparación";
+            // 
+            // lblTecnico
+            // 
+            lblTecnico.AutoSize = true;
+            lblTecnico.BackColor = Color.Transparent;
+            lblTecnico.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTecnico.ForeColor = Color.White;
+            lblTecnico.Location = new Point(20, 219);
+            lblTecnico.Name = "lblTecnico";
+            lblTecnico.Size = new Size(100, 15);
+            lblTecnico.TabIndex = 27;
+            lblTecnico.Text = "Técnico asignado";
+            // 
+            // lblSucursal
+            // 
+            lblSucursal.AutoSize = true;
+            lblSucursal.BackColor = Color.Transparent;
+            lblSucursal.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSucursal.ForeColor = Color.White;
+            lblSucursal.Location = new Point(154, 219);
+            lblSucursal.Name = "lblSucursal";
+            lblSucursal.Size = new Size(53, 15);
+            lblSucursal.TabIndex = 26;
+            lblSucursal.Text = "Sucursal";
+            // 
+            // airSeparator3
+            // 
+            airSeparator3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            airSeparator3.BackColor = Color.FromArgb(142, 113, 30);
+            airSeparator3.Customization = "";
+            airSeparator3.Font = new Font("Verdana", 8F);
+            airSeparator3.Image = null;
+            airSeparator3.Location = new Point(20, 34);
+            airSeparator3.Name = "airSeparator3";
+            airSeparator3.NoRounding = false;
+            airSeparator3.Size = new Size(256, 1);
+            airSeparator3.TabIndex = 1;
+            airSeparator3.Text = "airSeparator3";
+            airSeparator3.Transparent = false;
+            // 
+            // txtDescripcionProblema
+            // 
+            txtDescripcionProblema.BackColor = Color.Transparent;
+            txtDescripcionProblema.FillColor = Color.FromArgb(41, 53, 72);
+            txtDescripcionProblema.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDescripcionProblema.ForeColor = Color.White;
+            txtDescripcionProblema.Location = new Point(23, 73);
+            txtDescripcionProblema.Margin = new Padding(4, 5, 4, 5);
+            txtDescripcionProblema.MaxLength = 255;
+            txtDescripcionProblema.Minimum = 0D;
+            txtDescripcionProblema.MinimumSize = new Size(1, 16);
+            txtDescripcionProblema.Multiline = true;
+            txtDescripcionProblema.Name = "txtDescripcionProblema";
+            txtDescripcionProblema.Padding = new Padding(5);
+            txtDescripcionProblema.Radius = 12;
+            txtDescripcionProblema.RectColor = Color.FromArgb(39, 53, 72);
+            txtDescripcionProblema.ShowText = false;
+            txtDescripcionProblema.Size = new Size(256, 52);
+            txtDescripcionProblema.TabIndex = 23;
+            txtDescripcionProblema.TextAlignment = ContentAlignment.MiddleLeft;
+            txtDescripcionProblema.Watermark = "Describe el problema tal como lo describe el cliente...";
+            // 
+            // lblProblema
+            // 
+            lblProblema.AutoSize = true;
+            lblProblema.BackColor = Color.Transparent;
+            lblProblema.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblProblema.ForeColor = Color.White;
+            lblProblema.Location = new Point(23, 55);
+            lblProblema.Name = "lblProblema";
+            lblProblema.Size = new Size(119, 15);
+            lblProblema.TabIndex = 17;
+            lblProblema.Text = "Problema reportado";
+            // 
+            // lblDiagnostico
+            // 
+            lblDiagnostico.AutoSize = true;
+            lblDiagnostico.BackColor = Color.Transparent;
+            lblDiagnostico.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDiagnostico.ForeColor = Color.White;
+            lblDiagnostico.Location = new Point(26, 136);
+            lblDiagnostico.Name = "lblDiagnostico";
+            lblDiagnostico.Size = new Size(106, 15);
+            lblDiagnostico.TabIndex = 19;
+            lblDiagnostico.Text = "Diagnóstico inicial";
+            // 
+            // pnlDatosCliente
+            // 
+            pnlDatosCliente.BackColor = Color.Transparent;
+            pnlDatosCliente.Controls.Add(btnTelefono);
+            pnlDatosCliente.Controls.Add(lblTipoDispositivo);
+            pnlDatosCliente.Controls.Add(btnComputadora);
+            pnlDatosCliente.Controls.Add(txtCorreo);
+            pnlDatosCliente.Controls.Add(txtNumeroTelefonico);
+            pnlDatosCliente.Controls.Add(lblCorreo);
+            pnlDatosCliente.Controls.Add(txtNombres);
+            pnlDatosCliente.Controls.Add(pictureBox5);
+            pnlDatosCliente.Controls.Add(lblTelefono);
+            pnlDatosCliente.Controls.Add(lblCliente);
+            pnlDatosCliente.Controls.Add(airSeparator1);
+            pnlDatosCliente.Controls.Add(lblDatosCliente);
+            pnlDatosCliente.FillColor = Color.FromArgb(30, 41, 59);
+            pnlDatosCliente.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            pnlDatosCliente.Location = new Point(46, 40);
+            pnlDatosCliente.Margin = new Padding(4, 5, 4, 5);
+            pnlDatosCliente.MinimumSize = new Size(1, 1);
+            pnlDatosCliente.Name = "pnlDatosCliente";
+            pnlDatosCliente.Radius = 12;
+            pnlDatosCliente.RectColor = Color.FromArgb(39, 53, 72);
+            pnlDatosCliente.Size = new Size(299, 377);
+            pnlDatosCliente.TabIndex = 3;
+            pnlDatosCliente.Text = "299; 377";
+            pnlDatosCliente.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // btnTelefono
             // 
@@ -399,34 +677,34 @@
             lblDatosCliente.TabIndex = 7;
             lblDatosCliente.Text = "Nombre completo";
             // 
-            // pnlDispositivo2
+            // pnlDispositivo
             // 
-            pnlDispositivo2.BackColor = Color.Transparent;
-            pnlDispositivo2.Controls.Add(lblEstado);
-            pnlDispositivo2.Controls.Add(cmbEstado);
-            pnlDispositivo2.Controls.Add(txtModelo);
-            pnlDispositivo2.Controls.Add(txtMarca);
-            pnlDispositivo2.Controls.Add(txtColor);
-            pnlDispositivo2.Controls.Add(txtSerie);
-            pnlDispositivo2.Controls.Add(lblColor);
-            pnlDispositivo2.Controls.Add(lblSerie);
-            pnlDispositivo2.Controls.Add(lblModelo);
-            pnlDispositivo2.Controls.Add(lblMarca);
-            pnlDispositivo2.Controls.Add(pictureBox7);
-            pnlDispositivo2.Controls.Add(label5);
-            pnlDispositivo2.Controls.Add(airSeparator4);
-            pnlDispositivo2.FillColor = Color.FromArgb(30, 41, 59);
-            pnlDispositivo2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            pnlDispositivo2.Location = new Point(369, 40);
-            pnlDispositivo2.Margin = new Padding(4, 5, 4, 5);
-            pnlDispositivo2.MinimumSize = new Size(1, 1);
-            pnlDispositivo2.Name = "pnlDispositivo2";
-            pnlDispositivo2.Radius = 12;
-            pnlDispositivo2.RectColor = Color.FromArgb(39, 53, 72);
-            pnlDispositivo2.Size = new Size(299, 377);
-            pnlDispositivo2.TabIndex = 2;
-            pnlDispositivo2.Text = null;
-            pnlDispositivo2.TextAlignment = ContentAlignment.MiddleCenter;
+            pnlDispositivo.BackColor = Color.Transparent;
+            pnlDispositivo.Controls.Add(lblEstado);
+            pnlDispositivo.Controls.Add(cmbEstado);
+            pnlDispositivo.Controls.Add(txtModelo);
+            pnlDispositivo.Controls.Add(txtMarca);
+            pnlDispositivo.Controls.Add(txtColor);
+            pnlDispositivo.Controls.Add(txtSerie);
+            pnlDispositivo.Controls.Add(lblColor);
+            pnlDispositivo.Controls.Add(lblSerie);
+            pnlDispositivo.Controls.Add(lblModelo);
+            pnlDispositivo.Controls.Add(lblMarca);
+            pnlDispositivo.Controls.Add(pictureBox7);
+            pnlDispositivo.Controls.Add(label5);
+            pnlDispositivo.Controls.Add(airSeparator4);
+            pnlDispositivo.FillColor = Color.FromArgb(30, 41, 59);
+            pnlDispositivo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            pnlDispositivo.Location = new Point(369, 40);
+            pnlDispositivo.Margin = new Padding(4, 5, 4, 5);
+            pnlDispositivo.MinimumSize = new Size(1, 1);
+            pnlDispositivo.Name = "pnlDispositivo";
+            pnlDispositivo.Radius = 12;
+            pnlDispositivo.RectColor = Color.FromArgb(39, 53, 72);
+            pnlDispositivo.Size = new Size(299, 377);
+            pnlDispositivo.TabIndex = 2;
+            pnlDispositivo.Text = null;
+            pnlDispositivo.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // lblEstado
             // 
@@ -626,207 +904,6 @@
             airSeparator4.Text = "airSeparator4";
             airSeparator4.Transparent = false;
             // 
-            // mcReparacion
-            // 
-            mcReparacion.BackColor = Color.FromArgb(255, 255, 255);
-            mcReparacion.Controls.Add(lblReparacion);
-            mcReparacion.Controls.Add(picReparacion);
-            mcReparacion.Controls.Add(txtObservaciones);
-            mcReparacion.Controls.Add(txtDescripcionProblemac);
-            mcReparacion.Controls.Add(numericUpDown1);
-            mcReparacion.Controls.Add(cmbSucursal);
-            mcReparacion.Controls.Add(cmbTecnicos);
-            mcReparacion.Controls.Add(dateTimePicker1);
-            mcReparacion.Controls.Add(lblTecnico);
-            mcReparacion.Controls.Add(label6);
-            mcReparacion.Controls.Add(lblCosto);
-            mcReparacion.Controls.Add(lblFechaEntrega);
-            mcReparacion.Controls.Add(label2);
-            mcReparacion.Controls.Add(label1);
-            mcReparacion.Controls.Add(airSeparator3);
-            mcReparacion.Depth = 0;
-            mcReparacion.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            mcReparacion.Location = new Point(694, 40);
-            mcReparacion.Margin = new Padding(14);
-            mcReparacion.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            mcReparacion.Name = "mcReparacion";
-            mcReparacion.Padding = new Padding(14);
-            mcReparacion.Size = new Size(299, 377);
-            mcReparacion.TabIndex = 1;
-            // 
-            // lblReparacion
-            // 
-            lblReparacion.AutoSize = true;
-            lblReparacion.BackColor = Color.Transparent;
-            lblReparacion.Location = new Point(45, 14);
-            lblReparacion.Name = "lblReparacion";
-            lblReparacion.Size = new Size(127, 15);
-            lblReparacion.TabIndex = 6;
-            lblReparacion.Text = "Datos de la Reparación";
-            // 
-            // picReparacion
-            // 
-            picReparacion.BackColor = Color.Transparent;
-            picReparacion.Image = Properties.Resources.IconParkOutlineSpanner;
-            picReparacion.Location = new Point(19, 8);
-            picReparacion.Name = "picReparacion";
-            picReparacion.Size = new Size(30, 21);
-            picReparacion.SizeMode = PictureBoxSizeMode.Zoom;
-            picReparacion.TabIndex = 32;
-            picReparacion.TabStop = false;
-            // 
-            // txtObservaciones
-            // 
-            txtObservaciones.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtObservaciones.Location = new Point(23, 153);
-            txtObservaciones.Margin = new Padding(4, 5, 4, 5);
-            txtObservaciones.MaxLength = 255;
-            txtObservaciones.Minimum = 0D;
-            txtObservaciones.MinimumSize = new Size(1, 16);
-            txtObservaciones.Multiline = true;
-            txtObservaciones.Name = "txtObservaciones";
-            txtObservaciones.Padding = new Padding(5);
-            txtObservaciones.Radius = 12;
-            txtObservaciones.ShowText = false;
-            txtObservaciones.Size = new Size(256, 52);
-            txtObservaciones.TabIndex = 24;
-            txtObservaciones.TextAlignment = ContentAlignment.MiddleLeft;
-            txtObservaciones.Watermark = "Observaciones preliminares";
-            // 
-            // txtDescripcionProblemac
-            // 
-            txtDescripcionProblemac.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDescripcionProblemac.Location = new Point(23, 73);
-            txtDescripcionProblemac.Margin = new Padding(4, 5, 4, 5);
-            txtDescripcionProblemac.MaxLength = 255;
-            txtDescripcionProblemac.Minimum = 0D;
-            txtDescripcionProblemac.MinimumSize = new Size(1, 16);
-            txtDescripcionProblemac.Multiline = true;
-            txtDescripcionProblemac.Name = "txtDescripcionProblemac";
-            txtDescripcionProblemac.Padding = new Padding(5);
-            txtDescripcionProblemac.Radius = 12;
-            txtDescripcionProblemac.ShowText = false;
-            txtDescripcionProblemac.Size = new Size(256, 52);
-            txtDescripcionProblemac.TabIndex = 23;
-            txtDescripcionProblemac.TextAlignment = ContentAlignment.MiddleLeft;
-            txtDescripcionProblemac.Watermark = "Describe el problema tal como lo describe el cliente...";
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.DecimalPlaces = 2;
-            numericUpDown1.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            numericUpDown1.Location = new Point(160, 300);
-            numericUpDown1.Maximum = new decimal(new int[] { 500, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(122, 23);
-            numericUpDown1.TabIndex = 31;
-            // 
-            // cmbSucursal
-            // 
-            cmbSucursal.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            cmbSucursal.DisplayMember = "Seleccionar estado...";
-            cmbSucursal.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbSucursal.FormattingEnabled = true;
-            cmbSucursal.Items.AddRange(new object[] { "Seleccionar..." });
-            cmbSucursal.Location = new Point(157, 245);
-            cmbSucursal.Name = "cmbSucursal";
-            cmbSucursal.Size = new Size(221, 23);
-            cmbSucursal.TabIndex = 30;
-            // 
-            // cmbTecnicos
-            // 
-            cmbTecnicos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            cmbTecnicos.DisplayMember = "Seleccionar estado...";
-            cmbTecnicos.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbTecnicos.FormattingEnabled = true;
-            cmbTecnicos.Items.AddRange(new object[] { "Seleccionar..." });
-            cmbTecnicos.Location = new Point(23, 245);
-            cmbTecnicos.Name = "cmbTecnicos";
-            cmbTecnicos.Size = new Size(221, 23);
-            cmbTecnicos.TabIndex = 29;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(23, 300);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(122, 23);
-            dateTimePicker1.TabIndex = 28;
-            // 
-            // lblTecnico
-            // 
-            lblTecnico.AutoSize = true;
-            lblTecnico.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTecnico.Location = new Point(23, 227);
-            lblTecnico.Name = "lblTecnico";
-            lblTecnico.Size = new Size(100, 15);
-            lblTecnico.TabIndex = 27;
-            lblTecnico.Text = "Técnico asignado";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(157, 227);
-            label6.Name = "label6";
-            label6.Size = new Size(53, 15);
-            label6.TabIndex = 26;
-            label6.Text = "Sucursal";
-            // 
-            // lblCosto
-            // 
-            lblCosto.AutoSize = true;
-            lblCosto.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCosto.Location = new Point(157, 282);
-            lblCosto.Name = "lblCosto";
-            lblCosto.Size = new Size(110, 15);
-            lblCosto.TabIndex = 25;
-            lblCosto.Text = "Costo estimado ($)";
-            // 
-            // lblFechaEntrega
-            // 
-            lblFechaEntrega.AutoSize = true;
-            lblFechaEntrega.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFechaEntrega.Location = new Point(23, 282);
-            lblFechaEntrega.Name = "lblFechaEntrega";
-            lblFechaEntrega.Size = new Size(109, 15);
-            lblFechaEntrega.TabIndex = 24;
-            lblFechaEntrega.Text = "Fecha est. entrega";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(26, 136);
-            label2.Name = "label2";
-            label2.Size = new Size(106, 15);
-            label2.TabIndex = 19;
-            label2.Text = "Diagnóstico inicial";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(23, 55);
-            label1.Name = "label1";
-            label1.Size = new Size(119, 15);
-            label1.TabIndex = 17;
-            label1.Text = "Problema reportado";
-            // 
-            // airSeparator3
-            // 
-            airSeparator3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            airSeparator3.BackColor = Color.FromArgb(142, 113, 30);
-            airSeparator3.Customization = "";
-            airSeparator3.Font = new Font("Verdana", 8F);
-            airSeparator3.Image = null;
-            airSeparator3.Location = new Point(23, 34);
-            airSeparator3.Name = "airSeparator3";
-            airSeparator3.NoRounding = false;
-            airSeparator3.Size = new Size(355, 1);
-            airSeparator3.TabIndex = 1;
-            airSeparator3.Text = "airSeparator3";
-            airSeparator3.Transparent = false;
-            // 
             // pnlInferior
             // 
             pnlInferior.BackColor = Color.FromArgb(30, 41, 59);
@@ -961,14 +1038,13 @@
             pnlCentral.ResumeLayout(false);
             uiPanel1.ResumeLayout(false);
             uiPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            pnlDispositivo2.ResumeLayout(false);
-            pnlDispositivo2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
-            mcReparacion.ResumeLayout(false);
-            mcReparacion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picReparacion).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            pnlDatosCliente.ResumeLayout(false);
+            pnlDatosCliente.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            pnlDispositivo.ResumeLayout(false);
+            pnlDispositivo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             pnlInferior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -986,7 +1062,7 @@
         private Label lblFecha;
         private Label lblOrden;
         private Panel pnlCentral;
-        private Sunny.UI.UIPanel pnlDispositivo2;
+        private Sunny.UI.UIPanel pnlDispositivo;
         private Sunny.UI.UITextBox txtMarca;
         private Sunny.UI.UITextBox txtColor;
         private Sunny.UI.UITextBox txtSerie;
@@ -997,21 +1073,16 @@
         private PictureBox pictureBox7;
         private Label label5;
         private ReaLTaiizor.Controls.AirSeparator airSeparator4;
-        private ReaLTaiizor.Controls.MaterialCard mcReparacion;
         private Label lblReparacion;
         private PictureBox picReparacion;
         private Sunny.UI.UITextBox txtObservaciones;
-        private Sunny.UI.UITextBox txtDescripcionProblemac;
-        private NumericUpDown numericUpDown1;
-        private ComboBox cmbSucursal;
-        private ComboBox cmbTecnicos;
-        private DateTimePicker dateTimePicker1;
+        private Sunny.UI.UITextBox txtDescripcionProblema;
         private Label lblTecnico;
-        private Label label6;
+        private Label lblSucursal;
         private Label lblCosto;
         private Label lblFechaEntrega;
-        private Label label2;
-        private Label label1;
+        private Label lblDiagnostico;
+        private Label lblProblema;
         private ReaLTaiizor.Controls.AirSeparator airSeparator3;
         private Label lblTelefono;
         private Label lblDatosCliente;
@@ -1025,7 +1096,7 @@
         private Sunny.UI.UITextBox txtModelo;
         private Label lblEstado;
         private Sunny.UI.UIComboBox cmbEstado;
-        private Sunny.UI.UIPanel uiPanel1;
+        private Sunny.UI.UIPanel pnlDatosCliente;
         private Sunny.UI.UITextBox txtCorreo;
         private Label lblCorreo;
         private Label lblTipoDispositivo;
@@ -1036,5 +1107,10 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox4;
+        private Sunny.UI.UIPanel uiPanel1;
+        private Sunny.UI.UIComboBox cmbTecnico;
+        private Sunny.UI.UIComboBox cmbSucursal;
+        private Sunny.UI.UIDatetimePicker dtmFecha;
+        private Sunny.UI.UITextBox txtCosto;
     }
 }
