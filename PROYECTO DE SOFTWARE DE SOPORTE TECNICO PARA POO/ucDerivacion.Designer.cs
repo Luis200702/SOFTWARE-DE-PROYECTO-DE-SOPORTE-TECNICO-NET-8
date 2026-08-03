@@ -33,9 +33,8 @@
             panel1 = new Panel();
             btnNuevaDerivacion = new Button();
             lblnumeroderivaciones = new Label();
-            panel2 = new Panel();
-            dtgDetallesDerivacion = new DataGridView();
-            panel3 = new Panel();
+            pnlderivacionesdatos = new Panel();
+            uiUserControl1 = new Sunny.UI.UIUserControl();
             label4 = new Label();
             lblOrigenderivacion = new Label();
             lblfechaderivacion = new Label();
@@ -46,51 +45,51 @@
             lblDestinoderivacion = new Label();
             lblUsarioderivaci = new Label();
             lbltipoderivacion = new Label();
-            label2 = new Label();
-            panel4 = new Panel();
-            label5 = new Label();
-            label7 = new Label();
-            label8 = new Label();
-            label9 = new Label();
-            label10 = new Label();
-            label11 = new Label();
-            label12 = new Label();
-            label13 = new Label();
-            label14 = new Label();
+            lblcodigo = new Label();
             panel5 = new Panel();
-            label15 = new Label();
-            label16 = new Label();
-            label17 = new Label();
-            label18 = new Label();
-            label19 = new Label();
-            label20 = new Label();
-            label21 = new Label();
-            label22 = new Label();
-            label23 = new Label();
+            panel4 = new Panel();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            label12 = new Label();
+            label11 = new Label();
+            label10 = new Label();
+            label13 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            label2 = new Label();
+            label9 = new Label();
+            lblnombreDetalle = new Label();
+            lblcodigoDetalle = new Label();
+            lblestadoDetalle = new Label();
+            panel2 = new Panel();
+            label3 = new Label();
+            btnxdetalles = new Button();
             pnltituloderivacion.SuspendLayout();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dtgDetallesDerivacion).BeginInit();
-            panel3.SuspendLayout();
+            pnlderivacionesdatos.SuspendLayout();
+            uiUserControl1.SuspendLayout();
             panel4.SuspendLayout();
-            panel5.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // pnltituloderivacion
             // 
             pnltituloderivacion.BorderStyle = BorderStyle.FixedSingle;
             pnltituloderivacion.Controls.Add(label1);
-            pnltituloderivacion.Location = new Point(0, 2);
+            pnltituloderivacion.Location = new Point(3, 3);
             pnltituloderivacion.Name = "pnltituloderivacion";
-            pnltituloderivacion.Size = new Size(1025, 82);
+            pnltituloderivacion.Size = new Size(609, 59);
             pnltituloderivacion.TabIndex = 0;
+            pnltituloderivacion.Paint += pnltituloderivacion_Paint;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(44, 24);
+            label1.Location = new Point(44, 18);
             label1.Name = "label1";
             label1.Size = new Size(331, 32);
             label1.TabIndex = 0;
@@ -101,10 +100,11 @@
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(btnNuevaDerivacion);
             panel1.Controls.Add(lblnumeroderivaciones);
-            panel1.Location = new Point(0, 84);
+            panel1.Location = new Point(3, 61);
             panel1.Name = "panel1";
-            panel1.Size = new Size(645, 58);
+            panel1.Size = new Size(609, 58);
             panel1.TabIndex = 1;
+            panel1.Paint += splitContainer1_Panel1_Paint;
             // 
             // btnNuevaDerivacion
             // 
@@ -112,7 +112,7 @@
             btnNuevaDerivacion.FlatStyle = FlatStyle.Popup;
             btnNuevaDerivacion.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnNuevaDerivacion.ForeColor = Color.White;
-            btnNuevaDerivacion.Location = new Point(436, 11);
+            btnNuevaDerivacion.Location = new Point(407, 11);
             btnNuevaDerivacion.Name = "btnNuevaDerivacion";
             btnNuevaDerivacion.Size = new Size(170, 30);
             btnNuevaDerivacion.TabIndex = 1;
@@ -132,54 +132,54 @@
             lblnumeroderivaciones.Text = "3 Derivaciones ";
             lblnumeroderivaciones.Click += label1_Click;
             // 
-            // panel2
+            // pnlderivacionesdatos
             // 
-            panel2.BorderStyle = BorderStyle.Fixed3D;
-            panel2.Controls.Add(dtgDetallesDerivacion);
-            panel2.Location = new Point(644, 84);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(381, 602);
-            panel2.TabIndex = 0;
+            pnlderivacionesdatos.Controls.Add(uiUserControl1);
+            pnlderivacionesdatos.Controls.Add(panel5);
+            pnlderivacionesdatos.Controls.Add(pnltituloderivacion);
+            pnlderivacionesdatos.Controls.Add(panel1);
+            pnlderivacionesdatos.Dock = DockStyle.Left;
+            pnlderivacionesdatos.Location = new Point(0, 0);
+            pnlderivacionesdatos.Name = "pnlderivacionesdatos";
+            pnlderivacionesdatos.Size = new Size(618, 686);
+            pnlderivacionesdatos.TabIndex = 3;
+            pnlderivacionesdatos.Paint += panel2_Paint;
             // 
-            // dtgDetallesDerivacion
+            // uiUserControl1
             // 
-            dtgDetallesDerivacion.BackgroundColor = Color.FromArgb(26, 28, 44);
-            dtgDetallesDerivacion.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgDetallesDerivacion.Location = new Point(-2, -4);
-            dtgDetallesDerivacion.Name = "dtgDetallesDerivacion";
-            dtgDetallesDerivacion.Size = new Size(381, 601);
-            dtgDetallesDerivacion.TabIndex = 0;
-            dtgDetallesDerivacion.CellContentClick += dtgDetallesDerivacion_CellContentClick;
-            // 
-            // panel3
-            // 
-            panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Controls.Add(label4);
-            panel3.Controls.Add(lblOrigenderivacion);
-            panel3.Controls.Add(lblfechaderivacion);
-            panel3.Controls.Add(lblGMarcaderivacion);
-            panel3.Controls.Add(lblmarcaderivacion);
-            panel3.Controls.Add(lblfallaDerivacion);
-            panel3.Controls.Add(lblmotivoderivación);
-            panel3.Controls.Add(lblDestinoderivacion);
-            panel3.Controls.Add(lblUsarioderivaci);
-            panel3.Controls.Add(lbltipoderivacion);
-            panel3.Controls.Add(label2);
-            panel3.Location = new Point(0, 142);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(645, 128);
-            panel3.TabIndex = 2;
-            panel3.Click += panel3_Click;
-            panel3.Paint += panel3_Paint;
+            uiUserControl1.Controls.Add(label4);
+            uiUserControl1.Controls.Add(lblOrigenderivacion);
+            uiUserControl1.Controls.Add(lblfechaderivacion);
+            uiUserControl1.Controls.Add(lblGMarcaderivacion);
+            uiUserControl1.Controls.Add(lblmarcaderivacion);
+            uiUserControl1.Controls.Add(lblfallaDerivacion);
+            uiUserControl1.Controls.Add(lblmotivoderivación);
+            uiUserControl1.Controls.Add(lblDestinoderivacion);
+            uiUserControl1.Controls.Add(lblUsarioderivaci);
+            uiUserControl1.Controls.Add(lbltipoderivacion);
+            uiUserControl1.Controls.Add(lblcodigo);
+            uiUserControl1.FillColor = Color.FromArgb(26, 28, 44);
+            uiUserControl1.FillColor2 = Color.FromArgb(26, 28, 44);
+            uiUserControl1.FillDisableColor = Color.FromArgb(26, 28, 44);
+            uiUserControl1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiUserControl1.Location = new Point(3, 118);
+            uiUserControl1.MinimumSize = new Size(1, 1);
+            uiUserControl1.Name = "uiUserControl1";
+            uiUserControl1.RectColor = Color.FromArgb(192, 192, 255);
+            uiUserControl1.Size = new Size(609, 150);
+            uiUserControl1.TabIndex = 0;
+            uiUserControl1.Text = "uiUserControl1";
+            uiUserControl1.TextAlignment = ContentAlignment.MiddleCenter;
+            uiUserControl1.Click += uiUserControl1_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(174, 70);
+            label4.Location = new Point(181, 87);
             label4.Name = "label4";
-            label4.Size = new Size(22, 15);
-            label4.TabIndex = 8;
+            label4.Size = new Size(25, 20);
+            label4.TabIndex = 19;
             label4.Text = "➔ ";
             // 
             // lblOrigenderivacion
@@ -187,10 +187,10 @@
             lblOrigenderivacion.AutoSize = true;
             lblOrigenderivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblOrigenderivacion.ForeColor = SystemColors.ButtonShadow;
-            lblOrigenderivacion.Location = new Point(16, 65);
+            lblOrigenderivacion.Location = new Point(23, 82);
             lblOrigenderivacion.Name = "lblOrigenderivacion";
             lblOrigenderivacion.Size = new Size(130, 21);
-            lblOrigenderivacion.TabIndex = 7;
+            lblOrigenderivacion.TabIndex = 18;
             lblOrigenderivacion.Text = "Sucursal Centra  ";
             // 
             // lblfechaderivacion
@@ -198,10 +198,10 @@
             lblfechaderivacion.AutoSize = true;
             lblfechaderivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblfechaderivacion.ForeColor = SystemColors.ButtonShadow;
-            lblfechaderivacion.Location = new Point(525, 65);
+            lblfechaderivacion.Location = new Point(499, 81);
             lblfechaderivacion.Name = "lblfechaderivacion";
             lblfechaderivacion.Size = new Size(96, 21);
-            lblfechaderivacion.TabIndex = 4;
+            lblfechaderivacion.TabIndex = 13;
             lblfechaderivacion.Text = "26/07/2026";
             // 
             // lblGMarcaderivacion
@@ -209,54 +209,54 @@
             lblGMarcaderivacion.AutoSize = true;
             lblGMarcaderivacion.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblGMarcaderivacion.ForeColor = Color.White;
-            lblGMarcaderivacion.Location = new Point(299, 31);
+            lblGMarcaderivacion.Location = new Point(306, 48);
             lblGMarcaderivacion.Name = "lblGMarcaderivacion";
-            lblGMarcaderivacion.Size = new Size(181, 25);
-            lblGMarcaderivacion.TabIndex = 6;
-            lblGMarcaderivacion.Text = "Redmi Poco x5 pro\r\n";
+            lblGMarcaderivacion.Size = new Size(220, 25);
+            lblGMarcaderivacion.TabIndex = 17;
+            lblGMarcaderivacion.Text = "Marca del dispositivo ...";
             // 
             // lblmarcaderivacion
             // 
             lblmarcaderivacion.AutoSize = true;
             lblmarcaderivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblmarcaderivacion.ForeColor = Color.White;
-            lblmarcaderivacion.Location = new Point(299, 92);
+            lblmarcaderivacion.Location = new Point(306, 109);
             lblmarcaderivacion.Name = "lblmarcaderivacion";
-            lblmarcaderivacion.Size = new Size(148, 21);
-            lblmarcaderivacion.TabIndex = 5;
-            lblmarcaderivacion.Text = "Redmi Poco x5 pro\r\n";
+            lblmarcaderivacion.Size = new Size(182, 21);
+            lblmarcaderivacion.TabIndex = 15;
+            lblmarcaderivacion.Text = "Marca del dispositivo ...";
             // 
             // lblfallaDerivacion
             // 
             lblfallaDerivacion.AutoSize = true;
             lblfallaDerivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblfallaDerivacion.ForeColor = Color.White;
-            lblfallaDerivacion.Location = new Point(161, 92);
+            lblfallaDerivacion.Location = new Point(168, 109);
             lblfallaDerivacion.Name = "lblfallaDerivacion";
-            lblfallaDerivacion.Size = new Size(132, 21);
-            lblfallaDerivacion.TabIndex = 5;
-            lblfallaDerivacion.Text = "Conector USB-C ";
+            lblfallaDerivacion.Size = new Size(88, 21);
+            lblfallaDerivacion.TabIndex = 16;
+            lblfallaDerivacion.Text = "repuesto...";
             // 
             // lblmotivoderivación
             // 
             lblmotivoderivación.AutoSize = true;
             lblmotivoderivación.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblmotivoderivación.ForeColor = Color.White;
-            lblmotivoderivación.Location = new Point(10, 90);
+            lblmotivoderivación.Location = new Point(17, 107);
             lblmotivoderivación.Name = "lblmotivoderivación";
-            lblmotivoderivación.Size = new Size(162, 21);
-            lblmotivoderivación.TabIndex = 4;
-            lblmotivoderivación.Text = "Falta de repuesto  -   ";
+            lblmotivoderivación.Size = new Size(106, 21);
+            lblmotivoderivación.TabIndex = 14;
+            lblmotivoderivación.Text = "falla...         -   ";
             // 
             // lblDestinoderivacion
             // 
             lblDestinoderivacion.AutoSize = true;
             lblDestinoderivacion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDestinoderivacion.ForeColor = SystemColors.ButtonShadow;
-            lblDestinoderivacion.Location = new Point(202, 65);
+            lblDestinoderivacion.Location = new Point(209, 82);
             lblDestinoderivacion.Name = "lblDestinoderivacion";
             lblDestinoderivacion.Size = new Size(120, 21);
-            lblDestinoderivacion.TabIndex = 3;
+            lblDestinoderivacion.TabIndex = 12;
             lblDestinoderivacion.Text = "  sucursal norte";
             // 
             // lblUsarioderivaci
@@ -264,11 +264,11 @@
             lblUsarioderivaci.AutoSize = true;
             lblUsarioderivaci.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblUsarioderivaci.ForeColor = Color.White;
-            lblUsarioderivaci.Location = new Point(10, 31);
+            lblUsarioderivaci.Location = new Point(17, 48);
             lblUsarioderivaci.Name = "lblUsarioderivaci";
-            lblUsarioderivaci.Size = new Size(258, 25);
-            lblUsarioderivaci.TabIndex = 2;
-            lblUsarioderivaci.Text = "Kevin Pinargote Balarezo   -";
+            lblUsarioderivaci.Size = new Size(116, 25);
+            lblUsarioderivaci.TabIndex = 11;
+            lblUsarioderivaci.Text = "Nombre... : ";
             // 
             // lbltipoderivacion
             // 
@@ -276,283 +276,275 @@
             lbltipoderivacion.BackColor = Color.FromArgb(26, 28, 44);
             lbltipoderivacion.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbltipoderivacion.ForeColor = Color.Gold;
-            lbltipoderivacion.Location = new Point(126, 4);
+            lbltipoderivacion.Location = new Point(133, 21);
             lbltipoderivacion.Name = "lbltipoderivacion";
             lbltipoderivacion.Size = new Size(71, 17);
-            lbltipoderivacion.TabIndex = 1;
+            lbltipoderivacion.TabIndex = 10;
             lbltipoderivacion.Text = "Pendiente";
+            // 
+            // lblcodigo
+            // 
+            lblcodigo.AutoSize = true;
+            lblcodigo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblcodigo.ForeColor = Color.LightSeaGreen;
+            lblcodigo.Location = new Point(17, 21);
+            lblcodigo.Name = "lblcodigo";
+            lblcodigo.Size = new Size(92, 17);
+            lblcodigo.TabIndex = 9;
+            lblcodigo.Text = "ORD-2026_001";
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.FromArgb(26, 28, 46);
+            panel5.Dock = DockStyle.Right;
+            panel5.Location = new Point(612, 0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(6, 686);
+            panel5.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(tableLayoutPanel1);
+            panel4.Controls.Add(lblnombreDetalle);
+            panel4.Controls.Add(lblcodigoDetalle);
+            panel4.Controls.Add(lblestadoDetalle);
+            panel4.Controls.Add(panel2);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(618, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(407, 686);
+            panel4.TabIndex = 4;
+            panel4.Paint += panel4_Paint;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 156F));
+            tableLayoutPanel1.Controls.Add(label12, 1, 0);
+            tableLayoutPanel1.Controls.Add(label11, 1, 1);
+            tableLayoutPanel1.Controls.Add(label10, 1, 2);
+            tableLayoutPanel1.Controls.Add(label13, 1, 4);
+            tableLayoutPanel1.Controls.Add(label8, 0, 4);
+            tableLayoutPanel1.Controls.Add(label7, 0, 3);
+            tableLayoutPanel1.Controls.Add(label6, 0, 2);
+            tableLayoutPanel1.Controls.Add(label5, 0, 1);
+            tableLayoutPanel1.Controls.Add(label2, 0, 0);
+            tableLayoutPanel1.Controls.Add(label9, 1, 3);
+            tableLayoutPanel1.Location = new Point(22, 205);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 5;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            tableLayoutPanel1.Size = new Size(345, 144);
+            tableLayoutPanel1.TabIndex = 19;
+            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.ForeColor = Color.White;
+            label12.Location = new Point(192, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(17, 17);
+            label12.TabIndex = 21;
+            label12.Text = "...";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.ForeColor = Color.White;
+            label11.Location = new Point(192, 30);
+            label11.Name = "label11";
+            label11.Size = new Size(17, 17);
+            label11.TabIndex = 21;
+            label11.Text = "...";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.White;
+            label10.Location = new Point(192, 59);
+            label10.Name = "label10";
+            label10.Size = new Size(17, 17);
+            label10.TabIndex = 21;
+            label10.Text = "...";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label13.ForeColor = Color.White;
+            label13.Location = new Point(192, 117);
+            label13.Name = "label13";
+            label13.Size = new Size(17, 17);
+            label13.TabIndex = 20;
+            label13.Text = "...";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.ForeColor = Color.White;
+            label8.Location = new Point(3, 117);
+            label8.Name = "label8";
+            label8.Size = new Size(43, 17);
+            label8.TabIndex = 17;
+            label8.Text = "Fecha";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(3, 87);
+            label7.Name = "label7";
+            label7.Size = new Size(56, 17);
+            label7.TabIndex = 17;
+            label7.Text = "Recurso";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(3, 59);
+            label6.Name = "label6";
+            label6.Size = new Size(51, 17);
+            label6.TabIndex = 17;
+            label6.Text = "Motivo";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(3, 30);
+            label5.Name = "label5";
+            label5.Size = new Size(54, 17);
+            label5.TabIndex = 17;
+            label5.Text = "Destino";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.LightSeaGreen;
-            label2.Location = new Point(10, 4);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(3, 0);
             label2.Name = "label2";
-            label2.Size = new Size(92, 17);
-            label2.TabIndex = 0;
-            label2.Text = "ORD-2026_001";
-            label2.Click += label2_Click;
-            // 
-            // panel4
-            // 
-            panel4.BorderStyle = BorderStyle.FixedSingle;
-            panel4.Controls.Add(label5);
-            panel4.Controls.Add(label7);
-            panel4.Controls.Add(label8);
-            panel4.Controls.Add(label9);
-            panel4.Controls.Add(label10);
-            panel4.Controls.Add(label11);
-            panel4.Controls.Add(label12);
-            panel4.Controls.Add(label13);
-            panel4.Controls.Add(label14);
-            panel4.Location = new Point(-1, 269);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(645, 128);
-            panel4.TabIndex = 3;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = SystemColors.ButtonShadow;
-            label5.Location = new Point(526, 63);
-            label5.Name = "label5";
-            label5.Size = new Size(96, 21);
-            label5.TabIndex = 4;
-            label5.Text = "26/07/2026";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.White;
-            label7.Location = new Point(299, 31);
-            label7.Name = "label7";
-            label7.Size = new Size(188, 25);
-            label7.TabIndex = 6;
-            label7.Text = " Redmi note 60 pro ";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.White;
-            label8.Location = new Point(332, 92);
-            label8.Name = "label8";
-            label8.Size = new Size(147, 21);
-            label8.TabIndex = 5;
-            label8.Text = "Remid note 60 pro\r\n";
+            label2.Size = new Size(49, 17);
+            label2.TabIndex = 17;
+            label2.Text = "Origen";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(161, 92);
+            label9.Location = new Point(192, 87);
             label9.Name = "label9";
-            label9.Size = new Size(165, 21);
-            label9.TabIndex = 5;
-            label9.Text = "Bateria no disponible";
+            label9.Size = new Size(17, 17);
+            label9.TabIndex = 21;
+            label9.Text = "...";
             // 
-            // label10
+            // lblnombreDetalle
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.White;
-            label10.Location = new Point(10, 90);
-            label10.Name = "label10";
-            label10.Size = new Size(162, 21);
-            label10.TabIndex = 4;
-            label10.Text = "Falta de repuesto  -   ";
+            lblnombreDetalle.AutoSize = true;
+            lblnombreDetalle.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblnombreDetalle.ForeColor = Color.White;
+            lblnombreDetalle.Location = new Point(22, 166);
+            lblnombreDetalle.Name = "lblnombreDetalle";
+            lblnombreDetalle.Size = new Size(116, 25);
+            lblnombreDetalle.TabIndex = 12;
+            lblnombreDetalle.Text = "Nombre... : ";
+            lblnombreDetalle.Click += lblnombreDetalle_Click;
             // 
-            // label11
+            // lblcodigoDetalle
             // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.ForeColor = SystemColors.ButtonShadow;
-            label11.Location = new Point(10, 63);
-            label11.Name = "label11";
-            label11.Size = new Size(257, 21);
-            label11.TabIndex = 3;
-            label11.Text = "Sucursal Centra  ➔  sucursal norte";
+            lblcodigoDetalle.AutoSize = true;
+            lblcodigoDetalle.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblcodigoDetalle.ForeColor = Color.LightSeaGreen;
+            lblcodigoDetalle.Location = new Point(22, 139);
+            lblcodigoDetalle.Name = "lblcodigoDetalle";
+            lblcodigoDetalle.Size = new Size(92, 17);
+            lblcodigoDetalle.TabIndex = 10;
+            lblcodigoDetalle.Text = "ORD-2026_001";
             // 
-            // label12
+            // lblestadoDetalle
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label12.ForeColor = Color.White;
-            label12.Location = new Point(10, 31);
-            label12.Name = "label12";
-            label12.Size = new Size(174, 25);
-            label12.TabIndex = 2;
-            label12.Text = "Luiz Cruz Agual   -";
+            lblestadoDetalle.AutoSize = true;
+            lblestadoDetalle.BackColor = Color.FromArgb(26, 28, 44);
+            lblestadoDetalle.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblestadoDetalle.ForeColor = Color.Gold;
+            lblestadoDetalle.Location = new Point(22, 118);
+            lblestadoDetalle.Name = "lblestadoDetalle";
+            lblestadoDetalle.Size = new Size(71, 17);
+            lblestadoDetalle.TabIndex = 18;
+            lblestadoDetalle.Text = "Pendiente";
             // 
-            // label13
+            // panel2
             // 
-            label13.AutoSize = true;
-            label13.BackColor = Color.FromArgb(26, 28, 44);
-            label13.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.ForeColor = Color.Gold;
-            label13.Location = new Point(126, 4);
-            label13.Name = "label13";
-            label13.Size = new Size(71, 17);
-            label13.TabIndex = 1;
-            label13.Text = "Pendiente";
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(btnxdetalles);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(407, 85);
+            panel2.TabIndex = 17;
             // 
-            // label14
+            // label3
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label14.ForeColor = Color.LightSeaGreen;
-            label14.Location = new Point(10, 4);
-            label14.Name = "label14";
-            label14.Size = new Size(94, 17);
-            label14.TabIndex = 0;
-            label14.Text = "ORD-2026_002";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(22, 38);
+            label3.Name = "label3";
+            label3.Size = new Size(65, 21);
+            label3.TabIndex = 15;
+            label3.Text = "Detalle ";
+            label3.Click += label3_Click;
             // 
-            // panel5
+            // btnxdetalles
             // 
-            panel5.BorderStyle = BorderStyle.FixedSingle;
-            panel5.Controls.Add(label15);
-            panel5.Controls.Add(label16);
-            panel5.Controls.Add(label17);
-            panel5.Controls.Add(label18);
-            panel5.Controls.Add(label19);
-            panel5.Controls.Add(label20);
-            panel5.Controls.Add(label21);
-            panel5.Controls.Add(label22);
-            panel5.Controls.Add(label23);
-            panel5.Location = new Point(-1, 397);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(645, 128);
-            panel5.TabIndex = 4;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label15.ForeColor = SystemColors.ButtonShadow;
-            label15.Location = new Point(525, 65);
-            label15.Name = "label15";
-            label15.Size = new Size(96, 21);
-            label15.TabIndex = 4;
-            label15.Text = "26/07/2026";
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label16.ForeColor = Color.White;
-            label16.Location = new Point(299, 31);
-            label16.Name = "label16";
-            label16.Size = new Size(188, 25);
-            label16.TabIndex = 6;
-            label16.Text = "IPhone 15 Pro Max \r\n";
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label17.ForeColor = Color.White;
-            label17.Location = new Point(299, 92);
-            label17.Name = "label17";
-            label17.Size = new Size(148, 21);
-            label17.TabIndex = 5;
-            label17.Text = "IPhone 15 Pro Max ";
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label18.ForeColor = Color.White;
-            label18.Location = new Point(161, 92);
-            label18.Name = "label18";
-            label18.Size = new Size(66, 21);
-            label18.TabIndex = 5;
-            label18.Text = "Display ";
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label19.ForeColor = Color.White;
-            label19.Location = new Point(10, 90);
-            label19.Name = "label19";
-            label19.Size = new Size(162, 21);
-            label19.TabIndex = 4;
-            label19.Text = "Falta de repuesto  -   ";
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label20.ForeColor = SystemColors.ButtonShadow;
-            label20.Location = new Point(10, 63);
-            label20.Name = "label20";
-            label20.Size = new Size(257, 21);
-            label20.TabIndex = 3;
-            label20.Text = "Sucursal Centra  ➔  sucursal norte";
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label21.ForeColor = Color.White;
-            label21.Location = new Point(10, 31);
-            label21.Name = "label21";
-            label21.Size = new Size(241, 25);
-            label21.TabIndex = 2;
-            label21.Text = "Justin Maldonado Cruz   -";
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.BackColor = Color.FromArgb(26, 28, 44);
-            label22.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label22.ForeColor = Color.Gold;
-            label22.Location = new Point(126, 4);
-            label22.Name = "label22";
-            label22.Size = new Size(71, 17);
-            label22.TabIndex = 1;
-            label22.Text = "Pendiente";
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label23.ForeColor = Color.LightSeaGreen;
-            label23.Location = new Point(10, 4);
-            label23.Name = "label23";
-            label23.Size = new Size(94, 17);
-            label23.TabIndex = 0;
-            label23.Text = "ORD-2026_003";
+            btnxdetalles.FlatStyle = FlatStyle.Popup;
+            btnxdetalles.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnxdetalles.ForeColor = Color.White;
+            btnxdetalles.Location = new Point(319, 28);
+            btnxdetalles.Name = "btnxdetalles";
+            btnxdetalles.Size = new Size(60, 34);
+            btnxdetalles.TabIndex = 16;
+            btnxdetalles.Text = "x";
+            btnxdetalles.UseVisualStyleBackColor = true;
             // 
             // ucDerivacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 28, 44);
-            Controls.Add(panel5);
             Controls.Add(panel4);
-            Controls.Add(panel3);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
-            Controls.Add(pnltituloderivacion);
+            Controls.Add(pnlderivacionesdatos);
             Name = "ucDerivacion";
             Size = new Size(1025, 686);
+            Load += ucDerivacion_Load_1;
             pnltituloderivacion.ResumeLayout(false);
             pnltituloderivacion.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dtgDetallesDerivacion).EndInit();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
+            pnlderivacionesdatos.ResumeLayout(false);
+            uiUserControl1.ResumeLayout(false);
+            uiUserControl1.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -561,41 +553,39 @@
         private Panel pnltituloderivacion;
         private Panel panel1;
         private Label lblnumeroderivaciones;
-        private Panel panel2;
-        private Panel panel3;
         private Label label1;
         private Button btnNuevaDerivacion;
-        private Label label2;
-        private Label lbltipoderivacion;
-        private Label lblUsarioderivaci;
-        private Label lblDestinoderivacion;
-        private Label lblmotivoderivación;
-        private Label lblmarcaderivacion;
-        private Label lblfallaDerivacion;
-        private Label lblfechaderivacion;
-        private Label lblGMarcaderivacion;
+        private Panel pnlderivacionesdatos;
         private Panel panel4;
-        private Label label5;
-        private Label label7;
-        private Label label8;
-        private Label label9;
-        private Label label10;
-        private Label label11;
-        private Label label12;
-        private Label label13;
-        private Label label14;
         private Panel panel5;
-        private Label label15;
-        private Label label16;
-        private Label label17;
-        private Label label18;
-        private Label label19;
-        private Label label20;
-        private Label label21;
-        private Label label22;
-        private Label label23;
-        private DataGridView dtgDetallesDerivacion;
+        private Sunny.UI.UIUserControl uiUserControl1;
         private Label label4;
         private Label lblOrigenderivacion;
+        private Label lblfechaderivacion;
+        private Label lblGMarcaderivacion;
+        private Label lblmarcaderivacion;
+        private Label lblfallaDerivacion;
+        private Label lblmotivoderivación;
+        private Label lblDestinoderivacion;
+        private Label lblUsarioderivaci;
+        private Label lbltipoderivacion;
+        private Label lblcodigo;
+        private Label label3;
+        private Button btnxdetalles;
+        private Panel panel2;
+        private Label lblcodigoDetalle;
+        private Label lblestadoDetalle;
+        private Label lblnombreDetalle;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Label label13;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Label label5;
+        private Label label2;
+        private Label label12;
+        private Label label11;
+        private Label label10;
+        private Label label9;
     }
 }
