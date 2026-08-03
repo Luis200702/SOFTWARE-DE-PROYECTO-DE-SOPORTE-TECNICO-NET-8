@@ -17,13 +17,34 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             InitializeComponent();
         }
 
+        ucRecepcionEquipos UnSoloBoton = new ucRecepcionEquipos();
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             pnlResumen.Visible = true;
             pnlTrabajoRealizado.Visible = true;
             pnlDesgloseCosto.Visible = true;
-            pnlRegistrarEntrega.Visible = true;
+            pnlFormaDePago.Visible = true;
         }
 
+        private void ucDevolucion_Load(object sender, EventArgs e)
+        {
+            cmbFormaPago.SelectedIndex = 0;
+        }
+
+        private void uiButton3_Click(object sender, EventArgs e)
+        {
+            UnSoloBoton.SeleccionarBoton(btnReparado);
+        }
+
+        private void btnParcial_Click(object sender, EventArgs e)
+        {
+            UnSoloBoton.SeleccionarBoton(btnParcial);
+        }
+
+        private void btnSinReparar_Click(object sender, EventArgs e)
+        {
+            UnSoloBoton.SeleccionarBoton(btnSinReparar);
+        }
     }
 }

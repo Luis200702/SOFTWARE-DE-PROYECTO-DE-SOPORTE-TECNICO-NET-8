@@ -24,7 +24,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             mcCliente.BackColor = Color.FromArgb(45, 45, 45);
 
-            //this.RedondearBotones(40);
+         
         }
 
         private void ucRecepcionEquipos_Load(object sender, EventArgs e)
@@ -39,20 +39,20 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         }
 
 
-        private void SeleccionarBoton(UIButton boton)
+        public void SeleccionarBoton(UIButton boton)
         {
 
             if (botonSeleccionado != null)
             {
-                botonSeleccionado.FillColor = Color.White;
+                botonSeleccionado.FillColor = Color.FromArgb(22, 35, 52);
                 botonSeleccionado.RectColor = Color.Gray;
-                botonSeleccionado.ForeColor = Color.Black;
+                botonSeleccionado.ForeColor = Color.White;
             }
 
 
             boton.FillColor = Color.FromArgb(0, 150, 137);
             boton.RectColor = Color.FromArgb(0, 150, 137);
-            boton.ForeColor = Color.White;
+            boton.ForeColor = Color.FromArgb(22, 35, 52);
 
             botonSeleccionado = boton;
         }
@@ -60,27 +60,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void pnlCentral_Resize(object sender, EventArgs e)
         {
 
-            int margenIzquierdoDerecho = 30;
-            int espacioEntrePaneles = 20;
-
-            int espacioTotalParaPaneles = pnlCentral.Width - (margenIzquierdoDerecho * 2) - (espacioEntrePaneles * 2);
-
-            int anchoPorPanel = espacioTotalParaPaneles / 3;
-
-            mcCliente.Width = anchoPorPanel;
-            mcCliente.Left = margenIzquierdoDerecho;
-
-            mcDispositivo.Width = anchoPorPanel;
-            mcDispositivo.Left = mcCliente.Right + espacioEntrePaneles;
-
-            mcReparacion.Width = anchoPorPanel;
-            mcReparacion.Left = mcDispositivo.Right + espacioEntrePaneles;
-
-            int margenInferior = 30;
-            int nuevaAltura = pnlCentral.Height - mcCliente.Top - margenInferior;
-            mcCliente.Height = nuevaAltura;
-            mcDispositivo.Height = nuevaAltura;
-            mcReparacion.Height = nuevaAltura;
+        
         }
 
         private void btnComputadora_Click(object sender, EventArgs e)

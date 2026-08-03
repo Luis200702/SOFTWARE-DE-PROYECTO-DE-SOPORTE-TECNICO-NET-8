@@ -51,20 +51,6 @@
             label2 = new Label();
             label1 = new Label();
             airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
-            mcDispositivo = new ReaLTaiizor.Controls.MaterialCard();
-            cmbEstadoDispositvo = new Sunny.UI.UIComboBox();
-            txtColorc = new Sunny.UI.UITextBox();
-            txtSerieImei = new Sunny.UI.UITextBox();
-            txtModelo = new Sunny.UI.UITextBox();
-            txtMarca = new Sunny.UI.UITextBox();
-            pictureBox6 = new PictureBox();
-            lblEstado = new Label();
-            lblMarca = new Label();
-            label5 = new Label();
-            lblColor = new Label();
-            label3 = new Label();
-            lblDispositivo = new Label();
-            airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             mcCliente = new ReaLTaiizor.Controls.MaterialCard();
             lblTipoDispositivo = new Label();
             lblCorreo = new Label();
@@ -86,6 +72,20 @@
             btnCancelar = new Sunny.UI.UIButton();
             pictureBox2 = new PictureBox();
             btnGuardarRegistro = new Sunny.UI.UIButton();
+            lblDispositivo = new Label();
+            pictureBox6 = new PictureBox();
+            airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
+            lblMarca = new Label();
+            lblModelo = new Label();
+            txtMarca = new Sunny.UI.UITextBox();
+            txtModelo = new Sunny.UI.UITextBox();
+            label3 = new Label();
+            lblColor = new Label();
+            txtSerieImei = new Sunny.UI.UITextBox();
+            txtColorc = new Sunny.UI.UITextBox();
+            lblEstado = new Label();
+            cmbEstadoDispositvo = new Sunny.UI.UIComboBox();
+            pnlDispositivo2 = new Sunny.UI.UIPanel();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
@@ -93,8 +93,6 @@
             mcReparacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picReparacion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            mcDispositivo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             mcCliente.SuspendLayout();
             pnlCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -102,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
             // pnlSuperior
@@ -131,7 +130,7 @@
             // 
             lblTitulo.Dock = DockStyle.Left;
             lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.FromArgb(147, 162, 183);
+            lblTitulo.ForeColor = Color.White;
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(342, 57);
@@ -179,12 +178,12 @@
             pnlCentral.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlCentral.AutoSize = true;
             pnlCentral.BackColor = Color.FromArgb(15, 23, 42);
+            pnlCentral.Controls.Add(pnlDispositivo2);
             pnlCentral.Controls.Add(mcReparacion);
-            pnlCentral.Controls.Add(mcDispositivo);
             pnlCentral.Controls.Add(mcCliente);
             pnlCentral.Location = new Point(0, 118);
             pnlCentral.Name = "pnlCentral";
-            pnlCentral.Size = new Size(1022, 578);
+            pnlCentral.Size = new Size(1022, 820);
             pnlCentral.TabIndex = 2;
             pnlCentral.Resize += pnlCentral_Resize;
             // 
@@ -390,209 +389,6 @@
             airSeparator3.TabIndex = 1;
             airSeparator3.Text = "airSeparator3";
             airSeparator3.Transparent = false;
-            // 
-            // mcDispositivo
-            // 
-            mcDispositivo.AutoSize = true;
-            mcDispositivo.BackColor = Color.FromArgb(255, 255, 255);
-            mcDispositivo.Controls.Add(cmbEstadoDispositvo);
-            mcDispositivo.Controls.Add(txtColorc);
-            mcDispositivo.Controls.Add(txtSerieImei);
-            mcDispositivo.Controls.Add(txtModelo);
-            mcDispositivo.Controls.Add(txtMarca);
-            mcDispositivo.Controls.Add(pictureBox6);
-            mcDispositivo.Controls.Add(lblEstado);
-            mcDispositivo.Controls.Add(lblMarca);
-            mcDispositivo.Controls.Add(label5);
-            mcDispositivo.Controls.Add(lblColor);
-            mcDispositivo.Controls.Add(label3);
-            mcDispositivo.Controls.Add(lblDispositivo);
-            mcDispositivo.Controls.Add(airSeparator2);
-            mcDispositivo.Depth = 0;
-            mcDispositivo.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            mcDispositivo.Location = new Point(354, 40);
-            mcDispositivo.Margin = new Padding(14);
-            mcDispositivo.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            mcDispositivo.Name = "mcDispositivo";
-            mcDispositivo.Padding = new Padding(14);
-            mcDispositivo.Size = new Size(321, 377);
-            mcDispositivo.TabIndex = 1;
-            // 
-            // cmbEstadoDispositvo
-            // 
-            cmbEstadoDispositvo.DataSource = null;
-            cmbEstadoDispositvo.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbEstadoDispositvo.FillColor = Color.White;
-            cmbEstadoDispositvo.Font = new Font("Microsoft Sans Serif", 12F);
-            cmbEstadoDispositvo.FormattingEnabled = true;
-            cmbEstadoDispositvo.ItemHoverColor = Color.FromArgb(155, 200, 255);
-            cmbEstadoDispositvo.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
-            cmbEstadoDispositvo.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbEstadoDispositvo.Location = new Point(23, 184);
-            cmbEstadoDispositvo.Margin = new Padding(4, 5, 4, 5);
-            cmbEstadoDispositvo.MinimumSize = new Size(63, 0);
-            cmbEstadoDispositvo.Name = "cmbEstadoDispositvo";
-            cmbEstadoDispositvo.Padding = new Padding(0, 0, 30, 2);
-            cmbEstadoDispositvo.Radius = 12;
-            cmbEstadoDispositvo.Size = new Size(278, 22);
-            cmbEstadoDispositvo.SymbolSize = 24;
-            cmbEstadoDispositvo.TabIndex = 23;
-            cmbEstadoDispositvo.TextAlignment = ContentAlignment.MiddleLeft;
-            cmbEstadoDispositvo.Watermark = "";
-            // 
-            // txtColorc
-            // 
-            txtColorc.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtColorc.Location = new Point(157, 128);
-            txtColorc.Margin = new Padding(4, 5, 4, 5);
-            txtColorc.MaxLength = 255;
-            txtColorc.Minimum = 0D;
-            txtColorc.MinimumSize = new Size(1, 16);
-            txtColorc.Name = "txtColorc";
-            txtColorc.Padding = new Padding(5);
-            txtColorc.Radius = 12;
-            txtColorc.ShowText = false;
-            txtColorc.Size = new Size(144, 23);
-            txtColorc.TabIndex = 22;
-            txtColorc.TextAlignment = ContentAlignment.MiddleLeft;
-            txtColorc.Watermark = "Ej. Negro";
-            // 
-            // txtSerieImei
-            // 
-            txtSerieImei.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSerieImei.Location = new Point(23, 128);
-            txtSerieImei.Margin = new Padding(4, 5, 4, 5);
-            txtSerieImei.MaxLength = 255;
-            txtSerieImei.Minimum = 0D;
-            txtSerieImei.MinimumSize = new Size(1, 16);
-            txtSerieImei.Name = "txtSerieImei";
-            txtSerieImei.Padding = new Padding(5);
-            txtSerieImei.Radius = 12;
-            txtSerieImei.ShowText = false;
-            txtSerieImei.Size = new Size(130, 23);
-            txtSerieImei.TabIndex = 21;
-            txtSerieImei.TextAlignment = ContentAlignment.MiddleLeft;
-            txtSerieImei.Watermark = "15 digitos";
-            // 
-            // txtModelo
-            // 
-            txtModelo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtModelo.Location = new Point(157, 73);
-            txtModelo.Margin = new Padding(4, 5, 4, 5);
-            txtModelo.MaxLength = 255;
-            txtModelo.Minimum = 0D;
-            txtModelo.MinimumSize = new Size(1, 16);
-            txtModelo.Name = "txtModelo";
-            txtModelo.Padding = new Padding(5);
-            txtModelo.Radius = 12;
-            txtModelo.ShowText = false;
-            txtModelo.Size = new Size(144, 23);
-            txtModelo.TabIndex = 20;
-            txtModelo.TextAlignment = ContentAlignment.MiddleLeft;
-            txtModelo.Watermark = "Ej. Galaxy S22";
-            // 
-            // txtMarca
-            // 
-            txtMarca.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtMarca.Location = new Point(23, 73);
-            txtMarca.Margin = new Padding(4, 5, 4, 5);
-            txtMarca.MaxLength = 255;
-            txtMarca.Minimum = 0D;
-            txtMarca.MinimumSize = new Size(1, 16);
-            txtMarca.Name = "txtMarca";
-            txtMarca.Padding = new Padding(5);
-            txtMarca.Radius = 12;
-            txtMarca.ShowText = false;
-            txtMarca.Size = new Size(130, 23);
-            txtMarca.TabIndex = 19;
-            txtMarca.TextAlignment = ContentAlignment.MiddleLeft;
-            txtMarca.Watermark = "Ej. Samsung";
-            // 
-            // pictureBox6
-            // 
-            pictureBox6.BackColor = Color.Transparent;
-            pictureBox6.Image = Properties.Resources.GgScreen;
-            pictureBox6.Location = new Point(19, 8);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(30, 21);
-            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox6.TabIndex = 18;
-            pictureBox6.TabStop = false;
-            // 
-            // lblEstado
-            // 
-            lblEstado.AutoSize = true;
-            lblEstado.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEstado.Location = new Point(23, 164);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(113, 15);
-            lblEstado.TabIndex = 17;
-            lblEstado.Text = "Estado en que llega";
-            // 
-            // lblMarca
-            // 
-            lblMarca.AutoSize = true;
-            lblMarca.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMarca.Location = new Point(23, 55);
-            lblMarca.Name = "lblMarca";
-            lblMarca.Size = new Size(41, 15);
-            lblMarca.TabIndex = 16;
-            lblMarca.Text = "Marca";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(157, 55);
-            label5.Name = "label5";
-            label5.Size = new Size(49, 15);
-            label5.TabIndex = 15;
-            label5.Text = "Modelo";
-            // 
-            // lblColor
-            // 
-            lblColor.AutoSize = true;
-            lblColor.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblColor.Location = new Point(157, 110);
-            lblColor.Name = "lblColor";
-            lblColor.Size = new Size(36, 15);
-            lblColor.TabIndex = 14;
-            lblColor.Text = "Color";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(23, 110);
-            label3.Name = "label3";
-            label3.Size = new Size(72, 15);
-            label3.TabIndex = 13;
-            label3.Text = "Serie / IMEI";
-            // 
-            // lblDispositivo
-            // 
-            lblDispositivo.AutoSize = true;
-            lblDispositivo.Location = new Point(45, 14);
-            lblDispositivo.Name = "lblDispositivo";
-            lblDispositivo.Size = new Size(117, 15);
-            lblDispositivo.TabIndex = 5;
-            lblDispositivo.Text = "Datos del Dispositivo";
-            // 
-            // airSeparator2
-            // 
-            airSeparator2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            airSeparator2.BackColor = Color.FromArgb(98, 86, 159);
-            airSeparator2.Customization = "";
-            airSeparator2.Font = new Font("Verdana", 8F);
-            airSeparator2.Image = null;
-            airSeparator2.ImeMode = ImeMode.Off;
-            airSeparator2.Location = new Point(23, 34);
-            airSeparator2.Name = "airSeparator2";
-            airSeparator2.NoRounding = false;
-            airSeparator2.Size = new Size(278, 1);
-            airSeparator2.TabIndex = 1;
-            airSeparator2.Text = "airSeparator2";
-            airSeparator2.Transparent = false;
             // 
             // mcCliente
             // 
@@ -917,6 +713,222 @@
             btnGuardarRegistro.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnGuardarRegistro.TipsForeColor = Color.Black;
             // 
+            // lblDispositivo
+            // 
+            lblDispositivo.AutoSize = true;
+            lblDispositivo.BackColor = Color.Transparent;
+            lblDispositivo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDispositivo.ForeColor = Color.White;
+            lblDispositivo.Location = new Point(45, 14);
+            lblDispositivo.Name = "lblDispositivo";
+            lblDispositivo.Size = new Size(123, 15);
+            lblDispositivo.TabIndex = 6;
+            lblDispositivo.Text = "Datos del Dispositivo";
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.BackColor = Color.Transparent;
+            pictureBox6.Image = Properties.Resources.MdiMonitor;
+            pictureBox6.Location = new Point(19, 8);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(30, 21);
+            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox6.TabIndex = 19;
+            pictureBox6.TabStop = false;
+            // 
+            // airSeparator2
+            // 
+            airSeparator2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            airSeparator2.BackColor = Color.FromArgb(98, 86, 159);
+            airSeparator2.Customization = "";
+            airSeparator2.Font = new Font("Verdana", 8F);
+            airSeparator2.Image = null;
+            airSeparator2.ImeMode = ImeMode.Off;
+            airSeparator2.Location = new Point(23, 34);
+            airSeparator2.Name = "airSeparator2";
+            airSeparator2.NoRounding = false;
+            airSeparator2.Size = new Size(278, 1);
+            airSeparator2.TabIndex = 20;
+            airSeparator2.Text = "airSeparator2";
+            airSeparator2.Transparent = false;
+            // 
+            // lblMarca
+            // 
+            lblMarca.AutoSize = true;
+            lblMarca.BackColor = Color.Transparent;
+            lblMarca.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMarca.ForeColor = Color.White;
+            lblMarca.Location = new Point(23, 55);
+            lblMarca.Name = "lblMarca";
+            lblMarca.Size = new Size(41, 15);
+            lblMarca.TabIndex = 21;
+            lblMarca.Text = "Marca";
+            // 
+            // lblModelo
+            // 
+            lblModelo.AutoSize = true;
+            lblModelo.BackColor = Color.Transparent;
+            lblModelo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblModelo.ForeColor = Color.White;
+            lblModelo.Location = new Point(157, 55);
+            lblModelo.Name = "lblModelo";
+            lblModelo.Size = new Size(49, 15);
+            lblModelo.TabIndex = 22;
+            lblModelo.Text = "Modelo";
+            // 
+            // txtMarca
+            // 
+            txtMarca.BackColor = Color.Transparent;
+            txtMarca.FillColor = Color.FromArgb(41, 53, 72);
+            txtMarca.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtMarca.Location = new Point(23, 73);
+            txtMarca.Margin = new Padding(4, 5, 4, 5);
+            txtMarca.MaxLength = 255;
+            txtMarca.Minimum = 0D;
+            txtMarca.MinimumSize = new Size(1, 16);
+            txtMarca.Name = "txtMarca";
+            txtMarca.Padding = new Padding(5);
+            txtMarca.Radius = 12;
+            txtMarca.RectColor = Color.FromArgb(39, 53, 72);
+            txtMarca.ShowText = false;
+            txtMarca.Size = new Size(130, 23);
+            txtMarca.TabIndex = 23;
+            txtMarca.TextAlignment = ContentAlignment.MiddleLeft;
+            txtMarca.Watermark = "Ej. Samsung";
+            // 
+            // txtModelo
+            // 
+            txtModelo.BackColor = Color.Transparent;
+            txtModelo.FillColor = Color.FromArgb(41, 53, 72);
+            txtModelo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtModelo.Location = new Point(157, 73);
+            txtModelo.Margin = new Padding(4, 5, 4, 5);
+            txtModelo.MaxLength = 255;
+            txtModelo.Minimum = 0D;
+            txtModelo.MinimumSize = new Size(1, 16);
+            txtModelo.Name = "txtModelo";
+            txtModelo.Padding = new Padding(5);
+            txtModelo.Radius = 12;
+            txtModelo.RectColor = Color.FromArgb(39, 53, 72);
+            txtModelo.ShowText = false;
+            txtModelo.Size = new Size(144, 23);
+            txtModelo.TabIndex = 25;
+            txtModelo.TextAlignment = ContentAlignment.MiddleLeft;
+            txtModelo.Watermark = "Ej. Galaxy S22";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(23, 110);
+            label3.Name = "label3";
+            label3.Size = new Size(72, 15);
+            label3.TabIndex = 26;
+            label3.Text = "Serie / IMEI";
+            // 
+            // lblColor
+            // 
+            lblColor.AutoSize = true;
+            lblColor.BackColor = Color.Transparent;
+            lblColor.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblColor.ForeColor = Color.White;
+            lblColor.Location = new Point(157, 110);
+            lblColor.Name = "lblColor";
+            lblColor.Size = new Size(36, 15);
+            lblColor.TabIndex = 27;
+            lblColor.Text = "Color";
+            // 
+            // txtSerieImei
+            // 
+            txtSerieImei.BackColor = Color.Transparent;
+            txtSerieImei.FillColor = Color.FromArgb(41, 53, 72);
+            txtSerieImei.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSerieImei.Location = new Point(23, 128);
+            txtSerieImei.Margin = new Padding(4, 5, 4, 5);
+            txtSerieImei.MaxLength = 255;
+            txtSerieImei.Minimum = 0D;
+            txtSerieImei.MinimumSize = new Size(1, 16);
+            txtSerieImei.Name = "txtSerieImei";
+            txtSerieImei.Padding = new Padding(5);
+            txtSerieImei.Radius = 12;
+            txtSerieImei.RectColor = Color.FromArgb(39, 53, 72);
+            txtSerieImei.ShowText = false;
+            txtSerieImei.Size = new Size(130, 23);
+            txtSerieImei.TabIndex = 28;
+            txtSerieImei.TextAlignment = ContentAlignment.MiddleLeft;
+            txtSerieImei.Watermark = "15 digitos";
+            // 
+            // txtColorc
+            // 
+            txtColorc.BackColor = Color.Transparent;
+            txtColorc.FillColor = Color.FromArgb(41, 53, 72);
+            txtColorc.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtColorc.Location = new Point(157, 128);
+            txtColorc.Margin = new Padding(4, 5, 4, 5);
+            txtColorc.MaxLength = 255;
+            txtColorc.Minimum = 0D;
+            txtColorc.MinimumSize = new Size(1, 16);
+            txtColorc.Name = "txtColorc";
+            txtColorc.Padding = new Padding(5);
+            txtColorc.Radius = 12;
+            txtColorc.RectColor = Color.FromArgb(39, 53, 72);
+            txtColorc.ShowText = false;
+            txtColorc.Size = new Size(144, 23);
+            txtColorc.TabIndex = 29;
+            txtColorc.TextAlignment = ContentAlignment.MiddleLeft;
+            txtColorc.Watermark = "Ej. Negro";
+            // 
+            // lblEstado
+            // 
+            lblEstado.AutoSize = true;
+            lblEstado.BackColor = Color.Transparent;
+            lblEstado.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEstado.ForeColor = Color.White;
+            lblEstado.Location = new Point(19, 164);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(113, 15);
+            lblEstado.TabIndex = 30;
+            lblEstado.Text = "Estado en que llega";
+            // 
+            // cmbEstadoDispositvo
+            // 
+            cmbEstadoDispositvo.BackColor = Color.Transparent;
+            cmbEstadoDispositvo.DataSource = null;
+            cmbEstadoDispositvo.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            cmbEstadoDispositvo.FillColor = Color.FromArgb(41, 53, 72);
+            cmbEstadoDispositvo.Font = new Font("Microsoft Sans Serif", 12F);
+            cmbEstadoDispositvo.FormattingEnabled = true;
+            cmbEstadoDispositvo.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbEstadoDispositvo.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
+            cmbEstadoDispositvo.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbEstadoDispositvo.Location = new Point(23, 184);
+            cmbEstadoDispositvo.Margin = new Padding(4, 5, 4, 5);
+            cmbEstadoDispositvo.MinimumSize = new Size(63, 0);
+            cmbEstadoDispositvo.Name = "cmbEstadoDispositvo";
+            cmbEstadoDispositvo.Padding = new Padding(0, 0, 30, 2);
+            cmbEstadoDispositvo.Radius = 12;
+            cmbEstadoDispositvo.RectColor = Color.FromArgb(148, 163, 184);
+            cmbEstadoDispositvo.Size = new Size(278, 22);
+            cmbEstadoDispositvo.SymbolSize = 24;
+            cmbEstadoDispositvo.TabIndex = 31;
+            cmbEstadoDispositvo.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbEstadoDispositvo.Watermark = "";
+            // 
+            // pnlDispositivo2
+            // 
+            pnlDispositivo2.Font = new Font("Microsoft Sans Serif", 12F);
+            pnlDispositivo2.Location = new Point(369, 40);
+            pnlDispositivo2.Margin = new Padding(4, 5, 4, 5);
+            pnlDispositivo2.MinimumSize = new Size(1, 1);
+            pnlDispositivo2.Name = "pnlDispositivo2";
+            pnlDispositivo2.Radius = 12;
+            pnlDispositivo2.RectColor = Color.FromArgb(39, 53, 72);
+            pnlDispositivo2.Size = new Size(299, 377);
+            pnlDispositivo2.TabIndex = 2;
+            pnlDispositivo2.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
             // ucRecepcionEquipos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -932,14 +944,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInformacion.ResumeLayout(false);
             pnlCentral.ResumeLayout(false);
-            pnlCentral.PerformLayout();
             mcReparacion.ResumeLayout(false);
             mcReparacion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picReparacion).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            mcDispositivo.ResumeLayout(false);
-            mcDispositivo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             mcCliente.ResumeLayout(false);
             mcCliente.PerformLayout();
             pnlCliente.ResumeLayout(false);
@@ -948,6 +956,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -963,25 +972,18 @@
         private Label lblTitulo;
         private PictureBox pictureBox1;
         private ReaLTaiizor.Controls.MaterialCard mcReparacion;
-        private ReaLTaiizor.Controls.MaterialCard mcDispositivo;
+        private ReaLTaiizor.Controls.MaterialCard pnlDispositivos;
         private ReaLTaiizor.Controls.AirSeparator airSeparator3;
-        private ReaLTaiizor.Controls.AirSeparator airSeparator2;
         private ReaLTaiizor.Controls.AirSeparator airSeparator1;
         private FontAwesome.Sharp.IconButton uiButton1;
         private Label lblReparacion;
-        private Label lblDispositivo;
         private Label lblCliente;
         private ComboBox cmbEstado;
         private Sunny.UI.UIButton btnComputadora;
         private Sunny.UI.UIButton btnTelefono;
-        private Label lblMarca;
-        private Label label5;
-        private Label lblColor;
-        private Label label3;
         private Label lblCorreo;
         private Label lblTelefono;
         private Label lblDatosCliente;
-        private Label lblEstado;
         private Label lblTipoDispositivo;
         private Label label2;
         private Label label1;
@@ -1005,14 +1007,22 @@
         private Sunny.UI.UITextBox txtNombres;
         private Sunny.UI.UITextBox txtNumeroTelefonico;
         private PictureBox picReparacion;
-        private PictureBox pictureBox6;
         private PictureBox pictureBox5;
-        private Sunny.UI.UITextBox txtMarca;
         private Sunny.UI.UITextBox txtDescripcionProblemac;
+        private Sunny.UI.UITextBox txtObservaciones;
+        private PictureBox pictureBox6;
+        private Label lblDispositivo;
+        private Sunny.UI.UITextBox txtMarca;
+        private Label lblModelo;
+        private Label lblMarca;
+        private ReaLTaiizor.Controls.AirSeparator airSeparator2;
+        private Label lblColor;
+        private Label label3;
+        private Sunny.UI.UITextBox txtModelo;
         private Sunny.UI.UITextBox txtColorc;
         private Sunny.UI.UITextBox txtSerieImei;
-        private Sunny.UI.UITextBox txtModelo;
-        private Sunny.UI.UITextBox txtObservaciones;
         private Sunny.UI.UIComboBox cmbEstadoDispositvo;
+        private Label lblEstado;
+        private Sunny.UI.UIPanel pnlDispositivo2;
     }
 }
