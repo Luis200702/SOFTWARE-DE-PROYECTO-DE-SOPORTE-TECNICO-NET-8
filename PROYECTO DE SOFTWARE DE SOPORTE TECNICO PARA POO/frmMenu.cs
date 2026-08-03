@@ -329,9 +329,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         //    TemaManager.AplicarTema(this, esOscuro);
         //}
 
-        // ====================================================================
-        // EVENTOS DE LOS BOTONES DEL MENÚ: Abren los UserControls correspondientes
-        // ====================================================================
+      
 
 
         private void frmMenu_FormClosing(object sender, FormClosingEventArgs e)
@@ -341,7 +339,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnRecepcionEquipos_Click(object sender, EventArgs e)
         {
-            AbrirUserControl(new ucRecepcionEquipos());
+            AbrirUserControl(new ucRecepcion());
         }
 
         private void btnSeguimientoReparaciones_Click(object sender, EventArgs e)

@@ -165,6 +165,7 @@
             // 
             txtBuscar.FillColor = Color.FromArgb(41, 53, 72);
             txtBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBuscar.ForeColor = Color.White;
             txtBuscar.Location = new Point(64, 12);
             txtBuscar.Margin = new Padding(4, 5, 4, 5);
             txtBuscar.MinimumSize = new Size(1, 16);

@@ -166,6 +166,7 @@
             // 
             txtBuscarOrden.FillColor = Color.FromArgb(41, 53, 72);
             txtBuscarOrden.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBuscarOrden.ForeColor = Color.White;
             txtBuscarOrden.Location = new Point(29, 22);
             txtBuscarOrden.Margin = new Padding(4, 5, 4, 5);
             txtBuscarOrden.MinimumSize = new Size(1, 16);
@@ -302,6 +303,7 @@
             txtObservaciones.BackColor = Color.Transparent;
             txtObservaciones.FillColor = Color.FromArgb(41, 53, 72);
             txtObservaciones.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtObservaciones.ForeColor = Color.White;
             txtObservaciones.Location = new Point(18, 205);
             txtObservaciones.Margin = new Padding(4, 5, 4, 5);
             txtObservaciones.MaxLength = 255;
