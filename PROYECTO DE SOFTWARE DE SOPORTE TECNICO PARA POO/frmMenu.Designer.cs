@@ -411,7 +411,7 @@
             btnSalirApp.ColorBackground = Color.FromArgb(10, 12, 30);
             btnSalirApp.ColorBackground_1 = Color.FromArgb(50, 52, 68);
             btnSalirApp.ColorBackground_2 = Color.FromArgb(26, 28, 44);
-            btnSalirApp.ColorBackground_Pen = Color.FromArgb(29, 200, 238);
+            btnSalirApp.ColorBackground_Pen = Color.FromArgb(10, 12, 30);
             btnSalirApp.ColorLighting = Color.FromArgb(10, 12, 30);
             btnSalirApp.ColorPen_1 = Color.FromArgb(6, 20, 27);
             btnSalirApp.ColorPen_2 = Color.FromArgb(6, 20, 27);
@@ -432,7 +432,7 @@
             btnSalirApp.PenWidth = 15;
             btnSalirApp.Rounding = true;
             btnSalirApp.RoundingInt = 80;
-            btnSalirApp.Size = new Size(147, 40);
+            btnSalirApp.Size = new Size(192, 40);
             btnSalirApp.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             btnSalirApp.TabIndex = 3;
             btnSalirApp.Tag = "Cyber";
