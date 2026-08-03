@@ -238,12 +238,13 @@
             // dtmFecha
             // 
             dtmFecha.DateCultureInfo = new System.Globalization.CultureInfo("es-ES");
+            dtmFecha.DateFormat = "yyyy-MM-dd";
             dtmFecha.FillColor = Color.FromArgb(41, 53, 72);
             dtmFecha.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dtmFecha.ForeColor = Color.White;
             dtmFecha.Location = new Point(20, 287);
             dtmFecha.Margin = new Padding(4, 5, 4, 5);
-            dtmFecha.MaxLength = 19;
+            dtmFecha.MaxLength = 10;
             dtmFecha.MinimumSize = new Size(63, 0);
             dtmFecha.Name = "dtmFecha";
             dtmFecha.Padding = new Padding(0, 0, 30, 2);
@@ -254,7 +255,7 @@
             dtmFecha.SymbolNormal = 61555;
             dtmFecha.SymbolSize = 24;
             dtmFecha.TabIndex = 46;
-            dtmFecha.Text = "2026-08-03 00:00:00";
+            dtmFecha.Text = "2026-08-03";
             dtmFecha.TextAlignment = ContentAlignment.MiddleLeft;
             dtmFecha.Value = new DateTime(2026, 8, 3, 0, 0, 0, 0);
             dtmFecha.Watermark = "";

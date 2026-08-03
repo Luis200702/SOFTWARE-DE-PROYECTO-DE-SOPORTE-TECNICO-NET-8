@@ -299,7 +299,7 @@
             label9.BackColor = Color.Transparent;
             label9.Enabled = false;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.DimGray;
+            label9.ForeColor = Color.White;
             label9.Location = new Point(19, 52);
             label9.Name = "label9";
             label9.Size = new Size(141, 15);
@@ -312,7 +312,7 @@
             label8.BackColor = Color.Transparent;
             label8.Enabled = false;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.DimGray;
+            label8.ForeColor = Color.White;
             label8.Location = new Point(19, 86);
             label8.Name = "label8";
             label8.Size = new Size(103, 15);
@@ -457,6 +457,7 @@
             // 
             // uiTextBox1
             // 
+            uiTextBox1.BackColor = Color.Transparent;
             uiTextBox1.FillColor = Color.FromArgb(41, 53, 72);
             uiTextBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             uiTextBox1.ForeColor = Color.White;
@@ -477,6 +478,7 @@
             // 
             // uiTextBox2
             // 
+            uiTextBox2.BackColor = Color.Transparent;
             uiTextBox2.FillColor = Color.FromArgb(41, 53, 72);
             uiTextBox2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             uiTextBox2.ForeColor = Color.White;
@@ -619,6 +621,7 @@
             // 
             // txtNumeroTelefonico
             // 
+            txtNumeroTelefonico.BackColor = Color.Transparent;
             txtNumeroTelefonico.FillColor = Color.FromArgb(41, 53, 72);
             txtNumeroTelefonico.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNumeroTelefonico.ForeColor = Color.White;
@@ -640,6 +643,7 @@
             // 
             // btnTelefono
             // 
+            btnTelefono.BackColor = Color.Transparent;
             btnTelefono.FillColor = Color.FromArgb(22, 35, 52);
             btnTelefono.FillHoverColor = Color.Transparent;
             btnTelefono.FillPressColor = Color.FromArgb(0, 150, 137);
@@ -659,6 +663,7 @@
             // 
             // txtNombres
             // 
+            txtNombres.BackColor = Color.Transparent;
             txtNombres.FillColor = Color.FromArgb(41, 53, 72);
             txtNombres.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNombres.ForeColor = Color.White;
@@ -810,6 +815,7 @@
             // 
             // txtModelo
             // 
+            txtModelo.BackColor = Color.Transparent;
             txtModelo.FillColor = Color.FromArgb(41, 53, 72);
             txtModelo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtModelo.ForeColor = Color.White;
@@ -841,7 +847,7 @@
             txtMarca.Name = "txtMarca";
             txtMarca.Padding = new Padding(5);
             txtMarca.Radius = 12;
-            txtMarca.RectColor = Color.FromArgb(39, 53, 72);
+            txtMarca.RectColor = Color.Transparent;
             txtMarca.ShowText = false;
             txtMarca.Size = new Size(285, 37);
             txtMarca.TabIndex = 45;
@@ -886,6 +892,7 @@
             // 
             // btnComputadora
             // 
+            btnComputadora.BackColor = Color.Transparent;
             btnComputadora.FillColor = Color.FromArgb(22, 35, 52);
             btnComputadora.FillHoverColor = Color.Transparent;
             btnComputadora.FillPressColor = Color.FromArgb(0, 150, 137);
