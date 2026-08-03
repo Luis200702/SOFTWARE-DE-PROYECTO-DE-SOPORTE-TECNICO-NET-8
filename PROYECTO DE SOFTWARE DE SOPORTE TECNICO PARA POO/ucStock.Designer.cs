@@ -37,11 +37,11 @@
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
             panel1 = new Panel();
+            btnNuevoRepuesto = new Sunny.UI.UIButton();
+            cmbCategorias = new Sunny.UI.UIComboBox();
+            txtBuscar = new Sunny.UI.UITextBox();
             lblAlertas = new Label();
-            btnAgregar = new Button();
             btnAlertas = new Button();
-            cmbCategorias = new ComboBox();
-            txtBuscar = new TextBox();
             pictureBox2 = new PictureBox();
             dgv4 = new DataGridView();
             Nomnre = new DataGridViewTextBoxColumn();
@@ -67,20 +67,18 @@
             pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
             pnlSuperior.Controls.Add(pictureBox1);
             pnlSuperior.Controls.Add(lblTitulo);
-            pnlSuperior.Location = new Point(-8, -11);
-            pnlSuperior.Margin = new Padding(3, 4, 3, 4);
+            pnlSuperior.Location = new Point(-7, -8);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1190, 94);
+            pnlSuperior.Size = new Size(1039, 71);
             pnlSuperior.TabIndex = 1;
             pnlSuperior.Paint += pnlSuperior_Paint;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.MaterialSymbolsInventory__1_;
-            pictureBox1.Location = new Point(24, 27);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(21, 20);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(41, 40);
+            pictureBox1.Size = new Size(36, 30);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -93,7 +91,7 @@
             lblTitulo.ForeColor = Color.FromArgb(147, 162, 183);
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(328, 92);
+            lblTitulo.Size = new Size(287, 69);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Control de Stock";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -104,51 +102,94 @@
             panel1.AutoSize = true;
             panel1.BackColor = Color.FromArgb(30, 41, 59);
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(lblAlertas);
-            panel1.Controls.Add(btnAgregar);
-            panel1.Controls.Add(btnAlertas);
+            panel1.Controls.Add(btnNuevoRepuesto);
             panel1.Controls.Add(cmbCategorias);
             panel1.Controls.Add(txtBuscar);
+            panel1.Controls.Add(lblAlertas);
+            panel1.Controls.Add(btnAlertas);
             panel1.Controls.Add(pictureBox2);
-            panel1.Location = new Point(-8, 76);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(0, 59);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1186, 72);
+            panel1.Size = new Size(1021, 59);
             panel1.TabIndex = 2;
+            // 
+            // btnNuevoRepuesto
+            // 
+            btnNuevoRepuesto.BackColor = Color.Transparent;
+            btnNuevoRepuesto.FillColor = Color.FromArgb(0, 150, 137);
+            btnNuevoRepuesto.FillHoverColor = Color.Transparent;
+            btnNuevoRepuesto.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnNuevoRepuesto.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnNuevoRepuesto.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNuevoRepuesto.Location = new Point(865, 10);
+            btnNuevoRepuesto.MinimumSize = new Size(1, 1);
+            btnNuevoRepuesto.Name = "btnNuevoRepuesto";
+            btnNuevoRepuesto.Radius = 12;
+            btnNuevoRepuesto.RectColor = Color.FromArgb(39, 53, 72);
+            btnNuevoRepuesto.RectHoverColor = Color.Transparent;
+            btnNuevoRepuesto.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnNuevoRepuesto.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnNuevoRepuesto.Size = new Size(133, 31);
+            btnNuevoRepuesto.TabIndex = 30;
+            btnNuevoRepuesto.Text = "Registrar Entrega";
+            btnNuevoRepuesto.TextAlign = ContentAlignment.MiddleRight;
+            btnNuevoRepuesto.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnNuevoRepuesto.TipsForeColor = Color.Transparent;
+            // 
+            // cmbCategorias
+            // 
+            cmbCategorias.BackColor = Color.Transparent;
+            cmbCategorias.DataSource = null;
+            cmbCategorias.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            cmbCategorias.FillColor = Color.FromArgb(41, 53, 72);
+            cmbCategorias.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbCategorias.ForeColor = Color.White;
+            cmbCategorias.FormattingEnabled = true;
+            cmbCategorias.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbCategorias.Items.AddRange(new object[] { "Todas las categorías", "Pantalla", "Bateria", "Conector", "Placa", "Cámara", "Bóton", "Tapa", "Parlante", "Micrófono", "Otro" });
+            cmbCategorias.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbCategorias.Location = new Point(383, 10);
+            cmbCategorias.Margin = new Padding(4, 5, 4, 5);
+            cmbCategorias.MinimumSize = new Size(63, 0);
+            cmbCategorias.Name = "cmbCategorias";
+            cmbCategorias.Padding = new Padding(0, 0, 30, 2);
+            cmbCategorias.Radius = 12;
+            cmbCategorias.RectColor = Color.FromArgb(148, 163, 184);
+            cmbCategorias.Size = new Size(185, 32);
+            cmbCategorias.SymbolSize = 24;
+            cmbCategorias.TabIndex = 25;
+            cmbCategorias.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbCategorias.Watermark = "";
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.FillColor = Color.FromArgb(41, 53, 72);
+            txtBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBuscar.Location = new Point(64, 12);
+            txtBuscar.Margin = new Padding(4, 5, 4, 5);
+            txtBuscar.MinimumSize = new Size(1, 16);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Padding = new Padding(5);
+            txtBuscar.Radius = 12;
+            txtBuscar.RectColor = Color.FromArgb(39, 53, 72);
+            txtBuscar.ShowText = false;
+            txtBuscar.Size = new Size(295, 30);
+            txtBuscar.TabIndex = 4;
+            txtBuscar.TextAlignment = ContentAlignment.MiddleLeft;
+            txtBuscar.Watermark = "Ej. ORD-2024-003";
             // 
             // lblAlertas
             // 
             lblAlertas.AutoSize = true;
-            lblAlertas.BackColor = Color.OrangeRed;
+            lblAlertas.BackColor = Color.FromArgb(254, 154, 0);
             lblAlertas.FlatStyle = FlatStyle.Flat;
             lblAlertas.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAlertas.ForeColor = Color.FromArgb(147, 162, 183);
-            lblAlertas.Location = new Point(841, 18);
+            lblAlertas.Location = new Point(736, 14);
             lblAlertas.Name = "lblAlertas";
-            lblAlertas.Size = new Size(27, 31);
+            lblAlertas.Size = new Size(23, 25);
             lblAlertas.TabIndex = 7;
             lblAlertas.Text = "0";
-            // 
-            // btnAgregar
-            // 
-            btnAgregar.BackColor = Color.FromArgb(62, 155, 139);
-            btnAgregar.BackgroundImageLayout = ImageLayout.None;
-            btnAgregar.Cursor = Cursors.Hand;
-            btnAgregar.FlatAppearance.BorderColor = Color.FromArgb(30, 41, 59);
-            btnAgregar.FlatStyle = FlatStyle.Flat;
-            btnAgregar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAgregar.ForeColor = Color.Black;
-            btnAgregar.Image = Properties.Resources.WeuiAdd2Outlined__2_;
-            btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregar.Location = new Point(1021, 14);
-            btnAgregar.Name = "btnAgregar";
-            btnAgregar.RightToLeft = RightToLeft.No;
-            btnAgregar.Size = new Size(141, 41);
-            btnAgregar.TabIndex = 5;
-            btnAgregar.Text = "Agregar";
-            btnAgregar.TextAlign = ContentAlignment.MiddleRight;
-            btnAgregar.UseVisualStyleBackColor = false;
-            btnAgregar.Click += btnAgregar_Click;
             // 
             // btnAlertas
             // 
@@ -161,52 +202,23 @@
             btnAlertas.ForeColor = Color.FromArgb(147, 162, 183);
             btnAlertas.Image = Properties.Resources.SolarDangerOutline__2_;
             btnAlertas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAlertas.Location = new Point(701, 13);
+            btnAlertas.Location = new Point(613, 10);
+            btnAlertas.Margin = new Padding(3, 2, 3, 2);
             btnAlertas.Name = "btnAlertas";
             btnAlertas.RightToLeft = RightToLeft.No;
-            btnAlertas.Size = new Size(134, 41);
+            btnAlertas.Size = new Size(117, 31);
             btnAlertas.TabIndex = 3;
             btnAlertas.Text = "Alertas";
             btnAlertas.TextAlign = ContentAlignment.MiddleRight;
             btnAlertas.UseVisualStyleBackColor = false;
             btnAlertas.Click += btnAlertas_Click;
             // 
-            // cmbCategorias
-            // 
-            cmbCategorias.BackColor = Color.FromArgb(30, 41, 59);
-            cmbCategorias.Cursor = Cursors.Hand;
-            cmbCategorias.FlatStyle = FlatStyle.Flat;
-            cmbCategorias.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cmbCategorias.ForeColor = Color.FromArgb(147, 162, 183);
-            cmbCategorias.FormattingEnabled = true;
-            cmbCategorias.Items.AddRange(new object[] { "Telefonos", "Computadoras", "Accesorios ", "Repuestos" });
-            cmbCategorias.Location = new Point(472, 18);
-            cmbCategorias.Name = "cmbCategorias";
-            cmbCategorias.Size = new Size(211, 31);
-            cmbCategorias.TabIndex = 2;
-            cmbCategorias.Tag = "";
-            // 
-            // txtBuscar
-            // 
-            txtBuscar.BackColor = Color.FromArgb(30, 41, 59);
-            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
-            txtBuscar.Cursor = Cursors.Hand;
-            txtBuscar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBuscar.ForeColor = Color.FromArgb(147, 162, 183);
-            txtBuscar.Location = new Point(71, 18);
-            txtBuscar.Multiline = true;
-            txtBuscar.Name = "txtBuscar";
-            txtBuscar.PlaceholderText = "Buscar....";
-            txtBuscar.Size = new Size(385, 36);
-            txtBuscar.TabIndex = 1;
-            // 
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.TablerSearch;
-            pictureBox2.Location = new Point(24, 14);
-            pictureBox2.Margin = new Padding(3, 4, 3, 4);
+            pictureBox2.Location = new Point(21, 10);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(41, 40);
+            pictureBox2.Size = new Size(36, 30);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
@@ -236,7 +248,8 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgv4.DefaultCellStyle = dataGridViewCellStyle3;
             dgv4.EnableHeadersVisualStyles = false;
-            dgv4.Location = new Point(0, 143);
+            dgv4.Location = new Point(0, 118);
+            dgv4.Margin = new Padding(3, 2, 3, 2);
             dgv4.Name = "dgv4";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(10, 12, 30);
@@ -252,7 +265,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(147, 162, 183);
             dgv4.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv4.RowTemplate.Height = 40;
-            dgv4.Size = new Size(1171, 769);
+            dgv4.Size = new Size(1025, 661);
             dgv4.TabIndex = 3;
             dgv4.CellClick += dgv4_CellClick;
             // 
@@ -324,15 +337,14 @@
             // 
             // ucStock
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 35, 54);
             Controls.Add(panel1);
             Controls.Add(dgv4);
             Controls.Add(pnlSuperior);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "ucStock";
-            Size = new Size(1171, 915);
+            Size = new Size(1022, 781);
             Load += ucStock_Load;
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -351,10 +363,7 @@
         private Label lblTitulo;
         private Panel panel1;
         private PictureBox pictureBox2;
-        private TextBox txtBuscar;
-        private ComboBox cmbCategorias;
         private Button btnAlertas;
-        private Button btnAgregar;
         private DataGridView dgv4;
         private Label lblAlertas;
         private DataGridViewTextBoxColumn Nomnre;
@@ -365,5 +374,8 @@
         private DataGridViewTextBoxColumn Venta;
         private DataGridViewComboBoxColumn Proveedor;
         private DataGridViewButtonColumn Eliminar;
+        private Sunny.UI.UITextBox txtBuscar;
+        private Sunny.UI.UIComboBox cmbCategorias;
+        private Sunny.UI.UIButton btnNuevoRepuesto;
     }
 }

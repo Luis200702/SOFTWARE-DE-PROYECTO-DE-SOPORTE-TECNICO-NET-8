@@ -35,7 +35,12 @@
             lblFecha = new Label();
             lblOrden = new Label();
             pnlCentral = new Panel();
+            pnlDispositivo2 = new Sunny.UI.UIPanel();
+            pictureBox7 = new PictureBox();
+            label5 = new Label();
+            airSeparator4 = new ReaLTaiizor.Controls.AirSeparator();
             mcReparacion = new ReaLTaiizor.Controls.MaterialCard();
+            label4 = new Label();
             lblReparacion = new Label();
             picReparacion = new PictureBox();
             txtObservaciones = new Sunny.UI.UITextBox();
@@ -85,11 +90,13 @@
             txtColorc = new Sunny.UI.UITextBox();
             lblEstado = new Label();
             cmbEstadoDispositvo = new Sunny.UI.UIComboBox();
-            pnlDispositivo2 = new Sunny.UI.UIPanel();
+            label7 = new Label();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
             pnlCentral.SuspendLayout();
+            pnlDispositivo2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             mcReparacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picReparacion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -187,9 +194,68 @@
             pnlCentral.TabIndex = 2;
             pnlCentral.Resize += pnlCentral_Resize;
             // 
+            // pnlDispositivo2
+            // 
+            pnlDispositivo2.BackColor = Color.Transparent;
+            pnlDispositivo2.Controls.Add(label7);
+            pnlDispositivo2.Controls.Add(pictureBox7);
+            pnlDispositivo2.Controls.Add(label5);
+            pnlDispositivo2.Controls.Add(airSeparator4);
+            pnlDispositivo2.FillColor = Color.FromArgb(30, 41, 59);
+            pnlDispositivo2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            pnlDispositivo2.Location = new Point(369, 40);
+            pnlDispositivo2.Margin = new Padding(4, 5, 4, 5);
+            pnlDispositivo2.MinimumSize = new Size(1, 1);
+            pnlDispositivo2.Name = "pnlDispositivo2";
+            pnlDispositivo2.Radius = 12;
+            pnlDispositivo2.RectColor = Color.FromArgb(39, 53, 72);
+            pnlDispositivo2.Size = new Size(299, 377);
+            pnlDispositivo2.TabIndex = 2;
+            pnlDispositivo2.Text = null;
+            pnlDispositivo2.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.BackColor = Color.Transparent;
+            pictureBox7.Image = Properties.Resources.MdiMonitor;
+            pictureBox7.Location = new Point(14, 10);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(30, 21);
+            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox7.TabIndex = 33;
+            pictureBox7.TabStop = false;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(41, 16);
+            label5.Name = "label5";
+            label5.Size = new Size(123, 15);
+            label5.TabIndex = 7;
+            label5.Text = "Datos del Dispositivo";
+            // 
+            // airSeparator4
+            // 
+            airSeparator4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            airSeparator4.BackColor = Color.FromArgb(98, 86, 159);
+            airSeparator4.Customization = "";
+            airSeparator4.Font = new Font("Verdana", 8F);
+            airSeparator4.Image = null;
+            airSeparator4.Location = new Point(23, 34);
+            airSeparator4.Name = "airSeparator4";
+            airSeparator4.NoRounding = false;
+            airSeparator4.Size = new Size(256, 1);
+            airSeparator4.TabIndex = 2;
+            airSeparator4.Text = "airSeparator4";
+            airSeparator4.Transparent = false;
+            // 
             // mcReparacion
             // 
             mcReparacion.BackColor = Color.FromArgb(255, 255, 255);
+            mcReparacion.Controls.Add(label4);
             mcReparacion.Controls.Add(lblReparacion);
             mcReparacion.Controls.Add(picReparacion);
             mcReparacion.Controls.Add(txtObservaciones);
@@ -214,6 +280,16 @@
             mcReparacion.Padding = new Padding(14);
             mcReparacion.Size = new Size(299, 377);
             mcReparacion.TabIndex = 1;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Location = new Point(86, 181);
+            label4.Name = "label4";
+            label4.Size = new Size(127, 15);
+            label4.TabIndex = 33;
+            label4.Text = "Datos de la Reparación";
             // 
             // lblReparacion
             // 
@@ -916,18 +992,15 @@
             cmbEstadoDispositvo.TextAlignment = ContentAlignment.MiddleLeft;
             cmbEstadoDispositvo.Watermark = "";
             // 
-            // pnlDispositivo2
+            // label7
             // 
-            pnlDispositivo2.Font = new Font("Microsoft Sans Serif", 12F);
-            pnlDispositivo2.Location = new Point(369, 40);
-            pnlDispositivo2.Margin = new Padding(4, 5, 4, 5);
-            pnlDispositivo2.MinimumSize = new Size(1, 1);
-            pnlDispositivo2.Name = "pnlDispositivo2";
-            pnlDispositivo2.Radius = 12;
-            pnlDispositivo2.RectColor = Color.FromArgb(39, 53, 72);
-            pnlDispositivo2.Size = new Size(299, 377);
-            pnlDispositivo2.TabIndex = 2;
-            pnlDispositivo2.TextAlignment = ContentAlignment.MiddleCenter;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(23, 55);
+            label7.Name = "label7";
+            label7.Size = new Size(41, 15);
+            label7.TabIndex = 34;
+            label7.Text = "Marca";
             // 
             // ucRecepcionEquipos
             // 
@@ -944,6 +1017,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInformacion.ResumeLayout(false);
             pnlCentral.ResumeLayout(false);
+            pnlDispositivo2.ResumeLayout(false);
+            pnlDispositivo2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             mcReparacion.ResumeLayout(false);
             mcReparacion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picReparacion).EndInit();
@@ -1024,5 +1100,10 @@
         private Sunny.UI.UIComboBox cmbEstadoDispositvo;
         private Label lblEstado;
         private Sunny.UI.UIPanel pnlDispositivo2;
+        private Label label5;
+        private ReaLTaiizor.Controls.AirSeparator airSeparator4;
+        private Label label4;
+        private PictureBox pictureBox7;
+        private Label label7;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
@@ -36,7 +37,13 @@
             lblOrden = new Label();
             txtBuscarOrden = new Sunny.UI.UITextBox();
             pnlPrincipal = new Panel();
+            btnComprobante = new Sunny.UI.UIButton();
+            btnRegistraEntrega = new Sunny.UI.UIButton();
             pnlFormaDePago = new Sunny.UI.UIPanel();
+            pnlTotalCobrar = new Sunny.UI.UIPanel();
+            label4 = new Label();
+            txtObservaciones = new Sunny.UI.UITextBox();
+            label3 = new Label();
             label2 = new Label();
             btnReparado = new Sunny.UI.UIButton();
             btnSinReparar = new Sunny.UI.UIButton();
@@ -69,11 +76,13 @@
             pictureBox2 = new PictureBox();
             lblResumen = new Label();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
+            uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(components);
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
             pnlPrincipal.SuspendLayout();
             pnlFormaDePago.SuspendLayout();
+            pnlTotalCobrar.SuspendLayout();
             pnlDesgloseCosto.SuspendLayout();
             pnlTrabajoRealizado.SuspendLayout();
             pnlResumen.SuspendLayout();
@@ -90,7 +99,7 @@
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(-6, 0);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1052, 59);
+            pnlSuperior.Size = new Size(1037, 59);
             pnlSuperior.TabIndex = 1;
             // 
             // pictureBox1
@@ -174,6 +183,8 @@
             // 
             pnlPrincipal.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlPrincipal.BackColor = Color.FromArgb(15, 23, 42);
+            pnlPrincipal.Controls.Add(btnComprobante);
+            pnlPrincipal.Controls.Add(btnRegistraEntrega);
             pnlPrincipal.Controls.Add(pnlFormaDePago);
             pnlPrincipal.Controls.Add(pnlDesgloseCosto);
             pnlPrincipal.Controls.Add(pnlTrabajoRealizado);
@@ -183,8 +194,57 @@
             pnlPrincipal.Size = new Size(1025, 663);
             pnlPrincipal.TabIndex = 3;
             // 
+            // btnComprobante
+            // 
+            btnComprobante.BackColor = Color.Transparent;
+            btnComprobante.FillColor = Color.FromArgb(22, 35, 52);
+            btnComprobante.FillHoverColor = Color.Transparent;
+            btnComprobante.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnComprobante.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnComprobante.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnComprobante.Location = new Point(854, 529);
+            btnComprobante.MinimumSize = new Size(1, 1);
+            btnComprobante.Name = "btnComprobante";
+            btnComprobante.Radius = 12;
+            btnComprobante.RectColor = Color.FromArgb(39, 53, 72);
+            btnComprobante.RectHoverColor = Color.FromArgb(22, 35, 52);
+            btnComprobante.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnComprobante.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnComprobante.Size = new Size(144, 31);
+            btnComprobante.TabIndex = 30;
+            btnComprobante.Text = "Comprobante";
+            btnComprobante.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnComprobante.TipsForeColor = Color.Transparent;
+            btnComprobante.Visible = false;
+            // 
+            // btnRegistraEntrega
+            // 
+            btnRegistraEntrega.BackColor = Color.Transparent;
+            btnRegistraEntrega.FillColor = Color.FromArgb(0, 150, 137);
+            btnRegistraEntrega.FillHoverColor = Color.Transparent;
+            btnRegistraEntrega.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnRegistraEntrega.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnRegistraEntrega.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRegistraEntrega.Location = new Point(546, 529);
+            btnRegistraEntrega.MinimumSize = new Size(1, 1);
+            btnRegistraEntrega.Name = "btnRegistraEntrega";
+            btnRegistraEntrega.Radius = 12;
+            btnRegistraEntrega.RectColor = Color.FromArgb(39, 53, 72);
+            btnRegistraEntrega.RectHoverColor = Color.Transparent;
+            btnRegistraEntrega.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnRegistraEntrega.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnRegistraEntrega.Size = new Size(302, 31);
+            btnRegistraEntrega.TabIndex = 29;
+            btnRegistraEntrega.Text = "Registrar Entrega";
+            btnRegistraEntrega.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnRegistraEntrega.TipsForeColor = Color.Transparent;
+            btnRegistraEntrega.Visible = false;
+            // 
             // pnlFormaDePago
             // 
+            pnlFormaDePago.Controls.Add(pnlTotalCobrar);
+            pnlFormaDePago.Controls.Add(txtObservaciones);
+            pnlFormaDePago.Controls.Add(label3);
             pnlFormaDePago.Controls.Add(label2);
             pnlFormaDePago.Controls.Add(btnReparado);
             pnlFormaDePago.Controls.Add(btnSinReparar);
@@ -206,6 +266,70 @@
             pnlFormaDePago.Text = null;
             pnlFormaDePago.TextAlignment = ContentAlignment.MiddleCenter;
             pnlFormaDePago.Visible = false;
+            // 
+            // pnlTotalCobrar
+            // 
+            pnlTotalCobrar.BackColor = Color.Transparent;
+            pnlTotalCobrar.Controls.Add(label4);
+            pnlTotalCobrar.FillColor = Color.FromArgb(22, 35, 52);
+            pnlTotalCobrar.Font = new Font("Microsoft Sans Serif", 12F);
+            pnlTotalCobrar.ForeColor = Color.FromArgb(147, 162, 183);
+            pnlTotalCobrar.Location = new Point(18, 309);
+            pnlTotalCobrar.Margin = new Padding(4, 5, 4, 5);
+            pnlTotalCobrar.MinimumSize = new Size(1, 1);
+            pnlTotalCobrar.Name = "pnlTotalCobrar";
+            pnlTotalCobrar.Radius = 12;
+            pnlTotalCobrar.RectColor = Color.FromArgb(41, 53, 72);
+            pnlTotalCobrar.Size = new Size(409, 66);
+            pnlTotalCobrar.TabIndex = 33;
+            pnlTotalCobrar.Text = "Total a cobrar";
+            pnlTotalCobrar.TextAlignment = ContentAlignment.TopCenter;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(0, 150, 137);
+            label4.Location = new Point(190, 22);
+            label4.Name = "label4";
+            label4.Size = new Size(34, 25);
+            label4.TabIndex = 15;
+            label4.Text = "$0";
+            // 
+            // txtObservaciones
+            // 
+            txtObservaciones.BackColor = Color.Transparent;
+            txtObservaciones.FillColor = Color.FromArgb(41, 53, 72);
+            txtObservaciones.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtObservaciones.Location = new Point(18, 205);
+            txtObservaciones.Margin = new Padding(4, 5, 4, 5);
+            txtObservaciones.MaxLength = 255;
+            txtObservaciones.Minimum = 0D;
+            txtObservaciones.MinimumSize = new Size(1, 16);
+            txtObservaciones.Multiline = true;
+            txtObservaciones.Name = "txtObservaciones";
+            txtObservaciones.Padding = new Padding(5);
+            txtObservaciones.Radius = 12;
+            txtObservaciones.RectColor = Color.FromArgb(41, 53, 72);
+            txtObservaciones.ShowText = false;
+            txtObservaciones.Size = new Size(409, 87);
+            txtObservaciones.TabIndex = 32;
+            txtObservaciones.TextAlignment = ContentAlignment.MiddleLeft;
+            txtObservaciones.Watermark = "Notas Adicionales";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(147, 162, 183);
+            label3.Location = new Point(18, 183);
+            label3.Name = "label3";
+            label3.Size = new Size(168, 17);
+            label3.TabIndex = 31;
+            label3.Text = "Observaciones de entrega";
+            label3.TextAlign = ContentAlignment.TopCenter;
             // 
             // label2
             // 
@@ -673,6 +797,13 @@
             airSeparator1.Text = "airSeparator1";
             airSeparator1.Transparent = false;
             // 
+            // uiContextMenuStrip1
+            // 
+            uiContextMenuStrip1.BackColor = Color.FromArgb(243, 249, 255);
+            uiContextMenuStrip1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiContextMenuStrip1.Name = "uiContextMenuStrip1";
+            uiContextMenuStrip1.Size = new Size(61, 4);
+            // 
             // ucDevolucion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -690,6 +821,8 @@
             pnlPrincipal.ResumeLayout(false);
             pnlFormaDePago.ResumeLayout(false);
             pnlFormaDePago.PerformLayout();
+            pnlTotalCobrar.ResumeLayout(false);
+            pnlTotalCobrar.PerformLayout();
             pnlDesgloseCosto.ResumeLayout(false);
             pnlDesgloseCosto.PerformLayout();
             pnlTrabajoRealizado.ResumeLayout(false);
@@ -744,5 +877,12 @@
         private Sunny.UI.UIButton btnParcial;
         private Label label2;
         private Sunny.UI.UIButton btnReparado;
+        private Label label3;
+        private Sunny.UI.UITextBox txtObservaciones;
+        private Sunny.UI.UIPanel pnlTotalCobrar;
+        private Label label4;
+        private Sunny.UI.UIButton btnComprobante;
+        private Sunny.UI.UIButton btnRegistraEntrega;
+        private Sunny.UI.UIContextMenuStrip uiContextMenuStrip1;
     }
 }

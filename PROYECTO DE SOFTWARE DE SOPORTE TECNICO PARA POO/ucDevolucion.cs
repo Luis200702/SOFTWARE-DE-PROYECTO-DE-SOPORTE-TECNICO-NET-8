@@ -25,6 +25,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             pnlTrabajoRealizado.Visible = true;
             pnlDesgloseCosto.Visible = true;
             pnlFormaDePago.Visible = true;
+            btnRegistraEntrega.Visible = true;
+            btnComprobante.Visible = true;
         }
 
         private void ucDevolucion_Load(object sender, EventArgs e)

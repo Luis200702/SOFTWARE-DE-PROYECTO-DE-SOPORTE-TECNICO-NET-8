@@ -15,7 +15,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         public ucStock()
         {
             InitializeComponent();
-            cmbCategorias.Text = "Todas las categorías";
+            cmbCategorias.SelectedIndex = 0;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -30,6 +30,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void ucStock_Load(object sender, EventArgs e)
         {
+
 
             DataGridViewComboBoxColumn Categoria = (DataGridViewComboBoxColumn)dgv4.Columns["CATEGORIA"];
 
