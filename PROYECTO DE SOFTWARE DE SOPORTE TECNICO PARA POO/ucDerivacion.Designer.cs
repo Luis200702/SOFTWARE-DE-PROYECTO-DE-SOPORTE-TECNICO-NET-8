@@ -65,6 +65,12 @@
             panel2 = new Panel();
             label3 = new Label();
             btnxdetalles = new Button();
+            panel3 = new Panel();
+            label14 = new Label();
+            textBox1 = new TextBox();
+            btnAcceder = new Sunny.UI.UIButton();
+            uiButton1 = new Sunny.UI.UIButton();
+            tableLayoutPanel2 = new TableLayoutPanel();
             pnltituloderivacion.SuspendLayout();
             panel1.SuspendLayout();
             pnlderivacionesdatos.SuspendLayout();
@@ -72,6 +78,7 @@
             panel4.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // pnltituloderivacion
@@ -304,6 +311,10 @@
             // 
             // panel4
             // 
+            panel4.Controls.Add(tableLayoutPanel2);
+            panel4.Controls.Add(textBox1);
+            panel4.Controls.Add(label14);
+            panel4.Controls.Add(panel3);
             panel4.Controls.Add(tableLayoutPanel1);
             panel4.Controls.Add(lblnombreDetalle);
             panel4.Controls.Add(lblcodigoDetalle);
@@ -501,11 +512,11 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
             label3.Location = new Point(22, 38);
             label3.Name = "label3";
-            label3.Size = new Size(65, 21);
+            label3.Size = new Size(85, 30);
             label3.TabIndex = 15;
             label3.Text = "Detalle ";
             label3.Click += label3_Click;
@@ -521,6 +532,93 @@
             btnxdetalles.TabIndex = 16;
             btnxdetalles.Text = "x";
             btnxdetalles.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.FromArgb(26, 28, 46);
+            panel3.Location = new Point(0, 355);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(407, 6);
+            panel3.TabIndex = 20;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label14.ForeColor = Color.White;
+            label14.Location = new Point(22, 374);
+            label14.Name = "label14";
+            label14.Size = new Size(203, 17);
+            label14.TabIndex = 21;
+            label14.Text = "Repuesta de la sucursal destino ";
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(26, 25, 30);
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox1.ForeColor = Color.White;
+            textBox1.Location = new Point(50, 406);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Observaciones...";
+            textBox1.Size = new Size(317, 119);
+            textBox1.TabIndex = 22;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // btnAcceder
+            // 
+            btnAcceder.BackColor = Color.Transparent;
+            btnAcceder.FillColor = Color.FromArgb(0, 110, 0);
+            btnAcceder.FillHoverColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAcceder.Location = new Point(3, 3);
+            btnAcceder.MinimumSize = new Size(1, 1);
+            btnAcceder.Name = "btnAcceder";
+            btnAcceder.Radius = 12;
+            btnAcceder.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.Size = new Size(154, 36);
+            btnAcceder.TabIndex = 23;
+            btnAcceder.Text = "Aceptar";
+            btnAcceder.TipsFont = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAcceder.TipsForeColor = Color.Black;
+            // 
+            // uiButton1
+            // 
+            uiButton1.BackColor = Color.Transparent;
+            uiButton1.FillColor = Color.Brown;
+            uiButton1.FillHoverColor = Color.FromArgb(0, 150, 137);
+            uiButton1.FillPressColor = Color.FromArgb(0, 150, 137);
+            uiButton1.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            uiButton1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiButton1.Location = new Point(177, 3);
+            uiButton1.MinimumSize = new Size(1, 1);
+            uiButton1.Name = "uiButton1";
+            uiButton1.Radius = 12;
+            uiButton1.RectPressColor = Color.FromArgb(0, 150, 137);
+            uiButton1.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            uiButton1.Size = new Size(154, 36);
+            uiButton1.TabIndex = 24;
+            uiButton1.Text = "Rechazar";
+            uiButton1.TipsFont = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            uiButton1.TipsForeColor = Color.Black;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Controls.Add(uiButton1, 1, 0);
+            tableLayoutPanel2.Controls.Add(btnAcceder, 0, 0);
+            tableLayoutPanel2.Location = new Point(31, 552);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(348, 52);
+            tableLayoutPanel2.TabIndex = 25;
             // 
             // ucDerivacion
             // 
@@ -545,6 +643,7 @@
             tableLayoutPanel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -587,5 +686,11 @@
         private Label label11;
         private Label label10;
         private Label label9;
+        private Panel panel3;
+        private TextBox textBox1;
+        private Label label14;
+        private Sunny.UI.UIButton btnAcceder;
+        private Sunny.UI.UIButton uiButton1;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }
