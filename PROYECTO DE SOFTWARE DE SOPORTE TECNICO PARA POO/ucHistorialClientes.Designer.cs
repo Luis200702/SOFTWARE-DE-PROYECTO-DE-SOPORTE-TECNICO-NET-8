@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             materialButton1 = new ReaLTaiizor.Controls.MaterialButton();
             pictureBox1 = new PictureBox();
             label1 = new Label();
@@ -41,6 +41,8 @@
             uibuscarcliente = new Sunny.UI.UIButton();
             txtBuscarCliente = new Sunny.UI.UITextBox();
             panel3 = new Panel();
+            pictureBox3 = new PictureBox();
+            pictureBox2 = new PictureBox();
             uibreautilizar = new Sunny.UI.UIButton();
             lblvalor = new Label();
             label7 = new Label();
@@ -57,8 +59,6 @@
             Costo = new DataGridViewTextBoxColumn();
             Estado = new DataGridViewTextBoxColumn();
             Tecnico = new DataGridViewTextBoxColumn();
-            pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -67,9 +67,9 @@
             splitContainer1.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // materialButton1
@@ -130,7 +130,7 @@
             panel4.Controls.Add(pictureBox1);
             panel4.Location = new Point(0, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1173, 37);
+            panel4.Size = new Size(1200, 37);
             panel4.TabIndex = 2;
             // 
             // splitContainer1
@@ -154,7 +154,7 @@
             splitContainer1.Panel2.AutoScroll = true;
             splitContainer1.Panel2.Controls.Add(panel3);
             splitContainer1.Panel2.Controls.Add(dataGridView1);
-            splitContainer1.Size = new Size(1173, 705);
+            splitContainer1.Size = new Size(1200, 705);
             splitContainer1.SplitterDistance = 300;
             splitContainer1.TabIndex = 3;
             // 
@@ -223,8 +223,28 @@
             panel3.Controls.Add(lblNombre);
             panel3.Location = new Point(-1, 5);
             panel3.Name = "panel3";
-            panel3.Size = new Size(870, 107);
+            panel3.Size = new Size(897, 107);
             panel3.TabIndex = 3;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = Properties.Resources.correo;
+            pictureBox3.Location = new Point(115, 63);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(27, 25);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 23;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.telefono;
+            pictureBox2.Location = new Point(1, 63);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(26, 25);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 22;
+            pictureBox2.TabStop = false;
             // 
             // uibreautilizar
             // 
@@ -232,7 +252,7 @@
             uibreautilizar.FillColor = Color.FromArgb(45, 212, 191);
             uibreautilizar.FillColor2 = Color.FromArgb(45, 212, 191);
             uibreautilizar.Font = new Font("Segoe UI", 12F);
-            uibreautilizar.Location = new Point(718, 39);
+            uibreautilizar.Location = new Point(745, 39);
             uibreautilizar.MinimumSize = new Size(1, 1);
             uibreautilizar.Name = "uibreautilizar";
             uibreautilizar.RectColor = Color.Empty;
@@ -327,47 +347,47 @@
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.Coral;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.Yellow;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Coral;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.Yellow;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Orden, Fecha, Dispositivo, Reparacion, Costo, Estado, Tecnico });
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(15, 23, 43);
-            dataGridViewCellStyle7.SelectionForeColor = Color.GhostWhite;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(15, 23, 42);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(15, 23, 43);
+            dataGridViewCellStyle3.SelectionForeColor = Color.GhostWhite;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.GridColor = Color.Gray;
             dataGridView1.Location = new Point(3, 110);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = SystemColors.ControlText;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.RowHeadersVisible = false;
-            dataGridView1.Size = new Size(866, 592);
+            dataGridView1.Size = new Size(893, 592);
             dataGridView1.TabIndex = 0;
             // 
             // Orden
             // 
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(15, 23, 42);
-            Orden.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(15, 23, 42);
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(15, 23, 42);
+            Orden.DefaultCellStyle = dataGridViewCellStyle2;
             Orden.HeaderText = "ORDEN";
             Orden.Name = "Orden";
             Orden.ReadOnly = true;
@@ -408,26 +428,6 @@
             Tecnico.Name = "Tecnico";
             Tecnico.ReadOnly = true;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.telefono;
-            pictureBox2.Location = new Point(1, 63);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(26, 25);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 22;
-            pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = Properties.Resources.correo;
-            pictureBox3.Location = new Point(115, 63);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(27, 25);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 23;
-            pictureBox3.TabStop = false;
-            // 
             // ucHistorialClientes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -436,7 +436,7 @@
             Controls.Add(panel4);
             Controls.Add(splitContainer1);
             Name = "ucHistorialClientes";
-            Size = new Size(1173, 749);
+            Size = new Size(1200, 749);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
@@ -448,9 +448,9 @@
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
