@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInicioSesion));
             pnlIzquierda = new Panel();
+            pictureBox1 = new PictureBox();
             pnlDerecha = new Panel();
             label1 = new Label();
             lblDerechos = new Label();
@@ -39,10 +40,9 @@
             lblContraseña = new Label();
             lblUsuario = new Label();
             lblInicioSesion = new Label();
-            pictureBox1 = new PictureBox();
             pnlIzquierda.SuspendLayout();
-            pnlDerecha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pnlDerecha.SuspendLayout();
             SuspendLayout();
             // 
             // pnlIzquierda
@@ -53,6 +53,16 @@
             pnlIzquierda.Name = "pnlIzquierda";
             pnlIzquierda.Size = new Size(442, 511);
             pnlIzquierda.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(27, 76);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(377, 341);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
             // 
             // pnlDerecha
             // 
@@ -128,6 +138,7 @@
             txtContraseña.Name = "txtContraseña";
             txtContraseña.Padding = new Padding(5);
             txtContraseña.Radius = 12;
+            txtContraseña.RectColor = Color.FromArgb(39, 53, 72);
             txtContraseña.ShowText = false;
             txtContraseña.Size = new Size(343, 29);
             txtContraseña.TabIndex = 15;
@@ -148,6 +159,7 @@
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Padding = new Padding(5);
             txtUsuario.Radius = 12;
+            txtUsuario.RectColor = Color.FromArgb(39, 53, 72);
             txtUsuario.ShowText = false;
             txtUsuario.Size = new Size(343, 29);
             txtUsuario.TabIndex = 14;
@@ -187,16 +199,6 @@
             lblInicioSesion.TabIndex = 0;
             lblInicioSesion.Text = "Accede a tu cuenta";
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(27, 76);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(377, 341);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
-            // 
             // frmInicioSesion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -210,9 +212,9 @@
             Text = "Inicio de Sesión";
             Load += frmInicioSesion_Load;
             pnlIzquierda.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlDerecha.ResumeLayout(false);
             pnlDerecha.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 

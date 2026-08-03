@@ -16,5 +16,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             InitializeComponent();
         }
+
+        private void ucSeguimientoReparaciones_Load(object sender, EventArgs e)
+        {
+            cmbEstado.SelectedIndex = 0;
+        }
     }
 }

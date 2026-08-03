@@ -33,10 +33,9 @@
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
             pnlInformacion = new Panel();
-            pictureBox2 = new PictureBox();
-            cmbEstado = new ComboBox();
+            cmbEstado = new Sunny.UI.UIComboBox();
+            txtBuscarOrden = new Sunny.UI.UITextBox();
             lblOrden = new Label();
-            txtNombre = new TextBox();
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
             label7 = new Label();
@@ -49,7 +48,6 @@
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -95,36 +93,57 @@
             pnlInformacion.AutoSize = true;
             pnlInformacion.BackColor = Color.FromArgb(30, 41, 59);
             pnlInformacion.BorderStyle = BorderStyle.FixedSingle;
-            pnlInformacion.Controls.Add(pictureBox2);
             pnlInformacion.Controls.Add(cmbEstado);
+            pnlInformacion.Controls.Add(txtBuscarOrden);
             pnlInformacion.Controls.Add(lblOrden);
-            pnlInformacion.Controls.Add(txtNombre);
             pnlInformacion.Location = new Point(0, 54);
             pnlInformacion.Name = "pnlInformacion";
             pnlInformacion.Size = new Size(1025, 60);
             pnlInformacion.TabIndex = 2;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(79, 20);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(16, 16);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 14;
-            pictureBox2.TabStop = false;
-            // 
             // cmbEstado
             // 
-            cmbEstado.DisplayMember = "Seleccionar estado...";
-            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbEstado.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbEstado.BackColor = Color.Transparent;
+            cmbEstado.DataSource = null;
+            cmbEstado.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            cmbEstado.FillColor = Color.FromArgb(41, 53, 72);
+            cmbEstado.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbEstado.ForeColor = Color.White;
             cmbEstado.FormattingEnabled = true;
+            cmbEstado.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbEstado.Items.AddRange(new object[] { "Todos los estados", "Recibido", "En diagnóstico", "En reparación", "Listo", "Entregado" });
-            cmbEstado.Location = new Point(363, 13);
+            cmbEstado.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbEstado.Location = new Point(345, 13);
+            cmbEstado.Margin = new Padding(4, 5, 4, 5);
+            cmbEstado.MinimumSize = new Size(63, 0);
             cmbEstado.Name = "cmbEstado";
-            cmbEstado.Size = new Size(179, 29);
-            cmbEstado.TabIndex = 13;
+            cmbEstado.Padding = new Padding(0, 0, 30, 2);
+            cmbEstado.Radius = 12;
+            cmbEstado.RectColor = Color.FromArgb(148, 163, 184);
+            cmbEstado.Size = new Size(151, 30);
+            cmbEstado.SymbolSize = 24;
+            cmbEstado.TabIndex = 44;
+            cmbEstado.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbEstado.Watermark = "";
+            // 
+            // txtBuscarOrden
+            // 
+            txtBuscarOrden.FillColor = Color.FromArgb(41, 53, 72);
+            txtBuscarOrden.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBuscarOrden.ForeColor = Color.White;
+            txtBuscarOrden.Icon = Properties.Resources.TablerSearch;
+            txtBuscarOrden.Location = new Point(35, 13);
+            txtBuscarOrden.Margin = new Padding(4, 5, 4, 5);
+            txtBuscarOrden.MinimumSize = new Size(1, 16);
+            txtBuscarOrden.Name = "txtBuscarOrden";
+            txtBuscarOrden.Padding = new Padding(5);
+            txtBuscarOrden.Radius = 12;
+            txtBuscarOrden.RectColor = Color.FromArgb(39, 53, 72);
+            txtBuscarOrden.ShowText = false;
+            txtBuscarOrden.Size = new Size(292, 30);
+            txtBuscarOrden.TabIndex = 14;
+            txtBuscarOrden.TextAlignment = ContentAlignment.MiddleLeft;
+            txtBuscarOrden.Watermark = "Buscar orden, cliente...";
             // 
             // lblOrden
             // 
@@ -136,20 +155,6 @@
             lblOrden.TabIndex = 0;
             lblOrden.Text = "# órdenes";
             lblOrden.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // txtNombre
-            // 
-            txtNombre.BackColor = Color.FromArgb(33, 41, 67);
-            txtNombre.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtNombre.ForeColor = Color.White;
-            txtNombre.Location = new Point(71, 13);
-            txtNombre.MaxLength = 255;
-            txtNombre.Multiline = true;
-            txtNombre.Name = "txtNombre";
-            txtNombre.PlaceholderText = "    Buscar orden, cliente...";
-            txtNombre.Size = new Size(286, 30);
-            txtNombre.TabIndex = 2;
-            txtNombre.TextAlign = HorizontalAlignment.Center;
             // 
             // dataGridView1
             // 
@@ -266,11 +271,10 @@
             Controls.Add(pnlSuperior);
             Name = "ucSeguimientoReparaciones";
             Size = new Size(1025, 686);
+            Load += ucSeguimientoReparaciones_Load;
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInformacion.ResumeLayout(false);
-            pnlInformacion.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             ResumeLayout(false);
@@ -286,8 +290,6 @@
         private Label lblOrden;
         private DataGridView dataGridView1;
         private TextBox txtNombre;
-        private PictureBox pictureBox2;
-        private ComboBox cmbEstado;
         private Panel panel1;
         private Label label7;
         private Label label6;
@@ -296,5 +298,7 @@
         private Label label3;
         private Label label2;
         private Label label1;
+        private Sunny.UI.UITextBox txtBuscarOrden;
+        private Sunny.UI.UIComboBox cmbEstado;
     }
 }

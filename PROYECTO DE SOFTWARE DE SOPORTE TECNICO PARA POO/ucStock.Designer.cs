@@ -175,7 +175,7 @@
             txtBuscar.Size = new Size(345, 30);
             txtBuscar.TabIndex = 4;
             txtBuscar.TextAlignment = ContentAlignment.MiddleLeft;
-            txtBuscar.Watermark = "Ej. ORD-2024-003";
+            txtBuscar.Watermark = "Buscar repuesto, marca...";
             // 
             // lblAlertas
             // 
