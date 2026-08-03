@@ -217,7 +217,7 @@
             panel3.Controls.Add(label2);
             panel3.Location = new Point(-1, 5);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1177, 107);
+            panel3.Size = new Size(870, 107);
             panel3.TabIndex = 3;
             // 
             // uiButton2
@@ -226,7 +226,7 @@
             uiButton2.FillColor = Color.FromArgb(45, 212, 191);
             uiButton2.FillColor2 = Color.FromArgb(45, 212, 191);
             uiButton2.Font = new Font("Segoe UI", 12F);
-            uiButton2.Location = new Point(716, 39);
+            uiButton2.Location = new Point(718, 39);
             uiButton2.MinimumSize = new Size(1, 1);
             uiButton2.Name = "uiButton2";
             uiButton2.RectColor = Color.Empty;
