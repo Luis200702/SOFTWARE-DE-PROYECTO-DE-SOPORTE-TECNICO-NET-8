@@ -459,13 +459,15 @@
             // 
             // btnLogoPrincipal
             // 
+            btnLogoPrincipal.AutoSize = true;
+            btnLogoPrincipal.Enabled = false;
             btnLogoPrincipal.FlatAppearance.BorderColor = Color.FromArgb(24, 35, 54);
             btnLogoPrincipal.FlatStyle = FlatStyle.Flat;
             btnLogoPrincipal.ImageIndex = 0;
             btnLogoPrincipal.ImageList = imageListLogoPrincipal;
             btnLogoPrincipal.Location = new Point(381, 255);
             btnLogoPrincipal.Name = "btnLogoPrincipal";
-            btnLogoPrincipal.Size = new Size(252, 258);
+            btnLogoPrincipal.Size = new Size(264, 264);
             btnLogoPrincipal.TabIndex = 0;
             btnLogoPrincipal.UseVisualStyleBackColor = true;
             // 
@@ -498,6 +500,7 @@
             pnlContenedorLogotipo.ResumeLayout(false);
             pnlContenedorSalir.ResumeLayout(false);
             pnlInterfaces.ResumeLayout(false);
+            pnlInterfaces.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }

@@ -57,6 +57,8 @@
             Costo = new DataGridViewTextBoxColumn();
             Estado = new DataGridViewTextBoxColumn();
             Tecnico = new DataGridViewTextBoxColumn();
+            pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -66,6 +68,8 @@
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // materialButton1
@@ -207,6 +211,8 @@
             panel3.AutoScroll = true;
             panel3.AutoSize = true;
             panel3.BackColor = Color.FromArgb(23, 32, 50);
+            panel3.Controls.Add(pictureBox3);
+            panel3.Controls.Add(pictureBox2);
             panel3.Controls.Add(uibreautilizar);
             panel3.Controls.Add(lblvalor);
             panel3.Controls.Add(label7);
@@ -286,7 +292,7 @@
             // 
             lblcorreo.AutoSize = true;
             lblcorreo.ForeColor = Color.FromArgb(148, 163, 184);
-            lblcorreo.Location = new Point(96, 73);
+            lblcorreo.Location = new Point(148, 73);
             lblcorreo.Name = "lblcorreo";
             lblcorreo.Size = new Size(75, 15);
             lblcorreo.TabIndex = 2;
@@ -297,7 +303,7 @@
             // 
             lbltelefono.AutoSize = true;
             lbltelefono.ForeColor = Color.FromArgb(148, 163, 184);
-            lbltelefono.Location = new Point(20, 73);
+            lbltelefono.Location = new Point(33, 73);
             lbltelefono.Name = "lbltelefono";
             lbltelefono.Size = new Size(70, 15);
             lbltelefono.TabIndex = 1;
@@ -402,6 +408,26 @@
             Tecnico.Name = "Tecnico";
             Tecnico.ReadOnly = true;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.telefono;
+            pictureBox2.Location = new Point(1, 63);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(26, 25);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 22;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = Properties.Resources.correo;
+            pictureBox3.Location = new Point(115, 63);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(27, 25);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 23;
+            pictureBox3.TabStop = false;
+            // 
             // ucHistorialClientes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -423,6 +449,8 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -455,5 +483,7 @@
         private Label lblnvisitas;
         private Label lblcorreo;
         private Sunny.UI.UIButton uibreautilizar;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
     }
 }
