@@ -85,7 +85,7 @@
             pnlContenedorMenu.Controls.Add(lblSeparador3);
             pnlContenedorMenu.Location = new Point(0, 90);
             pnlContenedorMenu.Name = "pnlContenedorMenu";
-            pnlContenedorMenu.Size = new Size(223, 619);
+            pnlContenedorMenu.Size = new Size(223, 593);
             pnlContenedorMenu.TabIndex = 0;
             // 
             // lblSeparador2
@@ -109,6 +109,7 @@
             lblAdministracion.Size = new Size(105, 15);
             lblAdministracion.TabIndex = 14;
             lblAdministracion.Text = "ADMINISTRACIÓN";
+            lblAdministracion.Visible = false;
             // 
             // lblComercial
             // 
@@ -137,6 +138,7 @@
             btnConfiguracionGeneral.TextAlign = ContentAlignment.MiddleLeft;
             btnConfiguracionGeneral.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnConfiguracionGeneral.UseVisualStyleBackColor = false;
+            btnConfiguracionGeneral.Visible = false;
             btnConfiguracionGeneral.Click += btnConfiguracionGeneral_Click;
             // 
             // imageListBarrraMenu
@@ -173,6 +175,7 @@
             btnGestionUsuarios.TextAlign = ContentAlignment.MiddleLeft;
             btnGestionUsuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnGestionUsuarios.UseVisualStyleBackColor = false;
+            btnGestionUsuarios.Visible = false;
             btnGestionUsuarios.Click += btnGestionUsuarios_Click;
             // 
             // btnReportes
@@ -191,6 +194,7 @@
             btnReportes.TextAlign = ContentAlignment.MiddleLeft;
             btnReportes.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReportes.UseVisualStyleBackColor = false;
+            btnReportes.Visible = false;
             btnReportes.Click += btnReportes_Click;
             // 
             // btnHistorialCliente
@@ -396,7 +400,7 @@
             pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorSalir.BackColor = Color.FromArgb(10, 12, 30);
             pnlContenedorSalir.Controls.Add(btnSalirApp);
-            pnlContenedorSalir.Location = new Point(0, 686);
+            pnlContenedorSalir.Location = new Point(0, 654);
             pnlContenedorSalir.Name = "pnlContenedorSalir";
             pnlContenedorSalir.Size = new Size(220, 95);
             pnlContenedorSalir.TabIndex = 2;
@@ -450,7 +454,7 @@
             pnlInterfaces.Controls.Add(btnLogoPrincipal);
             pnlInterfaces.Location = new Point(220, 0);
             pnlInterfaces.Name = "pnlInterfaces";
-            pnlInterfaces.Size = new Size(1025, 784);
+            pnlInterfaces.Size = new Size(1025, 752);
             pnlInterfaces.TabIndex = 3;
             // 
             // btnLogoPrincipal
@@ -481,7 +485,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 35, 54);
-            ClientSize = new Size(1242, 781);
+            ClientSize = new Size(1242, 749);
             Controls.Add(pnlInterfaces);
             Controls.Add(pnlContenedorSalir);
             Controls.Add(pnlContenedorLogotipo);
