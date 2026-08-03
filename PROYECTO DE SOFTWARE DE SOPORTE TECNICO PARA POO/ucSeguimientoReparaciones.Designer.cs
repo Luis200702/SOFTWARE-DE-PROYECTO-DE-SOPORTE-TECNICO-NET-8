@@ -84,7 +84,7 @@
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(342, 52);
             lblTitulo.TabIndex = 1;
-            lblTitulo.Text = "Recepción de Dispositivos";
+            lblTitulo.Text = "       Seguimiento de Reparaciones";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pnlInformacion
