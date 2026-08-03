@@ -395,7 +395,7 @@
             uiComboBox2.ForeColor = Color.White;
             uiComboBox2.FormattingEnabled = true;
             uiComboBox2.ItemHoverColor = Color.FromArgb(155, 200, 255);
-            uiComboBox2.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
+            uiComboBox2.Items.AddRange(new object[] { "Seleccionar estado...", "Efectivo", "Transferencia" });
             uiComboBox2.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
             uiComboBox2.Location = new Point(12, 312);
             uiComboBox2.Margin = new Padding(4, 5, 4, 5);
@@ -680,6 +680,7 @@
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
+            lblTelefono.BackColor = Color.Transparent;
             lblTelefono.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTelefono.ForeColor = Color.White;
             lblTelefono.Location = new Point(16, 582);
@@ -691,6 +692,7 @@
             // lblDatosCliente
             // 
             lblDatosCliente.AutoSize = true;
+            lblDatosCliente.BackColor = Color.Transparent;
             lblDatosCliente.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDatosCliente.ForeColor = Color.White;
             lblDatosCliente.Location = new Point(17, 507);

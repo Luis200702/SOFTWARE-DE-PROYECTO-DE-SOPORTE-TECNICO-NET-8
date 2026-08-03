@@ -237,7 +237,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgv4.DefaultCellStyle = dataGridViewCellStyle3;
             dgv4.EnableHeadersVisualStyles = false;
-            dgv4.Location = new Point(0, 118);
+            dgv4.Location = new Point(3, 118);
             dgv4.Margin = new Padding(3, 2, 3, 2);
             dgv4.Name = "dgv4";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
