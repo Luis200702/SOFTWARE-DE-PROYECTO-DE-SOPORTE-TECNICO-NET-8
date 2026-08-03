@@ -36,10 +36,10 @@
             uiPanel4 = new Sunny.UI.UIPanel();
             label14 = new Label();
             uiPanel3 = new Sunny.UI.UIPanel();
-            uiTextBox6 = new Sunny.UI.UITextBox();
-            label10 = new Label();
             uiTextBox5 = new Sunny.UI.UITextBox();
             uiTextBox4 = new Sunny.UI.UITextBox();
+            uiTextBox7 = new Sunny.UI.UITextBox();
+            label10 = new Label();
             label9 = new Label();
             label8 = new Label();
             airSeparator4 = new ReaLTaiizor.Controls.AirSeparator();
@@ -162,9 +162,11 @@
             // 
             // uiPanel4
             // 
+            uiPanel4.BackColor = Color.Transparent;
             uiPanel4.Controls.Add(label14);
             uiPanel4.FillColor = Color.SlateBlue;
             uiPanel4.Font = new Font("Microsoft Sans Serif", 12F);
+            uiPanel4.ForeColor = Color.White;
             uiPanel4.Location = new Point(674, 201);
             uiPanel4.Margin = new Padding(4, 5, 4, 5);
             uiPanel4.MinimumSize = new Size(1, 1);
@@ -190,10 +192,10 @@
             // 
             // uiPanel3
             // 
-            uiPanel3.Controls.Add(uiTextBox6);
-            uiPanel3.Controls.Add(label10);
             uiPanel3.Controls.Add(uiTextBox5);
             uiPanel3.Controls.Add(uiTextBox4);
+            uiPanel3.Controls.Add(uiTextBox7);
+            uiPanel3.Controls.Add(label10);
             uiPanel3.Controls.Add(label9);
             uiPanel3.Controls.Add(label8);
             uiPanel3.Controls.Add(airSeparator4);
@@ -212,28 +214,68 @@
             uiPanel3.Text = null;
             uiPanel3.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // uiTextBox6
+            // uiTextBox5
             // 
-            uiTextBox6.BackColor = Color.Transparent;
-            uiTextBox6.Enabled = false;
-            uiTextBox6.FillColor = Color.FromArgb(41, 53, 72);
-            uiTextBox6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox6.ForeColor = Color.White;
-            uiTextBox6.Location = new Point(232, 136);
-            uiTextBox6.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox6.MaxLength = 255;
-            uiTextBox6.Minimum = 0D;
-            uiTextBox6.MinimumSize = new Size(1, 16);
-            uiTextBox6.Name = "uiTextBox6";
-            uiTextBox6.Padding = new Padding(5);
-            uiTextBox6.Radius = 12;
-            uiTextBox6.RectColor = Color.FromArgb(39, 53, 72);
-            uiTextBox6.ShowText = false;
-            uiTextBox6.Size = new Size(69, 25);
-            uiTextBox6.TabIndex = 56;
-            uiTextBox6.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox6.Watermark = "$ 0.00";
-            uiTextBox6.WatermarkColor = Color.FromArgb(15, 144, 157);
+            uiTextBox5.BackColor = Color.Transparent;
+            uiTextBox5.FillColor = Color.FromArgb(41, 53, 72);
+            uiTextBox5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiTextBox5.ForeColor = Color.White;
+            uiTextBox5.Location = new Point(232, 136);
+            uiTextBox5.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox5.MaxLength = 255;
+            uiTextBox5.Minimum = 0D;
+            uiTextBox5.MinimumSize = new Size(1, 16);
+            uiTextBox5.Name = "uiTextBox5";
+            uiTextBox5.Padding = new Padding(5);
+            uiTextBox5.Radius = 12;
+            uiTextBox5.RectColor = Color.FromArgb(39, 53, 72);
+            uiTextBox5.ShowText = false;
+            uiTextBox5.Size = new Size(69, 25);
+            uiTextBox5.TabIndex = 51;
+            uiTextBox5.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox5.Watermark = "$ 0.00";
+            // 
+            // uiTextBox4
+            // 
+            uiTextBox4.BackColor = Color.Transparent;
+            uiTextBox4.FillColor = Color.FromArgb(41, 53, 72);
+            uiTextBox4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiTextBox4.ForeColor = Color.White;
+            uiTextBox4.Location = new Point(232, 86);
+            uiTextBox4.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox4.MaxLength = 255;
+            uiTextBox4.Minimum = 0D;
+            uiTextBox4.MinimumSize = new Size(1, 16);
+            uiTextBox4.Name = "uiTextBox4";
+            uiTextBox4.Padding = new Padding(5);
+            uiTextBox4.Radius = 12;
+            uiTextBox4.RectColor = Color.FromArgb(39, 53, 72);
+            uiTextBox4.ShowText = false;
+            uiTextBox4.Size = new Size(69, 25);
+            uiTextBox4.TabIndex = 51;
+            uiTextBox4.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox4.Watermark = "$ 0.00";
+            // 
+            // uiTextBox7
+            // 
+            uiTextBox7.BackColor = Color.Transparent;
+            uiTextBox7.FillColor = Color.FromArgb(41, 53, 72);
+            uiTextBox7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiTextBox7.ForeColor = Color.White;
+            uiTextBox7.Location = new Point(232, 42);
+            uiTextBox7.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox7.MaxLength = 255;
+            uiTextBox7.Minimum = 0D;
+            uiTextBox7.MinimumSize = new Size(1, 16);
+            uiTextBox7.Name = "uiTextBox7";
+            uiTextBox7.Padding = new Padding(5);
+            uiTextBox7.Radius = 12;
+            uiTextBox7.RectColor = Color.FromArgb(39, 53, 72);
+            uiTextBox7.ShowText = false;
+            uiTextBox7.Size = new Size(69, 25);
+            uiTextBox7.TabIndex = 50;
+            uiTextBox7.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox7.Watermark = "$ 0.00";
             // 
             // label10
             // 
@@ -246,52 +288,6 @@
             label10.Size = new Size(111, 15);
             label10.TabIndex = 55;
             label10.Text = "Resumen del canje";
-            // 
-            // uiTextBox5
-            // 
-            uiTextBox5.BackColor = Color.Transparent;
-            uiTextBox5.Enabled = false;
-            uiTextBox5.FillColor = Color.FromArgb(41, 53, 72);
-            uiTextBox5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox5.ForeColor = Color.White;
-            uiTextBox5.Location = new Point(232, 83);
-            uiTextBox5.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox5.MaxLength = 255;
-            uiTextBox5.Minimum = 0D;
-            uiTextBox5.MinimumSize = new Size(1, 16);
-            uiTextBox5.Name = "uiTextBox5";
-            uiTextBox5.Padding = new Padding(5);
-            uiTextBox5.Radius = 12;
-            uiTextBox5.RectColor = Color.FromArgb(39, 53, 72);
-            uiTextBox5.ShowText = false;
-            uiTextBox5.Size = new Size(69, 25);
-            uiTextBox5.TabIndex = 54;
-            uiTextBox5.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox5.Watermark = "- $ 0.00";
-            uiTextBox5.WatermarkColor = Color.Yellow;
-            // 
-            // uiTextBox4
-            // 
-            uiTextBox4.BackColor = Color.Transparent;
-            uiTextBox4.Enabled = false;
-            uiTextBox4.FillColor = Color.FromArgb(41, 53, 72);
-            uiTextBox4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox4.ForeColor = Color.White;
-            uiTextBox4.Location = new Point(232, 48);
-            uiTextBox4.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox4.MaxLength = 255;
-            uiTextBox4.Minimum = 0D;
-            uiTextBox4.MinimumSize = new Size(1, 16);
-            uiTextBox4.Name = "uiTextBox4";
-            uiTextBox4.Padding = new Padding(5);
-            uiTextBox4.Radius = 12;
-            uiTextBox4.RectColor = Color.FromArgb(39, 53, 72);
-            uiTextBox4.ShowText = false;
-            uiTextBox4.Size = new Size(69, 25);
-            uiTextBox4.TabIndex = 53;
-            uiTextBox4.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox4.Watermark = "$ 0.00";
-            uiTextBox4.WatermarkColor = Color.White;
             // 
             // label9
             // 
@@ -1016,17 +1012,17 @@
         private Label label4;
         private Sunny.UI.UIComboBox uiComboBox2;
         private Label label6;
-        private Sunny.UI.UITextBox uiTextBox4;
         private Label label9;
         private Label label8;
         private ReaLTaiizor.Controls.AirSeparator airSeparator4;
         private ReaLTaiizor.Controls.AirSeparator airSeparator3;
         private Label label7;
-        private Sunny.UI.UITextBox uiTextBox5;
         private Sunny.UI.UIPanel uiPanel4;
         private Label label14;
-        private Sunny.UI.UITextBox uiTextBox6;
         private Label label10;
         private Sunny.UI.UIButton btnGuardarRegistro;
+        private Sunny.UI.UITextBox uiTextBox5;
+        private Sunny.UI.UITextBox uiTextBox4;
+        private Sunny.UI.UITextBox uiTextBox7;
     }
 }

@@ -316,6 +316,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
+        public void MostrarAdministrador()
+        {
+            btnGestionUsuarios.Visible = true;
+            btnConfiguracionGeneral.Visible = true;
+        }
 
         // ====================================================================
         // EVENTO DEL BOTÓN DE TEMA: Cambia entre Modo Oscuro y Modo Claro
@@ -329,7 +334,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         //    TemaManager.AplicarTema(this, esOscuro);
         //}
 
-      
+
 
 
         private void frmMenu_FormClosing(object sender, FormClosingEventArgs e)

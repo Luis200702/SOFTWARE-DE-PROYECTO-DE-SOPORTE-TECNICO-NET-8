@@ -215,9 +215,9 @@
             // dgv4
             // 
             dgv4.AllowUserToAddRows = false;
+            dgv4.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv4.BackgroundColor = Color.FromArgb(10, 12, 30);
             dgv4.BorderStyle = BorderStyle.None;
-            dgv4.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(30, 41, 59);
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -237,6 +237,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgv4.DefaultCellStyle = dataGridViewCellStyle3;
             dgv4.EnableHeadersVisualStyles = false;
+            dgv4.GridColor = SystemColors.InactiveCaptionText;
             dgv4.Location = new Point(3, 118);
             dgv4.Margin = new Padding(3, 2, 3, 2);
             dgv4.Name = "dgv4";
@@ -254,7 +255,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(147, 162, 183);
             dgv4.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv4.RowTemplate.Height = 40;
-            dgv4.Size = new Size(1025, 661);
+            dgv4.Size = new Size(1016, 661);
             dgv4.TabIndex = 3;
             dgv4.CellClick += dgv4_CellClick;
             // 
@@ -263,7 +264,6 @@
             Nomnre.HeaderText = "NOMBRE";
             Nomnre.MinimumWidth = 6;
             Nomnre.Name = "Nomnre";
-            Nomnre.Width = 300;
             // 
             // Categoria
             // 
@@ -272,35 +272,30 @@
             Categoria.Name = "Categoria";
             Categoria.Resizable = DataGridViewTriState.True;
             Categoria.SortMode = DataGridViewColumnSortMode.Automatic;
-            Categoria.Width = 160;
             // 
             // Compatible
             // 
             Compatible.HeaderText = "COMPATIBLE";
             Compatible.MinimumWidth = 6;
             Compatible.Name = "Compatible";
-            Compatible.Width = 160;
             // 
             // Stock
             // 
             Stock.HeaderText = "STOCK";
             Stock.MinimumWidth = 6;
             Stock.Name = "Stock";
-            Stock.Width = 125;
             // 
             // Costo
             // 
             Costo.HeaderText = "COSTO";
             Costo.MinimumWidth = 6;
             Costo.Name = "Costo";
-            Costo.Width = 125;
             // 
             // Venta
             // 
             Venta.HeaderText = "VENTA";
             Venta.MinimumWidth = 6;
             Venta.Name = "Venta";
-            Venta.Width = 125;
             // 
             // Proveedor
             // 
@@ -309,7 +304,6 @@
             Proveedor.Name = "Proveedor";
             Proveedor.Resizable = DataGridViewTriState.True;
             Proveedor.SortMode = DataGridViewColumnSortMode.Automatic;
-            Proveedor.Width = 125;
             // 
             // Eliminar
             // 
@@ -322,7 +316,6 @@
             Eliminar.HeaderText = "   X";
             Eliminar.MinimumWidth = 6;
             Eliminar.Name = "Eliminar";
-            Eliminar.Width = 50;
             // 
             // ucStock
             // 
