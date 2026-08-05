@@ -34,6 +34,7 @@
             btnNuevaDerivacion = new Button();
             lblnumeroderivaciones = new Label();
             pnlderivacionesdatos = new Panel();
+            dgvderivacionsucursales = new DataGridView();
             uiUserControl1 = new Sunny.UI.UIUserControl();
             label4 = new Label();
             lblOrigenderivacion = new Label();
@@ -48,6 +49,12 @@
             lblcodigo = new Label();
             panel5 = new Panel();
             panel4 = new Panel();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            uiButton1 = new Sunny.UI.UIButton();
+            btnAcceder = new Sunny.UI.UIButton();
+            textBox1 = new TextBox();
+            label14 = new Label();
+            panel3 = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             label12 = new Label();
             label11 = new Label();
@@ -65,20 +72,15 @@
             panel2 = new Panel();
             label3 = new Label();
             btnxdetalles = new Button();
-            panel3 = new Panel();
-            label14 = new Label();
-            textBox1 = new TextBox();
-            btnAcceder = new Sunny.UI.UIButton();
-            uiButton1 = new Sunny.UI.UIButton();
-            tableLayoutPanel2 = new TableLayoutPanel();
             pnltituloderivacion.SuspendLayout();
             panel1.SuspendLayout();
             pnlderivacionesdatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvderivacionsucursales).BeginInit();
             uiUserControl1.SuspendLayout();
             panel4.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // pnltituloderivacion
@@ -141,6 +143,7 @@
             // 
             // pnlderivacionesdatos
             // 
+            pnlderivacionesdatos.Controls.Add(dgvderivacionsucursales);
             pnlderivacionesdatos.Controls.Add(uiUserControl1);
             pnlderivacionesdatos.Controls.Add(panel5);
             pnlderivacionesdatos.Controls.Add(pnltituloderivacion);
@@ -151,6 +154,21 @@
             pnlderivacionesdatos.Size = new Size(618, 686);
             pnlderivacionesdatos.TabIndex = 3;
             pnlderivacionesdatos.Paint += panel2_Paint;
+            // 
+            // dgvderivacionsucursales
+            // 
+            dgvderivacionsucursales.AllowUserToAddRows = false;
+            dgvderivacionsucursales.AllowUserToDeleteRows = false;
+            dgvderivacionsucursales.BackgroundColor = Color.FromArgb(26, 28, 44);
+            dgvderivacionsucursales.BorderStyle = BorderStyle.Fixed3D;
+            dgvderivacionsucursales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvderivacionsucursales.Location = new Point(0, 118);
+            dgvderivacionsucursales.Name = "dgvderivacionsucursales";
+            dgvderivacionsucursales.ReadOnly = true;
+            dgvderivacionsucursales.Size = new Size(612, 157);
+            dgvderivacionsucursales.TabIndex = 4;
+            dgvderivacionsucursales.CellContentClick += dataGridView1_CellContentClick;
+            dgvderivacionsucursales.CellPainting += dataGridView1_CellPainting;
             // 
             // uiUserControl1
             // 
@@ -169,11 +187,11 @@
             uiUserControl1.FillColor2 = Color.FromArgb(26, 28, 44);
             uiUserControl1.FillDisableColor = Color.FromArgb(26, 28, 44);
             uiUserControl1.Font = new Font("Microsoft Sans Serif", 12F);
-            uiUserControl1.Location = new Point(3, 118);
+            uiUserControl1.Location = new Point(3, 292);
             uiUserControl1.MinimumSize = new Size(1, 1);
             uiUserControl1.Name = "uiUserControl1";
             uiUserControl1.RectColor = Color.FromArgb(192, 192, 255);
-            uiUserControl1.Size = new Size(609, 150);
+            uiUserControl1.Size = new Size(603, 150);
             uiUserControl1.TabIndex = 0;
             uiUserControl1.Text = "uiUserControl1";
             uiUserControl1.TextAlignment = ContentAlignment.MiddleCenter;
@@ -326,6 +344,93 @@
             panel4.Size = new Size(407, 686);
             panel4.TabIndex = 4;
             panel4.Paint += panel4_Paint;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Controls.Add(uiButton1, 1, 0);
+            tableLayoutPanel2.Controls.Add(btnAcceder, 0, 0);
+            tableLayoutPanel2.Location = new Point(31, 552);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(348, 52);
+            tableLayoutPanel2.TabIndex = 25;
+            // 
+            // uiButton1
+            // 
+            uiButton1.BackColor = Color.Transparent;
+            uiButton1.FillColor = Color.Brown;
+            uiButton1.FillHoverColor = Color.FromArgb(0, 150, 137);
+            uiButton1.FillPressColor = Color.FromArgb(0, 150, 137);
+            uiButton1.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            uiButton1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiButton1.Location = new Point(177, 3);
+            uiButton1.MinimumSize = new Size(1, 1);
+            uiButton1.Name = "uiButton1";
+            uiButton1.Radius = 12;
+            uiButton1.RectPressColor = Color.FromArgb(0, 150, 137);
+            uiButton1.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            uiButton1.Size = new Size(154, 36);
+            uiButton1.TabIndex = 24;
+            uiButton1.Text = "Rechazar";
+            uiButton1.TipsFont = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            uiButton1.TipsForeColor = Color.Black;
+            // 
+            // btnAcceder
+            // 
+            btnAcceder.BackColor = Color.Transparent;
+            btnAcceder.FillColor = Color.FromArgb(0, 110, 0);
+            btnAcceder.FillHoverColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAcceder.Location = new Point(3, 3);
+            btnAcceder.MinimumSize = new Size(1, 1);
+            btnAcceder.Name = "btnAcceder";
+            btnAcceder.Radius = 12;
+            btnAcceder.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.Size = new Size(154, 36);
+            btnAcceder.TabIndex = 23;
+            btnAcceder.Text = "Aceptar";
+            btnAcceder.TipsFont = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAcceder.TipsForeColor = Color.Black;
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(26, 25, 30);
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox1.ForeColor = Color.White;
+            textBox1.Location = new Point(50, 406);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Observaciones...";
+            textBox1.Size = new Size(317, 119);
+            textBox1.TabIndex = 22;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label14.ForeColor = Color.White;
+            label14.Location = new Point(22, 374);
+            label14.Name = "label14";
+            label14.Size = new Size(203, 17);
+            label14.TabIndex = 21;
+            label14.Text = "Repuesta de la sucursal destino ";
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.FromArgb(26, 28, 46);
+            panel3.Location = new Point(0, 355);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(407, 6);
+            panel3.TabIndex = 20;
             // 
             // tableLayoutPanel1
             // 
@@ -533,93 +638,6 @@
             btnxdetalles.Text = "x";
             btnxdetalles.UseVisualStyleBackColor = true;
             // 
-            // panel3
-            // 
-            panel3.BackColor = Color.FromArgb(26, 28, 46);
-            panel3.Location = new Point(0, 355);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(407, 6);
-            panel3.TabIndex = 20;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label14.ForeColor = Color.White;
-            label14.Location = new Point(22, 374);
-            label14.Name = "label14";
-            label14.Size = new Size(203, 17);
-            label14.TabIndex = 21;
-            label14.Text = "Repuesta de la sucursal destino ";
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.FromArgb(26, 25, 30);
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.ForeColor = Color.White;
-            textBox1.Location = new Point(50, 406);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Observaciones...";
-            textBox1.Size = new Size(317, 119);
-            textBox1.TabIndex = 22;
-            textBox1.TextChanged += textBox1_TextChanged;
-            // 
-            // btnAcceder
-            // 
-            btnAcceder.BackColor = Color.Transparent;
-            btnAcceder.FillColor = Color.FromArgb(0, 110, 0);
-            btnAcceder.FillHoverColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.FillPressColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAcceder.Location = new Point(3, 3);
-            btnAcceder.MinimumSize = new Size(1, 1);
-            btnAcceder.Name = "btnAcceder";
-            btnAcceder.Radius = 12;
-            btnAcceder.RectPressColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.Size = new Size(154, 36);
-            btnAcceder.TabIndex = 23;
-            btnAcceder.Text = "Aceptar";
-            btnAcceder.TipsFont = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAcceder.TipsForeColor = Color.Black;
-            // 
-            // uiButton1
-            // 
-            uiButton1.BackColor = Color.Transparent;
-            uiButton1.FillColor = Color.Brown;
-            uiButton1.FillHoverColor = Color.FromArgb(0, 150, 137);
-            uiButton1.FillPressColor = Color.FromArgb(0, 150, 137);
-            uiButton1.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            uiButton1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiButton1.Location = new Point(177, 3);
-            uiButton1.MinimumSize = new Size(1, 1);
-            uiButton1.Name = "uiButton1";
-            uiButton1.Radius = 12;
-            uiButton1.RectPressColor = Color.FromArgb(0, 150, 137);
-            uiButton1.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            uiButton1.Size = new Size(154, 36);
-            uiButton1.TabIndex = 24;
-            uiButton1.Text = "Rechazar";
-            uiButton1.TipsFont = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            uiButton1.TipsForeColor = Color.Black;
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Controls.Add(uiButton1, 1, 0);
-            tableLayoutPanel2.Controls.Add(btnAcceder, 0, 0);
-            tableLayoutPanel2.Location = new Point(31, 552);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(348, 52);
-            tableLayoutPanel2.TabIndex = 25;
-            // 
             // ucDerivacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -635,15 +653,16 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             pnlderivacionesdatos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvderivacionsucursales).EndInit();
             uiUserControl1.ResumeLayout(false);
             uiUserControl1.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -692,5 +711,6 @@
         private Sunny.UI.UIButton btnAcceder;
         private Sunny.UI.UIButton uiButton1;
         private TableLayoutPanel tableLayoutPanel2;
+        private DataGridView dgvderivacionsucursales;
     }
 }
