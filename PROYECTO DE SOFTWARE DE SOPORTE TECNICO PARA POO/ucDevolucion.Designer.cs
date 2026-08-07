@@ -450,6 +450,7 @@
             cmbFormaPago.TabIndex = 24;
             cmbFormaPago.TextAlignment = ContentAlignment.MiddleLeft;
             cmbFormaPago.Watermark = "";
+            cmbFormaPago.SelectedIndexChanged += cmbFormaPago_SelectedIndexChanged;
             // 
             // lblRegistrarEntrega
             // 

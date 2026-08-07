@@ -48,5 +48,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             UnSoloBoton.SeleccionarBoton(btnSinReparar);
         }
+
+        private void cmbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -20,6 +20,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             InitializeComponent();
             ConfigurarGrid();
             CargarDatos();
+            dgvderivacionsucursales.CellClick += dgvderivacionsucursales_CellClick;
+
         }
 
 
@@ -40,12 +42,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         { }
         private void ConfigurarGrid()
         {
-            dgvderivacionsucursales.BackgroundColor = Color.FromArgb(26, 28, 44);          
+            dgvderivacionsucursales.BackgroundColor = Color.FromArgb(26, 28, 44);
             dgvderivacionsucursales.ColumnHeadersVisible = false;
             dgvderivacionsucursales.RowHeadersVisible = false;
             dgvderivacionsucursales.AllowUserToAddRows = false;
             dgvderivacionsucursales.AllowUserToResizeRows = false;
-            dgvderivacionsucursales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;          
+            dgvderivacionsucursales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvderivacionsucursales.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvderivacionsucursales.RowTemplate.Height = 75; // alto de cada "tarjeta"
             dgvderivacionsucursales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -59,7 +61,27 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvderivacionsucursales.Font = new Font("Segoe UI", 9F);
         }
 
+        private void dgvderivacionsucursales_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+            // Evita errores si el clic fue en el encabezado o fuera de una fila válida
+            if (e.RowIndex < 0 || e.RowIndex >= ordenes.Count) return;
+
+            Orden ordenSeleccionada = ordenes[e.RowIndex];
+
+            // Muestra el panel
+            pnlDetallesDerivaciones.Visible = true;
+
+            // Si quieres además llenar el panel con los datos de esa orden:
+            //lblCodigo.Text = ordenSeleccionada.Codigo;
+            //lblEstado.Text = ordenSeleccionada.Estado;
+            //lblCliente.Text = ordenSeleccionada.Cliente;
+            //lblProducto.Text = ordenSeleccionada.Producto;
+            //lblOrigen.Text = ordenSeleccionada.Origen;
+            //lblDestino.Text = ordenSeleccionada.Destino;
+            //lblMotivo.Text = ordenSeleccionada.Motivo;
+            //lblDetalle.Text = ordenSeleccionada.Detalle;
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -73,10 +95,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void btnNuevaDerivacion_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void dtgDetallesDerivacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
         }
 
 
@@ -180,7 +198,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-            using (SolidBrush fondoBrush = new SolidBrush(Color.FromArgb(26, 28, 44)))
+            
+            using (SolidBrush fondoBrush = new SolidBrush(Color.FromArgb(15, 23, 42)))
             {
                 g.FillRectangle(fondoBrush, e.CellBounds);
             }
@@ -270,6 +289,96 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void dgvderivacionsucursales_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
 
+        }
+
+        private void lblcodigo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblestadoDetalle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+            pnlDetallesDerivaciones.Visible = false;
+        }
+
+        private void btnxdetalles_Click(object sender, EventArgs e)
+        {
+            pnlDetallesDerivaciones.Visible = false;
+        }
+
+        private void label4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNuevaDerivacion_Click_1(object sender, EventArgs e)
+        {
+            pnlNuevaDerivacion.Visible = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pnlNuevaDerivacion.Visible = false;
+        }
+
+        private void pnlNuevaDerivacion_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label16_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiButton3_Click(object sender, EventArgs e)
+        {
+            pnlDetallesDerivaciones.Visible = false;
+        }
+
+        private void btnComprobante_Click(object sender, EventArgs e)
+        {
+            pnlNuevaDerivacion.Visible = false;
         }
     }
 }
