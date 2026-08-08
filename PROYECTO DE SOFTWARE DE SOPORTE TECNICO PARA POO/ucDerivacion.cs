@@ -198,7 +198,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-            
+
             using (SolidBrush fondoBrush = new SolidBrush(Color.FromArgb(15, 23, 42)))
             {
                 g.FillRectangle(fondoBrush, e.CellBounds);
@@ -379,6 +379,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void btnComprobante_Click(object sender, EventArgs e)
         {
             pnlNuevaDerivacion.Visible = false;
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

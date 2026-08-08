@@ -197,7 +197,7 @@
             pnlNuevaDerivacion.Controls.Add(label17);
             pnlNuevaDerivacion.Controls.Add(label15);
             pnlNuevaDerivacion.Controls.Add(label4);
-            pnlNuevaDerivacion.Location = new Point(229, 14);
+            pnlNuevaDerivacion.Location = new Point(189, 281);
             pnlNuevaDerivacion.Name = "pnlNuevaDerivacion";
             pnlNuevaDerivacion.Size = new Size(383, 672);
             pnlNuevaDerivacion.TabIndex = 5;
@@ -542,7 +542,6 @@
             dgvderivacionsucursales.AllowUserToAddRows = false;
             dgvderivacionsucursales.AllowUserToDeleteRows = false;
             dgvderivacionsucursales.BackgroundColor = Color.FromArgb(15, 23, 42);
-            dgvderivacionsucursales.BorderStyle = BorderStyle.Fixed3D;
             dgvderivacionsucursales.CausesValidation = false;
             dgvderivacionsucursales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvderivacionsucursales.GridColor = Color.FromArgb(15, 23, 42);
@@ -563,6 +562,7 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(6, 686);
             panel5.TabIndex = 3;
+            panel5.Paint += panel5_Paint;
             // 
             // panel2
             // 
