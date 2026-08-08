@@ -167,11 +167,11 @@
             btnGestionUsuarios.ForeColor = Color.FromArgb(155, 168, 171);
             btnGestionUsuarios.ImageIndex = 9;
             btnGestionUsuarios.ImageList = imageListBarrraMenu;
-            btnGestionUsuarios.Location = new Point(14, 514);
+            btnGestionUsuarios.Location = new Point(14, 516);
             btnGestionUsuarios.Name = "btnGestionUsuarios";
             btnGestionUsuarios.Size = new Size(190, 35);
             btnGestionUsuarios.TabIndex = 12;
-            btnGestionUsuarios.Text = "   Gestión de Usuarios            ";
+            btnGestionUsuarios.Text = "   Gestión de Técnicos        ";
             btnGestionUsuarios.TextAlign = ContentAlignment.MiddleLeft;
             btnGestionUsuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnGestionUsuarios.UseVisualStyleBackColor = false;

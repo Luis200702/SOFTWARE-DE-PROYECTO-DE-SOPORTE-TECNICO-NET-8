@@ -298,7 +298,7 @@
             cmbTecnico.ForeColor = Color.White;
             cmbTecnico.FormattingEnabled = true;
             cmbTecnico.ItemHoverColor = Color.FromArgb(155, 200, 255);
-            cmbTecnico.Items.AddRange(new object[] { "Seleccionar...", "Juan Pablo", "Raul Mendoza", "Fatima Benalcazar" });
+            cmbTecnico.Items.AddRange(new object[] { "Seleccionar...", "Juan Pablo", "Juan Pérez", "Fatima Benalcazar" });
             cmbTecnico.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
             cmbTecnico.Location = new Point(20, 239);
             cmbTecnico.Margin = new Padding(4, 5, 4, 5);
@@ -850,7 +850,7 @@
             txtSerie.ForeColor = Color.White;
             txtSerie.Location = new Point(23, 128);
             txtSerie.Margin = new Padding(4, 5, 4, 5);
-            txtSerie.MaxLength = 255;
+            txtSerie.MaxLength = 15;
             txtSerie.Minimum = 0D;
             txtSerie.MinimumSize = new Size(1, 16);
             txtSerie.Name = "txtSerie";
@@ -1063,6 +1063,7 @@
             btnLimpiar.TextAlign = ContentAlignment.MiddleRight;
             btnLimpiar.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnLimpiar.TipsForeColor = Color.Black;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // ucRecepcion
             // 
