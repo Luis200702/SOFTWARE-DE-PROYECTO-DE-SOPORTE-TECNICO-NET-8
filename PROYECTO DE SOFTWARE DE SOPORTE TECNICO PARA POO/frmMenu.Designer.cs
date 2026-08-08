@@ -327,7 +327,7 @@
             // 
             btnRecepcionEquipos.BackColor = Color.Transparent;
             btnRecepcionEquipos.FlatStyle = FlatStyle.Flat;
-            btnRecepcionEquipos.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRecepcionEquipos.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold);
             btnRecepcionEquipos.ForeColor = Color.FromArgb(155, 168, 171);
             btnRecepcionEquipos.ImageIndex = 0;
             btnRecepcionEquipos.ImageList = imageListBarrraMenu;
