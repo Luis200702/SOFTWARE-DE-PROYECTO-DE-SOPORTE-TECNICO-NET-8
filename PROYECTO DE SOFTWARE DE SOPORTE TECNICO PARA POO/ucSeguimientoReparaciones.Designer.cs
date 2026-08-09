@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucSeguimientoReparaciones));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
@@ -36,33 +38,36 @@
             cmbEstado = new Sunny.UI.UIComboBox();
             txtBuscarOrden = new Sunny.UI.UITextBox();
             lblOrden = new Label();
-            dataGridView1 = new DataGridView();
-            panel1 = new Panel();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
+            dgvSeguimiento = new DataGridView();
+            Orden = new DataGridViewTextBoxColumn();
+            Cliente_Dispositivo = new DataGridViewTextBoxColumn();
+            Tecnico = new DataGridViewTextBoxColumn();
+            Estado = new DataGridViewTextBoxColumn();
+            Ingreso = new DataGridViewTextBoxColumn();
+            Entrega = new DataGridViewTextBoxColumn();
+            Tiempo = new DataGridViewTextBoxColumn();
+            pnlContenedor = new Panel();
+            pnldgv = new Panel();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvSeguimiento).BeginInit();
+            pnlContenedor.SuspendLayout();
+            pnldgv.SuspendLayout();
             SuspendLayout();
             // 
             // pnlSuperior
             // 
-            pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
             pnlSuperior.BackColor = Color.FromArgb(30, 41, 59);
             pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
             pnlSuperior.Controls.Add(pictureBox1);
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(0, 0);
+            pnlSuperior.MaximumSize = new Size(1125, 54);
+            pnlSuperior.MinimumSize = new Size(1125, 54);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1025, 54);
+            pnlSuperior.Size = new Size(1125, 54);
             pnlSuperior.TabIndex = 1;
             // 
             // pictureBox1
@@ -89,7 +94,6 @@
             // 
             // pnlInformacion
             // 
-            pnlInformacion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlInformacion.AutoSize = true;
             pnlInformacion.BackColor = Color.FromArgb(30, 41, 59);
             pnlInformacion.BorderStyle = BorderStyle.FixedSingle;
@@ -97,8 +101,10 @@
             pnlInformacion.Controls.Add(txtBuscarOrden);
             pnlInformacion.Controls.Add(lblOrden);
             pnlInformacion.Location = new Point(0, 54);
+            pnlInformacion.MaximumSize = new Size(1125, 60);
+            pnlInformacion.MinimumSize = new Size(1125, 60);
             pnlInformacion.Name = "pnlInformacion";
-            pnlInformacion.Size = new Size(1025, 60);
+            pnlInformacion.Size = new Size(1125, 60);
             pnlInformacion.TabIndex = 2;
             // 
             // cmbEstado
@@ -125,6 +131,7 @@
             cmbEstado.TabIndex = 44;
             cmbEstado.TextAlignment = ContentAlignment.MiddleLeft;
             cmbEstado.Watermark = "";
+            cmbEstado.SelectedIndexChanged += cmbEstado_SelectedIndexChanged_1;
             // 
             // txtBuscarOrden
             // 
@@ -144,6 +151,7 @@
             txtBuscarOrden.TabIndex = 14;
             txtBuscarOrden.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscarOrden.Watermark = "Buscar orden, cliente...";
+            txtBuscarOrden.TextChanged += txtBuscarOrden_TextChanged;
             // 
             // lblOrden
             // 
@@ -156,127 +164,115 @@
             lblOrden.Text = "# órdenes";
             lblOrden.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // dataGridView1
+            // dgvSeguimiento
             // 
-            dataGridView1.BackgroundColor = Color.FromArgb(24, 35, 54);
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(0, 174);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1025, 509);
-            dataGridView1.TabIndex = 3;
+            dgvSeguimiento.AllowUserToAddRows = false;
+            dgvSeguimiento.AllowUserToDeleteRows = false;
+            dgvSeguimiento.AllowUserToResizeColumns = false;
+            dgvSeguimiento.AllowUserToResizeRows = false;
+            dgvSeguimiento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvSeguimiento.BackgroundColor = Color.White;
+            dgvSeguimiento.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvSeguimiento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvSeguimiento.Columns.AddRange(new DataGridViewColumn[] { Orden, Cliente_Dispositivo, Tecnico, Estado, Ingreso, Entrega, Tiempo });
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvSeguimiento.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvSeguimiento.Location = new Point(0, 54);
+            dgvSeguimiento.MaximumSize = new Size(1125, 641);
+            dgvSeguimiento.MinimumSize = new Size(1125, 641);
+            dgvSeguimiento.Name = "dgvSeguimiento";
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dgvSeguimiento.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dgvSeguimiento.RowTemplate.Height = 30;
+            dgvSeguimiento.Size = new Size(1125, 641);
+            dgvSeguimiento.TabIndex = 3;
+            dgvSeguimiento.CellClick += dgvSeguimiento_CellClick;
+            dgvSeguimiento.CellContentClick += dgvSeguimiento_CellContentClick;
             // 
-            // panel1
+            // Orden
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.AutoSize = true;
-            panel1.BackColor = Color.FromArgb(30, 41, 59);
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(label7);
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(label5);
-            panel1.Controls.Add(label4);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(0, 114);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1025, 54);
-            panel1.TabIndex = 4;
+            Orden.HeaderText = "ORDEN";
+            Orden.Name = "Orden";
+            Orden.ReadOnly = true;
             // 
-            // label7
+            // Cliente_Dispositivo
             // 
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.FromArgb(147, 162, 183);
-            label7.Location = new Point(923, 15);
-            label7.Name = "label7";
-            label7.Size = new Size(63, 23);
-            label7.TabIndex = 7;
-            label7.Text = "TIEMPO";
-            label7.TextAlign = ContentAlignment.MiddleCenter;
+            Cliente_Dispositivo.HeaderText = "CLIENTE \\ DISPOSITIVO";
+            Cliente_Dispositivo.Name = "Cliente_Dispositivo";
+            Cliente_Dispositivo.ReadOnly = true;
             // 
-            // label6
+            // Tecnico
             // 
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.FromArgb(147, 162, 183);
-            label6.Location = new Point(773, 15);
-            label6.Name = "label6";
-            label6.Size = new Size(92, 23);
-            label6.TabIndex = 6;
-            label6.Text = "ENTRAGA EST.";
-            label6.TextAlign = ContentAlignment.MiddleCenter;
+            Tecnico.HeaderText = "TÉCNICO";
+            Tecnico.Name = "Tecnico";
+            Tecnico.ReadOnly = true;
             // 
-            // label5
+            // Estado
             // 
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.FromArgb(147, 162, 183);
-            label5.Location = new Point(636, 15);
-            label5.Name = "label5";
-            label5.Size = new Size(66, 23);
-            label5.TabIndex = 5;
-            label5.Text = "INGRESO";
-            label5.TextAlign = ContentAlignment.MiddleCenter;
+            Estado.HeaderText = "ESTADO";
+            Estado.Name = "Estado";
+            Estado.ReadOnly = true;
             // 
-            // label4
+            // Ingreso
             // 
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.FromArgb(147, 162, 183);
-            label4.Location = new Point(515, 15);
-            label4.Name = "label4";
-            label4.Size = new Size(66, 23);
-            label4.TabIndex = 4;
-            label4.Text = "ESTADO";
-            label4.TextAlign = ContentAlignment.MiddleCenter;
+            Ingreso.HeaderText = "INGRESO";
+            Ingreso.Name = "Ingreso";
+            Ingreso.ReadOnly = true;
             // 
-            // label3
+            // Entrega
             // 
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.FromArgb(147, 162, 183);
-            label3.Location = new Point(390, 15);
-            label3.Name = "label3";
-            label3.Size = new Size(66, 23);
-            label3.TabIndex = 3;
-            label3.Text = "TÉCNICO";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
+            Entrega.HeaderText = "ENTREGA ESTIMADA";
+            Entrega.Name = "Entrega";
+            Entrega.ReadOnly = true;
             // 
-            // label2
+            // Tiempo
             // 
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.FromArgb(147, 162, 183);
-            label2.Location = new Point(163, 15);
-            label2.Name = "label2";
-            label2.Size = new Size(153, 23);
-            label2.TabIndex = 2;
-            label2.Text = "CLIENTE / DISPOSITIVO";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
+            Tiempo.HeaderText = "TIEMPO";
+            Tiempo.Name = "Tiempo";
+            Tiempo.ReadOnly = true;
             // 
-            // label1
+            // pnlContenedor
             // 
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(147, 162, 183);
-            label1.Location = new Point(20, 15);
-            label1.Name = "label1";
-            label1.Size = new Size(75, 23);
-            label1.TabIndex = 1;
-            label1.Text = "ORDEN";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            pnlContenedor.Controls.Add(pnldgv);
+            pnlContenedor.Dock = DockStyle.Fill;
+            pnlContenedor.Location = new Point(0, 0);
+            pnlContenedor.MaximumSize = new Size(1125, 705);
+            pnlContenedor.MinimumSize = new Size(1125, 705);
+            pnlContenedor.Name = "pnlContenedor";
+            pnlContenedor.Size = new Size(1125, 705);
+            pnlContenedor.TabIndex = 4;
+            // 
+            // pnldgv
+            // 
+            pnldgv.Controls.Add(dgvSeguimiento);
+            pnldgv.Location = new Point(0, 60);
+            pnldgv.Name = "pnldgv";
+            pnldgv.Size = new Size(1125, 647);
+            pnldgv.TabIndex = 4;
             // 
             // ucSeguimientoReparaciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 35, 54);
-            Controls.Add(panel1);
-            Controls.Add(dataGridView1);
             Controls.Add(pnlInformacion);
             Controls.Add(pnlSuperior);
+            Controls.Add(pnlContenedor);
             Name = "ucSeguimientoReparaciones";
-            Size = new Size(1025, 686);
+            Size = new Size(1125, 764);
             Load += ucSeguimientoReparaciones_Load;
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInformacion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvSeguimiento).EndInit();
+            pnlContenedor.ResumeLayout(false);
+            pnldgv.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -288,17 +284,18 @@
         private Label lblTitulo;
         private Panel pnlInformacion;
         private Label lblOrden;
-        private DataGridView dataGridView1;
         private TextBox txtNombre;
-        private Panel panel1;
-        private Label label7;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private Label label1;
         private Sunny.UI.UITextBox txtBuscarOrden;
         private Sunny.UI.UIComboBox cmbEstado;
+        private DataGridView dgvSeguimiento;
+        private DataGridViewTextBoxColumn Orden;
+        private DataGridViewTextBoxColumn Cliente_Dispositivo;
+        private DataGridViewTextBoxColumn Tecnico;
+        private DataGridViewTextBoxColumn Estado;
+        private DataGridViewTextBoxColumn Ingreso;
+        private DataGridViewTextBoxColumn Entrega;
+        private DataGridViewTextBoxColumn Tiempo;
+        private Panel pnlContenedor;
+        private Panel pnldgv;
     }
 }

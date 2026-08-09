@@ -100,7 +100,7 @@
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(-6, 0);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1037, 59);
+            pnlSuperior.Size = new Size(1140, 59);
             pnlSuperior.TabIndex = 1;
             // 
             // pictureBox1
@@ -135,7 +135,7 @@
             pnlInformacion.ForeColor = Color.White;
             pnlInformacion.Location = new Point(0, 59);
             pnlInformacion.Name = "pnlInformacion";
-            pnlInformacion.Size = new Size(1022, 59);
+            pnlInformacion.Size = new Size(1125, 59);
             pnlInformacion.TabIndex = 2;
             // 
             // btnBuscar
@@ -194,7 +194,7 @@
             pnlPrincipal.Controls.Add(pnlResumen);
             pnlPrincipal.Location = new Point(0, 118);
             pnlPrincipal.Name = "pnlPrincipal";
-            pnlPrincipal.Size = new Size(1025, 663);
+            pnlPrincipal.Size = new Size(1128, 663);
             pnlPrincipal.TabIndex = 3;
             // 
             // btnComprobante
@@ -822,7 +822,7 @@
             Controls.Add(pnlInformacion);
             Controls.Add(pnlSuperior);
             Name = "ucDevolucion";
-            Size = new Size(1022, 781);
+            Size = new Size(1125, 764);
             Load += ucDevolucion_Load;
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
