@@ -430,7 +430,7 @@
             btnSalirApp.RectHoverColor = Color.FromArgb(255, 128, 128);
             btnSalirApp.RectPressColor = Color.FromArgb(0, 150, 137);
             btnSalirApp.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnSalirApp.Size = new Size(159, 35);
+            btnSalirApp.Size = new Size(160, 35);
             btnSalirApp.TabIndex = 16;
             btnSalirApp.Text = "SALIR";
             btnSalirApp.TipsFont = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);

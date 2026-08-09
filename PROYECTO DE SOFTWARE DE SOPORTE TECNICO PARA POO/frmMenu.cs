@@ -239,7 +239,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 if (btn != botonActivo)
                 {
-                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#6FE6D0");
+                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#1FE5CC");
                 }
 
                 posicionObjetivoY = btn.Top;
