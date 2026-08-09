@@ -218,12 +218,13 @@
             // lblEquipos
             // 
             lblEquipos.Anchor = AnchorStyles.None;
+            lblEquipos.AutoSize = true;
             lblEquipos.BackColor = Color.Transparent;
             lblEquipos.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblEquipos.ForeColor = Color.Black;
-            lblEquipos.Location = new Point(14, 16);
+            lblEquipos.Location = new Point(18, 25);
             lblEquipos.Name = "lblEquipos";
-            lblEquipos.Size = new Size(64, 31);
+            lblEquipos.Size = new Size(49, 15);
             lblEquipos.TabIndex = 23;
             lblEquipos.Text = "Equipos";
             lblEquipos.TextAlign = ContentAlignment.MiddleCenter;
@@ -1157,6 +1158,7 @@
             pnlCentral.ResumeLayout(false);
             pnlCentral.PerformLayout();
             flpEquipos.ResumeLayout(false);
+            flpEquipos.PerformLayout();
             uiPanel1.ResumeLayout(false);
             uiPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picReparacion).EndInit();

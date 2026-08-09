@@ -8,15 +8,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
-
     public partial class ucRecepcion : UserControl
     {
-        // Estas van al inicio, junto a 'contadorEquipos' y 'tipoDispositivo'
         private List<DispositivoTemporal> listaEquipos = new List<DispositivoTemporal>();
         private int indicePestanaActual = 0;
         private int contadorEquipos = 1;
@@ -31,18 +28,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void ucRecepcion_Load(object sender, EventArgs e)
         {
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
+            CargarDatosComboBox();
             cmbEstado.SelectedIndex = 0;
-            cmbSucursal.SelectedIndex = 0;
-            cmbTecnico.SelectedIndex = 0;
-
             MostrarNumeroOrden();
 
             listaEquipos.Add(new DispositivoTemporal());
 
             btnEquipo.Tag = 0;
-
-            // 2. Nos aseguramos de que dispare el evento de cambio de pestaña al hacerle clic
             btnEquipo.Click += btnEquipo_Click;
+
+            // 🔍 Vinculamos el evento para buscar al cliente cuando termine de escribir la cédula y salga del cuadro de texto
+            txtIdentificacionCliente.Leave += txtIdentificacionCliente_Leave;
         }
 
         public void SeleccionarBoton(UIButton boton)
@@ -73,111 +69,292 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             tipoDispositivo = "telefono";
         }
 
+        private void CargarDatosComboBox()
+        {
+            var db = new Conexion_Base_de_Datos();
+            if (db.abrirConexion())
+            {
+                try
+                {
+                    string queryTecnicos = "SELECT Id, Nombre FROM Usuarios WHERE Perfil = 'Tecnico'";
+                    SqlDataAdapter daTecnicos = new SqlDataAdapter(queryTecnicos, db.oCon);
+                    DataTable dtTecnicos = new DataTable();
+                    daTecnicos.Fill(dtTecnicos);
+
+                    cmbTecnico.DataSource = dtTecnicos;
+                    cmbTecnico.DisplayMember = "Nombre";
+                    cmbTecnico.ValueMember = "Id";
+
+                    if (cmbSucursal.Items.Count == 0)
+                    {
+                        cmbSucursal.Items.Add("Centro");
+                        cmbSucursal.Items.Add("Norte");
+                        cmbSucursal.Items.Add("Sur");
+                    }
+                    cmbSucursal.SelectedIndex = 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar los datos en los ComboBox: " + ex.Message);
+                }
+                finally
+                {
+                    db.cerrarConexion();
+                }
+            }
+        }
+
         private void MostrarNumeroOrden()
         {
-            //var db = new Conexion_Base_de_Datos();
+            var db = new Conexion_Base_de_Datos();
 
-            //using (SqlConnection con = db.ObtenerConexion())
-            //{
-            //    con.Open();
+            if (db.abrirConexion())
+            {
+                try
+                {
+                    string query = "SELECT ISNULL(MAX(id), 0) FROM ordenes";
 
-            //    string query = "SELECT ISNULL(MAX(id), 0) FROM ordenes";
+                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    {
+                        int ultimoId = Convert.ToInt32(cmd.ExecuteScalar());
+                        lblOrden.Text = "ORD-" + DateTime.Now.Year + "-" + (ultimoId + 1).ToString("D3");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener el número de orden: " + ex.Message);
+                    lblOrden.Text = "ORD-" + DateTime.Now.Year + "-001";
+                }
+                finally
+                {
+                    db.cerrarConexion();
+                }
+            }
+            else
+            {
+                lblOrden.Text = "ORD-" + DateTime.Now.Year + "-001";
+            }
+        }
 
-            //    using (SqlCommand cmd = new SqlCommand(query, con))
-            //    {
-            //        int ultimoId = Convert.ToInt32(cmd.ExecuteScalar());
-            //        lblOrden.Text = "ORD-" + DateTime.Now.Year + "-" + (ultimoId + 1).ToString("D3");
-            //    }
-            //}
+        // 🔍 MÉTODO PARA BUSCAR SI EL CLIENTE YA EXISTE EN LA BASE DE DATOS DE AZURE
+        private void txtIdentificacionCliente_Leave(object sender, EventArgs e)
+        {
+            string cedula = txtIdentificacionCliente.Text.Trim();
+            if (string.IsNullOrEmpty(cedula)) return;
+
+            var db = new Conexion_Base_de_Datos();
+            if (db.abrirConexion())
+            {
+                try
+                {
+                    string query = "SELECT TOP 1 nombre, telefono, correo FROM clientes WHERE cedula_pasaporte = @cedula";
+                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    {
+                        cmd.Parameters.AddWithValue("@cedula", cedula);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Si el cliente existe, autocompleta sus campos
+                                txtNombres.Text = reader["nombre"].ToString();
+                                txtNumeroTelefonico.Text = reader["telefono"].ToString();
+                                txtCorreo.Text = reader["correo"].ToString();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al buscar cliente: " + ex.Message);
+                }
+                finally
+                {
+                    db.cerrarConexion();
+                }
+            }
         }
 
         private void GuardarRecepcion()
         {
+            GuardarDatosEnMemoria();
+
+            foreach (var eq in listaEquipos)
+            {
+                if (string.IsNullOrEmpty(eq.Tipo))
+                {
+                    MessageBox.Show("Por favor selecciona si el equipo es computadora o teléfono en todas las pestañas.");
+                    return;
+                }
+            }
+
             var db = new Conexion_Base_de_Datos();
 
-            ////using (SqlConnection con = db.ObtenerConexion())
-            //{
-            //    con.Open();
+            if (!db.abrirConexion())
+            {
+                MessageBox.Show("No se pudo conectar a la base de datos de Azure.");
+                return;
+            }
 
-            //    // INSERT Cliente
-            //    string queryCliente = @"INSERT INTO clientes 
-            //            (nombre, telefono, correo, cedula, pasaporte, tipo_dispositivo)
-            //            VALUES 
-            //            (@nombre, @telefono, @correo, @cedula, @pasaporte, @tipo_dispositivo);
-            //            SELECT SCOPE_IDENTITY();";
+            SqlTransaction transaccion = db.oCon.BeginTransaction();
 
-            //    int idCliente;
-            //    using (SqlCommand cmd = new SqlCommand(queryCliente, con))
-            //    {
-            //        cmd.Parameters.AddWithValue("@nombre", txtNombres.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@telefono", txtNumeroTelefonico.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@correo", txtCorreo.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@cedula",
-            //            string.IsNullOrEmpty(txtIdentificacionCliente.Text) ? (object)DBNull.Value : txtIdentificacionCliente.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@pasaporte",
-            //            string.IsNullOrEmpty(txtIdentificacionCliente.Text) ? (object)DBNull.Value : txtIdentificacionCliente.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@tipo_dispositivo", tipoDispositivo);
+            try
+            {
+                // Verificamos si el cliente ya existe para no duplicarlo, o lo insertamos si es nuevo
+                string queryVerificarCliente = "SELECT id FROM clientes WHERE cedula_pasaporte = @cedula";
+                int idCliente = 0;
 
-            //        idCliente = Convert.ToInt32(cmd.ExecuteScalar());
-            //    }
+                using (SqlCommand cmdVal = new SqlCommand(queryVerificarCliente, db.oCon, transaccion))
+                {
+                    cmdVal.Parameters.AddWithValue("@cedula", txtIdentificacionCliente.Text.Trim());
+                    var resultado = cmdVal.ExecuteScalar();
+                    if (resultado != null)
+                    {
+                        idCliente = Convert.ToInt32(resultado);
+                    }
+                }
 
-            //    // INSERT Dispositivo
-            //    string queryDispositivo = @"INSERT INTO dispositivos 
-            //            (tipo, marca, modelo, serie_imei, color, estado_llegada)
-            //            VALUES 
-            //            (@tipo, @marca, @modelo, @serie_imei, @color, @estado_llegada);
-            //            SELECT SCOPE_IDENTITY();";
+                if (idCliente == 0)
+                {
+                    string queryCliente = @"INSERT INTO clientes (nombre, telefono, correo, cedula_pasaporte) 
+                                            VALUES (@nombre, @telefono, @correo, @cedula); 
+                                            SELECT SCOPE_IDENTITY();";
 
-            //    int idDispositivo;
-            //    using (SqlCommand cmd = new SqlCommand(queryDispositivo, con))
-            //    {
-            //        cmd.Parameters.AddWithValue("@tipo", tipoDispositivo);
-            //        cmd.Parameters.AddWithValue("@marca", txtMarca.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@modelo", txtModelo.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@serie_imei", txtSerie.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@color", txtColor.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@estado_llegada", cmbEstado.SelectedItem?.ToString());
+                    using (SqlCommand cmd = new SqlCommand(queryCliente, db.oCon, transaccion))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", txtNombres.Text.Trim());
+                        cmd.Parameters.AddWithValue("@telefono", txtNumeroTelefonico.Text.Trim());
+                        cmd.Parameters.AddWithValue("@correo", txtCorreo.Text.Trim());
+                        cmd.Parameters.AddWithValue("@cedula", txtIdentificacionCliente.Text.Trim());
 
-            //        idDispositivo = Convert.ToInt32(cmd.ExecuteScalar());
-            //    }
+                        idCliente = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
 
-            //    // INSERT Orden
-            //    string queryOrden = @"INSERT INTO ordenes 
-            //    (numero_orden, cliente_id, dispositivo_id, tecnico_id, sucursal_id, 
-            //     descripcion_problema, diagnostico_inicial, estado,
-            //     costo_estimado, fecha_ingreso, fecha_estimada_entrega)
-            //    VALUES 
-            //    (@numero_orden, @cliente_id, @dispositivo_id, @tecnico_id, @sucursal_id,
-            //     @descripcion_problema, @diagnostico_inicial, @estado,
-            //     @costo_estimado, @fecha_ingreso, @fecha_estimada_entrega)";
+                int tecnicoId = Convert.ToInt32(cmbTecnico.SelectedValue);
+                string sucursalNombre = cmbSucursal.SelectedItem?.ToString() ?? "Centro";
 
-            //    using (SqlCommand cmd = new SqlCommand(queryOrden, con))
-            //    {
-            //        cmd.Parameters.AddWithValue("@cliente_id", idCliente);
-            //        cmd.Parameters.AddWithValue("@dispositivo_id", idDispositivo);
+                for (int i = 0; i < listaEquipos.Count; i++)
+                {
+                    var equipo = listaEquipos[i];
 
-            //        int[] idsTecnicos = { 0, 11, 13, 14 };
-            //        cmd.Parameters.AddWithValue("@tecnico_id",
-            //            cmbTecnico.SelectedIndex >= 0 ? (object)idsTecnicos[cmbTecnico.SelectedIndex] : DBNull.Value);
+                    string queryDispositivo = @"INSERT INTO dispositivos (cliente_id, tipo, marca, modelo, serie_imei, color, estado_llegada) 
+                                                VALUES (@cliente_id, @tipo, @marca, @modelo, @serie_imei, @color, @estado_llegada); 
+                                                SELECT SCOPE_IDENTITY();";
 
-            //        int[] idsSucursales = { 1, 2, 3, 4 };
-            //        cmd.Parameters.AddWithValue("@sucursal_id",
-            //            cmbSucursal.SelectedIndex >= 0 ? (object)idsSucursales[cmbSucursal.SelectedIndex] : DBNull.Value);
+                    int idDispositivo;
+                    using (SqlCommand cmd = new SqlCommand(queryDispositivo, db.oCon, transaccion))
+                    {
+                        cmd.Parameters.AddWithValue("@cliente_id", idCliente);
+                        cmd.Parameters.AddWithValue("@tipo", equipo.Tipo);
+                        cmd.Parameters.AddWithValue("@marca", equipo.Marca.Trim());
+                        cmd.Parameters.AddWithValue("@modelo", equipo.Modelo.Trim());
+                        cmd.Parameters.AddWithValue("@serie_imei", equipo.Serie.Trim());
+                        cmd.Parameters.AddWithValue("@color", equipo.Color.Trim());
+                        cmd.Parameters.AddWithValue("@estado_llegada", cmbEstado.Items[equipo.IndiceEstado].ToString());
 
-            //        cmd.Parameters.AddWithValue("@descripcion_problema", txtDescripcionProblema.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@diagnostico_inicial", txtObservaciones.Text.Trim());
-            //        cmd.Parameters.AddWithValue("@estado", "Recibido");
-            //        cmd.Parameters.AddWithValue("@costo_estimado", decimal.Parse(txtCosto.Text));
-            //        cmd.Parameters.AddWithValue("@fecha_ingreso", DateTime.Now);
-            //        cmd.Parameters.AddWithValue("@fecha_estimada_entrega", dtmFecha.Value.Date);
-            //        cmd.Parameters.AddWithValue("@numero_orden", lblOrden.Text);
+                        idDispositivo = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
 
-            //        cmd.ExecuteNonQuery();
-            //    }
-            //}
+                    string queryOrden = @"INSERT INTO ordenes (numero_orden, cliente_id, dispositivo_id, tecnico_id, sucursal, 
+                                         descripcion_problema, diagnostico_inicial, costo_estimado, fecha_ingreso, fecha_estimada_entrega, estado) 
+                                         VALUES (@num_orden, @cli_id, @disp_id, @tec_id, @sucursal, @prob, @diag, @costo, @f_ingreso, @f_entrega, @estado)";
 
-            //MessageBox.Show("Recepción guardada correctamente.");
-            //MostrarNumeroOrden();
+                    using (SqlCommand cmd = new SqlCommand(queryOrden, db.oCon, transaccion))
+                    {
+                        string numOrdenFinal = listaEquipos.Count > 1 ? $"{lblOrden.Text}-{i + 1}" : lblOrden.Text;
+
+                        cmd.Parameters.AddWithValue("@num_orden", numOrdenFinal);
+                        cmd.Parameters.AddWithValue("@cli_id", idCliente);
+                        cmd.Parameters.AddWithValue("@disp_id", idDispositivo);
+                        cmd.Parameters.AddWithValue("@tec_id", tecnicoId);
+                        cmd.Parameters.AddWithValue("@sucursal", sucursalNombre);
+                        cmd.Parameters.AddWithValue("@prob", equipo.Problema.Trim());
+                        cmd.Parameters.AddWithValue("@diag", equipo.Observaciones.Trim());
+                        cmd.Parameters.AddWithValue("@costo", string.IsNullOrEmpty(txtCosto.Text) ? 0 : decimal.Parse(txtCosto.Text));
+                        cmd.Parameters.AddWithValue("@f_ingreso", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@f_entrega", dtmFecha.Value.Date);
+                        cmd.Parameters.AddWithValue("@estado", "Recibido");
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                transaccion.Commit();
+                MessageBox.Show("¡Recepción y equipos guardados exitosamente en la nube!");
+
+                // 🔄 REINICIO TOTAL DE LA INTERFAZ TRAS GUARDAR CON ÉXITO
+                ReiniciarFormularioCompleto();
+            }
+            catch (Exception ex)
+            {
+                try { transaccion.Rollback(); } catch { }
+                MessageBox.Show("Error al guardar en la base de datos: " + ex.Message);
+            }
+            finally
+            {
+                db.cerrarConexion();
+            }
+        }
+
+        // 🔄 MÉTODO AUXILIAR PARA LIMPIAR TODO Y DEJARLO COMO AL INICIO
+        private void ReiniciarFormularioCompleto()
+        {
+            // Limpiar datos de cliente
+            txtNombres.Clear();
+            txtNumeroTelefonico.Clear();
+            txtCorreo.Clear();
+            txtIdentificacionCliente.Clear();
+
+            // Limpiar datos de reparación generales
+            txtDescripcionProblema.Clear();
+            txtObservaciones.Clear();
+            txtCosto.Text = "0";
+            cmbEstado.SelectedIndex = 0;
+            cmbTecnico.SelectedIndex = 0;
+            cmbSucursal.SelectedIndex = 0;
+            dtmFecha.Value = DateTime.Now;
+
+            // Limpiar memoria de equipos y dejar solo el Equipo 1 limpio
+            listaEquipos.Clear();
+            listaEquipos.Add(new DispositivoTemporal());
+            indicePestanaActual = 0;
+            contadorEquipos = 1;
+
+            // Limpiar botones de equipo dinámicos del panel (dejando únicamente el btnEquipo original y btnAgregarEquipo)
+            List<Control> controlesABorrar = new List<Control>();
+            foreach (Control ctrl in flpEquipos.Controls)
+            {
+                if (ctrl is Sunny.UI.UIButton btn && btn.Name != "btnEquipo" && btn.Name != "btnAgregarEquipo")
+                {
+                    controlesABorrar.Add(btn);
+                }
+            }
+            foreach (var ctrl in controlesABorrar)
+            {
+                flpEquipos.Controls.Remove(ctrl);
+            }
+
+            // Resetear el botón principal "Equipo 1"
+            btnEquipo.Tag = 0;
+            btnEquipo.FillColor = Color.FromArgb(0, 150, 137);
+            btnEquipo.RectColor = Color.FromArgb(0, 150, 137);
+            btnEquipo.ForeColor = Color.FromArgb(22, 35, 52);
+
+            // Limpiar botones de tipo de dispositivo
+            tipoDispositivo = "";
+            if (botonSeleccionado != null)
+            {
+                botonSeleccionado.FillColor = Color.FromArgb(22, 35, 52);
+                botonSeleccionado.RectColor = Color.Gray;
+                botonSeleccionado.ForeColor = Color.White;
+                botonSeleccionado = null;
+            }
+
+            // Cargar datos limpios en la pantalla para el Equipo 1
+            CargarDatosA_Pantalla(0);
+
+            // Generar el nuevo número de orden para el siguiente registro
+            MostrarNumeroOrden();
         }
 
         private void btnGuardarRegistro_Click(object sender, EventArgs e)
@@ -192,44 +369,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            // Datos del cliente
-            txtNombres.Text = "";
-            txtNumeroTelefonico.Text = "";
-            txtCorreo.Text = "";
-            txtIdentificacionCliente.Text = "";
-
-            // Datos del dispositivo
-            txtMarca.Text = "";
-            txtModelo.Text = "";
-            txtSerie.Text = "";
-            txtColor.Text = "";
-            cmbEstado.SelectedIndex = 0;
-
-            // Datos de la reparación
-            txtDescripcionProblema.Text = "";
-            txtObservaciones.Text = "";
-            cmbTecnico.SelectedIndex = 0;
-            cmbSucursal.SelectedIndex = 0;
-            txtCosto.Text = "0";
-            dtmFecha.Value = DateTime.Now;
-
-            // Botón tipo dispositivo
-            tipoDispositivo = "";
-            if (botonSeleccionado != null)
-            {
-                botonSeleccionado.FillColor = Color.FromArgb(22, 35, 52);
-                botonSeleccionado.RectColor = Color.Gray;
-                botonSeleccionado.ForeColor = Color.White;
-                botonSeleccionado = null;
-            }
+            ReiniciarFormularioCompleto();
         }
 
         private void GuardarDatosEnMemoria()
         {
-            // Si la lista está vacía, no hay nada que guardar aún
             if (listaEquipos.Count == 0) return;
 
-            // Rescata lo que hay actualmente en pantalla y lo guarda en el objeto de la lista
             var equipo = listaEquipos[indicePestanaActual];
 
             equipo.Tipo = tipoDispositivo;
@@ -244,7 +390,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarDatosA_Pantalla(int indice)
         {
-            // Saca los datos del objeto guardado y los pone de vuelta en los TextBox
             var equipo = listaEquipos[indice];
 
             tipoDispositivo = equipo.Tipo;
@@ -252,18 +397,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             txtModelo.Text = equipo.Modelo;
             txtSerie.Text = equipo.Serie;
             txtColor.Text = equipo.Color;
-            cmbEstado.SelectedIndex = equipo.IndiceEstado;
+            cmbEstado.SelectedIndex = equipo.IndiceEstado >= 0 ? equipo.IndiceEstado : 0;
             txtDescripcionProblema.Text = equipo.Problema;
             txtObservaciones.Text = equipo.Observaciones;
 
-            // Y muy importante: restauramos el color visual del botón de Computadora/Teléfono
             if (tipoDispositivo == "computadora")
                 SeleccionarBoton(btnComputadora);
             else if (tipoDispositivo == "telefono")
                 SeleccionarBoton(btnTelefono);
             else
             {
-                // Si no hay tipo, despintamos ambos botones (opcional según tu diseño)
                 if (botonSeleccionado != null)
                 {
                     botonSeleccionado.FillColor = Color.FromArgb(22, 35, 52);
@@ -273,19 +416,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
             }
 
-            // Actualizamos en qué pestaña estamos actualmente
             indicePestanaActual = indice;
         }
 
         private void btnAgregarEquipo_Click(object sender, EventArgs e)
         {
-            // Guardamos los datos de la pestaña actual antes de crear otra
             GuardarDatosEnMemoria();
             listaEquipos.Add(new DispositivoTemporal());
 
             contadorEquipos++;
 
-            // 1. Crear un botón de la librería SunnyUI
             Sunny.UI.UIButton btnNuevo = new Sunny.UI.UIButton();
             btnNuevo.Name = "btnEquipo" + contadorEquipos;
             btnNuevo.Text = "Equipo " + contadorEquipos;
@@ -295,56 +435,42 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             btnNuevo.Font = new Font("Segoe UI Semibold", 9, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.Radius = 12;
 
-            // Asignar el Tag para la memoria
             btnNuevo.Tag = listaEquipos.Count - 1;
-
-            // 2. Conectar al evento de clic
             btnNuevo.Click += btnEquipo_Click;
 
-            // 3. Agregar al panel
             flpEquipos.Controls.Add(btnNuevo);
 
-            // 4. Asegurar que el botón de añadir quede al final (extremo derecho)
             flpEquipos.Controls.Remove(btnAgregarEquipo);
             flpEquipos.Controls.Add(btnAgregarEquipo);
 
-            // 5. Simular clic para activarlo
             btnNuevo.PerformClick();
         }
 
         private void btnEquipo_Click(object sender, EventArgs e)
         {
-            // Recibimos el botón como Sunny.UI.UIButton
             Sunny.UI.UIButton botonPresionado = (Sunny.UI.UIButton)sender;
 
-            // 1. Guardar la pestaña actual en memoria
             GuardarDatosEnMemoria();
 
-            // 2. Recorrer el panel y pintar todos los botones de equipo como "Inactivos"
             foreach (Control ctrl in flpEquipos.Controls)
             {
                 if (ctrl is Sunny.UI.UIButton btn && btn.Name != "btnAgregarEquipo")
                 {
-                    // Colores inactivos (igual que usas en tu método SeleccionarBoton)
                     btn.FillColor = Color.FromArgb(22, 35, 52);
                     btn.RectColor = Color.Gray;
                     btn.ForeColor = Color.White;
                 }
             }
 
-            // 3. Pintar SOLO el botón presionado como "Activo" (Turquesa)
             botonPresionado.FillColor = Color.FromArgb(0, 150, 137);
             botonPresionado.RectColor = Color.FromArgb(0, 150, 137);
             botonPresionado.ForeColor = Color.FromArgb(22, 35, 52);
 
-            // 4. Cargar los datos correspondientes a esta pestaña
             if (botonPresionado.Tag != null)
             {
                 int nuevoIndice = Convert.ToInt32(botonPresionado.Tag);
                 CargarDatosA_Pantalla(nuevoIndice);
             }
         }
-
     }
-
 }
