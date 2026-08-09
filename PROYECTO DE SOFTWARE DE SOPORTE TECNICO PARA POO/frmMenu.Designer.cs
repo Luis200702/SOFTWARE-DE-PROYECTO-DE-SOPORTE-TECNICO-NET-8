@@ -65,7 +65,7 @@
             // 
             pnlContenedorMenu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorMenu.AutoSize = true;
-            pnlContenedorMenu.BackColor = Color.Black;
+            pnlContenedorMenu.BackColor = Color.FromArgb(15, 23, 42);
             pnlContenedorMenu.Controls.Add(airSeparator2);
             pnlContenedorMenu.Controls.Add(airSeparator3);
             pnlContenedorMenu.Controls.Add(lblAdministracion);
@@ -359,7 +359,7 @@
             // 
             // pnlContenedorLogotipo
             // 
-            pnlContenedorLogotipo.BackColor = Color.Black;
+            pnlContenedorLogotipo.BackColor = Color.FromArgb(15, 23, 42);
             pnlContenedorLogotipo.Controls.Add(airSeparator1);
             pnlContenedorLogotipo.Controls.Add(btnLogoMenu);
             pnlContenedorLogotipo.Location = new Point(0, 0);
@@ -406,7 +406,7 @@
             // pnlContenedorSalir
             // 
             pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            pnlContenedorSalir.BackColor = Color.Black;
+            pnlContenedorSalir.BackColor = Color.FromArgb(15, 23, 42);
             pnlContenedorSalir.Controls.Add(btnSalirApp);
             pnlContenedorSalir.Location = new Point(0, 686);
             pnlContenedorSalir.Name = "pnlContenedorSalir";
@@ -441,10 +441,10 @@
             // 
             pnlInterfaces.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlInterfaces.AutoSize = true;
-            pnlInterfaces.BackColor = Color.LightGray;
-            pnlInterfaces.Location = new Point(262, 0);
+            pnlInterfaces.BackColor = Color.DarkGray;
+            pnlInterfaces.Location = new Point(261, 0);
             pnlInterfaces.Name = "pnlInterfaces";
-            pnlInterfaces.Size = new Size(1125, 764);
+            pnlInterfaces.Size = new Size(1123, 764);
             pnlInterfaces.TabIndex = 3;
             // 
             // imageListLogoPrincipal
@@ -462,7 +462,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Black;
+            BackColor = Color.FromArgb(15, 23, 42);
             ClientSize = new Size(1384, 761);
             Controls.Add(pnlInterfaces);
             Controls.Add(pnlContenedorSalir);
