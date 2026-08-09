@@ -35,7 +35,7 @@
             label1 = new Label();
             lblDerechos = new Label();
             btnAcceder = new Sunny.UI.UIButton();
-            txtContraseña = new Sunny.UI.UITextBox();
+            txtContrasena = new Sunny.UI.UITextBox();
             txtUsuario = new Sunny.UI.UITextBox();
             lblContraseña = new Label();
             lblUsuario = new Label();
@@ -70,7 +70,7 @@
             pnlDerecha.Controls.Add(label1);
             pnlDerecha.Controls.Add(lblDerechos);
             pnlDerecha.Controls.Add(btnAcceder);
-            pnlDerecha.Controls.Add(txtContraseña);
+            pnlDerecha.Controls.Add(txtContrasena);
             pnlDerecha.Controls.Add(txtUsuario);
             pnlDerecha.Controls.Add(lblContraseña);
             pnlDerecha.Controls.Add(lblUsuario);
@@ -124,26 +124,26 @@
             btnAcceder.TipsForeColor = Color.Black;
             btnAcceder.Click += btnAcceder_Click;
             // 
-            // txtContraseña
+            // txtContrasena
             // 
-            txtContraseña.BackColor = Color.Transparent;
-            txtContraseña.FillColor = Color.FromArgb(41, 53, 72);
-            txtContraseña.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtContraseña.ForeColor = Color.White;
-            txtContraseña.Location = new Point(52, 271);
-            txtContraseña.Margin = new Padding(4, 5, 4, 5);
-            txtContraseña.MaxLength = 255;
-            txtContraseña.Minimum = 0D;
-            txtContraseña.MinimumSize = new Size(1, 16);
-            txtContraseña.Name = "txtContraseña";
-            txtContraseña.Padding = new Padding(5);
-            txtContraseña.Radius = 12;
-            txtContraseña.RectColor = Color.FromArgb(39, 53, 72);
-            txtContraseña.ShowText = false;
-            txtContraseña.Size = new Size(343, 29);
-            txtContraseña.TabIndex = 15;
-            txtContraseña.TextAlignment = ContentAlignment.MiddleLeft;
-            txtContraseña.Watermark = "Contraseña";
+            txtContrasena.BackColor = Color.Transparent;
+            txtContrasena.FillColor = Color.FromArgb(41, 53, 72);
+            txtContrasena.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtContrasena.ForeColor = Color.White;
+            txtContrasena.Location = new Point(52, 271);
+            txtContrasena.Margin = new Padding(4, 5, 4, 5);
+            txtContrasena.MaxLength = 255;
+            txtContrasena.Minimum = 0D;
+            txtContrasena.MinimumSize = new Size(1, 16);
+            txtContrasena.Name = "txtContrasena";
+            txtContrasena.Padding = new Padding(5);
+            txtContrasena.Radius = 12;
+            txtContrasena.RectColor = Color.FromArgb(39, 53, 72);
+            txtContrasena.ShowText = false;
+            txtContrasena.Size = new Size(343, 29);
+            txtContrasena.TabIndex = 15;
+            txtContrasena.TextAlignment = ContentAlignment.MiddleLeft;
+            txtContrasena.Watermark = "Contraseña";
             // 
             // txtUsuario
             // 
@@ -225,7 +225,7 @@
         private Label lblInicioSesion;
         private Label lblContraseña;
         private Label lblUsuario;
-        private Sunny.UI.UITextBox txtContraseña;
+        private Sunny.UI.UITextBox txtContrasena;
         private Sunny.UI.UITextBox txtUsuario;
         private Sunny.UI.UIButton btnAcceder;
         private Label lblDerechos;

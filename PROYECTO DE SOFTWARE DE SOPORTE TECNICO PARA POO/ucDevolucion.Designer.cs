@@ -77,6 +77,7 @@
             lblResumen = new Label();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(components);
+            pdComprobante = new PrintDialog();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
@@ -93,7 +94,7 @@
             // 
             pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
-            pnlSuperior.BackColor = Color.FromArgb(30, 41, 59);
+            pnlSuperior.BackColor = Color.White;
             pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
             pnlSuperior.Controls.Add(pictureBox1);
             pnlSuperior.Controls.Add(lblTitulo);
@@ -116,7 +117,7 @@
             // 
             lblTitulo.Dock = DockStyle.Left;
             lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.White;
+            lblTitulo.ForeColor = Color.Black;
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(308, 57);
@@ -127,10 +128,11 @@
             // pnlInformacion
             // 
             pnlInformacion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlInformacion.BackColor = Color.FromArgb(30, 41, 59);
+            pnlInformacion.BackColor = Color.White;
             pnlInformacion.Controls.Add(btnBuscar);
             pnlInformacion.Controls.Add(lblOrden);
             pnlInformacion.Controls.Add(txtBuscarOrden);
+            pnlInformacion.ForeColor = Color.White;
             pnlInformacion.Location = new Point(0, 59);
             pnlInformacion.Name = "pnlInformacion";
             pnlInformacion.Size = new Size(1022, 59);
@@ -183,7 +185,7 @@
             // pnlPrincipal
             // 
             pnlPrincipal.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlPrincipal.BackColor = Color.FromArgb(15, 23, 42);
+            pnlPrincipal.BackColor = Color.White;
             pnlPrincipal.Controls.Add(btnComprobante);
             pnlPrincipal.Controls.Add(btnRegistraEntrega);
             pnlPrincipal.Controls.Add(pnlFormaDePago);
@@ -217,6 +219,7 @@
             btnComprobante.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnComprobante.TipsForeColor = Color.Transparent;
             btnComprobante.Visible = false;
+            btnComprobante.Click += btnComprobante_Click;
             // 
             // btnRegistraEntrega
             // 
@@ -807,6 +810,10 @@
             uiContextMenuStrip1.Name = "uiContextMenuStrip1";
             uiContextMenuStrip1.Size = new Size(61, 4);
             // 
+            // pdComprobante
+            // 
+            pdComprobante.UseEXDialog = true;
+            // 
             // ucDevolucion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -887,5 +894,6 @@
         private Sunny.UI.UIButton btnComprobante;
         private Sunny.UI.UIButton btnRegistraEntrega;
         private Sunny.UI.UIContextMenuStrip uiContextMenuStrip1;
+        private PrintDialog pdComprobante;
     }
 }

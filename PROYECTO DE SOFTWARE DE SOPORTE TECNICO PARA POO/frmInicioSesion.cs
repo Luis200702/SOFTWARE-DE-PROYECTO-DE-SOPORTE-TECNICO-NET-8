@@ -13,13 +13,29 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-            frmMenu menuPrincipal = new frmMenu();
-            menuPrincipal.MostrarAdministrador();
-            menuPrincipal.Show();
-            var db = new Conexion_Base_de_Datos();
-           // using (SqlConnection con = db.ObtenerConexion())
+            string perfil = conexion.validarUsuario(
+                txtUsuario.Text,
+                txtContrasena.Text
+            );
+
+            if (perfil == "")
             {
-               //
+                MessageBox.Show("Usuario o contraseña incorrectos");
+                return;
+            }
+
+            frmMenu menu = new frmMenu();
+
+            if (perfil == "Administrador")
+            {
+                menu.MostrarAdministrador();
+                menu.Show();
+                this.Hide();
+            }
+            else if (perfil == "Tecnico")
+            {
+                menu.Show();
+                this.Hide();
             }
         }
 
@@ -30,7 +46,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void frmInicioSesion_Load(object sender, EventArgs e)
         {
-            txtContraseña.PasswordChar = '*';
+            txtContrasena.PasswordChar = '*';
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

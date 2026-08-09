@@ -16,5 +16,53 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             InitializeComponent();
         }
+
+        private void ucGestionUsuarios_Load(object sender, EventArgs e)
+        {
+            Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
+            DataTable dt = conexion.obtenerUsuarios();
+
+            dgvUsuarios.Rows.Clear(); // Limpia las filas anteriores
+
+            foreach (DataRow fila in dt.Rows)
+            {
+                dgvUsuarios.Rows.Add(
+                    fila["Nombre"].ToString(),
+                    fila["Usuario"].ToString(),
+                    fila["Perfil"].ToString(),
+                    fila["Sucursal"].ToString()
+                );
+            }
+            dgvUsuarios.ColumnHeadersDefaultCellStyle.BackColor = Color.White;
+            dgvUsuarios.ClearSelection();
+        }
+
+        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+
+            if (dgvUsuarios.Columns[e.ColumnIndex].Name == "Editar")
+            {
+
+
+                string nombre = dgvUsuarios.Rows[e.RowIndex].Cells["Nombre"].Value.ToString();
+                string usuario = dgvUsuarios.Rows[e.RowIndex].Cells["Usuario"].Value.ToString();
+                string perfil = dgvUsuarios.Rows[e.RowIndex].Cells["Perfil"].Value.ToString();
+                string sucursal = dgvUsuarios.Rows[e.RowIndex].Cells["Sucursal"].Value.ToString();
+
+
+                frmEditarUsuarios frmEditar = new frmEditarUsuarios(nombre, usuario, perfil, sucursal);
+                frmEditar.ShowDialog();
+
+                
+            }
+        }
+
+        private void btnNuevoTecnico_Click(object sender, EventArgs e)
+        {
+            frmAgregarUsuario frm = new frmAgregarUsuario();
+            frm.ShowDialog();
+        }
     }
 }

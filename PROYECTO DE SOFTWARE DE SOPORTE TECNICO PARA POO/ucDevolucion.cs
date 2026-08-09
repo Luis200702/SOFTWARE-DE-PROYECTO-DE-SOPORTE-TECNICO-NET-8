@@ -22,6 +22,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            pnlResumen.Visible = true;
+            pnlTrabajoRealizado.Visible = true;
+            pnlDesgloseCosto.Visible = true;
+            pnlFormaDePago.Visible = true;
+            btnRegistraEntrega.Visible = true;
+            btnComprobante.Visible = true;
+
             //string numeroOrden = txtBuscarOrden.Text.Trim();
 
             //if (string.IsNullOrEmpty(numeroOrden))
@@ -99,7 +106,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void cmbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbFormaPago.SelectedItem.ToString() == "Transferencia")
+            {
+                frmComprobante_Pago Comprobante = new frmComprobante_Pago();
+                Comprobante.ShowDialog();
 
+            }
+        }
+
+        private void btnComprobante_Click(object sender, EventArgs e)
+        {
+            pdComprobante.ShowDialog();
         }
     }
 }

@@ -8,12 +8,18 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
+
     public partial class ucRecepcion : UserControl
     {
+        // Estas van al inicio, junto a 'contadorEquipos' y 'tipoDispositivo'
+        private List<DispositivoTemporal> listaEquipos = new List<DispositivoTemporal>();
+        private int indicePestanaActual = 0;
+        private int contadorEquipos = 1;
         private UIButton botonSeleccionado = null;
         private string tipoDispositivo = "";
 
@@ -30,6 +36,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             cmbTecnico.SelectedIndex = 0;
 
             MostrarNumeroOrden();
+
+            listaEquipos.Add(new DispositivoTemporal());
+
+            btnEquipo.Tag = 0;
+
+            // 2. Nos aseguramos de que dispare el evento de cambio de pestaña al hacerle clic
+            btnEquipo.Click += btnEquipo_Click;
         }
 
         public void SeleccionarBoton(UIButton boton)
@@ -210,5 +223,128 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 botonSeleccionado = null;
             }
         }
+
+        private void GuardarDatosEnMemoria()
+        {
+            // Si la lista está vacía, no hay nada que guardar aún
+            if (listaEquipos.Count == 0) return;
+
+            // Rescata lo que hay actualmente en pantalla y lo guarda en el objeto de la lista
+            var equipo = listaEquipos[indicePestanaActual];
+
+            equipo.Tipo = tipoDispositivo;
+            equipo.Marca = txtMarca.Text;
+            equipo.Modelo = txtModelo.Text;
+            equipo.Serie = txtSerie.Text;
+            equipo.Color = txtColor.Text;
+            equipo.IndiceEstado = cmbEstado.SelectedIndex;
+            equipo.Problema = txtDescripcionProblema.Text;
+            equipo.Observaciones = txtObservaciones.Text;
+        }
+
+        private void CargarDatosA_Pantalla(int indice)
+        {
+            // Saca los datos del objeto guardado y los pone de vuelta en los TextBox
+            var equipo = listaEquipos[indice];
+
+            tipoDispositivo = equipo.Tipo;
+            txtMarca.Text = equipo.Marca;
+            txtModelo.Text = equipo.Modelo;
+            txtSerie.Text = equipo.Serie;
+            txtColor.Text = equipo.Color;
+            cmbEstado.SelectedIndex = equipo.IndiceEstado;
+            txtDescripcionProblema.Text = equipo.Problema;
+            txtObservaciones.Text = equipo.Observaciones;
+
+            // Y muy importante: restauramos el color visual del botón de Computadora/Teléfono
+            if (tipoDispositivo == "computadora")
+                SeleccionarBoton(btnComputadora);
+            else if (tipoDispositivo == "telefono")
+                SeleccionarBoton(btnTelefono);
+            else
+            {
+                // Si no hay tipo, despintamos ambos botones (opcional según tu diseño)
+                if (botonSeleccionado != null)
+                {
+                    botonSeleccionado.FillColor = Color.FromArgb(22, 35, 52);
+                    botonSeleccionado.RectColor = Color.Gray;
+                    botonSeleccionado.ForeColor = Color.White;
+                    botonSeleccionado = null;
+                }
+            }
+
+            // Actualizamos en qué pestaña estamos actualmente
+            indicePestanaActual = indice;
+        }
+
+        private void btnAgregarEquipo_Click(object sender, EventArgs e)
+        {
+            // Guardamos los datos de la pestaña actual antes de crear otra
+            GuardarDatosEnMemoria();
+            listaEquipos.Add(new DispositivoTemporal());
+
+            contadorEquipos++;
+
+            // 1. Crear un botón de la librería SunnyUI
+            Sunny.UI.UIButton btnNuevo = new Sunny.UI.UIButton();
+            btnNuevo.Name = "btnEquipo" + contadorEquipos;
+            btnNuevo.Text = "Equipo " + contadorEquipos;
+            btnNuevo.Size = new Size(90, 32);
+            btnNuevo.Cursor = Cursors.Hand;
+            btnNuevo.Margin = new Padding(3, 3, 3, 3);
+            btnNuevo.Font = new Font("Segoe UI Semibold", 9, FontStyle.Bold, GraphicsUnit.Point);
+            btnNuevo.Radius = 12;
+
+            // Asignar el Tag para la memoria
+            btnNuevo.Tag = listaEquipos.Count - 1;
+
+            // 2. Conectar al evento de clic
+            btnNuevo.Click += btnEquipo_Click;
+
+            // 3. Agregar al panel
+            flpEquipos.Controls.Add(btnNuevo);
+
+            // 4. Asegurar que el botón de añadir quede al final (extremo derecho)
+            flpEquipos.Controls.Remove(btnAgregarEquipo);
+            flpEquipos.Controls.Add(btnAgregarEquipo);
+
+            // 5. Simular clic para activarlo
+            btnNuevo.PerformClick();
+        }
+
+        private void btnEquipo_Click(object sender, EventArgs e)
+        {
+            // Recibimos el botón como Sunny.UI.UIButton
+            Sunny.UI.UIButton botonPresionado = (Sunny.UI.UIButton)sender;
+
+            // 1. Guardar la pestaña actual en memoria
+            GuardarDatosEnMemoria();
+
+            // 2. Recorrer el panel y pintar todos los botones de equipo como "Inactivos"
+            foreach (Control ctrl in flpEquipos.Controls)
+            {
+                if (ctrl is Sunny.UI.UIButton btn && btn.Name != "btnAgregarEquipo")
+                {
+                    // Colores inactivos (igual que usas en tu método SeleccionarBoton)
+                    btn.FillColor = Color.FromArgb(22, 35, 52);
+                    btn.RectColor = Color.Gray;
+                    btn.ForeColor = Color.White;
+                }
+            }
+
+            // 3. Pintar SOLO el botón presionado como "Activo" (Turquesa)
+            botonPresionado.FillColor = Color.FromArgb(0, 150, 137);
+            botonPresionado.RectColor = Color.FromArgb(0, 150, 137);
+            botonPresionado.ForeColor = Color.FromArgb(22, 35, 52);
+
+            // 4. Cargar los datos correspondientes a esta pestaña
+            if (botonPresionado.Tag != null)
+            {
+                int nuevoIndice = Convert.ToInt32(botonPresionado.Tag);
+                CargarDatosA_Pantalla(nuevoIndice);
+            }
+        }
+
     }
+
 }

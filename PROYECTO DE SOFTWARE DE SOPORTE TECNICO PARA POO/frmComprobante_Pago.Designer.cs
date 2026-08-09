@@ -38,6 +38,7 @@
             ControlBox = false;
             MaximizeBox = false;
             Name = "frmComprobante_Pago";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Agregar Comprobante";
             ResumeLayout(false);
         }
