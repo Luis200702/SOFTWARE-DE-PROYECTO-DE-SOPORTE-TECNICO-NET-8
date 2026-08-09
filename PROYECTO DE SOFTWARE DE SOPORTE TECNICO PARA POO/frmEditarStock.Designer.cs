@@ -308,6 +308,7 @@
             Controls.Add(txtNombre);
             Controls.Add(btnAgg);
             Name = "frmEditarStock";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmEditarStock";
             ResumeLayout(false);
             PerformLayout();

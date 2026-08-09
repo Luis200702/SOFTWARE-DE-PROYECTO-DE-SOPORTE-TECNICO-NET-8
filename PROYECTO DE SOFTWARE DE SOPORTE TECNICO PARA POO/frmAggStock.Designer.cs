@@ -271,6 +271,7 @@
             Controls.Add(txtCompatible);
             Controls.Add(txtNombre);
             Name = "frmAggStock";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmAggStock";
             ResumeLayout(false);
             PerformLayout();

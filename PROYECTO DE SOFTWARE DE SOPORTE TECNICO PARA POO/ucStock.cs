@@ -57,7 +57,22 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void dgv4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0 && dgv4.Columns[e.ColumnIndex].Name == "Editar")
+            {
+                var fila = dgv4.Rows[e.RowIndex];
 
+                //string Nombre = fila.Cells["NOMBRE"].Value?.ToString();
+                //string Categoria = fila.Cells["CATEGORIA"].Value?.ToString();
+
+                // Abrir el formulario de edición pasando esos datos
+                frmEditarStock frmEditar = new frmEditarStock();
+                if (frmEditar.ShowDialog() == DialogResult.OK)
+                {
+                    //fila.Cells["NOMBRE"].Value = frmEditar.NuevoNombre;
+                    //fila.Cells["CATEGORIA"].Value = frmEditar.NuevaCategoria;
+                }
+            }
         }
+
     }
 }
