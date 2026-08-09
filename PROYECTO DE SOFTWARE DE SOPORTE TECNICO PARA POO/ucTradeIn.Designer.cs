@@ -57,8 +57,8 @@
             pictureBox1 = new PictureBox();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             uiPanel1 = new Sunny.UI.UIPanel();
+            airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             lblComercial = new Label();
-            lblSeparador2 = new Label();
             txtNumeroTelefonico = new Sunny.UI.UITextBox();
             btnTelefono = new Sunny.UI.UIButton();
             txtNombres = new Sunny.UI.UITextBox();
@@ -94,13 +94,14 @@
             // 
             pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
-            pnlSuperior.BackColor = Color.FromArgb(30, 41, 59);
+            pnlSuperior.BackColor = Color.DarkGray;
             pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
             pnlSuperior.Controls.Add(picTradeIn);
             pnlSuperior.Controls.Add(lblTitulo);
-            pnlSuperior.Location = new Point(-6, 0);
+            pnlSuperior.ForeColor = Color.DarkGray;
+            pnlSuperior.Location = new Point(0, 0);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1034, 59);
+            pnlSuperior.Size = new Size(1125, 59);
             pnlSuperior.TabIndex = 2;
             // 
             // picTradeIn
@@ -116,26 +117,27 @@
             // lblTitulo
             // 
             lblTitulo.Dock = DockStyle.Left;
-            lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.FromArgb(0, 150, 137);
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(210, 57);
+            lblTitulo.Size = new Size(245, 57);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Trade-In";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pnlCentral
             // 
-            pnlCentral.BackColor = Color.FromArgb(15, 23, 42);
+            pnlCentral.BackColor = Color.Gray;
             pnlCentral.Controls.Add(btnGuardarRegistro);
+            pnlCentral.Controls.Add(pnlSuperior);
             pnlCentral.Controls.Add(uiPanel4);
             pnlCentral.Controls.Add(uiPanel3);
             pnlCentral.Controls.Add(uiPanel2);
             pnlCentral.Controls.Add(uiPanel1);
-            pnlCentral.Location = new Point(0, 59);
+            pnlCentral.Location = new Point(0, 0);
             pnlCentral.Name = "pnlCentral";
-            pnlCentral.Size = new Size(1022, 722);
+            pnlCentral.Size = new Size(1125, 764);
             pnlCentral.TabIndex = 3;
             // 
             // btnGuardarRegistro
@@ -147,7 +149,7 @@
             btnGuardarRegistro.FillPressColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.Font = new Font("Segoe MDL2 Assets", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnGuardarRegistro.Location = new Point(674, 276);
+            btnGuardarRegistro.Location = new Point(729, 354);
             btnGuardarRegistro.MinimumSize = new Size(1, 1);
             btnGuardarRegistro.Name = "btnGuardarRegistro";
             btnGuardarRegistro.Radius = 12;
@@ -167,7 +169,7 @@
             uiPanel4.FillColor = Color.SlateBlue;
             uiPanel4.Font = new Font("Microsoft Sans Serif", 12F);
             uiPanel4.ForeColor = Color.White;
-            uiPanel4.Location = new Point(674, 201);
+            uiPanel4.Location = new Point(729, 265);
             uiPanel4.Margin = new Padding(4, 5, 4, 5);
             uiPanel4.MinimumSize = new Size(1, 1);
             uiPanel4.Name = "uiPanel4";
@@ -202,7 +204,7 @@
             uiPanel3.Controls.Add(label7);
             uiPanel3.FillColor = Color.FromArgb(30, 41, 59);
             uiPanel3.Font = new Font("Microsoft Sans Serif", 12F);
-            uiPanel3.Location = new Point(674, 20);
+            uiPanel3.Location = new Point(785, 72);
             uiPanel3.Margin = new Padding(4, 5, 4, 5);
             uiPanel3.MinimumSize = new Size(1, 1);
             uiPanel3.Name = "uiPanel3";
@@ -355,7 +357,7 @@
             uiPanel2.Controls.Add(airSeparator2);
             uiPanel2.FillColor = Color.FromArgb(30, 41, 59);
             uiPanel2.Font = new Font("Microsoft Sans Serif", 12F);
-            uiPanel2.Location = new Point(350, 20);
+            uiPanel2.Location = new Point(380, 72);
             uiPanel2.Margin = new Padding(4, 5, 4, 5);
             uiPanel2.MinimumSize = new Size(1, 1);
             uiPanel2.Name = "uiPanel2";
@@ -395,11 +397,11 @@
             // 
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.White;
             label6.Location = new Point(12, 292);
             label6.Name = "label6";
-            label6.Size = new Size(177, 15);
+            label6.Size = new Size(246, 21);
             label6.TabIndex = 55;
             label6.Text = "Forma de pago de la diferencia";
             // 
@@ -542,8 +544,8 @@
             // 
             // uiPanel1
             // 
+            uiPanel1.Controls.Add(airSeparator3);
             uiPanel1.Controls.Add(lblComercial);
-            uiPanel1.Controls.Add(lblSeparador2);
             uiPanel1.Controls.Add(txtNumeroTelefonico);
             uiPanel1.Controls.Add(btnTelefono);
             uiPanel1.Controls.Add(txtNombres);
@@ -564,49 +566,52 @@
             uiPanel1.Controls.Add(lblDispositivoRecibido);
             uiPanel1.Controls.Add(picIcon);
             uiPanel1.Controls.Add(airSeparator1);
-            uiPanel1.FillColor = Color.FromArgb(30, 41, 59);
+            uiPanel1.FillColor = Color.DarkGray;
             uiPanel1.Font = new Font("Microsoft Sans Serif", 12F);
-            uiPanel1.Location = new Point(26, 20);
+            uiPanel1.Location = new Point(32, 72);
             uiPanel1.Margin = new Padding(4, 5, 4, 5);
             uiPanel1.MinimumSize = new Size(1, 1);
             uiPanel1.Name = "uiPanel1";
             uiPanel1.Radius = 12;
-            uiPanel1.RectColor = Color.FromArgb(39, 53, 72);
-            uiPanel1.Size = new Size(316, 663);
+            uiPanel1.RectColor = Color.DarkGray;
+            uiPanel1.Size = new Size(330, 672);
             uiPanel1.TabIndex = 0;
             uiPanel1.Text = null;
             uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // airSeparator3
+            // 
+            airSeparator3.BackColor = Color.FromArgb(120, 99, 35);
+            airSeparator3.Customization = "";
+            airSeparator3.Font = new Font("Verdana", 8F);
+            airSeparator3.Image = null;
+            airSeparator3.Location = new Point(18, 464);
+            airSeparator3.Name = "airSeparator3";
+            airSeparator3.NoRounding = false;
+            airSeparator3.Size = new Size(293, 1);
+            airSeparator3.TabIndex = 60;
+            airSeparator3.Text = "airSeparator3";
+            airSeparator3.Transparent = false;
             // 
             // lblComercial
             // 
             lblComercial.AutoSize = true;
             lblComercial.BackColor = Color.Transparent;
             lblComercial.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblComercial.ForeColor = Color.DimGray;
-            lblComercial.Location = new Point(16, 479);
+            lblComercial.ForeColor = Color.FromArgb(64, 64, 64);
+            lblComercial.Location = new Point(16, 480);
             lblComercial.Name = "lblComercial";
             lblComercial.Size = new Size(125, 17);
             lblComercial.TabIndex = 59;
             lblComercial.Text = "DATOS DEL CLIENTE";
             // 
-            // lblSeparador2
-            // 
-            lblSeparador2.BackColor = Color.Transparent;
-            lblSeparador2.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSeparador2.ForeColor = Color.DimGray;
-            lblSeparador2.Location = new Point(16, 444);
-            lblSeparador2.Name = "lblSeparador2";
-            lblSeparador2.Size = new Size(288, 18);
-            lblSeparador2.TabIndex = 58;
-            lblSeparador2.Text = "______________________________________________________";
-            // 
             // txtNumeroTelefonico
             // 
             txtNumeroTelefonico.BackColor = Color.Transparent;
-            txtNumeroTelefonico.FillColor = Color.FromArgb(41, 53, 72);
-            txtNumeroTelefonico.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNumeroTelefonico.FillColor = Color.Gray;
+            txtNumeroTelefonico.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNumeroTelefonico.ForeColor = Color.White;
-            txtNumeroTelefonico.Location = new Point(17, 602);
+            txtNumeroTelefonico.Location = new Point(16, 611);
             txtNumeroTelefonico.Margin = new Padding(4, 5, 4, 5);
             txtNumeroTelefonico.Maximum = 0D;
             txtNumeroTelefonico.MaxLength = 10;
@@ -615,29 +620,30 @@
             txtNumeroTelefonico.Name = "txtNumeroTelefonico";
             txtNumeroTelefonico.Padding = new Padding(5);
             txtNumeroTelefonico.Radius = 12;
-            txtNumeroTelefonico.RectColor = Color.FromArgb(39, 53, 72);
+            txtNumeroTelefonico.RectColor = Color.Gray;
             txtNumeroTelefonico.ShowText = false;
-            txtNumeroTelefonico.Size = new Size(284, 37);
+            txtNumeroTelefonico.Size = new Size(295, 37);
             txtNumeroTelefonico.TabIndex = 56;
             txtNumeroTelefonico.TextAlignment = ContentAlignment.MiddleLeft;
             txtNumeroTelefonico.Watermark = "0993425009";
+            txtNumeroTelefonico.WatermarkColor = Color.White;
             // 
             // btnTelefono
             // 
             btnTelefono.BackColor = Color.Transparent;
-            btnTelefono.FillColor = Color.FromArgb(22, 35, 52);
+            btnTelefono.FillColor = Color.Gray;
             btnTelefono.FillHoverColor = Color.Transparent;
             btnTelefono.FillPressColor = Color.FromArgb(0, 150, 137);
             btnTelefono.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnTelefono.Font = new Font("Microsoft Sans Serif", 12F);
-            btnTelefono.Location = new Point(17, 88);
+            btnTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnTelefono.Location = new Point(18, 91);
             btnTelefono.MinimumSize = new Size(1, 1);
             btnTelefono.Name = "btnTelefono";
             btnTelefono.Radius = 12;
-            btnTelefono.RectColor = Color.FromArgb(39, 53, 72);
+            btnTelefono.RectColor = Color.Gray;
             btnTelefono.RectPressColor = Color.FromArgb(0, 150, 137);
             btnTelefono.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnTelefono.Size = new Size(125, 40);
+            btnTelefono.Size = new Size(133, 37);
             btnTelefono.TabIndex = 19;
             btnTelefono.Text = "Teléfono";
             btnTelefono.TipsFont = new Font("Microsoft Sans Serif", 9F);
@@ -645,10 +651,10 @@
             // txtNombres
             // 
             txtNombres.BackColor = Color.Transparent;
-            txtNombres.FillColor = Color.FromArgb(41, 53, 72);
-            txtNombres.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNombres.FillColor = Color.Gray;
+            txtNombres.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNombres.ForeColor = Color.White;
-            txtNombres.Location = new Point(17, 527);
+            txtNombres.Location = new Point(18, 533);
             txtNombres.Margin = new Padding(4, 5, 4, 5);
             txtNombres.MaxLength = 255;
             txtNombres.Minimum = 0D;
@@ -656,22 +662,23 @@
             txtNombres.Name = "txtNombres";
             txtNombres.Padding = new Padding(5);
             txtNombres.Radius = 12;
-            txtNombres.RectColor = Color.FromArgb(39, 53, 72);
+            txtNombres.RectColor = Color.Gray;
             txtNombres.ShowText = false;
-            txtNombres.Size = new Size(284, 37);
+            txtNombres.Size = new Size(293, 37);
             txtNombres.TabIndex = 57;
             txtNombres.TextAlignment = ContentAlignment.MiddleLeft;
             txtNombres.Watermark = "Nombre y apellidos";
+            txtNombres.WatermarkColor = Color.White;
             // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
             lblTelefono.BackColor = Color.Transparent;
-            lblTelefono.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTelefono.ForeColor = Color.White;
-            lblTelefono.Location = new Point(16, 582);
+            lblTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTelefono.ForeColor = Color.Black;
+            lblTelefono.Location = new Point(14, 585);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(105, 15);
+            lblTelefono.Size = new Size(146, 21);
             lblTelefono.TabIndex = 55;
             lblTelefono.Text = "Teléfono / Celular";
             // 
@@ -679,21 +686,21 @@
             // 
             lblDatosCliente.AutoSize = true;
             lblDatosCliente.BackColor = Color.Transparent;
-            lblDatosCliente.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDatosCliente.ForeColor = Color.White;
-            lblDatosCliente.Location = new Point(17, 507);
+            lblDatosCliente.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDatosCliente.ForeColor = Color.Black;
+            lblDatosCliente.Location = new Point(16, 507);
             lblDatosCliente.Name = "lblDatosCliente";
-            lblDatosCliente.Size = new Size(109, 15);
+            lblDatosCliente.Size = new Size(150, 21);
             lblDatosCliente.TabIndex = 54;
             lblDatosCliente.Text = "Nombre completo";
             // 
             // txtCosto
             // 
             txtCosto.BackColor = Color.Transparent;
-            txtCosto.FillColor = Color.FromArgb(41, 53, 72);
-            txtCosto.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCosto.FillColor = Color.Gray;
+            txtCosto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtCosto.ForeColor = Color.White;
-            txtCosto.Location = new Point(16, 391);
+            txtCosto.Location = new Point(16, 410);
             txtCosto.Margin = new Padding(4, 5, 4, 5);
             txtCosto.MaxLength = 255;
             txtCosto.Minimum = 0D;
@@ -701,22 +708,23 @@
             txtCosto.Name = "txtCosto";
             txtCosto.Padding = new Padding(5);
             txtCosto.Radius = 12;
-            txtCosto.RectColor = Color.FromArgb(39, 53, 72);
+            txtCosto.RectColor = Color.Gray;
             txtCosto.ShowText = false;
-            txtCosto.Size = new Size(285, 37);
+            txtCosto.Size = new Size(295, 37);
             txtCosto.TabIndex = 52;
             txtCosto.TextAlignment = ContentAlignment.MiddleLeft;
             txtCosto.Watermark = "0.00 $";
+            txtCosto.WatermarkColor = Color.White;
             // 
             // lblCosto
             // 
             lblCosto.AutoSize = true;
             lblCosto.BackColor = Color.Transparent;
-            lblCosto.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCosto.ForeColor = Color.White;
-            lblCosto.Location = new Point(16, 371);
+            lblCosto.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCosto.ForeColor = Color.Black;
+            lblCosto.Location = new Point(14, 384);
             lblCosto.Name = "lblCosto";
-            lblCosto.Size = new Size(104, 15);
+            lblCosto.Size = new Size(149, 21);
             lblCosto.TabIndex = 51;
             lblCosto.Text = "Valor asignado ($)";
             // 
@@ -725,35 +733,36 @@
             uiComboBox1.BackColor = Color.Transparent;
             uiComboBox1.DataSource = null;
             uiComboBox1.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            uiComboBox1.FillColor = Color.FromArgb(41, 53, 72);
+            uiComboBox1.FillColor = Color.Gray;
             uiComboBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             uiComboBox1.ForeColor = Color.White;
             uiComboBox1.FormattingEnabled = true;
             uiComboBox1.ItemHoverColor = Color.FromArgb(155, 200, 255);
             uiComboBox1.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
             uiComboBox1.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            uiComboBox1.Location = new Point(166, 312);
+            uiComboBox1.Location = new Point(176, 329);
             uiComboBox1.Margin = new Padding(4, 5, 4, 5);
             uiComboBox1.MinimumSize = new Size(63, 0);
             uiComboBox1.Name = "uiComboBox1";
             uiComboBox1.Padding = new Padding(0, 0, 30, 2);
             uiComboBox1.Radius = 12;
-            uiComboBox1.RectColor = Color.FromArgb(148, 163, 184);
+            uiComboBox1.RectColor = Color.DarkGray;
             uiComboBox1.Size = new Size(135, 37);
             uiComboBox1.SymbolSize = 24;
             uiComboBox1.TabIndex = 50;
             uiComboBox1.TextAlignment = ContentAlignment.MiddleLeft;
             uiComboBox1.Watermark = "Seleccionar";
+            uiComboBox1.WatermarkColor = Color.White;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(166, 292);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(173, 303);
             label1.Name = "label1";
-            label1.Size = new Size(97, 15);
+            label1.Size = new Size(138, 21);
             label1.TabIndex = 49;
             label1.Text = "Estado funcional";
             // 
@@ -761,11 +770,11 @@
             // 
             lblEstado.AutoSize = true;
             lblEstado.BackColor = Color.Transparent;
-            lblEstado.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEstado.ForeColor = Color.White;
-            lblEstado.Location = new Point(16, 292);
+            lblEstado.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEstado.ForeColor = Color.Black;
+            lblEstado.Location = new Point(14, 303);
             lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(75, 15);
+            lblEstado.Size = new Size(106, 21);
             lblEstado.TabIndex = 48;
             lblEstado.Text = "Estado físico";
             // 
@@ -774,33 +783,34 @@
             cmbEstado.BackColor = Color.Transparent;
             cmbEstado.DataSource = null;
             cmbEstado.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbEstado.FillColor = Color.FromArgb(41, 53, 72);
+            cmbEstado.FillColor = Color.Gray;
             cmbEstado.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbEstado.ForeColor = Color.White;
             cmbEstado.FormattingEnabled = true;
             cmbEstado.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbEstado.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
             cmbEstado.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbEstado.Location = new Point(16, 312);
+            cmbEstado.Location = new Point(17, 329);
             cmbEstado.Margin = new Padding(4, 5, 4, 5);
             cmbEstado.MinimumSize = new Size(63, 0);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Padding = new Padding(0, 0, 30, 2);
             cmbEstado.Radius = 12;
-            cmbEstado.RectColor = Color.FromArgb(148, 163, 184);
+            cmbEstado.RectColor = Color.DarkGray;
             cmbEstado.Size = new Size(135, 37);
             cmbEstado.SymbolSize = 24;
             cmbEstado.TabIndex = 47;
             cmbEstado.TextAlignment = ContentAlignment.MiddleLeft;
             cmbEstado.Watermark = "Seleccionar";
+            cmbEstado.WatermarkColor = Color.White;
             // 
             // txtModelo
             // 
             txtModelo.BackColor = Color.Transparent;
-            txtModelo.FillColor = Color.FromArgb(41, 53, 72);
-            txtModelo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtModelo.FillColor = Color.Gray;
+            txtModelo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtModelo.ForeColor = Color.White;
-            txtModelo.Location = new Point(16, 229);
+            txtModelo.Location = new Point(18, 250);
             txtModelo.Margin = new Padding(4, 5, 4, 5);
             txtModelo.MaxLength = 255;
             txtModelo.Minimum = 0D;
@@ -808,19 +818,21 @@
             txtModelo.Name = "txtModelo";
             txtModelo.Padding = new Padding(5);
             txtModelo.Radius = 12;
-            txtModelo.RectColor = Color.FromArgb(39, 53, 72);
+            txtModelo.RectColor = Color.Gray;
             txtModelo.ShowText = false;
-            txtModelo.Size = new Size(285, 37);
+            txtModelo.Size = new Size(293, 37);
             txtModelo.TabIndex = 46;
             txtModelo.TextAlignment = ContentAlignment.MiddleLeft;
             txtModelo.Watermark = "Ej. Galaxy S26";
+            txtModelo.WatermarkColor = Color.White;
             // 
             // txtMarca
             // 
-            txtMarca.FillColor = Color.FromArgb(41, 53, 72);
-            txtMarca.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtMarca.BackColor = Color.Transparent;
+            txtMarca.FillColor = Color.Gray;
+            txtMarca.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtMarca.ForeColor = Color.White;
-            txtMarca.Location = new Point(16, 159);
+            txtMarca.Location = new Point(17, 171);
             txtMarca.Margin = new Padding(4, 5, 4, 5);
             txtMarca.MaxLength = 255;
             txtMarca.Minimum = 0D;
@@ -828,22 +840,23 @@
             txtMarca.Name = "txtMarca";
             txtMarca.Padding = new Padding(5);
             txtMarca.Radius = 12;
-            txtMarca.RectColor = Color.Transparent;
+            txtMarca.RectColor = Color.Gray;
             txtMarca.ShowText = false;
-            txtMarca.Size = new Size(285, 37);
+            txtMarca.Size = new Size(294, 37);
             txtMarca.TabIndex = 45;
             txtMarca.TextAlignment = ContentAlignment.MiddleLeft;
             txtMarca.Watermark = "Ej. Samsung";
+            txtMarca.WatermarkColor = Color.White;
             // 
             // lblModelo
             // 
             lblModelo.AutoSize = true;
             lblModelo.BackColor = Color.Transparent;
-            lblModelo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblModelo.ForeColor = Color.White;
-            lblModelo.Location = new Point(16, 209);
+            lblModelo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblModelo.ForeColor = Color.Black;
+            lblModelo.Location = new Point(16, 224);
             lblModelo.Name = "lblModelo";
-            lblModelo.Size = new Size(49, 15);
+            lblModelo.Size = new Size(69, 21);
             lblModelo.TabIndex = 44;
             lblModelo.Text = "Modelo";
             // 
@@ -851,11 +864,11 @@
             // 
             lblMarca.AutoSize = true;
             lblMarca.BackColor = Color.Transparent;
-            lblMarca.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMarca.ForeColor = Color.White;
-            lblMarca.Location = new Point(13, 141);
+            lblMarca.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMarca.ForeColor = Color.Black;
+            lblMarca.Location = new Point(17, 145);
             lblMarca.Name = "lblMarca";
-            lblMarca.Size = new Size(41, 15);
+            lblMarca.Size = new Size(57, 21);
             lblMarca.TabIndex = 43;
             lblMarca.Text = "Marca";
             // 
@@ -863,31 +876,31 @@
             // 
             lblTipoDispositivo.AutoSize = true;
             lblTipoDispositivo.BackColor = Color.Transparent;
-            lblTipoDispositivo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTipoDispositivo.ForeColor = Color.White;
-            lblTipoDispositivo.Location = new Point(16, 68);
+            lblTipoDispositivo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTipoDispositivo.ForeColor = Color.Black;
+            lblTipoDispositivo.Location = new Point(17, 56);
             lblTipoDispositivo.Name = "lblTipoDispositivo";
-            lblTipoDispositivo.Size = new Size(110, 15);
+            lblTipoDispositivo.Size = new Size(155, 21);
             lblTipoDispositivo.TabIndex = 20;
             lblTipoDispositivo.Text = "Tipo de dispositivo";
             // 
             // btnComputadora
             // 
             btnComputadora.BackColor = Color.Transparent;
-            btnComputadora.FillColor = Color.FromArgb(22, 35, 52);
+            btnComputadora.FillColor = Color.Gray;
             btnComputadora.FillHoverColor = Color.Transparent;
             btnComputadora.FillPressColor = Color.FromArgb(0, 150, 137);
             btnComputadora.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnComputadora.Font = new Font("Microsoft Sans Serif", 12F);
-            btnComputadora.Location = new Point(176, 88);
+            btnComputadora.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnComputadora.Location = new Point(178, 91);
             btnComputadora.MinimumSize = new Size(1, 1);
             btnComputadora.Name = "btnComputadora";
             btnComputadora.Radius = 12;
-            btnComputadora.RectColor = Color.FromArgb(39, 53, 72);
+            btnComputadora.RectColor = Color.Gray;
             btnComputadora.RectHoverColor = Color.FromArgb(22, 35, 52);
-            btnComputadora.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnComputadora.RectPressColor = Color.Transparent;
             btnComputadora.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnComputadora.Size = new Size(125, 40);
+            btnComputadora.Size = new Size(133, 37);
             btnComputadora.TabIndex = 18;
             btnComputadora.Text = "Computadora";
             btnComputadora.TipsFont = new Font("Microsoft Sans Serif", 9F);
@@ -897,11 +910,11 @@
             // 
             lblDispositivoRecibido.AutoSize = true;
             lblDispositivoRecibido.BackColor = Color.Transparent;
-            lblDispositivoRecibido.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDispositivoRecibido.ForeColor = Color.White;
-            lblDispositivoRecibido.Location = new Point(52, 13);
+            lblDispositivoRecibido.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDispositivoRecibido.ForeColor = Color.FromArgb(120, 99, 35);
+            lblDispositivoRecibido.Location = new Point(53, 13);
             lblDispositivoRecibido.Name = "lblDispositivoRecibido";
-            lblDispositivoRecibido.Size = new Size(165, 15);
+            lblDispositivoRecibido.Size = new Size(231, 21);
             lblDispositivoRecibido.TabIndex = 17;
             lblDispositivoRecibido.Text = "Dispositivo recibido en canje";
             // 
@@ -910,7 +923,7 @@
             picIcon.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             picIcon.BackColor = Color.Transparent;
             picIcon.Image = Properties.Resources.TablerArrowsLeftRight__1_;
-            picIcon.Location = new Point(16, 7);
+            picIcon.Location = new Point(17, 13);
             picIcon.Name = "picIcon";
             picIcon.Size = new Size(30, 21);
             picIcon.SizeMode = PictureBoxSizeMode.Zoom;
@@ -923,7 +936,7 @@
             airSeparator1.Customization = "";
             airSeparator1.Font = new Font("Verdana", 8F);
             airSeparator1.Image = null;
-            airSeparator1.Location = new Point(16, 34);
+            airSeparator1.Location = new Point(16, 42);
             airSeparator1.Name = "airSeparator1";
             airSeparator1.NoRounding = false;
             airSeparator1.Size = new Size(285, 1);
@@ -936,12 +949,12 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(pnlCentral);
-            Controls.Add(pnlSuperior);
             Name = "ucTradeIn";
-            Size = new Size(1022, 781);
+            Size = new Size(1125, 764);
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picTradeIn).EndInit();
             pnlCentral.ResumeLayout(false);
+            pnlCentral.PerformLayout();
             uiPanel4.ResumeLayout(false);
             uiPanel3.ResumeLayout(false);
             uiPanel3.PerformLayout();
@@ -952,7 +965,6 @@
             uiPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picIcon).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -984,7 +996,6 @@
         private Sunny.UI.UITextBox txtNombres;
         private Label lblTelefono;
         private Label lblDatosCliente;
-        private Label lblSeparador2;
         private Label lblComercial;
         private Label label2;
         private PictureBox pictureBox1;
@@ -1008,5 +1019,6 @@
         private Sunny.UI.UITextBox uiTextBox5;
         private Sunny.UI.UITextBox uiTextBox4;
         private Sunny.UI.UITextBox uiTextBox7;
+        private ReaLTaiizor.Controls.AirSeparator airSeparator3;
     }
 }
