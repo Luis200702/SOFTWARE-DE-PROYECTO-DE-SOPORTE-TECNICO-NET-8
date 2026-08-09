@@ -43,7 +43,6 @@
             label9 = new Label();
             label8 = new Label();
             airSeparator4 = new ReaLTaiizor.Controls.AirSeparator();
-            airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             label7 = new Label();
             uiPanel2 = new Sunny.UI.UIPanel();
             uiComboBox2 = new Sunny.UI.UIComboBox();
@@ -152,6 +151,7 @@
             btnGuardarRegistro.MinimumSize = new Size(1, 1);
             btnGuardarRegistro.Name = "btnGuardarRegistro";
             btnGuardarRegistro.Radius = 12;
+            btnGuardarRegistro.RectColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.RectPressColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.RectSelectedColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.Size = new Size(316, 42);
@@ -199,7 +199,6 @@
             uiPanel3.Controls.Add(label9);
             uiPanel3.Controls.Add(label8);
             uiPanel3.Controls.Add(airSeparator4);
-            uiPanel3.Controls.Add(airSeparator3);
             uiPanel3.Controls.Add(label7);
             uiPanel3.FillColor = Color.FromArgb(30, 41, 59);
             uiPanel3.Font = new Font("Microsoft Sans Serif", 12F);
@@ -328,20 +327,6 @@
             airSeparator4.TabIndex = 50;
             airSeparator4.Text = "airSeparator4";
             airSeparator4.Transparent = false;
-            // 
-            // airSeparator3
-            // 
-            airSeparator3.BackColor = Color.DimGray;
-            airSeparator3.Customization = "";
-            airSeparator3.Font = new Font("Verdana", 8F);
-            airSeparator3.Image = null;
-            airSeparator3.Location = new Point(16, 34);
-            airSeparator3.Name = "airSeparator3";
-            airSeparator3.NoRounding = false;
-            airSeparator3.Size = new Size(285, 1);
-            airSeparator3.TabIndex = 49;
-            airSeparator3.Text = "airSeparator3";
-            airSeparator3.Transparent = false;
             // 
             // label7
             // 
@@ -1015,7 +1000,6 @@
         private Label label9;
         private Label label8;
         private ReaLTaiizor.Controls.AirSeparator airSeparator4;
-        private ReaLTaiizor.Controls.AirSeparator airSeparator3;
         private Label label7;
         private Sunny.UI.UIPanel uiPanel4;
         private Label label14;

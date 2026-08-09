@@ -31,7 +31,8 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             pnlContenedorMenu = new Panel();
-            lblSeparador2 = new Label();
+            airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
+            airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             lblAdministracion = new Label();
             lblComercial = new Label();
             btnConfiguracionGeneral = new Button();
@@ -46,29 +47,27 @@
             btnDevoluciónEntrega = new Button();
             btnSeguimientoReparaciones = new Button();
             btnRecepcionEquipos = new Button();
-            lblSeparador3 = new Label();
             pnlContenedorLogotipo = new Panel();
+            airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             btnLogoMenu = new Button();
             ImagenListLogoMenu = new ImageList(components);
-            label1 = new Label();
             pnlContenedorSalir = new Panel();
-            btnSalirApp = new ReaLTaiizor.Controls.CyberButton();
+            btnSalirApp = new Sunny.UI.UIButton();
             pnlInterfaces = new Panel();
-            btnLogoPrincipal = new Button();
             imageListLogoPrincipal = new ImageList(components);
             timerDesplazamiento = new System.Windows.Forms.Timer(components);
             pnlContenedorMenu.SuspendLayout();
             pnlContenedorLogotipo.SuspendLayout();
             pnlContenedorSalir.SuspendLayout();
-            pnlInterfaces.SuspendLayout();
             SuspendLayout();
             // 
             // pnlContenedorMenu
             // 
             pnlContenedorMenu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorMenu.AutoSize = true;
-            pnlContenedorMenu.BackColor = Color.FromArgb(10, 12, 30);
-            pnlContenedorMenu.Controls.Add(lblSeparador2);
+            pnlContenedorMenu.BackColor = Color.Black;
+            pnlContenedorMenu.Controls.Add(airSeparator2);
+            pnlContenedorMenu.Controls.Add(airSeparator3);
             pnlContenedorMenu.Controls.Add(lblAdministracion);
             pnlContenedorMenu.Controls.Add(lblComercial);
             pnlContenedorMenu.Controls.Add(btnConfiguracionGeneral);
@@ -82,40 +81,55 @@
             pnlContenedorMenu.Controls.Add(btnDevoluciónEntrega);
             pnlContenedorMenu.Controls.Add(btnSeguimientoReparaciones);
             pnlContenedorMenu.Controls.Add(btnRecepcionEquipos);
-            pnlContenedorMenu.Controls.Add(lblSeparador3);
             pnlContenedorMenu.Location = new Point(0, 90);
             pnlContenedorMenu.Name = "pnlContenedorMenu";
-            pnlContenedorMenu.Size = new Size(223, 593);
+            pnlContenedorMenu.Size = new Size(260, 594);
             pnlContenedorMenu.TabIndex = 0;
             // 
-            // lblSeparador2
+            // airSeparator2
             // 
-            lblSeparador2.BackColor = Color.Transparent;
-            lblSeparador2.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSeparador2.ForeColor = Color.FromArgb(155, 168, 171);
-            lblSeparador2.Location = new Point(12, 236);
-            lblSeparador2.Name = "lblSeparador2";
-            lblSeparador2.Size = new Size(202, 18);
-            lblSeparador2.TabIndex = 16;
-            lblSeparador2.Text = "___________________________";
+            airSeparator2.BackColor = Color.LightGray;
+            airSeparator2.Customization = "";
+            airSeparator2.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            airSeparator2.Image = null;
+            airSeparator2.Location = new Point(14, 432);
+            airSeparator2.Name = "airSeparator2";
+            airSeparator2.NoRounding = false;
+            airSeparator2.Size = new Size(230, 1);
+            airSeparator2.TabIndex = 51;
+            airSeparator2.Text = "airSeparator2";
+            airSeparator2.Transparent = false;
+            // 
+            // airSeparator3
+            // 
+            airSeparator3.BackColor = Color.LightGray;
+            airSeparator3.Customization = "";
+            airSeparator3.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            airSeparator3.Image = null;
+            airSeparator3.Location = new Point(14, 250);
+            airSeparator3.Name = "airSeparator3";
+            airSeparator3.NoRounding = false;
+            airSeparator3.Size = new Size(230, 1);
+            airSeparator3.TabIndex = 50;
+            airSeparator3.Text = "airSeparator3";
+            airSeparator3.Transparent = false;
             // 
             // lblAdministracion
             // 
             lblAdministracion.BackColor = Color.Transparent;
             lblAdministracion.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblAdministracion.ForeColor = Color.DimGray;
+            lblAdministracion.ForeColor = Color.LightGray;
             lblAdministracion.Location = new Point(27, 448);
             lblAdministracion.Name = "lblAdministracion";
             lblAdministracion.Size = new Size(105, 15);
             lblAdministracion.TabIndex = 14;
             lblAdministracion.Text = "ADMINISTRACIÓN";
-            lblAdministracion.Visible = false;
             // 
             // lblComercial
             // 
             lblComercial.BackColor = Color.Transparent;
             lblComercial.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblComercial.ForeColor = Color.DimGray;
+            lblComercial.ForeColor = Color.LightGray;
             lblComercial.Location = new Point(27, 264);
             lblComercial.Name = "lblComercial";
             lblComercial.Size = new Size(70, 15);
@@ -126,19 +140,19 @@
             // 
             btnConfiguracionGeneral.BackColor = Color.Transparent;
             btnConfiguracionGeneral.FlatStyle = FlatStyle.Flat;
-            btnConfiguracionGeneral.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnConfiguracionGeneral.ForeColor = Color.FromArgb(155, 168, 171);
+            btnConfiguracionGeneral.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnConfiguracionGeneral.ForeColor = Color.White;
+            btnConfiguracionGeneral.ImageAlign = ContentAlignment.MiddleRight;
             btnConfiguracionGeneral.ImageIndex = 10;
             btnConfiguracionGeneral.ImageList = imageListBarrraMenu;
             btnConfiguracionGeneral.Location = new Point(14, 555);
             btnConfiguracionGeneral.Name = "btnConfiguracionGeneral";
-            btnConfiguracionGeneral.Size = new Size(190, 35);
+            btnConfiguracionGeneral.Size = new Size(220, 35);
             btnConfiguracionGeneral.TabIndex = 13;
-            btnConfiguracionGeneral.Text = "   Configuración                            ";
+            btnConfiguracionGeneral.Text = " Configuración                     ";
             btnConfiguracionGeneral.TextAlign = ContentAlignment.MiddleLeft;
             btnConfiguracionGeneral.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnConfiguracionGeneral.UseVisualStyleBackColor = false;
-            btnConfiguracionGeneral.Visible = false;
             btnConfiguracionGeneral.Click += btnConfiguracionGeneral_Click;
             // 
             // imageListBarrraMenu
@@ -163,53 +177,53 @@
             // 
             btnGestionUsuarios.BackColor = Color.Transparent;
             btnGestionUsuarios.FlatStyle = FlatStyle.Flat;
-            btnGestionUsuarios.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnGestionUsuarios.ForeColor = Color.FromArgb(155, 168, 171);
+            btnGestionUsuarios.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnGestionUsuarios.ForeColor = Color.White;
+            btnGestionUsuarios.ImageAlign = ContentAlignment.MiddleRight;
             btnGestionUsuarios.ImageIndex = 9;
             btnGestionUsuarios.ImageList = imageListBarrraMenu;
             btnGestionUsuarios.Location = new Point(14, 516);
             btnGestionUsuarios.Name = "btnGestionUsuarios";
-            btnGestionUsuarios.Size = new Size(190, 35);
+            btnGestionUsuarios.Size = new Size(220, 35);
             btnGestionUsuarios.TabIndex = 12;
-            btnGestionUsuarios.Text = "   Gestión de Técnicos        ";
+            btnGestionUsuarios.Text = " Gestión de Técnicos           ";
             btnGestionUsuarios.TextAlign = ContentAlignment.MiddleLeft;
             btnGestionUsuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnGestionUsuarios.UseVisualStyleBackColor = false;
-            btnGestionUsuarios.Visible = false;
             btnGestionUsuarios.Click += btnGestionUsuarios_Click;
             // 
             // btnReportes
             // 
             btnReportes.BackColor = Color.Transparent;
             btnReportes.FlatStyle = FlatStyle.Flat;
-            btnReportes.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReportes.ForeColor = Color.FromArgb(155, 168, 171);
+            btnReportes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnReportes.ForeColor = Color.White;
+            btnReportes.ImageAlign = ContentAlignment.MiddleRight;
             btnReportes.ImageIndex = 8;
             btnReportes.ImageList = imageListBarrraMenu;
             btnReportes.Location = new Point(14, 473);
             btnReportes.Name = "btnReportes";
-            btnReportes.Size = new Size(190, 35);
+            btnReportes.Size = new Size(220, 35);
             btnReportes.TabIndex = 11;
-            btnReportes.Text = "   Reportes                                     ";
+            btnReportes.Text = " Reportes                             ";
             btnReportes.TextAlign = ContentAlignment.MiddleLeft;
             btnReportes.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReportes.UseVisualStyleBackColor = false;
-            btnReportes.Visible = false;
             btnReportes.Click += btnReportes_Click;
             // 
             // btnHistorialCliente
             // 
             btnHistorialCliente.BackColor = Color.Transparent;
             btnHistorialCliente.FlatStyle = FlatStyle.Flat;
-            btnHistorialCliente.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnHistorialCliente.ForeColor = Color.FromArgb(155, 168, 171);
+            btnHistorialCliente.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnHistorialCliente.ForeColor = Color.White;
             btnHistorialCliente.ImageIndex = 7;
             btnHistorialCliente.ImageList = imageListBarrraMenu;
             btnHistorialCliente.Location = new Point(14, 371);
             btnHistorialCliente.Name = "btnHistorialCliente";
-            btnHistorialCliente.Size = new Size(190, 35);
+            btnHistorialCliente.Size = new Size(230, 35);
             btnHistorialCliente.TabIndex = 10;
-            btnHistorialCliente.Text = "   Historial de Clientes                ";
+            btnHistorialCliente.Text = " Historial de Clientes         ";
             btnHistorialCliente.TextAlign = ContentAlignment.MiddleLeft;
             btnHistorialCliente.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnHistorialCliente.UseVisualStyleBackColor = false;
@@ -219,15 +233,15 @@
             // 
             btnTradeIn.BackColor = Color.Transparent;
             btnTradeIn.FlatStyle = FlatStyle.Flat;
-            btnTradeIn.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnTradeIn.ForeColor = Color.FromArgb(155, 168, 171);
+            btnTradeIn.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnTradeIn.ForeColor = Color.White;
             btnTradeIn.ImageIndex = 6;
             btnTradeIn.ImageList = imageListBarrraMenu;
             btnTradeIn.Location = new Point(14, 330);
             btnTradeIn.Name = "btnTradeIn";
-            btnTradeIn.Size = new Size(190, 35);
+            btnTradeIn.Size = new Size(230, 35);
             btnTradeIn.TabIndex = 9;
-            btnTradeIn.Text = "   Trade-In                                         ";
+            btnTradeIn.Text = " Trade-In                           ";
             btnTradeIn.TextAlign = ContentAlignment.MiddleLeft;
             btnTradeIn.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnTradeIn.UseVisualStyleBackColor = false;
@@ -237,15 +251,15 @@
             // 
             btnVentaDispositivos.BackColor = Color.Transparent;
             btnVentaDispositivos.FlatStyle = FlatStyle.Flat;
-            btnVentaDispositivos.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnVentaDispositivos.ForeColor = Color.FromArgb(155, 168, 171);
+            btnVentaDispositivos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnVentaDispositivos.ForeColor = Color.White;
             btnVentaDispositivos.ImageIndex = 5;
             btnVentaDispositivos.ImageList = imageListBarrraMenu;
             btnVentaDispositivos.Location = new Point(14, 289);
             btnVentaDispositivos.Name = "btnVentaDispositivos";
-            btnVentaDispositivos.Size = new Size(190, 35);
+            btnVentaDispositivos.Size = new Size(230, 35);
             btnVentaDispositivos.TabIndex = 8;
-            btnVentaDispositivos.Text = "   Venta de Dispositivos            ";
+            btnVentaDispositivos.Text = " Venta de Dispositivos        ";
             btnVentaDispositivos.TextAlign = ContentAlignment.MiddleLeft;
             btnVentaDispositivos.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnVentaDispositivos.UseVisualStyleBackColor = false;
@@ -255,15 +269,16 @@
             // 
             btnDerivacionOrdenes.BackColor = Color.Transparent;
             btnDerivacionOrdenes.FlatStyle = FlatStyle.Flat;
-            btnDerivacionOrdenes.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDerivacionOrdenes.ForeColor = Color.FromArgb(155, 168, 171);
+            btnDerivacionOrdenes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnDerivacionOrdenes.ForeColor = Color.White;
+            btnDerivacionOrdenes.ImageAlign = ContentAlignment.MiddleRight;
             btnDerivacionOrdenes.ImageIndex = 4;
             btnDerivacionOrdenes.ImageList = imageListBarrraMenu;
             btnDerivacionOrdenes.Location = new Point(14, 188);
             btnDerivacionOrdenes.Name = "btnDerivacionOrdenes";
-            btnDerivacionOrdenes.Size = new Size(190, 35);
+            btnDerivacionOrdenes.Size = new Size(230, 35);
             btnDerivacionOrdenes.TabIndex = 7;
-            btnDerivacionOrdenes.Text = "   Derivación entre Sucursales ";
+            btnDerivacionOrdenes.Text = " Derivación entre Sucursales   ";
             btnDerivacionOrdenes.TextAlign = ContentAlignment.MiddleLeft;
             btnDerivacionOrdenes.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnDerivacionOrdenes.UseVisualStyleBackColor = false;
@@ -273,15 +288,15 @@
             // 
             btnGestionStock.BackColor = Color.Transparent;
             btnGestionStock.FlatStyle = FlatStyle.Flat;
-            btnGestionStock.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnGestionStock.ForeColor = Color.FromArgb(155, 168, 171);
+            btnGestionStock.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnGestionStock.ForeColor = Color.White;
             btnGestionStock.ImageIndex = 3;
             btnGestionStock.ImageList = imageListBarrraMenu;
             btnGestionStock.Location = new Point(14, 147);
             btnGestionStock.Name = "btnGestionStock";
-            btnGestionStock.Size = new Size(190, 35);
+            btnGestionStock.Size = new Size(230, 35);
             btnGestionStock.TabIndex = 6;
-            btnGestionStock.Text = "   Control de Stock                            ";
+            btnGestionStock.Text = " Control de Stock                ";
             btnGestionStock.TextAlign = ContentAlignment.MiddleLeft;
             btnGestionStock.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnGestionStock.UseVisualStyleBackColor = false;
@@ -291,15 +306,15 @@
             // 
             btnDevoluciónEntrega.BackColor = Color.Transparent;
             btnDevoluciónEntrega.FlatStyle = FlatStyle.Flat;
-            btnDevoluciónEntrega.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDevoluciónEntrega.ForeColor = Color.FromArgb(155, 168, 171);
+            btnDevoluciónEntrega.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDevoluciónEntrega.ForeColor = Color.White;
             btnDevoluciónEntrega.ImageIndex = 2;
             btnDevoluciónEntrega.ImageList = imageListBarrraMenu;
             btnDevoluciónEntrega.Location = new Point(14, 106);
             btnDevoluciónEntrega.Name = "btnDevoluciónEntrega";
-            btnDevoluciónEntrega.Size = new Size(190, 35);
+            btnDevoluciónEntrega.Size = new Size(230, 35);
             btnDevoluciónEntrega.TabIndex = 5;
-            btnDevoluciónEntrega.Text = "   Devolución / Entrega                    ";
+            btnDevoluciónEntrega.Text = " Devolución / Entrega         ";
             btnDevoluciónEntrega.TextAlign = ContentAlignment.MiddleLeft;
             btnDevoluciónEntrega.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnDevoluciónEntrega.UseVisualStyleBackColor = false;
@@ -309,15 +324,16 @@
             // 
             btnSeguimientoReparaciones.BackColor = Color.Transparent;
             btnSeguimientoReparaciones.FlatStyle = FlatStyle.Flat;
-            btnSeguimientoReparaciones.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSeguimientoReparaciones.ForeColor = Color.FromArgb(155, 168, 171);
+            btnSeguimientoReparaciones.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSeguimientoReparaciones.ForeColor = Color.White;
+            btnSeguimientoReparaciones.ImageAlign = ContentAlignment.MiddleRight;
             btnSeguimientoReparaciones.ImageIndex = 1;
             btnSeguimientoReparaciones.ImageList = imageListBarrraMenu;
             btnSeguimientoReparaciones.Location = new Point(14, 65);
             btnSeguimientoReparaciones.Name = "btnSeguimientoReparaciones";
-            btnSeguimientoReparaciones.Size = new Size(190, 35);
+            btnSeguimientoReparaciones.Size = new Size(230, 35);
             btnSeguimientoReparaciones.TabIndex = 4;
-            btnSeguimientoReparaciones.Text = "   Seguimiento de Reparaciones";
+            btnSeguimientoReparaciones.Text = " Seguimiento de reparaciones";
             btnSeguimientoReparaciones.TextAlign = ContentAlignment.MiddleLeft;
             btnSeguimientoReparaciones.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnSeguimientoReparaciones.UseVisualStyleBackColor = false;
@@ -327,40 +343,43 @@
             // 
             btnRecepcionEquipos.BackColor = Color.Transparent;
             btnRecepcionEquipos.FlatStyle = FlatStyle.Flat;
-            btnRecepcionEquipos.Font = new Font("Nirmala UI", 6.75F, FontStyle.Bold);
-            btnRecepcionEquipos.ForeColor = Color.FromArgb(155, 168, 171);
+            btnRecepcionEquipos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRecepcionEquipos.ForeColor = Color.White;
             btnRecepcionEquipos.ImageIndex = 0;
             btnRecepcionEquipos.ImageList = imageListBarrraMenu;
             btnRecepcionEquipos.Location = new Point(14, 24);
             btnRecepcionEquipos.Name = "btnRecepcionEquipos";
-            btnRecepcionEquipos.Size = new Size(190, 35);
+            btnRecepcionEquipos.Size = new Size(230, 35);
             btnRecepcionEquipos.TabIndex = 3;
-            btnRecepcionEquipos.Text = "    Recepción de Equipos             ";
+            btnRecepcionEquipos.Text = " Recepción de Equipos         ";
             btnRecepcionEquipos.TextAlign = ContentAlignment.MiddleLeft;
             btnRecepcionEquipos.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnRecepcionEquipos.UseVisualStyleBackColor = false;
             btnRecepcionEquipos.Click += btnRecepcionEquipos_Click;
             // 
-            // lblSeparador3
-            // 
-            lblSeparador3.BackColor = Color.Transparent;
-            lblSeparador3.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSeparador3.ForeColor = Color.FromArgb(155, 168, 171);
-            lblSeparador3.Location = new Point(12, 418);
-            lblSeparador3.Name = "lblSeparador3";
-            lblSeparador3.Size = new Size(202, 18);
-            lblSeparador3.TabIndex = 15;
-            lblSeparador3.Text = "___________________________";
-            // 
             // pnlContenedorLogotipo
             // 
-            pnlContenedorLogotipo.BackColor = Color.FromArgb(10, 12, 30);
+            pnlContenedorLogotipo.BackColor = Color.Black;
+            pnlContenedorLogotipo.Controls.Add(airSeparator1);
             pnlContenedorLogotipo.Controls.Add(btnLogoMenu);
-            pnlContenedorLogotipo.Controls.Add(label1);
             pnlContenedorLogotipo.Location = new Point(0, 0);
             pnlContenedorLogotipo.Name = "pnlContenedorLogotipo";
-            pnlContenedorLogotipo.Size = new Size(223, 90);
+            pnlContenedorLogotipo.Size = new Size(260, 90);
             pnlContenedorLogotipo.TabIndex = 1;
+            // 
+            // airSeparator1
+            // 
+            airSeparator1.BackColor = Color.LightGray;
+            airSeparator1.Customization = "";
+            airSeparator1.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            airSeparator1.Image = null;
+            airSeparator1.Location = new Point(14, 86);
+            airSeparator1.Name = "airSeparator1";
+            airSeparator1.NoRounding = false;
+            airSeparator1.Size = new Size(230, 1);
+            airSeparator1.TabIndex = 51;
+            airSeparator1.Text = "airSeparator1";
+            airSeparator1.Transparent = false;
             // 
             // btnLogoMenu
             // 
@@ -370,9 +389,9 @@
             btnLogoMenu.FlatStyle = FlatStyle.Flat;
             btnLogoMenu.ImageIndex = 0;
             btnLogoMenu.ImageList = ImagenListLogoMenu;
-            btnLogoMenu.Location = new Point(67, 12);
+            btnLogoMenu.Location = new Point(98, 12);
             btnLogoMenu.Name = "btnLogoMenu";
-            btnLogoMenu.Size = new Size(82, 66);
+            btnLogoMenu.Size = new Size(67, 61);
             btnLogoMenu.TabIndex = 18;
             btnLogoMenu.UseVisualStyleBackColor = false;
             // 
@@ -384,92 +403,49 @@
             ImagenListLogoMenu.Images.SetKeyName(0, "LogotipoProyectoSd.png");
             ImagenListLogoMenu.Images.SetKeyName(1, "LogotipoProyecto.png");
             // 
-            // label1
-            // 
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(155, 168, 171);
-            label1.Location = new Point(12, 72);
-            label1.Name = "label1";
-            label1.Size = new Size(202, 18);
-            label1.TabIndex = 17;
-            label1.Text = "___________________________";
-            // 
             // pnlContenedorSalir
             // 
             pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            pnlContenedorSalir.BackColor = Color.FromArgb(10, 12, 30);
+            pnlContenedorSalir.BackColor = Color.Black;
             pnlContenedorSalir.Controls.Add(btnSalirApp);
-            pnlContenedorSalir.Location = new Point(0, 654);
+            pnlContenedorSalir.Location = new Point(0, 686);
             pnlContenedorSalir.Name = "pnlContenedorSalir";
-            pnlContenedorSalir.Size = new Size(220, 95);
+            pnlContenedorSalir.Size = new Size(260, 75);
             pnlContenedorSalir.TabIndex = 2;
             // 
             // btnSalirApp
             // 
-            btnSalirApp.Alpha = 20;
+            btnSalirApp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSalirApp.BackColor = Color.Transparent;
-            btnSalirApp.Background = true;
-            btnSalirApp.Background_WidthPen = 4F;
-            btnSalirApp.BackgroundPen = true;
-            btnSalirApp.ColorBackground = Color.FromArgb(10, 12, 30);
-            btnSalirApp.ColorBackground_1 = Color.FromArgb(50, 52, 68);
-            btnSalirApp.ColorBackground_2 = Color.FromArgb(26, 28, 44);
-            btnSalirApp.ColorBackground_Pen = Color.FromArgb(10, 12, 30);
-            btnSalirApp.ColorLighting = Color.FromArgb(10, 12, 30);
-            btnSalirApp.ColorPen_1 = Color.FromArgb(6, 20, 27);
-            btnSalirApp.ColorPen_2 = Color.FromArgb(6, 20, 27);
-            btnSalirApp.CyberButtonStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            btnSalirApp.Effect_1 = false;
-            btnSalirApp.Effect_1_ColorBackground = Color.FromArgb(255, 111, 111);
-            btnSalirApp.Effect_1_Transparency = 100;
-            btnSalirApp.Effect_2 = true;
-            btnSalirApp.Effect_2_ColorBackground = Color.FromArgb(255, 111, 111);
-            btnSalirApp.Effect_2_Transparency = 180;
-            btnSalirApp.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSalirApp.ForeColor = Color.FromArgb(155, 168, 171);
-            btnSalirApp.Lighting = false;
-            btnSalirApp.LinearGradient_Background = true;
-            btnSalirApp.LinearGradientPen = false;
-            btnSalirApp.Location = new Point(12, 43);
+            btnSalirApp.FillColor = Color.FromArgb(0, 150, 137);
+            btnSalirApp.FillHoverColor = Color.FromArgb(255, 128, 128);
+            btnSalirApp.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnSalirApp.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnSalirApp.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSalirApp.Location = new Point(49, 18);
+            btnSalirApp.MinimumSize = new Size(1, 1);
             btnSalirApp.Name = "btnSalirApp";
-            btnSalirApp.PenWidth = 15;
-            btnSalirApp.Rounding = true;
-            btnSalirApp.RoundingInt = 80;
-            btnSalirApp.Size = new Size(192, 40);
-            btnSalirApp.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            btnSalirApp.TabIndex = 3;
-            btnSalirApp.Tag = "Cyber";
-            btnSalirApp.TextButton = "Salir";
-            btnSalirApp.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            btnSalirApp.Timer_Effect_1 = 5;
-            btnSalirApp.Timer_RGB = 300;
+            btnSalirApp.Radius = 12;
+            btnSalirApp.RectColor = Color.FromArgb(0, 150, 137);
+            btnSalirApp.RectHoverColor = Color.FromArgb(255, 128, 128);
+            btnSalirApp.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnSalirApp.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnSalirApp.Size = new Size(159, 35);
+            btnSalirApp.TabIndex = 16;
+            btnSalirApp.Text = "SALIR";
+            btnSalirApp.TipsFont = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSalirApp.TipsForeColor = Color.Black;
             btnSalirApp.Click += btnSalirApp_Click;
             // 
             // pnlInterfaces
             // 
             pnlInterfaces.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlInterfaces.AutoSize = true;
-            pnlInterfaces.BackColor = Color.FromArgb(24, 35, 54);
-            pnlInterfaces.Controls.Add(btnLogoPrincipal);
-            pnlInterfaces.Location = new Point(220, 0);
+            pnlInterfaces.BackColor = Color.LightGray;
+            pnlInterfaces.Location = new Point(262, 0);
             pnlInterfaces.Name = "pnlInterfaces";
-            pnlInterfaces.Size = new Size(1025, 752);
+            pnlInterfaces.Size = new Size(1125, 764);
             pnlInterfaces.TabIndex = 3;
-            // 
-            // btnLogoPrincipal
-            // 
-            btnLogoPrincipal.AutoSize = true;
-            btnLogoPrincipal.Enabled = false;
-            btnLogoPrincipal.FlatAppearance.BorderColor = Color.FromArgb(24, 35, 54);
-            btnLogoPrincipal.FlatStyle = FlatStyle.Flat;
-            btnLogoPrincipal.ImageIndex = 0;
-            btnLogoPrincipal.ImageList = imageListLogoPrincipal;
-            btnLogoPrincipal.Location = new Point(381, 255);
-            btnLogoPrincipal.Name = "btnLogoPrincipal";
-            btnLogoPrincipal.Size = new Size(264, 264);
-            btnLogoPrincipal.TabIndex = 0;
-            btnLogoPrincipal.UseVisualStyleBackColor = true;
             // 
             // imageListLogoPrincipal
             // 
@@ -486,12 +462,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(24, 35, 54);
-            ClientSize = new Size(1242, 749);
+            BackColor = Color.Black;
+            ClientSize = new Size(1384, 761);
             Controls.Add(pnlInterfaces);
             Controls.Add(pnlContenedorSalir);
             Controls.Add(pnlContenedorLogotipo);
             Controls.Add(pnlContenedorMenu);
+            ForeColor = Color.Black;
             Name = "frmMenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu Principal";
@@ -499,8 +476,6 @@
             pnlContenedorMenu.ResumeLayout(false);
             pnlContenedorLogotipo.ResumeLayout(false);
             pnlContenedorSalir.ResumeLayout(false);
-            pnlInterfaces.ResumeLayout(false);
-            pnlInterfaces.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -523,17 +498,17 @@
         private Button btnRecepcionEquipos;
         private Label lblComercial;
         private Label lblAdministracion;
-        private Label lblSeparador3;
-        private Label lblSeparador2;
-        private ReaLTaiizor.Controls.CyberButton btnSalirApp;
         private Panel pnlInterfaces;
         private System.Windows.Forms.Timer timerDesplazamiento;
         private ImageList imageListBarrraMenu;
-        private Label label1;
-        private Button btnLogoMenu;
         private ImageList ImagenListLogoMenu;
         private ImageList imageListLogoPrincipal;
-        private Button btnLogoPrincipal;
+        private Button btnLogoMenu;
+
+        private ReaLTaiizor.Controls.AirSeparator airSeparator3;
+        private ReaLTaiizor.Controls.AirSeparator airSeparator2;
+        private ReaLTaiizor.Controls.AirSeparator airSeparator1;
+        private Sunny.UI.UIButton btnSalirApp;
         //private ToggleSwitch toggleSwitch1; =================================================================================================================
     }
 }

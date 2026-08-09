@@ -25,7 +25,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private float progresoAnchoObjetivo = 0f;
 
         private System.Windows.Forms.Button botonSeleccionado;
-        private System.Windows.Forms.Button ultimoBotonActivo; 
+        private System.Windows.Forms.Button ultimoBotonActivo;
 
         // Variable para mantener el botón que recibió Clic 
         private System.Windows.Forms.Button botonActivo;
@@ -62,7 +62,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     btn.BackColor = Color.Transparent;
                     btn.FlatAppearance.MouseOverBackColor = Color.Transparent;
                     btn.FlatAppearance.MouseDownBackColor = Color.Transparent;
-                    btn.ForeColor = ColorTranslator.FromHtml("#9BA8AB");
+                    btn.ForeColor = ColorTranslator.FromHtml("#FFFFFF");   // Color por defecto 
 
                     btn.MouseEnter -= BotonMenu_MouseEnter;
                     btn.MouseEnter += BotonMenu_MouseEnter;
@@ -85,7 +85,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 // Restaurar color del texto del botón activo anterior
                 if (botonActivo != null && botonActivo != btn)
                 {
-                    botonActivo.ForeColor = ColorTranslator.FromHtml("#9BA8AB");
+                    botonActivo.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
                 }
 
                 botonActivo = btn;
@@ -105,6 +105,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             e.Graphics.SetClip(new RectangleF(0, 0, anchoTotal, pnlContenedorMenu.Height));
 
             // =========================================================================
+            // VARIABLE DE CONFIGURACIÓN DE REDONDEO
+            // Puedes cambiar este valor libremente (ej. 4f, 6f, 8f, 10f) para ajustar 
+            // qué tan redondeadas o cuadradas quieres las esquinas.
+            // =========================================================================
+            float radioEsquinas = 6f;
+
+            // =========================================================================
             // 1. DIBUJAR DEGRADADO EN EL BOTÓN SELECCIONADO POR CLIC (SECCIÓN ACTIVA)
             // =========================================================================
             if (botonActivo != null)
@@ -113,25 +120,24 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 float yActivo = botonActivo.Top;
                 float anchoActivo = botonActivo.Width;
                 float altoActivo = botonActivo.Height;
-                float radioActivo = altoActivo / 2f;
 
-                using (GraphicsPath pathActivo = CrearPathHoverBoton(xActivo, yActivo, anchoActivo, altoActivo, radioActivo))
+                using (GraphicsPath pathActivo = CrearPathRedondeado(xActivo, yActivo, anchoActivo, altoActivo, radioEsquinas))
                 {
                     RectangleF rectGradiente = new RectangleF(xActivo, yActivo, anchoActivo, altoActivo);
                     if (rectGradiente.Width > 1)
                     {
-                        Color colorInicio = ColorTranslator.FromHtml("#2F7C70"); // Color claro/brillante       Otro si quiero por si acaso: #3E9B8B
-                        Color colorFin = Color.FromArgb(0, 74, 92, 98);         // Transparente a la derecha
+                        Color colorInicio = ColorTranslator.FromHtml("#009689");
+                        Color colorFin = Color.FromArgb(0, 72, 92, 98);
 
                         using (LinearGradientBrush brushGradiente = new LinearGradientBrush(
                             rectGradiente, colorInicio, colorFin, LinearGradientMode.Horizontal))
                         {
                             ColorBlend blend = new ColorBlend();
                             blend.Colors = new Color[] {
-                                colorInicio,
-                                Color.FromArgb(180, colorInicio),
-                                colorFin
-                            };
+                        colorInicio,
+                        Color.FromArgb(180, colorInicio),
+                        colorFin
+                    };
                             blend.Positions = new float[] { 0.0f, 0.55f, 1.0f };
                             brushGradiente.InterpolationColors = blend;
 
@@ -142,7 +148,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
 
             // =========================================================================
-            // 2. DIBUJAR ANIMACIÓN FLOTANTE (HOVER) LIMITADA EXCLUSIVAMENTE AL ÁREA DEL BOTÓN
+            // 2. DIBUJAR ANIMACIÓN FLOTANTE (HOVER) DENTRO DEL ÁREA DEL BOTÓN
             // =========================================================================
             if (progresoAncho > 0.001f)
             {
@@ -154,14 +160,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     float anchoMax = btn.Width;
                     float alto = btn.Height;
 
-                    // Animación de ancho y desplazamiento dentro del botón 
+                    // Animación de ancho y desplazamiento fluido 
                     float anchoActual = anchoMax * progresoAncho;
-                    float xActual = xBtn + (anchoMax - anchoActual);
-                    float radio = alto / 2f;
+                    float xActual = xBtn + (anchoMax - anchoActual); // Si prefieres que crezca desde la izquierda, cámbialo a xBtn
 
                     Color colorCapsula = Color.FromArgb(25, 255, 255, 255); // Blanco leve y translúcido
 
-                    using (GraphicsPath pathHover = CrearPathHoverBoton(xActual, y, anchoActual, alto, radio))
+                    using (GraphicsPath pathHover = CrearPathRedondeado(xActual, y, anchoActual, alto, radioEsquinas))
                     {
                         using (SolidBrush brush = new SolidBrush(colorCapsula))
                         {
@@ -174,46 +179,31 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             e.Graphics.ResetClip();
         }
 
-        // Método auxiliar para la figura cóncava original del Click 
-        private GraphicsPath CrearPathCapsula(float xCalculado, float y, int alto, int radio, float rCorner, int anchoTotal)
-        {
-            GraphicsPath path = new GraphicsPath();
-            path.StartFigure();
-
-            if (rCorner > 0.5f)
-            {
-                path.AddArc(anchoTotal - 2 * rCorner, y - 2 * rCorner, 2 * rCorner, 2 * rCorner, 0, 90);
-                path.AddArc(xCalculado, y, radio, radio, 270, -180);
-                path.AddArc(anchoTotal - 2 * rCorner, y + alto, 2 * rCorner, 2 * rCorner, 270, 90);
-                path.AddLine(anchoTotal, y + alto + rCorner, anchoTotal, y - rCorner);
-            }
-            else
-            {
-                path.AddLine(anchoTotal, y, xCalculado + radio / 2f, y);
-                path.AddArc(xCalculado, y, radio, radio, 270, -180);
-                path.AddLine(xCalculado + radio / 2f, y + alto, anchoTotal, y + alto);
-                path.AddLine(anchoTotal, y + alto, anchoTotal, y);
-            }
-
-            path.CloseFigure();
-            return path;
-        }
-
-        // Método auxiliar para construir la forma redondeada dentro del botón
-        private GraphicsPath CrearPathHoverBoton(float x, float y, float ancho, float alto, float radio)
+        // =========================================================================
+        // MÉTODO ÚNICO Y UNIVERSAL PARA RECTÁNGULOS CON ESQUINAS REDONDEADAS PERFECTAS
+        // =========================================================================
+        private GraphicsPath CrearPathRedondeado(float x, float y, float ancho, float alto, float radio)
         {
             GraphicsPath path = new GraphicsPath();
             if (ancho <= 0 || alto <= 0) return path;
 
+            // Asegurar matemáticamente que el radio nunca deforme la figura
             radio = Math.Min(radio, Math.Min(ancho / 2f, alto / 2f));
             if (radio < 0) radio = 0;
 
+            float diametro = radio * 2f;
+
             path.StartFigure();
-            path.AddArc(x, y, 2 * radio, 2 * radio, 90, 180);
-            path.AddLine(x + radio, y, x + ancho - radio, y);
-            path.AddArc(x + ancho - 2 * radio, y, 2 * radio, 2 * radio, 270, 180);
-            path.AddLine(x + ancho - radio, y + alto, x + radio, y + alto);
+            // Esquina superior izquierda
+            path.AddArc(x, y, diametro, diametro, 180, 90);
+            // Esquina superior derecha
+            path.AddArc(x + ancho - diametro, y, diametro, diametro, 270, 90);
+            // Esquina inferior derecha
+            path.AddArc(x + ancho - diametro, y + alto - diametro, diametro, diametro, 0, 90);
+            // Esquina inferior izquierda
+            path.AddArc(x, y + alto - diametro, diametro, diametro, 90, 90);
             path.CloseFigure();
+
             return path;
         }
 
@@ -226,7 +216,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     if (botonSeleccionado != null && botonSeleccionado != botonActivo)
                     {
-                        botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#9BA8AB");
+                        botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
                     }
                     botonSeleccionado = null;
                     progresoAnchoObjetivo = 0f;
@@ -236,7 +226,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 if (botonSeleccionado != null && botonSeleccionado != btn && botonSeleccionado != botonActivo)
                 {
-                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#9BA8AB");
+                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
                 }
 
                 if (progresoAnchoObjetivo == 0f && progresoAncho == 0f)
@@ -269,7 +259,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 if (botonSeleccionado != null && botonSeleccionado != botonActivo)
                 {
-                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#9BA8AB");
+                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
                     botonSeleccionado = null;
                 }
                 progresoAnchoObjetivo = 0.0f; // Contraer
@@ -334,9 +324,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         //    // Aplica el tema a todo el formulario actual y sus controles/paneles internos
         //    TemaManager.AplicarTema(this, esOscuro);
         //}
-
-
-
 
         private void frmMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
