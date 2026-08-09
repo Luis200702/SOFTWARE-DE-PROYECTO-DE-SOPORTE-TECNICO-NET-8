@@ -50,6 +50,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             dgv4.CurrentCell = dgv4.Rows[fila].Cells[0];
             dgv4.BeginEdit(true);
+            frmAggStock frm = new frmAggStock();
+            frm.ShowDialog();
+
         }
 
         private void dgv4_CellContentClick(object sender, DataGridViewCellEventArgs e)

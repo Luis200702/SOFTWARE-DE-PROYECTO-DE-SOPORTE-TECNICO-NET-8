@@ -263,7 +263,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(147, 162, 183);
             dgv4.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv4.RowTemplate.Height = 40;
-            dgv4.Size = new Size(1193, 881);
+            dgv4.Size = new Size(1193, 855);
             dgv4.TabIndex = 3;
             dgv4.CellClick += dgv4_CellClick;
             dgv4.CellContentClick += dgv4_CellContentClick;
