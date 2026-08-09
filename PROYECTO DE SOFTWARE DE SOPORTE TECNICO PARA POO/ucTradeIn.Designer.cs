@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucTradeIn));
             pnlSuperior = new Panel();
             picTradeIn = new PictureBox();
             lblTitulo = new Label();
@@ -36,6 +37,9 @@
             uiPanel4 = new Sunny.UI.UIPanel();
             label14 = new Label();
             uiPanel3 = new Sunny.UI.UIPanel();
+            uiTextBox5 = new Sunny.UI.UITextBox();
+            uiTextBox4 = new Sunny.UI.UITextBox();
+            airSeparator5 = new ReaLTaiizor.Controls.AirSeparator();
             uiTextBox7 = new Sunny.UI.UITextBox();
             label10 = new Label();
             label9 = new Label();
@@ -55,10 +59,11 @@
             pictureBox1 = new PictureBox();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             uiPanel1 = new Sunny.UI.UIPanel();
+            btnComputadora = new Sunny.UI.UIButton();
+            btnTelefono = new Sunny.UI.UIButton();
             airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             lblComercial = new Label();
             txtNumeroTelefonico = new Sunny.UI.UITextBox();
-            btnTelefono = new Sunny.UI.UIButton();
             txtNombres = new Sunny.UI.UITextBox();
             lblTelefono = new Label();
             lblDatosCliente = new Label();
@@ -73,13 +78,9 @@
             lblModelo = new Label();
             lblMarca = new Label();
             lblTipoDispositivo = new Label();
-            btnComputadora = new Sunny.UI.UIButton();
             lblDispositivoRecibido = new Label();
             picIcon = new PictureBox();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
-            airSeparator5 = new ReaLTaiizor.Controls.AirSeparator();
-            uiTextBox4 = new Sunny.UI.UITextBox();
-            uiTextBox5 = new Sunny.UI.UITextBox();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picTradeIn).BeginInit();
             pnlCentral.SuspendLayout();
@@ -95,7 +96,7 @@
             // 
             pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
-            pnlSuperior.BackColor = Color.FromArgb(30, 41, 59);
+            pnlSuperior.BackColor = Color.FromArgb(15, 23, 42);
             pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
             pnlSuperior.Controls.Add(picTradeIn);
             pnlSuperior.Controls.Add(lblTitulo);
@@ -107,7 +108,7 @@
             // 
             // picTradeIn
             // 
-            picTradeIn.Image = Properties.Resources.TablerArrowsLeftRight;
+            picTradeIn.Image = (Image)resources.GetObject("picTradeIn.Image");
             picTradeIn.Location = new Point(31, 15);
             picTradeIn.Name = "picTradeIn";
             picTradeIn.Size = new Size(36, 30);
@@ -146,18 +147,19 @@
             btnGuardarRegistro.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnGuardarRegistro.BackColor = Color.Transparent;
             btnGuardarRegistro.FillColor = Color.FromArgb(0, 150, 137);
-            btnGuardarRegistro.FillHoverColor = Color.FromArgb(0, 150, 137);
+            btnGuardarRegistro.FillHoverColor = Color.FromArgb(80, 160, 255);
             btnGuardarRegistro.FillPressColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnGuardarRegistro.Font = new Font("Segoe MDL2 Assets", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnGuardarRegistro.Location = new Point(758, 482);
+            btnGuardarRegistro.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGuardarRegistro.Location = new Point(802, 472);
             btnGuardarRegistro.MinimumSize = new Size(1, 1);
             btnGuardarRegistro.Name = "btnGuardarRegistro";
             btnGuardarRegistro.Radius = 12;
             btnGuardarRegistro.RectColor = Color.FromArgb(0, 150, 137);
+            btnGuardarRegistro.RectHoverColor = Color.FromArgb(80, 160, 255);
             btnGuardarRegistro.RectPressColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnGuardarRegistro.Size = new Size(330, 42);
+            btnGuardarRegistro.Size = new Size(241, 51);
             btnGuardarRegistro.TabIndex = 15;
             btnGuardarRegistro.Text = "Registrar Trade-In";
             btnGuardarRegistro.TipsFont = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -170,13 +172,13 @@
             uiPanel4.FillColor = Color.SlateBlue;
             uiPanel4.Font = new Font("Microsoft Sans Serif", 12F);
             uiPanel4.ForeColor = Color.White;
-            uiPanel4.Location = new Point(758, 387);
+            uiPanel4.Location = new Point(747, 384);
             uiPanel4.Margin = new Padding(4, 5, 4, 5);
             uiPanel4.MinimumSize = new Size(1, 1);
             uiPanel4.Name = "uiPanel4";
             uiPanel4.Radius = 12;
             uiPanel4.RectColor = Color.SlateBlue;
-            uiPanel4.Size = new Size(330, 64);
+            uiPanel4.Size = new Size(341, 64);
             uiPanel4.TabIndex = 2;
             uiPanel4.Text = null;
             uiPanel4.TextAlignment = ContentAlignment.MiddleCenter;
@@ -184,12 +186,11 @@
             // label14
             // 
             label14.BackColor = Color.Transparent;
-            label14.Enabled = false;
-            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label14.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label14.ForeColor = Color.White;
-            label14.Location = new Point(16, 17);
+            label14.Location = new Point(16, 10);
             label14.Name = "label14";
-            label14.Size = new Size(285, 41);
+            label14.Size = new Size(322, 54);
             label14.TabIndex = 48;
             label14.Text = "El equipo recibido pasa automáticamente al inventario de segunda mano.";
             // 
@@ -206,25 +207,97 @@
             uiPanel3.Controls.Add(label7);
             uiPanel3.FillColor = Color.FromArgb(30, 41, 59);
             uiPanel3.Font = new Font("Microsoft Sans Serif", 12F);
-            uiPanel3.Location = new Point(758, 72);
+            uiPanel3.Location = new Point(747, 72);
             uiPanel3.Margin = new Padding(4, 5, 4, 5);
             uiPanel3.MinimumSize = new Size(1, 1);
             uiPanel3.Name = "uiPanel3";
             uiPanel3.Radius = 12;
             uiPanel3.RectColor = Color.FromArgb(39, 53, 72);
-            uiPanel3.Size = new Size(330, 287);
+            uiPanel3.Size = new Size(340, 287);
             uiPanel3.TabIndex = 1;
             uiPanel3.Text = null;
             uiPanel3.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // uiTextBox5
+            // 
+            uiTextBox5.BackColor = Color.Transparent;
+            uiTextBox5.Enabled = false;
+            uiTextBox5.FillColor = Color.FromArgb(30, 41, 59);
+            uiTextBox5.FillDisableColor = Color.FromArgb(30, 41, 59);
+            uiTextBox5.FillReadOnlyColor = Color.FromArgb(30, 41, 59);
+            uiTextBox5.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            uiTextBox5.ForeColor = Color.Lime;
+            uiTextBox5.Location = new Point(195, 224);
+            uiTextBox5.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox5.MaxLength = 255;
+            uiTextBox5.Minimum = 0D;
+            uiTextBox5.MinimumSize = new Size(1, 16);
+            uiTextBox5.Name = "uiTextBox5";
+            uiTextBox5.Padding = new Padding(5);
+            uiTextBox5.Radius = 12;
+            uiTextBox5.RectColor = Color.FromArgb(30, 41, 59);
+            uiTextBox5.RectDisableColor = Color.FromArgb(30, 41, 59);
+            uiTextBox5.RectReadOnlyColor = Color.FromArgb(30, 41, 59);
+            uiTextBox5.ShowText = false;
+            uiTextBox5.Size = new Size(124, 37);
+            uiTextBox5.TabIndex = 58;
+            uiTextBox5.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox5.Watermark = "$ 0.00";
+            uiTextBox5.WatermarkActiveColor = Color.DimGray;
+            uiTextBox5.WatermarkColor = Color.Lime;
+            // 
+            // uiTextBox4
+            // 
+            uiTextBox4.BackColor = Color.Transparent;
+            uiTextBox4.Enabled = false;
+            uiTextBox4.FillColor = Color.FromArgb(30, 41, 59);
+            uiTextBox4.FillDisableColor = Color.FromArgb(30, 41, 59);
+            uiTextBox4.FillReadOnlyColor = Color.FromArgb(30, 41, 59);
+            uiTextBox4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            uiTextBox4.ForeColor = Color.FromArgb(229, 184, 0);
+            uiTextBox4.Location = new Point(222, 129);
+            uiTextBox4.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox4.MaxLength = 255;
+            uiTextBox4.Minimum = 0D;
+            uiTextBox4.MinimumSize = new Size(1, 16);
+            uiTextBox4.Name = "uiTextBox4";
+            uiTextBox4.Padding = new Padding(5);
+            uiTextBox4.Radius = 12;
+            uiTextBox4.RectColor = Color.FromArgb(30, 41, 59);
+            uiTextBox4.RectDisableColor = Color.FromArgb(30, 41, 59);
+            uiTextBox4.RectReadOnlyColor = Color.FromArgb(30, 41, 59);
+            uiTextBox4.ShowText = false;
+            uiTextBox4.Size = new Size(99, 37);
+            uiTextBox4.TabIndex = 57;
+            uiTextBox4.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox4.Watermark = "$ 0.00";
+            uiTextBox4.WatermarkActiveColor = Color.DimGray;
+            uiTextBox4.WatermarkColor = Color.FromArgb(229, 184, 0);
+            // 
+            // airSeparator5
+            // 
+            airSeparator5.BackColor = Color.DimGray;
+            airSeparator5.Customization = "";
+            airSeparator5.Font = new Font("Verdana", 8F);
+            airSeparator5.Image = null;
+            airSeparator5.Location = new Point(19, 42);
+            airSeparator5.Name = "airSeparator5";
+            airSeparator5.NoRounding = false;
+            airSeparator5.Size = new Size(299, 1);
+            airSeparator5.TabIndex = 56;
+            airSeparator5.Text = "airSeparator5";
+            airSeparator5.Transparent = false;
             // 
             // uiTextBox7
             // 
             uiTextBox7.BackColor = Color.Transparent;
             uiTextBox7.Enabled = false;
-            uiTextBox7.FillColor = Color.DimGray;
-            uiTextBox7.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox7.ForeColor = Color.White;
-            uiTextBox7.Location = new Point(219, 70);
+            uiTextBox7.FillColor = Color.FromArgb(30, 41, 59);
+            uiTextBox7.FillDisableColor = Color.FromArgb(30, 41, 59);
+            uiTextBox7.FillReadOnlyColor = Color.FromArgb(30, 41, 59);
+            uiTextBox7.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            uiTextBox7.ForeColor = Color.LightGray;
+            uiTextBox7.Location = new Point(222, 70);
             uiTextBox7.Margin = new Padding(4, 5, 4, 5);
             uiTextBox7.MaxLength = 255;
             uiTextBox7.Minimum = 0D;
@@ -232,12 +305,15 @@
             uiTextBox7.Name = "uiTextBox7";
             uiTextBox7.Padding = new Padding(5);
             uiTextBox7.Radius = 12;
-            uiTextBox7.RectColor = Color.DimGray;
+            uiTextBox7.RectColor = Color.FromArgb(30, 41, 59);
+            uiTextBox7.RectDisableColor = Color.FromArgb(30, 41, 59);
+            uiTextBox7.RectReadOnlyColor = Color.FromArgb(30, 41, 59);
             uiTextBox7.ShowText = false;
-            uiTextBox7.Size = new Size(85, 37);
+            uiTextBox7.Size = new Size(99, 37);
             uiTextBox7.TabIndex = 50;
             uiTextBox7.TextAlignment = ContentAlignment.MiddleLeft;
             uiTextBox7.Watermark = "$ 0.00";
+            uiTextBox7.WatermarkActiveColor = Color.DimGray;
             uiTextBox7.WatermarkColor = Color.LightGray;
             // 
             // label10
@@ -256,7 +332,6 @@
             // 
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
-            label9.Enabled = false;
             label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label9.ForeColor = Color.White;
             label9.Location = new Point(19, 75);
@@ -269,7 +344,6 @@
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
-            label8.Enabled = false;
             label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label8.ForeColor = Color.White;
             label8.Location = new Point(19, 134);
@@ -287,7 +361,7 @@
             airSeparator4.Location = new Point(19, 198);
             airSeparator4.Name = "airSeparator4";
             airSeparator4.NoRounding = false;
-            airSeparator4.Size = new Size(285, 1);
+            airSeparator4.Size = new Size(299, 1);
             airSeparator4.TabIndex = 50;
             airSeparator4.Text = "airSeparator4";
             airSeparator4.Transparent = false;
@@ -320,7 +394,7 @@
             uiPanel2.Controls.Add(airSeparator2);
             uiPanel2.FillColor = Color.FromArgb(30, 41, 59);
             uiPanel2.Font = new Font("Microsoft Sans Serif", 12F);
-            uiPanel2.Location = new Point(398, 72);
+            uiPanel2.Location = new Point(393, 72);
             uiPanel2.Margin = new Padding(4, 5, 4, 5);
             uiPanel2.MinimumSize = new Size(1, 1);
             uiPanel2.Name = "uiPanel2";
@@ -487,7 +561,7 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = Properties.Resources.TablerArrowsLeftRight__1_;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(12, 13);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(30, 21);
@@ -512,10 +586,11 @@
             // uiPanel1
             // 
             uiPanel1.BackColor = Color.DarkGray;
+            uiPanel1.Controls.Add(btnComputadora);
+            uiPanel1.Controls.Add(btnTelefono);
             uiPanel1.Controls.Add(airSeparator3);
             uiPanel1.Controls.Add(lblComercial);
             uiPanel1.Controls.Add(txtNumeroTelefonico);
-            uiPanel1.Controls.Add(btnTelefono);
             uiPanel1.Controls.Add(txtNombres);
             uiPanel1.Controls.Add(lblTelefono);
             uiPanel1.Controls.Add(lblDatosCliente);
@@ -530,7 +605,6 @@
             uiPanel1.Controls.Add(lblModelo);
             uiPanel1.Controls.Add(lblMarca);
             uiPanel1.Controls.Add(lblTipoDispositivo);
-            uiPanel1.Controls.Add(btnComputadora);
             uiPanel1.Controls.Add(lblDispositivoRecibido);
             uiPanel1.Controls.Add(picIcon);
             uiPanel1.Controls.Add(airSeparator1);
@@ -546,6 +620,49 @@
             uiPanel1.TabIndex = 0;
             uiPanel1.Text = null;
             uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // btnComputadora
+            // 
+            btnComputadora.BackColor = Color.Transparent;
+            btnComputadora.FillColor = Color.DimGray;
+            btnComputadora.FillHoverColor = Color.FromArgb(80, 160, 255);
+            btnComputadora.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnComputadora.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnComputadora.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnComputadora.Location = new Point(16, 91);
+            btnComputadora.MinimumSize = new Size(1, 1);
+            btnComputadora.Name = "btnComputadora";
+            btnComputadora.Radius = 12;
+            btnComputadora.RectColor = Color.DimGray;
+            btnComputadora.RectHoverColor = Color.FromArgb(80, 160, 255);
+            btnComputadora.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnComputadora.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnComputadora.Size = new Size(136, 37);
+            btnComputadora.TabIndex = 61;
+            btnComputadora.Text = "Computadora";
+            btnComputadora.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnComputadora.TipsForeColor = Color.Transparent;
+            // 
+            // btnTelefono
+            // 
+            btnTelefono.BackColor = Color.Transparent;
+            btnTelefono.FillColor = Color.DimGray;
+            btnTelefono.FillHoverColor = Color.FromArgb(80, 160, 255);
+            btnTelefono.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnTelefono.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnTelefono.Location = new Point(175, 91);
+            btnTelefono.MinimumSize = new Size(1, 1);
+            btnTelefono.Name = "btnTelefono";
+            btnTelefono.Radius = 12;
+            btnTelefono.RectColor = Color.DimGray;
+            btnTelefono.RectHoverColor = Color.FromArgb(80, 160, 255);
+            btnTelefono.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnTelefono.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnTelefono.Size = new Size(136, 37);
+            btnTelefono.TabIndex = 62;
+            btnTelefono.Text = "Teléfono";
+            btnTelefono.TipsFont = new Font("Microsoft Sans Serif", 9F);
             // 
             // airSeparator3
             // 
@@ -593,29 +710,8 @@
             txtNumeroTelefonico.Size = new Size(295, 37);
             txtNumeroTelefonico.TabIndex = 56;
             txtNumeroTelefonico.TextAlignment = ContentAlignment.MiddleLeft;
-            txtNumeroTelefonico.Watermark = "0993425009";
+            txtNumeroTelefonico.Watermark = "Eje. 0993425009";
             txtNumeroTelefonico.WatermarkColor = Color.LightGray;
-            // 
-            // btnTelefono
-            // 
-            btnTelefono.BackColor = Color.Transparent;
-            btnTelefono.FillColor = Color.DimGray;
-            btnTelefono.FillHoverColor = Color.Transparent;
-            btnTelefono.FillPressColor = Color.FromArgb(0, 150, 137);
-            btnTelefono.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnTelefono.ForeColor = Color.LightGray;
-            btnTelefono.Location = new Point(18, 91);
-            btnTelefono.MinimumSize = new Size(1, 1);
-            btnTelefono.Name = "btnTelefono";
-            btnTelefono.Radius = 12;
-            btnTelefono.RectColor = Color.FromArgb(55, 53, 72);
-            btnTelefono.RectPressColor = Color.FromArgb(0, 150, 137);
-            btnTelefono.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnTelefono.Size = new Size(133, 37);
-            btnTelefono.TabIndex = 19;
-            btnTelefono.Text = "Teléfono";
-            btnTelefono.TipsFont = new Font("Microsoft Sans Serif", 9F);
             // 
             // txtNombres
             // 
@@ -778,7 +874,7 @@
             txtModelo.BackColor = Color.Transparent;
             txtModelo.FillColor = Color.DimGray;
             txtModelo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtModelo.ForeColor = Color.DimGray;
+            txtModelo.ForeColor = Color.White;
             txtModelo.Location = new Point(18, 250);
             txtModelo.Margin = new Padding(4, 5, 4, 5);
             txtModelo.MaxLength = 255;
@@ -853,29 +949,6 @@
             lblTipoDispositivo.TabIndex = 20;
             lblTipoDispositivo.Text = "Tipo de dispositivo";
             // 
-            // btnComputadora
-            // 
-            btnComputadora.BackColor = Color.Transparent;
-            btnComputadora.FillColor = Color.DimGray;
-            btnComputadora.FillHoverColor = Color.Transparent;
-            btnComputadora.FillPressColor = Color.FromArgb(0, 150, 137);
-            btnComputadora.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnComputadora.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnComputadora.ForeColor = Color.LightGray;
-            btnComputadora.Location = new Point(178, 91);
-            btnComputadora.MinimumSize = new Size(1, 1);
-            btnComputadora.Name = "btnComputadora";
-            btnComputadora.Radius = 12;
-            btnComputadora.RectColor = Color.DimGray;
-            btnComputadora.RectHoverColor = Color.FromArgb(22, 35, 52);
-            btnComputadora.RectPressColor = Color.Transparent;
-            btnComputadora.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnComputadora.Size = new Size(133, 37);
-            btnComputadora.TabIndex = 18;
-            btnComputadora.Text = "Computadora";
-            btnComputadora.TipsFont = new Font("Microsoft Sans Serif", 9F);
-            btnComputadora.TipsForeColor = Color.Transparent;
-            // 
             // lblDispositivoRecibido
             // 
             lblDispositivoRecibido.AutoSize = true;
@@ -892,7 +965,7 @@
             // 
             picIcon.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             picIcon.BackColor = Color.Transparent;
-            picIcon.Image = Properties.Resources.TablerArrowsLeftRight__1_;
+            picIcon.Image = (Image)resources.GetObject("picIcon.Image");
             picIcon.Location = new Point(17, 13);
             picIcon.Name = "picIcon";
             picIcon.Size = new Size(30, 21);
@@ -913,66 +986,6 @@
             airSeparator1.TabIndex = 0;
             airSeparator1.Text = "airSeparator1";
             airSeparator1.Transparent = false;
-            // 
-            // airSeparator5
-            // 
-            airSeparator5.BackColor = Color.DimGray;
-            airSeparator5.Customization = "";
-            airSeparator5.Font = new Font("Verdana", 8F);
-            airSeparator5.Image = null;
-            airSeparator5.Location = new Point(19, 42);
-            airSeparator5.Name = "airSeparator5";
-            airSeparator5.NoRounding = false;
-            airSeparator5.Size = new Size(285, 1);
-            airSeparator5.TabIndex = 56;
-            airSeparator5.Text = "airSeparator5";
-            airSeparator5.Transparent = false;
-            // 
-            // uiTextBox4
-            // 
-            uiTextBox4.BackColor = Color.Transparent;
-            uiTextBox4.Enabled = false;
-            uiTextBox4.FillColor = Color.DimGray;
-            uiTextBox4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox4.ForeColor = Color.FromArgb(229, 184, 0);
-            uiTextBox4.Location = new Point(219, 129);
-            uiTextBox4.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox4.MaxLength = 255;
-            uiTextBox4.Minimum = 0D;
-            uiTextBox4.MinimumSize = new Size(1, 16);
-            uiTextBox4.Name = "uiTextBox4";
-            uiTextBox4.Padding = new Padding(5);
-            uiTextBox4.Radius = 12;
-            uiTextBox4.RectColor = Color.DimGray;
-            uiTextBox4.ShowText = false;
-            uiTextBox4.Size = new Size(85, 37);
-            uiTextBox4.TabIndex = 57;
-            uiTextBox4.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox4.Watermark = "$ 0.00";
-            uiTextBox4.WatermarkColor = Color.FromArgb(229, 184, 0);
-            // 
-            // uiTextBox5
-            // 
-            uiTextBox5.BackColor = Color.Transparent;
-            uiTextBox5.Enabled = false;
-            uiTextBox5.FillColor = Color.DimGray;
-            uiTextBox5.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiTextBox5.ForeColor = Color.FromArgb(229, 184, 0);
-            uiTextBox5.Location = new Point(219, 224);
-            uiTextBox5.Margin = new Padding(4, 5, 4, 5);
-            uiTextBox5.MaxLength = 255;
-            uiTextBox5.Minimum = 0D;
-            uiTextBox5.MinimumSize = new Size(1, 16);
-            uiTextBox5.Name = "uiTextBox5";
-            uiTextBox5.Padding = new Padding(5);
-            uiTextBox5.Radius = 12;
-            uiTextBox5.RectColor = Color.DimGray;
-            uiTextBox5.ShowText = false;
-            uiTextBox5.Size = new Size(85, 37);
-            uiTextBox5.TabIndex = 58;
-            uiTextBox5.TextAlignment = ContentAlignment.MiddleLeft;
-            uiTextBox5.Watermark = "$ 0.00";
-            uiTextBox5.WatermarkColor = Color.FromArgb(31, 229, 204);
             // 
             // ucTradeIn
             // 
@@ -1009,9 +1022,7 @@
         private ReaLTaiizor.Controls.AirSeparator airSeparator1;
         private PictureBox picIcon;
         private Label lblDispositivoRecibido;
-        private Sunny.UI.UIButton btnTelefono;
         private Label lblTipoDispositivo;
-        private Sunny.UI.UIButton btnComputadora;
         private Sunny.UI.UITextBox txtModelo;
         private Sunny.UI.UITextBox txtMarca;
         private Label lblModelo;
@@ -1051,5 +1062,7 @@
         private ReaLTaiizor.Controls.AirSeparator airSeparator5;
         private Sunny.UI.UITextBox uiTextBox4;
         private Sunny.UI.UITextBox uiTextBox5;
+        private Sunny.UI.UIButton btnTelefono;
+        private Sunny.UI.UIButton btnComputadora;
     }
 }
