@@ -180,8 +180,9 @@
             dgvUsuarios.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvUsuarios.RowHeadersVisible = false;
             dgvUsuarios.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.BackColor = Color.Transparent;
             dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.Black;
             dataGridViewCellStyle4.SelectionForeColor = Color.Transparent;
             dgvUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvUsuarios.RowTemplate.Height = 40;
