@@ -29,47 +29,34 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             materialButton1 = new ReaLTaiizor.Controls.MaterialButton();
+            pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
-            label1 = new Label();
-            panel4 = new Panel();
-            splitContainer1 = new SplitContainer();
-            panel1 = new Panel();
-            uibuscarcliente = new Sunny.UI.UIButton();
-            txtBuscarCliente = new Sunny.UI.UITextBox();
-            panel3 = new Panel();
-            pictureBox3 = new PictureBox();
+            lblTitulo = new Label();
+            pnlIzquierdo = new Panel();
+            dgvClientes = new DataGridView();
+            btnBuscar = new Sunny.UI.UIButton();
+            txtBuscar = new Sunny.UI.UITextBox();
+            pnlVacio = new Panel();
             pictureBox2 = new PictureBox();
-            uibreautilizar = new Sunny.UI.UIButton();
-            lblvalor = new Label();
-            label7 = new Label();
-            label6 = new Label();
-            lblnvisitas = new Label();
-            lblcorreo = new Label();
-            lbltelefono = new Label();
-            lblNombre = new Label();
-            dataGridView1 = new DataGridView();
-            Orden = new DataGridViewTextBoxColumn();
-            Fecha = new DataGridViewTextBoxColumn();
-            Dispositivo = new DataGridViewTextBoxColumn();
-            Reparacion = new DataGridViewTextBoxColumn();
-            Costo = new DataGridViewTextBoxColumn();
-            Estado = new DataGridViewTextBoxColumn();
-            Tecnico = new DataGridViewTextBoxColumn();
+            label1 = new Label();
+            pnlHistorial = new Panel();
+            dgvHistorialOrdenes = new DataGridView();
+            pnlSuperiorCliente = new Panel();
+            lblTotalGastado = new Label();
+            lblTotalVisitas = new Label();
+            lblContacto = new Label();
+            lblNombreCompleto = new Label();
+            pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
-            panel1.SuspendLayout();
-            panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            pnlIzquierdo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
+            pnlVacio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            pnlHistorial.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvHistorialOrdenes).BeginInit();
+            pnlSuperiorCliente.SuspendLayout();
             SuspendLayout();
             // 
             // materialButton1
@@ -97,390 +84,267 @@
             materialButton1.UseAccentColor = true;
             materialButton1.UseVisualStyleBackColor = false;
             // 
+            // pnlSuperior
+            // 
+            pnlSuperior.AutoSize = true;
+            pnlSuperior.BackColor = Color.White;
+            pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
+            pnlSuperior.Controls.Add(pictureBox1);
+            pnlSuperior.Controls.Add(lblTitulo);
+            pnlSuperior.Dock = DockStyle.Top;
+            pnlSuperior.Location = new Point(0, 0);
+            pnlSuperior.MaximumSize = new Size(1140, 59);
+            pnlSuperior.MinimumSize = new Size(1140, 59);
+            pnlSuperior.Name = "pnlSuperior";
+            pnlSuperior.Size = new Size(1140, 59);
+            pnlSuperior.TabIndex = 2;
+            // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = Color.FromArgb(23, 32, 50);
             pictureBox1.Image = Properties.Resources.tictoc;
-            pictureBox1.Location = new Point(16, 12);
+            pictureBox1.Location = new Point(34, 13);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(29, 20);
+            pictureBox1.Size = new Size(36, 30);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 1;
+            pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // label1
+            // lblTitulo
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.FromArgb(23, 32, 50);
-            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(40, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(228, 20);
-            label1.TabIndex = 2;
-            label1.Text = "Historial de Equipos por Cliente";
+            lblTitulo.Dock = DockStyle.Left;
+            lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.Black;
+            lblTitulo.Location = new Point(0, 0);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(394, 57);
+            lblTitulo.TabIndex = 1;
+            lblTitulo.Text = "Historial de Equipos por Cliente";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel4
+            // pnlIzquierdo
             // 
-            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel4.AutoScroll = true;
-            panel4.AutoSize = true;
-            panel4.BackColor = Color.FromArgb(23, 32, 50);
-            panel4.Controls.Add(label1);
-            panel4.Controls.Add(pictureBox1);
-            panel4.Location = new Point(0, 3);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(1022, 37);
-            panel4.TabIndex = 2;
+            pnlIzquierdo.Controls.Add(dgvClientes);
+            pnlIzquierdo.Controls.Add(btnBuscar);
+            pnlIzquierdo.Controls.Add(txtBuscar);
+            pnlIzquierdo.Location = new Point(0, 59);
+            pnlIzquierdo.MaximumSize = new Size(274, 705);
+            pnlIzquierdo.MinimumSize = new Size(274, 705);
+            pnlIzquierdo.Name = "pnlIzquierdo";
+            pnlIzquierdo.Size = new Size(274, 705);
+            pnlIzquierdo.TabIndex = 3;
             // 
-            // splitContainer1
+            // dgvClientes
             // 
-            splitContainer1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            splitContainer1.BackColor = Color.FromArgb(15, 23, 42);
-            splitContainer1.FixedPanel = FixedPanel.Panel1;
-            splitContainer1.Location = new Point(0, 41);
-            splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.AutoScroll = true;
-            splitContainer1.Panel1.Controls.Add(panel1);
-            splitContainer1.Panel1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            splitContainer1.Panel1.ForeColor = Color.Turquoise;
-            splitContainer1.Panel1.Paint += splitContainer1_Panel1_Paint;
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.AutoScroll = true;
-            splitContainer1.Panel2.Controls.Add(panel3);
-            splitContainer1.Panel2.Controls.Add(dataGridView1);
-            splitContainer1.Size = new Size(1022, 737);
-            splitContainer1.SplitterDistance = 300;
-            splitContainer1.TabIndex = 3;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(uibuscarcliente);
-            panel1.Controls.Add(txtBuscarCliente);
-            panel1.Location = new Point(3, 13);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(295, 109);
-            panel1.TabIndex = 2;
-            // 
-            // uibuscarcliente
-            // 
-            uibuscarcliente.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            uibuscarcliente.FillColor = Color.FromArgb(20, 184, 166);
-            uibuscarcliente.FillColor2 = Color.FromArgb(20, 184, 166);
-            uibuscarcliente.FillDisableColor = Color.Empty;
-            uibuscarcliente.Font = new Font("Segoe UI", 12F);
-            uibuscarcliente.Location = new Point(27, 54);
-            uibuscarcliente.MinimumSize = new Size(1, 1);
-            uibuscarcliente.Name = "uibuscarcliente";
-            uibuscarcliente.RectColor = Color.Empty;
-            uibuscarcliente.RectPressColor = Color.FromArgb(20, 184, 166);
-            uibuscarcliente.RectSelectedColor = Color.FromArgb(20, 184, 166);
-            uibuscarcliente.Size = new Size(246, 36);
-            uibuscarcliente.TabIndex = 20;
-            uibuscarcliente.Text = "Buscar Cliente";
-            uibuscarcliente.TipsFont = new Font("Microsoft Sans Serif", 9F);
-            // 
-            // txtBuscarCliente
-            // 
-            txtBuscarCliente.BackColor = Color.Transparent;
-            txtBuscarCliente.FillColor = Color.FromArgb(41, 53, 72);
-            txtBuscarCliente.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBuscarCliente.ForeColor = Color.White;
-            txtBuscarCliente.Location = new Point(6, 5);
-            txtBuscarCliente.Margin = new Padding(4, 5, 4, 5);
-            txtBuscarCliente.MaxLength = 255;
-            txtBuscarCliente.Minimum = 0D;
-            txtBuscarCliente.MinimumSize = new Size(1, 16);
-            txtBuscarCliente.Name = "txtBuscarCliente";
-            txtBuscarCliente.Padding = new Padding(5);
-            txtBuscarCliente.Radius = 12;
-            txtBuscarCliente.ShowText = false;
-            txtBuscarCliente.Size = new Size(287, 41);
-            txtBuscarCliente.TabIndex = 19;
-            txtBuscarCliente.TextAlignment = ContentAlignment.MiddleLeft;
-            txtBuscarCliente.Watermark = "Nombre, teléfono o correo";
-            // 
-            // panel3
-            // 
-            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel3.AutoScroll = true;
-            panel3.BackColor = Color.FromArgb(23, 32, 50);
-            panel3.Controls.Add(pictureBox3);
-            panel3.Controls.Add(pictureBox2);
-            panel3.Controls.Add(uibreautilizar);
-            panel3.Controls.Add(lblvalor);
-            panel3.Controls.Add(label7);
-            panel3.Controls.Add(label6);
-            panel3.Controls.Add(lblnvisitas);
-            panel3.Controls.Add(lblcorreo);
-            panel3.Controls.Add(lbltelefono);
-            panel3.Controls.Add(lblNombre);
-            panel3.Location = new Point(-1, 5);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(716, 107);
-            panel3.TabIndex = 3;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = Properties.Resources.correo;
-            pictureBox3.Location = new Point(138, 62);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(27, 25);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 23;
-            pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.telefono;
-            pictureBox2.Location = new Point(10, 63);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(26, 25);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 22;
-            pictureBox2.TabStop = false;
-            // 
-            // uibreautilizar
-            // 
-            uibreautilizar.FillColor = Color.FromArgb(45, 212, 191);
-            uibreautilizar.FillColor2 = Color.FromArgb(45, 212, 191);
-            uibreautilizar.Font = new Font("Segoe UI", 12F);
-            uibreautilizar.Location = new Point(570, 39);
-            uibreautilizar.MinimumSize = new Size(1, 1);
-            uibreautilizar.Name = "uibreautilizar";
-            uibreautilizar.RectColor = Color.Empty;
-            uibreautilizar.RectDisableColor = Color.Empty;
-            uibreautilizar.RectHoverColor = Color.FromArgb(45, 212, 191);
-            uibreautilizar.RectPressColor = Color.FromArgb(45, 212, 191);
-            uibreautilizar.RectSelectedColor = Color.FromArgb(45, 212, 191);
-            uibreautilizar.Size = new Size(131, 36);
-            uibreautilizar.TabIndex = 21;
-            uibreautilizar.Text = "Reutilizar datos";
-            uibreautilizar.TipsFont = new Font("Microsoft Sans Serif", 9F);
-            // 
-            // lblvalor
-            // 
-            lblvalor.AutoSize = true;
-            lblvalor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblvalor.ForeColor = Color.FromArgb(45, 212, 191);
-            lblvalor.Location = new Point(494, 38);
-            lblvalor.Name = "lblvalor";
-            lblvalor.Size = new Size(50, 21);
-            lblvalor.TabIndex = 6;
-            lblvalor.Text = "$ ###";
-            lblvalor.Click += label8_Click;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.ForeColor = Color.FromArgb(148, 163, 184);
-            label7.Location = new Point(511, 63);
-            label7.Name = "label7";
-            label7.Size = new Size(33, 15);
-            label7.TabIndex = 5;
-            label7.Text = "Total";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.ForeColor = Color.FromArgb(148, 163, 184);
-            label6.Location = new Point(436, 62);
-            label6.Name = "label6";
-            label6.Size = new Size(40, 15);
-            label6.TabIndex = 4;
-            label6.Text = "Visitas";
-            // 
-            // lblnvisitas
-            // 
-            lblnvisitas.AutoSize = true;
-            lblnvisitas.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblnvisitas.ForeColor = Color.White;
-            lblnvisitas.Location = new Point(448, 38);
-            lblnvisitas.Name = "lblnvisitas";
-            lblnvisitas.Size = new Size(19, 21);
-            lblnvisitas.TabIndex = 3;
-            lblnvisitas.Text = "#";
-            // 
-            // lblcorreo
-            // 
-            lblcorreo.AutoSize = true;
-            lblcorreo.ForeColor = Color.FromArgb(148, 163, 184);
-            lblcorreo.Location = new Point(171, 73);
-            lblcorreo.Name = "lblcorreo";
-            lblcorreo.Size = new Size(75, 15);
-            lblcorreo.TabIndex = 2;
-            lblcorreo.Text = "@gmail.com";
-            lblcorreo.Click += label4_Click;
-            // 
-            // lbltelefono
-            // 
-            lbltelefono.AutoSize = true;
-            lbltelefono.ForeColor = Color.FromArgb(148, 163, 184);
-            lbltelefono.Location = new Point(42, 73);
-            lbltelefono.Name = "lbltelefono";
-            lbltelefono.Size = new Size(70, 15);
-            lbltelefono.TabIndex = 1;
-            lbltelefono.Text = "#########";
-            // 
-            // lblNombre
-            // 
-            lblNombre.AutoSize = true;
-            lblNombre.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNombre.ForeColor = Color.White;
-            lblNombre.Location = new Point(20, 39);
-            lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(67, 20);
-            lblNombre.TabIndex = 0;
-            lblNombre.Text = "Nombre";
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.BackgroundColor = Color.FromArgb(15, 23, 42);
+            dgvClientes.AllowUserToAddRows = false;
+            dgvClientes.AllowUserToDeleteRows = false;
+            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClientes.ColumnHeadersVisible = false;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.Coral;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = Color.Yellow;
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Orden, Fecha, Dispositivo, Reparacion, Costo, Estado, Tecnico });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(15, 23, 43);
-            dataGridViewCellStyle3.SelectionForeColor = Color.GhostWhite;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            dataGridView1.GridColor = Color.Gray;
-            dataGridView1.Location = new Point(3, 110);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.ControlText;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.Size = new Size(715, 624);
-            dataGridView1.TabIndex = 0;
+            dgvClientes.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvClientes.Location = new Point(0, 101);
+            dgvClientes.Name = "dgvClientes";
+            dgvClientes.ReadOnly = true;
+            dgvClientes.RowHeadersVisible = false;
+            dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvClientes.Size = new Size(274, 604);
+            dgvClientes.TabIndex = 22;
+            dgvClientes.CellClick += dgvClientes_CellClick;
             // 
-            // Orden
+            // btnBuscar
             // 
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(15, 23, 42);
-            Orden.DefaultCellStyle = dataGridViewCellStyle2;
-            Orden.HeaderText = "ORDEN";
-            Orden.Name = "Orden";
-            Orden.ReadOnly = true;
+            btnBuscar.FillColor = Color.FromArgb(0, 150, 137);
+            btnBuscar.Font = new Font("Microsoft Sans Serif", 12F);
+            btnBuscar.Location = new Point(18, 56);
+            btnBuscar.MinimumSize = new Size(1, 1);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Radius = 12;
+            btnBuscar.RectColor = Color.FromArgb(0, 150, 137);
+            btnBuscar.Size = new Size(238, 31);
+            btnBuscar.TabIndex = 21;
+            btnBuscar.Text = "Buscar cliente";
+            btnBuscar.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnBuscar.Click += btnBuscarCliente_Click;
             // 
-            // Fecha
+            // txtBuscar
             // 
-            Fecha.HeaderText = "FECHA";
-            Fecha.Name = "Fecha";
-            Fecha.ReadOnly = true;
+            txtBuscar.FillColor = Color.FromArgb(41, 53, 72);
+            txtBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBuscar.ForeColor = Color.White;
+            txtBuscar.Icon = Properties.Resources.TablerSearch;
+            txtBuscar.Location = new Point(18, 8);
+            txtBuscar.Margin = new Padding(4, 5, 4, 5);
+            txtBuscar.MinimumSize = new Size(1, 16);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Padding = new Padding(5);
+            txtBuscar.Radius = 12;
+            txtBuscar.RectColor = Color.FromArgb(39, 53, 72);
+            txtBuscar.ShowText = false;
+            txtBuscar.Size = new Size(238, 40);
+            txtBuscar.TabIndex = 5;
+            txtBuscar.TextAlignment = ContentAlignment.MiddleLeft;
+            txtBuscar.Watermark = "Nombre, cedula o Correo";
             // 
-            // Dispositivo
+            // pnlVacio
             // 
-            Dispositivo.HeaderText = "DISPOSITIVO";
-            Dispositivo.Name = "Dispositivo";
-            Dispositivo.ReadOnly = true;
+            pnlVacio.Controls.Add(pictureBox2);
+            pnlVacio.Controls.Add(label1);
+            pnlVacio.Location = new Point(274, 59);
+            pnlVacio.Name = "pnlVacio";
+            pnlVacio.Size = new Size(851, 705);
+            pnlVacio.TabIndex = 4;
             // 
-            // Reparacion
+            // pictureBox2
             // 
-            Reparacion.HeaderText = "REPARACIÓN";
-            Reparacion.Name = "Reparacion";
-            Reparacion.ReadOnly = true;
+            pictureBox2.Image = Properties.Resources.tictoc;
+            pictureBox2.Location = new Point(406, 280);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(65, 54);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 3;
+            pictureBox2.TabStop = false;
             // 
-            // Costo
+            // label1
             // 
-            Costo.HeaderText = "COSTO";
-            Costo.Name = "Costo";
-            Costo.ReadOnly = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(241, 320);
+            label1.Name = "label1";
+            label1.Size = new Size(394, 57);
+            label1.TabIndex = 2;
+            label1.Text = "Selecciona un cliente para ver su historial";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // Estado
+            // pnlHistorial
             // 
-            Estado.HeaderText = "ESTADO";
-            Estado.Name = "Estado";
-            Estado.ReadOnly = true;
+            pnlHistorial.Controls.Add(dgvHistorialOrdenes);
+            pnlHistorial.Controls.Add(pnlSuperiorCliente);
+            pnlHistorial.Location = new Point(274, 59);
+            pnlHistorial.Name = "pnlHistorial";
+            pnlHistorial.Size = new Size(851, 705);
+            pnlHistorial.TabIndex = 5;
             // 
-            // Tecnico
+            // dgvHistorialOrdenes
             // 
-            Tecnico.HeaderText = "TÉCNICO";
-            Tecnico.Name = "Tecnico";
-            Tecnico.ReadOnly = true;
+            dgvHistorialOrdenes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvHistorialOrdenes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvHistorialOrdenes.ColumnHeadersVisible = false;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvHistorialOrdenes.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvHistorialOrdenes.Location = new Point(0, 87);
+            dgvHistorialOrdenes.Name = "dgvHistorialOrdenes";
+            dgvHistorialOrdenes.RowHeadersVisible = false;
+            dgvHistorialOrdenes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvHistorialOrdenes.Size = new Size(851, 618);
+            dgvHistorialOrdenes.TabIndex = 23;
+            // 
+            // pnlSuperiorCliente
+            // 
+            pnlSuperiorCliente.Controls.Add(lblTotalGastado);
+            pnlSuperiorCliente.Controls.Add(lblTotalVisitas);
+            pnlSuperiorCliente.Controls.Add(lblContacto);
+            pnlSuperiorCliente.Controls.Add(lblNombreCompleto);
+            pnlSuperiorCliente.Location = new Point(0, 0);
+            pnlSuperiorCliente.Name = "pnlSuperiorCliente";
+            pnlSuperiorCliente.Size = new Size(851, 87);
+            pnlSuperiorCliente.TabIndex = 0;
+            // 
+            // lblTotalGastado
+            // 
+            lblTotalGastado.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalGastado.ForeColor = Color.Black;
+            lblTotalGastado.Location = new Point(625, 8);
+            lblTotalGastado.Name = "lblTotalGastado";
+            lblTotalGastado.Size = new Size(90, 40);
+            lblTotalGastado.TabIndex = 5;
+            lblTotalGastado.Text = "x";
+            // 
+            // lblTotalVisitas
+            // 
+            lblTotalVisitas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalVisitas.ForeColor = Color.Black;
+            lblTotalVisitas.Location = new Point(536, 8);
+            lblTotalVisitas.Name = "lblTotalVisitas";
+            lblTotalVisitas.Size = new Size(99, 40);
+            lblTotalVisitas.TabIndex = 4;
+            lblTotalVisitas.Text = "x";
+            // 
+            // lblContacto
+            // 
+            lblContacto.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblContacto.ForeColor = Color.Black;
+            lblContacto.Location = new Point(18, 28);
+            lblContacto.Name = "lblContacto";
+            lblContacto.Size = new Size(212, 20);
+            lblContacto.TabIndex = 3;
+            lblContacto.Text = "x";
+            // 
+            // lblNombreCompleto
+            // 
+            lblNombreCompleto.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNombreCompleto.ForeColor = Color.Black;
+            lblNombreCompleto.Location = new Point(18, 8);
+            lblNombreCompleto.Name = "lblNombreCompleto";
+            lblNombreCompleto.Size = new Size(212, 20);
+            lblNombreCompleto.TabIndex = 2;
+            lblNombreCompleto.Text = "x";
             // 
             // ucHistorialClientes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(30, 41, 59);
-            Controls.Add(panel4);
-            Controls.Add(splitContainer1);
+            BackColor = Color.White;
+            Controls.Add(pnlSuperior);
+            Controls.Add(pnlIzquierdo);
+            Controls.Add(pnlVacio);
+            Controls.Add(pnlHistorial);
             Name = "ucHistorialClientes";
-            Size = new Size(1022, 781);
+            Size = new Size(1125, 764);
+            Load += ucHistorialClientes_Load;
+            pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            pnlIzquierdo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
+            pnlVacio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            pnlHistorial.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvHistorialOrdenes).EndInit();
+            pnlSuperiorCliente.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private PictureBox pictureBox1;
-        private Label label1;
-        private Panel panel2;
-        private ReaLTaiizor.Controls.MaterialButton materialButton1;                 private Panel panel4;
-        private SplitContainer splitContainer1;
-        private Panel panel1;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Orden;
-        private DataGridViewTextBoxColumn Fecha;
-        private DataGridViewTextBoxColumn Dispositivo;
-        private DataGridViewTextBoxColumn Reparacion;
-        private DataGridViewTextBoxColumn Costo;
-        private DataGridViewTextBoxColumn Estado;
-        private DataGridViewTextBoxColumn Tecnico;
-        private Sunny.UI.UITextBox txtContraseña;
+        private Panel pnlVacio;
+        private ReaLTaiizor.Controls.MaterialButton materialButton1;                         private Sunny.UI.UITextBox txtContraseña;
         private Sunny.UI.UIButton btnAcceder;
-        private Sunny.UI.UITextBox txtBuscarCliente;
-        private Sunny.UI.UIButton uibuscarcliente;
-        private Panel panel3;
-        private Label lbltelefono;
-        private Label lblNombre;
-        private Label lblvalor;
-        private Label label7;
-        private Label label6;
-        private Label lblnvisitas;
-        private Label lblcorreo;
-        private Sunny.UI.UIButton uibreautilizar;
+        private FontAwesome.Sharp.IconDropDownButton iconDropDownButton1;
+        private Panel pnlSuperior;
+        private PictureBox pictureBox1;
+        private Label lblTitulo;
+        private Panel pnlIzquierdo;
+        private Sunny.UI.UITextBox txtBuscar;
+        private DataGridView dgvClientes;
+        private Sunny.UI.UIButton btnBuscar;
         private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
+        private Label label1;
+        private Panel pnlHistorial;
+        private Panel pnlSuperiorCliente;
+        private Label lblTotalVisitas;
+        private Label lblContacto;
+        private Label lblNombreCompleto;
+        private DataGridView dgvHistorialOrdenes;
+        private Label lblTotalGastado;
     }
 }

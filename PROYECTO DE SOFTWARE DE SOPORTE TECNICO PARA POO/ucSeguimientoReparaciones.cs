@@ -16,7 +16,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         public ucSeguimientoReparaciones()
         {
             InitializeComponent();
-
         }
 
         private void ucSeguimientoReparaciones_Load(object sender, EventArgs e)
@@ -24,8 +23,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (cmbEstado.Items.Count > 0)
                 cmbEstado.SelectedIndex = 0;
 
-            // 2. Cargar los datos por defecto al abrir la pantalla
             CargarSeguimiento();
+            dgvSeguimiento.ClearSelection();
         }
 
         private void CargarSeguimiento(string filtroBusqueda = "", string filtroEstado = "Todos")
@@ -59,19 +58,42 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         DataTable dt = new DataTable();
                         da.Fill(dt);
 
-
-                        // Asegúrate de que el control no cree columnas automáticamente
                         dgvSeguimiento.AutoGenerateColumns = false;
 
-                        dgvSeguimiento.Columns[0].DataPropertyName = "Orden";      // Columna 1: ORDEN
-                        dgvSeguimiento.Columns[1].DataPropertyName = "Cliente_Dispositivo";    // Columna 2: CLIENTE \ DISPOSITIVO
-                        dgvSeguimiento.Columns[2].DataPropertyName = "Tecnico";    // Columna 3: TÉCNICO
-                        dgvSeguimiento.Columns[3].DataPropertyName = "Estado";     // Columna 4: ESTADO
-                        dgvSeguimiento.Columns[4].DataPropertyName = "Ingreso";    // Columna 5: INGRESO
-                        dgvSeguimiento.Columns[5].DataPropertyName = "Entrega"; // Columna 6: ENTREGA ESTIMADA
-                        dgvSeguimiento.Columns[6].DataPropertyName = "Tiempo";     // Columna 7: TIEMPO
+                        dgvSeguimiento.Columns[0].DataPropertyName = "Orden";
+                        dgvSeguimiento.Columns[1].DataPropertyName = "Cliente_Dispositivo";
+                        dgvSeguimiento.Columns[2].DataPropertyName = "Tecnico";
+                        dgvSeguimiento.Columns[3].DataPropertyName = "Estado";
+                        dgvSeguimiento.Columns[4].DataPropertyName = "Ingreso";
+                        dgvSeguimiento.Columns[5].DataPropertyName = "Entrega";
+                        dgvSeguimiento.Columns[6].DataPropertyName = "Tiempo";
 
                         dgvSeguimiento.DataSource = dt;
+
+                        // Fuerza blanco + negro en TODOS los niveles de estilo
+                        // (fila, fila alterna, columna y grilla) para que ningún
+                        // estilo oscuro heredado del Designer prevalezca.
+                        var estiloClaro = new DataGridViewCellStyle
+                        {
+                            BackColor = Color.White,
+                            ForeColor = Color.Black,
+                            SelectionBackColor = Color.White,
+                            SelectionForeColor = Color.Black
+                        };
+
+                        dgvSeguimiento.RowsDefaultCellStyle = estiloClaro;
+                        dgvSeguimiento.AlternatingRowsDefaultCellStyle = estiloClaro;
+                        dgvSeguimiento.DefaultCellStyle = estiloClaro;
+
+                        foreach (DataGridViewColumn col in dgvSeguimiento.Columns)
+                        {
+                            col.DefaultCellStyle.BackColor = Color.White;
+                            col.DefaultCellStyle.ForeColor = Color.Black;
+                            col.DefaultCellStyle.SelectionBackColor = Color.White;
+                            col.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        }
+
+                        dgvSeguimiento.ClearSelection();
                     }
                 }
                 catch (Exception ex)
@@ -85,48 +107,48 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // Evento para el buscador de texto en tiempo real
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             string estado = cmbEstado.SelectedItem?.ToString() ?? "Todos";
-            // Asegúrate de que tu caja de texto de búsqueda se llame txtBuscar o cámbiale el nombre aquí
-            // CargarSeguimiento(txtBuscar.Text.Trim(), estado);
         }
 
-        // Evento para el ComboBox de estados
         private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
             string estado = cmbEstado.SelectedItem?.ToString() ?? "Todos";
-            // CargarSeguimiento(txtBuscar.Text.Trim(), estado);
         }
 
         private void txtBuscarOrden_TextChanged(object sender, EventArgs e)
         {
-            // Obtener el estado seleccionado, si es "Todos los estados" enviamos "Todos"
             string estado = cmbEstado.Text == "Todos los estados" ? "Todos" : cmbEstado.Text;
-
-            // Llamar al método de carga con los filtros actuales
             CargarSeguimiento(txtBuscarOrden.Text.Trim(), estado);
         }
 
         private void cmbEstado_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             string estado = cmbEstado.Text == "Todos los estados" ? "Todos" : cmbEstado.Text;
-
-            // Llamar al método de carga con los filtros actuales
             CargarSeguimiento(txtBuscarOrden.Text.Trim(), estado);
         }
 
         private void dgvSeguimiento_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+
         }
 
         private void dgvSeguimiento_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            frmDetallesOrden frm = new frmDetallesOrden();
+            frm.ShowDialog();
+        }
 
+        private void dgvSeguimiento_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if ((e.State & DataGridViewElementStates.Selected) == DataGridViewElementStates.Selected)
+            {
+                using (SolidBrush accentBrush = new SolidBrush(Color.FromArgb(0, 210, 160)))
+                {
+                    e.Graphics.FillRectangle(accentBrush, e.RowBounds.Left, e.RowBounds.Top, 4, e.RowBounds.Height);
+                }
+            }
         }
     }
 }
-
-

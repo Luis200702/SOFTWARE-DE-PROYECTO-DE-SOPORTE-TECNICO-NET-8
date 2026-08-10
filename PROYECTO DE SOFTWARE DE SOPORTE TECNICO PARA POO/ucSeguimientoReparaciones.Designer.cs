@@ -176,24 +176,33 @@
             dgvSeguimiento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvSeguimiento.Columns.AddRange(new DataGridViewColumn[] { Orden, Cliente_Dispositivo, Tecnico, Estado, Ingreso, Entrega, Tiempo });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.BackColor = Color.White;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Transparent;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ActiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             dgvSeguimiento.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvSeguimiento.EnableHeadersVisualStyles = false;
+            dgvSeguimiento.GridColor = SystemColors.ActiveCaption;
             dgvSeguimiento.Location = new Point(0, 54);
             dgvSeguimiento.MaximumSize = new Size(1125, 641);
             dgvSeguimiento.MinimumSize = new Size(1125, 641);
+            dgvSeguimiento.MultiSelect = false;
             dgvSeguimiento.Name = "dgvSeguimiento";
+            dgvSeguimiento.RowHeadersVisible = false;
+            dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dgvSeguimiento.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dgvSeguimiento.RowTemplate.Height = 30;
+            dgvSeguimiento.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvSeguimiento.Size = new Size(1125, 641);
             dgvSeguimiento.TabIndex = 3;
             dgvSeguimiento.CellClick += dgvSeguimiento_CellClick;
             dgvSeguimiento.CellContentClick += dgvSeguimiento_CellContentClick;
+            dgvSeguimiento.RowPostPaint += dgvSeguimiento_RowPostPaint;
             // 
             // Orden
             // 
@@ -260,7 +269,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(24, 35, 54);
+            BackColor = Color.White;
             Controls.Add(pnlInformacion);
             Controls.Add(pnlSuperior);
             Controls.Add(pnlContenedor);
