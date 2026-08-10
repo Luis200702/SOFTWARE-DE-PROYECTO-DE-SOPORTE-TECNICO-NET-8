@@ -22,71 +22,166 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            pnlResumen.Visible = true;
-            pnlTrabajoRealizado.Visible = true;
-            pnlDesgloseCosto.Visible = true;
-            pnlFormaDePago.Visible = true;
-            btnRegistraEntrega.Visible = true;
-            btnComprobante.Visible = true;
+            string valorBusqueda = txtBuscarOrden.Text.Trim();
 
-            //string numeroOrden = txtBuscarOrden.Text.Trim();
+            // Validar que el campo no esté vacío
+            if (string.IsNullOrEmpty(valorBusqueda))
+            {
+                MessageBox.Show("Por favor, ingrese una cédula o un nombre para buscar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            //if (string.IsNullOrEmpty(numeroOrden))
-            //{
-            //    MessageBox.Show("Ingresa un número de orden.");
-            //    return;
-            //}
+            // Consulta para buscar las órdenes asociadas al cliente
+            string query = @"
+        SELECT O.id, O.numero_orden
+        FROM ordenes O
+        INNER JOIN Clientes C ON O.cliente_id = C.id
+        WHERE C.cedula_pasaporte LIKE @busqueda OR C.nombre LIKE @busqueda";
 
-            //var db = new Conexion_Base_de_Datos();
+            Conexion_Base_de_Datos conexionBD = new Conexion_Base_de_Datos();
 
-            //using (SqlConnection con = db.ObtenerConexion())
-            //{
-            //    con.Open();
+            try
+            {
+                if (conexionBD.abrirConexion())
+                {
+                    SqlCommand cmd = new SqlCommand(query, conexionBD.oCon);
+                    cmd.Parameters.AddWithValue("@busqueda", "%" + valorBusqueda + "%");
 
-            //    string query = @"SELECT o.numero_orden, o.estado, o.descripcion_problema, 
-            //                    o.diagnostico_inicial, o.costo_estimado, o.fecha_estimada_entrega,
-            //                    o.fecha_ingreso, c.nombre, c.telefono,
-            //                    d.marca, d.modelo, d.serie_imei,
-            //                    u.nombre AS tecnico
-            //             FROM ordenes o
-            //             INNER JOIN clientes c ON o.cliente_id = c.id
-            //             INNER JOIN dispositivos d ON o.dispositivo_id = d.id
-            //             INNER JOIN usuarios u ON o.tecnico_id = u.id
-            //             WHERE o.numero_orden = @numero_orden";
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-            //    using (SqlCommand cmd = new SqlCommand(query, con))
-            //    {
-            //        cmd.Parameters.AddWithValue("@numero_orden", numeroOrden);
-            //        SqlDataReader reader = cmd.ExecuteReader();
+                    if (dt.Rows.Count > 0)
+                    {
+                        // Desconectamos temporalmente el evento para evitar conflictos al asignar el DataSource
+                        cmbListaOrdenes.SelectedIndexChanged -= cmbListaOrdenes_SelectedIndexChanged;
 
-            //        if (reader.Read())
-            //        {
-            //            lblNumeroOrden.Text = reader["numero_orden"].ToString();
-            //            lblCliente.Text = reader["nombre"].ToString();
-            //            lblTelefono.Text = reader["telefono"].ToString();
-            //            lblDispositivo.Text = reader["marca"].ToString() + " " + reader["modelo"].ToString();
-            //            lblTecnicoAsignado.Text = reader["tecnico"].ToString();
-            //            lblFechaIngreso.Text = Convert.ToDateTime(reader["fecha_ingreso"]).ToString("dd/MM/yyyy");
+                        cmbListaOrdenes.DataSource = dt;
+                        cmbListaOrdenes.DisplayMember = "numero_orden";
+                        cmbListaOrdenes.ValueMember = "id";
 
-            //            pnlResumen.Visible = true;
-            //            //pnlTrabajoRealizado.Visible = true;
-            //            //pnlDesgloseCosto.Visible = true;
-            //            pnlFormaDePago.Visible = true;
-            //            btnRegistraEntrega.Visible = true;
-            //            btnComprobante.Visible = true;
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("No se encontró ninguna orden con ese número.");
-            //        }
-            //    }
-            //}
+                        // Volvemos a conectar el evento de selección
+                        cmbListaOrdenes.SelectedIndexChanged += cmbListaOrdenes_SelectedIndexChanged;
 
+                        // Forzamos a cargar los detalles y mostrar los paneles con la primera orden encontrada
+                        if (cmbListaOrdenes.SelectedValue != null && int.TryParse(cmbListaOrdenes.SelectedValue.ToString(), out int idPrimerOrden))
+                        {
+                            CargarDetallesOrden(idPrimerOrden);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró ningún registro con esa cédula o nombre.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmbListaOrdenes.DataSource = null;
+                        LimpiarCamposResumen();
+                        OcultarPaneles();
+                    }
+
+                    conexionBD.cerrarConexion();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al realizar la búsqueda: " + ex.Message, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Evento que se dispara al seleccionar una orden específica del ComboBox
+        private void cmbListaOrdenes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbListaOrdenes.SelectedValue == null) return;
+
+            // Evitamos que se ejecute si el valor es un DataRowView en blanco
+            if (int.TryParse(cmbListaOrdenes.SelectedValue.ToString(), out int idOrdenSeleccionada))
+            {
+                CargarDetallesOrden(idOrdenSeleccionada);
+            }
+        }
+
+        // Método para traer la información completa de la orden seleccionada
+        private void CargarDetallesOrden(int idOrden)
+        {
+            string query = @"
+                SELECT TOP 1
+                    O.numero_orden AS numero_orden,
+                    C.nombre AS Cliente,
+                    C.cedula_pasaporte AS Cedula,
+                    C.telefono AS Telefono,
+                    CONCAT(D.marca, ' ', D.modelo) AS Dispositivo,
+                    T.nombre AS Tecnico,
+                    O.fecha_ingreso AS Ingreso
+                FROM ordenes O
+                INNER JOIN Clientes C ON O.cliente_id = C.id
+                INNER JOIN Dispositivos D ON O.dispositivo_id = D.id
+                INNER JOIN Usuarios T ON O.tecnico_id = T.id
+                WHERE O.id = @idOrden";
+
+            Conexion_Base_de_Datos conexionBD = new Conexion_Base_de_Datos();
+
+            try
+            {
+                if (conexionBD.abrirConexion())
+                {
+                    SqlCommand cmd = new SqlCommand(query, conexionBD.oCon);
+                    cmd.Parameters.AddWithValue("@idOrden", idOrden);
+
+                    SqlDataReader lector = cmd.ExecuteReader();
+
+                    if (lector.Read())
+                    {
+                        // Mostramos los paneles de resumen y entrega
+                        pnlResumen.Visible = true;
+                        pnlTrabajoRealizado.Visible = true;
+                        pnlDesgloseCosto.Visible = true;
+                        pnlFormaDePago.Visible = true;
+                        btnRegistraEntrega.Visible = true;
+                        btnComprobante.Visible = true;
+
+                        // Rellenamos los datos de esa orden en específico
+                        lblNumeroOrden.Text = lector["numero_orden"] != DBNull.Value ? lector["numero_orden"].ToString() : "S/N";
+                        lblCliente.Text = lector["Cliente"] != DBNull.Value ? lector["Cliente"].ToString() : "";
+                        lblCedula.Text = lector["Cedula"] != DBNull.Value ? lector["Cedula"].ToString() : "";
+                        lblTelefono.Text = lector["Telefono"] != DBNull.Value ? lector["Telefono"].ToString() : "";
+                        lblDispositivo.Text = lector["Dispositivo"] != DBNull.Value ? lector["Dispositivo"].ToString() : "Sin dispositivo";
+                        lblTecnicoAsignado.Text = lector["Tecnico"] != DBNull.Value ? lector["Tecnico"].ToString() : "Asignado";
+
+                        // Formateamos la fecha de ingreso
+                        if (lector["Ingreso"] != DBNull.Value && DateTime.TryParse(lector["Ingreso"].ToString(), out DateTime fechaIngreso))
+                        {
+                            lblFechaIngreso.Text = fechaIngreso.ToString("dd/MM/yyyy HH:mm");
+                        }
+                        else
+                        {
+                            lblFechaIngreso.Text = "Sin fecha";
+                        }
+                    }
+
+                    lector.Close();
+                    conexionBD.cerrarConexion();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los detalles de la orden: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ucDevolucion_Load(object sender, EventArgs e)
         {
-            cmbFormaPago.SelectedIndex = 0;
+            if (cmbFormaPago.Items.Count > 0)
+                cmbFormaPago.SelectedIndex = 0;
+
+            OcultarPaneles();
+        }
+
+        private void OcultarPaneles()
+        {
+            pnlResumen.Visible = false;
+            pnlTrabajoRealizado.Visible = false;
+            pnlDesgloseCosto.Visible = false;
+            pnlFormaDePago.Visible = false;
+            btnRegistraEntrega.Visible = false;
+            btnComprobante.Visible = false;
         }
 
         private void uiButton3_Click(object sender, EventArgs e)
@@ -106,17 +201,27 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void cmbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbFormaPago.SelectedItem.ToString() == "Transferencia")
+            if (cmbFormaPago.SelectedItem != null && cmbFormaPago.SelectedItem.ToString() == "Transferencia")
             {
                 frmComprobante_Pago Comprobante = new frmComprobante_Pago();
                 Comprobante.ShowDialog();
-
             }
         }
 
         private void btnComprobante_Click(object sender, EventArgs e)
         {
             pdComprobante.ShowDialog();
+        }
+
+        private void LimpiarCamposResumen()
+        {
+            lblOrden.Text = "x";
+            lblCliente.Text = "x";
+            lblCedula.Text = "x";
+            lblTelefono.Text = "x";
+            lblDispositivo.Text = "x";
+            lblTecnicoAsignado.Text = "x";
+            lblFechaIngreso.Text = "x";
         }
     }
 }

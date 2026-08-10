@@ -33,6 +33,7 @@
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
             pnlInformacion = new Panel();
+            cmbListaOrdenes = new Sunny.UI.UIComboBox();
             btnBuscar = new Sunny.UI.UIButton();
             lblOrden = new Label();
             txtBuscarOrden = new Sunny.UI.UITextBox();
@@ -61,6 +62,8 @@
             lblTrabajoRealizado = new Label();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             pnlResumen = new Sunny.UI.UIPanel();
+            lblCedula = new Label();
+            lblTituloCedula = new Label();
             lblFechaIngreso = new Label();
             lblTecnicoAsignado = new Label();
             lblDispositivo = new Label();
@@ -129,6 +132,7 @@
             // 
             pnlInformacion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlInformacion.BackColor = Color.White;
+            pnlInformacion.Controls.Add(cmbListaOrdenes);
             pnlInformacion.Controls.Add(btnBuscar);
             pnlInformacion.Controls.Add(lblOrden);
             pnlInformacion.Controls.Add(txtBuscarOrden);
@@ -138,11 +142,36 @@
             pnlInformacion.Size = new Size(1125, 59);
             pnlInformacion.TabIndex = 2;
             // 
+            // cmbListaOrdenes
+            // 
+            cmbListaOrdenes.BackColor = Color.Transparent;
+            cmbListaOrdenes.DataSource = null;
+            cmbListaOrdenes.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            cmbListaOrdenes.FillColor = Color.FromArgb(41, 53, 72);
+            cmbListaOrdenes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbListaOrdenes.ForeColor = Color.White;
+            cmbListaOrdenes.FormattingEnabled = true;
+            cmbListaOrdenes.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbListaOrdenes.Items.AddRange(new object[] { "Seleccionar...", "Efectivo", "Transferencia" });
+            cmbListaOrdenes.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbListaOrdenes.Location = new Point(331, 22);
+            cmbListaOrdenes.Margin = new Padding(4, 5, 4, 5);
+            cmbListaOrdenes.MinimumSize = new Size(63, 0);
+            cmbListaOrdenes.Name = "cmbListaOrdenes";
+            cmbListaOrdenes.Padding = new Padding(0, 0, 30, 2);
+            cmbListaOrdenes.Radius = 12;
+            cmbListaOrdenes.RectColor = Color.FromArgb(148, 163, 184);
+            cmbListaOrdenes.Size = new Size(169, 30);
+            cmbListaOrdenes.SymbolSize = 24;
+            cmbListaOrdenes.TabIndex = 25;
+            cmbListaOrdenes.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbListaOrdenes.Watermark = "";
+            // 
             // btnBuscar
             // 
             btnBuscar.FillColor = Color.FromArgb(0, 150, 137);
             btnBuscar.Font = new Font("Microsoft Sans Serif", 12F);
-            btnBuscar.Location = new Point(331, 21);
+            btnBuscar.Location = new Point(518, 21);
             btnBuscar.MinimumSize = new Size(1, 1);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Radius = 12;
@@ -157,12 +186,12 @@
             // 
             lblOrden.AutoSize = true;
             lblOrden.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblOrden.ForeColor = Color.FromArgb(147, 162, 183);
+            lblOrden.ForeColor = Color.Black;
             lblOrden.Location = new Point(29, 3);
             lblOrden.Name = "lblOrden";
-            lblOrden.Size = new Size(246, 17);
+            lblOrden.Size = new Size(265, 17);
             lblOrden.TabIndex = 19;
-            lblOrden.Text = "Ingrese el número de orden para buscar";
+            lblOrden.Text = "Ingrese el número de cedula y elija la orden";
             // 
             // txtBuscarOrden
             // 
@@ -259,7 +288,7 @@
             pnlFormaDePago.Controls.Add(airSeparator4);
             pnlFormaDePago.FillColor = Color.FromArgb(30, 41, 59);
             pnlFormaDePago.Font = new Font("Microsoft Sans Serif", 12F);
-            pnlFormaDePago.Location = new Point(546, 46);
+            pnlFormaDePago.Location = new Point(608, 20);
             pnlFormaDePago.Margin = new Padding(4, 5, 4, 5);
             pnlFormaDePago.MinimumSize = new Size(1, 1);
             pnlFormaDePago.Name = "pnlFormaDePago";
@@ -598,6 +627,8 @@
             // pnlResumen
             // 
             pnlResumen.BackColor = Color.Transparent;
+            pnlResumen.Controls.Add(lblCedula);
+            pnlResumen.Controls.Add(lblTituloCedula);
             pnlResumen.Controls.Add(lblFechaIngreso);
             pnlResumen.Controls.Add(lblTecnicoAsignado);
             pnlResumen.Controls.Add(lblDispositivo);
@@ -616,93 +647,122 @@
             pnlResumen.FillColor = Color.FromArgb(30, 41, 59);
             pnlResumen.Font = new Font("Microsoft Sans Serif", 12F);
             pnlResumen.ForeColor = Color.FromArgb(147, 162, 183);
-            pnlResumen.Location = new Point(29, 46);
+            pnlResumen.Location = new Point(29, 17);
             pnlResumen.Margin = new Padding(4, 5, 4, 5);
             pnlResumen.MinimumSize = new Size(1, 1);
             pnlResumen.Name = "pnlResumen";
             pnlResumen.Radius = 12;
             pnlResumen.RectColor = Color.FromArgb(39, 53, 72);
-            pnlResumen.Size = new Size(500, 242);
+            pnlResumen.Size = new Size(500, 268);
             pnlResumen.TabIndex = 4;
             pnlResumen.Text = null;
             pnlResumen.TextAlignment = ContentAlignment.MiddleCenter;
             pnlResumen.Visible = false;
             // 
+            // lblCedula
+            // 
+            lblCedula.AutoSize = true;
+            lblCedula.BackColor = Color.Transparent;
+            lblCedula.Font = new Font("Segoe UI", 9.75F);
+            lblCedula.ForeColor = Color.FromArgb(147, 162, 183);
+            lblCedula.Location = new Point(348, 109);
+            lblCedula.Name = "lblCedula";
+            lblCedula.Size = new Size(14, 17);
+            lblCedula.TabIndex = 16;
+            lblCedula.Text = "x";
+            // 
+            // lblTituloCedula
+            // 
+            lblTituloCedula.AutoSize = true;
+            lblTituloCedula.BackColor = Color.Transparent;
+            lblTituloCedula.Font = new Font("Segoe UI", 9.75F);
+            lblTituloCedula.ForeColor = Color.FromArgb(147, 162, 183);
+            lblTituloCedula.Location = new Point(18, 109);
+            lblTituloCedula.Name = "lblTituloCedula";
+            lblTituloCedula.Size = new Size(48, 17);
+            lblTituloCedula.TabIndex = 15;
+            lblTituloCedula.Text = "Cedula";
+            // 
             // lblFechaIngreso
             // 
             lblFechaIngreso.AutoSize = true;
             lblFechaIngreso.BackColor = Color.Transparent;
-            lblFechaIngreso.Font = new Font("Segoe UI", 8.25F);
+            lblFechaIngreso.Font = new Font("Segoe UI", 9.75F);
             lblFechaIngreso.ForeColor = Color.FromArgb(147, 162, 183);
-            lblFechaIngreso.Location = new Point(381, 200);
+            lblFechaIngreso.Location = new Point(348, 242);
             lblFechaIngreso.Name = "lblFechaIngreso";
-            lblFechaIngreso.Size = new Size(0, 13);
+            lblFechaIngreso.Size = new Size(14, 17);
             lblFechaIngreso.TabIndex = 14;
+            lblFechaIngreso.Text = "x";
             // 
             // lblTecnicoAsignado
             // 
             lblTecnicoAsignado.AutoSize = true;
             lblTecnicoAsignado.BackColor = Color.Transparent;
-            lblTecnicoAsignado.Font = new Font("Segoe UI", 8.25F);
+            lblTecnicoAsignado.Font = new Font("Segoe UI", 9.75F);
             lblTecnicoAsignado.ForeColor = Color.FromArgb(147, 162, 183);
-            lblTecnicoAsignado.Location = new Point(381, 171);
+            lblTecnicoAsignado.Location = new Point(348, 218);
             lblTecnicoAsignado.Name = "lblTecnicoAsignado";
-            lblTecnicoAsignado.Size = new Size(0, 13);
+            lblTecnicoAsignado.Size = new Size(14, 17);
             lblTecnicoAsignado.TabIndex = 13;
+            lblTecnicoAsignado.Text = "x";
             // 
             // lblDispositivo
             // 
-            lblDispositivo.AutoSize = true;
             lblDispositivo.BackColor = Color.Transparent;
-            lblDispositivo.Font = new Font("Segoe UI", 8.25F);
+            lblDispositivo.Font = new Font("Segoe UI", 9.75F);
             lblDispositivo.ForeColor = Color.FromArgb(147, 162, 183);
-            lblDispositivo.Location = new Point(381, 141);
+            lblDispositivo.Location = new Point(348, 158);
             lblDispositivo.Name = "lblDispositivo";
-            lblDispositivo.Size = new Size(0, 13);
+            lblDispositivo.Size = new Size(133, 45);
             lblDispositivo.TabIndex = 12;
+            lblDispositivo.Text = "x";
             // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
             lblTelefono.BackColor = Color.Transparent;
-            lblTelefono.Font = new Font("Segoe UI", 8.25F);
+            lblTelefono.Font = new Font("Segoe UI", 9.75F);
             lblTelefono.ForeColor = Color.FromArgb(147, 162, 183);
-            lblTelefono.Location = new Point(381, 112);
+            lblTelefono.Location = new Point(348, 134);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(0, 13);
+            lblTelefono.Size = new Size(14, 17);
             lblTelefono.TabIndex = 11;
+            lblTelefono.Text = "x";
             // 
             // lblCliente
             // 
             lblCliente.AutoSize = true;
             lblCliente.BackColor = Color.Transparent;
-            lblCliente.Font = new Font("Segoe UI", 8.25F);
+            lblCliente.Font = new Font("Segoe UI", 9.75F);
             lblCliente.ForeColor = Color.FromArgb(147, 162, 183);
-            lblCliente.Location = new Point(381, 85);
+            lblCliente.Location = new Point(348, 85);
             lblCliente.Name = "lblCliente";
-            lblCliente.Size = new Size(0, 13);
+            lblCliente.Size = new Size(14, 17);
             lblCliente.TabIndex = 10;
+            lblCliente.Text = "x";
             // 
             // lblNumeroOrden
             // 
             lblNumeroOrden.AutoSize = true;
             lblNumeroOrden.BackColor = Color.Transparent;
-            lblNumeroOrden.Font = new Font("Segoe UI", 8.25F);
+            lblNumeroOrden.Font = new Font("Segoe UI", 9.75F);
             lblNumeroOrden.ForeColor = Color.FromArgb(70, 237, 213);
-            lblNumeroOrden.Location = new Point(381, 59);
+            lblNumeroOrden.Location = new Point(348, 59);
             lblNumeroOrden.Name = "lblNumeroOrden";
-            lblNumeroOrden.Size = new Size(0, 13);
+            lblNumeroOrden.Size = new Size(14, 17);
             lblNumeroOrden.TabIndex = 9;
+            lblNumeroOrden.Text = "x";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Segoe UI", 8.25F);
+            label6.Font = new Font("Segoe UI", 9.75F);
             label6.ForeColor = Color.FromArgb(147, 162, 183);
-            label6.Location = new Point(18, 200);
+            label6.Location = new Point(18, 242);
             label6.Name = "label6";
-            label6.Size = new Size(46, 13);
+            label6.Size = new Size(52, 17);
             label6.TabIndex = 8;
             label6.Text = "Ingreso";
             // 
@@ -710,11 +770,11 @@
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Segoe UI", 8.25F);
+            label5.Font = new Font("Segoe UI", 9.75F);
             label5.ForeColor = Color.FromArgb(147, 162, 183);
-            label5.Location = new Point(18, 171);
+            label5.Location = new Point(18, 218);
             label5.Name = "label5";
-            label5.Size = new Size(44, 13);
+            label5.Size = new Size(51, 17);
             label5.TabIndex = 7;
             label5.Text = "Técnico";
             // 
@@ -722,23 +782,23 @@
             // 
             lblTituloDispositivo.AutoSize = true;
             lblTituloDispositivo.BackColor = Color.Transparent;
-            lblTituloDispositivo.Font = new Font("Segoe UI", 8.25F);
+            lblTituloDispositivo.Font = new Font("Segoe UI", 9.75F);
             lblTituloDispositivo.ForeColor = Color.FromArgb(147, 162, 183);
-            lblTituloDispositivo.Location = new Point(18, 141);
+            lblTituloDispositivo.Location = new Point(18, 158);
             lblTituloDispositivo.Name = "lblTituloDispositivo";
-            lblTituloDispositivo.Size = new Size(64, 13);
+            lblTituloDispositivo.Size = new Size(78, 17);
             lblTituloDispositivo.TabIndex = 6;
-            lblTituloDispositivo.Text = "Dispositivo";
+            lblTituloDispositivo.Text = "Dispositivos";
             // 
             // lblTituloTelefono
             // 
             lblTituloTelefono.AutoSize = true;
             lblTituloTelefono.BackColor = Color.Transparent;
-            lblTituloTelefono.Font = new Font("Segoe UI", 8.25F);
+            lblTituloTelefono.Font = new Font("Segoe UI", 9.75F);
             lblTituloTelefono.ForeColor = Color.FromArgb(147, 162, 183);
-            lblTituloTelefono.Location = new Point(18, 112);
+            lblTituloTelefono.Location = new Point(18, 134);
             lblTituloTelefono.Name = "lblTituloTelefono";
-            lblTituloTelefono.Size = new Size(51, 13);
+            lblTituloTelefono.Size = new Size(58, 17);
             lblTituloTelefono.TabIndex = 5;
             lblTituloTelefono.Text = "Teléfono";
             // 
@@ -746,11 +806,11 @@
             // 
             lblTituloCliente.AutoSize = true;
             lblTituloCliente.BackColor = Color.Transparent;
-            lblTituloCliente.Font = new Font("Segoe UI", 8.25F);
+            lblTituloCliente.Font = new Font("Segoe UI", 9.75F);
             lblTituloCliente.ForeColor = Color.FromArgb(147, 162, 183);
             lblTituloCliente.Location = new Point(18, 85);
             lblTituloCliente.Name = "lblTituloCliente";
-            lblTituloCliente.Size = new Size(43, 13);
+            lblTituloCliente.Size = new Size(47, 17);
             lblTituloCliente.TabIndex = 4;
             lblTituloCliente.Text = "Cliente";
             // 
@@ -758,11 +818,11 @@
             // 
             lblTituloorden.AutoSize = true;
             lblTituloorden.BackColor = Color.Transparent;
-            lblTituloorden.Font = new Font("Segoe UI", 8.25F);
+            lblTituloorden.Font = new Font("Segoe UI", 9.75F);
             lblTituloorden.ForeColor = Color.FromArgb(147, 162, 183);
             lblTituloorden.Location = new Point(18, 59);
             lblTituloorden.Name = "lblTituloorden";
-            lblTituloorden.Size = new Size(98, 13);
+            lblTituloorden.Size = new Size(114, 17);
             lblTituloorden.TabIndex = 3;
             lblTituloorden.Text = "Número de orden";
             // 
@@ -895,5 +955,8 @@
         private Sunny.UI.UIButton btnRegistraEntrega;
         private Sunny.UI.UIContextMenuStrip uiContextMenuStrip1;
         private PrintDialog pdComprobante;
+        private Label lblCedula;
+        private Label lblTituloCedula;
+        private Sunny.UI.UIComboBox cmbListaOrdenes;
     }
 }
