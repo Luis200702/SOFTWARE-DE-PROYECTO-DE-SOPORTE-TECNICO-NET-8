@@ -14,10 +14,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void ucHistorialClientes_Load(object sender, EventArgs e)
         {
-            // Al inicio, mostramos el panel de "Vacio" y ocultamos la información
-            pnlVacio.Visible = true;
-            pnlHistorial.Visible = false;
-            pnlVacio.BringToFront(); // Asegura que esté por encima
 
             // Configuramos la tabla izquierda para que acepte saltos de línea
             dgvClientes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -117,11 +113,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     lblNombreCompleto.Text = nombre;
                     lblContacto.Text = $"{telefono} • {correo}";
 
-                    // Ocultamos el panel vacío y mostramos el panel del historial
-                    pnlVacio.Visible = false;
-
+                    // Aseguramos que el panel del historial esté al frente
                     pnlHistorial.Visible = true;
-                    pnlHistorial.BringToFront(); // Forzamos a que se ponga por encima de todo
+                    pnlHistorial.BringToFront();
 
                     // Cargamos la tabla grande de la derecha
                     CargarHistorialOrdenes(idCliente);
@@ -129,7 +123,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
             catch (Exception ex)
             {
-                // Si hay algún error oculto, ahora sí nos avisará con una ventana
                 MessageBox.Show("Hubo un problema al cargar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -141,21 +134,21 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    // Consulta que trae todo el detalle de las órdenes de ese cliente en específico
+                    // Consulta que trae todo el detalle de las órdenes
                     string query = @"
-                        SELECT 
-                            O.numero_orden AS Orden,
-                            O.fecha_ingreso AS Fecha,
-                            D.marca + ' ' + D.modelo AS Dispositivo,
-                            ISNULL(O.descripcion_problema, 'Reparación general') AS Reparacion,
-                            ISNULL(O.costo_estimado, 0) AS Costo,
-                            O.estado AS Estado,
-                            U.Nombre AS Tecnico
-                        FROM ordenes O
-                        INNER JOIN dispositivos D ON O.dispositivo_id = D.id
-                        INNER JOIN Usuarios U ON O.tecnico_id = U.Id
-                        WHERE O.cliente_id = @idCliente
-                        ORDER BY O.fecha_ingreso DESC";
+                SELECT 
+                    O.numero_orden AS Orden,
+                    O.fecha_ingreso AS Fecha,
+                    D.marca + ' ' + D.modelo AS Dispositivo,
+                    ISNULL(O.descripcion_problema, 'Reparación general') AS Reparacion,
+                    ISNULL(O.costo_estimado, 0) AS Costo,
+                    O.estado AS Estado,
+                    U.Nombre AS Tecnico
+                FROM ordenes O
+                INNER JOIN dispositivos D ON O.dispositivo_id = D.id
+                INNER JOIN Usuarios U ON O.tecnico_id = U.Id
+                WHERE O.cliente_id = @idCliente
+                ORDER BY O.fecha_ingreso DESC";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
@@ -164,6 +157,21 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
+
+                        // 1. Evitamos que Visual Studio invente columnas extra
+                        dgvHistorialOrdenes.AutoGenerateColumns = false;
+
+                        // 2. Vinculamos la información a TUS columnas predeterminadas
+                        if (dgvHistorialOrdenes.Columns.Count > 0)
+                        {
+                            dgvHistorialOrdenes.Columns[0].DataPropertyName = "Orden";
+                            dgvHistorialOrdenes.Columns[1].DataPropertyName = "Fecha";
+                            dgvHistorialOrdenes.Columns[2].DataPropertyName = "Dispositivo";
+                            dgvHistorialOrdenes.Columns[3].DataPropertyName = "Reparacion";
+                            dgvHistorialOrdenes.Columns[4].DataPropertyName = "Costo";
+                            dgvHistorialOrdenes.Columns[5].DataPropertyName = "Estado";
+                            dgvHistorialOrdenes.Columns[6].DataPropertyName = "Tecnico";
+                        }
 
                         dgvHistorialOrdenes.DataSource = dt;
 
@@ -181,7 +189,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al cargar el historial del cliente: " + ex.Message);
+                    MessageBox.Show("Error al cargar el historial del cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {

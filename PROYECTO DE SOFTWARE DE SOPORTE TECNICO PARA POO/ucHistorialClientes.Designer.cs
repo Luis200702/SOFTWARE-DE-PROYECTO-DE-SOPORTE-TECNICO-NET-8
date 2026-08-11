@@ -30,6 +30,8 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             materialButton1 = new ReaLTaiizor.Controls.MaterialButton();
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
@@ -38,25 +40,31 @@
             dgvClientes = new DataGridView();
             btnBuscar = new Sunny.UI.UIButton();
             txtBuscar = new Sunny.UI.UITextBox();
-            pnlVacio = new Panel();
-            pictureBox2 = new PictureBox();
-            label1 = new Label();
             pnlHistorial = new Panel();
             dgvHistorialOrdenes = new DataGridView();
+            Orden = new DataGridViewTextBoxColumn();
+            Fecha = new DataGridViewTextBoxColumn();
+            Dispositivo = new DataGridViewTextBoxColumn();
+            Reparacion = new DataGridViewTextBoxColumn();
+            Costo = new DataGridViewTextBoxColumn();
+            Estado = new DataGridViewTextBoxColumn();
+            Tecnico = new DataGridViewTextBoxColumn();
             pnlSuperiorCliente = new Panel();
             lblTotalGastado = new Label();
             lblTotalVisitas = new Label();
             lblContacto = new Label();
             lblNombreCompleto = new Label();
+            pictureBox2 = new PictureBox();
+            label1 = new Label();
+            llblTitleVisitas = new Label();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlIzquierdo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
-            pnlVacio.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             pnlHistorial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvHistorialOrdenes).BeginInit();
             pnlSuperiorCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // materialButton1
@@ -190,36 +198,6 @@
             txtBuscar.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscar.Watermark = "Nombre, cedula o Correo";
             // 
-            // pnlVacio
-            // 
-            pnlVacio.Controls.Add(pictureBox2);
-            pnlVacio.Controls.Add(label1);
-            pnlVacio.Location = new Point(274, 59);
-            pnlVacio.Name = "pnlVacio";
-            pnlVacio.Size = new Size(851, 705);
-            pnlVacio.TabIndex = 4;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.tictoc;
-            pictureBox2.Location = new Point(406, 280);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(65, 54);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
-            // 
-            // label1
-            // 
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(241, 320);
-            label1.Name = "label1";
-            label1.Size = new Size(394, 57);
-            label1.TabIndex = 2;
-            label1.Text = "Selecciona un cliente para ver su historial";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // pnlHistorial
             // 
             pnlHistorial.Controls.Add(dgvHistorialOrdenes);
@@ -228,29 +206,89 @@
             pnlHistorial.Name = "pnlHistorial";
             pnlHistorial.Size = new Size(851, 705);
             pnlHistorial.TabIndex = 5;
+            pnlHistorial.Visible = false;
             // 
             // dgvHistorialOrdenes
             // 
+            dgvHistorialOrdenes.AllowUserToAddRows = false;
+            dgvHistorialOrdenes.AllowUserToDeleteRows = false;
+            dgvHistorialOrdenes.AllowUserToResizeColumns = false;
+            dgvHistorialOrdenes.AllowUserToResizeRows = false;
             dgvHistorialOrdenes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvHistorialOrdenes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHistorialOrdenes.ColumnHeadersVisible = false;
+            dgvHistorialOrdenes.BackgroundColor = Color.White;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvHistorialOrdenes.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvHistorialOrdenes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgvHistorialOrdenes.ColumnHeadersHeight = 40;
+            dgvHistorialOrdenes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvHistorialOrdenes.Columns.AddRange(new DataGridViewColumn[] { Orden, Fecha, Dispositivo, Reparacion, Costo, Estado, Tecnico });
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvHistorialOrdenes.DefaultCellStyle = dataGridViewCellStyle3;
             dgvHistorialOrdenes.Location = new Point(0, 87);
             dgvHistorialOrdenes.Name = "dgvHistorialOrdenes";
             dgvHistorialOrdenes.RowHeadersVisible = false;
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dgvHistorialOrdenes.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvHistorialOrdenes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvHistorialOrdenes.Size = new Size(851, 618);
             dgvHistorialOrdenes.TabIndex = 23;
             // 
+            // Orden
+            // 
+            Orden.HeaderText = "ORDEN";
+            Orden.Name = "Orden";
+            Orden.ReadOnly = true;
+            // 
+            // Fecha
+            // 
+            Fecha.HeaderText = "FECHA";
+            Fecha.Name = "Fecha";
+            Fecha.ReadOnly = true;
+            // 
+            // Dispositivo
+            // 
+            Dispositivo.HeaderText = "DISPOSITIVO";
+            Dispositivo.Name = "Dispositivo";
+            Dispositivo.ReadOnly = true;
+            // 
+            // Reparacion
+            // 
+            Reparacion.HeaderText = "REPARACIÓN";
+            Reparacion.Name = "Reparacion";
+            Reparacion.ReadOnly = true;
+            // 
+            // Costo
+            // 
+            Costo.HeaderText = "COSTO";
+            Costo.Name = "Costo";
+            Costo.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            Estado.HeaderText = "ESTADO";
+            Estado.Name = "Estado";
+            Estado.ReadOnly = true;
+            // 
+            // Tecnico
+            // 
+            Tecnico.HeaderText = "TECNICO";
+            Tecnico.Name = "Tecnico";
+            Tecnico.ReadOnly = true;
+            // 
             // pnlSuperiorCliente
             // 
+            pnlSuperiorCliente.Controls.Add(llblTitleVisitas);
             pnlSuperiorCliente.Controls.Add(lblTotalGastado);
             pnlSuperiorCliente.Controls.Add(lblTotalVisitas);
             pnlSuperiorCliente.Controls.Add(lblContacto);
@@ -300,14 +338,47 @@
             lblNombreCompleto.TabIndex = 2;
             lblNombreCompleto.Text = "x";
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.tictoc;
+            pictureBox2.Location = new Point(670, 290);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(65, 54);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 25;
+            pictureBox2.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(500, 347);
+            label1.Name = "label1";
+            label1.Size = new Size(394, 57);
+            label1.TabIndex = 24;
+            label1.Text = "Selecciona un cliente para ver su historial";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // llblTitleVisitas
+            // 
+            llblTitleVisitas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            llblTitleVisitas.ForeColor = Color.Black;
+            llblTitleVisitas.Location = new Point(518, 28);
+            llblTitleVisitas.Name = "llblTitleVisitas";
+            llblTitleVisitas.Size = new Size(58, 20);
+            llblTitleVisitas.TabIndex = 6;
+            llblTitleVisitas.Text = "visitas";
+            llblTitleVisitas.TextAlign = ContentAlignment.TopCenter;
+            // 
             // ucHistorialClientes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(pictureBox2);
+            Controls.Add(label1);
             Controls.Add(pnlSuperior);
             Controls.Add(pnlIzquierdo);
-            Controls.Add(pnlVacio);
             Controls.Add(pnlHistorial);
             Name = "ucHistorialClientes";
             Size = new Size(1125, 764);
@@ -316,17 +387,15 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlIzquierdo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
-            pnlVacio.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             pnlHistorial.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvHistorialOrdenes).EndInit();
             pnlSuperiorCliente.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Panel pnlVacio;
         private ReaLTaiizor.Controls.MaterialButton materialButton1;                         private Sunny.UI.UITextBox txtContraseña;
         private Sunny.UI.UIButton btnAcceder;
         private FontAwesome.Sharp.IconDropDownButton iconDropDownButton1;
@@ -337,8 +406,6 @@
         private Sunny.UI.UITextBox txtBuscar;
         private DataGridView dgvClientes;
         private Sunny.UI.UIButton btnBuscar;
-        private PictureBox pictureBox2;
-        private Label label1;
         private Panel pnlHistorial;
         private Panel pnlSuperiorCliente;
         private Label lblTotalVisitas;
@@ -346,5 +413,15 @@
         private Label lblNombreCompleto;
         private DataGridView dgvHistorialOrdenes;
         private Label lblTotalGastado;
+        private DataGridViewTextBoxColumn Orden;
+        private DataGridViewTextBoxColumn Fecha;
+        private DataGridViewTextBoxColumn Dispositivo;
+        private DataGridViewTextBoxColumn Reparacion;
+        private DataGridViewTextBoxColumn Costo;
+        private DataGridViewTextBoxColumn Estado;
+        private DataGridViewTextBoxColumn Tecnico;
+        private PictureBox pictureBox2;
+        private Label label1;
+        private Label llblTitleVisitas;
     }
 }
