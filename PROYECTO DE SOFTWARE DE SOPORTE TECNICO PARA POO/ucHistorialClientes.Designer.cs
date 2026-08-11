@@ -50,13 +50,13 @@
             Estado = new DataGridViewTextBoxColumn();
             Tecnico = new DataGridViewTextBoxColumn();
             pnlSuperiorCliente = new Panel();
+            llblTitleVisitas = new Label();
             lblTotalGastado = new Label();
             lblTotalVisitas = new Label();
             lblContacto = new Label();
             lblNombreCompleto = new Label();
             pictureBox2 = new PictureBox();
             label1 = new Label();
-            llblTitleVisitas = new Label();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlIzquierdo.SuspendLayout();
@@ -298,6 +298,17 @@
             pnlSuperiorCliente.Size = new Size(851, 87);
             pnlSuperiorCliente.TabIndex = 0;
             // 
+            // llblTitleVisitas
+            // 
+            llblTitleVisitas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            llblTitleVisitas.ForeColor = Color.Black;
+            llblTitleVisitas.Location = new Point(518, 28);
+            llblTitleVisitas.Name = "llblTitleVisitas";
+            llblTitleVisitas.Size = new Size(58, 20);
+            llblTitleVisitas.TabIndex = 6;
+            llblTitleVisitas.Text = "visitas";
+            llblTitleVisitas.TextAlign = ContentAlignment.TopCenter;
+            // 
             // lblTotalGastado
             // 
             lblTotalGastado.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -358,17 +369,6 @@
             label1.TabIndex = 24;
             label1.Text = "Selecciona un cliente para ver su historial";
             label1.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // llblTitleVisitas
-            // 
-            llblTitleVisitas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            llblTitleVisitas.ForeColor = Color.Black;
-            llblTitleVisitas.Location = new Point(518, 28);
-            llblTitleVisitas.Name = "llblTitleVisitas";
-            llblTitleVisitas.Size = new Size(58, 20);
-            llblTitleVisitas.TabIndex = 6;
-            llblTitleVisitas.Text = "visitas";
-            llblTitleVisitas.TextAlign = ContentAlignment.TopCenter;
             // 
             // ucHistorialClientes
             // 
