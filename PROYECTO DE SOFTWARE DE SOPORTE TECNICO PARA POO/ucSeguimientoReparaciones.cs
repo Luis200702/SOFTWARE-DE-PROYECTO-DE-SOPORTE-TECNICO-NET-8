@@ -136,8 +136,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void dgvSeguimiento_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmDetallesOrden frm = new frmDetallesOrden();
-            frm.ShowDialog();
+
         }
 
         private void dgvSeguimiento_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -148,6 +147,40 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     e.Graphics.FillRectangle(accentBrush, e.RowBounds.Left, e.RowBounds.Top, 4, e.RowBounds.Height);
                 }
+            }
+        }
+
+        private void dgvSeguimiento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0)
+                {
+                    // Extraemos los datos reales ocultos en la fila
+                    DataRowView filaSeleccionada = (DataRowView)dgvSeguimiento.Rows[e.RowIndex].DataBoundItem;
+
+                    if (filaSeleccionada != null)
+                    {
+                        // Extraemos TODA la info de la celda
+                        string numeroOrden = filaSeleccionada["Orden"].ToString();
+                        string clienteDispositivo = filaSeleccionada["Cliente_Dispositivo"].ToString();
+                        string estado = filaSeleccionada["Estado"].ToString();
+                        string tecnico = filaSeleccionada["Tecnico"].ToString();
+
+                        // Abrimos el formulario y le inyectamos toda esta información
+                        frmDetallesOrden frm = new frmDetallesOrden(numeroOrden, clienteDispositivo, estado, tecnico);
+                        frm.ShowDialog();
+
+                        // Opcional: Al cerrar el formulario de detalles, refrescamos la tabla 
+                        // por si actualizaste el estado o cambiaste de técnico.
+                        string estadoFiltro = cmbEstado.Text == "Todos los estados" ? "Todos" : cmbEstado.Text;
+                        CargarSeguimiento(txtBuscarOrden.Text.Trim(), estadoFiltro);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir la orden: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

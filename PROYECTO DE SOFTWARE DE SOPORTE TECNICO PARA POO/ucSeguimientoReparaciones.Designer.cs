@@ -173,7 +173,8 @@
             dgvSeguimiento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSeguimiento.BackgroundColor = Color.White;
             dgvSeguimiento.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvSeguimiento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvSeguimiento.ColumnHeadersHeight = 40;
+            dgvSeguimiento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvSeguimiento.Columns.AddRange(new DataGridViewColumn[] { Orden, Cliente_Dispositivo, Tecnico, Estado, Ingreso, Entrega, Tiempo });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.White;
@@ -202,6 +203,7 @@
             dgvSeguimiento.TabIndex = 3;
             dgvSeguimiento.CellClick += dgvSeguimiento_CellClick;
             dgvSeguimiento.CellContentClick += dgvSeguimiento_CellContentClick;
+            dgvSeguimiento.CellDoubleClick += dgvSeguimiento_CellDoubleClick;
             dgvSeguimiento.RowPostPaint += dgvSeguimiento_RowPostPaint;
             // 
             // Orden

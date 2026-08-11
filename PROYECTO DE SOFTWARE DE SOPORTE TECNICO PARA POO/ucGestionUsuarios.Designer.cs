@@ -190,6 +190,7 @@
             dgvUsuarios.Size = new Size(1024, 661);
             dgvUsuarios.TabIndex = 4;
             dgvUsuarios.CellContentClick += dgvUsuarios_CellContentClick;
+            dgvUsuarios.RowPostPaint += dgvUsuarios_RowPostPaint;
             // 
             // Nombre
             // 

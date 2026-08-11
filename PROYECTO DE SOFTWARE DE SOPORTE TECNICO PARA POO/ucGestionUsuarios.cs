@@ -55,7 +55,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 frmEditarUsuarios frmEditar = new frmEditarUsuarios(nombre, usuario, perfil, sucursal);
                 frmEditar.ShowDialog();
 
-                
+
             }
         }
 
@@ -63,6 +63,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             frmAgregarUsuario frm = new frmAgregarUsuario();
             frm.ShowDialog();
+        }
+
+        private void dgvUsuarios_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if ((e.State & DataGridViewElementStates.Selected) == DataGridViewElementStates.Selected)
+            {
+                using (SolidBrush accentBrush = new SolidBrush(Color.FromArgb(0, 210, 160)))
+                {
+                    e.Graphics.FillRectangle(accentBrush, e.RowBounds.Left, e.RowBounds.Top, 4, e.RowBounds.Height);
+                }
+            }
         }
     }
 }
