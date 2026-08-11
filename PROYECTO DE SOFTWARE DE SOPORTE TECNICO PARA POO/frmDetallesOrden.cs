@@ -15,9 +15,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
     {
         ucRecepcion Unsoloboton = new ucRecepcion();
         private string ordenActual;
-
-        // Nueva variable para memorizar qué botón de estado se tocó
         private string estadoSeleccionado;
+
+        // Creamos una lista para guardar los IDs de los repuestos que se van agregando
+        private List<int> repuestosUsadosIds = new List<int>();
 
         // Actualizamos el constructor para recibir todos los datos de la grilla
         public frmDetallesOrden(string numeroOrden, string clienteDispositivo, string estadoActual, string tecnicoActual)
@@ -109,12 +110,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             if (cmbRepuestos.SelectedValue != null)
             {
-                // Agregamos el texto que el usuario ve a la lista visual inferior
+                // 1. Guardamos el ID del repuesto en nuestra memoria temporal
+                int idSeleccionado = Convert.ToInt32(cmbRepuestos.SelectedValue);
+                repuestosUsadosIds.Add(idSeleccionado);
+
+                // 2. Mostramos el texto en la lista de la pantalla
                 string repuestoTexto = cmbRepuestos.Text;
                 lstRepuestos.Items.Add("• " + repuestoTexto);
-
-                // NOTA: El descuento del inventario real en SQL se haría idealmente
-                // cuando el usuario guarde el formulario o haga clic en el botón verde final.
             }
         }
 
@@ -155,8 +157,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    // Usamos los nombres exactos de tu tabla: IdRepuesto y NombreRepuesto
-                    string query = "SELECT IdRepuesto, NombreRepuesto AS Descripcion FROM Repuestos";
+                    // Unimos Repuestos con InventarioSucursal usando el IdRepuesto
+                    string query = @"
+                SELECT 
+                    R.IdRepuesto, 
+                    R.NombreRepuesto + ' (Stock: ' + CAST(I.StockActual AS VARCHAR) + ')' AS Descripcion 
+                FROM Repuestos R
+                INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
+                WHERE I.StockActual > 0";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
@@ -164,7 +172,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         DataTable dt = new DataTable();
                         da.Fill(dt);
 
-                        // Llenamos el ComboBox
                         cmbRepuestos.DataSource = dt;
                         cmbRepuestos.DisplayMember = "Descripcion";
                         cmbRepuestos.ValueMember = "IdRepuesto";
@@ -204,16 +211,30 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
 
+                        // ... código anterior del botón verde (el primer UPDATE de la orden)
+
+                        // ... (código anterior donde haces el UPDATE del estado de la orden)
+
                         if (filasAfectadas > 0)
                         {
-                            MessageBox.Show("¡La orden se actualizó correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            // Recorremos la lista de repuestos que el técnico agregó
+                            foreach (int idRepuesto in repuestosUsadosIds)
+                            {
+                                // Actualizamos StockActual en la tabla InventarioSucursal
+                                string queryStock = @"
+            UPDATE InventarioSucursal 
+            SET StockActual = StockActual - 1 
+            WHERE IdRepuesto = @id";
 
-                            // Cerramos este panel para que el usuario vuelva a la tabla principal
+                                using (SqlCommand cmdStock = new SqlCommand(queryStock, db.oCon))
+                                {
+                                    cmdStock.Parameters.AddWithValue("@id", idRepuesto);
+                                    cmdStock.ExecuteNonQuery();
+                                }
+                            }
+
+                            MessageBox.Show("¡La orden se actualizó y el stock fue descontado en matriz!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se encontró la orden para actualizar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }

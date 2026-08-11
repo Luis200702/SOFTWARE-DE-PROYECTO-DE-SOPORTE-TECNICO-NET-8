@@ -83,7 +83,7 @@
             pnlContenedorMenu.Controls.Add(btnRecepcionEquipos);
             pnlContenedorMenu.Location = new Point(0, 90);
             pnlContenedorMenu.Name = "pnlContenedorMenu";
-            pnlContenedorMenu.Size = new Size(260, 594);
+            pnlContenedorMenu.Size = new Size(260, 662);
             pnlContenedorMenu.TabIndex = 0;
             // 
             // airSeparator2
@@ -92,7 +92,7 @@
             airSeparator2.Customization = "";
             airSeparator2.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             airSeparator2.Image = null;
-            airSeparator2.Location = new Point(14, 432);
+            airSeparator2.Location = new Point(14, 495);
             airSeparator2.Name = "airSeparator2";
             airSeparator2.NoRounding = false;
             airSeparator2.Size = new Size(230, 1);
@@ -119,7 +119,7 @@
             lblAdministracion.BackColor = Color.Transparent;
             lblAdministracion.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAdministracion.ForeColor = Color.LightGray;
-            lblAdministracion.Location = new Point(27, 448);
+            lblAdministracion.Location = new Point(27, 499);
             lblAdministracion.Name = "lblAdministracion";
             lblAdministracion.Size = new Size(105, 15);
             lblAdministracion.TabIndex = 14;
@@ -145,7 +145,7 @@
             btnConfiguracionGeneral.ImageAlign = ContentAlignment.MiddleRight;
             btnConfiguracionGeneral.ImageIndex = 10;
             btnConfiguracionGeneral.ImageList = imageListBarrraMenu;
-            btnConfiguracionGeneral.Location = new Point(14, 555);
+            btnConfiguracionGeneral.Location = new Point(14, 610);
             btnConfiguracionGeneral.Name = "btnConfiguracionGeneral";
             btnConfiguracionGeneral.Size = new Size(220, 35);
             btnConfiguracionGeneral.TabIndex = 13;
@@ -182,7 +182,7 @@
             btnGestionUsuarios.ImageAlign = ContentAlignment.MiddleRight;
             btnGestionUsuarios.ImageIndex = 9;
             btnGestionUsuarios.ImageList = imageListBarrraMenu;
-            btnGestionUsuarios.Location = new Point(14, 516);
+            btnGestionUsuarios.Location = new Point(14, 569);
             btnGestionUsuarios.Name = "btnGestionUsuarios";
             btnGestionUsuarios.Size = new Size(220, 35);
             btnGestionUsuarios.TabIndex = 12;
@@ -201,7 +201,7 @@
             btnReportes.ImageAlign = ContentAlignment.MiddleRight;
             btnReportes.ImageIndex = 8;
             btnReportes.ImageList = imageListBarrraMenu;
-            btnReportes.Location = new Point(14, 473);
+            btnReportes.Location = new Point(14, 528);
             btnReportes.Name = "btnReportes";
             btnReportes.Size = new Size(220, 35);
             btnReportes.TabIndex = 11;
@@ -408,7 +408,7 @@
             pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorSalir.BackColor = Color.FromArgb(15, 23, 42);
             pnlContenedorSalir.Controls.Add(btnSalirApp);
-            pnlContenedorSalir.Location = new Point(0, 686);
+            pnlContenedorSalir.Location = new Point(0, 754);
             pnlContenedorSalir.Name = "pnlContenedorSalir";
             pnlContenedorSalir.Size = new Size(260, 75);
             pnlContenedorSalir.TabIndex = 2;
@@ -444,7 +444,7 @@
             pnlInterfaces.BackColor = Color.DarkGray;
             pnlInterfaces.Location = new Point(261, 0);
             pnlInterfaces.Name = "pnlInterfaces";
-            pnlInterfaces.Size = new Size(1123, 764);
+            pnlInterfaces.Size = new Size(1123, 832);
             pnlInterfaces.TabIndex = 3;
             // 
             // imageListLogoPrincipal
@@ -463,7 +463,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 23, 42);
-            ClientSize = new Size(1384, 761);
+            ClientSize = new Size(1384, 829);
             Controls.Add(pnlInterfaces);
             Controls.Add(pnlContenedorSalir);
             Controls.Add(pnlContenedorLogotipo);
