@@ -62,7 +62,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     btn.BackColor = Color.Transparent;
                     btn.FlatAppearance.MouseOverBackColor = Color.Transparent;
                     btn.FlatAppearance.MouseDownBackColor = Color.Transparent;
-                    btn.ForeColor = ColorTranslator.FromHtml("#FFFFFF");   // Color por defecto 
+                    btn.ForeColor = ColorTranslator.FromHtml("#EBEFF0");   // Color Pale Gray, por defecto 
 
                     btn.MouseEnter -= BotonMenu_MouseEnter;
                     btn.MouseEnter += BotonMenu_MouseEnter;
@@ -85,7 +85,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 // Restaurar color del texto del botón activo anterior
                 if (botonActivo != null && botonActivo != btn)
                 {
-                    botonActivo.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+                    botonActivo.ForeColor = ColorTranslator.FromHtml("#EBEFF0");  // Color Pale Gray
                 }
 
                 botonActivo = btn;
@@ -216,7 +216,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     if (botonSeleccionado != null && botonSeleccionado != botonActivo)
                     {
-                        botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+                        botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#EBEFF0");  // Color Pale Gray
                     }
                     botonSeleccionado = null;
                     progresoAnchoObjetivo = 0f;
@@ -226,7 +226,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 if (botonSeleccionado != null && botonSeleccionado != btn && botonSeleccionado != botonActivo)
                 {
-                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#EBEFF0");   // Color Pale Gray
                 }
 
                 if (progresoAnchoObjetivo == 0f && progresoAncho == 0f)
@@ -259,7 +259,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 if (botonSeleccionado != null && botonSeleccionado != botonActivo)
                 {
-                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+                    botonSeleccionado.ForeColor = ColorTranslator.FromHtml("#EBEFF0");   // Color Pale Gray
                     botonSeleccionado = null;
                 }
                 progresoAnchoObjetivo = 0.0f; // Contraer

@@ -65,7 +65,7 @@
             // 
             pnlContenedorMenu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorMenu.AutoSize = true;
-            pnlContenedorMenu.BackColor = Color.FromArgb(15, 23, 42);
+            pnlContenedorMenu.BackColor = Color.FromArgb(28, 43, 60);
             pnlContenedorMenu.Controls.Add(airSeparator2);
             pnlContenedorMenu.Controls.Add(airSeparator3);
             pnlContenedorMenu.Controls.Add(lblAdministracion);
@@ -83,7 +83,7 @@
             pnlContenedorMenu.Controls.Add(btnRecepcionEquipos);
             pnlContenedorMenu.Location = new Point(0, 90);
             pnlContenedorMenu.Name = "pnlContenedorMenu";
-            pnlContenedorMenu.Size = new Size(260, 662);
+            pnlContenedorMenu.Size = new Size(260, 649);
             pnlContenedorMenu.TabIndex = 0;
             // 
             // airSeparator2
@@ -92,7 +92,7 @@
             airSeparator2.Customization = "";
             airSeparator2.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             airSeparator2.Image = null;
-            airSeparator2.Location = new Point(14, 495);
+            airSeparator2.Location = new Point(14, 435);
             airSeparator2.Name = "airSeparator2";
             airSeparator2.NoRounding = false;
             airSeparator2.Size = new Size(230, 1);
@@ -102,7 +102,7 @@
             // 
             // airSeparator3
             // 
-            airSeparator3.BackColor = Color.LightGray;
+            airSeparator3.BackColor = Color.FromArgb(235, 239, 240);
             airSeparator3.Customization = "";
             airSeparator3.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             airSeparator3.Image = null;
@@ -119,7 +119,7 @@
             lblAdministracion.BackColor = Color.Transparent;
             lblAdministracion.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAdministracion.ForeColor = Color.LightGray;
-            lblAdministracion.Location = new Point(27, 499);
+            lblAdministracion.Location = new Point(27, 450);
             lblAdministracion.Name = "lblAdministracion";
             lblAdministracion.Size = new Size(105, 15);
             lblAdministracion.TabIndex = 14;
@@ -141,13 +141,13 @@
             btnConfiguracionGeneral.BackColor = Color.Transparent;
             btnConfiguracionGeneral.FlatStyle = FlatStyle.Flat;
             btnConfiguracionGeneral.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnConfiguracionGeneral.ForeColor = Color.White;
+            btnConfiguracionGeneral.ForeColor = Color.FromArgb(235, 239, 240);
             btnConfiguracionGeneral.ImageAlign = ContentAlignment.MiddleRight;
             btnConfiguracionGeneral.ImageIndex = 10;
             btnConfiguracionGeneral.ImageList = imageListBarrraMenu;
-            btnConfiguracionGeneral.Location = new Point(14, 610);
+            btnConfiguracionGeneral.Location = new Point(14, 583);
             btnConfiguracionGeneral.Name = "btnConfiguracionGeneral";
-            btnConfiguracionGeneral.Size = new Size(220, 35);
+            btnConfiguracionGeneral.Size = new Size(230, 35);
             btnConfiguracionGeneral.TabIndex = 13;
             btnConfiguracionGeneral.Text = " Configuración                     ";
             btnConfiguracionGeneral.TextAlign = ContentAlignment.MiddleLeft;
@@ -178,13 +178,13 @@
             btnGestionUsuarios.BackColor = Color.Transparent;
             btnGestionUsuarios.FlatStyle = FlatStyle.Flat;
             btnGestionUsuarios.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnGestionUsuarios.ForeColor = Color.White;
+            btnGestionUsuarios.ForeColor = Color.FromArgb(235, 239, 240);
             btnGestionUsuarios.ImageAlign = ContentAlignment.MiddleRight;
             btnGestionUsuarios.ImageIndex = 9;
             btnGestionUsuarios.ImageList = imageListBarrraMenu;
-            btnGestionUsuarios.Location = new Point(14, 569);
+            btnGestionUsuarios.Location = new Point(14, 518);
             btnGestionUsuarios.Name = "btnGestionUsuarios";
-            btnGestionUsuarios.Size = new Size(220, 35);
+            btnGestionUsuarios.Size = new Size(230, 35);
             btnGestionUsuarios.TabIndex = 12;
             btnGestionUsuarios.Text = " Gestión de Técnicos           ";
             btnGestionUsuarios.TextAlign = ContentAlignment.MiddleLeft;
@@ -197,13 +197,13 @@
             btnReportes.BackColor = Color.Transparent;
             btnReportes.FlatStyle = FlatStyle.Flat;
             btnReportes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnReportes.ForeColor = Color.White;
+            btnReportes.ForeColor = Color.FromArgb(235, 239, 240);
             btnReportes.ImageAlign = ContentAlignment.MiddleRight;
             btnReportes.ImageIndex = 8;
             btnReportes.ImageList = imageListBarrraMenu;
-            btnReportes.Location = new Point(14, 528);
+            btnReportes.Location = new Point(14, 477);
             btnReportes.Name = "btnReportes";
-            btnReportes.Size = new Size(220, 35);
+            btnReportes.Size = new Size(230, 35);
             btnReportes.TabIndex = 11;
             btnReportes.Text = " Reportes                             ";
             btnReportes.TextAlign = ContentAlignment.MiddleLeft;
@@ -216,7 +216,7 @@
             btnHistorialCliente.BackColor = Color.Transparent;
             btnHistorialCliente.FlatStyle = FlatStyle.Flat;
             btnHistorialCliente.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnHistorialCliente.ForeColor = Color.White;
+            btnHistorialCliente.ForeColor = Color.FromArgb(235, 239, 240);
             btnHistorialCliente.ImageIndex = 7;
             btnHistorialCliente.ImageList = imageListBarrraMenu;
             btnHistorialCliente.Location = new Point(14, 371);
@@ -234,7 +234,7 @@
             btnTradeIn.BackColor = Color.Transparent;
             btnTradeIn.FlatStyle = FlatStyle.Flat;
             btnTradeIn.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnTradeIn.ForeColor = Color.White;
+            btnTradeIn.ForeColor = Color.FromArgb(235, 239, 240);
             btnTradeIn.ImageIndex = 6;
             btnTradeIn.ImageList = imageListBarrraMenu;
             btnTradeIn.Location = new Point(14, 330);
@@ -252,7 +252,7 @@
             btnVentaDispositivos.BackColor = Color.Transparent;
             btnVentaDispositivos.FlatStyle = FlatStyle.Flat;
             btnVentaDispositivos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnVentaDispositivos.ForeColor = Color.White;
+            btnVentaDispositivos.ForeColor = Color.FromArgb(235, 239, 240);
             btnVentaDispositivos.ImageIndex = 5;
             btnVentaDispositivos.ImageList = imageListBarrraMenu;
             btnVentaDispositivos.Location = new Point(14, 289);
@@ -270,7 +270,7 @@
             btnDerivacionOrdenes.BackColor = Color.Transparent;
             btnDerivacionOrdenes.FlatStyle = FlatStyle.Flat;
             btnDerivacionOrdenes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnDerivacionOrdenes.ForeColor = Color.White;
+            btnDerivacionOrdenes.ForeColor = Color.FromArgb(235, 239, 240);
             btnDerivacionOrdenes.ImageAlign = ContentAlignment.MiddleRight;
             btnDerivacionOrdenes.ImageIndex = 4;
             btnDerivacionOrdenes.ImageList = imageListBarrraMenu;
@@ -289,7 +289,7 @@
             btnGestionStock.BackColor = Color.Transparent;
             btnGestionStock.FlatStyle = FlatStyle.Flat;
             btnGestionStock.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnGestionStock.ForeColor = Color.White;
+            btnGestionStock.ForeColor = Color.FromArgb(235, 239, 240);
             btnGestionStock.ImageIndex = 3;
             btnGestionStock.ImageList = imageListBarrraMenu;
             btnGestionStock.Location = new Point(14, 147);
@@ -307,7 +307,7 @@
             btnDevoluciónEntrega.BackColor = Color.Transparent;
             btnDevoluciónEntrega.FlatStyle = FlatStyle.Flat;
             btnDevoluciónEntrega.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDevoluciónEntrega.ForeColor = Color.White;
+            btnDevoluciónEntrega.ForeColor = Color.FromArgb(235, 239, 240);
             btnDevoluciónEntrega.ImageIndex = 2;
             btnDevoluciónEntrega.ImageList = imageListBarrraMenu;
             btnDevoluciónEntrega.Location = new Point(14, 106);
@@ -325,7 +325,7 @@
             btnSeguimientoReparaciones.BackColor = Color.Transparent;
             btnSeguimientoReparaciones.FlatStyle = FlatStyle.Flat;
             btnSeguimientoReparaciones.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSeguimientoReparaciones.ForeColor = Color.White;
+            btnSeguimientoReparaciones.ForeColor = Color.FromArgb(235, 239, 240);
             btnSeguimientoReparaciones.ImageAlign = ContentAlignment.MiddleRight;
             btnSeguimientoReparaciones.ImageIndex = 1;
             btnSeguimientoReparaciones.ImageList = imageListBarrraMenu;
@@ -344,7 +344,7 @@
             btnRecepcionEquipos.BackColor = Color.Transparent;
             btnRecepcionEquipos.FlatStyle = FlatStyle.Flat;
             btnRecepcionEquipos.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRecepcionEquipos.ForeColor = Color.White;
+            btnRecepcionEquipos.ForeColor = Color.FromArgb(235, 239, 240);
             btnRecepcionEquipos.ImageIndex = 0;
             btnRecepcionEquipos.ImageList = imageListBarrraMenu;
             btnRecepcionEquipos.Location = new Point(14, 24);
@@ -359,7 +359,7 @@
             // 
             // pnlContenedorLogotipo
             // 
-            pnlContenedorLogotipo.BackColor = Color.FromArgb(15, 23, 42);
+            pnlContenedorLogotipo.BackColor = Color.FromArgb(28, 43, 60);
             pnlContenedorLogotipo.Controls.Add(airSeparator1);
             pnlContenedorLogotipo.Controls.Add(btnLogoMenu);
             pnlContenedorLogotipo.Location = new Point(0, 0);
@@ -369,7 +369,7 @@
             // 
             // airSeparator1
             // 
-            airSeparator1.BackColor = Color.LightGray;
+            airSeparator1.BackColor = Color.FromArgb(235, 239, 240);
             airSeparator1.Customization = "";
             airSeparator1.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             airSeparator1.Image = null;
@@ -385,7 +385,7 @@
             // 
             btnLogoMenu.BackColor = Color.Transparent;
             btnLogoMenu.Enabled = false;
-            btnLogoMenu.FlatAppearance.BorderColor = Color.FromArgb(10, 12, 30);
+            btnLogoMenu.FlatAppearance.BorderColor = Color.FromArgb(28, 43, 60);
             btnLogoMenu.FlatStyle = FlatStyle.Flat;
             btnLogoMenu.ImageIndex = 0;
             btnLogoMenu.ImageList = ImagenListLogoMenu;
@@ -406,11 +406,11 @@
             // pnlContenedorSalir
             // 
             pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            pnlContenedorSalir.BackColor = Color.FromArgb(15, 23, 42);
+            pnlContenedorSalir.BackColor = Color.FromArgb(28, 43, 60);
             pnlContenedorSalir.Controls.Add(btnSalirApp);
-            pnlContenedorSalir.Location = new Point(0, 754);
+            pnlContenedorSalir.Location = new Point(0, 739);
             pnlContenedorSalir.Name = "pnlContenedorSalir";
-            pnlContenedorSalir.Size = new Size(260, 75);
+            pnlContenedorSalir.Size = new Size(260, 90);
             pnlContenedorSalir.TabIndex = 2;
             // 
             // btnSalirApp
@@ -422,6 +422,7 @@
             btnSalirApp.FillPressColor = Color.FromArgb(0, 150, 137);
             btnSalirApp.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnSalirApp.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSalirApp.ForeColor = Color.FromArgb(235, 239, 240);
             btnSalirApp.Location = new Point(49, 18);
             btnSalirApp.MinimumSize = new Size(1, 1);
             btnSalirApp.Name = "btnSalirApp";
@@ -441,7 +442,7 @@
             // 
             pnlInterfaces.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlInterfaces.AutoSize = true;
-            pnlInterfaces.BackColor = Color.DarkGray;
+            pnlInterfaces.BackColor = Color.FromArgb(235, 239, 240);
             pnlInterfaces.Location = new Point(261, 0);
             pnlInterfaces.Name = "pnlInterfaces";
             pnlInterfaces.Size = new Size(1123, 832);
@@ -462,7 +463,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(15, 23, 42);
+            BackColor = Color.FromArgb(235, 239, 240);
             ClientSize = new Size(1384, 829);
             Controls.Add(pnlInterfaces);
             Controls.Add(pnlContenedorSalir);
