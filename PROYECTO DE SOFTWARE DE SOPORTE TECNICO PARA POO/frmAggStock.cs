@@ -21,5 +21,31 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
 
         }
+
+        private void frmAggStock_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void llbStockA_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            DialogResult result = DialogResult.Cancel;
+            this.Close();
+        }
     }
 }

@@ -105,7 +105,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void dgv4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
 
+            if (dgvControl.Columns[e.ColumnIndex].Name == "Agregar")
+            {
+                frmAggStock frm = new frmAggStock();
+                frm.ShowDialog(); 
+            }
+            else if (dgvControl.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                frmDeleteStock frm = new frmDeleteStock();
+                frm.ShowDialog();
+            }
         }
     }
 }

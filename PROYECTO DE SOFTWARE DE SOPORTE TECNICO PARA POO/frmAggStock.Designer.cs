@@ -28,205 +28,191 @@
         /// </summary>
         private void InitializeComponent()
         {
-            txtCompatible = new Sunny.UI.UITextBox();
-            txtNombre = new Sunny.UI.UITextBox();
-            txtStock = new Sunny.UI.UITextBox();
-            txtCosto = new Sunny.UI.UITextBox();
-            cmbProveedor = new Sunny.UI.UIComboBox();
-            cmbCategoria = new Sunny.UI.UIComboBox();
-            lblNombre = new Label();
-            lblCompatibilidad = new Label();
-            lblProveedor = new Label();
-            lblCategoria = new Label();
-            lblStock = new Label();
-            lblCosto = new Label();
+            lblTitulo = new Label();
+            lblProducto = new Label();
+            lblAgregar = new Label();
+            udoAgg = new Sunny.UI.UIUpDownTextBox();
+            pnlStockActual = new Sunny.UI.UIPanel();
+            llbStockA = new Label();
+            lblstockActual = new Label();
+            pnlStockResultante = new Sunny.UI.UIPanel();
+            lblStockR = new Label();
+            lblStockRedultante = new Label();
+            pnlFondo = new Sunny.UI.UIPanel();
+            btnCancelar = new Sunny.UI.UIButton();
             btnAgg = new Sunny.UI.UIButton();
+            pnlStockActual.SuspendLayout();
+            pnlStockResultante.SuspendLayout();
+            pnlFondo.SuspendLayout();
             SuspendLayout();
             // 
-            // txtCompatible
+            // lblTitulo
             // 
-            txtCompatible.FillColor = Color.FromArgb(41, 53, 72);
-            txtCompatible.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtCompatible.ForeColor = Color.White;
-            txtCompatible.Location = new Point(23, 176);
-            txtCompatible.Margin = new Padding(5, 7, 5, 7);
-            txtCompatible.MaxLength = 255;
-            txtCompatible.Minimum = 0D;
-            txtCompatible.MinimumSize = new Size(1, 21);
-            txtCompatible.Name = "txtCompatible";
-            txtCompatible.Padding = new Padding(6, 7, 6, 7);
-            txtCompatible.Radius = 12;
-            txtCompatible.RectColor = Color.FromArgb(39, 53, 72);
-            txtCompatible.ShowText = false;
-            txtCompatible.Size = new Size(441, 82);
-            txtCompatible.TabIndex = 47;
-            txtCompatible.TextAlignment = ContentAlignment.TopLeft;
-            txtCompatible.Watermark = "Compatible...";
-            txtCompatible.TextChanged += txtCompatible_TextChanged;
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTitulo.Location = new Point(130, 22);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(235, 38);
+            lblTitulo.TabIndex = 53;
+            lblTitulo.Text = "Registrar Entrada ";
             // 
-            // txtNombre
+            // lblProducto
             // 
-            txtNombre.FillColor = Color.FromArgb(41, 53, 72);
-            txtNombre.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtNombre.ForeColor = Color.White;
-            txtNombre.Location = new Point(23, 68);
-            txtNombre.Margin = new Padding(5, 7, 5, 7);
-            txtNombre.MaxLength = 255;
-            txtNombre.Minimum = 0D;
-            txtNombre.MinimumSize = new Size(1, 21);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Padding = new Padding(6, 7, 6, 7);
-            txtNombre.Radius = 12;
-            txtNombre.RectColor = Color.FromArgb(39, 53, 72);
-            txtNombre.ShowText = false;
-            txtNombre.Size = new Size(441, 63);
-            txtNombre.TabIndex = 46;
-            txtNombre.TextAlignment = ContentAlignment.MiddleLeft;
-            txtNombre.Watermark = "Producto....";
+            lblProducto.AutoSize = true;
+            lblProducto.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblProducto.Location = new Point(23, 85);
+            lblProducto.Name = "lblProducto";
+            lblProducto.Size = new Size(202, 31);
+            lblProducto.TabIndex = 54;
+            lblProducto.Text = "nombre producrto";
+            lblProducto.Click += lblProducto_Click;
             // 
-            // txtStock
+            // lblAgregar
             // 
-            txtStock.FillColor = Color.FromArgb(41, 53, 72);
-            txtStock.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtStock.ForeColor = Color.White;
-            txtStock.Location = new Point(50, 417);
-            txtStock.Margin = new Padding(5, 7, 5, 7);
-            txtStock.MaxLength = 255;
-            txtStock.Minimum = 0D;
-            txtStock.MinimumSize = new Size(1, 21);
-            txtStock.Name = "txtStock";
-            txtStock.Padding = new Padding(6, 7, 6, 7);
-            txtStock.Radius = 12;
-            txtStock.RectColor = Color.FromArgb(39, 53, 72);
-            txtStock.ShowText = false;
-            txtStock.Size = new Size(172, 50);
-            txtStock.TabIndex = 51;
-            txtStock.TextAlignment = ContentAlignment.MiddleLeft;
-            txtStock.Watermark = "Stock...";
+            lblAgregar.AutoSize = true;
+            lblAgregar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblAgregar.Location = new Point(23, 149);
+            lblAgregar.Name = "lblAgregar";
+            lblAgregar.Size = new Size(182, 28);
+            lblAgregar.TabIndex = 55;
+            lblAgregar.Text = "Cantidad a Agregar";
+            lblAgregar.Click += lblAgregar_Click;
             // 
-            // txtCosto
+            // udoAgg
             // 
-            txtCosto.FillColor = Color.FromArgb(41, 53, 72);
-            txtCosto.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtCosto.ForeColor = Color.White;
-            txtCosto.Location = new Point(279, 417);
-            txtCosto.Margin = new Padding(5, 7, 5, 7);
-            txtCosto.MaxLength = 255;
-            txtCosto.Minimum = 0D;
-            txtCosto.MinimumSize = new Size(1, 21);
-            txtCosto.Name = "txtCosto";
-            txtCosto.Padding = new Padding(6, 7, 6, 7);
-            txtCosto.Radius = 12;
-            txtCosto.RectColor = Color.FromArgb(39, 53, 72);
-            txtCosto.ShowText = false;
-            txtCosto.Size = new Size(172, 50);
-            txtCosto.TabIndex = 52;
-            txtCosto.TextAlignment = ContentAlignment.MiddleLeft;
-            txtCosto.Watermark = "Costo...";
+            udoAgg.CanEmpty = true;
+            udoAgg.DoubleStep = 1D;
+            udoAgg.DoubleValue = 1D;
+            udoAgg.Font = new Font("Microsoft Sans Serif", 12F);
+            udoAgg.IntValue = 1;
+            udoAgg.Location = new Point(23, 182);
+            udoAgg.Margin = new Padding(4, 5, 4, 5);
+            udoAgg.Minimum = 1D;
+            udoAgg.MinimumSize = new Size(1, 16);
+            udoAgg.Name = "udoAgg";
+            udoAgg.Padding = new Padding(5);
+            udoAgg.Radius = 12;
+            udoAgg.ShowText = false;
+            udoAgg.Size = new Size(445, 47);
+            udoAgg.TabIndex = 69;
+            udoAgg.Text = "1";
+            udoAgg.TextAlignment = ContentAlignment.MiddleLeft;
+            udoAgg.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            udoAgg.Watermark = "";
             // 
-            // cmbProveedor
+            // pnlStockActual
             // 
-            cmbProveedor.BackColor = Color.Transparent;
-            cmbProveedor.DataSource = null;
-            cmbProveedor.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbProveedor.FillColor = Color.FromArgb(41, 53, 72);
-            cmbProveedor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbProveedor.ForeColor = Color.White;
-            cmbProveedor.FormattingEnabled = true;
-            cmbProveedor.ItemHoverColor = Color.FromArgb(155, 200, 255);
-            cmbProveedor.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbProveedor.Location = new Point(14, 310);
-            cmbProveedor.Margin = new Padding(5, 7, 5, 7);
-            cmbProveedor.MinimumSize = new Size(72, 0);
-            cmbProveedor.Name = "cmbProveedor";
-            cmbProveedor.Padding = new Padding(0, 0, 34, 3);
-            cmbProveedor.Radius = 12;
-            cmbProveedor.RectColor = Color.FromArgb(148, 163, 184);
-            cmbProveedor.Size = new Size(235, 47);
-            cmbProveedor.SymbolSize = 24;
-            cmbProveedor.TabIndex = 40;
-            cmbProveedor.Text = "Seleccionar Proveedor";
-            cmbProveedor.TextAlignment = ContentAlignment.MiddleLeft;
-            cmbProveedor.Watermark = "";
+            pnlStockActual.Controls.Add(llbStockA);
+            pnlStockActual.Controls.Add(lblstockActual);
+            pnlStockActual.Font = new Font("Microsoft Sans Serif", 12F);
+            pnlStockActual.Location = new Point(23, 265);
+            pnlStockActual.Margin = new Padding(4, 5, 4, 5);
+            pnlStockActual.MinimumSize = new Size(1, 1);
+            pnlStockActual.Name = "pnlStockActual";
+            pnlStockActual.Radius = 12;
+            pnlStockActual.Size = new Size(445, 58);
+            pnlStockActual.TabIndex = 70;
+            pnlStockActual.Text = null;
+            pnlStockActual.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // cmbCategoria
+            // llbStockA
             // 
-            cmbCategoria.BackColor = Color.Transparent;
-            cmbCategoria.DataSource = null;
-            cmbCategoria.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbCategoria.FillColor = Color.FromArgb(41, 53, 72);
-            cmbCategoria.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbCategoria.ForeColor = Color.White;
-            cmbCategoria.FormattingEnabled = true;
-            cmbCategoria.ItemHoverColor = Color.FromArgb(155, 200, 255);
-            cmbCategoria.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbCategoria.Location = new Point(259, 310);
-            cmbCategoria.Margin = new Padding(5, 7, 5, 7);
-            cmbCategoria.MinimumSize = new Size(72, 0);
-            cmbCategoria.Name = "cmbCategoria";
-            cmbCategoria.Padding = new Padding(0, 0, 34, 3);
-            cmbCategoria.Radius = 12;
-            cmbCategoria.RectColor = Color.FromArgb(148, 163, 184);
-            cmbCategoria.Size = new Size(229, 47);
-            cmbCategoria.SymbolSize = 24;
-            cmbCategoria.TabIndex = 41;
-            cmbCategoria.Text = "Seleccionar Categoria";
-            cmbCategoria.TextAlignment = ContentAlignment.MiddleLeft;
-            cmbCategoria.Watermark = "";
+            llbStockA.AutoSize = true;
+            llbStockA.BackColor = Color.Transparent;
+            llbStockA.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            llbStockA.Location = new Point(392, 13);
+            llbStockA.Name = "llbStockA";
+            llbStockA.Size = new Size(26, 31);
+            llbStockA.TabIndex = 74;
+            llbStockA.Text = "1";
+            llbStockA.Click += llbStockA_Click;
             // 
-            // lblNombre
+            // lblstockActual
             // 
-            lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(23, 29);
-            lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(153, 20);
-            lblNombre.TabIndex = 53;
-            lblNombre.Text = "Nombre del Producto";
+            lblstockActual.AutoSize = true;
+            lblstockActual.BackColor = Color.Transparent;
+            lblstockActual.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblstockActual.Location = new Point(15, 13);
+            lblstockActual.Name = "lblstockActual";
+            lblstockActual.Size = new Size(139, 31);
+            lblstockActual.TabIndex = 73;
+            lblstockActual.Text = "Stock Actual";
             // 
-            // lblCompatibilidad
+            // pnlStockResultante
             // 
-            lblCompatibilidad.AutoSize = true;
-            lblCompatibilidad.Location = new Point(23, 149);
-            lblCompatibilidad.Name = "lblCompatibilidad";
-            lblCompatibilidad.Size = new Size(113, 20);
-            lblCompatibilidad.TabIndex = 54;
-            lblCompatibilidad.Text = "Compatibilidad";
+            pnlStockResultante.Controls.Add(lblStockR);
+            pnlStockResultante.Controls.Add(lblStockRedultante);
+            pnlStockResultante.Font = new Font("Microsoft Sans Serif", 12F);
+            pnlStockResultante.Location = new Point(23, 347);
+            pnlStockResultante.Margin = new Padding(4, 5, 4, 5);
+            pnlStockResultante.MinimumSize = new Size(1, 1);
+            pnlStockResultante.Name = "pnlStockResultante";
+            pnlStockResultante.Radius = 12;
+            pnlStockResultante.Size = new Size(445, 58);
+            pnlStockResultante.TabIndex = 71;
+            pnlStockResultante.Text = null;
+            pnlStockResultante.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // lblProveedor
+            // lblStockR
             // 
-            lblProveedor.AutoSize = true;
-            lblProveedor.Location = new Point(14, 283);
-            lblProveedor.Name = "lblProveedor";
-            lblProveedor.Size = new Size(77, 20);
-            lblProveedor.TabIndex = 55;
-            lblProveedor.Text = "Proveedor";
+            lblStockR.AutoSize = true;
+            lblStockR.BackColor = Color.Transparent;
+            lblStockR.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblStockR.Location = new Point(369, 14);
+            lblStockR.Name = "lblStockR";
+            lblStockR.Size = new Size(59, 31);
+            lblStockR.TabIndex = 75;
+            lblStockR.Text = "-----";
             // 
-            // lblCategoria
+            // lblStockRedultante
             // 
-            lblCategoria.AutoSize = true;
-            lblCategoria.Location = new Point(259, 283);
-            lblCategoria.Name = "lblCategoria";
-            lblCategoria.Size = new Size(74, 20);
-            lblCategoria.TabIndex = 56;
-            lblCategoria.Text = "Categoria";
+            lblStockRedultante.AutoSize = true;
+            lblStockRedultante.BackColor = Color.Transparent;
+            lblStockRedultante.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblStockRedultante.Location = new Point(15, 14);
+            lblStockRedultante.Name = "lblStockRedultante";
+            lblStockRedultante.Size = new Size(181, 31);
+            lblStockRedultante.TabIndex = 74;
+            lblStockRedultante.Text = "Stock Resultante";
             // 
-            // lblStock
+            // pnlFondo
             // 
-            lblStock.AutoSize = true;
-            lblStock.Location = new Point(50, 390);
-            lblStock.Name = "lblStock";
-            lblStock.Size = new Size(69, 20);
-            lblStock.TabIndex = 57;
-            lblStock.Text = "Cantidad";
+            pnlFondo.Controls.Add(btnCancelar);
+            pnlFondo.Controls.Add(btnAgg);
+            pnlFondo.Font = new Font("Microsoft Sans Serif", 12F);
+            pnlFondo.Location = new Point(-5, 445);
+            pnlFondo.Margin = new Padding(4, 5, 4, 5);
+            pnlFondo.MinimumSize = new Size(1, 1);
+            pnlFondo.Name = "pnlFondo";
+            pnlFondo.Radius = 12;
+            pnlFondo.Size = new Size(517, 131);
+            pnlFondo.TabIndex = 80;
+            pnlFondo.Text = null;
+            pnlFondo.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // lblCosto
+            // btnCancelar
             // 
-            lblCosto.AutoSize = true;
-            lblCosto.Location = new Point(279, 390);
-            lblCosto.Name = "lblCosto";
-            lblCosto.Size = new Size(112, 20);
-            lblCosto.TabIndex = 58;
-            lblCosto.Text = "Precio de Venta";
+            btnCancelar.BackColor = Color.Transparent;
+            btnCancelar.FillColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.FillHoverColor = Color.Transparent;
+            btnCancelar.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCancelar.Location = new Point(168, 23);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.MinimumSize = new Size(1, 1);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Radius = 12;
+            btnCancelar.RectColor = Color.FromArgb(39, 53, 72);
+            btnCancelar.RectHoverColor = Color.Transparent;
+            btnCancelar.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnCancelar.Size = new Size(150, 52);
+            btnCancelar.TabIndex = 72;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnCancelar.TipsForeColor = Color.Transparent;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnAgg
             // 
@@ -236,7 +222,7 @@
             btnAgg.FillPressColor = Color.FromArgb(0, 150, 137);
             btnAgg.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnAgg.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAgg.Location = new Point(165, 504);
+            btnAgg.Location = new Point(333, 23);
             btnAgg.Margin = new Padding(3, 4, 3, 4);
             btnAgg.MinimumSize = new Size(1, 1);
             btnAgg.Name = "btnAgg";
@@ -247,7 +233,7 @@
             btnAgg.RectSelectedColor = Color.FromArgb(0, 150, 137);
             btnAgg.Size = new Size(150, 52);
             btnAgg.TabIndex = 60;
-            btnAgg.Text = "Registrar Entrega";
+            btnAgg.Text = "Confirmar";
             btnAgg.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnAgg.TipsForeColor = Color.Transparent;
             // 
@@ -255,41 +241,42 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(30, 41, 59);
-            ClientSize = new Size(502, 599);
-            Controls.Add(btnAgg);
-            Controls.Add(lblCosto);
-            Controls.Add(lblStock);
-            Controls.Add(lblCategoria);
-            Controls.Add(lblProveedor);
-            Controls.Add(lblCompatibilidad);
-            Controls.Add(lblNombre);
-            Controls.Add(cmbCategoria);
-            Controls.Add(cmbProveedor);
-            Controls.Add(txtCosto);
-            Controls.Add(txtStock);
-            Controls.Add(txtCompatible);
-            Controls.Add(txtNombre);
+            BackColor = Color.White;
+            ClientSize = new Size(499, 541);
+            Controls.Add(pnlFondo);
+            Controls.Add(pnlStockResultante);
+            Controls.Add(pnlStockActual);
+            Controls.Add(udoAgg);
+            Controls.Add(lblAgregar);
+            Controls.Add(lblProducto);
+            Controls.Add(lblTitulo);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "frmAggStock";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmAggStock";
+            Load += frmAggStock_Load;
+            pnlStockActual.ResumeLayout(false);
+            pnlStockActual.PerformLayout();
+            pnlStockResultante.ResumeLayout(false);
+            pnlStockResultante.PerformLayout();
+            pnlFondo.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Sunny.UI.UITextBox txtCompatible;
-        private Sunny.UI.UITextBox txtNombre;
-        private Sunny.UI.UITextBox txtStock;
-        private Sunny.UI.UITextBox txtCosto;
-        private Sunny.UI.UIComboBox cmbProveedor;
-        private Sunny.UI.UIComboBox cmbCategoria;
-        private Label lblNombre;
-        private Label lblCompatibilidad;
-        private Label lblProveedor;
-        private Label lblCategoria;
-        private Label lblStock;
-        private Label lblCosto;
+        private Label lblTitulo;
+        private Label lblProducto;
+        private Label lblAgregar;
+        private Sunny.UI.UIUpDownTextBox udoAgg;
+        private Sunny.UI.UIPanel pnlStockActual;
+        private Label lblstockActual;
+        private Sunny.UI.UIPanel pnlStockResultante;
+        private Label lblStockRedultante;
+        private Label llbStockA;
+        private Label lblStockR;
+        private Sunny.UI.UIPanel pnlFondo;
+        private Sunny.UI.UIButton btnCancelar;
         private Sunny.UI.UIButton btnAgg;
     }
 }

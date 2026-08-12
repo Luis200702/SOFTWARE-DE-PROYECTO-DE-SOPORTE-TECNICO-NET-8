@@ -52,7 +52,8 @@
             Venta = new DataGridViewTextBoxColumn();
             Proveedor = new DataGridViewTextBoxColumn();
             Estado = new DataGridViewTextBoxColumn();
-            Editar = new DataGridViewImageColumn();
+            Agregar = new DataGridViewImageColumn();
+            Delete = new DataGridViewImageColumn();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
@@ -67,17 +68,19 @@
             pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
             pnlSuperior.Controls.Add(pictureBox1);
             pnlSuperior.Controls.Add(lblTitulo);
-            pnlSuperior.Location = new Point(-7, -8);
+            pnlSuperior.Location = new Point(-8, -11);
+            pnlSuperior.Margin = new Padding(3, 4, 3, 4);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1142, 71);
+            pnlSuperior.Size = new Size(1305, 94);
             pnlSuperior.TabIndex = 1;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.MaterialSymbolsInventory__1_;
-            pictureBox1.Location = new Point(21, 20);
+            pictureBox1.Location = new Point(24, 27);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(36, 30);
+            pictureBox1.Size = new Size(41, 40);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -89,7 +92,7 @@
             lblTitulo.ForeColor = Color.FromArgb(147, 162, 183);
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(287, 69);
+            lblTitulo.Size = new Size(328, 92);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Control de Stock";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -105,9 +108,10 @@
             panel1.Controls.Add(txtBuscar);
             panel1.Controls.Add(lblAlertas);
             panel1.Controls.Add(btnAlertas);
-            panel1.Location = new Point(0, 59);
+            panel1.Location = new Point(0, 79);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1124, 59);
+            panel1.Size = new Size(1284, 78);
             panel1.TabIndex = 2;
             // 
             // btnNuevoRepuesto
@@ -118,7 +122,8 @@
             btnNuevoRepuesto.FillPressColor = Color.FromArgb(0, 150, 137);
             btnNuevoRepuesto.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnNuevoRepuesto.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnNuevoRepuesto.Location = new Point(969, 10);
+            btnNuevoRepuesto.Location = new Point(1107, 13);
+            btnNuevoRepuesto.Margin = new Padding(3, 4, 3, 4);
             btnNuevoRepuesto.MinimumSize = new Size(1, 1);
             btnNuevoRepuesto.Name = "btnNuevoRepuesto";
             btnNuevoRepuesto.Radius = 12;
@@ -126,7 +131,7 @@
             btnNuevoRepuesto.RectHoverColor = Color.Transparent;
             btnNuevoRepuesto.RectPressColor = Color.FromArgb(0, 150, 137);
             btnNuevoRepuesto.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnNuevoRepuesto.Size = new Size(133, 31);
+            btnNuevoRepuesto.Size = new Size(152, 41);
             btnNuevoRepuesto.TabIndex = 30;
             btnNuevoRepuesto.Text = "Registrar Entrega";
             btnNuevoRepuesto.TextAlign = ContentAlignment.MiddleRight;
@@ -146,14 +151,14 @@
             cmbCategorias.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbCategorias.Items.AddRange(new object[] { "Todas las categorías", "Pantalla", "Bateria", "Conector", "Placa", "Cámara", "Bóton", "Tapa", "Parlante", "Micrófono", "Otro" });
             cmbCategorias.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbCategorias.Location = new Point(383, 10);
-            cmbCategorias.Margin = new Padding(4, 5, 4, 5);
-            cmbCategorias.MinimumSize = new Size(63, 0);
+            cmbCategorias.Location = new Point(438, 13);
+            cmbCategorias.Margin = new Padding(5, 7, 5, 7);
+            cmbCategorias.MinimumSize = new Size(72, 0);
             cmbCategorias.Name = "cmbCategorias";
-            cmbCategorias.Padding = new Padding(0, 0, 30, 2);
+            cmbCategorias.Padding = new Padding(0, 0, 34, 3);
             cmbCategorias.Radius = 12;
             cmbCategorias.RectColor = Color.FromArgb(148, 163, 184);
-            cmbCategorias.Size = new Size(185, 32);
+            cmbCategorias.Size = new Size(211, 43);
             cmbCategorias.SymbolSize = 24;
             cmbCategorias.TabIndex = 25;
             cmbCategorias.TextAlignment = ContentAlignment.MiddleLeft;
@@ -165,15 +170,15 @@
             txtBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtBuscar.ForeColor = Color.White;
             txtBuscar.Icon = Properties.Resources.TablerSearch;
-            txtBuscar.Location = new Point(14, 12);
-            txtBuscar.Margin = new Padding(4, 5, 4, 5);
-            txtBuscar.MinimumSize = new Size(1, 16);
+            txtBuscar.Location = new Point(16, 16);
+            txtBuscar.Margin = new Padding(5, 7, 5, 7);
+            txtBuscar.MinimumSize = new Size(1, 21);
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Padding = new Padding(5);
+            txtBuscar.Padding = new Padding(6, 7, 6, 7);
             txtBuscar.Radius = 12;
             txtBuscar.RectColor = Color.FromArgb(39, 53, 72);
             txtBuscar.ShowText = false;
-            txtBuscar.Size = new Size(345, 30);
+            txtBuscar.Size = new Size(394, 40);
             txtBuscar.TabIndex = 4;
             txtBuscar.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscar.Watermark = "Buscar repuesto, marca...";
@@ -185,9 +190,9 @@
             lblAlertas.FlatStyle = FlatStyle.Flat;
             lblAlertas.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAlertas.ForeColor = Color.FromArgb(147, 162, 183);
-            lblAlertas.Location = new Point(736, 14);
+            lblAlertas.Location = new Point(841, 19);
             lblAlertas.Name = "lblAlertas";
-            lblAlertas.Size = new Size(23, 25);
+            lblAlertas.Size = new Size(27, 31);
             lblAlertas.TabIndex = 7;
             lblAlertas.Text = "0";
             // 
@@ -202,11 +207,10 @@
             btnAlertas.ForeColor = Color.FromArgb(147, 162, 183);
             btnAlertas.Image = Properties.Resources.SolarDangerOutline__2_;
             btnAlertas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAlertas.Location = new Point(613, 10);
-            btnAlertas.Margin = new Padding(3, 2, 3, 2);
+            btnAlertas.Location = new Point(701, 13);
             btnAlertas.Name = "btnAlertas";
             btnAlertas.RightToLeft = RightToLeft.No;
-            btnAlertas.Size = new Size(117, 31);
+            btnAlertas.Size = new Size(134, 41);
             btnAlertas.TabIndex = 3;
             btnAlertas.Text = "Alertas";
             btnAlertas.TextAlign = ContentAlignment.MiddleRight;
@@ -233,19 +237,18 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvControl.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvControl.ColumnHeadersHeight = 50;
-            dgvControl.Columns.AddRange(new DataGridViewColumn[] { Nombre, Categoria, Compatible, Stock, Costo, Venta, Proveedor, Estado, Editar });
+            dgvControl.Columns.AddRange(new DataGridViewColumn[] { Nombre, Categoria, Compatible, Stock, Costo, Venta, Proveedor, Estado, Agregar, Delete });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(147, 162, 183);
+            dataGridViewCellStyle3.BackColor = Color.Transparent;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.Silver;
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle3.SelectionForeColor = Color.Transparent;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvControl.DefaultCellStyle = dataGridViewCellStyle3;
             dgvControl.EnableHeadersVisualStyles = false;
             dgvControl.GridColor = Color.Black;
-            dgvControl.Location = new Point(3, 118);
-            dgvControl.Margin = new Padding(3, 2, 3, 2);
+            dgvControl.Location = new Point(3, 157);
             dgvControl.Name = "dgvControl";
             dgvControl.ReadOnly = true;
             dgvControl.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -265,13 +268,14 @@
             dgvControl.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvControl.RowTemplate.Height = 40;
             dgvControl.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dgvControl.Size = new Size(1122, 641);
+            dgvControl.Size = new Size(1282, 855);
             dgvControl.TabIndex = 3;
             dgvControl.CellContentClick += dgv4_CellContentClick;
             // 
             // Nombre
             // 
             Nombre.DataPropertyName = "Nombre";
+            Nombre.FillWeight = 200F;
             Nombre.HeaderText = "NOMBRE";
             Nombre.MinimumWidth = 6;
             Nombre.Name = "Nombre";
@@ -280,6 +284,7 @@
             // Categoria
             // 
             Categoria.DataPropertyName = "Categoria";
+            Categoria.FillWeight = 120F;
             Categoria.HeaderText = "CATEGORIA";
             Categoria.MinimumWidth = 6;
             Categoria.Name = "Categoria";
@@ -289,6 +294,7 @@
             // Compatible
             // 
             Compatible.DataPropertyName = "Compatible";
+            Compatible.FillWeight = 180F;
             Compatible.HeaderText = "COMPATIBLE";
             Compatible.MinimumWidth = 6;
             Compatible.Name = "Compatible";
@@ -321,6 +327,7 @@
             // Proveedor
             // 
             Proveedor.DataPropertyName = "Proveedor";
+            Proveedor.FillWeight = 150F;
             Proveedor.HeaderText = "PROVEEDOR";
             Proveedor.MinimumWidth = 6;
             Proveedor.Name = "Proveedor";
@@ -330,6 +337,7 @@
             // Estado
             // 
             Estado.DataPropertyName = "Estado";
+            Estado.FillWeight = 60F;
             Estado.HeaderText = "ESTADO";
             Estado.MinimumWidth = 6;
             Estado.Name = "Estado";
@@ -337,33 +345,45 @@
             Estado.Resizable = DataGridViewTriState.True;
             Estado.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
-            // Editar
+            // Agregar
             // 
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.Red;
-            dataGridViewCellStyle2.ForeColor = Color.Red;
+            dataGridViewCellStyle2.BackColor = Color.Transparent;
+            dataGridViewCellStyle2.ForeColor = Color.Transparent;
             dataGridViewCellStyle2.NullValue = resources.GetObject("dataGridViewCellStyle2.NullValue");
-            dataGridViewCellStyle2.SelectionBackColor = Color.Red;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Red;
-            Editar.DefaultCellStyle = dataGridViewCellStyle2;
-            Editar.HeaderText = "ED";
-            Editar.Image = Properties.Resources.Editar;
-            Editar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Editar.MinimumWidth = 6;
-            Editar.Name = "Editar";
-            Editar.ReadOnly = true;
-            Editar.Resizable = DataGridViewTriState.True;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Transparent;
+            Agregar.DefaultCellStyle = dataGridViewCellStyle2;
+            Agregar.FillWeight = 40F;
+            Agregar.HeaderText = "";
+            Agregar.Image = Properties.Resources.Code_Generated_Image;
+            Agregar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Agregar.MinimumWidth = 6;
+            Agregar.Name = "Agregar";
+            Agregar.ReadOnly = true;
+            Agregar.Resizable = DataGridViewTriState.True;
+            // 
+            // Delete
+            // 
+            Delete.FillWeight = 40F;
+            Delete.HeaderText = "";
+            Delete.Image = Properties.Resources.Code_Generated_Image__1_;
+            Delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Delete.MinimumWidth = 6;
+            Delete.Name = "Delete";
+            Delete.ReadOnly = true;
             // 
             // ucStock
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 35, 54);
             Controls.Add(panel1);
             Controls.Add(dgvControl);
             Controls.Add(pnlSuperior);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ucStock";
-            Size = new Size(1125, 764);
+            Size = new Size(1286, 1019);
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
@@ -393,6 +413,7 @@
         private DataGridViewTextBoxColumn Venta;
         private DataGridViewTextBoxColumn Proveedor;
         private DataGridViewTextBoxColumn Estado;
-        private DataGridViewImageColumn Editar;
+        private DataGridViewImageColumn Agregar;
+        private DataGridViewImageColumn Delete;
     }
 }

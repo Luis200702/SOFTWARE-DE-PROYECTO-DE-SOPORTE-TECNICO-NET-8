@@ -169,6 +169,9 @@
   <data name="TablerSearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TablerSearch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LogotipoProyectoSd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LogotipoProyectoSd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="MaterialSymbolsInventoryRounded" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsInventoryRounded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -180,6 +183,9 @@
   </data>
   <data name="IconParkOutlineSpanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IconParkOutlineSpanner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Code_Generated_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Code_Generated_Image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MaterialSymbolsSearch (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsSearch (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,7 +220,7 @@
   <data name="WeuiAdd2Outlined (3)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WeuiAdd2Outlined (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LogotipoProyectoSd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LogotipoProyectoSd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Code_Generated_Image (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Code_Generated_Image (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
