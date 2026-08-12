@@ -47,7 +47,7 @@
             // 
             // pnlIzquierda
             // 
-            pnlIzquierda.BackColor = Color.FromArgb(15, 23, 42);
+            pnlIzquierda.BackColor = Color.FromArgb(28, 43, 60);
             pnlIzquierda.Controls.Add(pictureBox1);
             pnlIzquierda.Location = new Point(0, 0);
             pnlIzquierda.Name = "pnlIzquierda";
@@ -66,7 +66,7 @@
             // 
             // pnlDerecha
             // 
-            pnlDerecha.BackColor = Color.FromArgb(30, 41, 59);
+            pnlDerecha.BackColor = Color.FromArgb(235, 239, 240);
             pnlDerecha.Controls.Add(label1);
             pnlDerecha.Controls.Add(lblDerechos);
             pnlDerecha.Controls.Add(btnAcceder);
@@ -83,22 +83,22 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(147, 162, 183);
-            label1.Location = new Point(52, 116);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(103, 106, 112);
+            label1.Location = new Point(52, 106);
             label1.Name = "label1";
-            label1.Size = new Size(240, 17);
+            label1.Size = new Size(283, 21);
             label1.TabIndex = 18;
             label1.Text = "Ingresa tus credenciales para continuar.";
             // 
             // lblDerechos
             // 
             lblDerechos.AutoSize = true;
-            lblDerechos.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDerechos.ForeColor = Color.FromArgb(147, 162, 183);
-            lblDerechos.Location = new Point(131, 347);
+            lblDerechos.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDerechos.ForeColor = Color.FromArgb(103, 106, 112);
+            lblDerechos.Location = new Point(149, 402);
             lblDerechos.Name = "lblDerechos";
-            lblDerechos.Size = new Size(182, 17);
+            lblDerechos.Size = new Size(159, 15);
             lblDerechos.TabIndex = 17;
             lblDerechos.Text = "Versión 1.0 · TechDKV © 2026";
             // 
@@ -107,17 +107,20 @@
             btnAcceder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAcceder.BackColor = Color.Transparent;
             btnAcceder.FillColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.FillHoverColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.FillHoverColor = Color.FromArgb(80, 160, 255);
             btnAcceder.FillPressColor = Color.FromArgb(0, 150, 137);
             btnAcceder.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAcceder.Location = new Point(52, 308);
+            btnAcceder.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAcceder.ForeColor = Color.FromArgb(235, 239, 240);
+            btnAcceder.Location = new Point(52, 348);
             btnAcceder.MinimumSize = new Size(1, 1);
             btnAcceder.Name = "btnAcceder";
             btnAcceder.Radius = 12;
+            btnAcceder.RectColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.RectHoverColor = Color.FromArgb(80, 160, 255);
             btnAcceder.RectPressColor = Color.FromArgb(0, 150, 137);
             btnAcceder.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.Size = new Size(343, 36);
+            btnAcceder.Size = new Size(343, 37);
             btnAcceder.TabIndex = 16;
             btnAcceder.Text = "Acceder";
             btnAcceder.TipsFont = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -127,10 +130,10 @@
             // txtContrasena
             // 
             txtContrasena.BackColor = Color.Transparent;
-            txtContrasena.FillColor = Color.FromArgb(41, 53, 72);
-            txtContrasena.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtContrasena.ForeColor = Color.White;
-            txtContrasena.Location = new Point(52, 271);
+            txtContrasena.FillColor = Color.FromArgb(75, 92, 108);
+            txtContrasena.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtContrasena.ForeColor = Color.FromArgb(235, 239, 240);
+            txtContrasena.Location = new Point(52, 274);
             txtContrasena.Margin = new Padding(4, 5, 4, 5);
             txtContrasena.MaxLength = 255;
             txtContrasena.Minimum = 0D;
@@ -138,20 +141,21 @@
             txtContrasena.Name = "txtContrasena";
             txtContrasena.Padding = new Padding(5);
             txtContrasena.Radius = 12;
-            txtContrasena.RectColor = Color.FromArgb(39, 53, 72);
+            txtContrasena.RectColor = Color.FromArgb(75, 92, 108);
             txtContrasena.ShowText = false;
-            txtContrasena.Size = new Size(343, 29);
+            txtContrasena.Size = new Size(343, 37);
             txtContrasena.TabIndex = 15;
             txtContrasena.TextAlignment = ContentAlignment.MiddleLeft;
             txtContrasena.Watermark = "Contraseña";
+            txtContrasena.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
             // txtUsuario
             // 
             txtUsuario.BackColor = Color.Transparent;
-            txtUsuario.FillColor = Color.FromArgb(41, 53, 72);
-            txtUsuario.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsuario.ForeColor = Color.White;
-            txtUsuario.Location = new Point(52, 206);
+            txtUsuario.FillColor = Color.FromArgb(75, 92, 108);
+            txtUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUsuario.ForeColor = Color.FromArgb(235, 239, 240);
+            txtUsuario.Location = new Point(52, 195);
             txtUsuario.Margin = new Padding(4, 5, 4, 5);
             txtUsuario.MaxLength = 255;
             txtUsuario.Minimum = 0D;
@@ -159,19 +163,20 @@
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Padding = new Padding(5);
             txtUsuario.Radius = 12;
-            txtUsuario.RectColor = Color.FromArgb(39, 53, 72);
+            txtUsuario.RectColor = Color.FromArgb(75, 92, 108);
             txtUsuario.ShowText = false;
-            txtUsuario.Size = new Size(343, 29);
+            txtUsuario.Size = new Size(343, 37);
             txtUsuario.TabIndex = 14;
             txtUsuario.TextAlignment = ContentAlignment.MiddleLeft;
             txtUsuario.Watermark = "Usuario";
+            txtUsuario.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
             // lblContraseña
             // 
             lblContraseña.AutoSize = true;
             lblContraseña.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblContraseña.ForeColor = Color.FromArgb(147, 162, 183);
-            lblContraseña.Location = new Point(50, 245);
+            lblContraseña.ForeColor = Color.FromArgb(75, 92, 108);
+            lblContraseña.Location = new Point(52, 248);
             lblContraseña.Name = "lblContraseña";
             lblContraseña.Size = new Size(96, 21);
             lblContraseña.TabIndex = 5;
@@ -181,8 +186,8 @@
             // 
             lblUsuario.AutoSize = true;
             lblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblUsuario.ForeColor = Color.FromArgb(147, 162, 183);
-            lblUsuario.Location = new Point(52, 180);
+            lblUsuario.ForeColor = Color.FromArgb(75, 92, 108);
+            lblUsuario.Location = new Point(52, 169);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(69, 21);
             lblUsuario.TabIndex = 4;
@@ -191,11 +196,11 @@
             // lblInicioSesion
             // 
             lblInicioSesion.AutoSize = true;
-            lblInicioSesion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblInicioSesion.ForeColor = Color.FromArgb(147, 162, 183);
-            lblInicioSesion.Location = new Point(52, 95);
+            lblInicioSesion.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblInicioSesion.ForeColor = Color.FromArgb(75, 92, 108);
+            lblInicioSesion.Location = new Point(52, 76);
             lblInicioSesion.Name = "lblInicioSesion";
-            lblInicioSesion.Size = new Size(154, 21);
+            lblInicioSesion.Size = new Size(199, 30);
             lblInicioSesion.TabIndex = 0;
             lblInicioSesion.Text = "Accede a tu cuenta";
             // 
