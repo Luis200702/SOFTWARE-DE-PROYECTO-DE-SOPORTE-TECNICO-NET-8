@@ -89,13 +89,13 @@
             cmbTecnico.BackColor = Color.Transparent;
             cmbTecnico.DataSource = null;
             cmbTecnico.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbTecnico.FillColor = Color.FromArgb(41, 53, 72);
+            cmbTecnico.FillColor = Color.FromArgb(75, 92, 108);
             cmbTecnico.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbTecnico.ForeColor = Color.White;
             cmbTecnico.FormattingEnabled = true;
             cmbTecnico.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbTecnico.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbTecnico.Location = new Point(29, 282);
+            cmbTecnico.Location = new Point(29, 271);
             cmbTecnico.Margin = new Padding(4, 5, 4, 5);
             cmbTecnico.MinimumSize = new Size(63, 0);
             cmbTecnico.Name = "cmbTecnico";
@@ -110,10 +110,10 @@
             // 
             // txtObservacion
             // 
-            txtObservacion.FillColor = Color.FromArgb(41, 53, 72);
+            txtObservacion.FillColor = Color.FromArgb(75, 92, 108);
             txtObservacion.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtObservacion.ForeColor = Color.White;
-            txtObservacion.Location = new Point(360, 407);
+            txtObservacion.Location = new Point(361, 438);
             txtObservacion.Margin = new Padding(4, 5, 4, 5);
             txtObservacion.MaxLength = 255;
             txtObservacion.Minimum = 0D;
@@ -123,19 +123,21 @@
             txtObservacion.Radius = 12;
             txtObservacion.RectColor = Color.FromArgb(39, 53, 72);
             txtObservacion.ShowText = false;
-            txtObservacion.Size = new Size(300, 77);
+            txtObservacion.Size = new Size(300, 46);
             txtObservacion.TabIndex = 38;
             txtObservacion.TextAlignment = ContentAlignment.MiddleLeft;
             txtObservacion.Watermark = "Nueva observacion";
+            txtObservacion.WatermarkActiveColor = Color.WhiteSmoke;
+            txtObservacion.WatermarkColor = Color.WhiteSmoke;
             // 
             // btnDiagnostico
             // 
-            btnDiagnostico.FillColor = Color.FromArgb(22, 35, 52);
+            btnDiagnostico.FillColor = Color.FromArgb(75, 92, 108);
             btnDiagnostico.FillHoverColor = Color.Transparent;
             btnDiagnostico.FillPressColor = Color.FromArgb(0, 150, 137);
             btnDiagnostico.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnDiagnostico.Font = new Font("Microsoft Sans Serif", 12F);
-            btnDiagnostico.Location = new Point(171, 200);
+            btnDiagnostico.Location = new Point(171, 191);
             btnDiagnostico.MinimumSize = new Size(1, 1);
             btnDiagnostico.Name = "btnDiagnostico";
             btnDiagnostico.Radius = 12;
@@ -152,12 +154,12 @@
             // 
             // btnRecibido
             // 
-            btnRecibido.FillColor = Color.FromArgb(22, 35, 52);
+            btnRecibido.FillColor = Color.FromArgb(75, 92, 108);
             btnRecibido.FillHoverColor = Color.Transparent;
             btnRecibido.FillPressColor = Color.FromArgb(0, 150, 137);
             btnRecibido.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnRecibido.Font = new Font("Microsoft Sans Serif", 12F);
-            btnRecibido.Location = new Point(29, 200);
+            btnRecibido.Location = new Point(29, 191);
             btnRecibido.MinimumSize = new Size(1, 1);
             btnRecibido.Name = "btnRecibido";
             btnRecibido.Radius = 12;
@@ -175,10 +177,10 @@
             // lblNumeroOrden
             // 
             lblNumeroOrden.AutoSize = true;
-            lblNumeroOrden.Font = new Font("Segoe UI", 9.75F);
+            lblNumeroOrden.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic);
             lblNumeroOrden.Location = new Point(41, 93);
             lblNumeroOrden.Name = "lblNumeroOrden";
-            lblNumeroOrden.Size = new Size(14, 17);
+            lblNumeroOrden.Size = new Size(15, 17);
             lblNumeroOrden.TabIndex = 31;
             lblNumeroOrden.Text = "x";
             // 
@@ -195,7 +197,7 @@
             // lblCliente
             // 
             lblCliente.AutoSize = true;
-            lblCliente.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCliente.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic);
             lblCliente.Location = new Point(41, 118);
             lblCliente.Name = "lblCliente";
             lblCliente.Size = new Size(15, 17);
@@ -205,21 +207,21 @@
             // lblDispositivo
             // 
             lblDispositivo.AutoSize = true;
-            lblDispositivo.Font = new Font("Segoe UI", 9.75F);
+            lblDispositivo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic);
             lblDispositivo.Location = new Point(41, 142);
             lblDispositivo.Name = "lblDispositivo";
-            lblDispositivo.Size = new Size(14, 17);
+            lblDispositivo.Size = new Size(15, 17);
             lblDispositivo.TabIndex = 45;
             lblDispositivo.Text = "x";
             // 
             // btnListo
             // 
-            btnListo.FillColor = Color.FromArgb(22, 35, 52);
+            btnListo.FillColor = Color.FromArgb(75, 92, 108);
             btnListo.FillHoverColor = Color.Transparent;
             btnListo.FillPressColor = Color.FromArgb(0, 150, 137);
             btnListo.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnListo.Font = new Font("Microsoft Sans Serif", 12F);
-            btnListo.Location = new Point(451, 200);
+            btnListo.Location = new Point(451, 191);
             btnListo.MinimumSize = new Size(1, 1);
             btnListo.Name = "btnListo";
             btnListo.Radius = 12;
@@ -236,12 +238,12 @@
             // 
             // btnReparacion
             // 
-            btnReparacion.FillColor = Color.FromArgb(22, 35, 52);
+            btnReparacion.FillColor = Color.FromArgb(75, 92, 108);
             btnReparacion.FillHoverColor = Color.Transparent;
             btnReparacion.FillPressColor = Color.FromArgb(0, 150, 137);
             btnReparacion.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnReparacion.Font = new Font("Microsoft Sans Serif", 12F);
-            btnReparacion.Location = new Point(309, 200);
+            btnReparacion.Location = new Point(309, 191);
             btnReparacion.MinimumSize = new Size(1, 1);
             btnReparacion.Name = "btnReparacion";
             btnReparacion.Radius = 12;
@@ -258,12 +260,12 @@
             // 
             // btnEntregado
             // 
-            btnEntregado.FillColor = Color.FromArgb(22, 35, 52);
+            btnEntregado.FillColor = Color.FromArgb(75, 92, 108);
             btnEntregado.FillHoverColor = Color.Transparent;
             btnEntregado.FillPressColor = Color.FromArgb(0, 150, 137);
             btnEntregado.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnEntregado.Font = new Font("Microsoft Sans Serif", 12F);
-            btnEntregado.Location = new Point(593, 200);
+            btnEntregado.Location = new Point(593, 191);
             btnEntregado.MinimumSize = new Size(1, 1);
             btnEntregado.Name = "btnEntregado";
             btnEntregado.Radius = 12;
@@ -282,7 +284,7 @@
             // 
             lblActualizarEstado.AutoSize = true;
             lblActualizarEstado.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblActualizarEstado.Location = new Point(29, 178);
+            lblActualizarEstado.Location = new Point(29, 169);
             lblActualizarEstado.Name = "lblActualizarEstado";
             lblActualizarEstado.Size = new Size(141, 17);
             lblActualizarEstado.TabIndex = 49;
@@ -292,7 +294,7 @@
             // 
             lblTecnicoAsignado.AutoSize = true;
             lblTecnicoAsignado.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTecnicoAsignado.Location = new Point(29, 260);
+            lblTecnicoAsignado.Location = new Point(29, 248);
             lblTecnicoAsignado.Name = "lblTecnicoAsignado";
             lblTecnicoAsignado.Size = new Size(135, 17);
             lblTecnicoAsignado.TabIndex = 50;
@@ -303,14 +305,15 @@
             lstRepuestos.Font = new Font("Microsoft Sans Serif", 12F);
             lstRepuestos.HoverColor = Color.FromArgb(155, 200, 255);
             lstRepuestos.ItemSelectForeColor = Color.White;
-            lstRepuestos.Location = new Point(29, 365);
+            lstRepuestos.Location = new Point(29, 349);
             lstRepuestos.Margin = new Padding(4, 5, 4, 5);
             lstRepuestos.MinimumSize = new Size(1, 1);
             lstRepuestos.Name = "lstRepuestos";
             lstRepuestos.Padding = new Padding(6);
             lstRepuestos.Radius = 12;
+            lstRepuestos.RectColor = Color.FromArgb(39, 53, 72);
             lstRepuestos.ShowText = false;
-            lstRepuestos.Size = new Size(300, 34);
+            lstRepuestos.Size = new Size(300, 79);
             lstRepuestos.TabIndex = 51;
             lstRepuestos.Text = null;
             // 
@@ -318,7 +321,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(29, 343);
+            label2.Location = new Point(29, 327);
             label2.Name = "label2";
             label2.Size = new Size(159, 17);
             label2.TabIndex = 52;
@@ -326,12 +329,12 @@
             // 
             // btnAgregarRepuesto
             // 
-            btnAgregarRepuesto.FillColor = Color.FromArgb(22, 35, 52);
+            btnAgregarRepuesto.FillColor = Color.FromArgb(75, 92, 108);
             btnAgregarRepuesto.FillHoverColor = Color.Transparent;
             btnAgregarRepuesto.FillPressColor = Color.FromArgb(0, 150, 137);
             btnAgregarRepuesto.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnAgregarRepuesto.Font = new Font("Microsoft Sans Serif", 12F);
-            btnAgregarRepuesto.Location = new Point(257, 407);
+            btnAgregarRepuesto.Location = new Point(257, 438);
             btnAgregarRepuesto.MinimumSize = new Size(1, 1);
             btnAgregarRepuesto.Name = "btnAgregarRepuesto";
             btnAgregarRepuesto.Radius = 12;
@@ -351,13 +354,13 @@
             cmbRepuestos.BackColor = Color.Transparent;
             cmbRepuestos.DataSource = null;
             cmbRepuestos.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbRepuestos.FillColor = Color.FromArgb(41, 53, 72);
+            cmbRepuestos.FillColor = Color.FromArgb(75, 92, 108);
             cmbRepuestos.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbRepuestos.ForeColor = Color.White;
             cmbRepuestos.FormattingEnabled = true;
             cmbRepuestos.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbRepuestos.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbRepuestos.Location = new Point(29, 409);
+            cmbRepuestos.Location = new Point(29, 438);
             cmbRepuestos.Margin = new Padding(4, 5, 4, 5);
             cmbRepuestos.MinimumSize = new Size(63, 0);
             cmbRepuestos.Name = "cmbRepuestos";
@@ -374,36 +377,38 @@
             // 
             lblObservaciones.AutoSize = true;
             lblObservaciones.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblObservaciones.Location = new Point(360, 343);
+            lblObservaciones.Location = new Point(366, 327);
             lblObservaciones.Name = "lblObservaciones";
             lblObservaciones.Size = new Size(98, 17);
             lblObservaciones.TabIndex = 55;
             lblObservaciones.Text = "Observaciones";
+            lblObservaciones.Click += lblObservaciones_Click;
             // 
             // lstObservaciones
             // 
             lstObservaciones.Font = new Font("Microsoft Sans Serif", 12F);
             lstObservaciones.HoverColor = Color.FromArgb(155, 200, 255);
             lstObservaciones.ItemSelectForeColor = Color.White;
-            lstObservaciones.Location = new Point(360, 365);
+            lstObservaciones.Location = new Point(361, 349);
             lstObservaciones.Margin = new Padding(4, 5, 4, 5);
             lstObservaciones.MinimumSize = new Size(1, 1);
             lstObservaciones.Name = "lstObservaciones";
             lstObservaciones.Padding = new Padding(6);
             lstObservaciones.Radius = 12;
+            lstObservaciones.RectColor = Color.FromArgb(39, 53, 72);
             lstObservaciones.ShowText = false;
-            lstObservaciones.Size = new Size(300, 34);
+            lstObservaciones.Size = new Size(300, 79);
             lstObservaciones.TabIndex = 56;
             lstObservaciones.Text = null;
             // 
             // btnAgregarObservacion
             // 
-            btnAgregarObservacion.FillColor = Color.FromArgb(22, 35, 52);
+            btnAgregarObservacion.FillColor = Color.FromArgb(75, 92, 108);
             btnAgregarObservacion.FillHoverColor = Color.Transparent;
             btnAgregarObservacion.FillPressColor = Color.FromArgb(0, 150, 137);
             btnAgregarObservacion.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnAgregarObservacion.Font = new Font("Microsoft Sans Serif", 12F);
-            btnAgregarObservacion.Location = new Point(668, 425);
+            btnAgregarObservacion.Location = new Point(668, 438);
             btnAgregarObservacion.MinimumSize = new Size(1, 1);
             btnAgregarObservacion.Name = "btnAgregarObservacion";
             btnAgregarObservacion.Radius = 12;
@@ -422,6 +427,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(198, 199, 189);
             ClientSize = new Size(752, 607);
             Controls.Add(btnAgregarObservacion);
             Controls.Add(lstObservaciones);
@@ -447,7 +453,7 @@
             Controls.Add(lblEditar);
             Name = "frmDetallesOrden";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "frmDetallesOrden";
+            Text = "Detalles de orden";
             Load += frmDetallesOrden_Load;
             ResumeLayout(false);
             PerformLayout();

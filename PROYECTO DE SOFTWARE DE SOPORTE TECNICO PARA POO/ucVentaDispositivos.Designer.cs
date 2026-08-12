@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
@@ -61,7 +61,7 @@
             // 
             pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
-            pnlSuperior.BackColor = Color.FromArgb(30, 41, 59);
+            pnlSuperior.BackColor = Color.FromArgb(235, 239, 240);
             pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
             pnlSuperior.Controls.Add(pictureBox1);
             pnlSuperior.Controls.Add(lblTitulo);
@@ -84,7 +84,7 @@
             // 
             lblTitulo.Dock = DockStyle.Left;
             lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.White;
+            lblTitulo.ForeColor = Color.Black;
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(313, 57);
@@ -95,11 +95,12 @@
             // pnlInformacion
             // 
             pnlInformacion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlInformacion.BackColor = Color.FromArgb(30, 41, 59);
+            pnlInformacion.BackColor = Color.FromArgb(235, 239, 240);
             pnlInformacion.Controls.Add(lblVentas);
             pnlInformacion.Controls.Add(label1);
             pnlInformacion.Controls.Add(btnNuevaVenta);
             pnlInformacion.Controls.Add(txtBuscar);
+            pnlInformacion.ForeColor = SystemColors.ControlLight;
             pnlInformacion.Location = new Point(0, 59);
             pnlInformacion.Name = "pnlInformacion";
             pnlInformacion.Size = new Size(1125, 59);
@@ -108,7 +109,7 @@
             // lblVentas
             // 
             lblVentas.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblVentas.ForeColor = Color.White;
+            lblVentas.ForeColor = Color.Black;
             lblVentas.Location = new Point(877, 13);
             lblVentas.Name = "lblVentas";
             lblVentas.Size = new Size(27, 31);
@@ -119,7 +120,7 @@
             // label1
             // 
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
+            label1.ForeColor = Color.Black;
             label1.Location = new Point(901, 14);
             label1.Name = "label1";
             label1.Size = new Size(72, 31);
@@ -144,7 +145,7 @@
             // 
             // txtBuscar
             // 
-            txtBuscar.FillColor = Color.FromArgb(41, 53, 72);
+            txtBuscar.FillColor = Color.FromArgb(244, 244, 244);
             txtBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtBuscar.ForeColor = Color.White;
             txtBuscar.Icon = Properties.Resources.TablerSearch;
@@ -168,33 +169,33 @@
             dgvVentas.AllowUserToDeleteRows = false;
             dgvVentas.AllowUserToResizeColumns = false;
             dgvVentas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dgvVentas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.BackColor = Color.White;
+            dataGridViewCellStyle11.ForeColor = Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = Color.White;
+            dataGridViewCellStyle11.SelectionForeColor = Color.Black;
+            dgvVentas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvVentas.BackgroundColor = Color.White;
             dgvVentas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = SystemColors.Control;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            dgvVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             dgvVentas.ColumnHeadersHeight = 40;
             dgvVentas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvVentas.Columns.AddRange(new DataGridViewColumn[] { Venta, Dispositivo, Estado, Precio, Comprador, Pago, Garantia, Fecha, btnComprobante });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvVentas.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = Color.White;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle13.ForeColor = Color.Black;
+            dataGridViewCellStyle13.SelectionBackColor = Color.White;
+            dataGridViewCellStyle13.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
+            dgvVentas.DefaultCellStyle = dataGridViewCellStyle13;
             dgvVentas.EnableHeadersVisualStyles = false;
             dgvVentas.GridColor = SystemColors.ActiveCaption;
             dgvVentas.Location = new Point(0, 118);
@@ -202,20 +203,20 @@
             dgvVentas.MinimumSize = new Size(1125, 641);
             dgvVentas.MultiSelect = false;
             dgvVentas.Name = "dgvVentas";
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvVentas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.White;
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle14.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle14.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            dgvVentas.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             dgvVentas.RowHeadersVisible = false;
-            dataGridViewCellStyle5.BackColor = Color.White;
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
-            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.BackColor = Color.White;
+            dataGridViewCellStyle15.ForeColor = Color.Black;
+            dataGridViewCellStyle15.SelectionBackColor = Color.White;
+            dataGridViewCellStyle15.SelectionForeColor = Color.Black;
+            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle15;
             dgvVentas.RowTemplate.Height = 30;
             dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvVentas.Size = new Size(1125, 641);

@@ -55,7 +55,7 @@
             // 
             // txtContrasena
             // 
-            txtContrasena.FillColor = Color.FromArgb(41, 53, 72);
+            txtContrasena.FillColor = Color.FromArgb(75, 92, 108);
             txtContrasena.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtContrasena.ForeColor = Color.White;
             txtContrasena.Location = new Point(94, 244);
@@ -110,7 +110,7 @@
             cmbSucursal.BackColor = Color.Transparent;
             cmbSucursal.DataSource = null;
             cmbSucursal.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbSucursal.FillColor = Color.FromArgb(41, 53, 72);
+            cmbSucursal.FillColor = Color.FromArgb(75, 92, 108);
             cmbSucursal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbSucursal.ForeColor = Color.White;
             cmbSucursal.FormattingEnabled = true;
@@ -131,7 +131,7 @@
             // 
             // txtUsuario
             // 
-            txtUsuario.FillColor = Color.FromArgb(41, 53, 72);
+            txtUsuario.FillColor = Color.FromArgb(75, 92, 108);
             txtUsuario.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtUsuario.ForeColor = Color.White;
             txtUsuario.Location = new Point(94, 173);
@@ -151,7 +151,7 @@
             // 
             // txtNombre
             // 
-            txtNombre.FillColor = Color.FromArgb(41, 53, 72);
+            txtNombre.FillColor = Color.FromArgb(75, 92, 108);
             txtNombre.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNombre.ForeColor = Color.White;
             txtNombre.Location = new Point(94, 99);
@@ -171,7 +171,7 @@
             // 
             // btnTecnico
             // 
-            btnTecnico.FillColor = Color.FromArgb(22, 35, 52);
+            btnTecnico.FillColor = Color.FromArgb(75, 92, 108);
             btnTecnico.FillHoverColor = Color.Transparent;
             btnTecnico.FillPressColor = Color.FromArgb(0, 150, 137);
             btnTecnico.FillSelectedColor = Color.FromArgb(0, 150, 137);
@@ -193,7 +193,7 @@
             // 
             // btnAdministrador
             // 
-            btnAdministrador.FillColor = Color.FromArgb(22, 35, 52);
+            btnAdministrador.FillColor = Color.FromArgb(75, 92, 108);
             btnAdministrador.FillHoverColor = Color.Transparent;
             btnAdministrador.FillPressColor = Color.FromArgb(0, 150, 137);
             btnAdministrador.FillSelectedColor = Color.FromArgb(0, 150, 137);
@@ -263,6 +263,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(198, 199, 189);
             ClientSize = new Size(488, 568);
             Controls.Add(label1);
             Controls.Add(txtContrasena);
