@@ -232,7 +232,7 @@
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.BackColor = Color.FromArgb(0, 150, 137);
             pictureBox2.Image = Properties.Resources.MaterialSymbolsSaveOutline;
-            pictureBox2.Location = new Point(906, 18);
+            pictureBox2.Location = new Point(892, 18);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(30, 27);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -244,7 +244,7 @@
             pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackColor = Color.FromArgb(0, 150, 137);
             pictureBox3.Image = Properties.Resources.TablerX;
-            pictureBox3.Location = new Point(740, 18);
+            pictureBox3.Location = new Point(731, 18);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(21, 27);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -260,7 +260,7 @@
             btnGuardarRegistro.FillPressColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnGuardarRegistro.Location = new Point(891, 8);
+            btnGuardarRegistro.Location = new Point(882, 8);
             btnGuardarRegistro.MinimumSize = new Size(1, 1);
             btnGuardarRegistro.Name = "btnGuardarRegistro";
             btnGuardarRegistro.Radius = 12;
@@ -284,7 +284,7 @@
             btnCancelar.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCancelar.ForeColor = Color.FromArgb(225, 29, 72);
-            btnCancelar.Location = new Point(724, 8);
+            btnCancelar.Location = new Point(715, 8);
             btnCancelar.MinimumSize = new Size(1, 1);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Radius = 12;

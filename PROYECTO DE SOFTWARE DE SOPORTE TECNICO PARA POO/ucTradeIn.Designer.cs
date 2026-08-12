@@ -153,7 +153,7 @@
             btnGuardarRegistro.FillHoverColor = Color.FromArgb(80, 160, 255);
             btnGuardarRegistro.FillPressColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnGuardarRegistro.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGuardarRegistro.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardarRegistro.Location = new Point(800, 476);
             btnGuardarRegistro.MinimumSize = new Size(1, 1);
             btnGuardarRegistro.Name = "btnGuardarRegistro";
@@ -162,7 +162,7 @@
             btnGuardarRegistro.RectHoverColor = Color.FromArgb(80, 160, 255);
             btnGuardarRegistro.RectPressColor = Color.FromArgb(0, 150, 137);
             btnGuardarRegistro.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnGuardarRegistro.Size = new Size(241, 51);
+            btnGuardarRegistro.Size = new Size(241, 50);
             btnGuardarRegistro.TabIndex = 15;
             btnGuardarRegistro.Text = "Registrar Trade-In";
             btnGuardarRegistro.TipsFont = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -191,7 +191,7 @@
             // 
             label14.BackColor = Color.Transparent;
             label14.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label14.ForeColor = Color.White;
+            label14.ForeColor = Color.FromArgb(235, 239, 240);
             label14.Location = new Point(16, 10);
             label14.Name = "label14";
             label14.Size = new Size(322, 54);
@@ -250,7 +250,7 @@
             lblDiferencia.TextAlignment = ContentAlignment.MiddleLeft;
             lblDiferencia.Watermark = "$ 0.00";
             lblDiferencia.WatermarkActiveColor = Color.DimGray;
-            lblDiferencia.WatermarkColor = Color.Lime;
+            lblDiferencia.WatermarkColor = Color.LimeGreen;
             // 
             // lblValorTradeIn
             // 
@@ -282,7 +282,7 @@
             // 
             // airSeparator5
             // 
-            airSeparator5.BackColor = Color.FromArgb(198, 199, 189);
+            airSeparator5.BackColor = Color.FromArgb(235, 239, 240);
             airSeparator5.Customization = "";
             airSeparator5.Font = new Font("Verdana", 8F);
             airSeparator5.Image = null;
@@ -327,7 +327,7 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.White;
+            label10.ForeColor = Color.FromArgb(235, 239, 240);
             label10.Location = new Point(16, 230);
             label10.Name = "label10";
             label10.Size = new Size(150, 21);
@@ -339,7 +339,7 @@
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label9.ForeColor = Color.White;
+            label9.ForeColor = Color.FromArgb(235, 239, 240);
             label9.Location = new Point(19, 75);
             label9.Name = "label9";
             label9.Size = new Size(196, 21);
@@ -351,7 +351,7 @@
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label8.ForeColor = Color.White;
+            label8.ForeColor = Color.FromArgb(235, 239, 240);
             label8.Location = new Point(19, 134);
             label8.Name = "label8";
             label8.Size = new Size(143, 21);
@@ -360,7 +360,7 @@
             // 
             // airSeparator4
             // 
-            airSeparator4.BackColor = Color.FromArgb(198, 199, 189);
+            airSeparator4.BackColor = Color.FromArgb(235, 239, 240);
             airSeparator4.Customization = "";
             airSeparator4.Font = new Font("Verdana", 8F);
             airSeparator4.Image = null;
@@ -377,7 +377,7 @@
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label7.ForeColor = Color.White;
+            label7.ForeColor = Color.FromArgb(235, 239, 240);
             label7.Location = new Point(19, 13);
             label7.Name = "label7";
             label7.Size = new Size(153, 21);
