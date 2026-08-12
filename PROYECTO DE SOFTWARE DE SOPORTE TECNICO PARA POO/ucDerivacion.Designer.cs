@@ -93,9 +93,9 @@
             panel2.BackColor = Color.FromArgb(15, 23, 42);
             panel2.Controls.Add(uiButton3);
             panel2.Controls.Add(label3);
-            panel2.Location = new Point(1047, 259);
+            panel2.Location = new Point(602, 118);
             panel2.Name = "panel2";
-            panel2.Size = new Size(404, 75);
+            panel2.Size = new Size(523, 75);
             panel2.TabIndex = 26;
             // 
             // uiButton3
@@ -144,9 +144,9 @@
             pnlDetallesDerivaciones.Controls.Add(lblcodigoDetalle);
             pnlDetallesDerivaciones.Controls.Add(lblestadoDetalle);
             pnlDetallesDerivaciones.ForeColor = Color.FromArgb(15, 23, 42);
-            pnlDetallesDerivaciones.Location = new Point(982, 586);
+            pnlDetallesDerivaciones.Location = new Point(602, 192);
             pnlDetallesDerivaciones.Name = "pnlDetallesDerivaciones";
-            pnlDetallesDerivaciones.Size = new Size(404, 602);
+            pnlDetallesDerivaciones.Size = new Size(523, 602);
             pnlDetallesDerivaciones.TabIndex = 27;
             pnlDetallesDerivaciones.Visible = false;
             // 
@@ -157,7 +157,7 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Controls.Add(btnRechazarDerivacion, 1, 0);
             tableLayoutPanel2.Controls.Add(btnAceptarDerivacion, 0, 0);
-            tableLayoutPanel2.Location = new Point(29, 448);
+            tableLayoutPanel2.Location = new Point(95, 448);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
@@ -217,7 +217,7 @@
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             textBox1.ForeColor = Color.White;
-            textBox1.Location = new Point(48, 302);
+            textBox1.Location = new Point(108, 302);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Observaciones...";
@@ -240,7 +240,7 @@
             panel3.BackColor = Color.FromArgb(26, 35, 46);
             panel3.Location = new Point(-2, 251);
             panel3.Name = "panel3";
-            panel3.Size = new Size(407, 6);
+            panel3.Size = new Size(527, 10);
             panel3.TabIndex = 32;
             // 
             // tableLayoutPanel1
@@ -508,12 +508,13 @@
             // 
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(787, 371);
+            label1.Location = new Point(415, 492);
             label1.Name = "label1";
             label1.Size = new Size(120, 28);
             label1.TabIndex = 39;
             label1.Text = "Selecciona una derivación";
             label1.TextAlign = ContentAlignment.MiddleCenter;
+            label1.Visible = false;
             // 
             // ucDerivacion
             // 
