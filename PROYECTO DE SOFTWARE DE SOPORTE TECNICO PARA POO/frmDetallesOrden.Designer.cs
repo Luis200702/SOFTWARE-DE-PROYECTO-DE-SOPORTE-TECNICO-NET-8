@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnCancelar = new Sunny.UI.UIButton();
-            btnMarcarListo = new Sunny.UI.UIButton();
+            btnListoEntrega = new Sunny.UI.UIButton();
+            btnDerivar = new Sunny.UI.UIButton();
             cmbTecnico = new Sunny.UI.UIComboBox();
             txtUsuario = new Sunny.UI.UITextBox();
             btnDiagnostico = new Sunny.UI.UIButton();
@@ -52,36 +52,37 @@
             btnAgregarObservacion = new Sunny.UI.UIButton();
             SuspendLayout();
             // 
-            // btnCancelar
+            // btnListoEntrega
             // 
-            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCancelar.FillColor = Color.FromArgb(0, 150, 137);
-            btnCancelar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCancelar.Location = new Point(186, 548);
-            btnCancelar.MinimumSize = new Size(1, 1);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Radius = 3;
-            btnCancelar.RectColor = Color.FromArgb(0, 150, 137);
-            btnCancelar.Size = new Size(117, 30);
-            btnCancelar.TabIndex = 41;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnListoEntrega.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnListoEntrega.FillColor = Color.FromArgb(0, 150, 137);
+            btnListoEntrega.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnListoEntrega.Location = new Point(171, 548);
+            btnListoEntrega.MinimumSize = new Size(1, 1);
+            btnListoEntrega.Name = "btnListoEntrega";
+            btnListoEntrega.Radius = 3;
+            btnListoEntrega.RectColor = Color.FromArgb(0, 150, 137);
+            btnListoEntrega.Size = new Size(175, 30);
+            btnListoEntrega.TabIndex = 41;
+            btnListoEntrega.Text = "Actualizar estado";
+            btnListoEntrega.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnListoEntrega.Click += btnListoEntrega_Click;
             // 
-            // btnMarcarListo
+            // btnDerivar
             // 
-            btnMarcarListo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnMarcarListo.FillColor = Color.FromArgb(0, 150, 137);
-            btnMarcarListo.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnMarcarListo.Location = new Point(319, 548);
-            btnMarcarListo.MinimumSize = new Size(1, 1);
-            btnMarcarListo.Name = "btnMarcarListo";
-            btnMarcarListo.Radius = 3;
-            btnMarcarListo.RectColor = Color.FromArgb(0, 150, 137);
-            btnMarcarListo.Size = new Size(279, 30);
-            btnMarcarListo.TabIndex = 40;
-            btnMarcarListo.Text = "Guardar Cambios";
-            btnMarcarListo.TipsFont = new Font("Microsoft Sans Serif", 9F);
-            btnMarcarListo.Click += btnMarcarListo_Click;
+            btnDerivar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnDerivar.FillColor = Color.FromArgb(0, 150, 137);
+            btnDerivar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDerivar.Location = new Point(372, 548);
+            btnDerivar.MinimumSize = new Size(1, 1);
+            btnDerivar.Name = "btnDerivar";
+            btnDerivar.Radius = 3;
+            btnDerivar.RectColor = Color.FromArgb(0, 150, 137);
+            btnDerivar.Size = new Size(181, 30);
+            btnDerivar.TabIndex = 40;
+            btnDerivar.Text = "Derivar a otro sucursal";
+            btnDerivar.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnDerivar.Click += btnMarcarListo_Click;
             // 
             // cmbTecnico
             // 
@@ -435,8 +436,8 @@
             Controls.Add(btnReparacion);
             Controls.Add(lblDispositivo);
             Controls.Add(lblCliente);
-            Controls.Add(btnCancelar);
-            Controls.Add(btnMarcarListo);
+            Controls.Add(btnListoEntrega);
+            Controls.Add(btnDerivar);
             Controls.Add(cmbTecnico);
             Controls.Add(txtUsuario);
             Controls.Add(btnDiagnostico);
@@ -452,8 +453,8 @@
         }
 
         #endregion
-        private Sunny.UI.UIButton btnCancelar;
-        private Sunny.UI.UIButton btnMarcarListo;
+        private Sunny.UI.UIButton btnListoEntrega;
+        private Sunny.UI.UIButton btnDerivar;
         private Sunny.UI.UIComboBox cmbTecnico;
         private Sunny.UI.UITextBox txtUsuario;
         private Sunny.UI.UIButton btnDiagnostico;

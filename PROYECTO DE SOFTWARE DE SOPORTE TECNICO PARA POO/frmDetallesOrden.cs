@@ -45,7 +45,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarTecnicos();
             cmbTecnico.Text = tecnicoActual;
 
-            CargarRepuestosStock(); // <-- Lo movemos aquí
+            CargarRepuestosStock(); 
+            CargarRepuestosGuardados(); 
 
             ActualizarDiseñoBotonesEstado(estadoActual);
 
@@ -150,6 +151,44 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             estadoSeleccionado = "Entregado";
         }
 
+        private void CargarRepuestosGuardados()
+        {
+            var db = new Conexion_Base_de_Datos();
+            if (db.abrirConexion())
+            {
+                try
+                {
+                    // Usamos tu tabla DetallesOrden para traer lo que ya se había usado
+                    string query = @"
+                SELECT r.NombreRepuesto 
+                FROM DetallesOrden d
+                INNER JOIN Repuestos r ON d.IdRepuesto = r.IdRepuesto
+                INNER JOIN ordenes o ON d.IdOrden = o.id
+                WHERE o.numero_orden = @orden";
+
+                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    {
+                        cmd.Parameters.AddWithValue("@orden", ordenActual);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                lstRepuestos.Items.Add("• " + reader["NombreRepuesto"].ToString());
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar repuestos guardados: " + ex.Message);
+                }
+                finally
+                {
+                    db.cerrarConexion();
+                }
+            }
+        }
+
         private void CargarRepuestosStock()
         {
             var db = new Conexion_Base_de_Datos();
@@ -190,12 +229,63 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnMarcarListo_Click(object sender, EventArgs e)
         {
+            int idOrdenReal = 0;
+            string sucursalOrigen = "";
+
             var db = new Conexion_Base_de_Datos();
             if (db.abrirConexion())
             {
                 try
                 {
-                    // Hacemos el UPDATE de la tabla ordenes
+                    // Buscamos el ID numérico y la sucursal actual
+                    string query = "SELECT id, sucursal FROM ordenes WHERE numero_orden = @orden";
+                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    {
+                        cmd.Parameters.AddWithValue("@orden", ordenActual);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                idOrdenReal = Convert.ToInt32(reader["id"]);
+                                sucursalOrigen = reader["sucursal"].ToString();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al consultar datos para la derivación: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                finally
+                {
+                    db.cerrarConexion();
+                }
+            }
+
+            // Si encontramos la orden, abrimos el modal de derivación
+            if (idOrdenReal > 0)
+            {
+                frmSeguimientoDerivacion modalDerivacion = new frmSeguimientoDerivacion(idOrdenReal, sucursalOrigen);
+                modalDerivacion.ShowDialog();
+
+                // Cerramos los detalles automáticamente porque el equipo ya no está en esta sucursal
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo identificar la orden.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnListoEntrega_Click(object sender, EventArgs e)
+        {
+            var db = new Conexion_Base_de_Datos();
+            if (db.abrirConexion())
+            {
+                try
+                {
+                    // 1. Actualizamos la orden con el estado seleccionado en los botones superiores y el técnico
                     string query = @"
                 UPDATE ordenes 
                 SET estado = @estado, 
@@ -204,37 +294,41 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
-                        // Le pasamos la variable que memorizó el estado, el ID del combobox y la orden
                         cmd.Parameters.AddWithValue("@estado", estadoSeleccionado);
                         cmd.Parameters.AddWithValue("@tecnico", cmbTecnico.SelectedValue);
                         cmd.Parameters.AddWithValue("@orden", ordenActual);
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
 
-                        // ... código anterior del botón verde (el primer UPDATE de la orden)
-
-                        // ... (código anterior donde haces el UPDATE del estado de la orden)
-
                         if (filasAfectadas > 0)
                         {
-                            // Recorremos la lista de repuestos que el técnico agregó
+                            // 2. Si se agregaron repuestos, descontamos el stock y guardamos el detalle
                             foreach (int idRepuesto in repuestosUsadosIds)
                             {
-                                // Actualizamos StockActual en la tabla InventarioSucursal
-                                string queryStock = @"
-            UPDATE InventarioSucursal 
-            SET StockActual = StockActual - 1 
-            WHERE IdRepuesto = @id";
-
+                                // A) Descontar el stock
+                                string queryStock = "UPDATE InventarioSucursal SET StockActual = StockActual - 1 WHERE IdRepuesto = @id";
                                 using (SqlCommand cmdStock = new SqlCommand(queryStock, db.oCon))
                                 {
                                     cmdStock.Parameters.AddWithValue("@id", idRepuesto);
                                     cmdStock.ExecuteNonQuery();
                                 }
-                            }
 
-                            MessageBox.Show("¡La orden se actualizó y el stock fue descontado en matriz!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Close();
+                                // B) Registrar en DetallesOrden (asumiendo cantidad 1 por cada clic en +)
+                                // Nota: Necesitamos el ID numérico de la orden para insertarlo
+                                string queryDetalle = @"
+        INSERT INTO DetallesOrden (IdOrden, IdRepuesto, Cantidad, PrecioCobrado) 
+        VALUES (
+            (SELECT id FROM ordenes WHERE numero_orden = @numOrden), 
+            @idRepuesto, 1, 0
+        )";
+
+                                using (SqlCommand cmdDetalle = new SqlCommand(queryDetalle, db.oCon))
+                                {
+                                    cmdDetalle.Parameters.AddWithValue("@numOrden", ordenActual);
+                                    cmdDetalle.Parameters.AddWithValue("@idRepuesto", idRepuesto);
+                                    cmdDetalle.ExecuteNonQuery();
+                                }
+                            }
                         }
                     }
                 }
