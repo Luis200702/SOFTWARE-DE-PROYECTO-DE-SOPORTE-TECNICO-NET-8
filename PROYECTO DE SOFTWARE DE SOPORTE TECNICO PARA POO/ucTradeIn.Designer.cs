@@ -211,7 +211,7 @@
             pnlCanje.Controls.Add(label7);
             pnlCanje.FillColor = Color.FromArgb(75, 92, 108);
             pnlCanje.Font = new Font("Microsoft Sans Serif", 12F);
-            pnlCanje.Location = new Point(747, 67);
+            pnlCanje.Location = new Point(750, 67);
             pnlCanje.Margin = new Padding(4, 5, 4, 5);
             pnlCanje.MinimumSize = new Size(1, 1);
             pnlCanje.Name = "pnlCanje";
@@ -400,7 +400,7 @@
             pnlDispositivoLleva.Controls.Add(airSeparator2);
             pnlDispositivoLleva.FillColor = Color.FromArgb(198, 199, 189);
             pnlDispositivoLleva.Font = new Font("Microsoft Sans Serif", 12F);
-            pnlDispositivoLleva.Location = new Point(393, 67);
+            pnlDispositivoLleva.Location = new Point(390, 67);
             pnlDispositivoLleva.Margin = new Padding(4, 5, 4, 5);
             pnlDispositivoLleva.MinimumSize = new Size(1, 1);
             pnlDispositivoLleva.Name = "pnlDispositivoLleva";
@@ -642,7 +642,7 @@
             label13.Name = "label13";
             label13.Size = new Size(97, 21);
             label13.TabIndex = 66;
-            label13.Text = "IMEI \\ Serie";
+            label13.Text = "Serie / IMEI";
             // 
             // txtSerieCanje
             // 

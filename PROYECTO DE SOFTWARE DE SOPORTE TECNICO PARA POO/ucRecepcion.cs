@@ -472,5 +472,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 CargarDatosA_Pantalla(nuevoIndice);
             }
         }
+
+        private void flpEquipos_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
