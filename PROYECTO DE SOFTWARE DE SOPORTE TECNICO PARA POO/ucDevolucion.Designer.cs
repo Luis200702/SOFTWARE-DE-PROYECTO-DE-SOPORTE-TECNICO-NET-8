@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
@@ -42,7 +48,7 @@
             btnRegistraEntrega = new Sunny.UI.UIButton();
             pnlFormaDePago = new Sunny.UI.UIPanel();
             pnlTotalCobrar = new Sunny.UI.UIPanel();
-            label4 = new Label();
+            lblTotalCobrar = new Label();
             txtObservaciones = new Sunny.UI.UITextBox();
             label3 = new Label();
             label2 = new Label();
@@ -54,6 +60,11 @@
             lblRegistrarEntrega = new Label();
             airSeparator4 = new ReaLTaiizor.Controls.AirSeparator();
             pnlDesgloseCosto = new Sunny.UI.UIPanel();
+            label4 = new Label();
+            lblTotalDesglose = new Label();
+            dgvDesglose = new Sunny.UI.UIDataGridView();
+            colDescripcion = new DataGridViewTextBoxColumn();
+            colCosto = new DataGridViewTextBoxColumn();
             airSeparator5 = new ReaLTaiizor.Controls.AirSeparator();
             lblDesglose = new Label();
             airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
@@ -88,6 +99,7 @@
             pnlFormaDePago.SuspendLayout();
             pnlTotalCobrar.SuspendLayout();
             pnlDesgloseCosto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvDesglose).BeginInit();
             pnlTrabajoRealizado.SuspendLayout();
             pnlResumen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -242,7 +254,7 @@
             btnComprobante.RectHoverColor = Color.FromArgb(22, 35, 52);
             btnComprobante.RectPressColor = Color.FromArgb(0, 150, 137);
             btnComprobante.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnComprobante.Size = new Size(144, 31);
+            btnComprobante.Size = new Size(251, 31);
             btnComprobante.TabIndex = 30;
             btnComprobante.Text = "Comprobante";
             btnComprobante.TipsFont = new Font("Microsoft Sans Serif", 9F);
@@ -288,13 +300,13 @@
             pnlFormaDePago.Controls.Add(airSeparator4);
             pnlFormaDePago.FillColor = Color.FromArgb(30, 41, 59);
             pnlFormaDePago.Font = new Font("Microsoft Sans Serif", 12F);
-            pnlFormaDePago.Location = new Point(608, 20);
+            pnlFormaDePago.Location = new Point(546, 17);
             pnlFormaDePago.Margin = new Padding(4, 5, 4, 5);
             pnlFormaDePago.MinimumSize = new Size(1, 1);
             pnlFormaDePago.Name = "pnlFormaDePago";
             pnlFormaDePago.Radius = 12;
             pnlFormaDePago.RectColor = Color.FromArgb(39, 53, 72);
-            pnlFormaDePago.Size = new Size(452, 475);
+            pnlFormaDePago.Size = new Size(559, 475);
             pnlFormaDePago.TabIndex = 6;
             pnlFormaDePago.Text = null;
             pnlFormaDePago.TextAlignment = ContentAlignment.MiddleCenter;
@@ -303,32 +315,32 @@
             // pnlTotalCobrar
             // 
             pnlTotalCobrar.BackColor = Color.Transparent;
-            pnlTotalCobrar.Controls.Add(label4);
+            pnlTotalCobrar.Controls.Add(lblTotalCobrar);
             pnlTotalCobrar.FillColor = Color.FromArgb(22, 35, 52);
             pnlTotalCobrar.Font = new Font("Microsoft Sans Serif", 12F);
             pnlTotalCobrar.ForeColor = Color.FromArgb(147, 162, 183);
-            pnlTotalCobrar.Location = new Point(18, 309);
+            pnlTotalCobrar.Location = new Point(18, 379);
             pnlTotalCobrar.Margin = new Padding(4, 5, 4, 5);
             pnlTotalCobrar.MinimumSize = new Size(1, 1);
             pnlTotalCobrar.Name = "pnlTotalCobrar";
             pnlTotalCobrar.Radius = 12;
             pnlTotalCobrar.RectColor = Color.FromArgb(41, 53, 72);
-            pnlTotalCobrar.Size = new Size(409, 66);
+            pnlTotalCobrar.Size = new Size(513, 76);
             pnlTotalCobrar.TabIndex = 33;
             pnlTotalCobrar.Text = "Total a cobrar";
             pnlTotalCobrar.TextAlignment = ContentAlignment.TopCenter;
             // 
-            // label4
+            // lblTotalCobrar
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.FromArgb(0, 150, 137);
-            label4.Location = new Point(190, 22);
-            label4.Name = "label4";
-            label4.Size = new Size(34, 25);
-            label4.TabIndex = 15;
-            label4.Text = "$0";
+            lblTotalCobrar.AutoSize = true;
+            lblTotalCobrar.BackColor = Color.Transparent;
+            lblTotalCobrar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalCobrar.ForeColor = Color.FromArgb(0, 150, 137);
+            lblTotalCobrar.Location = new Point(250, 32);
+            lblTotalCobrar.Name = "lblTotalCobrar";
+            lblTotalCobrar.Size = new Size(34, 25);
+            lblTotalCobrar.TabIndex = 15;
+            lblTotalCobrar.Text = "$0";
             // 
             // txtObservaciones
             // 
@@ -347,7 +359,7 @@
             txtObservaciones.Radius = 12;
             txtObservaciones.RectColor = Color.FromArgb(41, 53, 72);
             txtObservaciones.ShowText = false;
-            txtObservaciones.Size = new Size(409, 87);
+            txtObservaciones.Size = new Size(513, 87);
             txtObservaciones.TabIndex = 32;
             txtObservaciones.TextAlignment = ContentAlignment.MiddleLeft;
             txtObservaciones.Watermark = "Notas Adicionales";
@@ -385,7 +397,7 @@
             btnReparado.FillPressColor = Color.FromArgb(0, 150, 137);
             btnReparado.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnReparado.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReparado.Location = new Point(18, 146);
+            btnReparado.Location = new Point(36, 146);
             btnReparado.MinimumSize = new Size(1, 1);
             btnReparado.Name = "btnReparado";
             btnReparado.Radius = 12;
@@ -393,7 +405,7 @@
             btnReparado.RectHoverColor = Color.Transparent;
             btnReparado.RectPressColor = Color.FromArgb(0, 150, 137);
             btnReparado.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnReparado.Size = new Size(138, 24);
+            btnReparado.Size = new Size(150, 24);
             btnReparado.TabIndex = 29;
             btnReparado.Text = "Reparado";
             btnReparado.TipsFont = new Font("Microsoft Sans Serif", 9F);
@@ -408,7 +420,7 @@
             btnSinReparar.FillPressColor = Color.FromArgb(0, 150, 137);
             btnSinReparar.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnSinReparar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSinReparar.Location = new Point(293, 146);
+            btnSinReparar.Location = new Point(381, 146);
             btnSinReparar.MinimumSize = new Size(1, 1);
             btnSinReparar.Name = "btnSinReparar";
             btnSinReparar.Radius = 12;
@@ -416,7 +428,7 @@
             btnSinReparar.RectHoverColor = Color.Transparent;
             btnSinReparar.RectPressColor = Color.FromArgb(0, 150, 137);
             btnSinReparar.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnSinReparar.Size = new Size(134, 24);
+            btnSinReparar.Size = new Size(150, 24);
             btnSinReparar.TabIndex = 28;
             btnSinReparar.Text = "Sin Reparación";
             btnSinReparar.TipsFont = new Font("Microsoft Sans Serif", 9F);
@@ -431,7 +443,7 @@
             btnParcial.FillPressColor = Color.FromArgb(0, 150, 137);
             btnParcial.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnParcial.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnParcial.Location = new Point(162, 146);
+            btnParcial.Location = new Point(208, 146);
             btnParcial.MinimumSize = new Size(1, 1);
             btnParcial.Name = "btnParcial";
             btnParcial.Radius = 12;
@@ -439,7 +451,7 @@
             btnParcial.RectHoverColor = Color.FromArgb(22, 35, 52);
             btnParcial.RectPressColor = Color.FromArgb(0, 150, 137);
             btnParcial.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnParcial.Size = new Size(125, 24);
+            btnParcial.Size = new Size(150, 24);
             btnParcial.TabIndex = 27;
             btnParcial.Text = "Parcial";
             btnParcial.TipsFont = new Font("Microsoft Sans Serif", 9F);
@@ -477,7 +489,7 @@
             cmbFormaPago.Padding = new Padding(0, 0, 30, 2);
             cmbFormaPago.Radius = 12;
             cmbFormaPago.RectColor = Color.FromArgb(148, 163, 184);
-            cmbFormaPago.Size = new Size(409, 22);
+            cmbFormaPago.Size = new Size(513, 22);
             cmbFormaPago.SymbolSize = 24;
             cmbFormaPago.TabIndex = 24;
             cmbFormaPago.TextAlignment = ContentAlignment.MiddleLeft;
@@ -490,7 +502,7 @@
             lblRegistrarEntrega.BackColor = Color.Transparent;
             lblRegistrarEntrega.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblRegistrarEntrega.ForeColor = Color.White;
-            lblRegistrarEntrega.Location = new Point(18, 23);
+            lblRegistrarEntrega.Location = new Point(18, 19);
             lblRegistrarEntrega.Name = "lblRegistrarEntrega";
             lblRegistrarEntrega.Size = new Size(114, 17);
             lblRegistrarEntrega.TabIndex = 2;
@@ -502,16 +514,19 @@
             airSeparator4.Customization = "";
             airSeparator4.Font = new Font("Verdana", 8F);
             airSeparator4.Image = null;
-            airSeparator4.Location = new Point(18, 43);
+            airSeparator4.Location = new Point(18, 39);
             airSeparator4.Name = "airSeparator4";
             airSeparator4.NoRounding = false;
-            airSeparator4.Size = new Size(409, 1);
+            airSeparator4.Size = new Size(513, 1);
             airSeparator4.TabIndex = 1;
             airSeparator4.Text = "airSeparator4";
             airSeparator4.Transparent = false;
             // 
             // pnlDesgloseCosto
             // 
+            pnlDesgloseCosto.Controls.Add(label4);
+            pnlDesgloseCosto.Controls.Add(lblTotalDesglose);
+            pnlDesgloseCosto.Controls.Add(dgvDesglose);
             pnlDesgloseCosto.Controls.Add(airSeparator5);
             pnlDesgloseCosto.Controls.Add(lblDesglose);
             pnlDesgloseCosto.Controls.Add(airSeparator3);
@@ -528,6 +543,99 @@
             pnlDesgloseCosto.Text = null;
             pnlDesgloseCosto.TextAlignment = ContentAlignment.MiddleCenter;
             pnlDesgloseCosto.Visible = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Segoe UI", 9.75F);
+            label4.ForeColor = Color.FromArgb(147, 162, 183);
+            label4.Location = new Point(18, 165);
+            label4.Name = "label4";
+            label4.Size = new Size(36, 17);
+            label4.TabIndex = 10;
+            label4.Text = "Total";
+            // 
+            // lblTotalDesglose
+            // 
+            lblTotalDesglose.AutoSize = true;
+            lblTotalDesglose.BackColor = Color.Transparent;
+            lblTotalDesglose.Font = new Font("Segoe UI", 9.75F);
+            lblTotalDesglose.ForeColor = Color.FromArgb(0, 150, 137);
+            lblTotalDesglose.Location = new Point(409, 165);
+            lblTotalDesglose.Name = "lblTotalDesglose";
+            lblTotalDesglose.Size = new Size(14, 17);
+            lblTotalDesglose.TabIndex = 9;
+            lblTotalDesglose.Text = "x";
+            // 
+            // dgvDesglose
+            // 
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(235, 243, 255);
+            dgvDesglose.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgvDesglose.BackgroundColor = Color.White;
+            dgvDesglose.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgvDesglose.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(80, 160, 255);
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvDesglose.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgvDesglose.ColumnHeadersHeight = 32;
+            dgvDesglose.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvDesglose.ColumnHeadersVisible = false;
+            dgvDesglose.Columns.AddRange(new DataGridViewColumn[] { colDescripcion, colCosto });
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(48, 48, 48);
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvDesglose.DefaultCellStyle = dataGridViewCellStyle4;
+            dgvDesglose.EnableHeadersVisualStyles = false;
+            dgvDesglose.Font = new Font("Microsoft Sans Serif", 12F);
+            dgvDesglose.GridColor = Color.FromArgb(80, 160, 255);
+            dgvDesglose.Location = new Point(18, 50);
+            dgvDesglose.Name = "dgvDesglose";
+            dgvDesglose.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(235, 243, 255);
+            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle5.ForeColor = Color.FromArgb(48, 48, 48);
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(80, 160, 255);
+            dataGridViewCellStyle5.SelectionForeColor = Color.White;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvDesglose.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dgvDesglose.RowHeadersVisible = false;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 12F);
+            dgvDesglose.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dgvDesglose.SelectedIndex = -1;
+            dgvDesglose.Size = new Size(463, 94);
+            dgvDesglose.StripeOddColor = Color.FromArgb(235, 243, 255);
+            dgvDesglose.TabIndex = 4;
+            // 
+            // colDescripcion
+            // 
+            colDescripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colDescripcion.DataPropertyName = "colDescripcion";
+            colDescripcion.HeaderText = "";
+            colDescripcion.Name = "colDescripcion";
+            colDescripcion.ReadOnly = true;
+            // 
+            // colCosto
+            // 
+            colCosto.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            colCosto.DataPropertyName = "colCosto";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colCosto.DefaultCellStyle = dataGridViewCellStyle3;
+            colCosto.HeaderText = "";
+            colCosto.Name = "colCosto";
+            colCosto.ReadOnly = true;
+            colCosto.Width = 20;
             // 
             // airSeparator5
             // 
@@ -895,6 +1003,7 @@
             pnlTotalCobrar.PerformLayout();
             pnlDesgloseCosto.ResumeLayout(false);
             pnlDesgloseCosto.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvDesglose).EndInit();
             pnlTrabajoRealizado.ResumeLayout(false);
             pnlTrabajoRealizado.PerformLayout();
             pnlResumen.ResumeLayout(false);
@@ -950,7 +1059,7 @@
         private Label label3;
         private Sunny.UI.UITextBox txtObservaciones;
         private Sunny.UI.UIPanel pnlTotalCobrar;
-        private Label label4;
+        private Label lblTotalCobrar;
         private Sunny.UI.UIButton btnComprobante;
         private Sunny.UI.UIButton btnRegistraEntrega;
         private Sunny.UI.UIContextMenuStrip uiContextMenuStrip1;
@@ -958,5 +1067,10 @@
         private Label lblCedula;
         private Label lblTituloCedula;
         private Sunny.UI.UIComboBox cmbListaOrdenes;
+        private Sunny.UI.UIDataGridView dgvDesglose;
+        private DataGridViewTextBoxColumn colDescripcion;
+        private DataGridViewTextBoxColumn colCosto;
+        private Label lblTotalDesglose;
+        private Label label4;
     }
 }

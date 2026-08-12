@@ -62,6 +62,7 @@
             label15 = new Label();
             label4 = new Label();
             btnBuscar = new Sunny.UI.UIButton();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvderivacionsucursales).BeginInit();
             panel2.SuspendLayout();
             pnlDetallesDerivaciones.SuspendLayout();
@@ -143,7 +144,7 @@
             pnlDetallesDerivaciones.Controls.Add(lblcodigoDetalle);
             pnlDetallesDerivaciones.Controls.Add(lblestadoDetalle);
             pnlDetallesDerivaciones.ForeColor = Color.FromArgb(15, 23, 42);
-            pnlDetallesDerivaciones.Location = new Point(728, 439);
+            pnlDetallesDerivaciones.Location = new Point(982, 586);
             pnlDetallesDerivaciones.Name = "pnlDetallesDerivaciones";
             pnlDetallesDerivaciones.Size = new Size(404, 602);
             pnlDetallesDerivaciones.TabIndex = 27;
@@ -504,11 +505,23 @@
             btnBuscar.Text = "+ Nueva derivación";
             btnBuscar.TipsFont = new Font("Microsoft Sans Serif", 9F);
             // 
+            // label1
+            // 
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(787, 371);
+            label1.Name = "label1";
+            label1.Size = new Size(120, 28);
+            label1.TabIndex = 39;
+            label1.Text = "Selecciona una derivación";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // ucDerivacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(label1);
             Controls.Add(dgvderivacionsucursales);
             Controls.Add(pnlInformacion);
             Controls.Add(pnlSuperior);
@@ -565,5 +578,6 @@
         private Sunny.UI.UIButton btnBuscar;
         private Label label4;
         private Label label15;
+        private Label label1;
     }
 }

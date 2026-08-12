@@ -99,6 +99,7 @@
             airSeparator2.TabIndex = 51;
             airSeparator2.Text = "airSeparator2";
             airSeparator2.Transparent = false;
+            airSeparator2.Visible = false;
             // 
             // airSeparator3
             // 
@@ -124,6 +125,7 @@
             lblAdministracion.Size = new Size(105, 15);
             lblAdministracion.TabIndex = 14;
             lblAdministracion.Text = "ADMINISTRACIÓN";
+            lblAdministracion.Visible = false;
             // 
             // lblComercial
             // 
@@ -153,6 +155,7 @@
             btnConfiguracionGeneral.TextAlign = ContentAlignment.MiddleLeft;
             btnConfiguracionGeneral.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnConfiguracionGeneral.UseVisualStyleBackColor = false;
+            btnConfiguracionGeneral.Visible = false;
             btnConfiguracionGeneral.Click += btnConfiguracionGeneral_Click;
             // 
             // imageListBarrraMenu
@@ -190,6 +193,7 @@
             btnGestionUsuarios.TextAlign = ContentAlignment.MiddleLeft;
             btnGestionUsuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnGestionUsuarios.UseVisualStyleBackColor = false;
+            btnGestionUsuarios.Visible = false;
             btnGestionUsuarios.Click += btnGestionUsuarios_Click;
             // 
             // btnReportes
@@ -209,6 +213,7 @@
             btnReportes.TextAlign = ContentAlignment.MiddleLeft;
             btnReportes.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReportes.UseVisualStyleBackColor = false;
+            btnReportes.Visible = false;
             btnReportes.Click += btnReportes_Click;
             // 
             // btnHistorialCliente

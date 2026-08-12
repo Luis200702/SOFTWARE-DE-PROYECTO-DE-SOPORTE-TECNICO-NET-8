@@ -101,20 +101,22 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // Método para traer la información completa de la orden seleccionada
         private void CargarDetallesOrden(int idOrden)
         {
+            // 1. Modificamos la consulta para traer también el trabajo realizado/observaciones
             string query = @"
-                SELECT TOP 1
-                    O.numero_orden AS numero_orden,
-                    C.nombre AS Cliente,
-                    C.cedula_pasaporte AS Cedula,
-                    C.telefono AS Telefono,
-                    CONCAT(D.marca, ' ', D.modelo) AS Dispositivo,
-                    T.nombre AS Tecnico,
-                    O.fecha_ingreso AS Ingreso
-                FROM ordenes O
-                INNER JOIN Clientes C ON O.cliente_id = C.id
-                INNER JOIN Dispositivos D ON O.dispositivo_id = D.id
-                INNER JOIN Usuarios T ON O.tecnico_id = T.id
-                WHERE O.id = @idOrden";
+        SELECT TOP 1
+            O.numero_orden AS numero_orden,
+            C.nombre AS Cliente,
+            C.cedula_pasaporte AS Cedula,
+            C.telefono AS Telefono,
+            CONCAT(D.marca, ' ', D.modelo) AS Dispositivo,
+            T.nombre AS Tecnico,
+            O.fecha_ingreso AS Ingreso,
+            O.diagnostico_inicial AS TrabajoRealizado -- Cambia esto por 'O.observaciones' si creaste una columna específica
+        FROM ordenes O
+        INNER JOIN Clientes C ON O.cliente_id = C.id
+        INNER JOIN Dispositivos D ON O.dispositivo_id = D.id
+        INNER JOIN Usuarios T ON O.tecnico_id = T.id
+        WHERE O.id = @idOrden";
 
             Conexion_Base_de_Datos conexionBD = new Conexion_Base_de_Datos();
 
@@ -137,7 +139,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         btnRegistraEntrega.Visible = true;
                         btnComprobante.Visible = true;
 
-                        // Rellenamos los datos de esa orden en específico
+                        // Rellenamos los datos del resumen
                         lblNumeroOrden.Text = lector["numero_orden"] != DBNull.Value ? lector["numero_orden"].ToString() : "S/N";
                         lblCliente.Text = lector["Cliente"] != DBNull.Value ? lector["Cliente"].ToString() : "";
                         lblCedula.Text = lector["Cedula"] != DBNull.Value ? lector["Cedula"].ToString() : "";
@@ -154,9 +156,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         {
                             lblFechaIngreso.Text = "Sin fecha";
                         }
+
+                        // 2. Llenamos el panel de "Trabajo realizado" usando el Label de tu diseño
+                        lblDescripcionTrabajo.Text = lector["TrabajoRealizado"] != DBNull.Value ? lector["TrabajoRealizado"].ToString() : "Sin observaciones registradas.";
                     }
 
                     lector.Close();
+
+                    CargarDesgloseCostos(idOrden);
                     conexionBD.cerrarConexion();
                 }
             }
@@ -164,6 +171,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 MessageBox.Show("Error al cargar los detalles de la orden: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
         }
 
         private void ucDevolucion_Load(object sender, EventArgs e)
@@ -222,6 +231,78 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             lblDispositivo.Text = "x";
             lblTecnicoAsignado.Text = "x";
             lblFechaIngreso.Text = "x";
+        }
+
+        private void CargarDesgloseCostos(int idOrden)
+        {
+            // Limpiamos la grilla antes de cargar nuevos datos
+            dgvDesglose.Rows.Clear();
+            decimal totalCosto = 0;
+
+            var db = new Conexion_Base_de_Datos();
+            if (db.abrirConexion())
+            {
+                try
+                {
+                    // 1. CARGAR LOS REPUESTOS USADOS
+                    // Unimos DetallesOrden con Repuestos para obtener el nombre y el precio de venta real
+                    string queryRepuestos = @"
+                SELECT r.NombreRepuesto, r.PrecioVenta 
+                FROM DetallesOrden d
+                INNER JOIN Repuestos r ON d.IdRepuesto = r.IdRepuesto
+                WHERE d.IdOrden = @idOrden";
+
+                    using (SqlCommand cmd = new SqlCommand(queryRepuestos, db.oCon))
+                    {
+                        cmd.Parameters.AddWithValue("@idOrden", idOrden);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string descripcion = reader["NombreRepuesto"].ToString();
+                                decimal precio = Convert.ToDecimal(reader["PrecioVenta"]);
+
+                                // Agregamos la fila a la grilla
+                                dgvDesglose.Rows.Add(descripcion, $"${precio:F2}");
+                                totalCosto += precio; // Vamos sumando
+                            }
+                        }
+                    }
+
+                    // 2. CARGAR LA MANO DE OBRA (costo_estimado)
+                    string queryManoObra = "SELECT ISNULL(costo_estimado, 0) FROM ordenes WHERE id = @idOrden";
+                    using (SqlCommand cmdManoObra = new SqlCommand(queryManoObra, db.oCon))
+                    {
+                        cmdManoObra.Parameters.AddWithValue("@idOrden", idOrden);
+                        object result = cmdManoObra.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            decimal costoManoObra = Convert.ToDecimal(result);
+                            if (costoManoObra > 0)
+                            {
+                                // Agregamos la fila de mano de obra
+                                dgvDesglose.Rows.Add("Mano de obra", $"${costoManoObra:F2}");
+                                totalCosto += costoManoObra;
+                            }
+                        }
+                    }
+
+                    // 3. ACTUALIZAR LOS TOTALES EN LA INTERFAZ
+                    lblTotalDesglose.Text = $"${totalCosto:F2}";
+
+                    // Si tienes el label grande a la derecha (el del panel "Registrar Entrega"):
+                    // lblTotalCobrar.Text = $"${totalCosto:F2}"; 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar el desglose de costos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    db.cerrarConexion();
+                }
+            }
         }
     }
 }

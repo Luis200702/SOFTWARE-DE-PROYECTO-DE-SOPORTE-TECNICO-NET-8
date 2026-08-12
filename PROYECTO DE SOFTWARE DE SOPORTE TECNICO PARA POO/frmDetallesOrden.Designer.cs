@@ -31,7 +31,7 @@
             btnListoEntrega = new Sunny.UI.UIButton();
             btnDerivar = new Sunny.UI.UIButton();
             cmbTecnico = new Sunny.UI.UIComboBox();
-            txtUsuario = new Sunny.UI.UITextBox();
+            txtObservacion = new Sunny.UI.UITextBox();
             btnDiagnostico = new Sunny.UI.UIButton();
             btnRecibido = new Sunny.UI.UIButton();
             lblNumeroOrden = new Label();
@@ -108,25 +108,25 @@
             cmbTecnico.TextAlignment = ContentAlignment.MiddleLeft;
             cmbTecnico.Watermark = "";
             // 
-            // txtUsuario
+            // txtObservacion
             // 
-            txtUsuario.FillColor = Color.FromArgb(41, 53, 72);
-            txtUsuario.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsuario.ForeColor = Color.White;
-            txtUsuario.Location = new Point(360, 407);
-            txtUsuario.Margin = new Padding(4, 5, 4, 5);
-            txtUsuario.MaxLength = 255;
-            txtUsuario.Minimum = 0D;
-            txtUsuario.MinimumSize = new Size(1, 16);
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.Padding = new Padding(5);
-            txtUsuario.Radius = 12;
-            txtUsuario.RectColor = Color.FromArgb(39, 53, 72);
-            txtUsuario.ShowText = false;
-            txtUsuario.Size = new Size(300, 77);
-            txtUsuario.TabIndex = 38;
-            txtUsuario.TextAlignment = ContentAlignment.MiddleLeft;
-            txtUsuario.Watermark = "Nueva observacion";
+            txtObservacion.FillColor = Color.FromArgb(41, 53, 72);
+            txtObservacion.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtObservacion.ForeColor = Color.White;
+            txtObservacion.Location = new Point(360, 407);
+            txtObservacion.Margin = new Padding(4, 5, 4, 5);
+            txtObservacion.MaxLength = 255;
+            txtObservacion.Minimum = 0D;
+            txtObservacion.MinimumSize = new Size(1, 16);
+            txtObservacion.Name = "txtObservacion";
+            txtObservacion.Padding = new Padding(5);
+            txtObservacion.Radius = 12;
+            txtObservacion.RectColor = Color.FromArgb(39, 53, 72);
+            txtObservacion.ShowText = false;
+            txtObservacion.Size = new Size(300, 77);
+            txtObservacion.TabIndex = 38;
+            txtObservacion.TextAlignment = ContentAlignment.MiddleLeft;
+            txtObservacion.Watermark = "Nueva observacion";
             // 
             // btnDiagnostico
             // 
@@ -416,6 +416,7 @@
             btnAgregarObservacion.Text = "+";
             btnAgregarObservacion.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnAgregarObservacion.TipsForeColor = Color.Transparent;
+            btnAgregarObservacion.Click += btnAgregarObservacion_Click;
             // 
             // frmDetallesOrden
             // 
@@ -439,7 +440,7 @@
             Controls.Add(btnListoEntrega);
             Controls.Add(btnDerivar);
             Controls.Add(cmbTecnico);
-            Controls.Add(txtUsuario);
+            Controls.Add(txtObservacion);
             Controls.Add(btnDiagnostico);
             Controls.Add(btnRecibido);
             Controls.Add(lblNumeroOrden);
@@ -456,7 +457,7 @@
         private Sunny.UI.UIButton btnListoEntrega;
         private Sunny.UI.UIButton btnDerivar;
         private Sunny.UI.UIComboBox cmbTecnico;
-        private Sunny.UI.UITextBox txtUsuario;
+        private Sunny.UI.UITextBox txtObservacion;
         private Sunny.UI.UIButton btnDiagnostico;
         private Sunny.UI.UIButton btnRecibido;
         private Label lblNumeroOrden;

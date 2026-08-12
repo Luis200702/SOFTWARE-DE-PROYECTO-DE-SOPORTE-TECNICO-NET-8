@@ -69,42 +69,45 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        public string validarUsuario(string usuario, string contrasena)
+        public string[] validarUsuario(string usuario, string contrasena)
+        {
+            try
             {
-                try
+                if (abrirConexion())
                 {
-                    if (abrirConexion())
+                    // Traemos el Perfil y la Sucursal de la base de datos
+                    string consulta = @"SELECT Perfil, Sucursal 
+                                FROM Usuarios 
+                                WHERE Usuario = @Usuario 
+                                AND Contrasena = @Contrasena";
+
+                    oCom = new SqlCommand(consulta, oCon);
+                    oCom.Parameters.AddWithValue("@Usuario", usuario);
+                    oCom.Parameters.AddWithValue("@Contrasena", contrasena);
+
+                    using (SqlDataReader reader = oCom.ExecuteReader())
                     {
-                        string consulta = @"SELECT Perfil
-                                    FROM Usuarios
-                                    WHERE Usuario = @Usuario
-                                    AND Contrasena = @Contrasena";
-
-                        oCom = new SqlCommand(consulta, oCon);
-
-                        oCom.Parameters.AddWithValue("@Usuario", usuario);
-                        oCom.Parameters.AddWithValue("@Contrasena", contrasena);
-
-                        object resultado = oCom.ExecuteScalar();
-
-                        cerrarConexion();
-
-                        if (resultado != null)
+                        if (reader.Read()) // Si el usuario y contraseña son correctos
                         {
-                            return resultado.ToString();
+                            string perfil = reader["Perfil"].ToString();
+                            string sucursal = reader["Sucursal"].ToString();
+                            cerrarConexion();
+
+                            // Retornamos los dos valores en un arreglo
+                            return new string[] { perfil, sucursal };
                         }
-
-                        return "";
                     }
-
-                    return "";
+                    cerrarConexion();
+                    return null; // Si no encontró el usuario
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                    return "";
-                }
+                return null;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return null;
+            }
+        }
 
         public DataTable obtenerUsuarios()
         {

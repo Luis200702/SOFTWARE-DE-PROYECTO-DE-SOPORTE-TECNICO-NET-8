@@ -45,8 +45,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarTecnicos();
             cmbTecnico.Text = tecnicoActual;
 
-            CargarRepuestosStock(); 
-            CargarRepuestosGuardados(); 
+            CargarRepuestosStock();
+            CargarRepuestosGuardados();
+            CargarObservacionesGuardadas();
 
             ActualizarDiseñoBotonesEstado(estadoActual);
 
@@ -285,27 +286,36 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    // 1. Actualizamos la orden con el estado seleccionado en los botones superiores y el técnico
+                    // Recopilamos todos los textos del ListBox en un solo bloque de texto (separados por un salto de línea)
+                    string observacionesFinales = "";
+                    foreach (var item in lstObservaciones.Items)
+                    {
+                        observacionesFinales += item.ToString() + Environment.NewLine;
+                    }
+
+                    // 1. Actualizamos el estado, el técnico Y LAS OBSERVACIONES
                     string query = @"
                 UPDATE ordenes 
                 SET estado = @estado, 
-                    tecnico_id = @tecnico 
+                    tecnico_id = @tecnico,
+                    diagnostico_inicial = @observaciones
                 WHERE numero_orden = @orden";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
                         cmd.Parameters.AddWithValue("@estado", estadoSeleccionado);
                         cmd.Parameters.AddWithValue("@tecnico", cmbTecnico.SelectedValue);
+                        // Pasamos el bloque de texto limpio a la base de datos
+                        cmd.Parameters.AddWithValue("@observaciones", observacionesFinales.Trim());
                         cmd.Parameters.AddWithValue("@orden", ordenActual);
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
 
                         if (filasAfectadas > 0)
                         {
-                            // 2. Si se agregaron repuestos, descontamos el stock y guardamos el detalle
+                            // 2. Descontar stock y registrar detalle
                             foreach (int idRepuesto in repuestosUsadosIds)
                             {
-                                // A) Descontar el stock
                                 string queryStock = "UPDATE InventarioSucursal SET StockActual = StockActual - 1 WHERE IdRepuesto = @id";
                                 using (SqlCommand cmdStock = new SqlCommand(queryStock, db.oCon))
                                 {
@@ -313,15 +323,15 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                     cmdStock.ExecuteNonQuery();
                                 }
 
-                                // B) Registrar en DetallesOrden (asumiendo cantidad 1 por cada clic en +)
-                                // Nota: Necesitamos el ID numérico de la orden para insertarlo
+                                // CÁMBIALO POR ESTO:
                                 string queryDetalle = @"
-        INSERT INTO DetallesOrden (IdOrden, IdRepuesto, Cantidad, PrecioCobrado) 
-        VALUES (
-            (SELECT id FROM ordenes WHERE numero_orden = @numOrden), 
-            @idRepuesto, 1, 0
-        )";
-
+                                    INSERT INTO DetallesOrden (IdOrden, IdRepuesto, Cantidad, PrecioCobrado) 
+                                    VALUES (
+                                        (SELECT id FROM ordenes WHERE numero_orden = @numOrden), 
+                                        @idRepuesto, 
+                                        1, 
+                                        (SELECT PrecioVenta FROM Repuestos WHERE IdRepuesto = @idRepuesto) 
+                                    )";
                                 using (SqlCommand cmdDetalle = new SqlCommand(queryDetalle, db.oCon))
                                 {
                                     cmdDetalle.Parameters.AddWithValue("@numOrden", ordenActual);
@@ -329,12 +339,66 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                     cmdDetalle.ExecuteNonQuery();
                                 }
                             }
+
+                            MessageBox.Show("¡Los cambios se guardaron correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
                         }
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error al guardar los cambios: " + ex.Message, "Error de BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    db.cerrarConexion();
+                }
+            }
+        }
+
+        private void btnAgregarObservacion_Click(object sender, EventArgs e)
+        {
+            // Verificamos que no esté vacío el TextBox
+            if (!string.IsNullOrWhiteSpace(txtObservacion.Text))
+            {
+                // Agregamos el texto a la lista con un puntito para que se vea ordenado
+                lstObservaciones.Items.Add("• " + txtObservacion.Text.Trim());
+
+                // Limpiamos el TextBox para escribir la siguiente
+                txtObservacion.Clear();
+                txtObservacion.Focus();
+            }
+        }
+
+        private void CargarObservacionesGuardadas()
+        {
+            var db = new Conexion_Base_de_Datos();
+            if (db.abrirConexion())
+            {
+                try
+                {
+                    // Nota: Uso 'diagnostico_inicial'. Si creaste otra columna como 'observaciones', cámbiala aquí.
+                    string query = "SELECT diagnostico_inicial FROM ordenes WHERE numero_orden = @orden";
+
+                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    {
+                        cmd.Parameters.AddWithValue("@orden", ordenActual);
+                        object resultado = cmd.ExecuteScalar();
+
+                        if (resultado != null && resultado != DBNull.Value)
+                        {
+                            // Separamos el texto guardado por saltos de línea para meterlo a la lista
+                            string[] obsGuardadas = resultado.ToString().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                            foreach (string obs in obsGuardadas)
+                            {
+                                lstObservaciones.Items.Add(obs);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar las observaciones: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
