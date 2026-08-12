@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucRecepcion));
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
@@ -63,6 +64,7 @@
             lblProblema = new Label();
             lblDiagnostico = new Label();
             pnlDatosCliente = new Sunny.UI.UIPanel();
+            pictureBox6 = new PictureBox();
             lbId = new Label();
             txtIdentificacionCliente = new Sunny.UI.UITextBox();
             txtCorreo = new Sunny.UI.UITextBox();
@@ -103,6 +105,7 @@
             uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picReparacion).BeginInit();
             pnlDatosCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             pnlDispositivo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
@@ -122,8 +125,8 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.GgScreen__1_;
-            pictureBox1.Location = new Point(31, 12);
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(31, 16);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(36, 30);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -331,7 +334,7 @@
             flpEquipos.Name = "flpEquipos";
             flpEquipos.Padding = new Padding(2);
             flpEquipos.Radius = 12;
-            flpEquipos.RectColor = Color.FromArgb(39, 53, 72);
+            flpEquipos.RectColor = Color.FromArgb(75, 92, 108);
             flpEquipos.ShowText = false;
             flpEquipos.Size = new Size(1054, 63);
             flpEquipos.TabIndex = 5;
@@ -565,7 +568,7 @@
             // picReparacion
             // 
             picReparacion.BackColor = Color.Transparent;
-            picReparacion.Image = Properties.Resources.IconParkOutlineSpanner;
+            picReparacion.Image = (Image)resources.GetObject("picReparacion.Image");
             picReparacion.Location = new Point(19, 14);
             picReparacion.Name = "picReparacion";
             picReparacion.Size = new Size(30, 21);
@@ -675,6 +678,7 @@
             pnlDatosCliente.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlDatosCliente.AutoSize = true;
             pnlDatosCliente.BackColor = Color.Transparent;
+            pnlDatosCliente.Controls.Add(pictureBox6);
             pnlDatosCliente.Controls.Add(lbId);
             pnlDatosCliente.Controls.Add(txtIdentificacionCliente);
             pnlDatosCliente.Controls.Add(txtCorreo);
@@ -699,6 +703,17 @@
             pnlDatosCliente.TabIndex = 3;
             pnlDatosCliente.Text = null;
             pnlDatosCliente.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.BackColor = Color.Transparent;
+            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
+            pictureBox6.Location = new Point(17, 13);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(30, 21);
+            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox6.TabIndex = 48;
+            pictureBox6.TabStop = false;
             // 
             // lbId
             // 
@@ -812,7 +827,6 @@
             // 
             pictureBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = Properties.Resources.LucideUser;
             pictureBox5.Location = new Point(-69, 13);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(30, 21);
@@ -1125,7 +1139,7 @@
             // pictureBox7
             // 
             pictureBox7.BackColor = Color.Transparent;
-            pictureBox7.Image = Properties.Resources.MdiMonitor;
+            pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
             pictureBox7.Location = new Point(18, 13);
             pictureBox7.Name = "pictureBox7";
             pictureBox7.Size = new Size(30, 21);
@@ -1186,6 +1200,7 @@
             ((System.ComponentModel.ISupportInitialize)picReparacion).EndInit();
             pnlDatosCliente.ResumeLayout(false);
             pnlDatosCliente.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             pnlDispositivo.ResumeLayout(false);
             pnlDispositivo.PerformLayout();
@@ -1259,5 +1274,6 @@
         private Label lblEquipos;
         private Sunny.UI.UIButton btnAgregarEquipo;
         private Sunny.UI.UIButton btnEquipo;
+        private PictureBox pictureBox6;
     }
 }
