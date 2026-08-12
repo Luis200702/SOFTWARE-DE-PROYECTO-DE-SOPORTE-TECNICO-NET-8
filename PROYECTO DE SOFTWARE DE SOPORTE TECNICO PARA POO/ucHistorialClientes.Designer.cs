@@ -94,12 +94,12 @@
             // 
             // pnlSuperior
             // 
+            pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
             pnlSuperior.BackColor = Color.White;
             pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
             pnlSuperior.Controls.Add(pictureBox1);
             pnlSuperior.Controls.Add(lblTitulo);
-            pnlSuperior.Dock = DockStyle.Top;
             pnlSuperior.Location = new Point(0, 0);
             pnlSuperior.MaximumSize = new Size(1140, 59);
             pnlSuperior.MinimumSize = new Size(1140, 59);
@@ -110,7 +110,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.tictoc;
-            pictureBox1.Location = new Point(34, 13);
+            pictureBox1.Location = new Point(17, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(36, 30);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -124,7 +124,7 @@
             lblTitulo.ForeColor = Color.Black;
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(394, 57);
+            lblTitulo.Size = new Size(423, 57);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Historial de Equipos por Cliente";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -145,6 +145,8 @@
             // 
             dgvClientes.AllowUserToAddRows = false;
             dgvClientes.AllowUserToDeleteRows = false;
+            dgvClientes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            dgvClientes.BackgroundColor = SystemColors.ControlDarkDark;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClientes.ColumnHeadersVisible = false;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -214,6 +216,7 @@
             dgvHistorialOrdenes.AllowUserToDeleteRows = false;
             dgvHistorialOrdenes.AllowUserToResizeColumns = false;
             dgvHistorialOrdenes.AllowUserToResizeRows = false;
+            dgvHistorialOrdenes.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvHistorialOrdenes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvHistorialOrdenes.BackgroundColor = Color.White;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -288,6 +291,7 @@
             // 
             // pnlSuperiorCliente
             // 
+            pnlSuperiorCliente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperiorCliente.Controls.Add(llblTitleVisitas);
             pnlSuperiorCliente.Controls.Add(lblTotalGastado);
             pnlSuperiorCliente.Controls.Add(lblTotalVisitas);
