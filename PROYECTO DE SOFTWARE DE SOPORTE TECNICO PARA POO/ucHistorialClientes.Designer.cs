@@ -245,11 +245,11 @@
             dgvHistorialOrdenes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvHistorialOrdenes.BackgroundColor = Color.FromArgb(235, 239, 240);
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(75, 92, 108);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.ForeColor = Color.Silver;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(75, 92, 108);
+            dataGridViewCellStyle2.SelectionForeColor = Color.Silver;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dgvHistorialOrdenes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvHistorialOrdenes.ColumnHeadersHeight = 40;
