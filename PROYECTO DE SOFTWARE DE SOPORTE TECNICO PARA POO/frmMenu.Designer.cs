@@ -475,6 +475,7 @@
             Controls.Add(pnlContenedorLogotipo);
             Controls.Add(pnlContenedorMenu);
             ForeColor = Color.Black;
+            MaximizeBox = false;
             Name = "frmMenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu Principal";
