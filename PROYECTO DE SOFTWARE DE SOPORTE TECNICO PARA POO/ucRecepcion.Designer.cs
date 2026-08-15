@@ -442,6 +442,8 @@
             txtCosto.TextAlignment = ContentAlignment.MiddleLeft;
             txtCosto.Watermark = "0$";
             txtCosto.WatermarkColor = Color.FromArgb(198, 199, 189);
+            txtCosto.KeyPress += txtCosto_KeyPress;
+            txtCosto.Leave += txtCosto_Leave;
             // 
             // dtmFecha
             // 

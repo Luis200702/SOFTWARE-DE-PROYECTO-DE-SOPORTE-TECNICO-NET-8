@@ -477,5 +477,53 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
 
         }
+
+        private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            UITextBox txt = sender as UITextBox;
+            if (txt == null) return;
+
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            // Solo números y coma
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Solo una coma
+            if (e.KeyChar == ',' && txt.Text.Contains(","))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCosto_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCosto.Text))
+                return;
+
+            // Convertimos la coma a punto solo para poder convertirlo a decimal
+            string texto = txtCosto.Text.Replace('.', ','); // por si acaso escriben punto
+            texto = texto.Replace(',', '.');
+
+            if (decimal.TryParse(texto, System.Globalization.NumberStyles.Any,
+                                 System.Globalization.CultureInfo.InvariantCulture, out decimal precio)
+                && precio >= 0)
+            {
+                // Mostramos con coma
+                txtCosto.Text = precio.ToString("0.00").Replace('.', ',');
+            }
+            else
+            {
+                MessageBox.Show("El costo debe ser un número positivo.\nEjemplo: 150,50",
+                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                txtCosto.Focus();
+                txtCosto.SelectAll();
+            }
+        }
     }
 }
