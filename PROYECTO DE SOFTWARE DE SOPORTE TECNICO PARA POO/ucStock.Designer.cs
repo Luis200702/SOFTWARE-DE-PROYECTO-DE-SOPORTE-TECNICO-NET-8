@@ -38,12 +38,11 @@
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
-            panel1 = new Panel();
+            pnlInfo = new Panel();
+            btnAlertas = new Sunny.UI.UIButton();
             btnNuevoRepuesto = new Sunny.UI.UIButton();
             cmbCategorias = new Sunny.UI.UIComboBox();
             txtBuscar = new Sunny.UI.UITextBox();
-            lblAlertas = new Label();
-            btnAlertas = new Button();
             imageListStock = new ImageList(components);
             dgvControl = new DataGridView();
             Nombre = new DataGridViewTextBoxColumn();
@@ -56,10 +55,12 @@
             Estado = new DataGridViewTextBoxColumn();
             Agregar = new DataGridViewImageColumn();
             Delete = new DataGridViewImageColumn();
+            dgvNuevo = new DataGridView();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            panel1.SuspendLayout();
+            pnlInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvControl).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvNuevo).BeginInit();
             SuspendLayout();
             // 
             // pnlSuperior
@@ -96,20 +97,36 @@
             lblTitulo.Text = "Control de Stock";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel1
+            // pnlInfo
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.AutoSize = true;
-            panel1.BackColor = Color.FromArgb(235, 239, 240);
-            panel1.Controls.Add(btnNuevoRepuesto);
-            panel1.Controls.Add(cmbCategorias);
-            panel1.Controls.Add(txtBuscar);
-            panel1.Controls.Add(lblAlertas);
-            panel1.Controls.Add(btnAlertas);
-            panel1.Location = new Point(0, 59);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1123, 73);
-            panel1.TabIndex = 2;
+            pnlInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlInfo.AutoSize = true;
+            pnlInfo.BackColor = Color.FromArgb(235, 239, 240);
+            pnlInfo.Controls.Add(btnAlertas);
+            pnlInfo.Controls.Add(btnNuevoRepuesto);
+            pnlInfo.Controls.Add(cmbCategorias);
+            pnlInfo.Controls.Add(txtBuscar);
+            pnlInfo.Location = new Point(0, 59);
+            pnlInfo.Name = "pnlInfo";
+            pnlInfo.Size = new Size(1123, 73);
+            pnlInfo.TabIndex = 2;
+            // 
+            // btnAlertas
+            // 
+            btnAlertas.FillColor = Color.White;
+            btnAlertas.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAlertas.ForeColor = Color.Black;
+            btnAlertas.Location = new Point(681, 19);
+            btnAlertas.MinimumSize = new Size(1, 1);
+            btnAlertas.Name = "btnAlertas";
+            btnAlertas.Radius = 12;
+            btnAlertas.Size = new Size(102, 37);
+            btnAlertas.TabIndex = 31;
+            btnAlertas.Text = "Alertas";
+            btnAlertas.TextAlign = ContentAlignment.MiddleLeft;
+            btnAlertas.TipsFont = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAlertas.Click += btnAlertas_Click;
+            btnAlertas.Paint += btnAlertas_Paint;
             // 
             // btnNuevoRepuesto
             // 
@@ -180,41 +197,6 @@
             txtBuscar.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscar.Watermark = "Buscar repuesto, marca...";
             // 
-            // lblAlertas
-            // 
-            lblAlertas.BackColor = Color.FromArgb(198, 199, 189);
-            lblAlertas.FlatStyle = FlatStyle.Flat;
-            lblAlertas.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAlertas.ForeColor = Color.FromArgb(147, 162, 183);
-            lblAlertas.Location = new Point(792, 19);
-            lblAlertas.Name = "lblAlertas";
-            lblAlertas.Size = new Size(48, 37);
-            lblAlertas.TabIndex = 7;
-            lblAlertas.Text = "0";
-            lblAlertas.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // btnAlertas
-            // 
-            btnAlertas.BackColor = Color.FromArgb(0, 150, 137);
-            btnAlertas.BackgroundImageLayout = ImageLayout.Stretch;
-            btnAlertas.Cursor = Cursors.Hand;
-            btnAlertas.FlatAppearance.BorderColor = Color.FromArgb(0, 150, 137);
-            btnAlertas.FlatStyle = FlatStyle.Flat;
-            btnAlertas.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAlertas.ForeColor = Color.FromArgb(235, 239, 240);
-            btnAlertas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAlertas.ImageKey = "SolarDangerOutline (2).png";
-            btnAlertas.ImageList = imageListStock;
-            btnAlertas.Location = new Point(659, 19);
-            btnAlertas.Margin = new Padding(3, 2, 3, 2);
-            btnAlertas.Name = "btnAlertas";
-            btnAlertas.RightToLeft = RightToLeft.No;
-            btnAlertas.Size = new Size(117, 37);
-            btnAlertas.TabIndex = 3;
-            btnAlertas.Text = "Alertas";
-            btnAlertas.TextAlign = ContentAlignment.MiddleRight;
-            btnAlertas.UseVisualStyleBackColor = false;
-            // 
             // imageListStock
             // 
             imageListStock.ColorDepth = ColorDepth.Depth32Bit;
@@ -254,7 +236,7 @@
             dgvControl.DefaultCellStyle = dataGridViewCellStyle3;
             dgvControl.EnableHeadersVisualStyles = false;
             dgvControl.GridColor = Color.Black;
-            dgvControl.Location = new Point(3, 137);
+            dgvControl.Location = new Point(774, 239);
             dgvControl.Margin = new Padding(3, 2, 3, 2);
             dgvControl.Name = "dgvControl";
             dgvControl.ReadOnly = true;
@@ -277,7 +259,6 @@
             dgvControl.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dgvControl.Size = new Size(1120, 690);
             dgvControl.TabIndex = 3;
-            dgvControl.CellContentClick += dgv4_CellContentClick;
             // 
             // Nombre
             // 
@@ -380,20 +361,34 @@
             Delete.Name = "Delete";
             Delete.ReadOnly = true;
             // 
+            // dgvNuevo
+            // 
+            dgvNuevo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvNuevo.Location = new Point(0, 133);
+            dgvNuevo.Name = "dgvNuevo";
+            dgvNuevo.Size = new Size(1123, 699);
+            dgvNuevo.TabIndex = 4;
+            dgvNuevo.CellContentClick += dgvNuevo_CellContentClick;
+            dgvNuevo.CellFormatting += dgvNuevo_CellFormatting;
+            dgvNuevo.CellPainting += dgvNuevo_CellPainting;
+            // 
             // ucStock
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(235, 239, 240);
-            Controls.Add(panel1);
+            Controls.Add(dgvNuevo);
+            Controls.Add(pnlInfo);
             Controls.Add(dgvControl);
             Controls.Add(pnlSuperior);
             Name = "ucStock";
             Size = new Size(1123, 832);
+            Load += ucStock_Load;
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            panel1.ResumeLayout(false);
+            pnlInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvControl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvNuevo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -403,10 +398,8 @@
         private Panel pnlSuperior;
         private PictureBox pictureBox1;
         private Label lblTitulo;
-        private Panel panel1;
-        private Button btnAlertas;
+        private Panel pnlInfo;
         private DataGridView dgvControl;
-        private Label lblAlertas;
         private Sunny.UI.UITextBox txtBuscar;
         private Sunny.UI.UIComboBox cmbCategorias;
         private Sunny.UI.UIButton btnNuevoRepuesto;
@@ -421,5 +414,7 @@
         private DataGridViewImageColumn Agregar;
         private DataGridViewImageColumn Delete;
         private ImageList imageListStock;
+        private DataGridView dgvNuevo;
+        private Sunny.UI.UIButton btnAlertas;
     }
 }

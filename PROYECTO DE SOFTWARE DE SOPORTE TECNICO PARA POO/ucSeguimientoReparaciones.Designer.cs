@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucSeguimientoReparaciones));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
@@ -38,22 +36,15 @@
             cmbEstado = new Sunny.UI.UIComboBox();
             txtBuscarOrden = new Sunny.UI.UITextBox();
             lblOrden = new Label();
-            dgvSeguimiento = new DataGridView();
-            Orden = new DataGridViewTextBoxColumn();
-            Cliente_Dispositivo = new DataGridViewTextBoxColumn();
-            Tecnico = new DataGridViewTextBoxColumn();
-            Estado = new DataGridViewTextBoxColumn();
-            Ingreso = new DataGridViewTextBoxColumn();
-            Entrega = new DataGridViewTextBoxColumn();
-            Tiempo = new DataGridViewTextBoxColumn();
             pnlContenedor = new Panel();
             pnldgv = new Panel();
+            dgvSeguimiento = new DataGridView();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvSeguimiento).BeginInit();
             pnlContenedor.SuspendLayout();
             pnldgv.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvSeguimiento).BeginInit();
             SuspendLayout();
             // 
             // pnlSuperior
@@ -164,90 +155,6 @@
             lblOrden.Text = "# órdenes";
             lblOrden.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // dgvSeguimiento
-            // 
-            dgvSeguimiento.AllowUserToAddRows = false;
-            dgvSeguimiento.AllowUserToDeleteRows = false;
-            dgvSeguimiento.AllowUserToResizeColumns = false;
-            dgvSeguimiento.AllowUserToResizeRows = false;
-            dgvSeguimiento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvSeguimiento.BackgroundColor = Color.White;
-            dgvSeguimiento.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvSeguimiento.ColumnHeadersHeight = 40;
-            dgvSeguimiento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvSeguimiento.Columns.AddRange(new DataGridViewColumn[] { Orden, Cliente_Dispositivo, Tecnico, Estado, Ingreso, Entrega, Tiempo });
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ActiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgvSeguimiento.DefaultCellStyle = dataGridViewCellStyle1;
-            dgvSeguimiento.EnableHeadersVisualStyles = false;
-            dgvSeguimiento.GridColor = SystemColors.ActiveCaption;
-            dgvSeguimiento.Location = new Point(0, 54);
-            dgvSeguimiento.MaximumSize = new Size(1125, 641);
-            dgvSeguimiento.MinimumSize = new Size(1125, 641);
-            dgvSeguimiento.MultiSelect = false;
-            dgvSeguimiento.Name = "dgvSeguimiento";
-            dgvSeguimiento.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.ForeColor = Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dgvSeguimiento.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            dgvSeguimiento.RowTemplate.Height = 30;
-            dgvSeguimiento.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvSeguimiento.Size = new Size(1125, 641);
-            dgvSeguimiento.TabIndex = 3;
-            dgvSeguimiento.CellClick += dgvSeguimiento_CellClick;
-            dgvSeguimiento.CellContentClick += dgvSeguimiento_CellContentClick;
-            dgvSeguimiento.CellDoubleClick += dgvSeguimiento_CellDoubleClick;
-            dgvSeguimiento.RowPostPaint += dgvSeguimiento_RowPostPaint;
-            // 
-            // Orden
-            // 
-            Orden.HeaderText = "ORDEN";
-            Orden.Name = "Orden";
-            Orden.ReadOnly = true;
-            // 
-            // Cliente_Dispositivo
-            // 
-            Cliente_Dispositivo.HeaderText = "CLIENTE \\ DISPOSITIVO";
-            Cliente_Dispositivo.Name = "Cliente_Dispositivo";
-            Cliente_Dispositivo.ReadOnly = true;
-            // 
-            // Tecnico
-            // 
-            Tecnico.HeaderText = "TÉCNICO";
-            Tecnico.Name = "Tecnico";
-            Tecnico.ReadOnly = true;
-            // 
-            // Estado
-            // 
-            Estado.HeaderText = "ESTADO";
-            Estado.Name = "Estado";
-            Estado.ReadOnly = true;
-            // 
-            // Ingreso
-            // 
-            Ingreso.HeaderText = "INGRESO";
-            Ingreso.Name = "Ingreso";
-            Ingreso.ReadOnly = true;
-            // 
-            // Entrega
-            // 
-            Entrega.HeaderText = "ENTREGA ESTIMADA";
-            Entrega.Name = "Entrega";
-            Entrega.ReadOnly = true;
-            // 
-            // Tiempo
-            // 
-            Tiempo.HeaderText = "TIEMPO";
-            Tiempo.Name = "Tiempo";
-            Tiempo.ReadOnly = true;
-            // 
             // pnlContenedor
             // 
             pnlContenedor.Controls.Add(pnldgv);
@@ -267,6 +174,17 @@
             pnldgv.Size = new Size(1125, 647);
             pnldgv.TabIndex = 4;
             // 
+            // dgvSeguimiento
+            // 
+            dgvSeguimiento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvSeguimiento.Location = new Point(0, 55);
+            dgvSeguimiento.Name = "dgvSeguimiento";
+            dgvSeguimiento.Size = new Size(1125, 649);
+            dgvSeguimiento.TabIndex = 4;
+            dgvSeguimiento.CellDoubleClick += dgvNuevo_CellDoubleClick;
+            dgvSeguimiento.CellFormatting += dgvNuevo_CellFormatting;
+            dgvSeguimiento.CellPainting += dgvNuevo_CellPainting;
+            // 
             // ucSeguimientoReparaciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -281,9 +199,9 @@
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInformacion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvSeguimiento).EndInit();
             pnlContenedor.ResumeLayout(false);
             pnldgv.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvSeguimiento).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
