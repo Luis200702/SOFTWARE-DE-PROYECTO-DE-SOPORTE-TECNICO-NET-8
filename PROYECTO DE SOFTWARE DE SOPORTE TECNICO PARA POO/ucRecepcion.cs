@@ -76,6 +76,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
+                    // 1. Cargar técnicos
                     string queryTecnicos = "SELECT Id, Nombre FROM Usuarios WHERE Perfil = 'Tecnico'";
                     SqlDataAdapter daTecnicos = new SqlDataAdapter(queryTecnicos, db.oCon);
                     DataTable dtTecnicos = new DataTable();
@@ -85,13 +86,25 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     cmbTecnico.DisplayMember = "Nombre";
                     cmbTecnico.ValueMember = "Id";
 
-                    if (cmbSucursal.Items.Count == 0)
+                    // 2. Cargar sucursales dinámicamente desde la base de datos
+                    cmbSucursal.Items.Clear();
+                    string querySucursales = "SELECT NombreSucursal FROM Sucursales";
+
+                    using (SqlCommand cmdSuc = new SqlCommand(querySucursales, db.oCon))
                     {
-                        cmbSucursal.Items.Add("Centro");
-                        cmbSucursal.Items.Add("Norte");
-                        cmbSucursal.Items.Add("Sur");
+                        using (SqlDataReader readerSuc = cmdSuc.ExecuteReader())
+                        {
+                            while (readerSuc.Read())
+                            {
+                                cmbSucursal.Items.Add(readerSuc["NombreSucursal"].ToString());
+                            }
+                        }
                     }
-                    cmbSucursal.SelectedIndex = 0;
+
+                    if (cmbSucursal.Items.Count > 0)
+                    {
+                        cmbSucursal.SelectedIndex = 0;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -510,7 +523,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             texto = texto.Replace(',', '.');
 
             if (decimal.TryParse(texto, System.Globalization.NumberStyles.Any,
-                                 System.Globalization.CultureInfo.InvariantCulture, out decimal precio)
+                                       System.Globalization.CultureInfo.InvariantCulture, out decimal precio)
                 && precio >= 0)
             {
                 // Mostramos con coma

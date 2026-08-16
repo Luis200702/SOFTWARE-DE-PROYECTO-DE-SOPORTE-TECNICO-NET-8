@@ -38,20 +38,21 @@
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
             tcDerivaciones = new Sunny.UI.UITabControl();
+            tpSalientes = new TabPage();
+            pnlDerechoS = new Panel();
+            pnlIzquierdoS = new Panel();
             tpEntrantes = new TabPage();
+            pnlDerechoE = new Panel();
             pnlIzquierdoE = new Panel();
             flpIzquierdoE = new FlowLayoutPanel();
-            pnlDerechoE = new Panel();
-            tpSalientes = new TabPage();
-            pnlIzquierdoS = new Panel();
-            pnlDerechoS = new Panel();
+            flpIzquierdoS = new FlowLayoutPanel();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tcDerivaciones.SuspendLayout();
-            tpEntrantes.SuspendLayout();
-            pnlIzquierdoE.SuspendLayout();
             tpSalientes.SuspendLayout();
             pnlIzquierdoS.SuspendLayout();
+            tpEntrantes.SuspendLayout();
+            pnlIzquierdoE.SuspendLayout();
             SuspendLayout();
             // 
             // pnlSuperior
@@ -106,8 +107,8 @@
             // 
             // tcDerivaciones
             // 
-            tcDerivaciones.Controls.Add(tpEntrantes);
             tcDerivaciones.Controls.Add(tpSalientes);
+            tcDerivaciones.Controls.Add(tpEntrantes);
             tcDerivaciones.DrawMode = TabDrawMode.OwnerDrawFixed;
             tcDerivaciones.FillColor = Color.FromArgb(245, 247, 250);
             tcDerivaciones.Font = new Font("Microsoft Sans Serif", 12F);
@@ -129,9 +130,36 @@
             tcDerivaciones.TabUnSelectedForeColor = Color.FromArgb(48, 48, 48);
             tcDerivaciones.TipsFont = new Font("Microsoft Sans Serif", 9F);
             // 
+            // tpSalientes
+            // 
+            tpSalientes.BackColor = Color.FromArgb(245, 247, 250);
+            tpSalientes.Controls.Add(pnlDerechoS);
+            tpSalientes.Controls.Add(pnlIzquierdoS);
+            tpSalientes.Location = new Point(0, 40);
+            tpSalientes.Name = "tpSalientes";
+            tpSalientes.Size = new Size(1125, 733);
+            tpSalientes.TabIndex = 1;
+            tpSalientes.Text = "Salientes (Enviadas)";
+            // 
+            // pnlDerechoS
+            // 
+            pnlDerechoS.Location = new Point(479, 0);
+            pnlDerechoS.Name = "pnlDerechoS";
+            pnlDerechoS.Size = new Size(646, 730);
+            pnlDerechoS.TabIndex = 1;
+            // 
+            // pnlIzquierdoS
+            // 
+            pnlIzquierdoS.Controls.Add(flpIzquierdoS);
+            pnlIzquierdoS.Location = new Point(0, 0);
+            pnlIzquierdoS.Name = "pnlIzquierdoS";
+            pnlIzquierdoS.Size = new Size(477, 733);
+            pnlIzquierdoS.TabIndex = 1;
+            // 
             // tpEntrantes
             // 
             tpEntrantes.BackColor = Color.FromArgb(245, 247, 250);
+            tpEntrantes.Controls.Add(pnlDerechoE);
             tpEntrantes.Controls.Add(pnlIzquierdoE);
             tpEntrantes.Location = new Point(0, 40);
             tpEntrantes.Name = "tpEntrantes";
@@ -139,10 +167,16 @@
             tpEntrantes.TabIndex = 0;
             tpEntrantes.Text = "Entrantes (Recibidas)";
             // 
+            // pnlDerechoE
+            // 
+            pnlDerechoE.Location = new Point(479, 0);
+            pnlDerechoE.Name = "pnlDerechoE";
+            pnlDerechoE.Size = new Size(644, 733);
+            pnlDerechoE.TabIndex = 1;
+            // 
             // pnlIzquierdoE
             // 
             pnlIzquierdoE.Controls.Add(flpIzquierdoE);
-            pnlIzquierdoE.Controls.Add(pnlDerechoE);
             pnlIzquierdoE.Location = new Point(0, 0);
             pnlIzquierdoE.Name = "pnlIzquierdoE";
             pnlIzquierdoE.Size = new Size(477, 733);
@@ -157,37 +191,14 @@
             flpIzquierdoE.Size = new Size(477, 733);
             flpIzquierdoE.TabIndex = 2;
             // 
-            // pnlDerechoE
+            // flpIzquierdoS
             // 
-            pnlDerechoE.Location = new Point(476, 0);
-            pnlDerechoE.Name = "pnlDerechoE";
-            pnlDerechoE.Size = new Size(649, 733);
-            pnlDerechoE.TabIndex = 1;
-            // 
-            // tpSalientes
-            // 
-            tpSalientes.BackColor = Color.FromArgb(245, 247, 250);
-            tpSalientes.Controls.Add(pnlIzquierdoS);
-            tpSalientes.Location = new Point(0, 40);
-            tpSalientes.Name = "tpSalientes";
-            tpSalientes.Size = new Size(1125, 733);
-            tpSalientes.TabIndex = 1;
-            tpSalientes.Text = "Salientes (Enviadas)";
-            // 
-            // pnlIzquierdoS
-            // 
-            pnlIzquierdoS.Controls.Add(pnlDerechoS);
-            pnlIzquierdoS.Location = new Point(0, 0);
-            pnlIzquierdoS.Name = "pnlIzquierdoS";
-            pnlIzquierdoS.Size = new Size(477, 733);
-            pnlIzquierdoS.TabIndex = 1;
-            // 
-            // pnlDerechoS
-            // 
-            pnlDerechoS.Location = new Point(478, 3);
-            pnlDerechoS.Name = "pnlDerechoS";
-            pnlDerechoS.Size = new Size(644, 730);
-            pnlDerechoS.TabIndex = 1;
+            flpIzquierdoS.AutoScroll = true;
+            flpIzquierdoS.Dock = DockStyle.Fill;
+            flpIzquierdoS.Location = new Point(0, 0);
+            flpIzquierdoS.Name = "flpIzquierdoS";
+            flpIzquierdoS.Size = new Size(477, 733);
+            flpIzquierdoS.TabIndex = 3;
             // 
             // ucDerivacion
             // 
@@ -201,10 +212,10 @@
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tcDerivaciones.ResumeLayout(false);
-            tpEntrantes.ResumeLayout(false);
-            pnlIzquierdoE.ResumeLayout(false);
             tpSalientes.ResumeLayout(false);
             pnlIzquierdoS.ResumeLayout(false);
+            tpEntrantes.ResumeLayout(false);
+            pnlIzquierdoE.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -221,5 +232,6 @@
         private Panel pnlIzquierdoS;
         private Panel pnlDerechoS;
         private FlowLayoutPanel flpIzquierdoE;
+        private FlowLayoutPanel flpIzquierdoS;
     }
 }

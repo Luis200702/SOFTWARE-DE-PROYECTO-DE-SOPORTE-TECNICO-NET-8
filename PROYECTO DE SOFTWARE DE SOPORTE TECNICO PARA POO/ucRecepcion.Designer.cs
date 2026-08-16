@@ -481,7 +481,6 @@
             cmbSucursal.ForeColor = Color.FromArgb(235, 239, 240);
             cmbSucursal.FormattingEnabled = true;
             cmbSucursal.ItemHoverColor = Color.FromArgb(155, 200, 255);
-            cmbSucursal.Items.AddRange(new object[] { "Seleccionar...", "Sucursal Centro", "Sucursal Sur" });
             cmbSucursal.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
             cmbSucursal.Location = new Point(177, 377);
             cmbSucursal.Margin = new Padding(4, 5, 4, 5);
