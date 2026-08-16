@@ -47,18 +47,19 @@
             airSeparator4 = new ReaLTaiizor.Controls.AirSeparator();
             label7 = new Label();
             pnlDispositivoLleva = new Sunny.UI.UIPanel();
+            cmbMarcaNuevo = new Sunny.UI.UIComboBox();
             cmbFormaPago = new Sunny.UI.UIComboBox();
             label6 = new Label();
             txtPrecioOriginal = new Sunny.UI.UITextBox();
             label5 = new Label();
             txtModeloNuevo = new Sunny.UI.UITextBox();
-            txtMarcaNuevo = new Sunny.UI.UITextBox();
             label3 = new Label();
             label4 = new Label();
             label2 = new Label();
             pictureBox1 = new PictureBox();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             pnlDispositivoRecibido = new Sunny.UI.UIPanel();
+            cmbMarcaRecibido = new Sunny.UI.UIComboBox();
             label13 = new Label();
             txtSerieCanje = new Sunny.UI.UITextBox();
             label11 = new Label();
@@ -78,7 +79,6 @@
             lblEstado = new Label();
             cmbEstadoFisico = new Sunny.UI.UIComboBox();
             txtModeloRecibido = new Sunny.UI.UITextBox();
-            txtMarcaRecibido = new Sunny.UI.UITextBox();
             lblModelo = new Label();
             lblMarca = new Label();
             lblTipoDispositivo = new Label();
@@ -387,12 +387,12 @@
             // pnlDispositivoLleva
             // 
             pnlDispositivoLleva.BackColor = Color.FromArgb(235, 239, 240);
+            pnlDispositivoLleva.Controls.Add(cmbMarcaNuevo);
             pnlDispositivoLleva.Controls.Add(cmbFormaPago);
             pnlDispositivoLleva.Controls.Add(label6);
             pnlDispositivoLleva.Controls.Add(txtPrecioOriginal);
             pnlDispositivoLleva.Controls.Add(label5);
             pnlDispositivoLleva.Controls.Add(txtModeloNuevo);
-            pnlDispositivoLleva.Controls.Add(txtMarcaNuevo);
             pnlDispositivoLleva.Controls.Add(label3);
             pnlDispositivoLleva.Controls.Add(label4);
             pnlDispositivoLleva.Controls.Add(label2);
@@ -410,6 +410,30 @@
             pnlDispositivoLleva.TabIndex = 1;
             pnlDispositivoLleva.Text = null;
             pnlDispositivoLleva.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // cmbMarcaNuevo
+            // 
+            cmbMarcaNuevo.BackColor = Color.Transparent;
+            cmbMarcaNuevo.DataSource = null;
+            cmbMarcaNuevo.FillColor = Color.FromArgb(75, 92, 108);
+            cmbMarcaNuevo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbMarcaNuevo.ForeColor = Color.FromArgb(235, 239, 240);
+            cmbMarcaNuevo.FormattingEnabled = true;
+            cmbMarcaNuevo.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbMarcaNuevo.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbMarcaNuevo.Location = new Point(18, 98);
+            cmbMarcaNuevo.Margin = new Padding(4, 5, 4, 5);
+            cmbMarcaNuevo.MinimumSize = new Size(63, 0);
+            cmbMarcaNuevo.Name = "cmbMarcaNuevo";
+            cmbMarcaNuevo.Padding = new Padding(0, 0, 30, 2);
+            cmbMarcaNuevo.Radius = 12;
+            cmbMarcaNuevo.RectColor = Color.FromArgb(148, 163, 184);
+            cmbMarcaNuevo.Size = new Size(294, 37);
+            cmbMarcaNuevo.SymbolSize = 24;
+            cmbMarcaNuevo.TabIndex = 57;
+            cmbMarcaNuevo.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbMarcaNuevo.Watermark = "Seleccionar";
+            cmbMarcaNuevo.WatermarkColor = Color.FromArgb(235, 239, 240);
             // 
             // cmbFormaPago
             // 
@@ -506,28 +530,6 @@
             txtModeloNuevo.Watermark = "Ej. Galaxy S26";
             txtModeloNuevo.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
-            // txtMarcaNuevo
-            // 
-            txtMarcaNuevo.BackColor = Color.Transparent;
-            txtMarcaNuevo.FillColor = Color.FromArgb(235, 239, 240);
-            txtMarcaNuevo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtMarcaNuevo.ForeColor = Color.FromArgb(75, 92, 108);
-            txtMarcaNuevo.Location = new Point(18, 91);
-            txtMarcaNuevo.Margin = new Padding(4, 5, 4, 5);
-            txtMarcaNuevo.MaxLength = 255;
-            txtMarcaNuevo.Minimum = 0D;
-            txtMarcaNuevo.MinimumSize = new Size(1, 16);
-            txtMarcaNuevo.Name = "txtMarcaNuevo";
-            txtMarcaNuevo.Padding = new Padding(5);
-            txtMarcaNuevo.Radius = 12;
-            txtMarcaNuevo.RectColor = Color.FromArgb(235, 239, 240);
-            txtMarcaNuevo.ShowText = false;
-            txtMarcaNuevo.Size = new Size(294, 37);
-            txtMarcaNuevo.TabIndex = 49;
-            txtMarcaNuevo.TextAlignment = ContentAlignment.MiddleLeft;
-            txtMarcaNuevo.Watermark = "Ej. Samsung";
-            txtMarcaNuevo.WatermarkColor = Color.FromArgb(198, 199, 189);
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -593,6 +595,7 @@
             // pnlDispositivoRecibido
             // 
             pnlDispositivoRecibido.BackColor = Color.FromArgb(235, 239, 240);
+            pnlDispositivoRecibido.Controls.Add(cmbMarcaRecibido);
             pnlDispositivoRecibido.Controls.Add(label13);
             pnlDispositivoRecibido.Controls.Add(txtSerieCanje);
             pnlDispositivoRecibido.Controls.Add(label11);
@@ -612,7 +615,6 @@
             pnlDispositivoRecibido.Controls.Add(lblEstado);
             pnlDispositivoRecibido.Controls.Add(cmbEstadoFisico);
             pnlDispositivoRecibido.Controls.Add(txtModeloRecibido);
-            pnlDispositivoRecibido.Controls.Add(txtMarcaRecibido);
             pnlDispositivoRecibido.Controls.Add(lblModelo);
             pnlDispositivoRecibido.Controls.Add(lblMarca);
             pnlDispositivoRecibido.Controls.Add(lblTipoDispositivo);
@@ -631,6 +633,30 @@
             pnlDispositivoRecibido.TabIndex = 0;
             pnlDispositivoRecibido.Text = null;
             pnlDispositivoRecibido.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // cmbMarcaRecibido
+            // 
+            cmbMarcaRecibido.BackColor = Color.Transparent;
+            cmbMarcaRecibido.DataSource = null;
+            cmbMarcaRecibido.FillColor = Color.FromArgb(75, 92, 108);
+            cmbMarcaRecibido.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbMarcaRecibido.ForeColor = Color.FromArgb(235, 239, 240);
+            cmbMarcaRecibido.FormattingEnabled = true;
+            cmbMarcaRecibido.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbMarcaRecibido.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbMarcaRecibido.Location = new Point(18, 146);
+            cmbMarcaRecibido.Margin = new Padding(4, 5, 4, 5);
+            cmbMarcaRecibido.MinimumSize = new Size(63, 0);
+            cmbMarcaRecibido.Name = "cmbMarcaRecibido";
+            cmbMarcaRecibido.Padding = new Padding(0, 0, 30, 2);
+            cmbMarcaRecibido.Radius = 12;
+            cmbMarcaRecibido.RectColor = Color.FromArgb(148, 163, 184);
+            cmbMarcaRecibido.Size = new Size(294, 37);
+            cmbMarcaRecibido.SymbolSize = 24;
+            cmbMarcaRecibido.TabIndex = 67;
+            cmbMarcaRecibido.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbMarcaRecibido.Watermark = "Seleccionar";
+            cmbMarcaRecibido.WatermarkColor = Color.FromArgb(235, 239, 240);
             // 
             // label13
             // 
@@ -975,28 +1001,6 @@
             txtModeloRecibido.Watermark = "Ej. Galaxy S26";
             txtModeloRecibido.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
-            // txtMarcaRecibido
-            // 
-            txtMarcaRecibido.BackColor = Color.Transparent;
-            txtMarcaRecibido.FillColor = Color.FromArgb(235, 239, 240);
-            txtMarcaRecibido.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtMarcaRecibido.ForeColor = Color.FromArgb(75, 92, 108);
-            txtMarcaRecibido.Location = new Point(18, 146);
-            txtMarcaRecibido.Margin = new Padding(4, 5, 4, 5);
-            txtMarcaRecibido.MaxLength = 255;
-            txtMarcaRecibido.Minimum = 0D;
-            txtMarcaRecibido.MinimumSize = new Size(1, 16);
-            txtMarcaRecibido.Name = "txtMarcaRecibido";
-            txtMarcaRecibido.Padding = new Padding(5);
-            txtMarcaRecibido.Radius = 12;
-            txtMarcaRecibido.RectColor = Color.FromArgb(235, 239, 240);
-            txtMarcaRecibido.ShowText = false;
-            txtMarcaRecibido.Size = new Size(294, 37);
-            txtMarcaRecibido.TabIndex = 45;
-            txtMarcaRecibido.TextAlignment = ContentAlignment.MiddleLeft;
-            txtMarcaRecibido.Watermark = "Ej. Samsung";
-            txtMarcaRecibido.WatermarkColor = Color.FromArgb(198, 199, 189);
-            // 
             // lblModelo
             // 
             lblModelo.AutoSize = true;
@@ -1109,7 +1113,6 @@
         private Label lblDispositivoRecibido;
         private Label lblTipoDispositivo;
         private Sunny.UI.UITextBox txtModeloRecibido;
-        private Sunny.UI.UITextBox txtMarcaRecibido;
         private Label lblModelo;
         private Label lblMarca;
         private Label lblEstado;
@@ -1129,7 +1132,6 @@
         private Sunny.UI.UITextBox txtPrecioOriginal;
         private Label label5;
         private Sunny.UI.UITextBox txtModeloNuevo;
-        private Sunny.UI.UITextBox txtMarcaNuevo;
         private Label label3;
         private Label label4;
         private Sunny.UI.UIComboBox cmbFormaPago;
@@ -1153,5 +1155,7 @@
         private Sunny.UI.UITextBox txtCedula;
         private Sunny.UI.UITextBox txtSerieCanje;
         private Label label13;
+        private Sunny.UI.UIComboBox cmbMarcaNuevo;
+        private Sunny.UI.UIComboBox cmbMarcaRecibido;
     }
 }

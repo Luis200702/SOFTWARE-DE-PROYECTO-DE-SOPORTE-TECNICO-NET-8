@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Sunny.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,20 +15,38 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
     public partial class ucTradeIn : UserControl
     {
         ucRecepcion Unsoloboton = new ucRecepcion();
+        private string tipoDispositivoSeleccionado = ""; // Controla si es computadora o teléfono
 
         public ucTradeIn()
         {
             InitializeComponent();
         }
 
+        private void ucTradeIn_Load(object sender, EventArgs e)
+        {
+            // Cargar marcas generales por defecto al abrir el módulo en ambos ComboBoxes
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarcaRecibido, "");
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarcaNuevo, "");
+        }
+
         private void btnComputadora_Click(object sender, EventArgs e)
         {
             Unsoloboton.SeleccionarBoton(btnComputadora);
+            tipoDispositivoSeleccionado = "computadora";
+
+            // 💻 Cargamos marcas orientadas a computadoras en ambos ComboBoxes
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarcaRecibido, tipoDispositivoSeleccionado);
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarcaNuevo, tipoDispositivoSeleccionado);
         }
 
         private void btnTelefono_Click(object sender, EventArgs e)
         {
             Unsoloboton.SeleccionarBoton(btnTelefono);
+            tipoDispositivoSeleccionado = "telefono";
+
+            // 📱 Cargamos marcas orientadas a teléfonos en ambos ComboBoxes
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarcaRecibido, tipoDispositivoSeleccionado);
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarcaNuevo, tipoDispositivoSeleccionado);
         }
 
         private void txtCedula_Leave(object sender, EventArgs e)
@@ -94,25 +113,26 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
-                        // Definición del tipo de dispositivo según tu lógica de negocio
-                        string tipoDispositivo = "Computadora";
-                        cmd.Parameters.AddWithValue("@tipo", tipoDispositivo);
+                        // Tipo de dispositivo dinámico según el botón seleccionado
+                        string tipo = string.IsNullOrEmpty(tipoDispositivoSeleccionado) ? "Computadora" : tipoDispositivoSeleccionado;
+                        cmd.Parameters.AddWithValue("@tipo", tipo);
 
-                        cmd.Parameters.AddWithValue("@marcaRecibido", txtMarcaRecibido.Text);
-                        cmd.Parameters.AddWithValue("@modeloRecibido", txtModeloRecibido.Text);
-                        cmd.Parameters.AddWithValue("@imei", txtSerieCanje.Text);
+                        // Lectura de los ComboBoxes de marcas (.Text para capturar selección o escritura manual)
+                        cmd.Parameters.AddWithValue("@marcaRecibido", cmbMarcaRecibido.Text.Trim());
+                        cmd.Parameters.AddWithValue("@modeloRecibido", txtModeloRecibido.Text.Trim());
+                        cmd.Parameters.AddWithValue("@imei", txtSerieCanje.Text.Trim());
                         cmd.Parameters.AddWithValue("@estadoFisico", cmbEstadoFisico.Text ?? "");
                         cmd.Parameters.AddWithValue("@estadoFuncional", cmbEstadoFuncional.Text ?? "");
 
                         decimal.TryParse(txtValorAsignado.Text, out decimal valorAsignado);
                         cmd.Parameters.AddWithValue("@valorAsignado", valorAsignado);
 
-                        cmd.Parameters.AddWithValue("@cedula", txtCedula.Text);
-                        cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
-                        cmd.Parameters.AddWithValue("@telefono", txtNumeroTelefonico.Text);
+                        cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Trim());
+                        cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+                        cmd.Parameters.AddWithValue("@telefono", txtNumeroTelefonico.Text.Trim());
 
-                        cmd.Parameters.AddWithValue("@marcaNuevo", txtMarcaNuevo.Text);
-                        cmd.Parameters.AddWithValue("@modeloNuevo", txtModeloNuevo.Text);
+                        cmd.Parameters.AddWithValue("@marcaNuevo", cmbMarcaNuevo.Text.Trim());
+                        cmd.Parameters.AddWithValue("@modeloNuevo", txtModeloNuevo.Text.Trim());
 
                         decimal.TryParse(txtPrecioOriginal.Text, out decimal precioOriginal);
                         cmd.Parameters.AddWithValue("@precioOriginal", precioOriginal);
@@ -155,23 +175,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // Método central para hacer los cálculos automáticos
         private void CalcularTotales()
         {
-            // 1. Obtenemos el precio del equipo nuevo (columna central)
             decimal.TryParse(txtPrecioOriginal.Text, out decimal precioNuevo);
-
-            // 2. Obtenemos el valor asignado al equipo usado (columna izquierda)
             decimal.TryParse(txtValorAsignado.Text, out decimal valorTradeIn);
 
-            // 3. Calculamos la diferencia a pagar
             decimal diferencia = precioNuevo - valorTradeIn;
-            if (diferencia < 0) diferencia = 0; // Evita valores negativos por seguridad
+            if (diferencia < 0) diferencia = 0;
 
-            // 4. Actualizamos las etiquetas del resumen (tarjeta derecha)
             lblPrecioEquipoNuevo.Text = "$" + precioNuevo.ToString("0.00");
             lblValorTradeIn.Text = "$" + valorTradeIn.ToString("0.00");
             lblDiferencia.Text = "$" + diferencia.ToString("0.00");
         }
 
-        // Eventos que disparan el cálculo automáticamente cuando el usuario escribe
         private void txtPrecioOriginal_TextChanged(object sender, EventArgs e)
         {
             CalcularTotales();

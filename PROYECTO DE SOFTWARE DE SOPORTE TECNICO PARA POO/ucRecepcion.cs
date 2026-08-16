@@ -39,6 +39,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             // 🔍 Vinculamos el evento para buscar al cliente cuando termine de escribir la cédula y salga del cuadro de texto
             txtIdentificacionCliente.Leave += txtIdentificacionCliente_Leave;
+
+            // Cargar marcas generales por defecto al abrir
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, "");
         }
 
         public void SeleccionarBoton(UIButton boton)
@@ -61,12 +64,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             SeleccionarBoton(btnComputadora);
             tipoDispositivo = "computadora";
+
+            // 💻 Carga las marcas orientadas a computadoras en el ComboBox
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, tipoDispositivo);
         }
 
         private void btnTelefono_Click(object sender, EventArgs e)
         {
             SeleccionarBoton(btnTelefono);
             tipoDispositivo = "telefono";
+
+            // 📱 Carga las marcas orientadas a teléfonos en el ComboBox
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, tipoDispositivo);
         }
 
         private void CargarDatosComboBox()
@@ -355,6 +364,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             // Limpiar botones de tipo de dispositivo
             tipoDispositivo = "";
+            cmbMarca.Text = "";
             if (botonSeleccionado != null)
             {
                 botonSeleccionado.FillColor = Color.FromArgb(22, 35, 52);
@@ -368,6 +378,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             // Generar el nuevo número de orden para el siguiente registro
             MostrarNumeroOrden();
+
+            // Recargar marcas generales
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, "");
         }
 
         private void btnGuardarRegistro_Click(object sender, EventArgs e)
@@ -392,7 +405,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             var equipo = listaEquipos[indicePestanaActual];
 
             equipo.Tipo = tipoDispositivo;
-            equipo.Marca = txtMarca.Text;
+            equipo.Marca = cmbMarca.Text; // <--- Guardamos el texto seleccionado o escrito en el ComboBox
             equipo.Modelo = txtModelo.Text;
             equipo.Serie = txtSerie.Text;
             equipo.Color = txtColor.Text;
@@ -406,7 +419,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             var equipo = listaEquipos[indice];
 
             tipoDispositivo = equipo.Tipo;
-            txtMarca.Text = equipo.Marca;
+
+            // Recargar las marcas correspondientes al tipo antes de asignar el texto al ComboBox
+            CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, tipoDispositivo);
+            cmbMarca.Text = equipo.Marca;
+
             txtModelo.Text = equipo.Modelo;
             txtSerie.Text = equipo.Serie;
             txtColor.Text = equipo.Color;

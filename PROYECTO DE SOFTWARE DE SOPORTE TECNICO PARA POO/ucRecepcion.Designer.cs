@@ -77,13 +77,13 @@
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             lblDatosCliente = new Label();
             pnlDispositivo = new Sunny.UI.UIPanel();
+            cmbMarca = new Sunny.UI.UIComboBox();
             lblEstado = new Label();
             cmbEstado = new Sunny.UI.UIComboBox();
             btnTelefono = new Sunny.UI.UIButton();
             lblTipoDispositivo = new Label();
             txtModelo = new Sunny.UI.UITextBox();
             btnComputadora = new Sunny.UI.UIButton();
-            txtMarca = new Sunny.UI.UITextBox();
             txtColor = new Sunny.UI.UITextBox();
             txtSerie = new Sunny.UI.UITextBox();
             lblColor = new Label();
@@ -887,13 +887,13 @@
             // 
             pnlDispositivo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             pnlDispositivo.BackColor = Color.Transparent;
+            pnlDispositivo.Controls.Add(cmbMarca);
             pnlDispositivo.Controls.Add(lblEstado);
             pnlDispositivo.Controls.Add(cmbEstado);
             pnlDispositivo.Controls.Add(btnTelefono);
             pnlDispositivo.Controls.Add(lblTipoDispositivo);
             pnlDispositivo.Controls.Add(txtModelo);
             pnlDispositivo.Controls.Add(btnComputadora);
-            pnlDispositivo.Controls.Add(txtMarca);
             pnlDispositivo.Controls.Add(txtColor);
             pnlDispositivo.Controls.Add(txtSerie);
             pnlDispositivo.Controls.Add(lblColor);
@@ -915,6 +915,31 @@
             pnlDispositivo.TabIndex = 2;
             pnlDispositivo.Text = null;
             pnlDispositivo.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // cmbMarca
+            // 
+            cmbMarca.BackColor = Color.Transparent;
+            cmbMarca.DataSource = null;
+            cmbMarca.FillColor = Color.FromArgb(75, 92, 108);
+            cmbMarca.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbMarca.ForeColor = Color.FromArgb(235, 239, 240);
+            cmbMarca.FormattingEnabled = true;
+            cmbMarca.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbMarca.Items.AddRange(new object[] { "Seleccionar estado...", "Bueno", "Regular", "Malo" });
+            cmbMarca.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbMarca.Location = new Point(18, 166);
+            cmbMarca.Margin = new Padding(4, 5, 4, 5);
+            cmbMarca.MinimumSize = new Size(63, 0);
+            cmbMarca.Name = "cmbMarca";
+            cmbMarca.Padding = new Padding(0, 0, 30, 2);
+            cmbMarca.Radius = 12;
+            cmbMarca.RectColor = Color.FromArgb(148, 163, 184);
+            cmbMarca.Size = new Size(294, 37);
+            cmbMarca.SymbolSize = 24;
+            cmbMarca.TabIndex = 45;
+            cmbMarca.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbMarca.Watermark = "";
+            cmbMarca.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
             // lblEstado
             // 
@@ -1029,27 +1054,6 @@
             btnComputadora.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnComputadora.TipsForeColor = Color.Transparent;
             btnComputadora.Click += btnComputadora_Click;
-            // 
-            // txtMarca
-            // 
-            txtMarca.FillColor = Color.FromArgb(240, 244, 248);
-            txtMarca.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtMarca.ForeColor = Color.FromArgb(75, 92, 108);
-            txtMarca.Location = new Point(18, 160);
-            txtMarca.Margin = new Padding(4, 5, 4, 5);
-            txtMarca.MaxLength = 255;
-            txtMarca.Minimum = 0D;
-            txtMarca.MinimumSize = new Size(1, 16);
-            txtMarca.Name = "txtMarca";
-            txtMarca.Padding = new Padding(5);
-            txtMarca.Radius = 12;
-            txtMarca.RectColor = Color.FromArgb(240, 244, 248);
-            txtMarca.ShowText = false;
-            txtMarca.Size = new Size(294, 37);
-            txtMarca.TabIndex = 41;
-            txtMarca.TextAlignment = ContentAlignment.MiddleLeft;
-            txtMarca.Watermark = "Ej. Samsung";
-            txtMarca.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
             // txtColor
             // 
@@ -1220,7 +1224,6 @@
         private Label lblOrden;
         private Panel pnlCentral;
         private Sunny.UI.UIPanel pnlDispositivo;
-        private Sunny.UI.UITextBox txtMarca;
         private Sunny.UI.UITextBox txtColor;
         private Sunny.UI.UITextBox txtSerie;
         private Label lblColor;
@@ -1276,5 +1279,6 @@
         private Sunny.UI.UIButton btnAgregarEquipo;
         private Sunny.UI.UIButton btnEquipo;
         private PictureBox pictureBox6;
+        private Sunny.UI.UIComboBox cmbMarca;
     }
 }
