@@ -34,8 +34,12 @@
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
             btnNuevaDerivacion = new Sunny.UI.UISymbolButton();
+            uiTabControl1 = new Sunny.UI.UITabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            uiTabControl1.SuspendLayout();
             SuspendLayout();
             // 
             // uiContextMenuStrip1
@@ -95,16 +99,53 @@
             btnNuevaDerivacion.Text = "Nueva derivación";
             btnNuevaDerivacion.TipsFont = new Font("Microsoft Sans Serif", 9F);
             // 
+            // uiTabControl1
+            // 
+            uiTabControl1.Controls.Add(tabPage1);
+            uiTabControl1.Controls.Add(tabPage2);
+            uiTabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
+            uiTabControl1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiTabControl1.ItemSize = new Size(150, 40);
+            uiTabControl1.Location = new Point(0, 59);
+            uiTabControl1.MainPage = "";
+            uiTabControl1.Name = "uiTabControl1";
+            uiTabControl1.SelectedIndex = 0;
+            uiTabControl1.Size = new Size(1125, 603);
+            uiTabControl1.SizeMode = TabSizeMode.Fixed;
+            uiTabControl1.TabIndex = 38;
+            uiTabControl1.TabUnSelectedForeColor = Color.FromArgb(240, 240, 240);
+            uiTabControl1.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            // 
+            // tabPage1
+            // 
+            tabPage1.Location = new Point(0, 40);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Size = new Size(1125, 563);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "tabPage1";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(0, 40);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Size = new Size(1050, 563);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
             // ucDerivacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(uiTabControl1);
             Controls.Add(pnlSuperior);
             Name = "ucDerivacion";
             Size = new Size(1125, 764);
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            uiTabControl1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -115,5 +156,8 @@
         private PictureBox pictureBox1;
         private Label lblTitulo;
         private Sunny.UI.UISymbolButton btnNuevaDerivacion;
+        private Sunny.UI.UITabControl uiTabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
     }
 }
