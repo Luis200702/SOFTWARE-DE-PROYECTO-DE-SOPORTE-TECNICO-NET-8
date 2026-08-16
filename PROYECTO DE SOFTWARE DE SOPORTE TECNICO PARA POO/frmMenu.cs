@@ -17,6 +17,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class frmMenu : Form
     {
+
+        private string sucursalActual;
+
+
         private float posicionActualY;
         private float posicionObjetivoY;
 
@@ -29,7 +33,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         // Variable para mantener el botón que recibió Clic 
         private System.Windows.Forms.Button botonActivo;
-
+        public frmMenu(string sucursal)
+        {
+            InitializeComponent();
+            sucursalActual = sucursal;
+        }
         public frmMenu()
         {
             //Crear e inicializar todos los componentes del diseño
@@ -37,6 +45,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             // Configurar el evento CheckedChanged del ToggleSwitch
             //toggleSwitch1.CheckedChanged += toggleSwitch1_CheckedChanged;
+
 
             // 1. Activar DoubleBuffer para evitar parpadeos en el panel
             typeof(System.Windows.Forms.Panel).InvokeMember("DoubleBuffered",
@@ -352,6 +361,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnDerivacionOrdenes_Click(object sender, EventArgs e)
         {
+            // Instanciamos el UserControl leyendo directamente la sucursal almacenada en la sesión
+            ucDerivacion uc = new ucDerivacion();
+
+            // Si tu ucDerivacion lee Sesion.SucursalActual en su constructor o Load, 
+            // simplemente abres el UserControl con tu método estandarizado:
             AbrirUserControl(new ucDerivacion());
         }
 

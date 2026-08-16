@@ -1,254 +1,187 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using Sunny.UI;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class ucDerivacion : UserControl
     {
-        private List<Orden> ordenes = new List<Orden>();
-
         public ucDerivacion()
         {
             InitializeComponent();
-            ConfigurarGrid();
-            CargarDatos();
 
-            // Aseguramos que los eventos estén conectados
-            dgvderivacionsucursales.CellClick += dgvderivacionsucursales_CellClick;
-            dgvderivacionsucursales.CellPainting += dgvderivacionsucursales_CellPainting;
+            // Usamos directamente la sucursal almacenada al iniciar sesión
+            CargarDerivacionesEntrantesDesdeBD(Sesion.SucursalActual);
         }
 
-        public class Orden
+        private void CargarDerivacionesEntrantesDesdeBD(string destinoSucursal)
         {
-            public int IdDerivacion { get; set; }
-            public string Codigo { get; set; }      // ORD-2024-004
-            public string Estado { get; set; }      // Pendiente
-            public string Cliente { get; set; }     // Laura Vega
-            public string Producto { get; set; }    // Xiaomi Redmi 12
-            public string Origen { get; set; }      // Sucursal Norte
-            public string Destino { get; set; }     // Sucursal Centro
-            public DateTime Fecha { get; set; }
-            public string Motivo { get; set; }      // Falta de repuesto
-            public string Detalle { get; set; }     // Conector USB-C Redmi 12
-        }
+            flpIzquierdoE.Controls.Clear();
 
-        private void ucDerivacion_Load(object sender, EventArgs e)
-        { }
+            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
 
-        private void ConfigurarGrid()
-        {
-            dgvderivacionsucursales.BackgroundColor = Color.FromArgb(26, 28, 44);
-            dgvderivacionsucursales.ColumnHeadersVisible = false;
-            dgvderivacionsucursales.RowHeadersVisible = false;
-            dgvderivacionsucursales.AllowUserToAddRows = false;
-            dgvderivacionsucursales.AllowUserToResizeRows = false;
-            dgvderivacionsucursales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvderivacionsucursales.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dgvderivacionsucursales.RowTemplate.Height = 75; // alto de cada "tarjeta"
-            dgvderivacionsucursales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvderivacionsucursales.DefaultCellStyle.SelectionBackColor = Color.FromArgb(245, 247, 250);
-            dgvderivacionsucursales.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            if (dgvderivacionsucursales.Columns.Count == 0)
+            try
             {
-                dgvderivacionsucursales.Columns.Add("colTarjeta", "");
-            }
-            dgvderivacionsucursales.Columns[0].Width = 500;
-
-            // Fuente base
-            dgvderivacionsucursales.Font = new Font("Segoe UI", 9F);
-        }
-
-        private void dgvderivacionsucursales_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || e.RowIndex >= ordenes.Count) return;
-
-            Orden ordenSeleccionada = ordenes[e.RowIndex];
-
-            // Muestra el panel de detalles
-            pnlDetallesDerivaciones.Visible = true;
-
-            // (Aquí puedes asignar textos a los labels de tu panel lateral si lo deseas)
-        }
-
-        // --- CARGA DE DATOS REALES DESDE SQL SERVER ---
-        public void CargarDatos()
-        {
-            ordenes.Clear();
-            var db = new Conexion_Base_de_Datos();
-
-            if (db.abrirConexion())
-            {
-                try
+                if (db.abrirConexion())
                 {
-                    // Consulta con JOIN para extraer los datos relacionales (Cliente y Dispositivo)
                     string query = @"
                         SELECT 
-                            d.IdDerivacion,
-                            o.numero_orden AS Codigo,
+                            o.numero_orden,
                             d.Estado,
-                            c.nombre AS ClienteNombre,
-                            disp.marca + ' ' + disp.modelo AS Producto,
-                            d.SucursalOrigen,
-                            d.SucursalDestino,
-                            d.FechaDerivacion,
-                            d.Motivo,
-                            d.Detalle
-                        FROM DerivacionesSucursales d
-                        INNER JOIN ordenes o ON d.IdOrden = o.id
-                        INNER JOIN clientes c ON o.cliente_id = c.id
-                        INNER JOIN dispositivos disp ON o.dispositivo_id = disp.id
-                        ORDER BY d.IdDerivacion DESC";
+                            c.nombre,
+                            d.SucursalOrigen AS Orig,
+                            d.SucursalDestino AS Dest,
+                            o.fecha_ingreso
+                        FROM dbo.DerivacionesSucursales d
+                        INNER JOIN dbo.ordenes o ON d.idOrden = o.id
+                        INNER JOIN dbo.clientes c ON o.cliente_id = c.id
+                        WHERE d.SucursalDestino = @SucursalDestino";
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    using (SqlCommand comando = new SqlCommand(query, db.oCon))
                     {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        comando.Parameters.AddWithValue("@SucursalDestino", destinoSucursal);
+
+                        using (SqlDataReader lector = comando.ExecuteReader())
                         {
-                            while (reader.Read())
+                            while (lector.Read())
                             {
-                                ordenes.Add(new Orden
-                                {
-                                    IdDerivacion = Convert.ToInt32(reader["IdDerivacion"]),
-                                    Codigo = reader["Codigo"].ToString(),
-                                    Estado = reader["Estado"].ToString(),
-                                    Cliente = reader["ClienteNombre"].ToString(),
-                                    Producto = reader["Producto"].ToString(),
-                                    Origen = reader["SucursalOrigen"].ToString(),
-                                    Destino = reader["SucursalDestino"].ToString(),
-                                    Fecha = reader["FechaDerivacion"] != DBNull.Value ? Convert.ToDateTime(reader["FechaDerivacion"]) : DateTime.Now,
-                                    Motivo = reader["Motivo"].ToString(),
-                                    Detalle = reader["Detalle"].ToString()
-                                });
+                                string codigo = lector["numero_orden"].ToString();
+                                string estado = lector["Estado"].ToString();
+                                string cliente = lector["nombre"].ToString();
+                                string ruta = $"{lector["Orig"]} → {lector["Dest"]}";
+                                string fecha = Convert.ToDateTime(lector["fecha_ingreso"]).ToString("dd/MM/yyyy hh:mm tt");
+
+                                Panel tarjeta = CrearTarjetaDerivacion(codigo, estado, cliente, ruta, fecha);
+                                flpIzquierdoE.Controls.Add(tarjeta);
                             }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al cargar las derivaciones: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
                     db.cerrarConexion();
                 }
             }
-
-            // Pintamos las tarjetas en el DataGridView
-            dgvderivacionsucursales.Rows.Clear();
-            foreach (var o in ordenes)
+            catch (Exception ex)
             {
-                dgvderivacionsucursales.Rows.Add(""); // Fila vacía, el CellPainting dibuja la tarjeta
+                MessageBox.Show("Error al cargar las derivaciones: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                db.cerrarConexion();
             }
         }
 
-        // --- LÓGICA DE DIBUJO (ESTILO FIGMA) ---
-        private void dgvderivacionsucursales_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private Panel CrearTarjetaDerivacion(string codigoOrden, string estado, string cliente, string ruta, string fecha)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= ordenes.Count) return;
+            Panel card = new Panel();
+            card.Size = new Size(460, 110);
+            card.BackColor = Color.White;
+            card.Margin = new Padding(10, 6, 10, 6);
+            card.Cursor = Cursors.Hand;
 
-            Orden o = ordenes[e.RowIndex];
-            Graphics g = e.Graphics;
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            using (SolidBrush fondoBrush = new SolidBrush(Color.FromArgb(15, 23, 42)))
-            {
-                g.FillRectangle(fondoBrush, e.CellBounds);
-            }
-
-            int x = e.CellBounds.Left + 10;
-            int y = e.CellBounds.Top + 8;
-
-            // --- Línea 1: Badge código + Badge estado ---
-            Size sizeCodigo = DibujarBadge(g, o.Codigo, x, y,
-                Color.FromArgb(238, 242, 255), Color.FromArgb(80, 90, 200));
-            x += sizeCodigo.Width + 8;
-
-            // Cambiar color del badge según el estado
-            Color bgEstado = Color.FromArgb(255, 243, 224); // Amarillo por defecto (Pendiente)
-            Color fgEstado = Color.FromArgb(200, 120, 20);
-
-            if (o.Estado == "Aceptada")
-            {
-                bgEstado = Color.FromArgb(220, 252, 231);
-                fgEstado = Color.FromArgb(22, 101, 52);
-            }
-            else if (o.Estado == "Rechazada")
-            {
-                bgEstado = Color.FromArgb(254, 226, 226);
-                fgEstado = Color.FromArgb(153, 27, 27);
-            }
-
-            DibujarBadge(g, "⏱ " + o.Estado, x, y, bgEstado, fgEstado);
-
-            // --- Línea 2: Cliente · Producto (negrita) + fecha a la derecha ---
-            x = e.CellBounds.Left + 10;
-            y += 26;
-            using (Font boldFont = new Font("Segoe UI", 9.5F, FontStyle.Bold))
-            {
-                string linea2 = $"{o.Cliente} · {o.Producto}";
-                g.DrawString(linea2, boldFont, Brushes.White, x, y);
-            }
-
-            string fechaTxt = o.Fecha.ToString("dd/MM/yyyy");
-            SizeF fechaSize = g.MeasureString(fechaTxt, dgvderivacionsucursales.Font);
-            g.DrawString(fechaTxt, dgvderivacionsucursales.Font, Brushes.Gray,
-                e.CellBounds.Right - fechaSize.Width - 10, y + 2);
-
-            // --- Línea 3: Origen -> Destino ---
-            y += 20;
-            using (Brush grayBrush = new SolidBrush(Color.FromArgb(160, 165, 180)))
-            {
-                g.DrawString($"{o.Origen} → {o.Destino}", dgvderivacionsucursales.Font, grayBrush, x, y);
-            }
-
-            // --- Línea 4: ícono + Motivo · Detalle ---
-            y += 20;
-            using (Brush grayBrush = new SolidBrush(Color.FromArgb(160, 165, 180)))
-            {
-                g.DrawString($"ⓘ {o.Motivo} · {o.Detalle}", dgvderivacionsucursales.Font, grayBrush, x, y);
-            }
-
-            e.Handled = true;
-        }
-
-        private Size DibujarBadge(Graphics g, string texto, int x, int y, Color fondo, Color letra)
-        {
-            using (Font f = new Font("Segoe UI", 8F, FontStyle.Bold))
-            {
-                SizeF textSize = g.MeasureString(texto, f);
-                int padX = 8, padY = 3;
-                Rectangle rect = new Rectangle(x, y, (int)textSize.Width + padX * 2, (int)textSize.Height + padY * 2);
-
-                using (GraphicsPath path = RoundedRect(rect, 8))
-                using (SolidBrush brush = new SolidBrush(fondo))
-                using (SolidBrush textBrush = new SolidBrush(letra))
+            // Pintado personalizado para esquinas redondeadas de la tarjeta principal (Radio: 12)
+            card.Paint += (s, e) => {
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                using (GraphicsPath path = CrearPathRedondeado(0, 0, card.Width - 1, card.Height - 1, 12f))
                 {
-                    g.FillPath(brush, path);
-                    g.DrawString(texto, f, textBrush, x + padX, y + padY);
+                    using (SolidBrush brush = new SolidBrush(Color.White))
+                    {
+                        e.Graphics.FillPath(brush, path);
+                    }
+                    using (Pen pen = new Pen(Color.FromArgb(220, 224, 230), 1f))
+                    {
+                        e.Graphics.DrawPath(pen, path);
+                    }
+                }
+            };
+
+            Label lblOrden = new Label()
+            {
+                Text = codigoOrden,
+                Font = new Font("Segoe UI", 9.5F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(30, 136, 229),
+                Location = new Point(16, 14),
+                AutoSize = true
+            };
+
+            // =========================================================
+            // CONFIGURACIÓN DEL BADGE DEL ESTADO CON ESQUINAS REDONDEADAS
+            // =========================================================
+            string textoEstado = "  ⏱ " + estado;
+            Label lblEstado = new Label()
+            {
+                Text = "", // Lo dejamos vacío aquí para que el texto por defecto no quede oculto por el fondo
+                Font = new Font("Segoe UI", 8.5F, FontStyle.Bold),
+                BackColor = Color.Transparent,
+                Location = new Point(135, 12),
+                Size = new Size(95, 24)
+            };
+
+            lblEstado.Paint += (s, e) => {
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // 1. Dibujamos el fondo naranja claro con esquinas redondeadas (Radio: 12)
+                using (GraphicsPath path = CrearPathRedondeado(0, 0, lblEstado.Width - 1, lblEstado.Height - 1, 12f))
+                {
+                    using (SolidBrush brush = new SolidBrush(Color.FromArgb(254, 243, 199)))
+                    {
+                        e.Graphics.FillPath(brush, path);
+                    }
                 }
 
-                return rect.Size;
-            }
+                // 2. Dibujamos el texto naranja oscuro centrado justo encima del fondo
+                TextRenderer.DrawText(e.Graphics, textoEstado, lblEstado.Font, lblEstado.ClientRectangle, Color.FromArgb(217, 119, 6), TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            };
+
+            Label lblFecha = new Label()
+            {
+                Text = fecha,
+                Font = new Font("Segoe UI", 8.5F),
+                ForeColor = Color.FromArgb(107, 114, 128),
+                Location = new Point(340, 14),
+                AutoSize = true
+            };
+
+            Label lblCliente = new Label()
+            {
+                Text = cliente,
+                Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(17, 24, 39),
+                Location = new Point(16, 44),
+                AutoSize = true
+            };
+
+            Label lblRuta = new Label()
+            {
+                Text = "🏢 " + ruta,
+                Font = new Font("Segoe UI", 9F),
+                ForeColor = Color.FromArgb(75, 85, 99),
+                Location = new Point(16, 74),
+                AutoSize = true
+            };
+
+            card.Controls.AddRange(new Control[] { lblOrden, lblEstado, lblFecha, lblCliente, lblRuta });
+
+            return card;
         }
 
-        private GraphicsPath RoundedRect(Rectangle bounds, int radius)
+        // Método auxiliar para generar la ruta geométrica de las esquinas redondeadas
+        private GraphicsPath CrearPathRedondeado(float x, float y, float ancho, float alto, float radio)
         {
             GraphicsPath path = new GraphicsPath();
-            int d = radius * 2;
-            path.AddArc(bounds.X, bounds.Y, d, d, 180, 90);
-            path.AddArc(bounds.Right - d, bounds.Y, d, d, 270, 90);
-            path.AddArc(bounds.Right - d, bounds.Bottom - d, d, d, 0, 90);
-            path.AddArc(bounds.X, bounds.Bottom - d, d, d, 90, 90);
+            if (ancho <= 0 || alto <= 0) return path;
+
+            radio = Math.Min(radio, Math.Min(ancho / 2f, alto / 2f));
+            if (radio < 0) radio = 0;
+
+            float diametro = radio * 2f;
+
+            path.StartFigure();
+            path.AddArc(x, y, diametro, diametro, 180, 90);
+            path.AddArc(x + ancho - diametro, y, diametro, diametro, 270, 90);
+            path.AddArc(x + ancho - diametro, y + alto - diametro, diametro, diametro, 0, 90);
+            path.AddArc(x, y + alto - diametro, diametro, diametro, 90, 90);
             path.CloseFigure();
+
             return path;
         }
-
-        private void label15_Click(object sender, EventArgs e) => pnlDetallesDerivaciones.Visible = false;
-        private void btnxdetalles_Click(object sender, EventArgs e) => pnlDetallesDerivaciones.Visible = false;
-        private void uiButton3_Click(object sender, EventArgs e) => pnlDetallesDerivaciones.Visible = false;
     }
 }

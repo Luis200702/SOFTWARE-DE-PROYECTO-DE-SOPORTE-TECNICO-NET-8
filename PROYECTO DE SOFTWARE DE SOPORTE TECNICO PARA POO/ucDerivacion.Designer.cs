@@ -7,6 +7,11 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        private Sunny.UI.UITabControl tcDerivaciones;
+        private System.Windows.Forms.TabPage tpEntrantes;
+        private System.Windows.Forms.TabPage tpSalientes;
+    
+
         /// <summary> 
         /// Limpiar los recursos que se estén usando.
         /// </summary>
@@ -28,26 +33,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(components);
             pnlSuperior = new Panel();
+            btnNuevaDerivacion = new Sunny.UI.UISymbolButton();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
-            btnNuevaDerivacion = new Sunny.UI.UISymbolButton();
-            uiTabControl1 = new Sunny.UI.UITabControl();
-            tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
+            tcDerivaciones = new Sunny.UI.UITabControl();
+            tpEntrantes = new TabPage();
+            pnlIzquierdoE = new Panel();
+            flpIzquierdoE = new FlowLayoutPanel();
+            pnlDerechoE = new Panel();
+            tpSalientes = new TabPage();
+            pnlIzquierdoS = new Panel();
+            pnlDerechoS = new Panel();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            uiTabControl1.SuspendLayout();
+            tcDerivaciones.SuspendLayout();
+            tpEntrantes.SuspendLayout();
+            pnlIzquierdoE.SuspendLayout();
+            tpSalientes.SuspendLayout();
+            pnlIzquierdoS.SuspendLayout();
             SuspendLayout();
-            // 
-            // uiContextMenuStrip1
-            // 
-            uiContextMenuStrip1.BackColor = Color.FromArgb(243, 249, 255);
-            uiContextMenuStrip1.Font = new Font("Microsoft Sans Serif", 12F);
-            uiContextMenuStrip1.Name = "uiContextMenuStrip1";
-            uiContextMenuStrip1.Size = new Size(61, 4);
             // 
             // pnlSuperior
             // 
@@ -60,8 +65,23 @@
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(-8, 0);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1140, 59);
+            pnlSuperior.Size = new Size(1138, 59);
             pnlSuperior.TabIndex = 37;
+            // 
+            // btnNuevaDerivacion
+            // 
+            btnNuevaDerivacion.FillColor = Color.FromArgb(0, 150, 137);
+            btnNuevaDerivacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnNuevaDerivacion.Location = new Point(954, 13);
+            btnNuevaDerivacion.MinimumSize = new Size(1, 1);
+            btnNuevaDerivacion.Name = "btnNuevaDerivacion";
+            btnNuevaDerivacion.Radius = 12;
+            btnNuevaDerivacion.RectColor = Color.FromArgb(0, 150, 137);
+            btnNuevaDerivacion.Size = new Size(157, 31);
+            btnNuevaDerivacion.Symbol = 61543;
+            btnNuevaDerivacion.TabIndex = 2;
+            btnNuevaDerivacion.Text = "Nueva derivación";
+            btnNuevaDerivacion.TipsFont = new Font("Microsoft Sans Serif", 9F);
             // 
             // pictureBox1
             // 
@@ -84,80 +104,122 @@
             lblTitulo.Text = "Derivación entre Sucursales";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // btnNuevaDerivacion
+            // tcDerivaciones
             // 
-            btnNuevaDerivacion.FillColor = Color.FromArgb(0, 150, 137);
-            btnNuevaDerivacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnNuevaDerivacion.Location = new Point(954, 13);
-            btnNuevaDerivacion.MinimumSize = new Size(1, 1);
-            btnNuevaDerivacion.Name = "btnNuevaDerivacion";
-            btnNuevaDerivacion.Radius = 12;
-            btnNuevaDerivacion.RectColor = Color.FromArgb(0, 150, 137);
-            btnNuevaDerivacion.Size = new Size(157, 31);
-            btnNuevaDerivacion.Symbol = 61543;
-            btnNuevaDerivacion.TabIndex = 2;
-            btnNuevaDerivacion.Text = "Nueva derivación";
-            btnNuevaDerivacion.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            tcDerivaciones.Controls.Add(tpEntrantes);
+            tcDerivaciones.Controls.Add(tpSalientes);
+            tcDerivaciones.DrawMode = TabDrawMode.OwnerDrawFixed;
+            tcDerivaciones.FillColor = Color.FromArgb(245, 247, 250);
+            tcDerivaciones.Font = new Font("Microsoft Sans Serif", 12F);
+            tcDerivaciones.ItemSize = new Size(190, 40);
+            tcDerivaciones.Location = new Point(0, 59);
+            tcDerivaciones.MainPage = "";
+            tcDerivaciones.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
+            tcDerivaciones.Name = "tcDerivaciones";
+            tcDerivaciones.SelectedIndex = 0;
+            tcDerivaciones.Size = new Size(1125, 773);
+            tcDerivaciones.SizeMode = TabSizeMode.Fixed;
+            tcDerivaciones.Style = Sunny.UI.UIStyle.Custom;
+            tcDerivaciones.TabBackColor = Color.FromArgb(240, 240, 240);
+            tcDerivaciones.TabIndex = 38;
+            tcDerivaciones.TabSelectedColor = Color.FromArgb(223, 241, 241);
+            tcDerivaciones.TabSelectedForeColor = Color.Black;
+            tcDerivaciones.TabSelectedHighColor = Color.FromArgb(0, 150, 137);
+            tcDerivaciones.TabUnSelectedColor = Color.FromArgb(240, 240, 240);
+            tcDerivaciones.TabUnSelectedForeColor = Color.FromArgb(48, 48, 48);
+            tcDerivaciones.TipsFont = new Font("Microsoft Sans Serif", 9F);
             // 
-            // uiTabControl1
+            // tpEntrantes
             // 
-            uiTabControl1.Controls.Add(tabPage1);
-            uiTabControl1.Controls.Add(tabPage2);
-            uiTabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
-            uiTabControl1.Font = new Font("Microsoft Sans Serif", 12F);
-            uiTabControl1.ItemSize = new Size(150, 40);
-            uiTabControl1.Location = new Point(0, 59);
-            uiTabControl1.MainPage = "";
-            uiTabControl1.Name = "uiTabControl1";
-            uiTabControl1.SelectedIndex = 0;
-            uiTabControl1.Size = new Size(1125, 603);
-            uiTabControl1.SizeMode = TabSizeMode.Fixed;
-            uiTabControl1.TabIndex = 38;
-            uiTabControl1.TabUnSelectedForeColor = Color.FromArgb(240, 240, 240);
-            uiTabControl1.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            tpEntrantes.BackColor = Color.FromArgb(245, 247, 250);
+            tpEntrantes.Controls.Add(pnlIzquierdoE);
+            tpEntrantes.Location = new Point(0, 40);
+            tpEntrantes.Name = "tpEntrantes";
+            tpEntrantes.Size = new Size(1125, 733);
+            tpEntrantes.TabIndex = 0;
+            tpEntrantes.Text = "Entrantes (Recibidas)";
             // 
-            // tabPage1
+            // pnlIzquierdoE
             // 
-            tabPage1.Location = new Point(0, 40);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Size = new Size(1125, 563);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
-            tabPage1.UseVisualStyleBackColor = true;
+            pnlIzquierdoE.Controls.Add(flpIzquierdoE);
+            pnlIzquierdoE.Controls.Add(pnlDerechoE);
+            pnlIzquierdoE.Location = new Point(0, 0);
+            pnlIzquierdoE.Name = "pnlIzquierdoE";
+            pnlIzquierdoE.Size = new Size(477, 733);
+            pnlIzquierdoE.TabIndex = 0;
             // 
-            // tabPage2
+            // flpIzquierdoE
             // 
-            tabPage2.Location = new Point(0, 40);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Size = new Size(1050, 563);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
+            flpIzquierdoE.AutoScroll = true;
+            flpIzquierdoE.Dock = DockStyle.Fill;
+            flpIzquierdoE.Location = new Point(0, 0);
+            flpIzquierdoE.Name = "flpIzquierdoE";
+            flpIzquierdoE.Size = new Size(477, 733);
+            flpIzquierdoE.TabIndex = 2;
+            // 
+            // pnlDerechoE
+            // 
+            pnlDerechoE.Location = new Point(476, 0);
+            pnlDerechoE.Name = "pnlDerechoE";
+            pnlDerechoE.Size = new Size(649, 733);
+            pnlDerechoE.TabIndex = 1;
+            // 
+            // tpSalientes
+            // 
+            tpSalientes.BackColor = Color.FromArgb(245, 247, 250);
+            tpSalientes.Controls.Add(pnlIzquierdoS);
+            tpSalientes.Location = new Point(0, 40);
+            tpSalientes.Name = "tpSalientes";
+            tpSalientes.Size = new Size(1125, 733);
+            tpSalientes.TabIndex = 1;
+            tpSalientes.Text = "Salientes (Enviadas)";
+            // 
+            // pnlIzquierdoS
+            // 
+            pnlIzquierdoS.Controls.Add(pnlDerechoS);
+            pnlIzquierdoS.Location = new Point(0, 0);
+            pnlIzquierdoS.Name = "pnlIzquierdoS";
+            pnlIzquierdoS.Size = new Size(477, 733);
+            pnlIzquierdoS.TabIndex = 1;
+            // 
+            // pnlDerechoS
+            // 
+            pnlDerechoS.Location = new Point(478, 3);
+            pnlDerechoS.Name = "pnlDerechoS";
+            pnlDerechoS.Size = new Size(644, 730);
+            pnlDerechoS.TabIndex = 1;
             // 
             // ucDerivacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            Controls.Add(uiTabControl1);
+            Controls.Add(tcDerivaciones);
             Controls.Add(pnlSuperior);
             Name = "ucDerivacion";
-            Size = new Size(1125, 764);
+            Size = new Size(1123, 832);
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            uiTabControl1.ResumeLayout(false);
+            tcDerivaciones.ResumeLayout(false);
+            tpEntrantes.ResumeLayout(false);
+            pnlIzquierdoE.ResumeLayout(false);
+            tpSalientes.ResumeLayout(false);
+            pnlIzquierdoS.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Sunny.UI.UIContextMenuStrip uiContextMenuStrip1;
         private Panel pnlSuperior;
         private PictureBox pictureBox1;
         private Label lblTitulo;
         private Sunny.UI.UISymbolButton btnNuevaDerivacion;
         private Sunny.UI.UITabControl uiTabControl1;
         private TabPage tabPage1;
-        private TabPage tabPage2;
+        private Panel pnlIzquierdoE;
+        private Panel pnlDerechoE;
+        private Panel pnlIzquierdoS;
+        private Panel pnlDerechoS;
+        private FlowLayoutPanel flpIzquierdoE;
     }
 }
