@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Sunny.UI; // Aseguramos que la librería de diseño esté incluida
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,87 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         public frmRegistrarEntrega()
         {
             InitializeComponent();
+
+            // 🔥 Disparamos la magia visual apenas arranca el formulario
+            AplicarDiseñoWeb();
         }
+
+        // --- MÉTODO PARA REPLICAR EL DISEÑO WEB LIMPIO ---
+        private void AplicarDiseñoWeb()
+        {
+            // 1. Definimos la paleta de colores de tu diseño
+            Color fondoBlanco = Color.White;
+            Color bordeGris = Color.FromArgb(220, 224, 230);
+            Color textoOscuro = Color.FromArgb(60, 60, 60);
+            Color verdeTeal = Color.FromArgb(0, 165, 140);
+
+            // 2. Aplicamos estilo base a TODOS los controles de SunnyUI en la pantalla
+            foreach (Control ctrl in this.Controls)
+            {
+                if (ctrl is UITextBox txt)
+                {
+                    txt.FillColor = fondoBlanco;
+                    txt.RectColor = bordeGris;
+                    txt.ForeColor = textoOscuro;
+                    txt.SymbolColor = verdeTeal; // El ícono será verde
+                }
+                else if (ctrl is UIComboBox cmb)
+                {
+                    cmb.FillColor = fondoBlanco;
+                    cmb.RectColor = bordeGris;
+                    cmb.ForeColor = textoOscuro;
+                }
+            }
+
+            // 3. Asignamos los Íconos y Textos de Fondo (Watermarks) específicos
+            try
+            {
+                // Nombres y Marcas
+                if (txtNombre != null) { txtNombre.Symbol = 61467; txtNombre.Watermark = "Modelo del repuesto"; }
+                if (txtMarca != null) { txtMarca.Symbol = 61467; txtMarca.Watermark = "Selecciona una marca"; }
+
+                // Modelo (Celular)
+                if (txtModelo != null) { txtModelo.Symbol = 61707; txtModelo.Watermark = "Ej. Galaxy S22"; }
+
+                // Cantidades y Stock (Caja y Escudo)
+                if (txtCantidadInicial != null) { txtCantidadInicial.Symbol = 61893; }
+                if (txtStockMinimo != null) { txtStockMinimo.Symbol = 61528; }
+
+                // Precios (Signo de Dólar)
+                if (txtPrecioCosto != null) { txtPrecioCosto.Symbol = 61781; txtPrecioCosto.Watermark = "0,00"; }
+                if (txtPrecioVenta != null) { txtPrecioVenta.Symbol = 61781; txtPrecioVenta.Watermark = "0,00"; }
+
+                // Proveedor (Usuario)
+                if (txtProveedor != null) { txtProveedor.Symbol = 61447; txtProveedor.Watermark = "Nombre del proveedor"; }
+
+                // 4. Estilos de los Botones
+                if (btnCancelar != null)
+                {
+                    btnCancelar.FillColor = fondoBlanco;
+                    btnCancelar.FillHoverColor = Color.FromArgb(245, 245, 245);
+                    btnCancelar.ForeColor = textoOscuro;
+                    btnCancelar.RectColor = bordeGris;
+                    btnCancelar.Cursor = Cursors.Hand;
+                }
+
+                if (btnGuardarCambios != null)
+                {
+                    btnGuardarCambios.FillColor = verdeTeal;
+                    btnGuardarCambios.FillHoverColor = Color.FromArgb(0, 180, 155);
+                    btnGuardarCambios.ForeColor = fondoBlanco;
+                    btnGuardarCambios.RectColor = verdeTeal;
+                    btnGuardarCambios.Cursor = Cursors.Hand;
+                }
+            }
+            catch
+            {
+                // Evitamos que crashee si algún control llega a faltar
+            }
+        }
+
+        // ----------------------------------------------------------------------
+        // TU CÓDIGO ORIGINAL (INTACTO) A CONTINUACIÓN
+        // ----------------------------------------------------------------------
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -74,7 +155,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     // Obtenemos el ID del nuevo repuesto
                     int idNuevoRepuesto = Convert.ToInt32(cmdRepuesto.ExecuteScalar());
 
-                    // --- PASO B: Guardar el Inventario (¡Aquí está el ajuste clave del texto!) ---
+                    // --- PASO B: Guardar el Inventario ---
                     string queryInventario = @"
                         INSERT INTO InventarioSucursal (Sucursal, IdRepuesto, StockActual, StockMinimo) 
                         VALUES (@Sucursal, @IdRepuesto, @StockActual, @StockMinimo)";

@@ -127,11 +127,14 @@
   <data name="SolarDangerOutline (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SolarDangerOutline (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="WeuiAdd2Outlined" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WeuiAdd2Outlined.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Code_Generated_Image (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Code_Generated_Image (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MaterialSymbolsRestartAltRounded1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsRestartAltRounded1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Code_Generated_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Code_Generated_Image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MdiAlertCircleOutline (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MdiAlertCircleOutline (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -144,6 +147,9 @@
   </data>
   <data name="MdiCartVariant" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MdiCartVariant.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WeuiAdd2Outlined" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeuiAdd2Outlined.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MdiMonitor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MdiMonitor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,14 +178,14 @@
   <data name="WhhAlertalt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhhAlertalt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Code_Generated_Image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Code_Generated_Image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="MaterialSymbolsSearch (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MaterialSymbolsSearch (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="buqueda blanca" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\buqueda blanca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WeuiAdd2Outlined (3)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeuiAdd2Outlined (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WeuiAdd2Outlined1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WeuiAdd2Outlined1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,10 +205,7 @@
   <data name="LineMdAlertCircleLoop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LineMdAlertCircleLoop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="WeuiAdd2Outlined (3)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WeuiAdd2Outlined (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Code_Generated_Image (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Code_Generated_Image (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SolarBoxOutline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SolarBoxOutline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

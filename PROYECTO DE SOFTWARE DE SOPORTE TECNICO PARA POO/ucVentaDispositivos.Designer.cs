@@ -28,11 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
@@ -41,20 +36,11 @@
             label1 = new Label();
             btnNuevaVenta = new Sunny.UI.UIButton();
             txtBuscar = new Sunny.UI.UITextBox();
-            dgvVentas = new DataGridView();
-            Venta = new DataGridViewTextBoxColumn();
-            Dispositivo = new DataGridViewTextBoxColumn();
-            Estado = new DataGridViewTextBoxColumn();
-            Precio = new DataGridViewTextBoxColumn();
-            Comprador = new DataGridViewTextBoxColumn();
-            Pago = new DataGridViewTextBoxColumn();
-            Garantia = new DataGridViewTextBoxColumn();
-            Fecha = new DataGridViewTextBoxColumn();
-            btnComprobante = new DataGridViewButtonColumn();
+            dgvNuevo = new DataGridView();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvVentas).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvNuevo).BeginInit();
             SuspendLayout();
             // 
             // pnlSuperior
@@ -163,140 +149,32 @@
             txtBuscar.Watermark = "Buscar dispositivo o comprador";
             txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
-            // dgvVentas
+            // dgvNuevo
             // 
-            dgvVentas.AllowUserToAddRows = false;
-            dgvVentas.AllowUserToDeleteRows = false;
-            dgvVentas.AllowUserToResizeColumns = false;
-            dgvVentas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle11.BackColor = Color.White;
-            dataGridViewCellStyle11.ForeColor = Color.Black;
-            dataGridViewCellStyle11.SelectionBackColor = Color.White;
-            dataGridViewCellStyle11.SelectionForeColor = Color.Black;
-            dgvVentas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
-            dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvVentas.BackgroundColor = Color.White;
-            dgvVentas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = SystemColors.Control;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
-            dgvVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            dgvVentas.ColumnHeadersHeight = 40;
-            dgvVentas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvVentas.Columns.AddRange(new DataGridViewColumn[] { Venta, Dispositivo, Estado, Precio, Comprador, Pago, Garantia, Fecha, btnComprobante });
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = Color.White;
-            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle13.ForeColor = Color.Black;
-            dataGridViewCellStyle13.SelectionBackColor = Color.White;
-            dataGridViewCellStyle13.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
-            dgvVentas.DefaultCellStyle = dataGridViewCellStyle13;
-            dgvVentas.EnableHeadersVisualStyles = false;
-            dgvVentas.GridColor = SystemColors.ActiveCaption;
-            dgvVentas.Location = new Point(0, 118);
-            dgvVentas.MaximumSize = new Size(1125, 641);
-            dgvVentas.MinimumSize = new Size(1125, 641);
-            dgvVentas.MultiSelect = false;
-            dgvVentas.Name = "dgvVentas";
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = Color.White;
-            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle14.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle14.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
-            dgvVentas.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
-            dgvVentas.RowHeadersVisible = false;
-            dataGridViewCellStyle15.BackColor = Color.White;
-            dataGridViewCellStyle15.ForeColor = Color.Black;
-            dataGridViewCellStyle15.SelectionBackColor = Color.White;
-            dataGridViewCellStyle15.SelectionForeColor = Color.Black;
-            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle15;
-            dgvVentas.RowTemplate.Height = 30;
-            dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvVentas.Size = new Size(1125, 641);
-            dgvVentas.TabIndex = 4;
-            // 
-            // Venta
-            // 
-            Venta.DataPropertyName = "TipoVenta";
-            Venta.HeaderText = "TIPO";
-            Venta.Name = "Venta";
-            Venta.ReadOnly = true;
-            // 
-            // Dispositivo
-            // 
-            Dispositivo.DataPropertyName = "MarcaNuevo";
-            Dispositivo.HeaderText = "DISPOSITIVO";
-            Dispositivo.Name = "Dispositivo";
-            Dispositivo.ReadOnly = true;
-            // 
-            // Estado
-            // 
-            Estado.DataPropertyName = "EstadoEquipo";
-            Estado.HeaderText = "ESTADO";
-            Estado.Name = "Estado";
-            Estado.ReadOnly = true;
-            // 
-            // Precio
-            // 
-            Precio.DataPropertyName = "PrecioOriginal";
-            Precio.HeaderText = "PRECIO";
-            Precio.Name = "Precio";
-            Precio.ReadOnly = true;
-            // 
-            // Comprador
-            // 
-            Comprador.DataPropertyName = "NombreCliente";
-            Comprador.HeaderText = "COMPRADOR";
-            Comprador.Name = "Comprador";
-            Comprador.ReadOnly = true;
-            // 
-            // Pago
-            // 
-            Pago.DataPropertyName = "FormaPago";
-            Pago.HeaderText = "PAGO";
-            Pago.Name = "Pago";
-            Pago.ReadOnly = true;
-            // 
-            // Garantia
-            // 
-            Garantia.DataPropertyName = "GarantiaOfrecida";
-            Garantia.HeaderText = "GARANTIA";
-            Garantia.Name = "Garantia";
-            Garantia.ReadOnly = true;
-            // 
-            // Fecha
-            // 
-            Fecha.DataPropertyName = "FechaVenta";
-            Fecha.HeaderText = "FECHA";
-            Fecha.Name = "Fecha";
-            Fecha.ReadOnly = true;
-            // 
-            // btnComprobante
-            // 
-            btnComprobante.HeaderText = "";
-            btnComprobante.Name = "btnComprobante";
+            dgvNuevo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvNuevo.Location = new Point(0, 118);
+            dgvNuevo.Name = "dgvNuevo";
+            dgvNuevo.Size = new Size(1125, 646);
+            dgvNuevo.TabIndex = 4;
+            dgvNuevo.CellContentClick += dgvNuevo_CellContentClick;
+            dgvNuevo.CellFormatting += dgvNuevo_CellFormatting;
+            dgvNuevo.CellPainting += dgvNuevo_CellPainting;
             // 
             // ucVentaDispositivos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(15, 23, 42);
-            Controls.Add(dgvVentas);
+            BackColor = Color.White;
+            Controls.Add(dgvNuevo);
             Controls.Add(pnlInformacion);
             Controls.Add(pnlSuperior);
             Name = "ucVentaDispositivos";
             Size = new Size(1125, 764);
+            Load += ucVentaDispositivos_Load;
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInformacion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvVentas).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvNuevo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -309,17 +187,8 @@
         private Panel pnlInformacion;
         private Sunny.UI.UIButton btnNuevaVenta;
         private Sunny.UI.UITextBox txtBuscar;
-        private DataGridView dgvVentas;
         private Label label1;
         private Label lblVentas;
-        private DataGridViewTextBoxColumn Venta;
-        private DataGridViewTextBoxColumn Dispositivo;
-        private DataGridViewTextBoxColumn Estado;
-        private DataGridViewTextBoxColumn Precio;
-        private DataGridViewTextBoxColumn Comprador;
-        private DataGridViewTextBoxColumn Pago;
-        private DataGridViewTextBoxColumn Garantia;
-        private DataGridViewTextBoxColumn Fecha;
-        private DataGridViewButtonColumn btnComprobante;
+        private DataGridView dgvNuevo;
     }
 }

@@ -7,10 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
-     class Conexion_Base_de_Datos
+    class Conexion_Base_de_Datos
     {
         public SqlConnection oCon;
         DataTable oDT;
@@ -75,11 +74,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 if (abrirConexion())
                 {
-                    // Traemos el Perfil y la Sucursal de la base de datos
-                    string consulta = @"SELECT Perfil, Sucursal 
-                                FROM Usuarios 
-                                WHERE Usuario = @Usuario 
-                                AND Contrasena = @Contrasena";
+                    // 🔥 MODIFICADO: Hacemos JOIN con Sucursales para traer el nombre o manejamos el IdSucursal
+                    string consulta = @"SELECT U.Perfil, S.NombreSucursal 
+                                FROM Usuarios U
+                                INNER JOIN Sucursales S ON U.IdSucursal = S.IdSucursal
+                                WHERE U.Usuario = @Usuario 
+                                AND U.Contrasena = @Contrasena";
 
                     oCom = new SqlCommand(consulta, oCon);
                     oCom.Parameters.AddWithValue("@Usuario", usuario);
@@ -90,15 +90,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         if (reader.Read()) // Si el usuario y contraseña son correctos
                         {
                             string perfil = reader["Perfil"].ToString();
-                            string sucursal = reader["Sucursal"].ToString();
+                            string sucursal = reader["NombreSucursal"].ToString();
                             cerrarConexion();
 
-                            // Retornamos los dos valores en un arreglo
                             return new string[] { perfil, sucursal };
                         }
                     }
                     cerrarConexion();
-                    return null; // Si no encontró el usuario
+                    return null; 
                 }
                 return null;
             }
@@ -116,8 +115,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 if (abrirConexion())
                 {
-                    string consulta = @"SELECT Nombre, Usuario, Perfil, Sucursal 
-                                FROM Usuarios";
+                    // 🔥 MODIFICADO: Traemos el NombreSucursal desde la tabla Sucursales usando el IdSucursal
+                    string consulta = @"SELECT U.Nombre, U.Usuario, U.Perfil, S.NombreSucursal AS Sucursal 
+                                FROM Usuarios U
+                                INNER JOIN Sucursales S ON U.IdSucursal = S.IdSucursal";
 
                     oDA = new SqlDataAdapter(consulta, oCon);
                     oDA.Fill(dt);
@@ -131,7 +132,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             return dt;
         }
 
-        public bool actualizarUsuario(string usuarioOriginal, string nombre, string usuario, string contraseña, string perfil, string sucursal)
+        public bool actualizarUsuario(string usuarioOriginal, string nombre, string usuario, string contraseña, string perfil, int idSucursal)
         {
             try
             {
@@ -141,23 +142,22 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     if (string.IsNullOrWhiteSpace(contraseña))
                     {
-               
+                        // 🔥 MODIFICADO: Usamos IdSucursal en lugar de Sucursal (texto)
                         consulta = @"UPDATE Usuarios SET 
                                 Nombre = @Nombre,
                                 Usuario = @Usuario,
                                 Perfil = @Perfil,
-                                Sucursal = @Sucursal
+                                IdSucursal = @IdSucursal
                               WHERE Usuario = @UsuarioOriginal";
                     }
                     else
                     {
-                 
                         consulta = @"UPDATE Usuarios SET 
                                 Nombre = @Nombre,
                                 Usuario = @Usuario,
                                 Contrasena = @Contrasena,
                                 Perfil = @Perfil,
-                                Sucursal = @Sucursal
+                                IdSucursal = @IdSucursal
                               WHERE Usuario = @UsuarioOriginal";
                     }
 
@@ -165,7 +165,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     oCom.Parameters.AddWithValue("@Nombre", nombre);
                     oCom.Parameters.AddWithValue("@Usuario", usuario);
                     oCom.Parameters.AddWithValue("@Perfil", perfil);
-                    oCom.Parameters.AddWithValue("@Sucursal", sucursal);
+                    oCom.Parameters.AddWithValue("@IdSucursal", idSucursal); // Recibe el ID numérico
                     oCom.Parameters.AddWithValue("@UsuarioOriginal", usuarioOriginal);
 
                     if (!string.IsNullOrWhiteSpace(contraseña))
@@ -187,21 +187,22 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        public bool insertarUsuario(string nombre, string usuario, string contraseña, string perfil, string sucursal)
+        public bool insertarUsuario(string nombre, string usuario, string contraseña, string perfil, int idSucursal)
         {
             try
             {
                 if (abrirConexion())
                 {
-                    string consulta = @"INSERT INTO Usuarios (Nombre, Usuario, Contrasena, Perfil, Sucursal)
-                                VALUES (@Nombre, @Usuario, @Contrasena, @Perfil, @Sucursal)";
+                    // 🔥 MODIFICADO: Insertamos IdSucursal (int)
+                    string consulta = @"INSERT INTO Usuarios (Nombre, Usuario, Contrasena, Perfil, IdSucursal)
+                                VALUES (@Nombre, @Usuario, @Contrasena, @Perfil, @IdSucursal)";
 
                     oCom = new SqlCommand(consulta, oCon);
                     oCom.Parameters.AddWithValue("@Nombre", nombre);
                     oCom.Parameters.AddWithValue("@Usuario", usuario);
                     oCom.Parameters.AddWithValue("@Contrasena", contraseña);
                     oCom.Parameters.AddWithValue("@Perfil", perfil);
-                    oCom.Parameters.AddWithValue("@Sucursal", sucursal);
+                    oCom.Parameters.AddWithValue("@IdSucursal", idSucursal);
 
                     int filas = oCom.ExecuteNonQuery();
                     cerrarConexion();
@@ -224,9 +225,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 if (abrirConexion())
                 {
-                    string consulta = "SELECT DISTINCT Sucursal FROM Usuarios ORDER BY Sucursal";
-                    // Si tienes una tabla separada de Sucursales, cambia la consulta por:
-                    // string consulta = "SELECT Nombre FROM Sucursales ORDER BY Nombre";
+                    // 🔥 MODIFICADO: Ahora sí consultamos directamente la tabla Sucursales real que tienes en tu BD
+                    string consulta = "SELECT IdSucursal, NombreSucursal FROM Sucursales ORDER BY NombreSucursal";
 
                     oDA = new SqlDataAdapter(consulta, oCon);
                     oDA.Fill(dt);
@@ -239,8 +239,5 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
             return dt;
         }
-
-
     }
 }
-

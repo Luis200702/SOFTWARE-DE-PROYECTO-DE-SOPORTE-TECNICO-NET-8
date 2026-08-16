@@ -12,23 +12,22 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class frmEditarUsuarios : Form
     {
+        private string usuarioOriginal;
+
         public frmEditarUsuarios()
         {
             InitializeComponent();
-
-
+            CargarSucursales(); // Cargamos las sucursales por si se abre vacío
         }
-
-        private string usuarioOriginal;
 
         public frmEditarUsuarios(string nombre, string usuario, string perfil, string sucursal)
         {
             InitializeComponent();
-            MessageBox.Show($"Nombre: {nombre}\nUsuario: {usuario}\nPerfil: {perfil}\nSucursal: {sucursal}");
 
+            // 1. Primero cargamos el ComboBox con las sucursales de la BD
+            CargarSucursales();
 
             usuarioOriginal = usuario;
-
 
             txtNombre.Text = nombre;
             txtUsuario.Text = usuario;
@@ -39,7 +38,22 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             else
                 btnTecnico.BackColor = Color.FromArgb(0, 150, 136);
 
+            // 2. Seleccionamos la sucursal que traía el usuario por su texto/nombre
             cmbSucursal.Text = sucursal;
+        }
+
+        // --- Método para llenar el ComboBox desde la BD ---
+        private void CargarSucursales()
+        {
+            Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
+            DataTable dt = conexion.obtenerSucursales(); // Devuelve IdSucursal y NombreSucursal
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                cmbSucursal.DataSource = dt;
+                cmbSucursal.DisplayMember = "NombreSucursal"; // Lo que ve el usuario
+                cmbSucursal.ValueMember = "IdSucursal";       // El ID oculto que necesitamos
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -75,13 +89,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(cmbSucursal.Text))
+            if (cmbSucursal.SelectedValue == null)
             {
-                MessageBox.Show("Debe seleccionar una sucursal");
+                MessageBox.Show("Debe seleccionar una sucursal válida");
                 return;
             }
 
-            // Enviar los datos
+            // 🔥 OBTENEMOS EL ID NUMÉRICO DE LA SUCURSAL SELECCIONADA
+            int idSucursalSeleccionada = Convert.ToInt32(cmbSucursal.SelectedValue);
+
+            // Enviar los datos actualizados usando el ID (int)
             Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
             bool resultado = conexion.actualizarUsuario(
                 usuarioOriginal,
@@ -89,7 +106,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 txtUsuario.Text.Trim(),
                 txtContrasena.Text.Trim(),
                 perfil,
-                cmbSucursal.Text
+                idSucursalSeleccionada // <-- Aquí enviamos el entero en lugar del texto
             );
 
             if (resultado)
@@ -101,7 +118,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 MessageBox.Show("No se pudo actualizar el usuario");
             }
-        
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,16 +18,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarSucursales();
         }
 
+        // --- Cargar sucursales usando la estructura relacional ---
         private void CargarSucursales()
         {
             Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
-            DataTable dt = conexion.obtenerSucursales();
+            DataTable dt = conexion.obtenerSucursales(); // Devuelve IdSucursal y NombreSucursal
 
-            cmbSucursal.Items.Clear();
-
-            foreach (DataRow fila in dt.Rows)
+            if (dt != null && dt.Rows.Count > 0)
             {
-                cmbSucursal.Items.Add(fila["Sucursal"].ToString());
+                cmbSucursal.DataSource = dt;
+                cmbSucursal.DisplayMember = "NombreSucursal"; // Lo que ve el usuario
+                cmbSucursal.ValueMember = "IdSucursal";       // El ID numérico oculto
             }
         }
 
@@ -52,7 +52,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
 
             // Obtener el perfil seleccionado
-
             if (perfil == "Administrador")
                 perfil = "Administrador";
             else if (perfil == "Tecnico")
@@ -63,26 +62,33 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            if (cmbSucursal.SelectedIndex == -1)
+            if (cmbSucursal.SelectedValue == null)
             {
-                MessageBox.Show("Seleccione una sucursal.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Seleccione una sucursal válida.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Guardar en la base de datos
+            // 🔥 OBTENEMOS EL ID NUMÉRICO DE LA SUCURSAL SELECCIONADA
+            int idSucursalSeleccionada = Convert.ToInt32(cmbSucursal.SelectedValue);
+
+            // Guardar en la base de datos enviando el ID (int)
             Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
             bool guardado = conexion.insertarUsuario(
                 txtNombre.Text.Trim(),
                 txtUsuario.Text.Trim(),
                 txtContrasena.Text.Trim(),
                 perfil,
-                cmbSucursal.Text
+                idSucursalSeleccionada // <-- Aquí va el entero en lugar del texto
             );
 
             if (guardado)
             {
                 MessageBox.Show("Usuario agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo registrar el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -98,5 +104,4 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             perfil = "Administrador";
         }
     }
-
 }

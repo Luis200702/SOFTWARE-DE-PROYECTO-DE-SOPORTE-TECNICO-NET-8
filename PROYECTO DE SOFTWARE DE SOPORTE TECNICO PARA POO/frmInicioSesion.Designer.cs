@@ -98,7 +98,7 @@
             lblDerechos.ForeColor = Color.FromArgb(103, 106, 112);
             lblDerechos.Location = new Point(149, 402);
             lblDerechos.Name = "lblDerechos";
-            lblDerechos.Size = new Size(159, 15);
+            lblDerechos.Size = new Size(160, 15);
             lblDerechos.TabIndex = 17;
             lblDerechos.Text = "Versión 1.0 · TechDKV © 2026";
             // 
@@ -144,6 +144,8 @@
             txtContrasena.RectColor = Color.FromArgb(75, 92, 108);
             txtContrasena.ShowText = false;
             txtContrasena.Size = new Size(343, 37);
+            txtContrasena.Symbol = 61572;
+            txtContrasena.SymbolColor = Color.FromArgb(198, 199, 189);
             txtContrasena.TabIndex = 15;
             txtContrasena.TextAlignment = ContentAlignment.MiddleLeft;
             txtContrasena.Watermark = "Contraseña";
@@ -166,6 +168,8 @@
             txtUsuario.RectColor = Color.FromArgb(75, 92, 108);
             txtUsuario.ShowText = false;
             txtUsuario.Size = new Size(343, 37);
+            txtUsuario.Symbol = 61447;
+            txtUsuario.SymbolColor = Color.FromArgb(198, 199, 189);
             txtUsuario.TabIndex = 14;
             txtUsuario.TextAlignment = ContentAlignment.MiddleLeft;
             txtUsuario.Watermark = "Usuario";

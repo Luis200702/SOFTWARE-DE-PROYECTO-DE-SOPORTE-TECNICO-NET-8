@@ -330,9 +330,9 @@
             lblPrecioVenta.AutoSize = true;
             lblPrecioVenta.Location = new Point(27, 359);
             lblPrecioVenta.Name = "lblPrecioVenta";
-            lblPrecioVenta.Size = new Size(89, 15);
+            lblPrecioVenta.Size = new Size(93, 15);
             lblPrecioVenta.TabIndex = 50;
-            lblPrecioVenta.Text = "Precio costo ($)";
+            lblPrecioVenta.Text = "Precio a la venta";
             // 
             // txtProveedor
             // 
@@ -359,14 +359,15 @@
             lblProveedor.AutoSize = true;
             lblProveedor.Location = new Point(28, 428);
             lblProveedor.Name = "lblProveedor";
-            lblProveedor.Size = new Size(89, 15);
+            lblProveedor.Size = new Size(127, 15);
             lblProveedor.TabIndex = 52;
-            lblProveedor.Text = "Precio costo ($)";
+            lblProveedor.Text = "Nombre del proveedor";
             // 
             // frmRegistrarEntrega
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(198, 199, 189);
             ClientSize = new Size(488, 568);
             Controls.Add(lblProveedor);
             Controls.Add(txtProveedor);

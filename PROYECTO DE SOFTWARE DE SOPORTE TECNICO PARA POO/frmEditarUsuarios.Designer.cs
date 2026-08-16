@@ -204,7 +204,7 @@
             btnGuardarCambios.Location = new Point(253, 547);
             btnGuardarCambios.MinimumSize = new Size(1, 1);
             btnGuardarCambios.Name = "btnGuardarCambios";
-            btnGuardarCambios.Radius = 3;
+            btnGuardarCambios.Radius = 12;
             btnGuardarCambios.RectColor = Color.FromArgb(0, 150, 137);
             btnGuardarCambios.Size = new Size(117, 30);
             btnGuardarCambios.TabIndex = 26;
@@ -220,7 +220,7 @@
             btnCancelar.Location = new Point(130, 547);
             btnCancelar.MinimumSize = new Size(1, 1);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Radius = 3;
+            btnCancelar.Radius = 12;
             btnCancelar.RectColor = Color.FromArgb(0, 150, 137);
             btnCancelar.Size = new Size(117, 30);
             btnCancelar.TabIndex = 27;
