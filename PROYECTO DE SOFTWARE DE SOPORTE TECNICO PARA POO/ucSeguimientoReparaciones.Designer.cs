@@ -49,11 +49,10 @@
             // 
             // pnlSuperior
             // 
-            pnlSuperior.AutoSize = true;
-            pnlSuperior.BackColor = Color.FromArgb(30, 41, 59);
-            pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
+            pnlSuperior.BackColor = Color.FromArgb(243, 246, 250);
             pnlSuperior.Controls.Add(pictureBox1);
             pnlSuperior.Controls.Add(lblTitulo);
+            pnlSuperior.ForeColor = Color.Transparent;
             pnlSuperior.Location = new Point(0, 0);
             pnlSuperior.MaximumSize = new Size(1125, 54);
             pnlSuperior.MinimumSize = new Size(1125, 54);
@@ -74,11 +73,11 @@
             // lblTitulo
             // 
             lblTitulo.Dock = DockStyle.Left;
-            lblTitulo.Font = new Font("Nirmala UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.FromArgb(147, 162, 183);
+            lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.FromArgb(24, 43, 62);
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(342, 52);
+            lblTitulo.Size = new Size(414, 54);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "       Seguimiento de Reparaciones";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -86,8 +85,7 @@
             // pnlInformacion
             // 
             pnlInformacion.AutoSize = true;
-            pnlInformacion.BackColor = Color.FromArgb(30, 41, 59);
-            pnlInformacion.BorderStyle = BorderStyle.FixedSingle;
+            pnlInformacion.BackColor = Color.FromArgb(243, 246, 250);
             pnlInformacion.Controls.Add(cmbEstado);
             pnlInformacion.Controls.Add(txtBuscarOrden);
             pnlInformacion.Controls.Add(lblOrden);
@@ -103,9 +101,9 @@
             cmbEstado.BackColor = Color.Transparent;
             cmbEstado.DataSource = null;
             cmbEstado.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbEstado.FillColor = Color.FromArgb(41, 53, 72);
+            cmbEstado.FillColor = Color.FromArgb(248, 249, 251);
             cmbEstado.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbEstado.ForeColor = Color.White;
+            cmbEstado.ForeColor = Color.FromArgb(70, 86, 103);
             cmbEstado.FormattingEnabled = true;
             cmbEstado.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbEstado.Items.AddRange(new object[] { "Todos los estados", "Recibido", "En diagnóstico", "En reparación", "Listo", "Entregado" });
@@ -116,19 +114,20 @@
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Padding = new Padding(0, 0, 30, 2);
             cmbEstado.Radius = 12;
-            cmbEstado.RectColor = Color.FromArgb(148, 163, 184);
+            cmbEstado.RectColor = Color.FromArgb(220, 226, 232);
             cmbEstado.Size = new Size(151, 30);
             cmbEstado.SymbolSize = 24;
             cmbEstado.TabIndex = 44;
             cmbEstado.TextAlignment = ContentAlignment.MiddleLeft;
-            cmbEstado.Watermark = "";
+            cmbEstado.Watermark = "Filtrar";
+            cmbEstado.WatermarkColor = Color.FromArgb(145, 158, 172);
             cmbEstado.SelectedIndexChanged += cmbEstado_SelectedIndexChanged_1;
             // 
             // txtBuscarOrden
             // 
-            txtBuscarOrden.FillColor = Color.FromArgb(41, 53, 72);
+            txtBuscarOrden.FillColor = Color.FromArgb(248, 249, 251);
             txtBuscarOrden.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBuscarOrden.ForeColor = Color.White;
+            txtBuscarOrden.ForeColor = Color.FromArgb(70, 86, 103);
             txtBuscarOrden.Icon = Properties.Resources.TablerSearch;
             txtBuscarOrden.Location = new Point(35, 13);
             txtBuscarOrden.Margin = new Padding(4, 5, 4, 5);
@@ -136,12 +135,13 @@
             txtBuscarOrden.Name = "txtBuscarOrden";
             txtBuscarOrden.Padding = new Padding(5);
             txtBuscarOrden.Radius = 12;
-            txtBuscarOrden.RectColor = Color.FromArgb(39, 53, 72);
+            txtBuscarOrden.RectColor = Color.FromArgb(220, 226, 232);
             txtBuscarOrden.ShowText = false;
             txtBuscarOrden.Size = new Size(292, 30);
             txtBuscarOrden.TabIndex = 14;
             txtBuscarOrden.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscarOrden.Watermark = "Buscar orden, cliente...";
+            txtBuscarOrden.WatermarkColor = Color.FromArgb(145, 158, 172);
             txtBuscarOrden.TextChanged += txtBuscarOrden_TextChanged;
             // 
             // lblOrden
@@ -158,12 +158,11 @@
             // pnlContenedor
             // 
             pnlContenedor.Controls.Add(pnldgv);
-            pnlContenedor.Dock = DockStyle.Fill;
             pnlContenedor.Location = new Point(0, 0);
-            pnlContenedor.MaximumSize = new Size(1125, 705);
+            pnlContenedor.MaximumSize = new Size(1125, 0);
             pnlContenedor.MinimumSize = new Size(1125, 705);
             pnlContenedor.Name = "pnlContenedor";
-            pnlContenedor.Size = new Size(1125, 705);
+            pnlContenedor.Size = new Size(1125, 832);
             pnlContenedor.TabIndex = 4;
             // 
             // pnldgv
@@ -179,7 +178,7 @@
             dgvSeguimiento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvSeguimiento.Location = new Point(0, 55);
             dgvSeguimiento.Name = "dgvSeguimiento";
-            dgvSeguimiento.Size = new Size(1125, 649);
+            dgvSeguimiento.Size = new Size(1123, 717);
             dgvSeguimiento.TabIndex = 4;
             dgvSeguimiento.CellDoubleClick += dgvNuevo_CellDoubleClick;
             dgvSeguimiento.CellFormatting += dgvNuevo_CellFormatting;
@@ -194,7 +193,7 @@
             Controls.Add(pnlSuperior);
             Controls.Add(pnlContenedor);
             Name = "ucSeguimientoReparaciones";
-            Size = new Size(1125, 764);
+            Size = new Size(1123, 832);
             Load += ucSeguimientoReparaciones_Load;
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

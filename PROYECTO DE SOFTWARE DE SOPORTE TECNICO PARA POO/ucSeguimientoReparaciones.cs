@@ -14,14 +14,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             AplicarDiseñoGrid();
         }
 
-        // --- 1. DISEÑO BASE DE LA TABLA (MÁRGENES, ALTURAS Y FONDOS) ---
+        // --- 1. DISEÑO BASE DE LA TABLA Y UNIFICACIÓN VISUAL ---
         private void AplicarDiseñoGrid()
         {
-            // Apariencia general
-            dgvSeguimiento.BackgroundColor = Color.White;
-            dgvSeguimiento.BorderStyle = BorderStyle.None;
+            // Apariencia general unificada
+            dgvSeguimiento.BackgroundColor = Color.White; // Cambiado a blanco total para fundirse con el panel
             dgvSeguimiento.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvSeguimiento.GridColor = Color.FromArgb(235, 235, 235);
+            dgvSeguimiento.GridColor = Color.FromArgb(240, 242, 245); // Líneas horizontales muy sutiles
             dgvSeguimiento.RowHeadersVisible = false;
 
             // Comportamiento
@@ -36,17 +35,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvSeguimiento.ColumnHeadersHeight = 50;
             dgvSeguimiento.RowTemplate.Height = 45;
 
-            // Títulos (Headers)
+            // Títulos (Headers) unificados sin cortes visuales
             dgvSeguimiento.EnableHeadersVisualStyles = false;
             DataGridViewCellStyle estiloEncabezado = new DataGridViewCellStyle();
-            estiloEncabezado.BackColor = Color.FromArgb(250, 250, 252);
+            estiloEncabezado.BackColor = Color.White; // Fondo blanco idéntico al contenedor superior
             estiloEncabezado.ForeColor = Color.FromArgb(120, 120, 120);
             estiloEncabezado.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
             estiloEncabezado.Alignment = DataGridViewContentAlignment.MiddleLeft;
             estiloEncabezado.Padding = new Padding(15, 0, 0, 0);
 
-            // Eliminamos el resaltado azul al hacer clic en los títulos
-            estiloEncabezado.SelectionBackColor = Color.FromArgb(250, 250, 252);
+            // Eliminamos el resaltado al hacer clic en los títulos
+            estiloEncabezado.SelectionBackColor = Color.White;
             estiloEncabezado.SelectionForeColor = Color.FromArgb(120, 120, 120);
 
             dgvSeguimiento.ColumnHeadersDefaultCellStyle = estiloEncabezado;
@@ -60,7 +59,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             estiloFila.Alignment = DataGridViewContentAlignment.MiddleLeft;
             estiloFila.Padding = new Padding(15, 0, 0, 0);
 
-            // Selección sutil para no arruinar las píldoras de colores
+            // Selección sutil
             estiloFila.SelectionBackColor = Color.FromArgb(245, 248, 255);
             estiloFila.SelectionForeColor = Color.FromArgb(60, 60, 60);
 
@@ -155,7 +154,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             try
             {
-                // Asegurarnos de que no se hizo doble clic en el encabezado
                 if (e.RowIndex >= 0)
                 {
                     DataRowView filaSeleccionada = (DataRowView)dgvSeguimiento.Rows[e.RowIndex].DataBoundItem;
@@ -196,14 +194,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // --- 5. MAGIA VISUAL (PÍLDORAS REDONDEADAS Y LÍNEA DE COLOR) ---
         private void dgvNuevo_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // Ignorar el pintado de los encabezados
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
             string estado = dgvSeguimiento.Rows[e.RowIndex].Cells["ESTADO"].Value?.ToString() ?? "";
             Color colorPrincipal = Color.Gray;
             Color colorFondo = Color.White;
 
-            // Paleta de colores según estado
             switch (estado)
             {
                 case "En reparación":
@@ -248,7 +244,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 int x = e.CellBounds.Left + 15;
                 int y = e.CellBounds.Top + (e.CellBounds.Height - altoBadge) / 2;
 
-                // Dibujar figura redondeada
                 using (System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath())
                 {
                     int radio = 10;
@@ -264,7 +259,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     }
                 }
 
-                // Dibujar puntito
                 int dotSize = 6;
                 int dotX = x + 8;
                 int dotY = y + (altoBadge - dotSize) / 2;
@@ -273,7 +267,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     e.Graphics.FillEllipse(dotBrush, dotX, dotY, dotSize, dotSize);
                 }
 
-                // Dibujar texto
                 int textX = dotX + dotSize + 4;
                 int textY = y + (altoBadge - e.CellStyle.Font.Height) / 2 + 1;
                 using (SolidBrush textBrush = new SolidBrush(colorPrincipal))
@@ -285,7 +278,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // Eventos vacíos opcionales que tenías en tu código original
         private void txtBuscar_TextChanged(object sender, EventArgs e) { }
         private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e) { }
     }

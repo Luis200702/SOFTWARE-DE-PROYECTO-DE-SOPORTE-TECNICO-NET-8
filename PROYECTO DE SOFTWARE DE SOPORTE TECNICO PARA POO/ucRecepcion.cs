@@ -8,6 +8,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
@@ -46,17 +48,20 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         public void SeleccionarBoton(UIButton boton)
         {
+            // 1. Si ya había un botón seleccionado previamente, lo regresamos al estado "no seleccionado" (gris claro)
             if (botonSeleccionado != null)
             {
-                botonSeleccionado.FillColor = Color.FromArgb(22, 35, 52);
-                botonSeleccionado.RectColor = Color.Gray;
-                botonSeleccionado.ForeColor = Color.White;
+                botonSeleccionado.FillColor = Color.FromArgb(239, 243, 247); // Fondo gris claro
+                botonSeleccionado.ForeColor = Color.FromArgb(70, 86, 103);   // Texto gris oscuro
+                botonSeleccionado.RectColor = Color.FromArgb(220, 226, 232); // Borde gris suave
             }
 
-            boton.FillColor = Color.FromArgb(0, 150, 137);
-            boton.RectColor = Color.FromArgb(0, 150, 137);
-            boton.ForeColor = Color.FromArgb(22, 35, 52);
+            // 2. Al botón recién presionado le aplicamos el estado "seleccionado" (turquesa / teal)
+            boton.FillColor = Color.FromArgb(0, 165, 155);   // Fondo turquesa principal
+            boton.ForeColor = Color.FromArgb(255, 255, 255); // Texto blanco
+            boton.RectColor = Color.FromArgb(0, 165, 155);   // Borde turquesa
 
+            // 3. Guardamos la referencia del botón activo
             botonSeleccionado = boton;
         }
 
@@ -459,11 +464,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             Sunny.UI.UIButton btnNuevo = new Sunny.UI.UIButton();
             btnNuevo.Name = "btnEquipo" + contadorEquipos;
             btnNuevo.Text = "Equipo " + contadorEquipos;
-            btnNuevo.Size = new Size(90, 32);
+            btnNuevo.Size = new Size(100, 34);
             btnNuevo.Cursor = Cursors.Hand;
             btnNuevo.Margin = new Padding(3, 3, 3, 3);
-            btnNuevo.Font = new Font("Segoe UI Semibold", 9, FontStyle.Bold, GraphicsUnit.Point);
+            btnNuevo.Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.Radius = 12;
+
+
 
             btnNuevo.Tag = listaEquipos.Count - 1;
             btnNuevo.Click += btnEquipo_Click;
@@ -555,5 +562,37 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 txtCosto.SelectAll();
             }
         }
+        public bool EsEmailValido(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email)) return false;
+
+            // Patrón de validación de correo
+            string patron = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            return Regex.IsMatch(email, patron, RegexOptions.IgnoreCase);
+        }
+
+        private void txtCorreo_Validating(object sender, CancelEventArgs e)
+        {
+            string correo = txtCorreo.Text.Trim();
+
+            if (!string.IsNullOrWhiteSpace(correo) && !EsEmailValido(correo))
+            {
+                // 1. Marcar el error visualmente (opcional: poner borde rojo)
+                txtCorreo.RectColor = Color.Red;
+
+                // 2. Avisar al usuario (usamos un MessageBox, pero ahora no causará bucle porque cancelamos el evento)
+                MessageBox.Show("El formato del correo no es válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // 3. ESTA ES LA CLAVE: cancelamos el evento para que el cursor no pueda salir
+                e.Cancel = true;
+            }
+            else
+            {
+                // Si es válido, restauramos el color original
+                txtCorreo.RectColor = Color.FromArgb(220, 224, 230); // El color de borde que usamos en tu diseño
+            }
+        }
+
     }
 }
