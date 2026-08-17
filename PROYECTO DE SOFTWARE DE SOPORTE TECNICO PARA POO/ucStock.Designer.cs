@@ -50,7 +50,7 @@
             // 
             pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
-            pnlSuperior.BackColor = Color.FromArgb(235, 239, 240);
+            pnlSuperior.BackColor = Color.FromArgb(243, 246, 250);
             pnlSuperior.Controls.Add(pictureBox1);
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(0, 0);
@@ -84,7 +84,7 @@
             // 
             pnlInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlInfo.AutoSize = true;
-            pnlInfo.BackColor = Color.FromArgb(235, 239, 240);
+            pnlInfo.BackColor = Color.FromArgb(243, 246, 250);
             pnlInfo.Controls.Add(btnAlertas);
             pnlInfo.Controls.Add(btnNuevoRepuesto);
             pnlInfo.Controls.Add(cmbCategorias);
@@ -141,7 +141,7 @@
             cmbCategorias.BackColor = Color.Transparent;
             cmbCategorias.DataSource = null;
             cmbCategorias.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbCategorias.FillColor = Color.FromArgb(75, 92, 108);
+            cmbCategorias.FillColor = Color.FromArgb(248, 249, 251);
             cmbCategorias.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbCategorias.ForeColor = Color.White;
             cmbCategorias.FormattingEnabled = true;
@@ -163,7 +163,7 @@
             // 
             // txtBuscar
             // 
-            txtBuscar.FillColor = Color.FromArgb(75, 92, 108);
+            txtBuscar.FillColor = Color.FromArgb(243, 246, 250);
             txtBuscar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtBuscar.ForeColor = Color.FromArgb(235, 239, 240);
             txtBuscar.Icon = Properties.Resources.TablerSearch;

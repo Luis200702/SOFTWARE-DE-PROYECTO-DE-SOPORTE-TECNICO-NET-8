@@ -180,6 +180,7 @@
             dgvSeguimiento.Name = "dgvSeguimiento";
             dgvSeguimiento.Size = new Size(1123, 717);
             dgvSeguimiento.TabIndex = 4;
+            dgvSeguimiento.CellContentClick += dgvSeguimiento_CellContentClick;
             dgvSeguimiento.CellDoubleClick += dgvNuevo_CellDoubleClick;
             dgvSeguimiento.CellFormatting += dgvNuevo_CellFormatting;
             dgvSeguimiento.CellPainting += dgvNuevo_CellPainting;

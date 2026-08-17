@@ -459,7 +459,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             btnRecibir = new UIButton() { Text = "Recibir orden", FillColor = Color.FromArgb(13, 148, 136), RectColor = Color.FromArgb(13, 148, 136), ForeColor = Color.White, Font = new Font("Segoe UI", 9.5F, FontStyle.Bold), Size = new Size(anchoMitad, 42), Location = new Point(24, 462), Radius = 12, Cursor = Cursors.Hand, Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right };
             btnRecibir.Click += (s, e) => { ActualizarEstadoDerivacion("Recibido"); };
 
-            btnRechazar = new UIButton() { Text = "Recazar orden", FillColor = Color.FromArgb(220, 38, 38), RectColor = Color.FromArgb(220, 38, 38), ForeColor = Color.White, Font = new Font("Segoe UI", 9.5F, FontStyle.Bold), Size = new Size(anchoMitad, 42), Location = new Point(24 + anchoMitad + 10, 462), Radius = 12, Cursor = Cursors.Hand, Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right };
+            btnRechazar = new UIButton() { Text = "Rechazar orden", FillColor = Color.FromArgb(220, 38, 38), RectColor = Color.FromArgb(220, 38, 38), ForeColor = Color.White, Font = new Font("Segoe UI", 9.5F, FontStyle.Bold), Size = new Size(anchoMitad, 42), Location = new Point(24 + anchoMitad + 10, 462), Radius = 12, Cursor = Cursors.Hand, Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right };
             btnRechazar.Click += (s, e) => { ActualizarEstadoDerivacion("Rechazado"); };
 
             pnlDerechoE.Controls.AddRange(new Control[] { lblTitulo, lblValOrden, pnlClienteBox, pnlDispBox, pnlRutaBox, pnlAccionBox, btnRecibir, btnRechazar });
