@@ -593,6 +593,37 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 txtCorreo.RectColor = Color.FromArgb(220, 224, 230); // El color de borde que usamos en tu diseño
             }
         }
+        private void txtNombres_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 1. Permitir teclas de control como el Retroceso (Backspace) para poder borrar
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+            // 2. Permitir solo letras y espacios
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                // Si la tecla presionada no es una letra ni un espacio, cancelamos el evento
+                e.Handled = true;
+            }
+        }
+
+        private void txtSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 1. Permitir teclas de control como el Retroceso (Backspace) para poder borrar
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+            // 2. Permitir exclusivamente números (dígitos del 0 al 9)
+            if (!char.IsDigit(e.KeyChar))
+            {
+                // Si la tecla presionada NO es un número, bloqueamos la entrada
+                e.Handled = true;
+            }
+        }
 
     }
 }

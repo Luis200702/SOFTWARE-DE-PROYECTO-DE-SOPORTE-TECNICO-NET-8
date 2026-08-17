@@ -754,6 +754,7 @@
             txtIdentificacionCliente.TextAlignment = ContentAlignment.MiddleLeft;
             txtIdentificacionCliente.Watermark = "Ej. 1203807183";
             txtIdentificacionCliente.WatermarkColor = Color.FromArgb(145, 158, 172);
+            txtIdentificacionCliente.KeyPress += txtSoloNumeros_KeyPress;
             // 
             // txtCorreo
             // 
@@ -798,6 +799,7 @@
             txtNumeroTelefonico.TextAlignment = ContentAlignment.MiddleLeft;
             txtNumeroTelefonico.Watermark = "0993425009";
             txtNumeroTelefonico.WatermarkColor = Color.FromArgb(145, 158, 172);
+            txtNumeroTelefonico.KeyPress += txtSoloNumeros_KeyPress;
             // 
             // lblCorreo
             // 
@@ -830,6 +832,7 @@
             txtNombres.TextAlignment = ContentAlignment.MiddleLeft;
             txtNombres.Watermark = "Nombre y apellidos";
             txtNombres.WatermarkColor = Color.FromArgb(145, 158, 172);
+            txtNombres.KeyPress += txtNombres_KeyPress;
             // 
             // pictureBox5
             // 
@@ -1038,6 +1041,7 @@
             txtModelo.TextAlignment = ContentAlignment.MiddleLeft;
             txtModelo.Watermark = "Ej. Galaxy S26";
             txtModelo.WatermarkColor = Color.FromArgb(145, 158, 172);
+            txtModelo.KeyPress += txtNombres_KeyPress;
             // 
             // btnComputadora
             // 
@@ -1082,6 +1086,7 @@
             txtColor.TextAlignment = ContentAlignment.MiddleLeft;
             txtColor.Watermark = "Ej. Negro";
             txtColor.WatermarkColor = Color.FromArgb(145, 158, 172);
+            txtColor.KeyPress += txtNombres_KeyPress;
             // 
             // txtSerie
             // 
