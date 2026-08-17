@@ -694,9 +694,9 @@
             pnlDatosCliente.Controls.Add(txtNombres);
             pnlDatosCliente.Controls.Add(pictureBox5);
             pnlDatosCliente.Controls.Add(lblTelefono);
+            pnlDatosCliente.Controls.Add(lblDatosCliente);
             pnlDatosCliente.Controls.Add(lblCliente);
             pnlDatosCliente.Controls.Add(airSeparator1);
-            pnlDatosCliente.Controls.Add(lblDatosCliente);
             pnlDatosCliente.FillColor = Color.White;
             pnlDatosCliente.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             pnlDatosCliente.ForeColor = Color.Black;
@@ -727,7 +727,7 @@
             lbId.AutoSize = true;
             lbId.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbId.ForeColor = Color.FromArgb(24, 43, 62);
-            lbId.Location = new Point(19, 134);
+            lbId.Location = new Point(19, 63);
             lbId.Name = "lbId";
             lbId.Size = new Size(164, 21);
             lbId.TabIndex = 17;
@@ -738,7 +738,7 @@
             txtIdentificacionCliente.FillColor = Color.FromArgb(248, 249, 251);
             txtIdentificacionCliente.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtIdentificacionCliente.ForeColor = Color.FromArgb(70, 86, 103);
-            txtIdentificacionCliente.Location = new Point(18, 160);
+            txtIdentificacionCliente.Location = new Point(18, 88);
             txtIdentificacionCliente.Margin = new Padding(4, 5, 4, 5);
             txtIdentificacionCliente.Maximum = 0D;
             txtIdentificacionCliente.MaxLength = 10;
@@ -817,7 +817,7 @@
             txtNombres.FillColor = Color.FromArgb(248, 249, 251);
             txtNombres.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNombres.ForeColor = Color.FromArgb(70, 86, 103);
-            txtNombres.Location = new Point(19, 88);
+            txtNombres.Location = new Point(20, 166);
             txtNombres.Margin = new Padding(4, 5, 4, 5);
             txtNombres.MaxLength = 255;
             txtNombres.Minimum = 0D;
@@ -887,11 +887,12 @@
             lblDatosCliente.AutoSize = true;
             lblDatosCliente.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDatosCliente.ForeColor = Color.FromArgb(24, 43, 62);
-            lblDatosCliente.Location = new Point(19, 62);
+            lblDatosCliente.Location = new Point(19, 137);
             lblDatosCliente.Name = "lblDatosCliente";
             lblDatosCliente.Size = new Size(150, 21);
             lblDatosCliente.TabIndex = 7;
             lblDatosCliente.Text = "Nombre completo";
+            lblDatosCliente.Click += lblDatosCliente_Click;
             // 
             // pnlDispositivo
             // 
