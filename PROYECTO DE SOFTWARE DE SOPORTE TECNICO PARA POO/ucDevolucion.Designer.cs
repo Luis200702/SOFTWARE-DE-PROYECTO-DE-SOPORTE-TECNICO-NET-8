@@ -30,12 +30,12 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucDevolucion));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             pnlSuperior = new Panel();
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
@@ -45,8 +45,6 @@
             lblOrden = new Label();
             txtBuscarOrden = new Sunny.UI.UITextBox();
             pnlPrincipal = new Panel();
-            btnComprobante = new Sunny.UI.UIButton();
-            btnRegistraEntrega = new Sunny.UI.UIButton();
             pnlFormaDePago = new Sunny.UI.UIPanel();
             pnlTotalCobrar = new Sunny.UI.UIPanel();
             lblTotalCobrar = new Label();
@@ -93,6 +91,8 @@
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(components);
             pdComprobante = new PrintDialog();
+            btnRegistraEntrega = new Sunny.UI.UISymbolButton();
+            btnComprobante = new Sunny.UI.UISymbolButton();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
@@ -110,7 +110,7 @@
             // 
             pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
-            pnlSuperior.BackColor = Color.FromArgb(235, 239, 240);
+            pnlSuperior.BackColor = Color.FromArgb(243, 246, 250);
             pnlSuperior.Controls.Add(pictureBox1);
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(0, 0);
@@ -130,9 +130,10 @@
             // 
             // lblTitulo
             // 
+            lblTitulo.BackColor = Color.FromArgb(243, 246, 250);
             lblTitulo.Dock = DockStyle.Left;
             lblTitulo.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.FromArgb(75, 92, 108);
+            lblTitulo.ForeColor = Color.FromArgb(24, 43, 62);
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(446, 59);
@@ -143,7 +144,7 @@
             // pnlInformacion
             // 
             pnlInformacion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlInformacion.BackColor = Color.FromArgb(235, 239, 240);
+            pnlInformacion.BackColor = Color.FromArgb(243, 246, 250);
             pnlInformacion.Controls.Add(cmbListaOrdenes);
             pnlInformacion.Controls.Add(btnBuscar);
             pnlInformacion.Controls.Add(lblOrden);
@@ -159,9 +160,9 @@
             cmbListaOrdenes.BackColor = Color.Transparent;
             cmbListaOrdenes.DataSource = null;
             cmbListaOrdenes.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbListaOrdenes.FillColor = Color.FromArgb(244, 244, 244);
+            cmbListaOrdenes.FillColor = Color.White;
             cmbListaOrdenes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbListaOrdenes.ForeColor = Color.FromArgb(75, 92, 108);
+            cmbListaOrdenes.ForeColor = Color.FromArgb(70, 86, 103);
             cmbListaOrdenes.FormattingEnabled = true;
             cmbListaOrdenes.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbListaOrdenes.Items.AddRange(new object[] { "Seleccionar...", "Efectivo", "Transferencia" });
@@ -172,7 +173,8 @@
             cmbListaOrdenes.Name = "cmbListaOrdenes";
             cmbListaOrdenes.Padding = new Padding(0, 0, 30, 2);
             cmbListaOrdenes.Radius = 12;
-            cmbListaOrdenes.RectColor = Color.FromArgb(75, 92, 108);
+            cmbListaOrdenes.RectColor = Color.FromArgb(220, 226, 232);
+            cmbListaOrdenes.RectDisableColor = Color.FromArgb(0, 165, 155);
             cmbListaOrdenes.Size = new Size(294, 37);
             cmbListaOrdenes.SymbolSize = 24;
             cmbListaOrdenes.TabIndex = 25;
@@ -207,26 +209,29 @@
             // 
             // txtBuscarOrden
             // 
-            txtBuscarOrden.FillColor = Color.FromArgb(244, 244, 244);
+            txtBuscarOrden.ButtonRectHoverColor = Color.FromArgb(0, 165, 155);
+            txtBuscarOrden.ButtonRectPressColor = Color.FromArgb(0, 165, 155);
+            txtBuscarOrden.ButtonStyleInherited = false;
             txtBuscarOrden.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBuscarOrden.ForeColor = Color.FromArgb(75, 92, 108);
+            txtBuscarOrden.ForeColor = Color.FromArgb(70, 86, 103);
             txtBuscarOrden.Location = new Point(28, 45);
             txtBuscarOrden.Margin = new Padding(4, 5, 4, 5);
             txtBuscarOrden.MinimumSize = new Size(1, 16);
             txtBuscarOrden.Name = "txtBuscarOrden";
             txtBuscarOrden.Padding = new Padding(5);
             txtBuscarOrden.Radius = 12;
-            txtBuscarOrden.RectColor = Color.FromArgb(244, 244, 244);
+            txtBuscarOrden.RectColor = Color.FromArgb(220, 226, 232);
             txtBuscarOrden.ShowText = false;
             txtBuscarOrden.Size = new Size(294, 37);
+            txtBuscarOrden.Symbol = 62144;
             txtBuscarOrden.TabIndex = 3;
             txtBuscarOrden.TextAlignment = ContentAlignment.MiddleLeft;
-            txtBuscarOrden.Watermark = "Ej. ORD-2024-003";
+            txtBuscarOrden.Watermark = "Ej. 0953485638";
             // 
             // pnlPrincipal
             // 
             pnlPrincipal.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlPrincipal.BackColor = Color.FromArgb(235, 239, 240);
+            pnlPrincipal.BackColor = Color.FromArgb(243, 246, 250);
             pnlPrincipal.Controls.Add(btnComprobante);
             pnlPrincipal.Controls.Add(btnRegistraEntrega);
             pnlPrincipal.Controls.Add(pnlSuperior);
@@ -239,55 +244,6 @@
             pnlPrincipal.Name = "pnlPrincipal";
             pnlPrincipal.Size = new Size(1123, 832);
             pnlPrincipal.TabIndex = 3;
-            // 
-            // btnComprobante
-            // 
-            btnComprobante.BackColor = Color.Transparent;
-            btnComprobante.FillColor = Color.FromArgb(75, 92, 108);
-            btnComprobante.FillHoverColor = Color.Transparent;
-            btnComprobante.FillPressColor = Color.FromArgb(0, 150, 137);
-            btnComprobante.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnComprobante.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnComprobante.ForeColor = Color.FromArgb(235, 239, 240);
-            btnComprobante.Location = new Point(849, 700);
-            btnComprobante.MinimumSize = new Size(1, 1);
-            btnComprobante.Name = "btnComprobante";
-            btnComprobante.Radius = 12;
-            btnComprobante.RectColor = Color.FromArgb(75, 92, 108);
-            btnComprobante.RectHoverColor = Color.FromArgb(22, 35, 52);
-            btnComprobante.RectPressColor = Color.FromArgb(0, 150, 137);
-            btnComprobante.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnComprobante.Size = new Size(200, 50);
-            btnComprobante.TabIndex = 30;
-            btnComprobante.Text = "Comprobante";
-            btnComprobante.TipsFont = new Font("Segoe UI", 12F);
-            btnComprobante.TipsForeColor = Color.Transparent;
-            btnComprobante.Visible = false;
-            btnComprobante.Click += btnComprobante_Click;
-            // 
-            // btnRegistraEntrega
-            // 
-            btnRegistraEntrega.BackColor = Color.Transparent;
-            btnRegistraEntrega.FillColor = Color.FromArgb(0, 150, 137);
-            btnRegistraEntrega.FillHoverColor = Color.Transparent;
-            btnRegistraEntrega.FillPressColor = Color.FromArgb(0, 150, 137);
-            btnRegistraEntrega.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnRegistraEntrega.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnRegistraEntrega.ForeColor = Color.FromArgb(235, 239, 240);
-            btnRegistraEntrega.Location = new Point(605, 700);
-            btnRegistraEntrega.MinimumSize = new Size(1, 1);
-            btnRegistraEntrega.Name = "btnRegistraEntrega";
-            btnRegistraEntrega.Radius = 12;
-            btnRegistraEntrega.RectColor = Color.FromArgb(0, 150, 137);
-            btnRegistraEntrega.RectHoverColor = Color.Transparent;
-            btnRegistraEntrega.RectPressColor = Color.FromArgb(0, 150, 137);
-            btnRegistraEntrega.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnRegistraEntrega.Size = new Size(200, 50);
-            btnRegistraEntrega.TabIndex = 29;
-            btnRegistraEntrega.Text = "Registrar Entrega";
-            btnRegistraEntrega.TipsFont = new Font("Segoe UI", 12F);
-            btnRegistraEntrega.TipsForeColor = Color.Transparent;
-            btnRegistraEntrega.Visible = false;
             // 
             // pnlFormaDePago
             // 
@@ -302,14 +258,14 @@
             pnlFormaDePago.Controls.Add(cmbFormaPago);
             pnlFormaDePago.Controls.Add(lblRegistrarEntrega);
             pnlFormaDePago.Controls.Add(airSeparator4);
-            pnlFormaDePago.FillColor = Color.FromArgb(198, 199, 189);
+            pnlFormaDePago.FillColor = Color.White;
             pnlFormaDePago.Font = new Font("Microsoft Sans Serif", 12F);
             pnlFormaDePago.Location = new Point(560, 180);
             pnlFormaDePago.Margin = new Padding(4, 5, 4, 5);
             pnlFormaDePago.MinimumSize = new Size(1, 1);
             pnlFormaDePago.Name = "pnlFormaDePago";
             pnlFormaDePago.Radius = 12;
-            pnlFormaDePago.RectColor = Color.FromArgb(198, 199, 189);
+            pnlFormaDePago.RectColor = Color.FromArgb(225, 230, 235);
             pnlFormaDePago.Size = new Size(530, 475);
             pnlFormaDePago.TabIndex = 6;
             pnlFormaDePago.Text = null;
@@ -351,7 +307,7 @@
             txtObservaciones.BackColor = Color.Transparent;
             txtObservaciones.FillColor = Color.FromArgb(244, 244, 244);
             txtObservaciones.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtObservaciones.ForeColor = Color.FromArgb(75, 92, 108);
+            txtObservaciones.ForeColor = Color.FromArgb(24, 43, 62);
             txtObservaciones.Location = new Point(18, 240);
             txtObservaciones.Margin = new Padding(4, 5, 4, 5);
             txtObservaciones.MaxLength = 255;
@@ -361,12 +317,14 @@
             txtObservaciones.Name = "txtObservaciones";
             txtObservaciones.Padding = new Padding(5);
             txtObservaciones.Radius = 12;
-            txtObservaciones.RectColor = Color.FromArgb(244, 244, 244);
+            txtObservaciones.RectColor = Color.FromArgb(220, 226, 232);
+            txtObservaciones.RectDisableColor = Color.FromArgb(0, 165, 155);
             txtObservaciones.ShowText = false;
-            txtObservaciones.Size = new Size(493, 90);
+            txtObservaciones.Size = new Size(493, 110);
             txtObservaciones.TabIndex = 32;
             txtObservaciones.TextAlignment = ContentAlignment.MiddleLeft;
             txtObservaciones.Watermark = "Notas Adicionales";
+            txtObservaciones.WatermarkColor = Color.FromArgb(145, 158, 172);
             // 
             // label3
             // 
@@ -396,17 +354,17 @@
             // btnReparado
             // 
             btnReparado.BackColor = Color.Transparent;
-            btnReparado.FillColor = Color.FromArgb(75, 92, 108);
+            btnReparado.FillColor = Color.FromArgb(239, 243, 247);
             btnReparado.FillHoverColor = Color.Transparent;
             btnReparado.FillPressColor = Color.FromArgb(0, 150, 137);
             btnReparado.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnReparado.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnReparado.ForeColor = Color.FromArgb(235, 239, 240);
+            btnReparado.ForeColor = Color.FromArgb(70, 86, 103);
             btnReparado.Location = new Point(18, 162);
             btnReparado.MinimumSize = new Size(1, 1);
             btnReparado.Name = "btnReparado";
             btnReparado.Radius = 12;
-            btnReparado.RectColor = Color.FromArgb(75, 92, 108);
+            btnReparado.RectColor = Color.FromArgb(220, 226, 232);
             btnReparado.RectHoverColor = Color.Transparent;
             btnReparado.RectPressColor = Color.FromArgb(0, 150, 137);
             btnReparado.RectSelectedColor = Color.FromArgb(0, 150, 137);
@@ -420,17 +378,17 @@
             // btnSinReparar
             // 
             btnSinReparar.BackColor = Color.Transparent;
-            btnSinReparar.FillColor = Color.FromArgb(75, 92, 108);
+            btnSinReparar.FillColor = Color.FromArgb(239, 243, 247);
             btnSinReparar.FillHoverColor = Color.Transparent;
             btnSinReparar.FillPressColor = Color.FromArgb(0, 150, 137);
             btnSinReparar.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnSinReparar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnSinReparar.ForeColor = Color.FromArgb(235, 239, 240);
+            btnSinReparar.ForeColor = Color.FromArgb(70, 86, 103);
             btnSinReparar.Location = new Point(361, 162);
             btnSinReparar.MinimumSize = new Size(1, 1);
             btnSinReparar.Name = "btnSinReparar";
             btnSinReparar.Radius = 12;
-            btnSinReparar.RectColor = Color.FromArgb(75, 92, 108);
+            btnSinReparar.RectColor = Color.FromArgb(220, 226, 232);
             btnSinReparar.RectHoverColor = Color.Transparent;
             btnSinReparar.RectPressColor = Color.FromArgb(0, 150, 137);
             btnSinReparar.RectSelectedColor = Color.FromArgb(0, 150, 137);
@@ -444,17 +402,17 @@
             // btnParcial
             // 
             btnParcial.BackColor = Color.Transparent;
-            btnParcial.FillColor = Color.FromArgb(75, 92, 108);
+            btnParcial.FillColor = Color.FromArgb(239, 243, 247);
             btnParcial.FillHoverColor = Color.Transparent;
             btnParcial.FillPressColor = Color.FromArgb(0, 150, 137);
             btnParcial.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnParcial.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnParcial.ForeColor = Color.FromArgb(235, 239, 240);
+            btnParcial.ForeColor = Color.FromArgb(70, 86, 103);
             btnParcial.Location = new Point(189, 162);
             btnParcial.MinimumSize = new Size(1, 1);
             btnParcial.Name = "btnParcial";
             btnParcial.Radius = 12;
-            btnParcial.RectColor = Color.FromArgb(75, 92, 108);
+            btnParcial.RectColor = Color.FromArgb(220, 226, 232);
             btnParcial.RectHoverColor = Color.FromArgb(22, 35, 52);
             btnParcial.RectPressColor = Color.FromArgb(0, 150, 137);
             btnParcial.RectSelectedColor = Color.FromArgb(0, 150, 137);
@@ -482,9 +440,11 @@
             cmbFormaPago.BackColor = Color.Transparent;
             cmbFormaPago.DataSource = null;
             cmbFormaPago.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbFormaPago.FillColor = Color.FromArgb(75, 92, 108);
+            cmbFormaPago.FillColor = Color.White;
+            cmbFormaPago.FillColor2 = Color.FromArgb(240, 252, 251);
             cmbFormaPago.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbFormaPago.ForeColor = Color.White;
+            cmbFormaPago.ForeColor = Color.FromArgb(70, 86, 103);
+            cmbFormaPago.ForeDisableColor = Color.FromArgb(0, 165, 155);
             cmbFormaPago.FormattingEnabled = true;
             cmbFormaPago.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbFormaPago.Items.AddRange(new object[] { "Seleccionar...", "Efectivo", "Transferencia" });
@@ -495,12 +455,14 @@
             cmbFormaPago.Name = "cmbFormaPago";
             cmbFormaPago.Padding = new Padding(0, 0, 30, 2);
             cmbFormaPago.Radius = 12;
-            cmbFormaPago.RectColor = Color.FromArgb(148, 163, 184);
+            cmbFormaPago.RectColor = Color.FromArgb(220, 226, 232);
+            cmbFormaPago.RectDisableColor = Color.FromArgb(0, 165, 155);
             cmbFormaPago.Size = new Size(493, 37);
             cmbFormaPago.SymbolSize = 24;
             cmbFormaPago.TabIndex = 24;
             cmbFormaPago.TextAlignment = ContentAlignment.MiddleLeft;
             cmbFormaPago.Watermark = "";
+            cmbFormaPago.WatermarkColor = Color.FromArgb(145, 158, 172);
             cmbFormaPago.SelectedIndexChanged += cmbFormaPago_SelectedIndexChanged;
             // 
             // lblRegistrarEntrega
@@ -508,7 +470,7 @@
             lblRegistrarEntrega.AutoSize = true;
             lblRegistrarEntrega.BackColor = Color.Transparent;
             lblRegistrarEntrega.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblRegistrarEntrega.ForeColor = Color.FromArgb(75, 92, 108);
+            lblRegistrarEntrega.ForeColor = Color.FromArgb(24, 43, 62);
             lblRegistrarEntrega.Location = new Point(18, 13);
             lblRegistrarEntrega.Name = "lblRegistrarEntrega";
             lblRegistrarEntrega.Size = new Size(141, 21);
@@ -537,14 +499,14 @@
             pnlDesgloseCosto.Controls.Add(airSeparator5);
             pnlDesgloseCosto.Controls.Add(lblDesglose);
             pnlDesgloseCosto.Controls.Add(airSeparator3);
-            pnlDesgloseCosto.FillColor = Color.FromArgb(198, 199, 189);
+            pnlDesgloseCosto.FillColor = Color.White;
             pnlDesgloseCosto.Font = new Font("Microsoft Sans Serif", 12F);
             pnlDesgloseCosto.Location = new Point(31, 610);
             pnlDesgloseCosto.Margin = new Padding(4, 5, 4, 5);
             pnlDesgloseCosto.MinimumSize = new Size(1, 1);
             pnlDesgloseCosto.Name = "pnlDesgloseCosto";
             pnlDesgloseCosto.Radius = 12;
-            pnlDesgloseCosto.RectColor = Color.FromArgb(198, 199, 189);
+            pnlDesgloseCosto.RectColor = Color.FromArgb(225, 230, 235);
             pnlDesgloseCosto.Size = new Size(500, 200);
             pnlDesgloseCosto.TabIndex = 5;
             pnlDesgloseCosto.Text = null;
@@ -555,11 +517,11 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI", 15.75F);
-            label4.ForeColor = Color.Black;
+            label4.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(24, 43, 62);
             label4.Location = new Point(18, 164);
             label4.Name = "label4";
-            label4.Size = new Size(57, 30);
+            label4.Size = new Size(60, 30);
             label4.TabIndex = 10;
             label4.Text = "Total";
             // 
@@ -577,31 +539,31 @@
             // 
             // dgvDesglose
             // 
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(235, 243, 255);
-            dgvDesglose.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(235, 243, 255);
+            dgvDesglose.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             dgvDesglose.BackgroundColor = Color.FromArgb(235, 239, 240);
             dgvDesglose.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvDesglose.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(80, 160, 255);
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvDesglose.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(80, 160, 255);
+            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            dgvDesglose.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             dgvDesglose.ColumnHeadersHeight = 32;
             dgvDesglose.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvDesglose.ColumnHeadersVisible = false;
             dgvDesglose.Columns.AddRange(new DataGridViewColumn[] { colDescripcion, colCosto });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(48, 48, 48);
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgvDesglose.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = SystemColors.Window;
+            dataGridViewCellStyle10.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle10.ForeColor = Color.FromArgb(48, 48, 48);
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            dgvDesglose.DefaultCellStyle = dataGridViewCellStyle10;
             dgvDesglose.EnableHeadersVisualStyles = false;
             dgvDesglose.Font = new Font("Microsoft Sans Serif", 12F);
             dgvDesglose.GridColor = Color.FromArgb(80, 160, 255);
@@ -609,18 +571,18 @@
             dgvDesglose.Name = "dgvDesglose";
             dgvDesglose.RectColor = Color.FromArgb(41, 53, 72);
             dgvDesglose.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(235, 243, 255);
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle5.ForeColor = Color.FromArgb(48, 48, 48);
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(80, 160, 255);
-            dataGridViewCellStyle5.SelectionForeColor = Color.White;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgvDesglose.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(235, 243, 255);
+            dataGridViewCellStyle11.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle11.ForeColor = Color.FromArgb(48, 48, 48);
+            dataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(80, 160, 255);
+            dataGridViewCellStyle11.SelectionForeColor = Color.White;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            dgvDesglose.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             dgvDesglose.RowHeadersVisible = false;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 12F);
-            dgvDesglose.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.BackColor = Color.White;
+            dataGridViewCellStyle12.Font = new Font("Microsoft Sans Serif", 12F);
+            dgvDesglose.RowsDefaultCellStyle = dataGridViewCellStyle12;
             dgvDesglose.SelectedIndex = -1;
             dgvDesglose.Size = new Size(463, 94);
             dgvDesglose.StripeOddColor = Color.FromArgb(235, 243, 255);
@@ -638,8 +600,8 @@
             // 
             colCosto.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             colCosto.DataPropertyName = "colCosto";
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
-            colCosto.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colCosto.DefaultCellStyle = dataGridViewCellStyle9;
             colCosto.HeaderText = "";
             colCosto.Name = "colCosto";
             colCosto.ReadOnly = true;
@@ -664,7 +626,7 @@
             lblDesglose.AutoSize = true;
             lblDesglose.BackColor = Color.Transparent;
             lblDesglose.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDesglose.ForeColor = Color.FromArgb(75, 92, 108);
+            lblDesglose.ForeColor = Color.FromArgb(24, 43, 62);
             lblDesglose.Location = new Point(18, 13);
             lblDesglose.Name = "lblDesglose";
             lblDesglose.Size = new Size(154, 21);
@@ -690,14 +652,14 @@
             pnlTrabajoRealizado.Controls.Add(lblDescripcionTrabajo);
             pnlTrabajoRealizado.Controls.Add(lblTrabajoRealizado);
             pnlTrabajoRealizado.Controls.Add(airSeparator2);
-            pnlTrabajoRealizado.FillColor = Color.FromArgb(198, 199, 189);
+            pnlTrabajoRealizado.FillColor = Color.White;
             pnlTrabajoRealizado.Font = new Font("Microsoft Sans Serif", 12F);
             pnlTrabajoRealizado.Location = new Point(31, 468);
             pnlTrabajoRealizado.Margin = new Padding(4, 5, 4, 5);
             pnlTrabajoRealizado.MinimumSize = new Size(1, 1);
             pnlTrabajoRealizado.Name = "pnlTrabajoRealizado";
             pnlTrabajoRealizado.Radius = 12;
-            pnlTrabajoRealizado.RectColor = Color.FromArgb(198, 199, 189);
+            pnlTrabajoRealizado.RectColor = Color.FromArgb(225, 230, 235);
             pnlTrabajoRealizado.Size = new Size(500, 120);
             pnlTrabajoRealizado.TabIndex = 5;
             pnlTrabajoRealizado.Text = null;
@@ -719,7 +681,7 @@
             lblTrabajoRealizado.AutoSize = true;
             lblTrabajoRealizado.BackColor = Color.Transparent;
             lblTrabajoRealizado.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTrabajoRealizado.ForeColor = Color.FromArgb(75, 92, 108);
+            lblTrabajoRealizado.ForeColor = Color.FromArgb(24, 43, 62);
             lblTrabajoRealizado.Location = new Point(18, 13);
             lblTrabajoRealizado.Name = "lblTrabajoRealizado";
             lblTrabajoRealizado.Size = new Size(142, 21);
@@ -760,7 +722,7 @@
             pnlResumen.Controls.Add(pictureBox2);
             pnlResumen.Controls.Add(lblResumen);
             pnlResumen.Controls.Add(airSeparator1);
-            pnlResumen.FillColor = Color.FromArgb(198, 199, 189);
+            pnlResumen.FillColor = Color.White;
             pnlResumen.Font = new Font("Microsoft Sans Serif", 12F);
             pnlResumen.ForeColor = Color.FromArgb(147, 162, 183);
             pnlResumen.Location = new Point(31, 180);
@@ -768,7 +730,7 @@
             pnlResumen.MinimumSize = new Size(1, 1);
             pnlResumen.Name = "pnlResumen";
             pnlResumen.Radius = 12;
-            pnlResumen.RectColor = Color.FromArgb(198, 199, 189);
+            pnlResumen.RectColor = Color.FromArgb(225, 230, 235);
             pnlResumen.Size = new Size(500, 268);
             pnlResumen.TabIndex = 4;
             pnlResumen.Text = null;
@@ -959,7 +921,7 @@
             lblResumen.AutoSize = true;
             lblResumen.BackColor = Color.Transparent;
             lblResumen.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblResumen.ForeColor = Color.FromArgb(75, 92, 108);
+            lblResumen.ForeColor = Color.FromArgb(24, 43, 62);
             lblResumen.Location = new Point(53, 13);
             lblResumen.Name = "lblResumen";
             lblResumen.Size = new Size(170, 21);
@@ -990,6 +952,40 @@
             // pdComprobante
             // 
             pdComprobante.UseEXDialog = true;
+            // 
+            // btnRegistraEntrega
+            // 
+            btnRegistraEntrega.FillColor = Color.FromArgb(0, 165, 155);
+            btnRegistraEntrega.FillHoverColor = Color.FromArgb(0, 145, 137);
+            btnRegistraEntrega.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnRegistraEntrega.Location = new Point(631, 664);
+            btnRegistraEntrega.MinimumSize = new Size(1, 1);
+            btnRegistraEntrega.Name = "btnRegistraEntrega";
+            btnRegistraEntrega.Radius = 12;
+            btnRegistraEntrega.Size = new Size(200, 50);
+            btnRegistraEntrega.Symbol = 61562;
+            btnRegistraEntrega.TabIndex = 31;
+            btnRegistraEntrega.Text = "Registrar Entrega";
+            btnRegistraEntrega.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            // 
+            // btnComprobante
+            // 
+            btnComprobante.FillColor = Color.FromArgb(239, 243, 247);
+            btnComprobante.FillHoverColor = Color.FromArgb(232, 248, 247);
+            btnComprobante.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnComprobante.ForeColor = Color.FromArgb(70, 86, 103);
+            btnComprobante.Location = new Point(837, 664);
+            btnComprobante.MinimumSize = new Size(1, 1);
+            btnComprobante.Name = "btnComprobante";
+            btnComprobante.Radius = 12;
+            btnComprobante.RectColor = Color.FromArgb(220, 226, 232);
+            btnComprobante.Size = new Size(200, 50);
+            btnComprobante.Symbol = 61487;
+            btnComprobante.SymbolColor = Color.FromArgb(70, 86, 103);
+            btnComprobante.TabIndex = 32;
+            btnComprobante.Text = "Comprobante";
+            btnComprobante.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnComprobante.Click += btnComprobante_Click;
             // 
             // ucDevolucion
             // 
@@ -1068,8 +1064,6 @@
         private Sunny.UI.UITextBox txtObservaciones;
         private Sunny.UI.UIPanel pnlTotalCobrar;
         private Label lblTotalCobrar;
-        private Sunny.UI.UIButton btnComprobante;
-        private Sunny.UI.UIButton btnRegistraEntrega;
         private Sunny.UI.UIContextMenuStrip uiContextMenuStrip1;
         private PrintDialog pdComprobante;
         private Label lblCedula;
@@ -1080,5 +1074,7 @@
         private DataGridViewTextBoxColumn colCosto;
         private Label lblTotalDesglose;
         private Label label4;
+        private Sunny.UI.UISymbolButton btnRegistraEntrega;
+        private Sunny.UI.UISymbolButton btnComprobante;
     }
 }

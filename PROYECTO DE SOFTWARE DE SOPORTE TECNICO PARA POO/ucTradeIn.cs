@@ -195,5 +195,134 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             CalcularTotales();
         }
+
+        private void btnVerificarRobo_Click(object sender, EventArgs e)
+        {
+            string imei = txtSerieCanje.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(imei) || imei.Length != 15)
+            {
+                MessageBox.Show("Primero ingresa un IMEI válido de 15 dígitos.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 🔗 URL oficial de consulta de ARCOTEL (Tu Celular Legal)
+            // También puedes usar alternativas internacionales como "https://www.imei.info/"
+            string urlOficial = "https://tucelularlegal.arcotel.gob.ec/consultas/";
+
+            try
+            {
+                // Esto abre el navegador web predeterminado de Windows (Chrome, Edge, etc.)
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = urlOficial,
+                    UseShellExecute = true
+                });
+
+                // Opcional: Copiar el IMEI al portapapeles para que el técnico solo haga "Ctrl+V" en la página
+                Clipboard.SetText(imei);
+                MessageBox.Show("El IMEI se ha copiado al portapapeles.\nPégalo en la página que se acaba de abrir para verificar el estado de robo.", "Verificación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo abrir el navegador web: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtPrecioOriginal_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPrecioOriginal.Text))
+                return;
+
+            // Convertimos la coma a punto solo para poder convertirlo a decimal
+            string texto = txtPrecioOriginal.Text.Replace('.', ','); // por si acaso escriben punto
+            texto = texto.Replace(',', '.');
+
+            if (decimal.TryParse(texto, System.Globalization.NumberStyles.Any,
+                                       System.Globalization.CultureInfo.InvariantCulture, out decimal precio)
+                && precio >= 0)
+            {
+                // Mostramos con coma
+                txtPrecioOriginal.Text = precio.ToString("0.00").Replace('.', ',');
+            }
+            else
+            {
+                MessageBox.Show("El costo debe ser un número positivo.\nEjemplo: 150,50",
+                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                txtPrecioOriginal.Focus();
+                txtPrecioOriginal.SelectAll();
+            }
+        }
+
+        private void txtPrecioOriginal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            UITextBox txt = sender as UITextBox;
+            if (txt == null) return;
+
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            // Solo números y coma
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Solo una coma
+            if (e.KeyChar == ',' && txt.Text.Contains(","))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtValorAsignado_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtValorAsignado.Text))
+                return;
+
+            // Convertimos la coma a punto solo para poder convertirlo a decimal
+            string texto = txtValorAsignado.Text.Replace('.', ','); // por si acaso escriben punto
+            texto = texto.Replace(',', '.');
+
+            if (decimal.TryParse(texto, System.Globalization.NumberStyles.Any,
+                                       System.Globalization.CultureInfo.InvariantCulture, out decimal precio)
+                && precio >= 0)
+            {
+                // Mostramos con coma
+                txtValorAsignado.Text = precio.ToString("0.00").Replace('.', ',');
+            }
+            else
+            {
+                MessageBox.Show("El costo debe ser un número positivo.\nEjemplo: 150,50",
+                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                txtValorAsignado.Focus();
+                txtValorAsignado.SelectAll();
+            }
+        }
+
+        private void txtValorAsignado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            UITextBox txt = sender as UITextBox;
+            if (txt == null) return;
+
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            // Solo números y coma
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Solo una coma
+            if (e.KeyChar == ',' && txt.Text.Contains(","))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

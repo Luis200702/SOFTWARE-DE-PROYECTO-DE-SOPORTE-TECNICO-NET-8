@@ -59,6 +59,7 @@
             pictureBox1 = new PictureBox();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             pnlDispositivoRecibido = new Sunny.UI.UIPanel();
+            btnVerificarRobo = new Sunny.UI.UISymbolButton();
             cmbMarcaRecibido = new Sunny.UI.UIComboBox();
             label13 = new Label();
             txtSerieCanje = new Sunny.UI.UITextBox();
@@ -249,7 +250,7 @@
             lblDiferencia.TabIndex = 58;
             lblDiferencia.TextAlignment = ContentAlignment.MiddleLeft;
             lblDiferencia.Watermark = "$ 0.00";
-            lblDiferencia.WatermarkActiveColor = Color.DimGray;
+            lblDiferencia.WatermarkActiveColor = Color.LimeGreen;
             lblDiferencia.WatermarkColor = Color.LimeGreen;
             // 
             // lblValorTradeIn
@@ -495,6 +496,8 @@
             txtPrecioOriginal.Watermark = "0.00 $";
             txtPrecioOriginal.WatermarkColor = Color.FromArgb(198, 199, 189);
             txtPrecioOriginal.TextChanged += txtPrecioOriginal_TextChanged;
+            txtPrecioOriginal.KeyPress += txtPrecioOriginal_KeyPress;
+            txtPrecioOriginal.Leave += txtPrecioOriginal_Leave;
             // 
             // label5
             // 
@@ -595,6 +598,7 @@
             // pnlDispositivoRecibido
             // 
             pnlDispositivoRecibido.BackColor = Color.FromArgb(235, 239, 240);
+            pnlDispositivoRecibido.Controls.Add(btnVerificarRobo);
             pnlDispositivoRecibido.Controls.Add(cmbMarcaRecibido);
             pnlDispositivoRecibido.Controls.Add(label13);
             pnlDispositivoRecibido.Controls.Add(txtSerieCanje);
@@ -633,6 +637,18 @@
             pnlDispositivoRecibido.TabIndex = 0;
             pnlDispositivoRecibido.Text = null;
             pnlDispositivoRecibido.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // btnVerificarRobo
+            // 
+            btnVerificarRobo.Font = new Font("Microsoft Sans Serif", 12F);
+            btnVerificarRobo.Location = new Point(263, 285);
+            btnVerificarRobo.MinimumSize = new Size(1, 1);
+            btnVerificarRobo.Name = "btnVerificarRobo";
+            btnVerificarRobo.Size = new Size(50, 39);
+            btnVerificarRobo.Symbol = 61442;
+            btnVerificarRobo.TabIndex = 68;
+            btnVerificarRobo.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnVerificarRobo.Click += btnVerificarRobo_Click;
             // 
             // cmbMarcaRecibido
             // 
@@ -686,7 +702,7 @@
             txtSerieCanje.Radius = 12;
             txtSerieCanje.RectColor = Color.FromArgb(235, 239, 240);
             txtSerieCanje.ShowText = false;
-            txtSerieCanje.Size = new Size(294, 37);
+            txtSerieCanje.Size = new Size(235, 37);
             txtSerieCanje.TabIndex = 65;
             txtSerieCanje.TextAlignment = ContentAlignment.MiddleLeft;
             txtSerieCanje.Watermark = "";
@@ -890,6 +906,8 @@
             txtValorAsignado.Watermark = "0.00 $";
             txtValorAsignado.WatermarkColor = Color.FromArgb(198, 199, 189);
             txtValorAsignado.TextChanged += txtValorAsignado_TextChanged;
+            txtValorAsignado.KeyPress += txtValorAsignado_KeyPress;
+            txtValorAsignado.Leave += txtValorAsignado_Leave;
             // 
             // lblCosto
             // 
@@ -1157,5 +1175,6 @@
         private Label label13;
         private Sunny.UI.UIComboBox cmbMarcaNuevo;
         private Sunny.UI.UIComboBox cmbMarcaRecibido;
+        private Sunny.UI.UISymbolButton btnVerificarRobo;
     }
 }
