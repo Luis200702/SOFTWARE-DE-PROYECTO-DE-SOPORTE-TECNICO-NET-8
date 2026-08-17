@@ -130,7 +130,7 @@
             btnNuevoRepuesto.RectSelectedColor = Color.FromArgb(0, 150, 137);
             btnNuevoRepuesto.Size = new Size(192, 37);
             btnNuevoRepuesto.TabIndex = 30;
-            btnNuevoRepuesto.Text = "Registrar Entrega  ";
+            btnNuevoRepuesto.Text = "Agregar Repuesto";
             btnNuevoRepuesto.TextAlign = ContentAlignment.MiddleRight;
             btnNuevoRepuesto.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnNuevoRepuesto.TipsForeColor = Color.Transparent;
