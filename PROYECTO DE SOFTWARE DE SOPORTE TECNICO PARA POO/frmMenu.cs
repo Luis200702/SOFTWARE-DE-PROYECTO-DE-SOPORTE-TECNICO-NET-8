@@ -115,7 +115,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             // =========================================================================
             // VARIABLE DE CONFIGURACIÓN DE REDONDEO
-            // Puedes cambiar este valor libremente (ej. 4f, 6f, 8f, 10f) para ajustar 
+            // Cambiar este valor libremente (ej. 4f, 6f, 8f, 10f) para ajustar 
             // qué tan redondeadas o cuadradas quieres las esquinas.
             // =========================================================================
             float radioEsquinas = 6f;
@@ -171,7 +171,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     // Animación de ancho y desplazamiento fluido 
                     float anchoActual = anchoMax * progresoAncho;
-                    float xActual = xBtn + (anchoMax - anchoActual); // Si prefieres que crezca desde la izquierda, cámbialo a xBtn
+                    float xActual = xBtn + (anchoMax - anchoActual); // Que crezca desde la izquierda, cámbialo a xBtn
 
                     Color colorCapsula = Color.FromArgb(25, 255, 255, 255); // Blanco leve y translúcido
 
@@ -364,8 +364,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             // Instanciamos el UserControl leyendo directamente la sucursal almacenada en la sesión
             ucDerivacion uc = new ucDerivacion();
 
-            // Si tu ucDerivacion lee Sesion.SucursalActual en su constructor o Load, 
-            // simplemente abres el UserControl con tu método estandarizado:
+            // Si ucDerivacion lee Sesion.SucursalActual en su constructor o Load, 
+            // simplemente abrir el UserControl con tu método estandarizado:
             AbrirUserControl(new ucDerivacion());
         }
 
