@@ -324,5 +324,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 e.Handled = true;
             }
         }
+
+        private void pnlDispositivoLleva_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
