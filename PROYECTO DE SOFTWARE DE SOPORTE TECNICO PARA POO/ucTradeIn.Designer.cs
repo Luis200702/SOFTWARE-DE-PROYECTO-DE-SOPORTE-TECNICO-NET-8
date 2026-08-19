@@ -177,13 +177,13 @@
             uiPanel4.FillColor = Color.SlateBlue;
             uiPanel4.Font = new Font("Microsoft Sans Serif", 12F);
             uiPanel4.ForeColor = Color.White;
-            uiPanel4.Location = new Point(747, 384);
+            uiPanel4.Location = new Point(750, 384);
             uiPanel4.Margin = new Padding(4, 5, 4, 5);
             uiPanel4.MinimumSize = new Size(1, 1);
             uiPanel4.Name = "uiPanel4";
             uiPanel4.Radius = 12;
             uiPanel4.RectColor = Color.SlateBlue;
-            uiPanel4.Size = new Size(341, 64);
+            uiPanel4.Size = new Size(338, 64);
             uiPanel4.TabIndex = 2;
             uiPanel4.Text = null;
             uiPanel4.TextAlignment = ContentAlignment.MiddleCenter;

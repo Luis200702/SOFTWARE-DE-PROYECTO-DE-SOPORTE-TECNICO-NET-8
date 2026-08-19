@@ -53,7 +53,7 @@
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(-7, 0);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1140, 59);
+            pnlSuperior.Size = new Size(1138, 59);
             pnlSuperior.TabIndex = 2;
             // 
             // pictureBox1
@@ -89,7 +89,7 @@
             pnlInformacion.ForeColor = SystemColors.ControlLight;
             pnlInformacion.Location = new Point(0, 59);
             pnlInformacion.Name = "pnlInformacion";
-            pnlInformacion.Size = new Size(1125, 59);
+            pnlInformacion.Size = new Size(1123, 59);
             pnlInformacion.TabIndex = 3;
             // 
             // lblVentas
@@ -154,7 +154,7 @@
             dgvNuevo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvNuevo.Location = new Point(0, 118);
             dgvNuevo.Name = "dgvNuevo";
-            dgvNuevo.Size = new Size(1125, 646);
+            dgvNuevo.Size = new Size(1125, 714);
             dgvNuevo.TabIndex = 4;
             dgvNuevo.CellContentClick += dgvNuevo_CellContentClick;
             dgvNuevo.CellFormatting += dgvNuevo_CellFormatting;
@@ -169,7 +169,7 @@
             Controls.Add(pnlInformacion);
             Controls.Add(pnlSuperior);
             Name = "ucVentaDispositivos";
-            Size = new Size(1125, 764);
+            Size = new Size(1123, 832);
             Load += ucVentaDispositivos_Load;
             pnlSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

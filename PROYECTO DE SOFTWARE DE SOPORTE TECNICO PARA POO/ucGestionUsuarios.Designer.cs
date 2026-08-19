@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             pnlSuperior = new Panel();
-            pictureBox1 = new PictureBox();
+            uiSymbolLabel1 = new Sunny.UI.UISymbolLabel();
             lblTitulo = new Label();
             pnlInformacion = new Panel();
-            btnNuevoTecnico = new Sunny.UI.UIButton();
+            btnNuevoTecnico = new Sunny.UI.UISymbolButton();
             txtBuscarTecnico = new Sunny.UI.UITextBox();
             dgvNuevo = new DataGridView();
             pnlSuperior.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvNuevo).BeginInit();
             SuspendLayout();
@@ -46,33 +45,34 @@
             pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
             pnlSuperior.BackColor = Color.White;
-            pnlSuperior.BorderStyle = BorderStyle.FixedSingle;
-            pnlSuperior.Controls.Add(pictureBox1);
+            pnlSuperior.Controls.Add(uiSymbolLabel1);
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(-6, 0);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1137, 59);
+            pnlSuperior.Size = new Size(1135, 59);
             pnlSuperior.TabIndex = 2;
             // 
-            // pictureBox1
+            // uiSymbolLabel1
             // 
-            pictureBox1.Location = new Point(34, 13);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(36, 30);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            uiSymbolLabel1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiSymbolLabel1.Location = new Point(34, 15);
+            uiSymbolLabel1.MinimumSize = new Size(1, 1);
+            uiSymbolLabel1.Name = "uiSymbolLabel1";
+            uiSymbolLabel1.Size = new Size(36, 30);
+            uiSymbolLabel1.Symbol = 61632;
+            uiSymbolLabel1.SymbolColor = Color.FromArgb(0, 165, 155);
+            uiSymbolLabel1.TabIndex = 2;
             // 
             // lblTitulo
             // 
             lblTitulo.Dock = DockStyle.Left;
             lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.Black;
+            lblTitulo.ForeColor = Color.FromArgb(24, 43, 62);
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(308, 57);
+            lblTitulo.Size = new Size(308, 59);
             lblTitulo.TabIndex = 1;
-            lblTitulo.Text = "Gestión de Usuarios";
+            lblTitulo.Text = "Gestión de Perfiles";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pnlInformacion
@@ -84,51 +84,56 @@
             pnlInformacion.ForeColor = Color.Coral;
             pnlInformacion.Location = new Point(0, 59);
             pnlInformacion.Name = "pnlInformacion";
-            pnlInformacion.Size = new Size(1131, 59);
+            pnlInformacion.Size = new Size(1126, 59);
             pnlInformacion.TabIndex = 3;
             // 
             // btnNuevoTecnico
             // 
-            btnNuevoTecnico.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnNuevoTecnico.FillColor = Color.FromArgb(0, 150, 137);
-            btnNuevoTecnico.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnNuevoTecnico.Location = new Point(974, 16);
+            btnNuevoTecnico.FillColor = Color.FromArgb(0, 165, 155);
+            btnNuevoTecnico.FillHoverColor = Color.FromArgb(0, 145, 137);
+            btnNuevoTecnico.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnNuevoTecnico.Location = new Point(950, 16);
             btnNuevoTecnico.MinimumSize = new Size(1, 1);
             btnNuevoTecnico.Name = "btnNuevoTecnico";
-            btnNuevoTecnico.Radius = 3;
-            btnNuevoTecnico.RectColor = Color.FromArgb(0, 150, 137);
-            btnNuevoTecnico.Size = new Size(117, 30);
-            btnNuevoTecnico.TabIndex = 20;
-            btnNuevoTecnico.Text = "Nuevo Técnico";
+            btnNuevoTecnico.Radius = 12;
+            btnNuevoTecnico.RectColor = Color.Transparent;
+            btnNuevoTecnico.RectHoverColor = Color.Transparent;
+            btnNuevoTecnico.Size = new Size(147, 30);
+            btnNuevoTecnico.Symbol = 61525;
+            btnNuevoTecnico.TabIndex = 21;
+            btnNuevoTecnico.Text = "Nuevo perfil";
             btnNuevoTecnico.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnNuevoTecnico.Click += btnNuevoTecnico_Click;
             // 
             // txtBuscarTecnico
             // 
             txtBuscarTecnico.BackColor = Color.Transparent;
-            txtBuscarTecnico.FillColor = Color.LightGray;
             txtBuscarTecnico.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBuscarTecnico.ForeColor = Color.Black;
-            txtBuscarTecnico.Icon = Properties.Resources.TablerSearch;
+            txtBuscarTecnico.ForeColor = Color.FromArgb(70, 86, 103);
             txtBuscarTecnico.Location = new Point(29, 16);
             txtBuscarTecnico.Margin = new Padding(4, 5, 4, 5);
             txtBuscarTecnico.MinimumSize = new Size(1, 16);
             txtBuscarTecnico.Name = "txtBuscarTecnico";
             txtBuscarTecnico.Padding = new Padding(5);
             txtBuscarTecnico.Radius = 12;
-            txtBuscarTecnico.RectColor = Color.FromArgb(39, 53, 72);
+            txtBuscarTecnico.RectColor = Color.FromArgb(220, 226, 232);
+            txtBuscarTecnico.RectDisableColor = Color.FromArgb(0, 165, 155);
+            txtBuscarTecnico.RectReadOnlyColor = Color.FromArgb(0, 165, 155);
             txtBuscarTecnico.ShowText = false;
             txtBuscarTecnico.Size = new Size(295, 30);
+            txtBuscarTecnico.Symbol = 61442;
+            txtBuscarTecnico.SymbolColor = Color.FromArgb(70, 86, 103);
             txtBuscarTecnico.TabIndex = 3;
             txtBuscarTecnico.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscarTecnico.Watermark = "Buscar usuario...";
+            txtBuscarTecnico.WatermarkColor = Color.FromArgb(145, 158, 172);
             // 
             // dgvNuevo
             // 
             dgvNuevo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvNuevo.Location = new Point(0, 118);
             dgvNuevo.Name = "dgvNuevo";
-            dgvNuevo.Size = new Size(1125, 646);
+            dgvNuevo.Size = new Size(1125, 714);
             dgvNuevo.TabIndex = 5;
             dgvNuevo.CellContentClick += dgvNuevo_CellContentClick;
             dgvNuevo.CellPainting += dgvNuevo_CellPainting;
@@ -141,10 +146,9 @@
             Controls.Add(pnlInformacion);
             Controls.Add(pnlSuperior);
             Name = "ucGestionUsuarios";
-            Size = new Size(1125, 764);
+            Size = new Size(1123, 832);
             Load += ucGestionUsuarios_Load;
             pnlSuperior.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlInformacion.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvNuevo).EndInit();
             ResumeLayout(false);
@@ -157,8 +161,9 @@
         private PictureBox pictureBox1;
         private Label lblTitulo;
         private Panel pnlInformacion;
-        private Sunny.UI.UIButton btnNuevoTecnico;
         private Sunny.UI.UITextBox txtBuscarTecnico;
         private DataGridView dgvNuevo;
+        private Sunny.UI.UISymbolLabel uiSymbolLabel1;
+        private Sunny.UI.UISymbolButton btnNuevoTecnico;
     }
 }

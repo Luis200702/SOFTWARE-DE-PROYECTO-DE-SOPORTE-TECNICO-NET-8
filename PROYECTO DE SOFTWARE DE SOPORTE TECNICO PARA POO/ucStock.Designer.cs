@@ -103,6 +103,7 @@
             btnAlertas.MinimumSize = new Size(1, 1);
             btnAlertas.Name = "btnAlertas";
             btnAlertas.Radius = 12;
+            btnAlertas.RectColor = Color.FromArgb(220, 226, 232);
             btnAlertas.Size = new Size(102, 37);
             btnAlertas.TabIndex = 31;
             btnAlertas.Text = "Alertas";
@@ -148,13 +149,13 @@
             cmbCategorias.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbCategorias.Items.AddRange(new object[] { "Todas las categorías", "Pantalla", "Bateria", "Conector", "Placa", "Cámara", "Bóton", "Tapa", "Parlante", "Micrófono", "Otro" });
             cmbCategorias.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbCategorias.Location = new Point(417, 19);
+            cmbCategorias.Location = new Point(384, 19);
             cmbCategorias.Margin = new Padding(4, 5, 4, 5);
             cmbCategorias.MinimumSize = new Size(63, 0);
             cmbCategorias.Name = "cmbCategorias";
             cmbCategorias.Padding = new Padding(0, 0, 30, 2);
             cmbCategorias.Radius = 12;
-            cmbCategorias.RectColor = Color.FromArgb(148, 163, 184);
+            cmbCategorias.RectColor = Color.FromArgb(220, 226, 232);
             cmbCategorias.Size = new Size(185, 37);
             cmbCategorias.SymbolSize = 24;
             cmbCategorias.TabIndex = 25;
@@ -173,7 +174,7 @@
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Padding = new Padding(5);
             txtBuscar.Radius = 12;
-            txtBuscar.RectColor = Color.FromArgb(75, 92, 108);
+            txtBuscar.RectColor = Color.FromArgb(220, 226, 232);
             txtBuscar.ShowText = false;
             txtBuscar.Size = new Size(345, 37);
             txtBuscar.TabIndex = 4;
