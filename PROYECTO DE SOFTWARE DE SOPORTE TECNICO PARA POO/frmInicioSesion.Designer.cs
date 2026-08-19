@@ -36,6 +36,7 @@
             lblDerechos = new Label();
             btnAcceder = new Sunny.UI.UIButton();
             txtContrasena = new Sunny.UI.UITextBox();
+            btnVerContrasena = new Sunny.UI.UISymbolButton();
             txtUsuario = new Sunny.UI.UITextBox();
             lblContraseña = new Label();
             lblUsuario = new Label();
@@ -43,6 +44,7 @@
             pnlIzquierda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlDerecha.SuspendLayout();
+            txtContrasena.SuspendLayout();
             SuspendLayout();
             // 
             // pnlIzquierda
@@ -66,7 +68,7 @@
             // 
             // pnlDerecha
             // 
-            pnlDerecha.BackColor = Color.FromArgb(235, 239, 240);
+            pnlDerecha.BackColor = Color.FromArgb(243, 246, 250);
             pnlDerecha.Controls.Add(label1);
             pnlDerecha.Controls.Add(lblDerechos);
             pnlDerecha.Controls.Add(btnAcceder);
@@ -84,7 +86,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(103, 106, 112);
+            label1.ForeColor = Color.FromArgb(70, 86, 103);
             label1.Location = new Point(52, 106);
             label1.Name = "label1";
             label1.Size = new Size(283, 21);
@@ -95,7 +97,7 @@
             // 
             lblDerechos.AutoSize = true;
             lblDerechos.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDerechos.ForeColor = Color.FromArgb(103, 106, 112);
+            lblDerechos.ForeColor = Color.FromArgb(70, 86, 103);
             lblDerechos.Location = new Point(149, 402);
             lblDerechos.Name = "lblDerechos";
             lblDerechos.Size = new Size(160, 15);
@@ -106,17 +108,16 @@
             // 
             btnAcceder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAcceder.BackColor = Color.Transparent;
-            btnAcceder.FillColor = Color.FromArgb(0, 150, 137);
-            btnAcceder.FillHoverColor = Color.FromArgb(80, 160, 255);
+            btnAcceder.FillColor = Color.FromArgb(0, 165, 155);
+            btnAcceder.FillHoverColor = Color.FromArgb(0, 145, 137);
             btnAcceder.FillPressColor = Color.FromArgb(0, 150, 137);
             btnAcceder.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnAcceder.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAcceder.ForeColor = Color.FromArgb(235, 239, 240);
             btnAcceder.Location = new Point(52, 348);
             btnAcceder.MinimumSize = new Size(1, 1);
             btnAcceder.Name = "btnAcceder";
             btnAcceder.Radius = 12;
-            btnAcceder.RectColor = Color.FromArgb(0, 150, 137);
+            btnAcceder.RectColor = Color.FromArgb(0, 165, 155);
             btnAcceder.RectHoverColor = Color.FromArgb(80, 160, 255);
             btnAcceder.RectPressColor = Color.FromArgb(0, 150, 137);
             btnAcceder.RectSelectedColor = Color.FromArgb(0, 150, 137);
@@ -130,9 +131,10 @@
             // txtContrasena
             // 
             txtContrasena.BackColor = Color.Transparent;
-            txtContrasena.FillColor = Color.FromArgb(75, 92, 108);
+            txtContrasena.ButtonSymbol = 61552;
+            txtContrasena.Controls.Add(btnVerContrasena);
             txtContrasena.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtContrasena.ForeColor = Color.FromArgb(235, 239, 240);
+            txtContrasena.ForeColor = Color.FromArgb(24, 43, 62);
             txtContrasena.Location = new Point(52, 274);
             txtContrasena.Margin = new Padding(4, 5, 4, 5);
             txtContrasena.MaxLength = 255;
@@ -140,23 +142,48 @@
             txtContrasena.MinimumSize = new Size(1, 16);
             txtContrasena.Name = "txtContrasena";
             txtContrasena.Padding = new Padding(5);
+            txtContrasena.PasswordChar = '●';
             txtContrasena.Radius = 12;
-            txtContrasena.RectColor = Color.FromArgb(75, 92, 108);
+            txtContrasena.RectColor = Color.FromArgb(220, 226, 232);
+            txtContrasena.RectDisableColor = Color.FromArgb(0, 165, 155);
+            txtContrasena.RectReadOnlyColor = Color.FromArgb(0, 165, 155);
             txtContrasena.ShowText = false;
             txtContrasena.Size = new Size(343, 37);
             txtContrasena.Symbol = 61572;
-            txtContrasena.SymbolColor = Color.FromArgb(198, 199, 189);
+            txtContrasena.SymbolColor = Color.FromArgb(0, 165, 155);
             txtContrasena.TabIndex = 15;
             txtContrasena.TextAlignment = ContentAlignment.MiddleLeft;
             txtContrasena.Watermark = "Contraseña";
-            txtContrasena.WatermarkColor = Color.FromArgb(198, 199, 189);
+            txtContrasena.WatermarkColor = Color.FromArgb(145, 158, 172);
+            // 
+            // btnVerContrasena
+            // 
+            btnVerContrasena.FillColor = Color.White;
+            btnVerContrasena.FillHoverColor = Color.White;
+            btnVerContrasena.Font = new Font("Microsoft Sans Serif", 12F);
+            btnVerContrasena.Location = new Point(307, 1);
+            btnVerContrasena.MinimumSize = new Size(1, 1);
+            btnVerContrasena.Name = "btnVerContrasena";
+            btnVerContrasena.Radius = 12;
+            btnVerContrasena.RectColor = Color.White;
+            btnVerContrasena.RectHoverColor = Color.White;
+            btnVerContrasena.RectPressColor = Color.White;
+            btnVerContrasena.RectSelectedColor = Color.White;
+            btnVerContrasena.Size = new Size(35, 35);
+            btnVerContrasena.Symbol = 61552;
+            btnVerContrasena.SymbolColor = Color.FromArgb(70, 86, 103);
+            btnVerContrasena.TabIndex = 20;
+            btnVerContrasena.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnVerContrasena.Click += btnVerContrasena_Click;
             // 
             // txtUsuario
             // 
             txtUsuario.BackColor = Color.Transparent;
-            txtUsuario.FillColor = Color.FromArgb(75, 92, 108);
+            txtUsuario.ButtonRectHoverColor = Color.FromArgb(0, 165, 155);
+            txtUsuario.ButtonRectPressColor = Color.FromArgb(0, 165, 155);
+            txtUsuario.ButtonStyleInherited = false;
             txtUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsuario.ForeColor = Color.FromArgb(235, 239, 240);
+            txtUsuario.ForeColor = Color.FromArgb(24, 43, 62);
             txtUsuario.Location = new Point(52, 195);
             txtUsuario.Margin = new Padding(4, 5, 4, 5);
             txtUsuario.MaxLength = 255;
@@ -165,21 +192,23 @@
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Padding = new Padding(5);
             txtUsuario.Radius = 12;
-            txtUsuario.RectColor = Color.FromArgb(75, 92, 108);
+            txtUsuario.RectColor = Color.FromArgb(220, 226, 232);
+            txtUsuario.RectDisableColor = Color.FromArgb(0, 165, 155);
+            txtUsuario.RectReadOnlyColor = Color.FromArgb(0, 165, 155);
             txtUsuario.ShowText = false;
             txtUsuario.Size = new Size(343, 37);
             txtUsuario.Symbol = 61447;
-            txtUsuario.SymbolColor = Color.FromArgb(198, 199, 189);
+            txtUsuario.SymbolColor = Color.FromArgb(0, 165, 155);
             txtUsuario.TabIndex = 14;
             txtUsuario.TextAlignment = ContentAlignment.MiddleLeft;
             txtUsuario.Watermark = "Usuario";
-            txtUsuario.WatermarkColor = Color.FromArgb(198, 199, 189);
+            txtUsuario.WatermarkColor = Color.FromArgb(145, 158, 172);
             // 
             // lblContraseña
             // 
             lblContraseña.AutoSize = true;
             lblContraseña.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblContraseña.ForeColor = Color.FromArgb(75, 92, 108);
+            lblContraseña.ForeColor = Color.FromArgb(24, 43, 62);
             lblContraseña.Location = new Point(52, 248);
             lblContraseña.Name = "lblContraseña";
             lblContraseña.Size = new Size(96, 21);
@@ -190,7 +219,7 @@
             // 
             lblUsuario.AutoSize = true;
             lblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblUsuario.ForeColor = Color.FromArgb(75, 92, 108);
+            lblUsuario.ForeColor = Color.FromArgb(24, 43, 62);
             lblUsuario.Location = new Point(52, 169);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(69, 21);
@@ -201,7 +230,7 @@
             // 
             lblInicioSesion.AutoSize = true;
             lblInicioSesion.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblInicioSesion.ForeColor = Color.FromArgb(75, 92, 108);
+            lblInicioSesion.ForeColor = Color.FromArgb(24, 43, 62);
             lblInicioSesion.Location = new Point(52, 76);
             lblInicioSesion.Name = "lblInicioSesion";
             lblInicioSesion.Size = new Size(199, 30);
@@ -224,6 +253,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlDerecha.ResumeLayout(false);
             pnlDerecha.PerformLayout();
+            txtContrasena.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -240,5 +270,6 @@
         private Label lblDerechos;
         private Label label1;
         private PictureBox pictureBox1;
+        private Sunny.UI.UISymbolButton btnVerContrasena;
     }
 }
