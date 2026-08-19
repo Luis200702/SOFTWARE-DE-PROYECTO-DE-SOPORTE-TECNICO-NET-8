@@ -174,7 +174,7 @@
             // 
             uiPanel4.BackColor = Color.Transparent;
             uiPanel4.Controls.Add(label14);
-            uiPanel4.FillColor = Color.SlateBlue;
+            uiPanel4.FillColor = Color.FromArgb(100, 75, 200);
             uiPanel4.Font = new Font("Microsoft Sans Serif", 12F);
             uiPanel4.ForeColor = Color.White;
             uiPanel4.Location = new Point(750, 384);
