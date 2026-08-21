@@ -144,7 +144,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             string nombreColumna = dgvNuevo.Columns[e.ColumnIndex].Name;
 
-            // A) AVATAR Y NOMBRE
+       
             if (nombreColumna == "NOMBRE")
             {
                 e.PaintBackground(e.CellBounds, true);
