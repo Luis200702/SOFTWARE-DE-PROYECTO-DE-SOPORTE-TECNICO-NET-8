@@ -14,13 +14,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             AplicarDiseñoGrid();
         }
 
-        // --- 1. DISEÑO BASE DE LA TABLA Y UNIFICACIÓN VISUAL ---
+        // DISEÑO BASE DE LA TABLA  
         private void AplicarDiseñoGrid()
         {
-            // Apariencia general unificada
-            dgvSeguimiento.BackgroundColor = Color.White; // Cambiado a blanco total para fundirse con el panel
+            // Apariencia general
+            dgvSeguimiento.BackgroundColor = Color.White; // Color blanco para que sea como transparente con el panel
             dgvSeguimiento.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvSeguimiento.GridColor = Color.FromArgb(240, 242, 245); // Líneas horizontales muy sutiles
+            dgvSeguimiento.GridColor = Color.FromArgb(240, 242, 245); // Líneas horizontales 
             dgvSeguimiento.RowHeadersVisible = false;
 
             // Comportamiento
@@ -35,7 +35,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvSeguimiento.ColumnHeadersHeight = 50;
             dgvSeguimiento.RowTemplate.Height = 45;
 
-            // Títulos (Headers) unificados sin cortes visuales
+            // Títulos 
             dgvSeguimiento.EnableHeadersVisualStyles = false;
             DataGridViewCellStyle estiloEncabezado = new DataGridViewCellStyle();
             estiloEncabezado.BackColor = Color.White; // Fondo blanco idéntico al contenedor superior
@@ -44,7 +44,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             estiloEncabezado.Alignment = DataGridViewContentAlignment.MiddleLeft;
             estiloEncabezado.Padding = new Padding(15, 0, 0, 0);
 
-            // Eliminamos el resaltado al hacer clic en los títulos
+            // Eliminar el resaltado al hacer clic en los títulos
             estiloEncabezado.SelectionBackColor = Color.White;
             estiloEncabezado.SelectionForeColor = Color.FromArgb(120, 120, 120);
 
@@ -59,7 +59,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             estiloFila.Alignment = DataGridViewContentAlignment.MiddleLeft;
             estiloFila.Padding = new Padding(15, 0, 0, 0);
 
-            // Selección sutil
             estiloFila.SelectionBackColor = Color.FromArgb(245, 248, 255);
             estiloFila.SelectionForeColor = Color.FromArgb(60, 60, 60);
 
@@ -76,7 +75,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvSeguimiento.ClearSelection();
         }
 
-        // --- 2. CONSULTA A LA BASE DE DATOS Y ANCHO DE COLUMNAS ---
+        // CONSULTAR A LA BASE DE DATOS Y ANCHO DE COLUMNAS
         private void CargarSeguimiento(string filtroBusqueda = "", string filtroEstado = "Todos")
         {
             var db = new Conexion_Base_de_Datos();
@@ -149,7 +148,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarSeguimiento(txtBuscarOrden.Text.Trim(), estado);
         }
 
-        // --- 3. ABRIR DETALLES CON DOBLE CLIC ---
+        // ABRIR DETALLES CON DOBLE CLIC 
         private void dgvNuevo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -179,7 +178,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // --- 4. FORMATO DE TEXTO (AGREGAR "días" EN AZUL) ---
+        // FORMATO DE TEXTO 
         private void dgvNuevo_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvSeguimiento.Columns[e.ColumnIndex].Name == "TIEMPO" && e.Value != null)
@@ -191,7 +190,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // --- 5. MAGIA VISUAL (PÍLDORAS REDONDEADAS Y LÍNEA DE COLOR) ---
+        // FONDO DE LA CAPSULA ESTADO Y LÍNEA VERTICAL DE LA TABLA
         private void dgvNuevo_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
@@ -220,7 +219,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     break;
             }
 
-            // A) Línea vertical izquierda de la tabla (Columna 0)
+            // Línea vertical izquierda de la tabla (Columna 0)
             if (e.ColumnIndex == 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
@@ -231,7 +230,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 e.Handled = true;
             }
 
-            // B) Píldora redondeada en la columna de estado
+            // Capsula redondeada en la columna de estado
             if (dgvSeguimiento.Columns[e.ColumnIndex].Name == "ESTADO")
             {
                 e.PaintBackground(e.CellBounds, true);

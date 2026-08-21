@@ -522,7 +522,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (string.IsNullOrWhiteSpace(txtCosto.Text))
                 return;
 
-            // Convertimos la coma a punto solo para poder convertirlo a decimal
+            // Convertir la coma a punto solo para poder convertirlo a decimal
             string texto = txtCosto.Text.Replace('.', ','); // por si acaso escriben punto
             texto = texto.Replace(',', '.');
 
@@ -547,7 +547,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             if (string.IsNullOrWhiteSpace(email)) return false;
 
-            // Patrón de validación de correo
+            // Validación de correo
             string patron = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
             return Regex.IsMatch(email, patron, RegexOptions.IgnoreCase);
@@ -559,50 +559,50 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             if (!string.IsNullOrWhiteSpace(correo) && !EsEmailValido(correo))
             {
-                // 1. Marcar el error visualmente (opcional: poner borde rojo)
+                // Marcar el error 
                 txtCorreo.RectColor = Color.Red;
 
-                // 2. Avisar al usuario (usamos un MessageBox, pero ahora no causará bucle porque cancelamos el evento)
+                // Avisar al usuario 
                 MessageBox.Show("El formato del correo no es válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                // 3. ESTA ES LA CLAVE: cancelamos el evento para que el cursor no pueda salir
+                // Cancelar el evento para que el cursor no pueda salir
                 e.Cancel = true;
             }
             else
             {
-                // Si es válido, restauramos el color original
-                txtCorreo.RectColor = Color.FromArgb(220, 224, 230); // El color de borde que usamos en tu diseño
+                // Si es válido, restaorar el color original
+                txtCorreo.RectColor = Color.FromArgb(220, 224, 230); // El color de borde del diseño
             }
         }
 
         private void txtNombres_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 1. Permitir teclas de control como el Retroceso (Backspace) para poder borrar
+            // Permitir teclas de control como el Retroceso para poder borrar
             if (char.IsControl(e.KeyChar))
             {
                 return;
             }
 
-            // 2. Permitir solo letras y espacios
+            // Permitir solo letras y espacios
             if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
             {
-                // Si la tecla presionada no es una letra ni un espacio, cancelamos el evento
+                // Si la tecla presionada no es una letra ni un espacio, se cancela el evento
                 e.Handled = true;
             }
         }
 
         private void txtSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 1. Permitir teclas de control como el Retroceso (Backspace) para poder borrar
+            // Permitir teclas de control como el Retroceso para poder borrar
             if (char.IsControl(e.KeyChar))
             {
                 return;
             }
 
-            // 2. Permitir exclusivamente números (dígitos del 0 al 9)
+            // Permitir solo números (del 0 al 9)
             if (!char.IsDigit(e.KeyChar))
             {
-                // Si la tecla presionada NO es un número, bloqueamos la entrada
+                // Si la tecla presionada no es un número, se bloquea la entrada
                 e.Handled = true;
             }
         }

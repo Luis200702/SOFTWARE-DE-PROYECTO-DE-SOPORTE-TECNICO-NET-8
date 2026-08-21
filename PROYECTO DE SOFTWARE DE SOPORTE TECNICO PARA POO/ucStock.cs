@@ -18,7 +18,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             AplicarDiseñoGrid();
         }
 
-        // --- 1. DISEÑO BASE DE LA TABLA ESTILO WEB ---
+        // DISEÑO BASE DE LA TABLA 
         private void AplicarDiseñoGrid()
         {
             dgvNuevo.BackgroundColor = Color.White;
@@ -71,7 +71,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarDatos();
         }
 
-        // --- 2. CARGAR DATOS Y CREAR COLUMNAS PARA BOTONES ---
+        // CARGAR DATOS Y CREAR COLUMNAS PARA BOTONES 
         private void CargarDatos()
         {
             // La consulta usa @SoloAlertas para filtrar si el botón está activo
@@ -110,7 +110,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         dgvNuevo.AutoGenerateColumns = true;
                         dgvNuevo.DataSource = dt;
 
-                        // --- COLUMNAS PARA LOS BOTONES DINÁMICOS ---
+                        // COLUMNAS PARA LOS BOTONES DINÁMICOS 
                         if (!dgvNuevo.Columns.Contains("Agregar"))
                         {
                             DataGridViewButtonColumn btnAgregar = new DataGridViewButtonColumn();
@@ -131,7 +131,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             dgvNuevo.Columns.Add(btnDelete);
                         }
 
-                        // --- AJUSTE EXACTO DE ANCHOS ---
+                        // AJUSTE DE ANCHOS
                         if (dgvNuevo.Columns.Count > 0)
                         {
                             if (dgvNuevo.Columns.Contains("NOMBRE")) dgvNuevo.Columns["NOMBRE"].Width = 160;
@@ -157,11 +157,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 conexionBD.cerrarConexion();
             }
 
-            // Al final actualizamos el circulito naranja de las alertas
+            // Actualizar el circulito naranja de las alertas
             ActualizarContadorAlertas();
         }
 
-        // --- 3. CONTAR ALERTAS (Stock Mínimo) ---
+        // CONTAR ALERTAS (Stock Mínimo)
         private void ActualizarContadorAlertas()
         {
             string query = "SELECT COUNT(*) FROM InventarioSucursal WHERE StockActual <= StockMinimo";
@@ -182,7 +182,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             finally { db.cerrarConexion(); }
         }
 
-        // --- 4. FORMATO DE TEXTO (MONEDA Y COLOR VERDE PARA VENTAS) ---
+        // FORMATO DE TEXTO (MONEDA Y COLOR VERDE PARA VENTAS) 
         private void dgvNuevo_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.Value != null)
@@ -212,14 +212,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // --- 5. MAGIA VISUAL (PÍLDORAS REDONDEADAS Y BOTONES DISEÑADOS) ---
+        // CAPSULA REDONDEADAS Y BOTONES 
         private void dgvNuevo_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
             string nombreColumna = dgvNuevo.Columns[e.ColumnIndex].Name;
 
-            // A) PÍLDORAS REDONDEADAS DEL STOCK
+            // CAPSULA REDONDEADAS DEL STOCK
             if (nombreColumna == "ESTADO")
             {
                 string estado = e.Value?.ToString() ?? "";
@@ -285,7 +285,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 e.Handled = true;
             }
 
-            // B) BOTONES ESTILO FIGMA (NUEVO DISEÑO)
+            // BOTONES 
             if (nombreColumna == "Agregar" || nombreColumna == "Delete")
             {
                 e.PaintBackground(e.CellBounds, true);
@@ -338,20 +338,19 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // --- 6. EVENTOS DEL BOTÓN DE ALERTAS ---
+        // EVENTOS DEL BOTÓN DE ALERTAS 
         private void btnAlertas_Click(object sender, EventArgs e)
         {
             mostrandoAlertas = !mostrandoAlertas; // Alterna el estado
 
-            // Obligatorio en Sunny UI para que te deje cambiar los colores manualmente
             btnAlertas.Style = Sunny.UI.UIStyle.Custom;
 
             if (mostrandoAlertas)
             {
-                // Propiedades exclusivas de Sunny UI
+                // Propiedades  de Sunny UI
                 btnAlertas.FillColor = Color.FromArgb(255, 245, 235); // Fondo naranja claro
                 btnAlertas.RectColor = Color.FromArgb(255, 150, 0);   // Borde naranja oscuro
-                btnAlertas.ForeColor = Color.FromArgb(255, 150, 0);   // Opcional: Letras naranjas
+                btnAlertas.ForeColor = Color.FromArgb(255, 150, 0);   // Letras naranjas
             }
             else
             {
@@ -390,7 +389,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // --- 7. ACCIONES DE CLIC EN LA TABLA Y NUEVO REPUESTO ---
+        // ACCIONES DE CLIC EN LA TABLA Y NUEVO REPUESTO  
         private void dgvNuevo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;

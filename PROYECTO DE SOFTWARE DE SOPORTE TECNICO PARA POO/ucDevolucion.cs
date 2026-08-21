@@ -53,17 +53,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     if (dt.Rows.Count > 0)
                     {
-                        // Desconectamos temporalmente el evento para evitar conflictos al asignar el DataSource
+                        // Desconectar temporalmente el evento para evitar conflictos al asignar el DataSource
                         cmbListaOrdenes.SelectedIndexChanged -= cmbListaOrdenes_SelectedIndexChanged;
 
                         cmbListaOrdenes.DataSource = dt;
                         cmbListaOrdenes.DisplayMember = "numero_orden";
                         cmbListaOrdenes.ValueMember = "id";
 
-                        // Volvemos a conectar el evento de selección
+                        // Volver a conectar el evento de selección
                         cmbListaOrdenes.SelectedIndexChanged += cmbListaOrdenes_SelectedIndexChanged;
 
-                        // Forzamos a cargar los detalles y mostrar los paneles con la primera orden encontrada
+                        // Cargar los detalles y mostrar los paneles con la primera orden encontrada
                         if (cmbListaOrdenes.SelectedValue != null && int.TryParse(cmbListaOrdenes.SelectedValue.ToString(), out int idPrimerOrden))
                         {
                             CargarDetallesOrden(idPrimerOrden);
@@ -101,7 +101,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // Método para traer la información completa de la orden seleccionada
         private void CargarDetallesOrden(int idOrden)
         {
-            // 1. Modificamos la consulta para traer también el trabajo realizado/observaciones
+            // Modificar la consulta para traer también el trabajo realizado/observaciones
             string query = @"
         SELECT TOP 1
             O.numero_orden AS numero_orden,
@@ -131,7 +131,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     if (lector.Read())
                     {
-                        // Mostramos los paneles de resumen y entrega
+                        // Mostrar los paneles de resumen y entrega
                         pnlResumen.Visible = true;
                         pnlTrabajoRealizado.Visible = true;
                         pnlDesgloseCosto.Visible = true;
@@ -139,7 +139,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         btnRegistraEntrega.Visible = true;
                         btnComprobante.Visible = true;
 
-                        // Rellenamos los datos del resumen
+                        // Rellenar los datos del resumen
                         lblNumeroOrden.Text = lector["numero_orden"] != DBNull.Value ? lector["numero_orden"].ToString() : "S/N";
                         lblCliente.Text = lector["Cliente"] != DBNull.Value ? lector["Cliente"].ToString() : "";
                         lblCedula.Text = lector["Cedula"] != DBNull.Value ? lector["Cedula"].ToString() : "";
@@ -147,7 +147,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         lblDispositivo.Text = lector["Dispositivo"] != DBNull.Value ? lector["Dispositivo"].ToString() : "Sin dispositivo";
                         lblTecnicoAsignado.Text = lector["Tecnico"] != DBNull.Value ? lector["Tecnico"].ToString() : "Asignado";
 
-                        // Formateamos la fecha de ingreso
+                        // Formatear la fecha de ingreso
                         if (lector["Ingreso"] != DBNull.Value && DateTime.TryParse(lector["Ingreso"].ToString(), out DateTime fechaIngreso))
                         {
                             lblFechaIngreso.Text = fechaIngreso.ToString("dd/MM/yyyy HH:mm");
@@ -157,7 +157,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             lblFechaIngreso.Text = "Sin fecha";
                         }
 
-                        // 2. Llenamos el panel de "Trabajo realizado" usando el Label de tu diseño
+                        // 2. Llenar el panel de "Trabajo realizado" 
                         lblDescripcionTrabajo.Text = lector["TrabajoRealizado"] != DBNull.Value ? lector["TrabajoRealizado"].ToString() : "Sin observaciones registradas.";
                     }
 
@@ -235,7 +235,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarDesgloseCostos(int idOrden)
         {
-            // Limpiamos la grilla antes de cargar nuevos datos
+            // Limpiar la grilla antes de cargar nuevos datos
             dgvDesglose.Rows.Clear();
             decimal totalCosto = 0;
 
@@ -244,8 +244,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    // 1. CARGAR LOS REPUESTOS USADOS
-                    // Unimos DetallesOrden con Repuestos para obtener el nombre y el precio de venta real
+                    // CARGAR LOS REPUESTOS USADOS
+                    // Unir DetallesOrden con Repuestos para obtener el nombre y el precio de venta real
                     string queryRepuestos = @"
                 SELECT r.NombreRepuesto, r.PrecioVenta 
                 FROM DetallesOrden d
@@ -262,14 +262,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 string descripcion = reader["NombreRepuesto"].ToString();
                                 decimal precio = Convert.ToDecimal(reader["PrecioVenta"]);
 
-                                // Agregamos la fila a la grilla
+                                // Agregar la fila a la celda
                                 dgvDesglose.Rows.Add(descripcion, $"${precio:F2}");
-                                totalCosto += precio; // Vamos sumando
+                                totalCosto += precio; // Sumar al total
                             }
                         }
                     }
 
-                    // 2. CARGAR LA MANO DE OBRA (costo_estimado)
+                    // CARGAR LA MANO DE OBRA (costo_estimado)
                     string queryManoObra = "SELECT ISNULL(costo_estimado, 0) FROM ordenes WHERE id = @idOrden";
                     using (SqlCommand cmdManoObra = new SqlCommand(queryManoObra, db.oCon))
                     {
@@ -281,18 +281,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             decimal costoManoObra = Convert.ToDecimal(result);
                             if (costoManoObra > 0)
                             {
-                                // Agregamos la fila de mano de obra
+                                // Agregar la fila de mano de obra
                                 dgvDesglose.Rows.Add("Mano de obra", $"${costoManoObra:F2}");
                                 totalCosto += costoManoObra;
                             }
                         }
                     }
 
-                    // 3. ACTUALIZAR LOS TOTALES EN LA INTERFAZ
+                    // ACTUALIZAR LOS TOTALES EN LA INTERFAZ
                     lblTotalDesglose.Text = $"${totalCosto:F2}";
 
-                    // Si tienes el label grande a la derecha (el del panel "Registrar Entrega"):
-                    // lblTotalCobrar.Text = $"${totalCosto:F2}"; 
                 }
                 catch (Exception ex)
                 {
