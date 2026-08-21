@@ -30,6 +30,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void ucRecepcion_Load(object sender, EventArgs e)
         {
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
+
+            // Texto por defecto para la Sucursal (ahora es un TextBox bloqueado)
+            txtSucursal.Text = "Sucursal Norte";
+
             CargarDatosComboBox();
             cmbEstado.SelectedIndex = 0;
             MostrarNumeroOrden();
@@ -39,29 +43,25 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             btnEquipo.Tag = 0;
             btnEquipo.Click += btnEquipo_Click;
 
-            // 🔍 Vinculamos el evento para buscar al cliente cuando termine de escribir la cédula y salga del cuadro de texto
             txtIdentificacionCliente.Leave += txtIdentificacionCliente_Leave;
 
-            // Cargar marcas generales por defecto al abrir
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, "");
         }
 
+        //Metodo para permitir seleccionar un boton (usado en otros objetos)
         public void SeleccionarBoton(UIButton boton)
         {
-            // 1. Si ya había un botón seleccionado previamente, lo regresamos al estado "no seleccionado" (gris claro)
             if (botonSeleccionado != null)
             {
-                botonSeleccionado.FillColor = Color.FromArgb(239, 243, 247); // Fondo gris claro
-                botonSeleccionado.ForeColor = Color.FromArgb(70, 86, 103);   // Texto gris oscuro
-                botonSeleccionado.RectColor = Color.FromArgb(220, 226, 232); // Borde gris suave
+                botonSeleccionado.FillColor = Color.FromArgb(239, 243, 247);
+                botonSeleccionado.ForeColor = Color.FromArgb(70, 86, 103);
+                botonSeleccionado.RectColor = Color.FromArgb(220, 226, 232);
             }
 
-            // 2. Al botón recién presionado le aplicamos el estado "seleccionado" (turquesa / teal)
-            boton.FillColor = Color.FromArgb(0, 165, 155);   // Fondo turquesa principal
-            boton.ForeColor = Color.FromArgb(255, 255, 255); // Texto blanco
-            boton.RectColor = Color.FromArgb(0, 165, 155);   // Borde turquesa
+            boton.FillColor = Color.FromArgb(0, 165, 155);
+            boton.ForeColor = Color.FromArgb(255, 255, 255);
+            boton.RectColor = Color.FromArgb(0, 165, 155);
 
-            // 3. Guardamos la referencia del botón activo
             botonSeleccionado = boton;
         }
 
@@ -70,7 +70,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             SeleccionarBoton(btnComputadora);
             tipoDispositivo = "computadora";
 
-            // 💻 Carga las marcas orientadas a computadoras en el ComboBox
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, tipoDispositivo);
         }
 
@@ -79,7 +78,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             SeleccionarBoton(btnTelefono);
             tipoDispositivo = "telefono";
 
-            // 📱 Carga las marcas orientadas a teléfonos en el ComboBox
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, tipoDispositivo);
         }
 
@@ -90,9 +88,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    // 1. Cargar técnicos
-                    string queryTecnicos = "SELECT Id, Nombre FROM Usuarios WHERE Perfil = 'Tecnico'";
-                    SqlDataAdapter daTecnicos = new SqlDataAdapter(queryTecnicos, db.oCon);
+                    // Solo cargamos los técnicos de la base de datos
+                    string ConsultaTecnicos = "SELECT Id, Nombre FROM Usuarios WHERE Perfil = 'Tecnico'";
+                    SqlDataAdapter daTecnicos = new SqlDataAdapter(ConsultaTecnicos, db.oCon);
                     DataTable dtTecnicos = new DataTable();
                     daTecnicos.Fill(dtTecnicos);
 
@@ -100,24 +98,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     cmbTecnico.DisplayMember = "Nombre";
                     cmbTecnico.ValueMember = "Id";
 
-                    // 2. Cargar sucursales dinámicamente desde la base de datos
-                    cmbSucursal.Items.Clear();
-                    string querySucursales = "SELECT NombreSucursal FROM Sucursales";
-
-                    using (SqlCommand cmdSuc = new SqlCommand(querySucursales, db.oCon))
+                    // Si hay técnicos, seleccionamos al primero por defecto
+                    if (cmbTecnico.Items.Count > 0)
                     {
-                        using (SqlDataReader readerSuc = cmdSuc.ExecuteReader())
-                        {
-                            while (readerSuc.Read())
-                            {
-                                cmbSucursal.Items.Add(readerSuc["NombreSucursal"].ToString());
-                            }
-                        }
-                    }
-
-                    if (cmbSucursal.Items.Count > 0)
-                    {
-                        cmbSucursal.SelectedIndex = 0;
+                        cmbTecnico.SelectedIndex = 0;
                     }
                 }
                 catch (Exception ex)
@@ -163,7 +147,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // 🔍 MÉTODO PARA BUSCAR SI EL CLIENTE YA EXISTE EN LA BASE DE DATOS DE AZURE
+        //autocompletado por si existe el cliente en la base de datos
         private void txtIdentificacionCliente_Leave(object sender, EventArgs e)
         {
             string cedula = txtIdentificacionCliente.Text.Trim();
@@ -174,15 +158,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    string query = "SELECT TOP 1 nombre, telefono, correo FROM clientes WHERE cedula_pasaporte = @cedula";
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    string ConsultaCliente = "SELECT TOP 1 nombre, telefono, correo FROM clientes WHERE cedula_pasaporte = @cedula";
+                    using (SqlCommand cmd = new SqlCommand(ConsultaCliente, db.oCon))
                     {
                         cmd.Parameters.AddWithValue("@cedula", cedula);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                // Si el cliente existe, autocompleta sus campos
                                 txtNombres.Text = reader["nombre"].ToString();
                                 txtNumeroTelefonico.Text = reader["telefono"].ToString();
                                 txtCorreo.Text = reader["correo"].ToString();
@@ -203,6 +186,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void GuardarRecepcion()
         {
+            //Metodo para guardar los equipos asosiados al cliente en la recepcion
             GuardarDatosEnMemoria();
 
             foreach (var eq in listaEquipos)
@@ -218,7 +202,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             if (!db.abrirConexion())
             {
-                MessageBox.Show("No se pudo conectar a la base de datos de Azure.");
+                MessageBox.Show("No se pudo conectar a la base de datos");
                 return;
             }
 
@@ -226,7 +210,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             try
             {
-                // Verificamos si el cliente ya existe para no duplicarlo, o lo insertamos si es nuevo
+                // verificacion si existe o no el cliente
                 string queryVerificarCliente = "SELECT id FROM clientes WHERE cedula_pasaporte = @cedula";
                 int idCliente = 0;
 
@@ -242,11 +226,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 if (idCliente == 0)
                 {
-                    string queryCliente = @"INSERT INTO clientes (nombre, telefono, correo, cedula_pasaporte) 
+                    string ConsultaCliente = @"INSERT INTO clientes (nombre, telefono, correo, cedula_pasaporte) 
                                             VALUES (@nombre, @telefono, @correo, @cedula); 
                                             SELECT SCOPE_IDENTITY();";
 
-                    using (SqlCommand cmd = new SqlCommand(queryCliente, db.oCon, transaccion))
+                    using (SqlCommand cmd = new SqlCommand(ConsultaCliente, db.oCon, transaccion))
                     {
                         cmd.Parameters.AddWithValue("@nombre", txtNombres.Text.Trim());
                         cmd.Parameters.AddWithValue("@telefono", txtNumeroTelefonico.Text.Trim());
@@ -257,8 +241,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     }
                 }
 
+                // Extraemos el técnico del ComboBox y la sucursal del TextBox
                 int tecnicoId = Convert.ToInt32(cmbTecnico.SelectedValue);
-                string sucursalNombre = cmbSucursal.SelectedItem?.ToString() ?? "Centro";
+                string sucursalNombre = txtSucursal.Text.Trim();
 
                 for (int i = 0; i < listaEquipos.Count; i++)
                 {
@@ -307,9 +292,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
 
                 transaccion.Commit();
-                MessageBox.Show("¡Recepción y equipos guardados exitosamente en la nube!");
+                MessageBox.Show("¡Recepción y equipos guardados exitosamente en la base de datos!");
 
-                // 🔄 REINICIO TOTAL DE LA INTERFAZ TRAS GUARDAR CON ÉXITO
                 ReiniciarFormularioCompleto();
             }
             catch (Exception ex)
@@ -323,31 +307,29 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // 🔄 MÉTODO AUXILIAR PARA LIMPIAR TODO Y DEJARLO COMO AL INICIO
         private void ReiniciarFormularioCompleto()
         {
-            // Limpiar datos de cliente
             txtNombres.Clear();
             txtNumeroTelefonico.Clear();
             txtCorreo.Clear();
             txtIdentificacionCliente.Clear();
 
-            // Limpiar datos de reparación generales
             txtDescripcionProblema.Clear();
             txtObservaciones.Clear();
             txtCosto.Text = "0";
             cmbEstado.SelectedIndex = 0;
-            cmbTecnico.SelectedIndex = 0;
-            cmbSucursal.SelectedIndex = 0;
+
+            // Restablecer valores por defecto de la asignación
+            if (cmbTecnico.Items.Count > 0) cmbTecnico.SelectedIndex = 0;
+            txtSucursal.Text = "Sucursal Norte";
+
             dtmFecha.Value = DateTime.Now;
 
-            // Limpiar memoria de equipos y dejar solo el Equipo 1 limpio
             listaEquipos.Clear();
             listaEquipos.Add(new DispositivoTemporal());
             indicePestanaActual = 0;
             contadorEquipos = 1;
 
-            // Limpiar botones de equipo dinámicos del panel (dejando únicamente el btnEquipo original y btnAgregarEquipo)
             List<Control> controlesABorrar = new List<Control>();
             foreach (Control ctrl in flpEquipos.Controls)
             {
@@ -390,9 +372,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnGuardarRegistro_Click(object sender, EventArgs e)
         {
-            if (cmbTecnico.SelectedIndex < 0 || cmbSucursal.SelectedIndex < 0)
+            if (cmbTecnico.SelectedIndex < 0)
             {
-                MessageBox.Show("Selecciona un técnico y una sucursal.");
+                MessageBox.Show("Selecciona un técnico asignado.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             GuardarRecepcion();
@@ -410,7 +392,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             var equipo = listaEquipos[indicePestanaActual];
 
             equipo.Tipo = tipoDispositivo;
-            equipo.Marca = cmbMarca.Text; // <--- Guardamos el texto seleccionado o escrito en el ComboBox
+            equipo.Marca = cmbMarca.Text;
             equipo.Modelo = txtModelo.Text;
             equipo.Serie = txtSerie.Text;
             equipo.Color = txtColor.Text;
@@ -469,8 +451,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             btnNuevo.Margin = new Padding(3, 3, 3, 3);
             btnNuevo.Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.Radius = 12;
-
-
 
             btnNuevo.Tag = listaEquipos.Count - 1;
             btnNuevo.Click += btnEquipo_Click;
@@ -562,6 +542,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 txtCosto.SelectAll();
             }
         }
+
         public bool EsEmailValido(string email)
         {
             if (string.IsNullOrWhiteSpace(email)) return false;
@@ -593,6 +574,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 txtCorreo.RectColor = Color.FromArgb(220, 224, 230); // El color de borde que usamos en tu diseño
             }
         }
+
         private void txtNombres_KeyPress(object sender, KeyPressEventArgs e)
         {
             // 1. Permitir teclas de control como el Retroceso (Backspace) para poder borrar

@@ -50,7 +50,6 @@
             uiPanel1 = new Sunny.UI.UIPanel();
             txtCosto = new Sunny.UI.UITextBox();
             dtmFecha = new Sunny.UI.UIDatetimePicker();
-            cmbSucursal = new Sunny.UI.UIComboBox();
             cmbTecnico = new Sunny.UI.UIComboBox();
             lblCosto = new Label();
             txtObservaciones = new Sunny.UI.UITextBox();
@@ -73,9 +72,9 @@
             txtNombres = new Sunny.UI.UITextBox();
             pictureBox5 = new PictureBox();
             lblTelefono = new Label();
+            lblDatosCliente = new Label();
             lblCliente = new Label();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
-            lblDatosCliente = new Label();
             pnlDispositivo = new Sunny.UI.UIPanel();
             cmbMarca = new Sunny.UI.UIComboBox();
             lblEstado = new Label();
@@ -93,6 +92,7 @@
             pictureBox7 = new PictureBox();
             label5 = new Label();
             airSeparator4 = new ReaLTaiizor.Controls.AirSeparator();
+            txtSucursal = new Sunny.UI.UITextBox();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
@@ -396,9 +396,9 @@
             // uiPanel1
             // 
             uiPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            uiPanel1.Controls.Add(txtSucursal);
             uiPanel1.Controls.Add(txtCosto);
             uiPanel1.Controls.Add(dtmFecha);
-            uiPanel1.Controls.Add(cmbSucursal);
             uiPanel1.Controls.Add(cmbTecnico);
             uiPanel1.Controls.Add(lblCosto);
             uiPanel1.Controls.Add(txtObservaciones);
@@ -474,30 +474,6 @@
             dtmFecha.Value = new DateTime(2026, 8, 3, 0, 0, 0, 0);
             dtmFecha.Watermark = "";
             dtmFecha.WatermarkColor = Color.FromArgb(145, 158, 172);
-            // 
-            // cmbSucursal
-            // 
-            cmbSucursal.BackColor = Color.Transparent;
-            cmbSucursal.DataSource = null;
-            cmbSucursal.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbSucursal.FillColor = Color.FromArgb(248, 249, 251);
-            cmbSucursal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbSucursal.ForeColor = Color.FromArgb(70, 86, 103);
-            cmbSucursal.FormattingEnabled = true;
-            cmbSucursal.ItemHoverColor = Color.FromArgb(243, 247, 247);
-            cmbSucursal.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbSucursal.Location = new Point(177, 377);
-            cmbSucursal.Margin = new Padding(4, 5, 4, 5);
-            cmbSucursal.MinimumSize = new Size(63, 0);
-            cmbSucursal.Name = "cmbSucursal";
-            cmbSucursal.Padding = new Padding(0, 0, 30, 2);
-            cmbSucursal.Radius = 12;
-            cmbSucursal.RectColor = Color.FromArgb(220, 226, 232);
-            cmbSucursal.Size = new Size(136, 37);
-            cmbSucursal.SymbolSize = 24;
-            cmbSucursal.TabIndex = 45;
-            cmbSucursal.TextAlignment = ContentAlignment.MiddleLeft;
-            cmbSucursal.Watermark = "";
             // 
             // cmbTecnico
             // 
@@ -856,6 +832,18 @@
             lblTelefono.TabIndex = 8;
             lblTelefono.Text = "Teléfono / Celular";
             // 
+            // lblDatosCliente
+            // 
+            lblDatosCliente.AutoSize = true;
+            lblDatosCliente.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDatosCliente.ForeColor = Color.FromArgb(24, 43, 62);
+            lblDatosCliente.Location = new Point(19, 137);
+            lblDatosCliente.Name = "lblDatosCliente";
+            lblDatosCliente.Size = new Size(150, 21);
+            lblDatosCliente.TabIndex = 7;
+            lblDatosCliente.Text = "Nombre completo";
+            lblDatosCliente.Click += lblDatosCliente_Click;
+            // 
             // lblCliente
             // 
             lblCliente.AutoSize = true;
@@ -881,18 +869,6 @@
             airSeparator1.TabIndex = 0;
             airSeparator1.Text = "airSeparator1";
             airSeparator1.Transparent = false;
-            // 
-            // lblDatosCliente
-            // 
-            lblDatosCliente.AutoSize = true;
-            lblDatosCliente.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDatosCliente.ForeColor = Color.FromArgb(24, 43, 62);
-            lblDatosCliente.Location = new Point(19, 137);
-            lblDatosCliente.Name = "lblDatosCliente";
-            lblDatosCliente.Size = new Size(150, 21);
-            lblDatosCliente.TabIndex = 7;
-            lblDatosCliente.Text = "Nombre completo";
-            lblDatosCliente.Click += lblDatosCliente_Click;
             // 
             // pnlDispositivo
             // 
@@ -1192,6 +1168,30 @@
             airSeparator4.Text = "airSeparator4";
             airSeparator4.Transparent = false;
             // 
+            // txtSucursal
+            // 
+            txtSucursal.BackColor = Color.Transparent;
+            txtSucursal.FillColor = Color.FromArgb(248, 249, 251);
+            txtSucursal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSucursal.ForeColor = Color.FromArgb(70, 86, 103);
+            txtSucursal.Location = new Point(177, 377);
+            txtSucursal.Margin = new Padding(4, 5, 4, 5);
+            txtSucursal.MaxLength = 255;
+            txtSucursal.Minimum = 0D;
+            txtSucursal.MinimumSize = new Size(1, 16);
+            txtSucursal.Name = "txtSucursal";
+            txtSucursal.Padding = new Padding(5);
+            txtSucursal.Radius = 12;
+            txtSucursal.ReadOnly = true;
+            txtSucursal.RectColor = Color.FromArgb(220, 226, 232);
+            txtSucursal.RectDisableColor = Color.FromArgb(220, 226, 232);
+            txtSucursal.ShowText = false;
+            txtSucursal.Size = new Size(136, 37);
+            txtSucursal.TabIndex = 48;
+            txtSucursal.TextAlignment = ContentAlignment.MiddleLeft;
+            txtSucursal.Watermark = "";
+            txtSucursal.WatermarkColor = Color.FromArgb(145, 158, 172);
+            // 
             // ucRecepcion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1282,7 +1282,6 @@
         private PictureBox pictureBox4;
         private Sunny.UI.UIPanel uiPanel1;
         private Sunny.UI.UIComboBox cmbTecnico;
-        private Sunny.UI.UIComboBox cmbSucursal;
         private Sunny.UI.UIDatetimePicker dtmFecha;
         private Sunny.UI.UITextBox txtCosto;
         private Label lbId;
@@ -1293,5 +1292,6 @@
         private PictureBox pictureBox6;
         private Sunny.UI.UIComboBox cmbMarca;
         private Sunny.UI.UISymbolButton btnAgregarEquipo;
+        private Sunny.UI.UITextBox txtSucursal;
     }
 }
