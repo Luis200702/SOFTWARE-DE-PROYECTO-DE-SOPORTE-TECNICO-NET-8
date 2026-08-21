@@ -107,7 +107,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 if (db.abrirConexion())
                 {
-                    // Relación corregida usando o.dispositivo_id = dp.id
                     string query = @"
                         SELECT 
                             o.numero_orden,
