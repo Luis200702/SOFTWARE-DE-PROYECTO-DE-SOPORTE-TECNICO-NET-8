@@ -13,7 +13,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             AplicarDiseñoGrid();
         }
 
-        // --- 1. DISEÑO BASE DE LA TABLA ---
+        //DIseño tabla
         private void AplicarDiseñoGrid()
         {
             dgvNuevo.BackgroundColor = Color.White;
@@ -61,13 +61,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarDatos();
         }
 
-        // --- 2. CARGAR DATOS USANDO TU LÓGICA ORIGINAL ---
+
         private void CargarDatos()
         {
             Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
             DataTable dt = conexion.obtenerUsuarios();
 
-            // Transformamos las columnas de tu DataTable a mayúsculas para el diseño
+
             if (dt.Columns.Contains("Nombre")) dt.Columns["Nombre"].ColumnName = "NOMBRE";
             if (dt.Columns.Contains("Usuario")) dt.Columns["Usuario"].ColumnName = "USUARIO";
             if (dt.Columns.Contains("Perfil")) dt.Columns["Perfil"].ColumnName = "PERFIL";
@@ -90,7 +90,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 dgvNuevo.Columns.Add(btnEditar);
             }
 
-            // Ajustamos los tamaños
+
             if (dgvNuevo.Columns.Count > 0)
             {
                 if (dgvNuevo.Columns.Contains("NOMBRE"))
@@ -106,39 +106,38 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvNuevo.ClearSelection();
         }
 
-        // --- 3. ACCIONES DE BOTONES (TU CÓDIGO ADAPTADO) ---
+
         private void dgvNuevo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
             if (dgvNuevo.Columns[e.ColumnIndex].Name == "Editar")
             {
-                // Leemos los datos de la fila seleccionada usando los nombres en mayúscula
+
                 string nombre = dgvNuevo.Rows[e.RowIndex].Cells["NOMBRE"].Value.ToString();
                 string usuario = dgvNuevo.Rows[e.RowIndex].Cells["USUARIO"].Value.ToString();
                 string perfil = dgvNuevo.Rows[e.RowIndex].Cells["PERFIL"].Value.ToString();
                 string sucursal = dgvNuevo.Rows[e.RowIndex].Cells["SUCURSAL"].Value.ToString();
 
-                // Abrimos tu formulario de edición
+
                 frmEditarUsuarios frmEditar = new frmEditarUsuarios(nombre, usuario, perfil, sucursal);
                 frmEditar.ShowDialog();
 
-                // Recargamos la tabla al cerrar por si hubo cambios
+
                 CargarDatos();
             }
         }
 
         private void btnNuevoTecnico_Click(object sender, EventArgs e)
         {
-            // Tu código original para el nuevo técnico
+
             frmAgregarUsuario frm = new frmAgregarUsuario();
             frm.ShowDialog();
 
-            // Recargamos la tabla al cerrar por si se agregó alguien
+
             CargarDatos();
         }
 
-        // --- 4. MAGIA VISUAL: AVATARES, BADGES Y BOTÓN EDITAR ---
         private void dgvNuevo_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
@@ -153,7 +152,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 string nombreCompleto = e.Value?.ToString() ?? "Desconocido";
 
-                // Extraer iniciales
+
                 string iniciales = "";
                 string[] palabras = nombreCompleto.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 if (palabras.Length >= 2)
@@ -163,18 +162,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 else if (nombreCompleto.Length > 0)
                     iniciales = nombreCompleto.Substring(0, 1).ToUpper();
 
-                // Color fijo basado en el nombre
+
                 Color[] paleta = {
-                    Color.FromArgb(40, 180, 90),  // Verde
-                    Color.FromArgb(20, 140, 220), // Azul
-                    Color.FromArgb(240, 140, 0),  // Naranja
-                    Color.FromArgb(140, 80, 220), // Morado
-                    Color.FromArgb(0, 160, 160)   // Turquesa
+                    Color.FromArgb(40, 180, 90),  
+                    Color.FromArgb(20, 140, 220), 
+                    Color.FromArgb(240, 140, 0),  
+                    Color.FromArgb(140, 80, 220), 
+                    Color.FromArgb(0, 160, 160)  
                 };
                 int colorIndex = Math.Abs(nombreCompleto.GetHashCode()) % paleta.Length;
                 Color colorAvatar = paleta[colorIndex];
 
-                // Dibujar círculo
                 int size = 32;
                 int xCiculo = e.CellBounds.Left + 15;
                 int yCirculo = e.CellBounds.Top + (e.CellBounds.Height - size) / 2;
@@ -184,7 +182,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     e.Graphics.FillEllipse(brush, xCiculo, yCirculo, size, size);
                 }
 
-                // Dibujar iniciales
+   
                 using (Font fontIniciales = new Font("Segoe UI", 9F, FontStyle.Bold))
                 using (SolidBrush brushTexto = new SolidBrush(Color.White))
                 {
@@ -194,7 +192,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     e.Graphics.DrawString(iniciales, fontIniciales, brushTexto, xTexto, yTexto);
                 }
 
-                // Dibujar nombre completo
+
                 int xNombre = xCiculo + size + 15;
                 int yNombre = e.CellBounds.Top + (e.CellBounds.Height - e.CellStyle.Font.Height) / 2;
                 using (SolidBrush brushNombre = new SolidBrush(e.CellStyle.ForeColor))
@@ -205,7 +203,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 e.Handled = true;
             }
 
-            // B) BADGES DE PERFIL
             if (nombreColumna == "PERFIL")
             {
                 e.PaintBackground(e.CellBounds, true);
@@ -217,15 +214,15 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 if (perfil.ToLower().Contains("admin") || perfil.ToLower().Contains("gerente"))
                 {
-                    colorBase = Color.FromArgb(140, 80, 220); // Morado
+                    colorBase = Color.FromArgb(140, 80, 220); 
                     colorFondo = Color.FromArgb(245, 240, 255);
-                    icono = "👑 "; // Corona
+                    icono = "👑 "; 
                 }
                 else
                 {
-                    colorBase = Color.FromArgb(40, 140, 220); // Azul
+                    colorBase = Color.FromArgb(40, 140, 220);
                     colorFondo = Color.FromArgb(240, 245, 255);
-                    icono = "👤 "; // Usuario
+                    icono = "👤 "; 
                 }
 
                 string textoFinal = icono + perfil;
@@ -263,7 +260,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 e.Handled = true;
             }
 
-            // C) BOTÓN "EDITAR" CON BORDE VERDE
+
             if (nombreColumna == "Editar")
             {
                 e.PaintBackground(e.CellBounds, true);

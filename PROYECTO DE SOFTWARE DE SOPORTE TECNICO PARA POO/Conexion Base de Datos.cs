@@ -74,7 +74,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 if (abrirConexion())
                 {
-                    // 🔥 MODIFICADO: Hacemos JOIN con Sucursales para traer el nombre o manejamos el IdSucursal
                     string consulta = @"SELECT U.Perfil, S.NombreSucursal 
                                 FROM Usuarios U
                                 INNER JOIN Sucursales S ON U.IdSucursal = S.IdSucursal
