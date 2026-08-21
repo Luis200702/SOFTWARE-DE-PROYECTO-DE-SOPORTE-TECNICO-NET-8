@@ -24,14 +24,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private float posicionActualY;
         private float posicionObjetivoY;
 
-        // Variables para la animación de extensión/retracción horizontal 
+        // Variables para la animación del menú: extensión/retracción horizontal, osea recorrre el ancho del botón
         private float progresoAncho = 0f;
         private float progresoAnchoObjetivo = 0f;
 
         private System.Windows.Forms.Button botonSeleccionado;
         private System.Windows.Forms.Button ultimoBotonActivo;
 
-        // Variable para mantener el botón que recibió Clic 
+        // Variable para mantener el botón que recibió Clic en el menú
         private System.Windows.Forms.Button botonActivo;
         public frmMenu(string sucursal)
         {
@@ -40,27 +40,22 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         }
         public frmMenu()
         {
-            //Crear e inicializar todos los componentes del diseño
             InitializeComponent();
 
-            // Configurar el evento CheckedChanged del ToggleSwitch
-            //toggleSwitch1.CheckedChanged += toggleSwitch1_CheckedChanged;
-
-
-            // 1. Activar DoubleBuffer para evitar parpadeos en el panel
+            // Activar DoubleBuffer para evitar parpadeos en el panel
             typeof(System.Windows.Forms.Panel).InvokeMember("DoubleBuffered",
                 BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
                 null, pnlContenedorMenu, new object[] { true });
 
-            // 2. Conectar evento Paint enfocado en pnlContenedorMenu
+            // Evento Paint enfocado en pnlContenedorMenu
             pnlContenedorMenu.Paint += PnlContenedorMenu_Paint;
 
-            // 3. Configurar Timer de animación
+            // Timer de animación
             timerDesplazamiento.Interval = 10;
             timerDesplazamiento.Tick -= timerDesplazamiento_Tick;
             timerDesplazamiento.Tick += timerDesplazamiento_Tick;
 
-            // 4. Configurar botones transparentes, eventos MouseEnter y Click
+            // Botones transparentes, eventos MouseEnter y Click
             foreach (Control c in pnlContenedorMenu.Controls)
             {
                 if (c is System.Windows.Forms.Button btn)
@@ -72,7 +67,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     btn.FlatAppearance.MouseOverBackColor = Color.Transparent;
                     btn.FlatAppearance.MouseDownBackColor = Color.Transparent;
                     btn.ForeColor = ColorTranslator.FromHtml("#EBEFF0");   // Color Pale Gray, por defecto 
-
                     btn.MouseEnter -= BotonMenu_MouseEnter;
                     btn.MouseEnter += BotonMenu_MouseEnter;
 
@@ -86,12 +80,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             botonActivo = null;
         }
 
-        // EVENTO CLICK: Marca el botón como activo y le aplica el estado seleccionado
+        // EVENTO CLICK: Marca el botón como activo (osea indica que esta en la interfaz respectiva)
         private void BotonMenu_Click(object sender, EventArgs e)
         {
             if (sender is System.Windows.Forms.Button btn)
             {
-                // Restaurar color del texto del botón activo anterior
+                // Se pone de nuevo el color Pale Gray 
                 if (botonActivo != null && botonActivo != btn)
                 {
                     botonActivo.ForeColor = ColorTranslator.FromHtml("#EBEFF0");  // Color Pale Gray
@@ -100,11 +94,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 botonActivo = btn;
                 botonActivo.ForeColor = Color.White; // Destaca texto del botón seleccionado
                 progresoAnchoObjetivo = 0f;          // Oculta hover inmediatamente al hacer clic
-                pnlContenedorMenu.Invalidate();      // Redibuja panel para mostrar el degradado
+                pnlContenedorMenu.Invalidate();      // Redibuja panel para mostrar el degradado 
             }
         }
 
-        // DIBUJO EN EL PANEL
+        // DIBUJO EN EL PANEL (menú)
         private void PnlContenedorMenu_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -113,16 +107,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             // Recortar límites del panel
             e.Graphics.SetClip(new RectangleF(0, 0, anchoTotal, pnlContenedorMenu.Height));
 
-            // =========================================================================
-            // VARIABLE DE CONFIGURACIÓN DE REDONDEO
-            // Cambiar este valor libremente (ej. 4f, 6f, 8f, 10f) para ajustar 
-            // qué tan redondeadas o cuadradas quieres las esquinas.
-            // =========================================================================
+
+            // Variable para redondear las esquinas de los botones del menú
             float radioEsquinas = 6f;
 
-            // =========================================================================
-            // 1. DIBUJAR DEGRADADO EN EL BOTÓN SELECCIONADO POR CLIC (SECCIÓN ACTIVA)
-            // =========================================================================
+            // Degradado de color para el botón activo 
             if (botonActivo != null)
             {
                 float xActivo = botonActivo.Left;
@@ -143,10 +132,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         {
                             ColorBlend blend = new ColorBlend();
                             blend.Colors = new Color[] {
-                        colorInicio,
-                        Color.FromArgb(180, colorInicio),
-                        colorFin
-                    };
+                            colorInicio,
+                            Color.FromArgb(180, colorInicio),
+                            colorFin
+                            };
                             blend.Positions = new float[] { 0.0f, 0.55f, 1.0f };
                             brushGradiente.InterpolationColors = blend;
 
@@ -156,9 +145,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
             }
 
-            // =========================================================================
-            // 2. DIBUJAR ANIMACIÓN FLOTANTE (HOVER) DENTRO DEL ÁREA DEL BOTÓN
-            // =========================================================================
+
+            // Animación de selecionar el botón
             if (progresoAncho > 0.001f)
             {
                 System.Windows.Forms.Button btn = botonSeleccionado ?? ultimoBotonActivo;
@@ -169,11 +157,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     float anchoMax = btn.Width;
                     float alto = btn.Height;
 
-                    // Animación de ancho y desplazamiento fluido 
+                    // Animación de ancho y desplazamiento 
                     float anchoActual = anchoMax * progresoAncho;
-                    float xActual = xBtn + (anchoMax - anchoActual); // Que crezca desde la izquierda, cámbialo a xBtn
+                    float xActual = xBtn + (anchoMax - anchoActual); // Que aparezca desde la izquierda
 
-                    Color colorCapsula = Color.FromArgb(25, 255, 255, 255); // Blanco leve y translúcido
+                    Color colorCapsula = Color.FromArgb(25, 255, 255, 255); // Blanco leve 
 
                     using (GraphicsPath pathHover = CrearPathRedondeado(xActual, y, anchoActual, alto, radioEsquinas))
                     {
@@ -188,15 +176,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             e.Graphics.ResetClip();
         }
 
-        // =========================================================================
-        // MÉTODO ÚNICO Y UNIVERSAL PARA RECTÁNGULOS CON ESQUINAS REDONDEADAS PERFECTAS
-        // =========================================================================
+        // Redondea las esquinas de los botones del menú y del selecionado
         private GraphicsPath CrearPathRedondeado(float x, float y, float ancho, float alto, float radio)
         {
             GraphicsPath path = new GraphicsPath();
             if (ancho <= 0 || alto <= 0) return path;
 
-            // Asegurar matemáticamente que el radio nunca deforme la figura
+            // para que el radio nunca deforme la figura
             radio = Math.Min(radio, Math.Min(ancho / 2f, alto / 2f));
             if (radio < 0) radio = 0;
 
@@ -216,7 +202,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             return path;
         }
 
-        // EVENTO MOUSE ENTER: Activa y despliega la pestaña al posicionarse en un botón del menú
+        // EVENTO MOUSE ENTER: Activa y despliega la animacion al botón del menú
         private void BotonMenu_MouseEnter(object sender, EventArgs e)
         {
             if (sender is System.Windows.Forms.Button btn)
@@ -258,7 +244,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // ANIMACIÓN Y VALIDACIÓN CONTINUA DEL MOUSE
+        // Animación y siempre valida que el mouse este dentro del panel del menú
         private void timerDesplazamiento_Tick(object sender, EventArgs e)
         {
             Point posicionMouse = pnlContenedorMenu.PointToClient(Cursor.Position);
@@ -276,7 +262,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             bool huboMovimiento = false;
 
-            // 1. Animación Vertical (Y)
+            // Animación vertical (Y)
             float distanciaY = posicionObjetivoY - posicionActualY;
             if (Math.Abs(distanciaY) > 0.5f)
             {
@@ -288,7 +274,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 posicionActualY = posicionObjetivoY;
             }
 
-            // 2. Animación Horizontal (Ancho)
+            // Animación horizontal (Ancho)
             float distanciaAncho = progresoAnchoObjetivo - progresoAncho;
             if (Math.Abs(distanciaAncho) > 0.005f)
             {
@@ -322,18 +308,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             btnConfiguracionGeneral.Visible = true;
         }
 
-        // ====================================================================
-        // EVENTO DEL BOTÓN DE TEMA: Cambia entre Modo Oscuro y Modo Claro
-        // ====================================================================
-        //private void toggleSwitch1_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    // True = Modo Oscuro, False = Modo Claro
-        //    bool esOscuro = toggleSwitch1.Checked;
-
-        //    // Aplica el tema a todo el formulario actual y sus controles/paneles internos
-        //    TemaManager.AplicarTema(this, esOscuro);
-        //}
-
         private void frmMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -361,11 +335,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnDerivacionOrdenes_Click(object sender, EventArgs e)
         {
-            // Instanciamos el UserControl leyendo directamente la sucursal almacenada en la sesión
+            // UserControl, la sucursal almacenada en la sesión
             ucDerivacion uc = new ucDerivacion();
 
             // Si ucDerivacion lee Sesion.SucursalActual en su constructor o Load, 
-            // simplemente abrir el UserControl con tu método estandarizado:
+            // simplemente abrir el UserControl con tu método predeterminado:
             AbrirUserControl(new ucDerivacion());
         }
 
