@@ -228,7 +228,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     string ConsultaCliente = @"INSERT INTO clientes (nombre, telefono, correo, cedula_pasaporte) 
                                             VALUES (@nombre, @telefono, @correo, @cedula); 
-                                            SELECT SCOPE_IDENTITY();";
+                                            SELECT SCOPE_IDENTITY();"; 
 
                     using (SqlCommand cmd = new SqlCommand(ConsultaCliente, db.oCon, transaccion))
                     {
