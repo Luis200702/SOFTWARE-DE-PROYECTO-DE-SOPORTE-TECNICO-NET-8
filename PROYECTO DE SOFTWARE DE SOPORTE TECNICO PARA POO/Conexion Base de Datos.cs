@@ -238,5 +238,28 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
             return dt;
         }
+
+        public bool insertDatosCliente(string tabla, string campos, string datos)
+        {
+            try
+            {
+                if (abrirConexion())
+                {
+                    Cadena = "Insert into " + tabla + "(" + campos + ") values(" + datos + ")";
+                    oCom = new SqlCommand(Cadena, oCon);
+                    oCom.ExecuteNonQuery();
+                    cerrarConexion();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+
+        }
     }
 }

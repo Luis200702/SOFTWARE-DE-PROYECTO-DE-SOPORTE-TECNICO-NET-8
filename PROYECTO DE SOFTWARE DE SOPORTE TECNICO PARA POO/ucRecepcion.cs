@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using FontAwesome.Sharp;
+using Microsoft.Data.SqlClient;
 using Sunny.UI;
 using System;
 using System.Collections.Generic;
@@ -7,15 +8,16 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Documents;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class ucRecepcion : UserControl
     {
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
         private List<DispositivoTemporal> listaEquipos = new List<DispositivoTemporal>();
         private int indicePestanaActual = 0;
         private int contadorEquipos = 1;
@@ -27,7 +29,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             InitializeComponent();
         }
 
-        private void ucRecepcion_Load(object sender, EventArgs e) 
+        private void ucRecepcion_Load(object sender, EventArgs e)
         {
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
 
@@ -228,7 +230,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     string ConsultaCliente = @"INSERT INTO clientes (nombre, telefono, correo, cedula_pasaporte) 
                                             VALUES (@nombre, @telefono, @correo, @cedula); 
-                                            SELECT SCOPE_IDENTITY();"; 
+                                            SELECT SCOPE_IDENTITY();";
 
                     using (SqlCommand cmd = new SqlCommand(ConsultaCliente, db.oCon, transaccion))
                     {
@@ -610,6 +612,15 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void lblDatosCliente_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnRegistrarCliente_Click(object sender, EventArgs e)
+        {
+            string campos, datos;
+            campos = "nombre, telefono, correo, cedula_pasaporte, telefono_alt, direccion";
+            datos = "'" + txtNombres.Text.Trim() + "','" + txtNumeroTelefonico.Text + "','" + txtCorreo.Text + "','" + txtIdentificacionCliente.Text + "','" + txtNumeroTelefonicoAlt.Text + "','" + txtDireccion.Text + "'";
+
+            oCon.insertDatosCliente("clientes", campos, datos);
         }
     }
 }
