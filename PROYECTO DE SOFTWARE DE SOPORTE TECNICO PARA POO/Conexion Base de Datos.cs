@@ -107,30 +107,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        public DataTable obtenerUsuarios()
-        {
-            DataTable dt = new DataTable();
-            try
-            {
-                if (abrirConexion())
-                {
-                    // 🔥 MODIFICADO: Traemos el NombreSucursal desde la tabla Sucursales usando el IdSucursal
-                    string consulta = @"SELECT U.Nombre, U.Usuario, U.Perfil, S.NombreSucursal AS Sucursal 
-                                FROM Usuarios U
-                                INNER JOIN Sucursales S ON U.IdSucursal = S.IdSucursal";
-
-                    oDA = new SqlDataAdapter(consulta, oCon);
-                    oDA.Fill(dt);
-                    cerrarConexion();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar usuarios: " + ex.Message);
-            }
-            return dt;
-        }
-
         public bool actualizarUsuario(string usuarioOriginal, string nombre, string usuario, string contraseña, string perfil, int idSucursal)
         {
             try
@@ -186,57 +162,21 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        public bool insertarUsuario(string nombre, string usuario, string contraseña, string perfil, int idSucursal)
+
+
+        //Codigo de clases modificado
+        public DataTable retornarRegistrosUsuarios(string Sentencia)
         {
-            try
+            if (Sentencia.Length > 0)
             {
-                if (abrirConexion())
-                {
-                    // 🔥 MODIFICADO: Insertamos IdSucursal (int)
-                    string consulta = @"INSERT INTO Usuarios (Nombre, Usuario, Contrasena, Perfil, IdSucursal)
-                                VALUES (@Nombre, @Usuario, @Contrasena, @Perfil, @IdSucursal)";
-
-                    oCom = new SqlCommand(consulta, oCon);
-                    oCom.Parameters.AddWithValue("@Nombre", nombre);
-                    oCom.Parameters.AddWithValue("@Usuario", usuario);
-                    oCom.Parameters.AddWithValue("@Contrasena", contraseña);
-                    oCom.Parameters.AddWithValue("@Perfil", perfil);
-                    oCom.Parameters.AddWithValue("@IdSucursal", idSucursal);
-
-                    int filas = oCom.ExecuteNonQuery();
-                    cerrarConexion();
-
-                    return filas > 0;
-                }
-                return false;
+                abrirConexion();
+                oCom = new SqlCommand(Sentencia, oCon);
+                oDA = new SqlDataAdapter(oCom);
+                oDT = new DataTable();
+                oDA.Fill(oDT);
+                cerrarConexion();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al agregar usuario: " + ex.Message);
-                return false;
-            }
-        }
-
-        public DataTable obtenerSucursales()
-        {
-            DataTable dt = new DataTable();
-            try
-            {
-                if (abrirConexion())
-                {
-                    // 🔥 MODIFICADO: Ahora sí consultamos directamente la tabla Sucursales real que tienes en tu BD
-                    string consulta = "SELECT IdSucursal, NombreSucursal FROM Sucursales ORDER BY NombreSucursal";
-
-                    oDA = new SqlDataAdapter(consulta, oCon);
-                    oDA.Fill(dt);
-                    cerrarConexion();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar sucursales: " + ex.Message);
-            }
-            return dt;
+            return oDT;
         }
 
         public bool insertDatosCliente(string tabla, string campos, string datos)
@@ -261,5 +201,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
 
         }
+       
+
     }
 }

@@ -33,7 +33,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
 
-            // Texto por defecto para la Sucursal (ahora es un TextBox bloqueado)
+            // Texto por defecto para la Sucursal
             txtSucursal.Text = "Sucursal Norte";
 
             CargarDatosComboBox();
@@ -50,7 +50,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, "");
         }
 
-        //Metodo para permitir seleccionar un boton (usado en otros objetos)
         public void SeleccionarBoton(UIButton boton)
         {
             if (botonSeleccionado != null)
@@ -71,7 +70,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             SeleccionarBoton(btnComputadora);
             tipoDispositivo = "computadora";
-
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, tipoDispositivo);
         }
 
@@ -79,7 +77,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             SeleccionarBoton(btnTelefono);
             tipoDispositivo = "telefono";
-
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, tipoDispositivo);
         }
 
@@ -90,7 +87,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    // Solo cargamos los técnicos de la base de datos
                     string ConsultaTecnicos = "SELECT Id, Nombre FROM Usuarios WHERE Perfil = 'Tecnico'";
                     SqlDataAdapter daTecnicos = new SqlDataAdapter(ConsultaTecnicos, db.oCon);
                     DataTable dtTecnicos = new DataTable();
@@ -100,7 +96,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     cmbTecnico.DisplayMember = "Nombre";
                     cmbTecnico.ValueMember = "Id";
 
-                    // Si hay técnicos, seleccionamos al primero por defecto
                     if (cmbTecnico.Items.Count > 0)
                     {
                         cmbTecnico.SelectedIndex = 0;
@@ -120,13 +115,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void MostrarNumeroOrden()
         {
             var db = new Conexion_Base_de_Datos();
-
             if (db.abrirConexion())
             {
                 try
                 {
                     string query = "SELECT ISNULL(MAX(id), 0) FROM ordenes";
-
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
                         int ultimoId = Convert.ToInt32(cmd.ExecuteScalar());
@@ -149,7 +142,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        //autocompletado por si existe el cliente en la base de datos
         private void txtIdentificacionCliente_Leave(object sender, EventArgs e)
         {
             string cedula = txtIdentificacionCliente.Text.Trim();
@@ -160,7 +152,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    string ConsultaCliente = "SELECT TOP 1 nombre, telefono, correo FROM clientes WHERE cedula_pasaporte = @cedula";
+                    string ConsultaCliente = "SELECT TOP 1 nombre, telefono, correo, telefono_alt, direccion FROM clientes WHERE cedula_pasaporte = @cedula";
                     using (SqlCommand cmd = new SqlCommand(ConsultaCliente, db.oCon))
                     {
                         cmd.Parameters.AddWithValue("@cedula", cedula);
@@ -171,6 +163,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 txtNombres.Text = reader["nombre"].ToString();
                                 txtNumeroTelefonico.Text = reader["telefono"].ToString();
                                 txtCorreo.Text = reader["correo"].ToString();
+
+                                if (txtNumeroTelefonicoAlt != null) txtNumeroTelefonicoAlt.Text = reader["telefono_alt"].ToString();
+                                if (txtDireccion != null) txtDireccion.Text = reader["direccion"].ToString();
                             }
                         }
                     }
@@ -188,125 +183,137 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void GuardarRecepcion()
         {
-            //Metodo para guardar los equipos asosiados al cliente en la recepcion
             GuardarDatosEnMemoria();
 
-            foreach (var eq in listaEquipos)
+            // ==========================================
+            // 1. VALIDACIÓN DEL CLIENTE (Obligatorio siempre)
+            // ==========================================
+            if (string.IsNullOrWhiteSpace(txtIdentificacionCliente.Text) ||
+                string.IsNullOrWhiteSpace(txtNombres.Text) ||
+                string.IsNullOrWhiteSpace(txtNumeroTelefonico.Text))
             {
-                if (string.IsNullOrEmpty(eq.Tipo))
+                MessageBox.Show("Por favor, llena al menos la Cédula, Nombre y Teléfono del cliente para poder continuar.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // ==========================================
+            // 2. ¿GUARDAMOS SOLO CLIENTE O TAMBIÉN EQUIPO?
+            // ==========================================
+            bool guardarSoloCliente = false;
+            var primerEquipo = listaEquipos[0];
+
+            // Si no seleccionó Tipo (Compu/Teléfono) y no escribió Modelo, asumimos que solo quiere registrar al cliente
+            if (listaEquipos.Count == 1 && string.IsNullOrEmpty(primerEquipo.Tipo) && string.IsNullOrWhiteSpace(primerEquipo.Modelo))
+            {
+                guardarSoloCliente = true;
+            }
+            else
+            {
+                // Si decidió llenar el equipo, validamos que no deje campos importantes vacíos
+                foreach (var eq in listaEquipos)
                 {
-                    MessageBox.Show("Por favor selecciona si el equipo es computadora o teléfono en todas las pestañas.");
+                    if (string.IsNullOrEmpty(eq.Tipo) || string.IsNullOrWhiteSpace(eq.Marca) || string.IsNullOrWhiteSpace(eq.Modelo))
+                    {
+                        MessageBox.Show("Para registrar un dispositivo, debes elegir el Tipo, Marca y Modelo.\n\nSi solo deseas guardar al cliente, limpia los campos del dispositivo y presiona Guardar.", "Faltan datos del equipo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                if (cmbTecnico.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Selecciona un técnico asignado para la reparación.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
 
-            var db = new Conexion_Base_de_Datos();
+            // ==========================================
+            // 3. GUARDAMOS AL CLIENTE EN LA BASE DE DATOS
+            // ==========================================
+            var oCon = new Conexion_Base_de_Datos();
+            int idCliente = 0;
 
-            if (!db.abrirConexion())
+            if (oCon.abrirConexion())
             {
-                MessageBox.Show("No se pudo conectar a la base de datos");
-                return;
+                string consultaBusqueda = "SELECT id FROM clientes WHERE cedula_pasaporte = '" + txtIdentificacionCliente.Text.Trim() + "'";
+                SqlCommand cmdBusqueda = new SqlCommand(consultaBusqueda, oCon.oCon);
+                object resultado = cmdBusqueda.ExecuteScalar();
+
+                if (resultado != null)
+                {
+                    idCliente = Convert.ToInt32(resultado);
+                }
+                oCon.cerrarConexion();
             }
 
-            SqlTransaction transaccion = db.oCon.BeginTransaction();
-
-            try
+            if (idCliente == 0) // Si no existe, lo creamos
             {
-                // verificacion si existe o no el cliente
-                string queryVerificarCliente = "SELECT id FROM clientes WHERE cedula_pasaporte = @cedula";
-                int idCliente = 0;
+                string campos = "nombre, telefono, correo, cedula_pasaporte, telefono_alt, direccion";
+                string datos = "'" + txtNombres.Text.Trim() + "','" + txtNumeroTelefonico.Text + "','" +
+                               txtCorreo.Text + "','" + txtIdentificacionCliente.Text + "','" +
+                               (txtNumeroTelefonicoAlt != null ? txtNumeroTelefonicoAlt.Text : "") + "','" +
+                               (txtDireccion != null ? txtDireccion.Text : "") + "'";
 
-                using (SqlCommand cmdVal = new SqlCommand(queryVerificarCliente, db.oCon, transaccion))
+                oCon.insertDatosCliente("clientes", campos, datos);
+
+                if (oCon.abrirConexion())
                 {
-                    cmdVal.Parameters.AddWithValue("@cedula", txtIdentificacionCliente.Text.Trim());
-                    var resultado = cmdVal.ExecuteScalar();
-                    if (resultado != null)
-                    {
-                        idCliente = Convert.ToInt32(resultado);
-                    }
+                    string consultaId = "SELECT id FROM clientes WHERE cedula_pasaporte = '" + txtIdentificacionCliente.Text.Trim() + "'";
+                    SqlCommand cmdId = new SqlCommand(consultaId, oCon.oCon);
+                    idCliente = Convert.ToInt32(cmdId.ExecuteScalar());
+                    oCon.cerrarConexion();
                 }
+            }
 
-                if (idCliente == 0)
-                {
-                    string ConsultaCliente = @"INSERT INTO clientes (nombre, telefono, correo, cedula_pasaporte) 
-                                            VALUES (@nombre, @telefono, @correo, @cedula); 
-                                            SELECT SCOPE_IDENTITY();";
-
-                    using (SqlCommand cmd = new SqlCommand(ConsultaCliente, db.oCon, transaccion))
-                    {
-                        cmd.Parameters.AddWithValue("@nombre", txtNombres.Text.Trim());
-                        cmd.Parameters.AddWithValue("@telefono", txtNumeroTelefonico.Text.Trim());
-                        cmd.Parameters.AddWithValue("@correo", txtCorreo.Text.Trim());
-                        cmd.Parameters.AddWithValue("@cedula", txtIdentificacionCliente.Text.Trim());
-
-                        idCliente = Convert.ToInt32(cmd.ExecuteScalar());
-                    }
-                }
-
-                // Extraemos el técnico del ComboBox y la sucursal del TextBox
+            // ==========================================
+            // 4. GUARDAR DISPOSITIVOS Y ÓRDENES (Solo si aplica)
+            // ==========================================
+            if (!guardarSoloCliente)
+            {
                 int tecnicoId = Convert.ToInt32(cmbTecnico.SelectedValue);
-                string sucursalNombre = txtSucursal.Text.Trim();
+                string sucursal = txtSucursal.Text;
 
                 for (int i = 0; i < listaEquipos.Count; i++)
                 {
                     var equipo = listaEquipos[i];
 
-                    string queryDispositivo = @"INSERT INTO dispositivos (cliente_id, tipo, marca, modelo, serie_imei, color, estado_llegada) 
-                                                VALUES (@cliente_id, @tipo, @marca, @modelo, @serie_imei, @color, @estado_llegada); 
-                                                SELECT SCOPE_IDENTITY();";
+                    // Insertar Dispositivo
+                    string camposDisp = "cliente_id, tipo, marca, modelo, serie_imei, color, estado_llegada";
+                    string datosDisp = idCliente + ",'" + equipo.Tipo + "','" + equipo.Marca.Trim() + "','" +
+                                       equipo.Modelo.Trim() + "','" + equipo.Serie.Trim() + "','" +
+                                       equipo.Color.Trim() + "','" + cmbEstado.Items[equipo.IndiceEstado].ToString() + "'";
 
-                    int idDispositivo;
-                    using (SqlCommand cmd = new SqlCommand(queryDispositivo, db.oCon, transaccion))
+                    oCon.insertDatosCliente("dispositivos", camposDisp, datosDisp);
+
+                    // Buscar su ID
+                    int idDispositivo = 0;
+                    if (oCon.abrirConexion())
                     {
-                        cmd.Parameters.AddWithValue("@cliente_id", idCliente);
-                        cmd.Parameters.AddWithValue("@tipo", equipo.Tipo);
-                        cmd.Parameters.AddWithValue("@marca", equipo.Marca.Trim());
-                        cmd.Parameters.AddWithValue("@modelo", equipo.Modelo.Trim());
-                        cmd.Parameters.AddWithValue("@serie_imei", equipo.Serie.Trim());
-                        cmd.Parameters.AddWithValue("@color", equipo.Color.Trim());
-                        cmd.Parameters.AddWithValue("@estado_llegada", cmbEstado.Items[equipo.IndiceEstado].ToString());
-
-                        idDispositivo = Convert.ToInt32(cmd.ExecuteScalar());
+                        string consultaDisp = "SELECT MAX(id) FROM dispositivos WHERE cliente_id = " + idCliente;
+                        SqlCommand cmdDisp = new SqlCommand(consultaDisp, oCon.oCon);
+                        idDispositivo = Convert.ToInt32(cmdDisp.ExecuteScalar());
+                        oCon.cerrarConexion();
                     }
 
-                    string queryOrden = @"INSERT INTO ordenes (numero_orden, cliente_id, dispositivo_id, tecnico_id, sucursal, 
-                                         descripcion_problema, diagnostico_inicial, costo_estimado, fecha_ingreso, fecha_estimada_entrega, estado) 
-                                         VALUES (@num_orden, @cli_id, @disp_id, @tec_id, @sucursal, @prob, @diag, @costo, @f_ingreso, @f_entrega, @estado)";
+                    // Insertar Orden
+                    string costoAjustado = txtCosto.Text.Replace(",", ".");
+                    string fechaEntrega = dtmFecha.Value.ToString("yyyy-MM-dd");
+                    string numOrdenFinal = listaEquipos.Count > 1 ? $"{lblOrden.Text}-{i + 1}" : lblOrden.Text;
 
-                    using (SqlCommand cmd = new SqlCommand(queryOrden, db.oCon, transaccion))
-                    {
-                        string numOrdenFinal = listaEquipos.Count > 1 ? $"{lblOrden.Text}-{i + 1}" : lblOrden.Text;
+                    string camposOrd = "numero_orden, cliente_id, dispositivo_id, tecnico_id, sucursal, descripcion_problema, diagnostico_inicial, costo_estimado, fecha_ingreso, fecha_estimada_entrega, estado";
+                    string datosOrd = "'" + numOrdenFinal + "'," + idCliente + "," + idDispositivo + "," + tecnicoId + ",'" + sucursal + "','" +
+                                      equipo.Problema.Trim() + "','" + equipo.Observaciones.Trim() + "'," + costoAjustado + ",GETDATE(),'" + fechaEntrega + "','Recibido'";
 
-                        cmd.Parameters.AddWithValue("@num_orden", numOrdenFinal);
-                        cmd.Parameters.AddWithValue("@cli_id", idCliente);
-                        cmd.Parameters.AddWithValue("@disp_id", idDispositivo);
-                        cmd.Parameters.AddWithValue("@tec_id", tecnicoId);
-                        cmd.Parameters.AddWithValue("@sucursal", sucursalNombre);
-                        cmd.Parameters.AddWithValue("@prob", equipo.Problema.Trim());
-                        cmd.Parameters.AddWithValue("@diag", equipo.Observaciones.Trim());
-                        cmd.Parameters.AddWithValue("@costo", string.IsNullOrEmpty(txtCosto.Text) ? 0 : decimal.Parse(txtCosto.Text));
-                        cmd.Parameters.AddWithValue("@f_ingreso", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@f_entrega", dtmFecha.Value.Date);
-                        cmd.Parameters.AddWithValue("@estado", "Recibido");
-
-                        cmd.ExecuteNonQuery();
-                    }
+                    oCon.insertDatosCliente("ordenes", camposOrd, datosOrd);
                 }
+            }
 
-                transaccion.Commit();
-                MessageBox.Show("¡Recepción y equipos guardados exitosamente en la base de datos!");
+            // ==========================================
+            // 5. MENSAJE FINAL Y LIMPIEZA
+            // ==========================================
+            string mensajeExito = guardarSoloCliente ? "¡Cliente registrado exitosamente en la base de datos!" : "¡Recepción, equipo y orden guardados exitosamente!";
+            MessageBox.Show(mensajeExito, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                ReiniciarFormularioCompleto();
-            }
-            catch (Exception ex)
-            {
-                try { transaccion.Rollback(); } catch { }
-                MessageBox.Show("Error al guardar en la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                db.cerrarConexion();
-            }
+            ReiniciarFormularioCompleto();
         }
 
         private void ReiniciarFormularioCompleto()
@@ -316,12 +323,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             txtCorreo.Clear();
             txtIdentificacionCliente.Clear();
 
+            if (txtNumeroTelefonicoAlt != null) txtNumeroTelefonicoAlt.Clear();
+            if (txtDireccion != null) txtDireccion.Clear();
+
             txtDescripcionProblema.Clear();
             txtObservaciones.Clear();
             txtCosto.Text = "0";
             cmbEstado.SelectedIndex = 0;
 
-            // Restablecer valores por defecto de la asignación
             if (cmbTecnico.Items.Count > 0) cmbTecnico.SelectedIndex = 0;
             txtSucursal.Text = "Sucursal Norte";
 
@@ -345,13 +354,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 flpEquipos.Controls.Remove(ctrl);
             }
 
-            // Resetear el botón principal "Equipo 1"
             btnEquipo.Tag = 0;
             btnEquipo.FillColor = Color.FromArgb(0, 150, 137);
             btnEquipo.RectColor = Color.FromArgb(0, 150, 137);
             btnEquipo.ForeColor = Color.FromArgb(22, 35, 52);
 
-            // Limpiar botones de tipo de dispositivo
             tipoDispositivo = "";
             cmbMarca.Text = "";
             if (botonSeleccionado != null)
@@ -362,23 +369,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 botonSeleccionado = null;
             }
 
-            // Cargar datos limpios en la pantalla para el Equipo 1
             CargarDatosA_Pantalla(0);
-
-            // Generar el nuevo número de orden para el siguiente registro
             MostrarNumeroOrden();
-
-            // Recargar marcas generales
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, "");
         }
 
         private void btnGuardarRegistro_Click(object sender, EventArgs e)
         {
-            if (cmbTecnico.SelectedIndex < 0)
-            {
-                MessageBox.Show("Selecciona un técnico asignado.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
             GuardarRecepcion();
         }
 
@@ -387,7 +384,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             ReiniciarFormularioCompleto();
         }
 
-        private void GuardarDatosEnMemoria() // Lista de dispositivos 
+        private void GuardarDatosEnMemoria()
         {
             if (listaEquipos.Count == 0) return;
 
@@ -409,7 +406,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             tipoDispositivo = equipo.Tipo;
 
-            // Recargar las marcas correspondientes al tipo antes de asignar el texto al ComboBox
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, tipoDispositivo);
             cmbMarca.Text = equipo.Marca;
 
@@ -492,27 +488,20 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        private void flpEquipos_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void flpEquipos_Click(object sender, EventArgs e) { }
 
         private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
         {
             UITextBox txt = sender as UITextBox;
             if (txt == null) return;
+            if (char.IsControl(e.KeyChar)) return;
 
-            if (char.IsControl(e.KeyChar))
-                return;
-
-            // Solo números y coma
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != ',')
             {
                 e.Handled = true;
                 return;
             }
 
-            // Solo una coma
             if (e.KeyChar == ',' && txt.Text.Contains(","))
             {
                 e.Handled = true;
@@ -521,25 +510,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void txtCosto_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtCosto.Text))
-                return;
+            if (string.IsNullOrWhiteSpace(txtCosto.Text)) return;
 
-            // Convertir la coma a punto solo para poder convertirlo a decimal
-            string texto = txtCosto.Text.Replace('.', ','); // por si acaso escriben punto
+            string texto = txtCosto.Text.Replace('.', ',');
             texto = texto.Replace(',', '.');
 
-            if (decimal.TryParse(texto, System.Globalization.NumberStyles.Any,
-                                       System.Globalization.CultureInfo.InvariantCulture, out decimal precio)
-                && precio >= 0)
+            if (decimal.TryParse(texto, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal precio) && precio >= 0)
             {
-                // Mostramos con coma
                 txtCosto.Text = precio.ToString("0.00").Replace('.', ',');
             }
             else
             {
-                MessageBox.Show("El costo debe ser un número positivo.\nEjemplo: 150,50",
-                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                MessageBox.Show("El costo debe ser un número positivo.\nEjemplo: 150,50", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCosto.Focus();
                 txtCosto.SelectAll();
             }
@@ -548,10 +530,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         public bool EsEmailValido(string email)
         {
             if (string.IsNullOrWhiteSpace(email)) return false;
-
-            // Validación de correo
             string patron = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-
             return Regex.IsMatch(email, patron, RegexOptions.IgnoreCase);
         }
 
@@ -561,66 +540,41 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             if (!string.IsNullOrWhiteSpace(correo) && !EsEmailValido(correo))
             {
-                // Marcar el error 
                 txtCorreo.RectColor = Color.Red;
-
-                // Avisar al usuario 
                 MessageBox.Show("El formato del correo no es válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                // Cancelar el evento para que el cursor no pueda salir
                 e.Cancel = true;
             }
             else
             {
-                // Si es válido, restaorar el color original
-                txtCorreo.RectColor = Color.FromArgb(220, 224, 230); // El color de borde del diseño
+                txtCorreo.RectColor = Color.FromArgb(220, 224, 230);
             }
         }
 
         private void txtNombres_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permitir teclas de control como el Retroceso para poder borrar
-            if (char.IsControl(e.KeyChar))
-            {
-                return;
-            }
+            if (char.IsControl(e.KeyChar)) return;
 
-            // Permitir solo letras y espacios
             if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
             {
-                // Si la tecla presionada no es una letra ni un espacio, se cancela el evento
                 e.Handled = true;
             }
         }
 
         private void txtSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permitir teclas de control como el Retroceso para poder borrar
-            if (char.IsControl(e.KeyChar))
-            {
-                return;
-            }
+            if (char.IsControl(e.KeyChar)) return;
 
-            // Permitir solo números (del 0 al 9)
             if (!char.IsDigit(e.KeyChar))
             {
-                // Si la tecla presionada no es un número, se bloquea la entrada
                 e.Handled = true;
             }
         }
 
-        private void lblDatosCliente_Click(object sender, EventArgs e)
+        private void lblDatosCliente_Click(object sender, EventArgs e) { }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnRegistrarCliente_Click(object sender, EventArgs e)
-        {
-            string campos, datos;
-            campos = "nombre, telefono, correo, cedula_pasaporte, telefono_alt, direccion";
-            datos = "'" + txtNombres.Text.Trim() + "','" + txtNumeroTelefonico.Text + "','" + txtCorreo.Text + "','" + txtIdentificacionCliente.Text + "','" + txtNumeroTelefonicoAlt.Text + "','" + txtDireccion.Text + "'";
-
-            oCon.insertDatosCliente("clientes", campos, datos);
         }
     }
 }

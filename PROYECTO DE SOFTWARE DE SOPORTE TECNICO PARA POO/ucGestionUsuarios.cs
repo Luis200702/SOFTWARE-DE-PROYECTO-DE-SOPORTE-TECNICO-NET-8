@@ -7,6 +7,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class ucGestionUsuarios : UserControl
     {
+        Conexion_Base_de_Datos conSQL = new Conexion_Base_de_Datos();
         public ucGestionUsuarios()
         {
             InitializeComponent();
@@ -64,8 +65,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarDatos()
         {
-            Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
-            DataTable dt = conexion.obtenerUsuarios();
+            DataTable dt = conSQL.retornarRegistrosUsuarios("select U.Nombre, U.Usuario, U.Perfil, S.NombreSucursal as Sucursal\r\nfrom Usuarios U inner join Sucursales S on U.IdSucursal = S.IdSucursal\r\ngroup by U.Nombre, U.Usuario, U.Perfil, S.NombreSucursal");
 
 
             if (dt.Columns.Contains("Nombre")) dt.Columns["Nombre"].ColumnName = "NOMBRE";

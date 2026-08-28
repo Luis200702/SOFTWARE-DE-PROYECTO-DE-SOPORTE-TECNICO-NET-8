@@ -13,18 +13,31 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
     public partial class frmEditarUsuarios : Form
     {
         private string usuarioOriginal;
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
+        frmAgregarUsuario Sucursales = new frmAgregarUsuario();
 
         public frmEditarUsuarios()
         {
             InitializeComponent();
-            CargarSucursales(); // Cargamos las sucursales por si se abre vacío
+            CargarSucursales(); 
         }
+        public void CargarSucursales()
+        {
 
+            DataTable dt = oCon.retornarRegistrosUsuarios("select IdSucursal, NombreSucursal from Sucursales order by NombreSucursal");
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                cmbSucursal.DataSource = dt;
+                cmbSucursal.DisplayMember = "NombreSucursal";
+                cmbSucursal.ValueMember = "IdSucursal";
+            }
+        }
         public frmEditarUsuarios(string nombre, string usuario, string perfil, string sucursal)
         {
             InitializeComponent();
 
-            // 1. Primero cargamos el ComboBox con las sucursales de la BD
+
             CargarSucursales();
 
             usuarioOriginal = usuario;
@@ -43,18 +56,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         }
 
         // --- Método para llenar el ComboBox desde la BD ---
-        private void CargarSucursales()
-        {
-            Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
-            DataTable dt = conexion.obtenerSucursales(); // Devuelve IdSucursal y NombreSucursal
-
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                cmbSucursal.DataSource = dt;
-                cmbSucursal.DisplayMember = "NombreSucursal"; // Lo que ve el usuario
-                cmbSucursal.ValueMember = "IdSucursal";       // El ID oculto que necesitamos
-            }
-        }
+      
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {

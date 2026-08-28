@@ -12,23 +12,26 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class frmAgregarUsuario : Form
     {
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
+        string campos;
+        string datos;
         public frmAgregarUsuario()
         {
             InitializeComponent();
             CargarSucursales();
         }
 
-        // --- Cargar sucursales usando la estructura relacional ---
-        private void CargarSucursales()
+
+        public void CargarSucursales()
         {
-            Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
-            DataTable dt = conexion.obtenerSucursales(); // Devuelve IdSucursal y NombreSucursal
+           
+            DataTable dt = oCon.retornarRegistrosUsuarios("select IdSucursal, NombreSucursal from Sucursales order by NombreSucursal");
 
             if (dt != null && dt.Rows.Count > 0)
             {
                 cmbSucursal.DataSource = dt;
-                cmbSucursal.DisplayMember = "NombreSucursal"; // Lo que ve el usuario
-                cmbSucursal.ValueMember = "IdSucursal";       // El ID numérico oculto
+                cmbSucursal.DisplayMember = "NombreSucursal";
+                cmbSucursal.ValueMember = "IdSucursal";
             }
         }
 
@@ -42,7 +45,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
-            // Validaciones básicas
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
                 string.IsNullOrWhiteSpace(txtUsuario.Text) ||
                 string.IsNullOrWhiteSpace(txtContrasena.Text))
@@ -51,7 +53,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            // Obtener el perfil seleccionado
+   
             if (perfil == "Administrador")
                 perfil = "Administrador";
             else if (perfil == "Tecnico")
@@ -68,18 +70,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            // 🔥 OBTENEMOS EL ID NUMÉRICO DE LA SUCURSAL SELECCIONADA
+           
             int idSucursalSeleccionada = Convert.ToInt32(cmbSucursal.SelectedValue);
 
             // Guardar en la base de datos enviando el ID (int)
-            Conexion_Base_de_Datos conexion = new Conexion_Base_de_Datos();
-            bool guardado = conexion.insertarUsuario(
-                txtNombre.Text.Trim(),
-                txtUsuario.Text.Trim(),
-                txtContrasena.Text.Trim(),
-                perfil,
-                idSucursalSeleccionada // <-- Aquí va el entero en lugar del texto
-            );
+            campos = "Nombre, Usuario, Contrasena, Perfil, IdSucursal";
+            datos = "'" + txtNombre.Text.Trim() + "','" + txtUsuario.Text.Trim() + "','" + txtContrasena.Text.Trim() + "','" + perfil + "','" + idSucursalSeleccionada + "'";
+
+            bool guardado = oCon.insertDatosCliente("Usuarios", campos, datos);
 
             if (guardado)
             {
