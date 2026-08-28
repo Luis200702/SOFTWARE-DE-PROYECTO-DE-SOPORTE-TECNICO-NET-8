@@ -41,11 +41,11 @@
             tpSalientes = new TabPage();
             pnlDerechoS = new Panel();
             pnlIzquierdoS = new Panel();
+            flpIzquierdoS = new FlowLayoutPanel();
             tpEntrantes = new TabPage();
             pnlDerechoE = new Panel();
             pnlIzquierdoE = new Panel();
             flpIzquierdoE = new FlowLayoutPanel();
-            flpIzquierdoS = new FlowLayoutPanel();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tcDerivaciones.SuspendLayout();
@@ -83,6 +83,8 @@
             btnNuevaDerivacion.TabIndex = 2;
             btnNuevaDerivacion.Text = "Nueva derivación";
             btnNuevaDerivacion.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnNuevaDerivacion.Visible = false;
+            btnNuevaDerivacion.Click += btnNuevaDerivacion_Click;
             // 
             // pictureBox1
             // 
@@ -156,6 +158,16 @@
             pnlIzquierdoS.Size = new Size(477, 733);
             pnlIzquierdoS.TabIndex = 1;
             // 
+            // flpIzquierdoS
+            // 
+            flpIzquierdoS.AutoScroll = true;
+            flpIzquierdoS.Dock = DockStyle.Fill;
+            flpIzquierdoS.Location = new Point(0, 0);
+            flpIzquierdoS.Name = "flpIzquierdoS";
+            flpIzquierdoS.Size = new Size(477, 733);
+            flpIzquierdoS.TabIndex = 3;
+            flpIzquierdoS.Paint += flpIzquierdoS_Paint;
+            // 
             // tpEntrantes
             // 
             tpEntrantes.BackColor = Color.FromArgb(245, 247, 250);
@@ -163,7 +175,7 @@
             tpEntrantes.Controls.Add(pnlIzquierdoE);
             tpEntrantes.Location = new Point(0, 40);
             tpEntrantes.Name = "tpEntrantes";
-            tpEntrantes.Size = new Size(1125, 733);
+            tpEntrantes.Size = new Size(200, 60);
             tpEntrantes.TabIndex = 0;
             tpEntrantes.Text = "Entrantes (Recibidas)";
             // 
@@ -190,15 +202,6 @@
             flpIzquierdoE.Name = "flpIzquierdoE";
             flpIzquierdoE.Size = new Size(477, 733);
             flpIzquierdoE.TabIndex = 2;
-            // 
-            // flpIzquierdoS
-            // 
-            flpIzquierdoS.AutoScroll = true;
-            flpIzquierdoS.Dock = DockStyle.Fill;
-            flpIzquierdoS.Location = new Point(0, 0);
-            flpIzquierdoS.Name = "flpIzquierdoS";
-            flpIzquierdoS.Size = new Size(477, 733);
-            flpIzquierdoS.TabIndex = 3;
             // 
             // ucDerivacion
             // 
