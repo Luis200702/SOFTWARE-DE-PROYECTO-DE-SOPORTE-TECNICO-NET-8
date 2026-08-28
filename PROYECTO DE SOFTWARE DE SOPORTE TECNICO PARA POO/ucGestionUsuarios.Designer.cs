@@ -127,6 +127,7 @@
             txtBuscarTecnico.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscarTecnico.Watermark = "Buscar usuario...";
             txtBuscarTecnico.WatermarkColor = Color.FromArgb(145, 158, 172);
+            txtBuscarTecnico.TextChanged += txtBuscarTecnico_TextChanged;
             // 
             // dgvNuevo
             // 

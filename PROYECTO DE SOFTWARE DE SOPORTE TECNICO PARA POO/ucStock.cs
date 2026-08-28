@@ -341,6 +341,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // EVENTOS DEL BOTÓN DE ALERTAS 
         private void btnAlertas_Click(object sender, EventArgs e)
         {
+            
             mostrandoAlertas = !mostrandoAlertas; // Alterna el estado
 
             btnAlertas.Style = Sunny.UI.UIStyle.Custom;
@@ -419,6 +420,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 CargarDatos();
             }
+        }
+
+        private void cmbCategorias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
