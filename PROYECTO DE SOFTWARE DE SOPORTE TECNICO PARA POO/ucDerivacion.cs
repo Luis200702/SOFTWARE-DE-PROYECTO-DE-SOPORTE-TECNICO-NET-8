@@ -159,7 +159,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             card.Margin = new Padding(10, 6, 10, 6);
             card.Cursor = Cursors.Hand;
 
-            card.Paint += (s, e) => {
+            card.Paint += (s, e) =>
+            {
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 using (GraphicsPath path = CrearPathRedondeado(0, 0, card.Width - 1, card.Height - 1, 12f))
                 {
@@ -172,7 +173,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             string textoEstado = "  ● " + estado;
             Label lblEstado = new Label() { Text = "", Font = new Font("Segoe UI", 8.5F, FontStyle.Bold), BackColor = Color.Transparent, Location = new Point(135, 12), Size = new Size(95, 24) };
-            lblEstado.Paint += (s, e) => {
+            lblEstado.Paint += (s, e) =>
+            {
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 using (GraphicsPath path = CrearPathRedondeado(0, 0, lblEstado.Width - 1, lblEstado.Height - 1, 12f))
                 {
@@ -189,7 +191,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             card.Controls.AddRange(new Control[] { lblOrden, lblEstado, lblFecha, lblCliente, lblRuta });
 
-            EventHandler seleccionarTarjeta = (s, e) => {
+            EventHandler seleccionarTarjeta = (s, e) =>
+            {
                 CargarDetallesSalientesDerechos(codigoOrden);
             };
 
@@ -207,7 +210,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             card.Margin = new Padding(10, 6, 10, 6);
             card.Cursor = Cursors.Hand;
 
-            card.Paint += (s, e) => {
+            card.Paint += (s, e) =>
+            {
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 using (GraphicsPath path = CrearPathRedondeado(0, 0, card.Width - 1, card.Height - 1, 12f))
                 {
@@ -220,7 +224,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             string textoEstado = "  ● " + estado;
             Label lblEstado = new Label() { Text = "", Font = new Font("Segoe UI", 8.5F, FontStyle.Bold), BackColor = Color.Transparent, Location = new Point(135, 12), Size = new Size(95, 24) };
-            lblEstado.Paint += (s, e) => {
+            lblEstado.Paint += (s, e) =>
+            {
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 using (GraphicsPath path = CrearPathRedondeado(0, 0, lblEstado.Width - 1, lblEstado.Height - 1, 12f))
                 {
@@ -237,7 +242,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             card.Controls.AddRange(new Control[] { lblOrden, lblEstado, lblFecha, lblCliente, lblRuta });
 
-            EventHandler seleccionarTarjeta = (s, e) => {
+            EventHandler seleccionarTarjeta = (s, e) =>
+            {
                 if (esEntrante) CargarDetallesEntrantesDerechos(codigoOrden);
             };
 
@@ -571,6 +577,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 MessageBox.Show("Error al actualizar el estado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 db.cerrarConexion();
             }
+        }
+
+        private void btnNuevaDerivacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flpIzquierdoS_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
