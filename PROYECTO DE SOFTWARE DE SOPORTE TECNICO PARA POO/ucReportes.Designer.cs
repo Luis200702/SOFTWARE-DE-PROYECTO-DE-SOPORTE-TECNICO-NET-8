@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             pnlSuperior = new Panel();
+            label16 = new Label();
             uiSymbolLabel1 = new Sunny.UI.UISymbolLabel();
             lblTitulo = new Label();
             pnlDatosCliente = new Sunny.UI.UIPanel();
@@ -56,6 +57,9 @@
             uiAvatar4 = new Sunny.UI.UIAvatar();
             label11 = new Label();
             uiPanel4 = new Sunny.UI.UIPanel();
+            uiComboBox2 = new Sunny.UI.UIComboBox();
+            uiComboBox1 = new Sunny.UI.UIComboBox();
+            cmbMarca = new Sunny.UI.UIComboBox();
             uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             label14 = new Label();
             label13 = new Label();
@@ -63,15 +67,16 @@
             lbId = new Label();
             label15 = new Label();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
-            cmbMarca = new Sunny.UI.UIComboBox();
-            uiComboBox1 = new Sunny.UI.UIComboBox();
-            uiComboBox2 = new Sunny.UI.UIComboBox();
+            uiPanel5 = new Sunny.UI.UIPanel();
+            label21 = new Label();
+            airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
             pnlSuperior.SuspendLayout();
             pnlDatosCliente.SuspendLayout();
             uiPanel1.SuspendLayout();
             uiPanel2.SuspendLayout();
             uiPanel3.SuspendLayout();
             uiPanel4.SuspendLayout();
+            uiPanel5.SuspendLayout();
             SuspendLayout();
             // 
             // pnlSuperior
@@ -79,12 +84,24 @@
             pnlSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperior.AutoSize = true;
             pnlSuperior.BackColor = Color.FromArgb(243, 246, 250);
+            pnlSuperior.Controls.Add(label16);
             pnlSuperior.Controls.Add(uiSymbolLabel1);
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(-8, 0);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1236, 100);
+            pnlSuperior.Size = new Size(1236, 88);
             pnlSuperior.TabIndex = 38;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label16.ForeColor = Color.FromArgb(70, 86, 103);
+            label16.Location = new Point(93, 47);
+            label16.Name = "label16";
+            label16.Size = new Size(322, 20);
+            label16.TabIndex = 62;
+            label16.Text = "Genera, consulta y exporta reportes del sistema";
             // 
             // uiSymbolLabel1
             // 
@@ -333,9 +350,9 @@
             label7.ForeColor = Color.FromArgb(24, 43, 62);
             label7.Location = new Point(83, 37);
             label7.Name = "label7";
-            label7.Size = new Size(45, 25);
+            label7.Size = new Size(56, 25);
             label7.TabIndex = 61;
-            label7.Text = "###";
+            label7.Text = "$###";
             // 
             // uiAvatar3
             // 
@@ -473,6 +490,78 @@
             uiPanel4.Text = null;
             uiPanel4.TextAlignment = ContentAlignment.MiddleCenter;
             // 
+            // uiComboBox2
+            // 
+            uiComboBox2.BackColor = Color.Transparent;
+            uiComboBox2.DataSource = null;
+            uiComboBox2.FillColor = Color.FromArgb(248, 249, 251);
+            uiComboBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiComboBox2.ForeColor = Color.FromArgb(70, 86, 103);
+            uiComboBox2.FormattingEnabled = true;
+            uiComboBox2.ItemHoverColor = Color.FromArgb(243, 247, 247);
+            uiComboBox2.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            uiComboBox2.Location = new Point(380, 91);
+            uiComboBox2.Margin = new Padding(4, 5, 4, 5);
+            uiComboBox2.MinimumSize = new Size(63, 0);
+            uiComboBox2.Name = "uiComboBox2";
+            uiComboBox2.Padding = new Padding(0, 0, 30, 2);
+            uiComboBox2.Radius = 12;
+            uiComboBox2.RectColor = Color.FromArgb(220, 226, 232);
+            uiComboBox2.Size = new Size(143, 37);
+            uiComboBox2.SymbolSize = 24;
+            uiComboBox2.TabIndex = 59;
+            uiComboBox2.TextAlignment = ContentAlignment.MiddleLeft;
+            uiComboBox2.Watermark = "";
+            uiComboBox2.WatermarkColor = Color.FromArgb(198, 199, 189);
+            // 
+            // uiComboBox1
+            // 
+            uiComboBox1.BackColor = Color.Transparent;
+            uiComboBox1.DataSource = null;
+            uiComboBox1.FillColor = Color.FromArgb(248, 249, 251);
+            uiComboBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiComboBox1.ForeColor = Color.FromArgb(70, 86, 103);
+            uiComboBox1.FormattingEnabled = true;
+            uiComboBox1.ItemHoverColor = Color.FromArgb(243, 247, 247);
+            uiComboBox1.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            uiComboBox1.Location = new Point(208, 91);
+            uiComboBox1.Margin = new Padding(4, 5, 4, 5);
+            uiComboBox1.MinimumSize = new Size(63, 0);
+            uiComboBox1.Name = "uiComboBox1";
+            uiComboBox1.Padding = new Padding(0, 0, 30, 2);
+            uiComboBox1.Radius = 12;
+            uiComboBox1.RectColor = Color.FromArgb(220, 226, 232);
+            uiComboBox1.Size = new Size(153, 37);
+            uiComboBox1.SymbolSize = 24;
+            uiComboBox1.TabIndex = 58;
+            uiComboBox1.TextAlignment = ContentAlignment.MiddleLeft;
+            uiComboBox1.Watermark = "";
+            uiComboBox1.WatermarkColor = Color.FromArgb(198, 199, 189);
+            // 
+            // cmbMarca
+            // 
+            cmbMarca.BackColor = Color.Transparent;
+            cmbMarca.DataSource = null;
+            cmbMarca.FillColor = Color.FromArgb(248, 249, 251);
+            cmbMarca.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbMarca.ForeColor = Color.FromArgb(70, 86, 103);
+            cmbMarca.FormattingEnabled = true;
+            cmbMarca.ItemHoverColor = Color.FromArgb(243, 247, 247);
+            cmbMarca.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbMarca.Location = new Point(17, 91);
+            cmbMarca.Margin = new Padding(4, 5, 4, 5);
+            cmbMarca.MinimumSize = new Size(63, 0);
+            cmbMarca.Name = "cmbMarca";
+            cmbMarca.Padding = new Padding(0, 0, 30, 2);
+            cmbMarca.Radius = 12;
+            cmbMarca.RectColor = Color.FromArgb(220, 226, 232);
+            cmbMarca.Size = new Size(167, 37);
+            cmbMarca.SymbolSize = 24;
+            cmbMarca.TabIndex = 57;
+            cmbMarca.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbMarca.Watermark = "";
+            cmbMarca.WatermarkColor = Color.FromArgb(198, 199, 189);
+            // 
             // uiSymbolButton1
             // 
             uiSymbolButton1.FillColor = Color.FromArgb(0, 165, 155);
@@ -559,83 +648,57 @@
             airSeparator1.Text = "airSeparator1";
             airSeparator1.Transparent = false;
             // 
-            // cmbMarca
+            // uiPanel5
             // 
-            cmbMarca.BackColor = Color.Transparent;
-            cmbMarca.DataSource = null;
-            cmbMarca.FillColor = Color.FromArgb(248, 249, 251);
-            cmbMarca.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbMarca.ForeColor = Color.FromArgb(70, 86, 103);
-            cmbMarca.FormattingEnabled = true;
-            cmbMarca.ItemHoverColor = Color.FromArgb(243, 247, 247);
-            cmbMarca.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbMarca.Location = new Point(17, 91);
-            cmbMarca.Margin = new Padding(4, 5, 4, 5);
-            cmbMarca.MinimumSize = new Size(63, 0);
-            cmbMarca.Name = "cmbMarca";
-            cmbMarca.Padding = new Padding(0, 0, 30, 2);
-            cmbMarca.Radius = 12;
-            cmbMarca.RectColor = Color.FromArgb(220, 226, 232);
-            cmbMarca.Size = new Size(167, 37);
-            cmbMarca.SymbolSize = 24;
-            cmbMarca.TabIndex = 57;
-            cmbMarca.TextAlignment = ContentAlignment.MiddleLeft;
-            cmbMarca.Watermark = "";
-            cmbMarca.WatermarkColor = Color.FromArgb(198, 199, 189);
+            uiPanel5.AutoSize = true;
+            uiPanel5.BackColor = Color.Transparent;
+            uiPanel5.Controls.Add(label21);
+            uiPanel5.Controls.Add(airSeparator2);
+            uiPanel5.FillColor = Color.White;
+            uiPanel5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiPanel5.ForeColor = Color.Black;
+            uiPanel5.Location = new Point(18, 426);
+            uiPanel5.Margin = new Padding(4, 5, 4, 5);
+            uiPanel5.MinimumSize = new Size(1, 1);
+            uiPanel5.Name = "uiPanel5";
+            uiPanel5.Radius = 12;
+            uiPanel5.RectColor = Color.FromArgb(221, 227, 233);
+            uiPanel5.Size = new Size(807, 378);
+            uiPanel5.TabIndex = 44;
+            uiPanel5.Text = null;
+            uiPanel5.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // uiComboBox1
+            // label21
             // 
-            uiComboBox1.BackColor = Color.Transparent;
-            uiComboBox1.DataSource = null;
-            uiComboBox1.FillColor = Color.FromArgb(248, 249, 251);
-            uiComboBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiComboBox1.ForeColor = Color.FromArgb(70, 86, 103);
-            uiComboBox1.FormattingEnabled = true;
-            uiComboBox1.ItemHoverColor = Color.FromArgb(243, 247, 247);
-            uiComboBox1.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            uiComboBox1.Location = new Point(208, 91);
-            uiComboBox1.Margin = new Padding(4, 5, 4, 5);
-            uiComboBox1.MinimumSize = new Size(63, 0);
-            uiComboBox1.Name = "uiComboBox1";
-            uiComboBox1.Padding = new Padding(0, 0, 30, 2);
-            uiComboBox1.Radius = 12;
-            uiComboBox1.RectColor = Color.FromArgb(220, 226, 232);
-            uiComboBox1.Size = new Size(153, 37);
-            uiComboBox1.SymbolSize = 24;
-            uiComboBox1.TabIndex = 58;
-            uiComboBox1.TextAlignment = ContentAlignment.MiddleLeft;
-            uiComboBox1.Watermark = "";
-            uiComboBox1.WatermarkColor = Color.FromArgb(198, 199, 189);
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label21.ForeColor = Color.FromArgb(24, 43, 62);
+            label21.Location = new Point(17, 9);
+            label21.Name = "label21";
+            label21.Size = new Size(191, 25);
+            label21.TabIndex = 4;
+            label21.Text = "Reportes generados";
             // 
-            // uiComboBox2
+            // airSeparator2
             // 
-            uiComboBox2.BackColor = Color.Transparent;
-            uiComboBox2.DataSource = null;
-            uiComboBox2.FillColor = Color.FromArgb(248, 249, 251);
-            uiComboBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiComboBox2.ForeColor = Color.FromArgb(70, 86, 103);
-            uiComboBox2.FormattingEnabled = true;
-            uiComboBox2.ItemHoverColor = Color.FromArgb(243, 247, 247);
-            uiComboBox2.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            uiComboBox2.Location = new Point(380, 91);
-            uiComboBox2.Margin = new Padding(4, 5, 4, 5);
-            uiComboBox2.MinimumSize = new Size(63, 0);
-            uiComboBox2.Name = "uiComboBox2";
-            uiComboBox2.Padding = new Padding(0, 0, 30, 2);
-            uiComboBox2.Radius = 12;
-            uiComboBox2.RectColor = Color.FromArgb(220, 226, 232);
-            uiComboBox2.Size = new Size(143, 37);
-            uiComboBox2.SymbolSize = 24;
-            uiComboBox2.TabIndex = 59;
-            uiComboBox2.TextAlignment = ContentAlignment.MiddleLeft;
-            uiComboBox2.Watermark = "";
-            uiComboBox2.WatermarkColor = Color.FromArgb(198, 199, 189);
+            airSeparator2.BackColor = Color.FromArgb(225, 230, 235);
+            airSeparator2.Customization = "";
+            airSeparator2.Font = new Font("Verdana", 8F);
+            airSeparator2.Image = null;
+            airSeparator2.Location = new Point(18, 36);
+            airSeparator2.Name = "airSeparator2";
+            airSeparator2.NoRounding = false;
+            airSeparator2.Size = new Size(754, 1);
+            airSeparator2.TabIndex = 0;
+            airSeparator2.Text = "airSeparator2";
+            airSeparator2.Transparent = false;
             // 
             // ucReportes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 246, 250);
+            Controls.Add(uiPanel5);
             Controls.Add(uiPanel4);
             Controls.Add(uiPanel3);
             Controls.Add(uiPanel2);
@@ -645,6 +708,7 @@
             Name = "ucReportes";
             Size = new Size(1123, 832);
             pnlSuperior.ResumeLayout(false);
+            pnlSuperior.PerformLayout();
             pnlDatosCliente.ResumeLayout(false);
             pnlDatosCliente.PerformLayout();
             uiPanel1.ResumeLayout(false);
@@ -655,6 +719,8 @@
             uiPanel3.PerformLayout();
             uiPanel4.ResumeLayout(false);
             uiPanel4.PerformLayout();
+            uiPanel5.ResumeLayout(false);
+            uiPanel5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -699,5 +765,9 @@
         private Sunny.UI.UIComboBox uiComboBox2;
         private Sunny.UI.UIComboBox uiComboBox1;
         private Sunny.UI.UIComboBox cmbMarca;
+        private Label label16;
+        private Sunny.UI.UIPanel uiPanel5;
+        private Label label21;
+        private ReaLTaiizor.Controls.AirSeparator airSeparator2;
     }
 }
