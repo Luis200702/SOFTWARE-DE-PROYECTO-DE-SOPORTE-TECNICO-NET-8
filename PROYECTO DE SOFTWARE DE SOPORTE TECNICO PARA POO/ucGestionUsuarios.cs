@@ -144,7 +144,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             string nombreColumna = dgvNuevo.Columns[e.ColumnIndex].Name;
 
-       
+
             if (nombreColumna == "NOMBRE")
             {
                 e.PaintBackground(e.CellBounds, true);
@@ -164,11 +164,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
 
                 Color[] paleta = {
-                    Color.FromArgb(40, 180, 90),  
-                    Color.FromArgb(20, 140, 220), 
-                    Color.FromArgb(240, 140, 0),  
-                    Color.FromArgb(140, 80, 220), 
-                    Color.FromArgb(0, 160, 160)  
+                    Color.FromArgb(40, 180, 90),
+                    Color.FromArgb(20, 140, 220),
+                    Color.FromArgb(240, 140, 0),
+                    Color.FromArgb(140, 80, 220),
+                    Color.FromArgb(0, 160, 160)
                 };
                 int colorIndex = Math.Abs(nombreCompleto.GetHashCode()) % paleta.Length;
                 Color colorAvatar = paleta[colorIndex];
@@ -182,7 +182,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     e.Graphics.FillEllipse(brush, xCiculo, yCirculo, size, size);
                 }
 
-   
+
                 using (Font fontIniciales = new Font("Segoe UI", 9F, FontStyle.Bold))
                 using (SolidBrush brushTexto = new SolidBrush(Color.White))
                 {
@@ -214,15 +214,15 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 if (perfil.ToLower().Contains("admin") || perfil.ToLower().Contains("gerente"))
                 {
-                    colorBase = Color.FromArgb(140, 80, 220); 
+                    colorBase = Color.FromArgb(140, 80, 220);
                     colorFondo = Color.FromArgb(245, 240, 255);
-                    icono = "👑 "; 
+                    icono = "👑 ";
                 }
                 else
                 {
                     colorBase = Color.FromArgb(40, 140, 220);
                     colorFondo = Color.FromArgb(240, 245, 255);
-                    icono = "👤 "; 
+                    icono = "👤 ";
                 }
 
                 string textoFinal = icono + perfil;
@@ -301,6 +301,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 e.Handled = true;
             }
+        }
+
+        private void txtBuscarTecnico_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

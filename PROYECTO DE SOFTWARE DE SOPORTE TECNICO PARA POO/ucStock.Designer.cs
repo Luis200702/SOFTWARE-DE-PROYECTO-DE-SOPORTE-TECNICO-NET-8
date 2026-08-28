@@ -121,7 +121,7 @@
             btnNuevoRepuesto.FillSelectedColor = Color.FromArgb(0, 150, 137);
             btnNuevoRepuesto.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnNuevoRepuesto.ForeColor = Color.FromArgb(235, 239, 240);
-            btnNuevoRepuesto.Location = new Point(886, 19);
+            btnNuevoRepuesto.Location = new Point(918, 19);
             btnNuevoRepuesto.MinimumSize = new Size(1, 1);
             btnNuevoRepuesto.Name = "btnNuevoRepuesto";
             btnNuevoRepuesto.Radius = 12;
@@ -144,7 +144,7 @@
             cmbCategorias.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             cmbCategorias.FillColor = Color.FromArgb(248, 249, 251);
             cmbCategorias.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbCategorias.ForeColor = Color.White;
+            cmbCategorias.ForeColor = Color.Black;
             cmbCategorias.FormattingEnabled = true;
             cmbCategorias.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbCategorias.Items.AddRange(new object[] { "Todas las categorías", "Pantalla", "Bateria", "Conector", "Placa", "Cámara", "Bóton", "Tapa", "Parlante", "Micrófono", "Otro" });
@@ -161,12 +161,15 @@
             cmbCategorias.TabIndex = 25;
             cmbCategorias.TextAlignment = ContentAlignment.MiddleLeft;
             cmbCategorias.Watermark = "";
+            cmbCategorias.SelectedIndexChanged += cmbCategorias_SelectedIndexChanged;
             // 
             // txtBuscar
             // 
+            txtBuscar.ButtonForeColor = Color.Black;
+            txtBuscar.ButtonStyleInherited = false;
             txtBuscar.FillColor = Color.FromArgb(243, 246, 250);
             txtBuscar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBuscar.ForeColor = Color.FromArgb(235, 239, 240);
+            txtBuscar.ForeColor = Color.Black;
             txtBuscar.Icon = Properties.Resources.TablerSearch;
             txtBuscar.Location = new Point(31, 19);
             txtBuscar.Margin = new Padding(4, 5, 4, 5);

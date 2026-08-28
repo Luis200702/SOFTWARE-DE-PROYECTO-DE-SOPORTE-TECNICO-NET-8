@@ -47,5 +47,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             DialogResult result = DialogResult.Cancel;
             this.Close();
         }
+
+        private void udoAgg_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -62,7 +62,7 @@
             // 
             // txtCantidadInicial
             // 
-            txtCantidadInicial.FillColor = Color.FromArgb(41, 53, 72);
+            txtCantidadInicial.FillColor = Color.FromArgb(243, 246, 250);
             txtCantidadInicial.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtCantidadInicial.ForeColor = Color.White;
             txtCantidadInicial.Location = new Point(242, 237);
@@ -86,12 +86,12 @@
             btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnCancelar.FillColor = Color.FromArgb(0, 150, 137);
             btnCancelar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCancelar.Location = new Point(119, 526);
+            btnCancelar.Location = new Point(181, 513);
             btnCancelar.MinimumSize = new Size(1, 1);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Radius = 12;
             btnCancelar.RectColor = Color.FromArgb(0, 150, 137);
-            btnCancelar.Size = new Size(117, 30);
+            btnCancelar.Size = new Size(138, 43);
             btnCancelar.TabIndex = 41;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TipsFont = new Font("Microsoft Sans Serif", 9F);
@@ -102,12 +102,12 @@
             btnGuardarCambios.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnGuardarCambios.FillColor = Color.FromArgb(0, 150, 137);
             btnGuardarCambios.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnGuardarCambios.Location = new Point(242, 526);
+            btnGuardarCambios.Location = new Point(336, 513);
             btnGuardarCambios.MinimumSize = new Size(1, 1);
             btnGuardarCambios.Name = "btnGuardarCambios";
             btnGuardarCambios.Radius = 12;
             btnGuardarCambios.RectColor = Color.FromArgb(0, 150, 137);
-            btnGuardarCambios.Size = new Size(117, 30);
+            btnGuardarCambios.Size = new Size(140, 43);
             btnGuardarCambios.TabIndex = 40;
             btnGuardarCambios.Text = "Agregar";
             btnGuardarCambios.TipsFont = new Font("Microsoft Sans Serif", 9F);
@@ -118,7 +118,7 @@
             cmbCategoria.BackColor = Color.Transparent;
             cmbCategoria.DataSource = null;
             cmbCategoria.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            cmbCategoria.FillColor = Color.FromArgb(41, 53, 72);
+            cmbCategoria.FillColor = Color.FromArgb(243, 246, 250);
             cmbCategoria.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbCategoria.ForeColor = Color.White;
             cmbCategoria.FormattingEnabled = true;
@@ -140,7 +140,7 @@
             // 
             // txtNombre
             // 
-            txtNombre.FillColor = Color.FromArgb(41, 53, 72);
+            txtNombre.FillColor = Color.Empty;
             txtNombre.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNombre.ForeColor = Color.White;
             txtNombre.Location = new Point(28, 92);
@@ -215,7 +215,7 @@
             // 
             // txtModelo
             // 
-            txtModelo.FillColor = Color.FromArgb(41, 53, 72);
+            txtModelo.FillColor = Color.FromArgb(243, 246, 250);
             txtModelo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtModelo.ForeColor = Color.White;
             txtModelo.Location = new Point(28, 237);
@@ -244,7 +244,7 @@
             // 
             // txtStockMinimo
             // 
-            txtStockMinimo.FillColor = Color.FromArgb(41, 53, 72);
+            txtStockMinimo.FillColor = Color.FromArgb(243, 246, 250);
             txtStockMinimo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtStockMinimo.ForeColor = Color.White;
             txtStockMinimo.Location = new Point(27, 308);
@@ -265,7 +265,7 @@
             // 
             // txtPrecioCosto
             // 
-            txtPrecioCosto.FillColor = Color.FromArgb(41, 53, 72);
+            txtPrecioCosto.FillColor = Color.FromArgb(243, 246, 250);
             txtPrecioCosto.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPrecioCosto.ForeColor = Color.White;
             txtPrecioCosto.Location = new Point(242, 308);
@@ -286,7 +286,7 @@
             // 
             // txtPrecioVenta
             // 
-            txtPrecioVenta.FillColor = Color.FromArgb(41, 53, 72);
+            txtPrecioVenta.FillColor = Color.FromArgb(243, 246, 250);
             txtPrecioVenta.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPrecioVenta.ForeColor = Color.White;
             txtPrecioVenta.Location = new Point(28, 379);
@@ -316,7 +316,7 @@
             // 
             // txtProveedor
             // 
-            txtProveedor.FillColor = Color.FromArgb(41, 53, 72);
+            txtProveedor.FillColor = Color.Empty;
             txtProveedor.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtProveedor.ForeColor = Color.White;
             txtProveedor.Location = new Point(28, 448);
@@ -347,7 +347,7 @@
             // 
             cmbMarca.BackColor = Color.Transparent;
             cmbMarca.DataSource = null;
-            cmbMarca.FillColor = Color.FromArgb(41, 53, 72);
+            cmbMarca.FillColor = Color.FromArgb(243, 246, 250);
             cmbMarca.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbMarca.ForeColor = Color.White;
             cmbMarca.FormattingEnabled = true;
@@ -371,7 +371,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(198, 199, 189);
+            BackColor = Color.FromArgb(243, 246, 250);
             ClientSize = new Size(488, 568);
             Controls.Add(cmbMarca);
             Controls.Add(lblProveedor);

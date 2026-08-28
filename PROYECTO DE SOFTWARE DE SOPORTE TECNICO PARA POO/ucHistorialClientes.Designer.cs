@@ -173,6 +173,7 @@
             txtBuscar.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscar.Watermark = "Nombre, cedula o Correo";
             txtBuscar.WatermarkColor = Color.FromArgb(198, 199, 189);
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
             // pnlHistorial
             // 
