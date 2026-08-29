@@ -183,6 +183,7 @@
             txtBuscar.TabIndex = 4;
             txtBuscar.TextAlignment = ContentAlignment.MiddleLeft;
             txtBuscar.Watermark = "Buscar repuesto, marca...";
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
             // imageListStock
             // 

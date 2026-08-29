@@ -16,6 +16,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             InitializeComponent();
             AplicarDiseñoGrid();
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
+            cmbCategorias.SelectedIndexChanged += cmbCategorias_SelectedIndexChanged;
         }
 
         // DISEÑO BASE DE LA TABLA 
@@ -72,26 +74,37 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         }
 
         // CARGAR DATOS Y CREAR COLUMNAS PARA BOTONES 
+        // CARGAR DATOS Y APLICAR FILTROS (Búsqueda + Categoría + Alertas)
         private void CargarDatos()
         {
-            // La consulta usa @SoloAlertas para filtrar si el botón está activo
+            // 1. Obtener los valores de los controles
+            string textoBusqueda = txtBuscar.Text.Trim();
+            string categoriaSeleccionada = cmbCategorias.SelectedItem != null
+                ? cmbCategorias.SelectedItem.ToString()
+                : "Todas las categorías";
+
+            // 2. Consulta SQL combinada
             string query = @"
-                SELECT 
-                    R.NombreRepuesto AS NOMBRE, 
-                    ISNULL(R.Categoria, '—') AS CATEGORÍA, 
-                    ISNULL(R.Compatibilidad, '—') AS COMPATIBLE, 
-                    CONCAT(I.StockActual, ' / ', I.StockMinimo) AS STOCK, 
-                    R.PrecioCosto AS COSTO, 
-                    R.PrecioVenta AS VENTA, 
-                    ISNULL(R.Proveedor, '—') AS PROVEEDOR,
-                    CASE 
-                        WHEN I.StockActual = 0 THEN 'Sin stock'
-                        WHEN I.StockActual <= I.StockMinimo THEN 'Stock bajo'
-                        ELSE 'Normal'
-                    END AS ESTADO
-                FROM Repuestos R
-                INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
-                WHERE (@SoloAlertas = 0 OR I.StockActual <= I.StockMinimo)";
+        SELECT 
+            R.NombreRepuesto AS NOMBRE, 
+            ISNULL(R.Categoria, '—') AS CATEGORÍA, 
+            ISNULL(R.Compatibilidad, '—') AS COMPATIBLE, 
+            CONCAT(I.StockActual, ' / ', I.StockMinimo) AS STOCK, 
+            R.PrecioCosto AS COSTO, 
+            R.PrecioVenta AS VENTA, 
+            ISNULL(R.Proveedor, '—') AS PROVEEDOR,
+            CASE 
+                WHEN I.StockActual = 0 THEN 'Sin stock'
+                WHEN I.StockActual <= I.StockMinimo THEN 'Stock bajo'
+                ELSE 'Normal'
+            END AS ESTADO
+        FROM Repuestos R
+        INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
+        WHERE (@SoloAlertas = 0 OR I.StockActual <= I.StockMinimo)
+          AND (@Texto = '' OR R.NombreRepuesto LIKE '%' + @Texto + '%' 
+                           OR R.Compatibilidad LIKE '%' + @Texto + '%'
+                           OR R.Proveedor LIKE '%' + @Texto + '%')
+          AND (@Categoria = 'Todas las categorías' OR @Categoria = '' OR @Categoria = 'Todas' OR R.Categoria = @Categoria)";
 
             Conexion_Base_de_Datos conexionBD = new Conexion_Base_de_Datos();
 
@@ -101,45 +114,67 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     using (SqlCommand cmd = new SqlCommand(query, conexionBD.oCon))
                     {
+                        // 3. Pasar los 3 parámetros a la consulta SQL
                         cmd.Parameters.AddWithValue("@SoloAlertas", mostrandoAlertas ? 1 : 0);
+                        cmd.Parameters.AddWithValue("@Texto", textoBusqueda);
+                        cmd.Parameters.AddWithValue("@Categoria", categoriaSeleccionada);
 
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
+                        // 4. Cargar datos liberando memoria RAM inmediatamente (using)
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            using (DataTable dt = new DataTable())
+                            {
+                                da.Fill(dt);
 
-                        dgvNuevo.AutoGenerateColumns = true;
-                        dgvNuevo.DataSource = dt;
+                                // Refresco limpio de datos manteniendo la estructura intacta
+                                dgvNuevo.DataSource = dt;
+                            }
+                        }
 
-                        // COLUMNAS PARA LOS BOTONES DINÁMICOS 
+                        // 5. Crear columnas para los botones solo si no existen (evita duplicados)
                         if (!dgvNuevo.Columns.Contains("Agregar"))
                         {
-                            DataGridViewButtonColumn btnAgregar = new DataGridViewButtonColumn();
-                            btnAgregar.Name = "Agregar";
-                            btnAgregar.HeaderText = "";
-                            btnAgregar.Width = 45;
-                            btnAgregar.FlatStyle = FlatStyle.Flat;
+                            DataGridViewButtonColumn btnAgregar = new DataGridViewButtonColumn
+                            {
+                                Name = "Agregar",
+                                HeaderText = "",
+                                Width = 45,
+                                FlatStyle = FlatStyle.Flat
+                            };
                             dgvNuevo.Columns.Add(btnAgregar);
                         }
 
                         if (!dgvNuevo.Columns.Contains("Delete"))
                         {
-                            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-                            btnDelete.Name = "Delete";
-                            btnDelete.HeaderText = "";
-                            btnDelete.Width = 45;
-                            btnDelete.FlatStyle = FlatStyle.Flat;
+                            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn
+                            {
+                                Name = "Delete",
+                                HeaderText = "",
+                                Width = 45,
+                                FlatStyle = FlatStyle.Flat
+                            };
                             dgvNuevo.Columns.Add(btnDelete);
                         }
 
-                        // AJUSTE DE ANCHOS
+                        // 6. Ajustar anchos y formato de columnas
                         if (dgvNuevo.Columns.Count > 0)
                         {
                             if (dgvNuevo.Columns.Contains("NOMBRE")) dgvNuevo.Columns["NOMBRE"].Width = 160;
                             if (dgvNuevo.Columns.Contains("CATEGORÍA")) dgvNuevo.Columns["CATEGORÍA"].Width = 120;
                             if (dgvNuevo.Columns.Contains("COMPATIBLE")) dgvNuevo.Columns["COMPATIBLE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                             if (dgvNuevo.Columns.Contains("STOCK")) dgvNuevo.Columns["STOCK"].Width = 110;
-                            if (dgvNuevo.Columns.Contains("COSTO")) dgvNuevo.Columns["COSTO"].Width = 100;
-                            if (dgvNuevo.Columns.Contains("VENTA")) dgvNuevo.Columns["VENTA"].Width = 100;
+
+                            if (dgvNuevo.Columns.Contains("COSTO"))
+                            {
+                                dgvNuevo.Columns["COSTO"].Width = 100;
+                                dgvNuevo.Columns["COSTO"].DefaultCellStyle.Format = "N2";
+                            }
+                            if (dgvNuevo.Columns.Contains("VENTA"))
+                            {
+                                dgvNuevo.Columns["VENTA"].Width = 100;
+                                dgvNuevo.Columns["VENTA"].DefaultCellStyle.Format = "N2";
+                            }
+
                             if (dgvNuevo.Columns.Contains("PROVEEDOR")) dgvNuevo.Columns["PROVEEDOR"].Width = 160;
                             if (dgvNuevo.Columns.Contains("ESTADO")) dgvNuevo.Columns["ESTADO"].Width = 140;
                         }
@@ -157,7 +192,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 conexionBD.cerrarConexion();
             }
 
-            // Actualizar el circulito naranja de las alertas
+            // 7. Actualizar el contador del botón de alertas
             ActualizarContadorAlertas();
         }
 
@@ -341,7 +376,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // EVENTOS DEL BOTÓN DE ALERTAS 
         private void btnAlertas_Click(object sender, EventArgs e)
         {
-            
+
             mostrandoAlertas = !mostrandoAlertas; // Alterna el estado
 
             btnAlertas.Style = Sunny.UI.UIStyle.Custom;
@@ -424,7 +459,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void cmbCategorias_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CargarDatos();
+        }
 
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            CargarDatos();
         }
     }
 }

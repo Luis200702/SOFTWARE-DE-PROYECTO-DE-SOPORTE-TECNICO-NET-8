@@ -242,7 +242,7 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(126, 22);
+            lblTitulo.Location = new Point(122, 13);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(200, 37);
             lblTitulo.TabIndex = 81;
@@ -259,7 +259,7 @@
             uiPanel1.Name = "uiPanel1";
             uiPanel1.Radius = 12;
             uiPanel1.RectColor = Color.Black;
-            uiPanel1.Size = new Size(472, 70);
+            uiPanel1.Size = new Size(472, 60);
             uiPanel1.TabIndex = 90;
             uiPanel1.Text = null;
             uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
