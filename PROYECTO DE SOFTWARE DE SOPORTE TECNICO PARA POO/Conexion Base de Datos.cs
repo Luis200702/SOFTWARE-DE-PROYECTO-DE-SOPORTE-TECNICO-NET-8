@@ -198,10 +198,26 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 MessageBox.Show(ex.Message);
                 return false;
             }
-
-
         }
-       
 
+        public bool actualizarDatos(string tabla, string campos, string condicion)
+        {
+            try
+            {
+                abrirConexion();
+
+                Cadena = "Update " + tabla + " set " + campos + " where " + condicion;
+                oCom = new SqlCommand(Cadena, oCon);
+                oCom.ExecuteNonQuery();
+                cerrarConexion();
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
     }
 }
