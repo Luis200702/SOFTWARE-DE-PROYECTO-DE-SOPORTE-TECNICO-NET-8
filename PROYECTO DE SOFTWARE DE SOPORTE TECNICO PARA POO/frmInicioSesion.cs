@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
@@ -17,37 +18,32 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             var db = new Conexion_Base_de_Datos();
 
-            string[] datosUsuario = db.validarUsuario(txtUsuario.Text, txtContrasena.Text);
+            string sentencia = @"select U.Usuario, U.Contrasena, U.Perfil, S.NombreSucursal as Sucursal
+                     from Usuarios U 
+                     inner join Sucursales S on U.IdSucursal = S.IdSucursal";
 
-            if (datosUsuario != null)
+            DataTable tabla = db.retornarRegistrosUsuarios(sentencia);
+
+            DataRow[] resultado = tabla.Select($"Usuario = '{txtUsuario.Text}' and Contrasena = '{txtContrasena.Text}'");
+
+            if (resultado.Length > 0)
             {
-                // Guardamos los datos en nuestra clase Global
-                Sesion.PerfilActual = datosUsuario[0];
-                Sesion.SucursalActual = datosUsuario[1];
+                Sesion.PerfilActual = resultado[0]["Perfil"].ToString();
+                Sesion.SucursalActual = resultado[0]["Sucursal"].ToString();
 
-                // Instanciamos el menú principal
-
-
-                // --- CONDICIÓN SEGÚN EL PERFIL ---
                 if (Sesion.PerfilActual == "Administrador")
                 {
                     MessageBox.Show($"¡Bienvenido Administrador! Ingresando a {Sesion.SucursalActual}...",
                                     "Acceso concedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     menu.MostrarAdministrador();
                     menu.Show();
-
-
                 }
                 else if (Sesion.PerfilActual == "Tecnico")
                 {
                     MessageBox.Show($"¡Bienvenido Técnico! Ingresando a {Sesion.SucursalActual}...",
                                     "Acceso concedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
                     menu.Show();
                 }
-
             }
             else
             {

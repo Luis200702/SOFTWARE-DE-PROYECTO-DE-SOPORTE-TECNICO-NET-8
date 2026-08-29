@@ -65,8 +65,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarDatos()
         {
-            DataTable dt = conSQL.retornarRegistrosUsuarios("select U.Nombre, U.Usuario, U.Perfil, S.NombreSucursal as Sucursal\r\nfrom Usuarios U inner join Sucursales S on U.IdSucursal = S.IdSucursal\r\ngroup by U.Nombre, U.Usuario, U.Perfil, S.NombreSucursal");
 
+            DataTable dt = conSQL.retornarRegistrosUsuarios("select U.Id, U.Nombre, U.Usuario, U.Perfil, S.NombreSucursal as Sucursal from Usuarios U inner join Sucursales S on U.IdSucursal = S.IdSucursal");
 
             if (dt.Columns.Contains("Nombre")) dt.Columns["Nombre"].ColumnName = "NOMBRE";
             if (dt.Columns.Contains("Usuario")) dt.Columns["Usuario"].ColumnName = "USUARIO";
@@ -76,7 +76,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvNuevo.AutoGenerateColumns = true;
             dgvNuevo.DataSource = dt;
 
-            // Ocultamos el ID si es que tu método lo trae
+            // Ocultamos el ID visualmente, pero sigue ahí "escondido" para cuando hagamos clic
             if (dgvNuevo.Columns.Contains("Id")) dgvNuevo.Columns["Id"].Visible = false;
 
             // Creamos el botón de EDITAR al final
@@ -90,13 +90,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 dgvNuevo.Columns.Add(btnEditar);
             }
 
-
             if (dgvNuevo.Columns.Count > 0)
             {
                 if (dgvNuevo.Columns.Contains("NOMBRE"))
                 {
                     dgvNuevo.Columns["NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dgvNuevo.Columns["NOMBRE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft; // Nombre a la izquierda
+                    dgvNuevo.Columns["NOMBRE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 }
                 if (dgvNuevo.Columns.Contains("USUARIO")) dgvNuevo.Columns["USUARIO"].Width = 150;
                 if (dgvNuevo.Columns.Contains("PERFIL")) dgvNuevo.Columns["PERFIL"].Width = 160;
@@ -114,13 +113,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (dgvNuevo.Columns[e.ColumnIndex].Name == "Editar")
             {
 
+
+                int idUsuario = Convert.ToInt32(dgvNuevo.Rows[e.RowIndex].Cells["Id"].Value);
+
                 string nombre = dgvNuevo.Rows[e.RowIndex].Cells["NOMBRE"].Value.ToString();
                 string usuario = dgvNuevo.Rows[e.RowIndex].Cells["USUARIO"].Value.ToString();
                 string perfil = dgvNuevo.Rows[e.RowIndex].Cells["PERFIL"].Value.ToString();
                 string sucursal = dgvNuevo.Rows[e.RowIndex].Cells["SUCURSAL"].Value.ToString();
 
-
-                frmEditarUsuarios frmEditar = new frmEditarUsuarios(nombre, usuario, perfil, sucursal);
+                // Pasamos el idUsuario como primer parámetro, tal cual lo pide el nuevo constructor
+                frmEditarUsuarios frmEditar = new frmEditarUsuarios(idUsuario, nombre, usuario, perfil, sucursal);
                 frmEditar.ShowDialog();
 
 
