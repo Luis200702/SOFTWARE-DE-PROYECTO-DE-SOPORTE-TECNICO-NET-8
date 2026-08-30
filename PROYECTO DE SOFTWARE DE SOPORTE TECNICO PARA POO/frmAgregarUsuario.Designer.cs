@@ -281,6 +281,7 @@
             // 
             btnGuardarCambios.FillColor = Color.FromArgb(0, 165, 155);
             btnGuardarCambios.FillHoverColor = Color.FromArgb(0, 145, 137);
+            btnGuardarCambios.FillPressColor = Color.FromArgb(0, 125, 117);
             btnGuardarCambios.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             btnGuardarCambios.Location = new Point(230, 458);
             btnGuardarCambios.MinimumSize = new Size(1, 1);

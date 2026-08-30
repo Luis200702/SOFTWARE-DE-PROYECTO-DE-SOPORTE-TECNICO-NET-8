@@ -40,6 +40,7 @@
             txtBuscar = new Sunny.UI.UITextBox();
             pnlHistorial = new Panel();
             pnlDatosCliente = new Sunny.UI.UIPanel();
+            btnGuardarCambios = new Sunny.UI.UISymbolButton();
             uiPanel2 = new Sunny.UI.UIPanel();
             uiAvatar3 = new Sunny.UI.UIAvatar();
             label4 = new Label();
@@ -55,7 +56,6 @@
             dgvNuevoHistorial = new DataGridView();
             label1 = new Label();
             pictureBox2 = new PictureBox();
-            btnGuardarCambios = new Sunny.UI.UISymbolButton();
             pnlSuperior.SuspendLayout();
             pnlIzquierdo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientesNuevo).BeginInit();
@@ -166,6 +166,7 @@
             dgvClientesNuevo.Size = new Size(274, 647);
             dgvClientesNuevo.TabIndex = 22;
             dgvClientesNuevo.CellClick += dgvClientesNuevo_CellClick;
+            dgvClientesNuevo.RowPostPaint += dgvClientesNuevo_RowPostPaint;
             // 
             // btnBuscar
             // 
@@ -243,6 +244,28 @@
             pnlDatosCliente.TabIndex = 40;
             pnlDatosCliente.Text = null;
             pnlDatosCliente.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // btnGuardarCambios
+            // 
+            btnGuardarCambios.FillColor = Color.White;
+            btnGuardarCambios.FillHoverColor = Color.FromArgb(232, 248, 247);
+            btnGuardarCambios.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnGuardarCambios.ForeColor = Color.FromArgb(0, 145, 137);
+            btnGuardarCambios.ForeHoverColor = Color.FromArgb(232, 248, 247);
+            btnGuardarCambios.Location = new Point(671, 30);
+            btnGuardarCambios.MinimumSize = new Size(1, 1);
+            btnGuardarCambios.Name = "btnGuardarCambios";
+            btnGuardarCambios.Radius = 12;
+            btnGuardarCambios.RectColor = Color.FromArgb(0, 165, 155);
+            btnGuardarCambios.RectHoverColor = Color.FromArgb(232, 248, 247);
+            btnGuardarCambios.Size = new Size(156, 40);
+            btnGuardarCambios.Symbol = 61508;
+            btnGuardarCambios.SymbolColor = Color.FromArgb(0, 165, 155);
+            btnGuardarCambios.SymbolHoverColor = Color.FromArgb(232, 248, 247);
+            btnGuardarCambios.TabIndex = 75;
+            btnGuardarCambios.Text = "Editar cliente";
+            btnGuardarCambios.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnGuardarCambios.Click += btnGuardarCambios_Click;
             // 
             // uiPanel2
             // 
@@ -383,7 +406,7 @@
             lblContacto.MinimumSize = new Size(1, 1);
             lblContacto.Name = "lblContacto";
             lblContacto.Size = new Size(120, 26);
-            lblContacto.Symbol = 61589;
+            lblContacto.Symbol = 62147;
             lblContacto.TabIndex = 61;
             lblContacto.Text = "ID";
             lblContacto.TextAlign = ContentAlignment.MiddleLeft;
@@ -449,27 +472,6 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 25;
             pictureBox2.TabStop = false;
-            // 
-            // btnGuardarCambios
-            // 
-            btnGuardarCambios.FillColor = Color.White;
-            btnGuardarCambios.FillHoverColor = Color.FromArgb(232, 248, 247);
-            btnGuardarCambios.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnGuardarCambios.ForeColor = Color.FromArgb(0, 145, 137);
-            btnGuardarCambios.ForeHoverColor = Color.FromArgb(232, 248, 247);
-            btnGuardarCambios.Location = new Point(671, 30);
-            btnGuardarCambios.MinimumSize = new Size(1, 1);
-            btnGuardarCambios.Name = "btnGuardarCambios";
-            btnGuardarCambios.Radius = 12;
-            btnGuardarCambios.RectColor = Color.FromArgb(0, 165, 155);
-            btnGuardarCambios.RectHoverColor = Color.FromArgb(232, 248, 247);
-            btnGuardarCambios.Size = new Size(156, 40);
-            btnGuardarCambios.Symbol = 61508;
-            btnGuardarCambios.SymbolColor = Color.FromArgb(0, 165, 155);
-            btnGuardarCambios.SymbolHoverColor = Color.FromArgb(232, 248, 247);
-            btnGuardarCambios.TabIndex = 75;
-            btnGuardarCambios.Text = "Editar cliente";
-            btnGuardarCambios.TipsFont = new Font("Microsoft Sans Serif", 9F);
             // 
             // ucHistorialClientes
             // 

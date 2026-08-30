@@ -1,7 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Data;
-using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {

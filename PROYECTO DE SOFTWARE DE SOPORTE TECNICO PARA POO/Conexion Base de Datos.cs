@@ -1,12 +1,6 @@
 ﻿//using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
@@ -122,6 +116,24 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return true;
             }
 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
+        public bool eliminarDatos(string tabla, string condicion)
+        {
+            try
+            {
+                abrirConexion();
+                Cadena = "Delete from " + tabla + " where " + condicion;
+                oCom = new SqlCommand(Cadena, oCon);
+                oCom.ExecuteNonQuery();
+                cerrarConexion();
+                return true;
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

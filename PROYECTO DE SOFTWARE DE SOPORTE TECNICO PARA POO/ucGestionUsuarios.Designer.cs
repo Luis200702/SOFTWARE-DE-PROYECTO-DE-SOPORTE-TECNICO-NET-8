@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             pnlSuperior = new Panel();
-            uiSymbolLabel1 = new Sunny.UI.UISymbolLabel();
-            lblTitulo = new Label();
             pnlInformacion = new Panel();
             btnNuevoTecnico = new Sunny.UI.UISymbolButton();
             txtBuscarTecnico = new Sunny.UI.UITextBox();
             dgvNuevo = new DataGridView();
+            lblTitulo = new Label();
+            label16 = new Label();
+            uiSymbolLabel1 = new Sunny.UI.UISymbolLabel();
             pnlSuperior.SuspendLayout();
             pnlInformacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvNuevo).BeginInit();
@@ -46,34 +47,12 @@
             pnlSuperior.AutoSize = true;
             pnlSuperior.BackColor = Color.White;
             pnlSuperior.Controls.Add(uiSymbolLabel1);
+            pnlSuperior.Controls.Add(label16);
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(-6, 0);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1135, 59);
+            pnlSuperior.Size = new Size(1135, 88);
             pnlSuperior.TabIndex = 2;
-            // 
-            // uiSymbolLabel1
-            // 
-            uiSymbolLabel1.Font = new Font("Microsoft Sans Serif", 12F);
-            uiSymbolLabel1.Location = new Point(34, 15);
-            uiSymbolLabel1.MinimumSize = new Size(1, 1);
-            uiSymbolLabel1.Name = "uiSymbolLabel1";
-            uiSymbolLabel1.Size = new Size(36, 30);
-            uiSymbolLabel1.Symbol = 61632;
-            uiSymbolLabel1.SymbolColor = Color.FromArgb(0, 165, 155);
-            uiSymbolLabel1.TabIndex = 2;
-            // 
-            // lblTitulo
-            // 
-            lblTitulo.Dock = DockStyle.Left;
-            lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.FromArgb(24, 43, 62);
-            lblTitulo.Location = new Point(0, 0);
-            lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(308, 59);
-            lblTitulo.TabIndex = 1;
-            lblTitulo.Text = "Gestión de Perfiles";
-            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pnlInformacion
             // 
@@ -82,7 +61,7 @@
             pnlInformacion.Controls.Add(btnNuevoTecnico);
             pnlInformacion.Controls.Add(txtBuscarTecnico);
             pnlInformacion.ForeColor = Color.Coral;
-            pnlInformacion.Location = new Point(0, 59);
+            pnlInformacion.Location = new Point(0, 88);
             pnlInformacion.Name = "pnlInformacion";
             pnlInformacion.Size = new Size(1126, 59);
             pnlInformacion.TabIndex = 3;
@@ -132,12 +111,46 @@
             // dgvNuevo
             // 
             dgvNuevo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvNuevo.Location = new Point(0, 118);
+            dgvNuevo.Location = new Point(0, 147);
             dgvNuevo.Name = "dgvNuevo";
-            dgvNuevo.Size = new Size(1125, 714);
+            dgvNuevo.Size = new Size(1125, 685);
             dgvNuevo.TabIndex = 5;
             dgvNuevo.CellContentClick += dgvNuevo_CellContentClick;
             dgvNuevo.CellPainting += dgvNuevo_CellPainting;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.FromArgb(24, 43, 62);
+            lblTitulo.Location = new Point(6, 0);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(406, 59);
+            lblTitulo.TabIndex = 3;
+            lblTitulo.Text = "Gestión de perfiles";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label16.ForeColor = Color.FromArgb(70, 86, 103);
+            label16.Location = new Point(97, 45);
+            label16.Name = "label16";
+            label16.Size = new Size(406, 20);
+            label16.TabIndex = 64;
+            label16.Text = "Administra los perfiles del sistema y sus permisos asignados";
+            // 
+            // uiSymbolLabel1
+            // 
+            uiSymbolLabel1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiSymbolLabel1.Location = new Point(25, 11);
+            uiSymbolLabel1.MinimumSize = new Size(1, 1);
+            uiSymbolLabel1.Name = "uiSymbolLabel1";
+            uiSymbolLabel1.Size = new Size(62, 48);
+            uiSymbolLabel1.Symbol = 61463;
+            uiSymbolLabel1.SymbolColor = Color.FromArgb(0, 165, 155);
+            uiSymbolLabel1.SymbolSize = 40;
+            uiSymbolLabel1.TabIndex = 65;
             // 
             // ucGestionUsuarios
             // 
@@ -150,6 +163,7 @@
             Size = new Size(1123, 832);
             Load += ucGestionUsuarios_Load;
             pnlSuperior.ResumeLayout(false);
+            pnlSuperior.PerformLayout();
             pnlInformacion.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvNuevo).EndInit();
             ResumeLayout(false);
@@ -160,11 +174,12 @@
 
         private Panel pnlSuperior;
         private PictureBox pictureBox1;
-        private Label lblTitulo;
         private Panel pnlInformacion;
         private Sunny.UI.UITextBox txtBuscarTecnico;
         private DataGridView dgvNuevo;
-        private Sunny.UI.UISymbolLabel uiSymbolLabel1;
         private Sunny.UI.UISymbolButton btnNuevoTecnico;
+        private Label lblTitulo;
+        private Label label16;
+        private Sunny.UI.UISymbolLabel uiSymbolLabel1;
     }
 }

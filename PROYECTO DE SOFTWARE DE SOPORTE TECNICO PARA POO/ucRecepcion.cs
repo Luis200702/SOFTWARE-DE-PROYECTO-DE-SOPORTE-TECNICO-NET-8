@@ -1,17 +1,8 @@
-﻿using FontAwesome.Sharp;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Sunny.UI;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Documents;
-using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
@@ -314,7 +305,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             if (cmbTecnico.Items.Count > 0) cmbTecnico.SelectedIndex = 0;
 
-            // 🔥 Mantiene la sucursal de la sesión actual al limpiar el formulario
             txtSucursal.Text = Sesion.SucursalActual;
 
             dtmFecha.Value = DateTime.Now;
