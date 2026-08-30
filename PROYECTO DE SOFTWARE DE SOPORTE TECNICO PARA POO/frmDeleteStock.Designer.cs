@@ -40,12 +40,11 @@
             udoAgg = new Sunny.UI.UIUpDownTextBox();
             lblReducir = new Label();
             lblProducto = new Label();
-            lblTitulo = new Label();
-            uiPanel1 = new Sunny.UI.UIPanel();
+            uiAvatar1 = new Sunny.UI.UIAvatar();
+            lblCliente = new Label();
             pnlFondo.SuspendLayout();
             pnlStockResultante.SuspendLayout();
             pnlStockActual.SuspendLayout();
-            uiPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // pnlFondo
@@ -240,31 +239,29 @@
             lblProducto.TabIndex = 82;
             lblProducto.Text = "nombre del producto";
             // 
-            // lblTitulo
+            // uiAvatar1
             // 
-            lblTitulo.AutoSize = true;
-            lblTitulo.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(122, 13);
-            lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(200, 37);
-            lblTitulo.TabIndex = 81;
-            lblTitulo.Text = "Registrar Salida";
+            uiAvatar1.FillColor = Color.FromArgb(232, 248, 247);
+            uiAvatar1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiAvatar1.ForeColor = Color.FromArgb(0, 165, 155);
+            uiAvatar1.Location = new Point(29, 12);
+            uiAvatar1.MinimumSize = new Size(1, 1);
+            uiAvatar1.Name = "uiAvatar1";
+            uiAvatar1.Size = new Size(60, 60);
+            uiAvatar1.Symbol = 61582;
+            uiAvatar1.TabIndex = 90;
+            uiAvatar1.Text = "uiAvatar1";
             // 
-            // uiPanel1
+            // lblCliente
             // 
-            uiPanel1.Controls.Add(lblTitulo);
-            uiPanel1.FillColor = Color.FromArgb(243, 246, 250);
-            uiPanel1.Font = new Font("Microsoft Sans Serif", 12F);
-            uiPanel1.Location = new Point(-17, -4);
-            uiPanel1.Margin = new Padding(4);
-            uiPanel1.MinimumSize = new Size(1, 1);
-            uiPanel1.Name = "uiPanel1";
-            uiPanel1.Radius = 12;
-            uiPanel1.RectColor = Color.Black;
-            uiPanel1.Size = new Size(472, 60);
-            uiPanel1.TabIndex = 90;
-            uiPanel1.Text = null;
-            uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
+            lblCliente.AutoSize = true;
+            lblCliente.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
+            lblCliente.ForeColor = Color.FromArgb(24, 43, 62);
+            lblCliente.Location = new Point(95, 32);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(147, 25);
+            lblCliente.TabIndex = 91;
+            lblCliente.Text = "Registrar salida";
             // 
             // frmDeleteStock
             // 
@@ -273,7 +270,8 @@
             BackColor = Color.FromArgb(243, 246, 250);
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(437, 406);
-            Controls.Add(uiPanel1);
+            Controls.Add(lblCliente);
+            Controls.Add(uiAvatar1);
             Controls.Add(pnlFondo);
             Controls.Add(pnlStockResultante);
             Controls.Add(pnlStockActual);
@@ -291,8 +289,6 @@
             pnlStockResultante.PerformLayout();
             pnlStockActual.ResumeLayout(false);
             pnlStockActual.PerformLayout();
-            uiPanel1.ResumeLayout(false);
-            uiPanel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -311,7 +307,7 @@
         private Sunny.UI.UIUpDownTextBox udoAgg;
         private Label lblReducir;
         private Label lblProducto;
-        private Label lblTitulo;
-        private Sunny.UI.UIPanel uiPanel1;
+        private Sunny.UI.UIAvatar uiAvatar1;
+        private Label lblCliente;
     }
 }

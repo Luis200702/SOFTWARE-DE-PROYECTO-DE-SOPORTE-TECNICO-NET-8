@@ -40,10 +40,10 @@
             uiAvatar1 = new Sunny.UI.UIAvatar();
             lblCliente = new Label();
             pnlDatosCliente = new Sunny.UI.UIPanel();
+            btnCancelar = new Sunny.UI.UISymbolButton();
+            btnAgg = new Sunny.UI.UISymbolButton();
             pnlStockActual = new Sunny.UI.UIPanel();
             uiAvatar2 = new Sunny.UI.UIAvatar();
-            btnAgg = new Sunny.UI.UISymbolButton();
-            btnCancelar = new Sunny.UI.UISymbolButton();
             pnlStockResultante.SuspendLayout();
             pnlDatosCliente.SuspendLayout();
             pnlStockActual.SuspendLayout();
@@ -230,6 +230,47 @@
             pnlDatosCliente.Text = null;
             pnlDatosCliente.TextAlignment = ContentAlignment.MiddleCenter;
             // 
+            // btnCancelar
+            // 
+            btnCancelar.FillColor = Color.White;
+            btnCancelar.FillHoverColor = Color.FromArgb(243, 246, 250);
+            btnCancelar.FillPressColor = Color.FromArgb(232, 237, 242);
+            btnCancelar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCancelar.ForeColor = Color.FromArgb(70, 86, 103);
+            btnCancelar.ForeHoverColor = Color.FromArgb(24, 43, 62);
+            btnCancelar.ForePressColor = Color.FromArgb(24, 43, 62);
+            btnCancelar.Location = new Point(119, 253);
+            btnCancelar.MinimumSize = new Size(1, 1);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Radius = 12;
+            btnCancelar.RectColor = Color.FromArgb(180, 190, 200);
+            btnCancelar.RectHoverColor = Color.FromArgb(145, 158, 172);
+            btnCancelar.Size = new Size(155, 38);
+            btnCancelar.Symbol = 61453;
+            btnCancelar.SymbolColor = Color.FromArgb(70, 86, 103);
+            btnCancelar.TabIndex = 75;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TipsFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // btnAgg
+            // 
+            btnAgg.FillColor = Color.FromArgb(0, 165, 155);
+            btnAgg.FillHoverColor = Color.FromArgb(0, 145, 137);
+            btnAgg.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgg.Location = new Point(280, 253);
+            btnAgg.MinimumSize = new Size(1, 1);
+            btnAgg.Name = "btnAgg";
+            btnAgg.Radius = 12;
+            btnAgg.RectColor = Color.FromArgb(0, 165, 155);
+            btnAgg.RectHoverColor = Color.FromArgb(0, 145, 137);
+            btnAgg.Size = new Size(155, 38);
+            btnAgg.Symbol = 61533;
+            btnAgg.TabIndex = 74;
+            btnAgg.Text = "Confirmar";
+            btnAgg.TipsFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAgg.Click += btnConfirmar_Click;
+            // 
             // pnlStockActual
             // 
             pnlStockActual.Controls.Add(uiAvatar2);
@@ -261,47 +302,6 @@
             uiAvatar2.SymbolSize = 25;
             uiAvatar2.TabIndex = 92;
             uiAvatar2.Text = "uiAvatar2";
-            // 
-            // btnAgg
-            // 
-            btnAgg.FillColor = Color.FromArgb(0, 165, 155);
-            btnAgg.FillHoverColor = Color.FromArgb(0, 145, 137);
-            btnAgg.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAgg.Location = new Point(280, 253);
-            btnAgg.MinimumSize = new Size(1, 1);
-            btnAgg.Name = "btnAgg";
-            btnAgg.Radius = 12;
-            btnAgg.RectColor = Color.FromArgb(0, 165, 155);
-            btnAgg.RectHoverColor = Color.FromArgb(0, 145, 137);
-            btnAgg.Size = new Size(155, 38);
-            btnAgg.Symbol = 61533;
-            btnAgg.TabIndex = 74;
-            btnAgg.Text = "Confirmar";
-            btnAgg.TipsFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAgg.Click += btnConfirmar_Click;
-            // 
-            // btnCancelar
-            // 
-            btnCancelar.FillColor = Color.White;
-            btnCancelar.FillHoverColor = Color.FromArgb(243, 246, 250);
-            btnCancelar.FillPressColor = Color.FromArgb(232, 237, 242);
-            btnCancelar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCancelar.ForeColor = Color.FromArgb(70, 86, 103);
-            btnCancelar.ForeHoverColor = Color.FromArgb(24, 43, 62);
-            btnCancelar.ForePressColor = Color.FromArgb(24, 43, 62);
-            btnCancelar.Location = new Point(119, 253);
-            btnCancelar.MinimumSize = new Size(1, 1);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Radius = 12;
-            btnCancelar.RectColor = Color.FromArgb(180, 190, 200);
-            btnCancelar.RectHoverColor = Color.FromArgb(145, 158, 172);
-            btnCancelar.Size = new Size(155, 38);
-            btnCancelar.Symbol = 61453;
-            btnCancelar.SymbolColor = Color.FromArgb(70, 86, 103);
-            btnCancelar.TabIndex = 75;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.TipsFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCancelar.Click += btnCancelar_Click;
             // 
             // frmAggStock
             // 
