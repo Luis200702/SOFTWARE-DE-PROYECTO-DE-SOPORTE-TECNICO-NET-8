@@ -579,6 +579,7 @@
             uiSymbolButton1.TabIndex = 56;
             uiSymbolButton1.Text = "Generar Reporte";
             uiSymbolButton1.TipsFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiSymbolButton1.Click += uiSymbolButton1_Click;
             // 
             // label14
             // 
