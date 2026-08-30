@@ -68,23 +68,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnVerContrasena_Click(object sender, EventArgs e)
         {
-            // Verificamos si la contraseña está oculta actualmente
             if (txtContrasena.PasswordChar == '●' || txtContrasena.PasswordChar == '*')
             {
-                // 🔓 MOSTRAR CONTRASEÑA
-                // El caracter '\0' (nulo) le dice a C# que quite la máscara y muestre el texto real
                 txtContrasena.PasswordChar = '\0';
 
-                // Cambiamos el ícono al ojo abierto (fa-eye)
                 btnVerContrasena.Symbol = 61550;
             }
             else
             {
-                // 🔒 OCULTAR CONTRASEÑA
-                // Volvemos a ponerle el punto o asterisco
-                txtContrasena.PasswordChar = '●';
 
-                // Cambiamos el ícono al ojo cerrado / tachado (fa-eye-slash)
+                txtContrasena.PasswordChar = '●';
                 btnVerContrasena.Symbol = 61552;
             }
         }

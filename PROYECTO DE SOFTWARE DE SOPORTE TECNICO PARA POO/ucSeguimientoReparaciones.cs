@@ -1,7 +1,12 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
 using System.Data;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
@@ -17,41 +22,35 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // DISEÑO BASE DE LA TABLA  
         private void AplicarDiseñoGrid()
         {
-            // Apariencia general
-            dgvSeguimiento.BackgroundColor = Color.White; // Color blanco para que sea como transparente con el panel
+            dgvSeguimiento.BackgroundColor = Color.White;
             dgvSeguimiento.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvSeguimiento.GridColor = Color.FromArgb(240, 242, 245); // Líneas horizontales 
+            dgvSeguimiento.GridColor = Color.FromArgb(240, 242, 245);
             dgvSeguimiento.RowHeadersVisible = false;
 
-            // Comportamiento
             dgvSeguimiento.AllowUserToAddRows = false;
             dgvSeguimiento.AllowUserToDeleteRows = false;
             dgvSeguimiento.AllowUserToResizeRows = false;
             dgvSeguimiento.AllowUserToResizeColumns = false;
             dgvSeguimiento.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            // Alturas anchas
             dgvSeguimiento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvSeguimiento.ColumnHeadersHeight = 50;
             dgvSeguimiento.RowTemplate.Height = 45;
 
-            // Títulos 
             dgvSeguimiento.EnableHeadersVisualStyles = false;
             DataGridViewCellStyle estiloEncabezado = new DataGridViewCellStyle();
-            estiloEncabezado.BackColor = Color.White; // Fondo blanco idéntico al contenedor superior
+            estiloEncabezado.BackColor = Color.White;
             estiloEncabezado.ForeColor = Color.FromArgb(120, 120, 120);
             estiloEncabezado.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
             estiloEncabezado.Alignment = DataGridViewContentAlignment.MiddleLeft;
             estiloEncabezado.Padding = new Padding(15, 0, 0, 0);
 
-            // Eliminar el resaltado al hacer clic en los títulos
             estiloEncabezado.SelectionBackColor = Color.White;
             estiloEncabezado.SelectionForeColor = Color.FromArgb(120, 120, 120);
 
             dgvSeguimiento.ColumnHeadersDefaultCellStyle = estiloEncabezado;
             dgvSeguimiento.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
 
-            // Filas de datos
             DataGridViewCellStyle estiloFila = new DataGridViewCellStyle();
             estiloFila.BackColor = Color.White;
             estiloFila.ForeColor = Color.FromArgb(60, 60, 60);
@@ -95,11 +94,15 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                     INNER JOIN clientes c ON o.cliente_id = c.id
                                     INNER JOIN dispositivos d ON o.dispositivo_id = d.id
                                     INNER JOIN Usuarios u ON o.tecnico_id = u.Id
-                                    WHERE (@busqueda = '' OR o.numero_orden LIKE '%' + @busqueda + '%' OR c.nombre LIKE '%' + @busqueda + '%')
+                                    WHERE o.sucursal = @sucursalSesion
+                                      AND (@busqueda = '' OR o.numero_orden LIKE '%' + @busqueda + '%' OR c.nombre LIKE '%' + @busqueda + '%')
                                       AND (@estado = 'Todos' OR o.estado = @estado)";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
+                        string sucursalActual = Sesion.SucursalActual;
+
+                        cmd.Parameters.AddWithValue("@sucursalSesion", sucursalActual);
                         cmd.Parameters.AddWithValue("@busqueda", filtroBusqueda);
                         cmd.Parameters.AddWithValue("@estado", filtroEstado);
 
@@ -110,7 +113,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         dgvSeguimiento.AutoGenerateColumns = true;
                         dgvSeguimiento.DataSource = dt;
 
-                        // Ajustamos los anchos exactos
                         if (dgvSeguimiento.Columns.Count > 0)
                         {
                             dgvSeguimiento.Columns["ORDEN"].Width = 130;
@@ -148,7 +150,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarSeguimiento(txtBuscarOrden.Text.Trim(), estado);
         }
 
-        // ABRIR DETALLES CON DOBLE CLIC 
         private void dgvNuevo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -178,19 +179,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // FORMATO DE TEXTO 
         private void dgvNuevo_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvSeguimiento.Columns[e.ColumnIndex].Name == "TIEMPO" && e.Value != null)
             {
                 e.Value = e.Value.ToString() + " días";
-                e.CellStyle.ForeColor = Color.FromArgb(0, 100, 220); // Azul
+                e.CellStyle.ForeColor = Color.FromArgb(0, 100, 220);
                 e.CellStyle.Font = new Font(dgvSeguimiento.Font, FontStyle.Bold);
                 e.FormattingApplied = true;
             }
         }
 
-        // FONDO DE LA CAPSULA ESTADO Y LÍNEA VERTICAL DE LA TABLA
         private void dgvNuevo_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
@@ -202,24 +201,23 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             switch (estado)
             {
                 case "En reparación":
-                    colorPrincipal = Color.FromArgb(0, 100, 220); // Azul
+                    colorPrincipal = Color.FromArgb(0, 100, 220);
                     colorFondo = Color.FromArgb(235, 245, 255);
                     break;
                 case "En diagnóstico":
-                    colorPrincipal = Color.FromArgb(240, 140, 0); // Naranja
+                    colorPrincipal = Color.FromArgb(240, 140, 0);
                     colorFondo = Color.FromArgb(255, 245, 235);
                     break;
                 case "Listo":
-                    colorPrincipal = Color.FromArgb(40, 180, 90); // Verde
+                    colorPrincipal = Color.FromArgb(40, 180, 90);
                     colorFondo = Color.FromArgb(235, 250, 240);
                     break;
                 case "Recibido":
-                    colorPrincipal = Color.FromArgb(140, 40, 200); // Morado
+                    colorPrincipal = Color.FromArgb(140, 40, 200);
                     colorFondo = Color.FromArgb(245, 235, 255);
                     break;
             }
 
-            // Línea vertical izquierda de la tabla (Columna 0)
             if (e.ColumnIndex == 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
@@ -230,7 +228,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 e.Handled = true;
             }
 
-            // Capsula redondeada en la columna de estado
             if (dgvSeguimiento.Columns[e.ColumnIndex].Name == "ESTADO")
             {
                 e.PaintBackground(e.CellBounds, true);
@@ -243,6 +240,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 int x = e.CellBounds.Left + 15;
                 int y = e.CellBounds.Top + (e.CellBounds.Height - altoBadge) / 2;
 
+                // Corregido: Usar System.Drawing.Drawing2D directamente sin duplicar
                 using (System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath())
                 {
                     int radio = 10;
@@ -279,10 +277,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void txtBuscar_TextChanged(object sender, EventArgs e) { }
         private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e) { }
-
-        private void dgvSeguimiento_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        private void dgvSeguimiento_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
     }
 }

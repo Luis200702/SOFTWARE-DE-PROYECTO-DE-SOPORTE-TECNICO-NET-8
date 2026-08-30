@@ -1,5 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -73,20 +75,21 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarDatos();
         }
 
-        // CARGAR DATOS Y CREAR COLUMNAS PARA BOTONES 
-        // CARGAR DATOS Y APLICAR FILTROS (Búsqueda + Categoría + Alertas)
+        // CARGAR DATOS Y APLICAR FILTROS (Búsqueda + Categoría + Alertas + Sucursal de Sesión)
         private void CargarDatos()
         {
-            // 1. Obtener los valores de los controles
             string textoBusqueda = txtBuscar.Text.Trim();
             string categoriaSeleccionada = cmbCategorias.SelectedItem != null
                 ? cmbCategorias.SelectedItem.ToString()
                 : "Todas las categorías";
 
-            // 2. Consulta SQL combinada
+            // 🔥 Filtramos la consulta directamente por la sucursal actual del usuario
             string query = @"
         SELECT 
+            R.IdRepuesto, 
+            I.IdSucursal, 
             R.NombreRepuesto AS NOMBRE, 
+            S.NombreSucursal AS SUCURSAL,
             ISNULL(R.Categoria, '—') AS CATEGORÍA, 
             ISNULL(R.Compatibilidad, '—') AS COMPATIBLE, 
             CONCAT(I.StockActual, ' / ', I.StockMinimo) AS STOCK, 
@@ -100,10 +103,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             END AS ESTADO
         FROM Repuestos R
         INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
-        WHERE (@SoloAlertas = 0 OR I.StockActual <= I.StockMinimo)
+        INNER JOIN Sucursales S ON I.IdSucursal = S.IdSucursal
+        WHERE S.NombreSucursal = @SucursalUsuario
+          AND (@SoloAlertas = 0 OR I.StockActual <= I.StockMinimo)
           AND (@Texto = '' OR R.NombreRepuesto LIKE '%' + @Texto + '%' 
-                           OR R.Compatibilidad LIKE '%' + @Texto + '%'
-                           OR R.Proveedor LIKE '%' + @Texto + '%')
+                            OR R.Compatibilidad LIKE '%' + @Texto + '%'
+                            OR R.Proveedor LIKE '%' + @Texto + '%')
           AND (@Categoria = 'Todas las categorías' OR @Categoria = '' OR @Categoria = 'Todas' OR R.Categoria = @Categoria)";
 
             Conexion_Base_de_Datos conexionBD = new Conexion_Base_de_Datos();
@@ -114,24 +119,24 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     using (SqlCommand cmd = new SqlCommand(query, conexionBD.oCon))
                     {
-                        // 3. Pasar los 3 parámetros a la consulta SQL
+                        // Pasamos la sucursal activa de la sesión y los demás parámetros
+                        cmd.Parameters.AddWithValue("@SucursalUsuario", Sesion.SucursalActual);
                         cmd.Parameters.AddWithValue("@SoloAlertas", mostrandoAlertas ? 1 : 0);
                         cmd.Parameters.AddWithValue("@Texto", textoBusqueda);
                         cmd.Parameters.AddWithValue("@Categoria", categoriaSeleccionada);
 
-                        // 4. Cargar datos liberando memoria RAM inmediatamente (using)
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         {
                             using (DataTable dt = new DataTable())
                             {
                                 da.Fill(dt);
-
-                                // Refresco limpio de datos manteniendo la estructura intacta
                                 dgvNuevo.DataSource = dt;
                             }
                         }
 
-                        // 5. Crear columnas para los botones solo si no existen (evita duplicados)
+                        if (dgvNuevo.Columns.Contains("IdRepuesto")) dgvNuevo.Columns["IdRepuesto"].Visible = false;
+                        if (dgvNuevo.Columns.Contains("IdSucursal")) dgvNuevo.Columns["IdSucursal"].Visible = false;
+
                         if (!dgvNuevo.Columns.Contains("Agregar"))
                         {
                             DataGridViewButtonColumn btnAgregar = new DataGridViewButtonColumn
@@ -156,10 +161,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             dgvNuevo.Columns.Add(btnDelete);
                         }
 
-                        // 6. Ajustar anchos y formato de columnas
                         if (dgvNuevo.Columns.Count > 0)
                         {
                             if (dgvNuevo.Columns.Contains("NOMBRE")) dgvNuevo.Columns["NOMBRE"].Width = 160;
+                            if (dgvNuevo.Columns.Contains("SUCURSAL")) dgvNuevo.Columns["SUCURSAL"].Width = 120;
                             if (dgvNuevo.Columns.Contains("CATEGORÍA")) dgvNuevo.Columns["CATEGORÍA"].Width = 120;
                             if (dgvNuevo.Columns.Contains("COMPATIBLE")) dgvNuevo.Columns["COMPATIBLE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                             if (dgvNuevo.Columns.Contains("STOCK")) dgvNuevo.Columns["STOCK"].Width = 110;
@@ -192,14 +197,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 conexionBD.cerrarConexion();
             }
 
-            // 7. Actualizar el contador del botón de alertas
             ActualizarContadorAlertas();
         }
 
-        // CONTAR ALERTAS (Stock Mínimo)
+        // CONTAR ALERTAS (Stock Mínimo solo para la sucursal actual)
         private void ActualizarContadorAlertas()
         {
-            string query = "SELECT COUNT(*) FROM InventarioSucursal WHERE StockActual <= StockMinimo";
+            string query = @"
+                SELECT COUNT(*) 
+                FROM InventarioSucursal I
+                INNER JOIN Sucursales S ON I.IdSucursal = S.IdSucursal
+                WHERE S.NombreSucursal = @SucursalUsuario AND I.StockActual <= I.StockMinimo";
+
             Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
             try
             {
@@ -207,6 +216,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
+                        cmd.Parameters.AddWithValue("@SucursalUsuario", Sesion.SucursalActual);
                         cantidadAlertas = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
@@ -217,7 +227,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             finally { db.cerrarConexion(); }
         }
 
-        // FORMATO DE TEXTO (MONEDA Y COLOR VERDE PARA VENTAS) 
         private void dgvNuevo_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.Value != null)
@@ -247,14 +256,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // CAPSULA REDONDEADAS Y BOTONES 
         private void dgvNuevo_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
             string nombreColumna = dgvNuevo.Columns[e.ColumnIndex].Name;
 
-            // CAPSULA REDONDEADAS DEL STOCK
             if (nombreColumna == "ESTADO")
             {
                 string estado = e.Value?.ToString() ?? "";
@@ -320,7 +327,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 e.Handled = true;
             }
 
-            // BOTONES 
             if (nombreColumna == "Agregar" || nombreColumna == "Delete")
             {
                 e.PaintBackground(e.CellBounds, true);
@@ -373,29 +379,26 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // EVENTOS DEL BOTÓN DE ALERTAS 
         private void btnAlertas_Click(object sender, EventArgs e)
         {
-
-            mostrandoAlertas = !mostrandoAlertas; // Alterna el estado
+            mostrandoAlertas = !mostrandoAlertas;
 
             btnAlertas.Style = Sunny.UI.UIStyle.Custom;
 
             if (mostrandoAlertas)
             {
-                // Propiedades  de Sunny UI
-                btnAlertas.FillColor = Color.FromArgb(255, 245, 235); // Fondo naranja claro
-                btnAlertas.RectColor = Color.FromArgb(255, 150, 0);   // Borde naranja oscuro
-                btnAlertas.ForeColor = Color.FromArgb(255, 150, 0);   // Letras naranjas
+                btnAlertas.FillColor = Color.FromArgb(255, 245, 235);
+                btnAlertas.RectColor = Color.FromArgb(255, 150, 0);
+                btnAlertas.ForeColor = Color.FromArgb(255, 150, 0);
             }
             else
             {
-                btnAlertas.FillColor = Color.White; // Vuelve a blanco
-                btnAlertas.RectColor = Color.FromArgb(213, 218, 223); // Borde gris claro estándar
-                btnAlertas.ForeColor = Color.FromArgb(100, 100, 100); // Letras grises
+                btnAlertas.FillColor = Color.White;
+                btnAlertas.RectColor = Color.FromArgb(213, 218, 223);
+                btnAlertas.ForeColor = Color.FromArgb(100, 100, 100);
             }
 
-            CargarDatos(); // Recargar tabla con o sin filtro
+            CargarDatos();
         }
 
         private void btnAlertas_Paint(object sender, PaintEventArgs e)
@@ -425,14 +428,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // ACCIONES DE CLIC EN LA TABLA Y NUEVO REPUESTO  
         private void dgvNuevo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
+            int idRepuestoActual = Convert.ToInt32(dgvNuevo.Rows[e.RowIndex].Cells["IdRepuesto"].Value);
+            int idSucursalActual = Convert.ToInt32(dgvNuevo.Rows[e.RowIndex].Cells["IdSucursal"].Value);
+            string nombreRepuestoActual = dgvNuevo.Rows[e.RowIndex].Cells["NOMBRE"].Value.ToString();
+            string nombreSucursalActual = dgvNuevo.Rows[e.RowIndex].Cells["SUCURSAL"].Value.ToString();
+
             if (dgvNuevo.Columns[e.ColumnIndex].Name == "Agregar")
             {
-                frmAggStock frm = new frmAggStock();
+                frmAggStock frm = new frmAggStock(idRepuestoActual, idSucursalActual, nombreRepuestoActual, nombreSucursalActual);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     CargarDatos();
@@ -440,7 +447,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
             else if (dgvNuevo.Columns[e.ColumnIndex].Name == "Delete")
             {
-                frmDeleteStock frm = new frmDeleteStock();
+                frmDeleteStock frm = new frmDeleteStock(idRepuestoActual, idSucursalActual, nombreRepuestoActual, nombreSucursalActual);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     CargarDatos();

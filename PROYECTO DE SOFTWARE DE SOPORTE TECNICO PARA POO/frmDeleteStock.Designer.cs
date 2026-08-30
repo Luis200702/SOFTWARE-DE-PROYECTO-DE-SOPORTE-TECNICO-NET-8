@@ -32,12 +32,12 @@
             btnCancelar = new Sunny.UI.UIButton();
             btnAgg = new Sunny.UI.UIButton();
             pnlStockResultante = new Sunny.UI.UIPanel();
-            lblStockR = new Label();
+            lblStockResultante = new Label();
             lblStockRedultante = new Label();
             pnlStockActual = new Sunny.UI.UIPanel();
             llbStockA = new Label();
             lblstockActual = new Label();
-            udoDel = new Sunny.UI.UIUpDownTextBox();
+            udoAgg = new Sunny.UI.UIUpDownTextBox();
             lblReducir = new Label();
             lblProducto = new Label();
             lblTitulo = new Label();
@@ -111,11 +111,12 @@
             btnAgg.Text = "Confirmar";
             btnAgg.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnAgg.TipsForeColor = Color.Transparent;
+            btnAgg.Click += btnConfirmar_Click;
             // 
             // pnlStockResultante
             // 
             pnlStockResultante.BackColor = Color.FromArgb(220, 226, 232);
-            pnlStockResultante.Controls.Add(lblStockR);
+            pnlStockResultante.Controls.Add(lblStockResultante);
             pnlStockResultante.Controls.Add(lblStockRedultante);
             pnlStockResultante.FillColor = Color.FromArgb(243, 246, 250);
             pnlStockResultante.Font = new Font("Microsoft Sans Serif", 12F);
@@ -130,16 +131,16 @@
             pnlStockResultante.Text = null;
             pnlStockResultante.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // lblStockR
+            // lblStockResultante
             // 
-            lblStockR.AutoSize = true;
-            lblStockR.BackColor = Color.Transparent;
-            lblStockR.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblStockR.Location = new Point(321, 14);
-            lblStockR.Name = "lblStockR";
-            lblStockR.Size = new Size(52, 25);
-            lblStockR.TabIndex = 75;
-            lblStockR.Text = "-----";
+            lblStockResultante.AutoSize = true;
+            lblStockResultante.BackColor = Color.Transparent;
+            lblStockResultante.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblStockResultante.Location = new Point(321, 14);
+            lblStockResultante.Name = "lblStockResultante";
+            lblStockResultante.Size = new Size(52, 25);
+            lblStockResultante.TabIndex = 75;
+            lblStockResultante.Text = "-----";
             // 
             // lblStockRedultante
             // 
@@ -193,30 +194,31 @@
             lblstockActual.TabIndex = 73;
             lblstockActual.Text = "Stock Actual";
             // 
-            // udoDel
+            // udoAgg
             // 
-            udoDel.BackColor = Color.FromArgb(220, 226, 232);
-            udoDel.CanEmpty = true;
-            udoDel.DoubleStep = 1D;
-            udoDel.DoubleValue = 1D;
-            udoDel.FillColor = Color.FromArgb(243, 246, 250);
-            udoDel.Font = new Font("Microsoft Sans Serif", 12F);
-            udoDel.IntValue = 1;
-            udoDel.Location = new Point(17, 136);
-            udoDel.Margin = new Padding(4);
-            udoDel.Minimum = 1D;
-            udoDel.MinimumSize = new Size(1, 12);
-            udoDel.Name = "udoDel";
-            udoDel.Padding = new Padding(4);
-            udoDel.Radius = 12;
-            udoDel.RectColor = Color.Black;
-            udoDel.ShowText = false;
-            udoDel.Size = new Size(389, 35);
-            udoDel.TabIndex = 84;
-            udoDel.Text = "1";
-            udoDel.TextAlignment = ContentAlignment.MiddleLeft;
-            udoDel.Type = Sunny.UI.UITextBox.UIEditType.Integer;
-            udoDel.Watermark = "";
+            udoAgg.BackColor = Color.FromArgb(220, 226, 232);
+            udoAgg.CanEmpty = true;
+            udoAgg.DoubleStep = 1D;
+            udoAgg.DoubleValue = 1D;
+            udoAgg.FillColor = Color.FromArgb(243, 246, 250);
+            udoAgg.Font = new Font("Microsoft Sans Serif", 12F);
+            udoAgg.IntValue = 1;
+            udoAgg.Location = new Point(17, 136);
+            udoAgg.Margin = new Padding(4);
+            udoAgg.Minimum = 1D;
+            udoAgg.MinimumSize = new Size(1, 12);
+            udoAgg.Name = "udoAgg";
+            udoAgg.Padding = new Padding(4);
+            udoAgg.Radius = 12;
+            udoAgg.RectColor = Color.Black;
+            udoAgg.ShowText = false;
+            udoAgg.Size = new Size(389, 35);
+            udoAgg.TabIndex = 84;
+            udoAgg.Text = "1";
+            udoAgg.TextAlignment = ContentAlignment.MiddleLeft;
+            udoAgg.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            udoAgg.Watermark = "";
+            udoAgg.TextChanged += udoAgg_TextChanged;
             // 
             // lblReducir
             // 
@@ -275,7 +277,7 @@
             Controls.Add(pnlFondo);
             Controls.Add(pnlStockResultante);
             Controls.Add(pnlStockActual);
-            Controls.Add(udoDel);
+            Controls.Add(udoAgg);
             Controls.Add(lblReducir);
             Controls.Add(lblProducto);
             FormBorderStyle = FormBorderStyle.None;
@@ -283,6 +285,7 @@
             Name = "frmDeleteStock";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmDeleteStock";
+            Load += frmDeleteStock_Load;
             pnlFondo.ResumeLayout(false);
             pnlStockResultante.ResumeLayout(false);
             pnlStockResultante.PerformLayout();
@@ -300,12 +303,12 @@
         private Sunny.UI.UIButton btnCancelar;
         private Sunny.UI.UIButton btnAgg;
         private Sunny.UI.UIPanel pnlStockResultante;
-        private Label lblStockR;
+        private Label lblStockResultante;
         private Label lblStockRedultante;
         private Sunny.UI.UIPanel pnlStockActual;
         private Label llbStockA;
         private Label lblstockActual;
-        private Sunny.UI.UIUpDownTextBox udoDel;
+        private Sunny.UI.UIUpDownTextBox udoAgg;
         private Label lblReducir;
         private Label lblProducto;
         private Label lblTitulo;

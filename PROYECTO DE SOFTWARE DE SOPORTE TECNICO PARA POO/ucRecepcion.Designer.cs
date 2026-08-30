@@ -100,7 +100,6 @@
             btnGuardarRegistro = new Sunny.UI.UIButton();
             btnCancelar = new Sunny.UI.UIButton();
             btnLimpiar = new Sunny.UI.UIButton();
-            ucReportes1 = new ucReportes();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
@@ -160,7 +159,6 @@
             pnlInformacion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlInformacion.AutoSize = true;
             pnlInformacion.BackColor = Color.FromArgb(243, 246, 250);
-            pnlInformacion.Controls.Add(ucReportes1);
             pnlInformacion.Controls.Add(lblFecha);
             pnlInformacion.Controls.Add(lblOrden);
             pnlInformacion.Location = new Point(0, 59);
@@ -1328,14 +1326,6 @@
             btnLimpiar.TipsForeColor = Color.Black;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
-            // ucReportes1
-            // 
-            ucReportes1.BackColor = Color.FromArgb(243, 246, 250);
-            ucReportes1.Location = new Point(719, 21);
-            ucReportes1.Name = "ucReportes1";
-            ucReportes1.Size = new Size(1123, 832);
-            ucReportes1.TabIndex = 2;
-            // 
             // ucRecepcion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1447,6 +1437,5 @@
         private Label label1;
         private Label label3;
         private Sunny.UI.UIAvatar uiAvatar1;
-        private ucReportes ucReportes1;
     }
 }

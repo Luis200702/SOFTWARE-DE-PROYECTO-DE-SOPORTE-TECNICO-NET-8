@@ -36,14 +36,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // 🔥 NOTA: Recuerda que al abrir este form desde tu otra pantalla, 
-        // ahora debes enviarle el ID del usuario como primer parámetro.
         public frmEditarUsuarios(int idUsuario, string nombre, string usuario, string perfil, string sucursal)
         {
             InitializeComponent();
             CargarSucursales();
 
-            idUsuarioActual = idUsuario; // Guardamos el ID real de la base de datos
+            idUsuarioActual = idUsuario; 
             usuarioOriginal = usuario;
 
             txtNombre.Text = nombre;

@@ -67,7 +67,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (db.abrirConexion())
             {
                 // Ajusta el nombre de la tabla si es distinto en tu SQL
-                string query = "SELECT Id, Nombre FROM Usuarios WHERE Perfil = 'Tecnico'"; SqlDataAdapter da = new SqlDataAdapter(query, db.oCon);
+                string query = "SELECT Id, Nombre FROM Usuarios WHERE Perfil = 'Tecnico'";
+                SqlDataAdapter da = new SqlDataAdapter(query, db.oCon);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
@@ -79,10 +80,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-
-
         // --- LÓGICA DE INTERFAZ Y EFECTOS VISUALES ---
-
         private void ActualizarDiseñoBotonesEstado(string estadoSeleccionado)
         {
             // Usamos tu función personalizada para "presionar" el botón correcto al abrir la ventana
@@ -105,7 +103,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     break;
             }
         }
-
 
         // --- EVENTO: BOTÓN DE AGREGAR REPUESTO ---
         private void btnAgregarRepuesto_Click(object sender, EventArgs e)
@@ -197,17 +194,20 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    // Unimos Repuestos con InventarioSucursal usando el IdRepuesto
+                    // Unimos Repuestos, Inventario, Sucursales y la Orden actual para filtrar por la sucursal correcta
                     string query = @"
-                SELECT 
-                    R.IdRepuesto, 
-                    R.NombreRepuesto + ' (Stock: ' + CAST(I.StockActual AS VARCHAR) + ')' AS Descripcion 
-                FROM Repuestos R
-                INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
-                WHERE I.StockActual > 0";
+                    SELECT 
+                        R.IdRepuesto, 
+                        R.NombreRepuesto + ' (Stock: ' + CAST(I.StockActual AS VARCHAR) + ')' AS Descripcion 
+                    FROM Repuestos R
+                    INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
+                    INNER JOIN Sucursales S ON I.IdSucursal = S.IdSucursal
+                    INNER JOIN ordenes O ON S.NombreSucursal = O.sucursal
+                    WHERE O.numero_orden = @orden AND I.StockActual > 0";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
+                        cmd.Parameters.AddWithValue("@orden", ordenActual);
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
@@ -313,17 +313,27 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                         if (filasAfectadas > 0)
                         {
-                            // 2. Descontar stock y registrar detalle
+                            // 2. Descontar stock solo en la sucursal de esta orden
                             foreach (int idRepuesto in repuestosUsadosIds)
                             {
-                                string queryStock = "UPDATE InventarioSucursal SET StockActual = StockActual - 1 WHERE IdRepuesto = @id";
+                                string queryStock = @"
+                                UPDATE InventarioSucursal 
+                                SET StockActual = StockActual - 1 
+                                WHERE IdRepuesto = @id 
+                                AND IdSucursal = (
+                                    SELECT S.IdSucursal 
+                                    FROM Sucursales S 
+                                    INNER JOIN ordenes O ON S.NombreSucursal = O.sucursal 
+                                    WHERE O.numero_orden = @numOrden
+                                )";
+
                                 using (SqlCommand cmdStock = new SqlCommand(queryStock, db.oCon))
                                 {
                                     cmdStock.Parameters.AddWithValue("@id", idRepuesto);
+                                    cmdStock.Parameters.AddWithValue("@numOrden", ordenActual);
                                     cmdStock.ExecuteNonQuery();
                                 }
 
-                                // CÁMBIALO POR ESTO:
                                 string queryDetalle = @"
                                     INSERT INTO DetallesOrden (IdOrden, IdRepuesto, Cantidad, PrecioCobrado) 
                                     VALUES (

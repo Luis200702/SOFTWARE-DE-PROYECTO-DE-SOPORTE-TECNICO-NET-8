@@ -57,9 +57,9 @@
             uiAvatar4 = new Sunny.UI.UIAvatar();
             label11 = new Label();
             uiPanel4 = new Sunny.UI.UIPanel();
-            uiComboBox2 = new Sunny.UI.UIComboBox();
-            uiComboBox1 = new Sunny.UI.UIComboBox();
-            cmbMarca = new Sunny.UI.UIComboBox();
+            this.cmbTecnicos = new Sunny.UI.UIComboBox();
+            this.cmbSucursal = new Sunny.UI.UIComboBox();
+            cmbTiposReporte = new Sunny.UI.UIComboBox();
             uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             label14 = new Label();
             label13 = new Label();
@@ -467,9 +467,9 @@
             // 
             uiPanel4.AutoSize = true;
             uiPanel4.BackColor = Color.Transparent;
-            uiPanel4.Controls.Add(uiComboBox2);
-            uiPanel4.Controls.Add(uiComboBox1);
-            uiPanel4.Controls.Add(cmbMarca);
+            uiPanel4.Controls.Add(this.cmbTecnicos);
+            uiPanel4.Controls.Add(this.cmbSucursal);
+            uiPanel4.Controls.Add(cmbTiposReporte);
             uiPanel4.Controls.Add(uiSymbolButton1);
             uiPanel4.Controls.Add(label14);
             uiPanel4.Controls.Add(label13);
@@ -491,77 +491,77 @@
             uiPanel4.Text = null;
             uiPanel4.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // uiComboBox2
+            // cmbTecnicos
             // 
-            uiComboBox2.BackColor = Color.Transparent;
-            uiComboBox2.DataSource = null;
-            uiComboBox2.FillColor = Color.FromArgb(248, 249, 251);
-            uiComboBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiComboBox2.ForeColor = Color.FromArgb(70, 86, 103);
-            uiComboBox2.FormattingEnabled = true;
-            uiComboBox2.ItemHoverColor = Color.FromArgb(243, 247, 247);
-            uiComboBox2.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            uiComboBox2.Location = new Point(380, 91);
-            uiComboBox2.Margin = new Padding(4, 5, 4, 5);
-            uiComboBox2.MinimumSize = new Size(63, 0);
-            uiComboBox2.Name = "uiComboBox2";
-            uiComboBox2.Padding = new Padding(0, 0, 30, 2);
-            uiComboBox2.Radius = 12;
-            uiComboBox2.RectColor = Color.FromArgb(220, 226, 232);
-            uiComboBox2.Size = new Size(143, 37);
-            uiComboBox2.SymbolSize = 24;
-            uiComboBox2.TabIndex = 59;
-            uiComboBox2.TextAlignment = ContentAlignment.MiddleLeft;
-            uiComboBox2.Watermark = "";
-            uiComboBox2.WatermarkColor = Color.FromArgb(198, 199, 189);
+            this.cmbTecnicos.BackColor = Color.Transparent;
+            this.cmbTecnicos.DataSource = null;
+            this.cmbTecnicos.FillColor = Color.FromArgb(248, 249, 251);
+            this.cmbTecnicos.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.cmbTecnicos.ForeColor = Color.FromArgb(70, 86, 103);
+            this.cmbTecnicos.FormattingEnabled = true;
+            this.cmbTecnicos.ItemHoverColor = Color.FromArgb(243, 247, 247);
+            this.cmbTecnicos.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            this.cmbTecnicos.Location = new Point(380, 91);
+            this.cmbTecnicos.Margin = new Padding(4, 5, 4, 5);
+            this.cmbTecnicos.MinimumSize = new Size(63, 0);
+            this.cmbTecnicos.Name = "cmbTecnicos";
+            this.cmbTecnicos.Padding = new Padding(0, 0, 30, 2);
+            this.cmbTecnicos.Radius = 12;
+            this.cmbTecnicos.RectColor = Color.FromArgb(220, 226, 232);
+            this.cmbTecnicos.Size = new Size(143, 37);
+            this.cmbTecnicos.SymbolSize = 24;
+            this.cmbTecnicos.TabIndex = 59;
+            this.cmbTecnicos.TextAlignment = ContentAlignment.MiddleLeft;
+            this.cmbTecnicos.Watermark = "";
+            this.cmbTecnicos.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
-            // uiComboBox1
+            // cmbSucursal
             // 
-            uiComboBox1.BackColor = Color.Transparent;
-            uiComboBox1.DataSource = null;
-            uiComboBox1.FillColor = Color.FromArgb(248, 249, 251);
-            uiComboBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiComboBox1.ForeColor = Color.FromArgb(70, 86, 103);
-            uiComboBox1.FormattingEnabled = true;
-            uiComboBox1.ItemHoverColor = Color.FromArgb(243, 247, 247);
-            uiComboBox1.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            uiComboBox1.Location = new Point(208, 91);
-            uiComboBox1.Margin = new Padding(4, 5, 4, 5);
-            uiComboBox1.MinimumSize = new Size(63, 0);
-            uiComboBox1.Name = "uiComboBox1";
-            uiComboBox1.Padding = new Padding(0, 0, 30, 2);
-            uiComboBox1.Radius = 12;
-            uiComboBox1.RectColor = Color.FromArgb(220, 226, 232);
-            uiComboBox1.Size = new Size(153, 37);
-            uiComboBox1.SymbolSize = 24;
-            uiComboBox1.TabIndex = 58;
-            uiComboBox1.TextAlignment = ContentAlignment.MiddleLeft;
-            uiComboBox1.Watermark = "";
-            uiComboBox1.WatermarkColor = Color.FromArgb(198, 199, 189);
+            this.cmbSucursal.BackColor = Color.Transparent;
+            this.cmbSucursal.DataSource = null;
+            this.cmbSucursal.FillColor = Color.FromArgb(248, 249, 251);
+            this.cmbSucursal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.cmbSucursal.ForeColor = Color.FromArgb(70, 86, 103);
+            this.cmbSucursal.FormattingEnabled = true;
+            this.cmbSucursal.ItemHoverColor = Color.FromArgb(243, 247, 247);
+            this.cmbSucursal.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            this.cmbSucursal.Location = new Point(208, 91);
+            this.cmbSucursal.Margin = new Padding(4, 5, 4, 5);
+            this.cmbSucursal.MinimumSize = new Size(63, 0);
+            this.cmbSucursal.Name = "cmbSucursal";
+            this.cmbSucursal.Padding = new Padding(0, 0, 30, 2);
+            this.cmbSucursal.Radius = 12;
+            this.cmbSucursal.RectColor = Color.FromArgb(220, 226, 232);
+            this.cmbSucursal.Size = new Size(153, 37);
+            this.cmbSucursal.SymbolSize = 24;
+            this.cmbSucursal.TabIndex = 58;
+            this.cmbSucursal.TextAlignment = ContentAlignment.MiddleLeft;
+            this.cmbSucursal.Watermark = "";
+            this.cmbSucursal.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
-            // cmbMarca
+            // cmbTiposReporte
             // 
-            cmbMarca.BackColor = Color.Transparent;
-            cmbMarca.DataSource = null;
-            cmbMarca.FillColor = Color.FromArgb(248, 249, 251);
-            cmbMarca.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbMarca.ForeColor = Color.FromArgb(70, 86, 103);
-            cmbMarca.FormattingEnabled = true;
-            cmbMarca.ItemHoverColor = Color.FromArgb(243, 247, 247);
-            cmbMarca.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbMarca.Location = new Point(17, 91);
-            cmbMarca.Margin = new Padding(4, 5, 4, 5);
-            cmbMarca.MinimumSize = new Size(63, 0);
-            cmbMarca.Name = "cmbMarca";
-            cmbMarca.Padding = new Padding(0, 0, 30, 2);
-            cmbMarca.Radius = 12;
-            cmbMarca.RectColor = Color.FromArgb(220, 226, 232);
-            cmbMarca.Size = new Size(167, 37);
-            cmbMarca.SymbolSize = 24;
-            cmbMarca.TabIndex = 57;
-            cmbMarca.TextAlignment = ContentAlignment.MiddleLeft;
-            cmbMarca.Watermark = "";
-            cmbMarca.WatermarkColor = Color.FromArgb(198, 199, 189);
+            cmbTiposReporte.BackColor = Color.Transparent;
+            cmbTiposReporte.DataSource = null;
+            cmbTiposReporte.FillColor = Color.FromArgb(248, 249, 251);
+            cmbTiposReporte.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbTiposReporte.ForeColor = Color.FromArgb(70, 86, 103);
+            cmbTiposReporte.FormattingEnabled = true;
+            cmbTiposReporte.ItemHoverColor = Color.FromArgb(243, 247, 247);
+            cmbTiposReporte.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbTiposReporte.Location = new Point(17, 91);
+            cmbTiposReporte.Margin = new Padding(4, 5, 4, 5);
+            cmbTiposReporte.MinimumSize = new Size(63, 0);
+            cmbTiposReporte.Name = "cmbTiposReporte";
+            cmbTiposReporte.Padding = new Padding(0, 0, 30, 2);
+            cmbTiposReporte.Radius = 12;
+            cmbTiposReporte.RectColor = Color.FromArgb(220, 226, 232);
+            cmbTiposReporte.Size = new Size(167, 37);
+            cmbTiposReporte.SymbolSize = 24;
+            cmbTiposReporte.TabIndex = 57;
+            cmbTiposReporte.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbTiposReporte.Watermark = "";
+            cmbTiposReporte.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
             // uiSymbolButton1
             // 
@@ -765,9 +765,9 @@
         private Label label13;
         private Label label12;
         private Sunny.UI.UISymbolButton uiSymbolButton1;
-        private Sunny.UI.UIComboBox uiComboBox2;
-        private Sunny.UI.UIComboBox uiComboBox1;
-        private Sunny.UI.UIComboBox cmbMarca;
+        private Sunny.UI.UIComboBox cmbTecnicos;
+        private Sunny.UI.UIComboBox cmbSucursal;
+        private Sunny.UI.UIComboBox cmbTiposReporte;
         private Label label16;
         private Sunny.UI.UIPanel uiPanel5;
         private Label label21;

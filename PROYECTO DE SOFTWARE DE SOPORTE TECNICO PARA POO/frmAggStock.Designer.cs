@@ -36,7 +36,7 @@
             llbStockA = new Label();
             lblstockActual = new Label();
             pnlStockResultante = new Sunny.UI.UIPanel();
-            lblStockR = new Label();
+            lblStockResultante = new Label();
             lblStockRedultante = new Label();
             btnAgg = new Sunny.UI.UIButton();
             btnCancelar = new Sunny.UI.UIButton();
@@ -147,7 +147,7 @@
             // 
             // pnlStockResultante
             // 
-            pnlStockResultante.Controls.Add(lblStockR);
+            pnlStockResultante.Controls.Add(lblStockResultante);
             pnlStockResultante.Controls.Add(lblStockRedultante);
             pnlStockResultante.Font = new Font("Microsoft Sans Serif", 12F);
             pnlStockResultante.Location = new Point(20, 265);
@@ -161,16 +161,16 @@
             pnlStockResultante.Text = null;
             pnlStockResultante.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // lblStockR
+            // lblStockResultante
             // 
-            lblStockR.AutoSize = true;
-            lblStockR.BackColor = Color.Transparent;
-            lblStockR.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblStockR.Location = new Point(325, 14);
-            lblStockR.Name = "lblStockR";
-            lblStockR.Size = new Size(52, 25);
-            lblStockR.TabIndex = 75;
-            lblStockR.Text = "-----";
+            lblStockResultante.AutoSize = true;
+            lblStockResultante.BackColor = Color.Transparent;
+            lblStockResultante.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblStockResultante.Location = new Point(325, 14);
+            lblStockResultante.Name = "lblStockResultante";
+            lblStockResultante.Size = new Size(52, 25);
+            lblStockResultante.TabIndex = 75;
+            lblStockResultante.Text = "-----";
             // 
             // lblStockRedultante
             // 
@@ -205,6 +205,7 @@
             btnAgg.Text = "Confirmar";
             btnAgg.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnAgg.TipsForeColor = Color.Transparent;
+            btnAgg.Click += btnConfirmar_Click;
             // 
             // btnCancelar
             // 
@@ -303,7 +304,7 @@
         private Sunny.UI.UIPanel pnlStockResultante;
         private Label lblStockRedultante;
         private Label llbStockA;
-        private Label lblStockR;
+        private Label lblStockResultante;
         private Sunny.UI.UIButton btnAgg;
         private Sunny.UI.UIButton btnCancelar;
         private Sunny.UI.UIPanel pnlFondo;

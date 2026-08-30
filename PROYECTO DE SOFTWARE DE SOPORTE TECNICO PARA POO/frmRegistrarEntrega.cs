@@ -84,13 +84,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult result = DialogResult.Cancel;
+            // CORRECCIÓN: Asignar directamente a la propiedad del formulario
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
-            // 1. Validaciones básicas
+            // 1. Validaciones básicas de campos vacíos
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
                 string.IsNullOrWhiteSpace(txtPrecioCosto.Text) ||
                 string.IsNullOrWhiteSpace(txtPrecioVenta.Text))
@@ -99,19 +100,22 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            // 2. Unimos la Marca (del ComboBox) y el Modelo para guardarlos en Compatibilidad
-            string marcaYModelo = cmbMarca.Text.Trim() + " " + txtModelo.Text.Trim();
+            // 2. CORRECCIÓN: Validación ESTRICTA de tipos numéricos
+            if (!decimal.TryParse(txtPrecioCosto.Text, out decimal precioCosto) ||
+                !decimal.TryParse(txtPrecioVenta.Text, out decimal precioVenta))
+            {
+                MessageBox.Show("Los precios deben ser valores numéricos válidos.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // 3. Convertir los textos a números (decimales y enteros)
-            decimal precioCosto = 0, precioVenta = 0;
-            int cantidadInicial = 0, stockMinimo = 1;
+            // Para las cantidades, si falla o está vacío, asignamos valores por defecto de forma segura
+            if (!int.TryParse(txtCantidadInicial.Text, out int cantidadInicial)) cantidadInicial = 0;
+            if (!int.TryParse(txtStockMinimo.Text, out int stockMinimo)) stockMinimo = 1;
 
-            decimal.TryParse(txtPrecioCosto.Text, out precioCosto);
-            decimal.TryParse(txtPrecioVenta.Text, out precioVenta);
-            int.TryParse(txtCantidadInicial.Text, out cantidadInicial);
-            int.TryParse(txtStockMinimo.Text, out stockMinimo);
+            // 3. Unimos la Marca y el Modelo
+            string marcaYModelo = $"{cmbMarca.Text.Trim()} {txtModelo.Text.Trim()}";
 
-            // 4. Iniciar la conexión a la base de datos usando tu clase
+            // 4. Iniciar la conexión a la base de datos
             Conexion_Base_de_Datos conexionBD = new Conexion_Base_de_Datos();
 
             if (conexionBD.abrirConexion())
@@ -136,13 +140,15 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     int idNuevoRepuesto = Convert.ToInt32(cmdRepuesto.ExecuteScalar());
 
-                    // --- PASO B: Guardar el Inventario ---
+                    // --- PASO B: Guardar el Inventario (CORRECCIÓN IdSucursal) ---
                     string queryInventario = @"
-                        INSERT INTO InventarioSucursal (Sucursal, IdRepuesto, StockActual, StockMinimo) 
-                        VALUES (@Sucursal, @IdRepuesto, @StockActual, @StockMinimo)";
+                        INSERT INTO InventarioSucursal (IdSucursal, IdRepuesto, StockActual, StockMinimo) 
+                        VALUES (@IdSucursal, @IdRepuesto, @StockActual, @StockMinimo)";
 
                     SqlCommand cmdInventario = new SqlCommand(queryInventario, conexionBD.oCon, transaccion);
-                    cmdInventario.Parameters.AddWithValue("@Sucursal", "Matriz Quevedo");
+
+                    // Asignamos el ID de la sucursal (Asumiendo que 1 corresponde a "Matriz Quevedo" en tu tabla Sucursales)
+                    cmdInventario.Parameters.AddWithValue("@IdSucursal", 1);
                     cmdInventario.Parameters.AddWithValue("@IdRepuesto", idNuevoRepuesto);
                     cmdInventario.Parameters.AddWithValue("@StockActual", cantidadInicial);
                     cmdInventario.Parameters.AddWithValue("@StockMinimo", stockMinimo);

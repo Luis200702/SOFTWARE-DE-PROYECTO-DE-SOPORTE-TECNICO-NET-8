@@ -17,9 +17,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class frmMenu : Form
     {
-
         private string sucursalActual;
-
 
         private float posicionActualY;
         private float posicionObjetivoY;
@@ -33,11 +31,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         // Variable para mantener el botón que recibió Clic en el menú
         private System.Windows.Forms.Button botonActivo;
+
         public frmMenu(string sucursal)
         {
             InitializeComponent();
             sucursalActual = sucursal;
         }
+
         public frmMenu()
         {
             InitializeComponent();
@@ -107,7 +107,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             // Recortar límites del panel
             e.Graphics.SetClip(new RectangleF(0, 0, anchoTotal, pnlContenedorMenu.Height));
 
-
             // Variable para redondear las esquinas de los botones del menú
             float radioEsquinas = 6f;
 
@@ -144,7 +143,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     }
                 }
             }
-
 
             // Animación de selecionar el botón
             if (progresoAncho > 0.001f)
@@ -189,13 +187,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             float diametro = radio * 2f;
 
             path.StartFigure();
-            // Esquina superior izquierda
             path.AddArc(x, y, diametro, diametro, 180, 90);
-            // Esquina superior derecha
             path.AddArc(x + ancho - diametro, y, diametro, diametro, 270, 90);
-            // Esquina inferior derecha
             path.AddArc(x + ancho - diametro, y + alto - diametro, diametro, diametro, 0, 90);
-            // Esquina inferior izquierda
             path.AddArc(x, y + alto - diametro, diametro, diametro, 90, 90);
             path.CloseFigure();
 
@@ -335,11 +329,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnDerivacionOrdenes_Click(object sender, EventArgs e)
         {
-            // UserControl, la sucursal almacenada en la sesión
-            ucDerivacion uc = new ucDerivacion();
-
-            // Si ucDerivacion lee Sesion.SucursalActual en su constructor o Load, 
-            // simplemente abrir el UserControl con tu método predeterminado:
             AbrirUserControl(new ucDerivacion());
         }
 

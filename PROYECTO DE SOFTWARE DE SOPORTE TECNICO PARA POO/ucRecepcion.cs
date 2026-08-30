@@ -33,8 +33,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
 
-            // Texto por defecto para la Sucursal
-            txtSucursal.Text = "Sucursal Norte";
+            // 🔥 Tomamos dinámicamente la sucursal activa desde la sesión del usuario
+            txtSucursal.Text = Sesion.SucursalActual;
 
             CargarDatosComboBox();
             cmbEstado.SelectedIndex = 0;
@@ -185,9 +185,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             GuardarDatosEnMemoria();
 
-            // ==========================================
-            // 1. VALIDACIÓN DEL CLIENTE (Obligatorio siempre)
-            // ==========================================
             if (string.IsNullOrWhiteSpace(txtIdentificacionCliente.Text) ||
                 string.IsNullOrWhiteSpace(txtNombres.Text) ||
                 string.IsNullOrWhiteSpace(txtNumeroTelefonico.Text))
@@ -196,20 +193,15 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            // ==========================================
-            // 2. ¿GUARDAMOS SOLO CLIENTE O TAMBIÉN EQUIPO?
-            // ==========================================
             bool guardarSoloCliente = false;
             var primerEquipo = listaEquipos[0];
 
-            // Si no seleccionó Tipo (Compu/Teléfono) y no escribió Modelo, asumimos que solo quiere registrar al cliente
             if (listaEquipos.Count == 1 && string.IsNullOrEmpty(primerEquipo.Tipo) && string.IsNullOrWhiteSpace(primerEquipo.Modelo))
             {
                 guardarSoloCliente = true;
             }
             else
             {
-                // Si decidió llenar el equipo, validamos que no deje campos importantes vacíos
                 foreach (var eq in listaEquipos)
                 {
                     if (string.IsNullOrEmpty(eq.Tipo) || string.IsNullOrWhiteSpace(eq.Marca) || string.IsNullOrWhiteSpace(eq.Modelo))
@@ -226,9 +218,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
             }
 
-            // ==========================================
-            // 3. GUARDAMOS AL CLIENTE EN LA BASE DE DATOS
-            // ==========================================
             var oCon = new Conexion_Base_de_Datos();
             int idCliente = 0;
 
@@ -245,7 +234,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 oCon.cerrarConexion();
             }
 
-            if (idCliente == 0) // Si no existe, lo creamos
+            if (idCliente == 0)
             {
                 string campos = "nombre, telefono, correo, cedula_pasaporte, telefono_alt, direccion";
                 string datos = "'" + txtNombres.Text.Trim() + "','" + txtNumeroTelefonico.Text + "','" +
@@ -264,19 +253,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
             }
 
-            // ==========================================
-            // 4. GUARDAR DISPOSITIVOS Y ÓRDENES (Solo si aplica)
-            // ==========================================
             if (!guardarSoloCliente)
             {
                 int tecnicoId = Convert.ToInt32(cmbTecnico.SelectedValue);
-                string sucursal = txtSucursal.Text;
+                // 🔥 Aseguramos que la sucursal guardada en la orden sea la activa de la sesión
+                string sucursal = Sesion.SucursalActual;
 
                 for (int i = 0; i < listaEquipos.Count; i++)
                 {
                     var equipo = listaEquipos[i];
 
-                    // Insertar Dispositivo
                     string camposDisp = "cliente_id, tipo, marca, modelo, serie_imei, color, estado_llegada";
                     string datosDisp = idCliente + ",'" + equipo.Tipo + "','" + equipo.Marca.Trim() + "','" +
                                        equipo.Modelo.Trim() + "','" + equipo.Serie.Trim() + "','" +
@@ -284,7 +270,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     oCon.insertDatosCliente("dispositivos", camposDisp, datosDisp);
 
-                    // Buscar su ID
                     int idDispositivo = 0;
                     if (oCon.abrirConexion())
                     {
@@ -294,7 +279,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         oCon.cerrarConexion();
                     }
 
-                    // Insertar Orden
                     string costoAjustado = txtCosto.Text.Replace(",", ".");
                     string fechaEntrega = dtmFecha.Value.ToString("yyyy-MM-dd");
                     string numOrdenFinal = listaEquipos.Count > 1 ? $"{lblOrden.Text}-{i + 1}" : lblOrden.Text;
@@ -307,9 +291,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
             }
 
-            // ==========================================
-            // 5. MENSAJE FINAL Y LIMPIEZA
-            // ==========================================
             string mensajeExito = guardarSoloCliente ? "¡Cliente registrado exitosamente en la base de datos!" : "¡Recepción, equipo y orden guardados exitosamente!";
             MessageBox.Show(mensajeExito, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -332,7 +313,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             cmbEstado.SelectedIndex = 0;
 
             if (cmbTecnico.Items.Count > 0) cmbTecnico.SelectedIndex = 0;
-            txtSucursal.Text = "Sucursal Norte";
+
+            // 🔥 Mantiene la sucursal de la sesión actual al limpiar el formulario
+            txtSucursal.Text = Sesion.SucursalActual;
 
             dtmFecha.Value = DateTime.Now;
 
@@ -571,10 +554,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         }
 
         private void lblDatosCliente_Click(object sender, EventArgs e) { }
-
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void pictureBox4_Click(object sender, EventArgs e) { }
     }
 }
