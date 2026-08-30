@@ -25,7 +25,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             Unsoloboton.SeleccionarBoton(btnComputadora);
             tipoDispositivoSeleccionado = "computadora";
 
-            // 💻 Cargamos marcas orientadas a computadoras en ambos ComboBoxes
+            //  marcas orientadas a computadoras 
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarcaRecibido, tipoDispositivoSeleccionado);
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarcaNuevo, tipoDispositivoSeleccionado);
         }
@@ -197,20 +197,20 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            // 🔗 URL oficial de consulta de ARCOTEL (Tu Celular Legal)
-            // También puedes usar alternativas internacionales como "https://www.imei.info/"
+            // URL de consulta de ARCOTEL 
+            //"https://www.imei.info/"
             string urlOficial = "https://tucelularlegal.arcotel.gob.ec/consultas/";
 
             try
             {
-                // Esto abre el navegador web predeterminado de Windows (Chrome, Edge, etc.)
+                // abrir el navegador web predeterminado de Windows (Chrome, Edge, etc.)
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
                 {
                     FileName = urlOficial,
                     UseShellExecute = true
                 });
 
-                // Opcional: Copiar el IMEI al portapapeles para que el técnico solo haga "Ctrl+V" en la página
+                //Copiar el IMEI al portapapeles para que el técnico solo haga "Ctrl+V" en la página
                 Clipboard.SetText(imei);
                 MessageBox.Show("El IMEI se ha copiado al portapapeles.\nPégalo en la página que se acaba de abrir para verificar el estado de robo.", "Verificación", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -225,7 +225,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (string.IsNullOrWhiteSpace(txtPrecioOriginal.Text))
                 return;
 
-            // Convertimos la coma a punto solo para poder convertirlo a decimal
+            // Convertir la coma a punto solo para poder convertirlo a decimal
             string texto = txtPrecioOriginal.Text.Replace('.', ','); // por si acaso escriben punto
             texto = texto.Replace(',', '.');
 
@@ -273,7 +273,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (string.IsNullOrWhiteSpace(txtValorAsignado.Text))
                 return;
 
-            // Convertimos la coma a punto solo para poder convertirlo a decimal
+            // Convertir la coma a punto solo para poder convertirlo a decimal
             string texto = txtValorAsignado.Text.Replace('.', ','); // por si acaso escriben punto
             texto = texto.Replace(',', '.');
 
@@ -281,7 +281,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                        System.Globalization.CultureInfo.InvariantCulture, out decimal precio)
                 && precio >= 0)
             {
-                // Mostramos con coma
+                // Mostrar con coma
                 txtValorAsignado.Text = precio.ToString("0.00").Replace('.', ',');
             }
             else

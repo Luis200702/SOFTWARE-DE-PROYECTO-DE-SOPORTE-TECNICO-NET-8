@@ -24,7 +24,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
 
-            // 🔥 Tomamos dinámicamente la sucursal activa desde la sesión del usuario
+       
             txtSucursal.Text = Sesion.SucursalActual;
 
             CargarDatosComboBox();
@@ -247,7 +247,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (!guardarSoloCliente)
             {
                 int tecnicoId = Convert.ToInt32(cmbTecnico.SelectedValue);
-                // 🔥 Aseguramos que la sucursal guardada en la orden sea la activa de la sesión
+              
                 string sucursal = Sesion.SucursalActual;
 
                 for (int i = 0; i < listaEquipos.Count; i++)

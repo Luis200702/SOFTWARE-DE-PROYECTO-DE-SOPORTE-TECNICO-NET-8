@@ -14,13 +14,13 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             AplicarDiseñoGrid();
         }
 
-        // --- 1. DISEÑO BASE: FUERZA BRUTA CONTRA LOS BORDES ---
+        // --- 1. DISEÑO BASE: BORDES ---
         private void AplicarDiseñoGrid()
         {
             dgvNuevo.BackgroundColor = Color.White;
             dgvNuevo.BorderStyle = BorderStyle.None;
 
-            // 🔥 APAGAMOS TOTALMENTE LOS BORDES NATIVOS
+           
             dgvNuevo.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvNuevo.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvNuevo.RowHeadersVisible = false;
@@ -58,7 +58,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvNuevo.RowsDefaultCellStyle = estiloFila;
             dgvNuevo.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
 
-            // Aseguramos que los eventos estén conectados
+           
             dgvNuevo.DataBindingComplete += DgvNuevo_DataBindingComplete;
             dgvNuevo.RowPostPaint += DgvNuevo_RowPostPaint;
         }

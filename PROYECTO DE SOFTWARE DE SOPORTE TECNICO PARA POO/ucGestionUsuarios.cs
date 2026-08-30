@@ -79,7 +79,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             // Ocultamos el ID visualmente, pero sigue ahí "escondido" para cuando hagamos clic
             if (dgvNuevo.Columns.Contains("Id")) dgvNuevo.Columns["Id"].Visible = false;
 
-            // Creamos el botón de EDITAR al final
+            // Crear el botón de EDITAR al final
             if (!dgvNuevo.Columns.Contains("Editar"))
             {
                 DataGridViewButtonColumn btnEditar = new DataGridViewButtonColumn();
@@ -121,7 +121,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 string perfil = dgvNuevo.Rows[e.RowIndex].Cells["PERFIL"].Value.ToString();
                 string sucursal = dgvNuevo.Rows[e.RowIndex].Cells["SUCURSAL"].Value.ToString();
 
-                // Pasamos el idUsuario como primer parámetro, tal cual lo pide el nuevo constructor
+               
                 frmEditarUsuarios frmEditar = new frmEditarUsuarios(idUsuario, nombre, usuario, perfil, sucursal);
                 frmEditar.ShowDialog();
 

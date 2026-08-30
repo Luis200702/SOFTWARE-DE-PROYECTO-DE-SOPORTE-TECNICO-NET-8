@@ -83,7 +83,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 ? cmbCategorias.SelectedItem.ToString()
                 : "Todas las categorías";
 
-            // 🔥 Filtramos la consulta directamente por la sucursal actual del usuario
+           
             string query = @"
         SELECT 
             R.IdRepuesto, 

@@ -287,7 +287,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             btnReportes.Visible = true;
             btnGestionUsuarios.Visible = true;
-            btnConfiguracionGeneral.Visible = true;
+            btnConfiguracionGeneral.Visible = false;
         }
 
         private void frmMenu_FormClosing(object sender, FormClosingEventArgs e)
