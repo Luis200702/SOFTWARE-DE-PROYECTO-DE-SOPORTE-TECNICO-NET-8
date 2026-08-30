@@ -40,23 +40,30 @@
             txtBuscar = new Sunny.UI.UITextBox();
             pnlHistorial = new Panel();
             pnlDatosCliente = new Sunny.UI.UIPanel();
+            uiPanel2 = new Sunny.UI.UIPanel();
+            uiAvatar3 = new Sunny.UI.UIAvatar();
+            label4 = new Label();
+            lblTotalGastado = new Label();
+            uiPanel1 = new Sunny.UI.UIPanel();
+            uiAvatar2 = new Sunny.UI.UIAvatar();
+            label3 = new Label();
+            lblTotalVisitas = new Label();
+            lblCorreo = new Sunny.UI.UISymbolLabel();
             lblContacto = new Sunny.UI.UISymbolLabel();
             uiAvatar1 = new Sunny.UI.UIAvatar();
             lblNombreCompleto = new Label();
             dgvNuevoHistorial = new DataGridView();
             label1 = new Label();
-            pnlSuperiorCliente = new Panel();
-            llblTitleVisitas = new Label();
-            lblTotalGastado = new Label();
-            lblTotalVisitas = new Label();
             pictureBox2 = new PictureBox();
+            btnGuardarCambios = new Sunny.UI.UISymbolButton();
             pnlSuperior.SuspendLayout();
             pnlIzquierdo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientesNuevo).BeginInit();
             pnlHistorial.SuspendLayout();
             pnlDatosCliente.SuspendLayout();
+            uiPanel2.SuspendLayout();
+            uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvNuevoHistorial).BeginInit();
-            pnlSuperiorCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
@@ -204,7 +211,6 @@
             pnlHistorial.Controls.Add(pnlDatosCliente);
             pnlHistorial.Controls.Add(dgvNuevoHistorial);
             pnlHistorial.Controls.Add(label1);
-            pnlHistorial.Controls.Add(pnlSuperiorCliente);
             pnlHistorial.Controls.Add(pictureBox2);
             pnlHistorial.Location = new Point(274, 88);
             pnlHistorial.Name = "pnlHistorial";
@@ -217,22 +223,157 @@
             pnlDatosCliente.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlDatosCliente.AutoSize = true;
             pnlDatosCliente.BackColor = Color.Transparent;
+            pnlDatosCliente.Controls.Add(btnGuardarCambios);
+            pnlDatosCliente.Controls.Add(uiPanel2);
+            pnlDatosCliente.Controls.Add(uiPanel1);
+            pnlDatosCliente.Controls.Add(lblCorreo);
             pnlDatosCliente.Controls.Add(lblContacto);
             pnlDatosCliente.Controls.Add(uiAvatar1);
             pnlDatosCliente.Controls.Add(lblNombreCompleto);
             pnlDatosCliente.FillColor = Color.White;
             pnlDatosCliente.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             pnlDatosCliente.ForeColor = Color.Black;
-            pnlDatosCliente.Location = new Point(11, 10);
+            pnlDatosCliente.Location = new Point(4, 10);
             pnlDatosCliente.Margin = new Padding(4, 5, 4, 5);
             pnlDatosCliente.MinimumSize = new Size(1, 1);
             pnlDatosCliente.Name = "pnlDatosCliente";
             pnlDatosCliente.Radius = 12;
             pnlDatosCliente.RectColor = Color.FromArgb(221, 227, 233);
-            pnlDatosCliente.Size = new Size(834, 104);
+            pnlDatosCliente.Size = new Size(841, 104);
             pnlDatosCliente.TabIndex = 40;
             pnlDatosCliente.Text = null;
             pnlDatosCliente.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // uiPanel2
+            // 
+            uiPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            uiPanel2.AutoSize = true;
+            uiPanel2.BackColor = Color.Transparent;
+            uiPanel2.Controls.Add(uiAvatar3);
+            uiPanel2.Controls.Add(label4);
+            uiPanel2.Controls.Add(lblTotalGastado);
+            uiPanel2.FillColor = Color.White;
+            uiPanel2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiPanel2.ForeColor = Color.Black;
+            uiPanel2.Location = new Point(503, 13);
+            uiPanel2.Margin = new Padding(4, 5, 4, 5);
+            uiPanel2.MinimumSize = new Size(1, 1);
+            uiPanel2.Name = "uiPanel2";
+            uiPanel2.Radius = 12;
+            uiPanel2.RectColor = Color.FromArgb(221, 227, 233);
+            uiPanel2.Size = new Size(157, 71);
+            uiPanel2.TabIndex = 63;
+            uiPanel2.Text = null;
+            uiPanel2.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // uiAvatar3
+            // 
+            uiAvatar3.AvatarSize = 20;
+            uiAvatar3.FillColor = Color.FromArgb(232, 248, 247);
+            uiAvatar3.Font = new Font("Microsoft Sans Serif", 12F);
+            uiAvatar3.ForeColor = Color.FromArgb(0, 165, 155);
+            uiAvatar3.Location = new Point(10, 5);
+            uiAvatar3.MinimumSize = new Size(1, 1);
+            uiAvatar3.Name = "uiAvatar3";
+            uiAvatar3.Size = new Size(36, 39);
+            uiAvatar3.Symbol = 61654;
+            uiAvatar3.SymbolSize = 30;
+            uiAvatar3.TabIndex = 63;
+            uiAvatar3.Text = "uiAvatar3";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(70, 86, 103);
+            label4.Location = new Point(56, 40);
+            label4.Name = "label4";
+            label4.Size = new Size(98, 20);
+            label4.TabIndex = 64;
+            label4.Text = "total gastado";
+            // 
+            // lblTotalGastado
+            // 
+            lblTotalGastado.AutoSize = true;
+            lblTotalGastado.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalGastado.ForeColor = Color.FromArgb(24, 43, 62);
+            lblTotalGastado.Location = new Point(86, 12);
+            lblTotalGastado.Name = "lblTotalGastado";
+            lblTotalGastado.Size = new Size(23, 25);
+            lblTotalGastado.TabIndex = 5;
+            lblTotalGastado.Text = "#";
+            // 
+            // uiPanel1
+            // 
+            uiPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            uiPanel1.AutoSize = true;
+            uiPanel1.BackColor = Color.Transparent;
+            uiPanel1.Controls.Add(uiAvatar2);
+            uiPanel1.Controls.Add(label3);
+            uiPanel1.Controls.Add(lblTotalVisitas);
+            uiPanel1.FillColor = Color.White;
+            uiPanel1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            uiPanel1.ForeColor = Color.Black;
+            uiPanel1.Location = new Point(370, 13);
+            uiPanel1.Margin = new Padding(4, 5, 4, 5);
+            uiPanel1.MinimumSize = new Size(1, 1);
+            uiPanel1.Name = "uiPanel1";
+            uiPanel1.Radius = 12;
+            uiPanel1.RectColor = Color.FromArgb(221, 227, 233);
+            uiPanel1.Size = new Size(126, 71);
+            uiPanel1.TabIndex = 41;
+            uiPanel1.Text = null;
+            uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // uiAvatar2
+            // 
+            uiAvatar2.AvatarSize = 20;
+            uiAvatar2.FillColor = Color.FromArgb(232, 248, 247);
+            uiAvatar2.Font = new Font("Microsoft Sans Serif", 12F);
+            uiAvatar2.ForeColor = Color.FromArgb(0, 165, 155);
+            uiAvatar2.Location = new Point(10, 5);
+            uiAvatar2.MinimumSize = new Size(1, 1);
+            uiAvatar2.Name = "uiAvatar2";
+            uiAvatar2.Size = new Size(36, 39);
+            uiAvatar2.Symbol = 61555;
+            uiAvatar2.SymbolSize = 30;
+            uiAvatar2.TabIndex = 63;
+            uiAvatar2.Text = "uiAvatar2";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(70, 86, 103);
+            label3.Location = new Point(52, 40);
+            label3.Name = "label3";
+            label3.Size = new Size(62, 20);
+            label3.TabIndex = 64;
+            label3.Text = "órdenes";
+            // 
+            // lblTotalVisitas
+            // 
+            lblTotalVisitas.AutoSize = true;
+            lblTotalVisitas.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalVisitas.ForeColor = Color.FromArgb(24, 43, 62);
+            lblTotalVisitas.Location = new Point(72, 12);
+            lblTotalVisitas.Name = "lblTotalVisitas";
+            lblTotalVisitas.Size = new Size(23, 25);
+            lblTotalVisitas.TabIndex = 5;
+            lblTotalVisitas.Text = "#";
+            // 
+            // lblCorreo
+            // 
+            lblCorreo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCorreo.ForeColor = Color.FromArgb(70, 86, 103);
+            lblCorreo.Location = new Point(87, 70);
+            lblCorreo.MinimumSize = new Size(1, 1);
+            lblCorreo.Name = "lblCorreo";
+            lblCorreo.Size = new Size(203, 26);
+            lblCorreo.Symbol = 61664;
+            lblCorreo.TabIndex = 62;
+            lblCorreo.Text = "Correo";
+            lblCorreo.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblContacto
             // 
@@ -241,7 +382,7 @@
             lblContacto.Location = new Point(87, 44);
             lblContacto.MinimumSize = new Size(1, 1);
             lblContacto.Name = "lblContacto";
-            lblContacto.Size = new Size(156, 26);
+            lblContacto.Size = new Size(120, 26);
             lblContacto.Symbol = 61589;
             lblContacto.TabIndex = 61;
             lblContacto.Text = "ID";
@@ -299,48 +440,6 @@
             label1.Text = "Selecciona un cliente para ver su historial";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pnlSuperiorCliente
-            // 
-            pnlSuperiorCliente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlSuperiorCliente.Controls.Add(llblTitleVisitas);
-            pnlSuperiorCliente.Controls.Add(lblTotalGastado);
-            pnlSuperiorCliente.Controls.Add(lblTotalVisitas);
-            pnlSuperiorCliente.Location = new Point(300, 118);
-            pnlSuperiorCliente.Name = "pnlSuperiorCliente";
-            pnlSuperiorCliente.Size = new Size(372, 78);
-            pnlSuperiorCliente.TabIndex = 0;
-            // 
-            // llblTitleVisitas
-            // 
-            llblTitleVisitas.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            llblTitleVisitas.ForeColor = Color.Black;
-            llblTitleVisitas.Location = new Point(31, 52);
-            llblTitleVisitas.Name = "llblTitleVisitas";
-            llblTitleVisitas.Size = new Size(58, 20);
-            llblTitleVisitas.TabIndex = 6;
-            llblTitleVisitas.Text = "visitas";
-            llblTitleVisitas.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblTotalGastado
-            // 
-            lblTotalGastado.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblTotalGastado.ForeColor = Color.Black;
-            lblTotalGastado.Location = new Point(175, 18);
-            lblTotalGastado.Name = "lblTotalGastado";
-            lblTotalGastado.Size = new Size(90, 40);
-            lblTotalGastado.TabIndex = 5;
-            lblTotalGastado.Text = "x";
-            // 
-            // lblTotalVisitas
-            // 
-            lblTotalVisitas.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblTotalVisitas.ForeColor = Color.Black;
-            lblTotalVisitas.Location = new Point(21, 3);
-            lblTotalVisitas.Name = "lblTotalVisitas";
-            lblTotalVisitas.Size = new Size(99, 40);
-            lblTotalVisitas.TabIndex = 4;
-            lblTotalVisitas.Text = "x";
-            // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
@@ -350,6 +449,27 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 25;
             pictureBox2.TabStop = false;
+            // 
+            // btnGuardarCambios
+            // 
+            btnGuardarCambios.FillColor = Color.White;
+            btnGuardarCambios.FillHoverColor = Color.FromArgb(232, 248, 247);
+            btnGuardarCambios.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnGuardarCambios.ForeColor = Color.FromArgb(0, 145, 137);
+            btnGuardarCambios.ForeHoverColor = Color.FromArgb(232, 248, 247);
+            btnGuardarCambios.Location = new Point(671, 30);
+            btnGuardarCambios.MinimumSize = new Size(1, 1);
+            btnGuardarCambios.Name = "btnGuardarCambios";
+            btnGuardarCambios.Radius = 12;
+            btnGuardarCambios.RectColor = Color.FromArgb(0, 165, 155);
+            btnGuardarCambios.RectHoverColor = Color.FromArgb(232, 248, 247);
+            btnGuardarCambios.Size = new Size(156, 40);
+            btnGuardarCambios.Symbol = 61508;
+            btnGuardarCambios.SymbolColor = Color.FromArgb(0, 165, 155);
+            btnGuardarCambios.SymbolHoverColor = Color.FromArgb(232, 248, 247);
+            btnGuardarCambios.TabIndex = 75;
+            btnGuardarCambios.Text = "Editar cliente";
+            btnGuardarCambios.TipsFont = new Font("Microsoft Sans Serif", 9F);
             // 
             // ucHistorialClientes
             // 
@@ -370,8 +490,11 @@
             pnlHistorial.PerformLayout();
             pnlDatosCliente.ResumeLayout(false);
             pnlDatosCliente.PerformLayout();
+            uiPanel2.ResumeLayout(false);
+            uiPanel2.PerformLayout();
+            uiPanel1.ResumeLayout(false);
+            uiPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvNuevoHistorial).EndInit();
-            pnlSuperiorCliente.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
@@ -389,7 +512,6 @@
         private Panel pnlSuperiorCliente;
         private Label lblTotalVisitas;
         private Sunny.UI.UISymbolLabel lblContacto;
-        private Label lblTotalGastado;
         private PictureBox pictureBox2;
         private Label label1;
         private Label llblTitleVisitas;
@@ -400,5 +522,15 @@
         private Sunny.UI.UIPanel pnlDatosCliente;
         private Sunny.UI.UIAvatar uiAvatar1;
         private Label lblNombreCompleto;
+        private Sunny.UI.UISymbolLabel lblCorreo;
+        private Sunny.UI.UIPanel uiPanel1;
+        private Sunny.UI.UIAvatar uiAvatar2;
+        private Label label3;
+        private Label label2;
+        private Sunny.UI.UIPanel uiPanel2;
+        private Sunny.UI.UIAvatar uiAvatar3;
+        private Label label4;
+        private Label lblTotalGastado;
+        private Sunny.UI.UISymbolButton btnGuardarCambios;
     }
 }

@@ -127,7 +127,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     // Mostramos los datos básicos (Tu lógica adaptada)
                     if (lblNombreCompleto != null) lblNombreCompleto.Text = nombre;
-                    if (lblContacto != null) lblContacto.Text = $"{telefono} • {correo}";
+                    if (lblContacto != null) lblContacto.Text = telefono;
+                    if (lblCorreo != null) lblCorreo.Text = correo;
 
                     if (pnlHistorial != null)
                     {
