@@ -31,30 +31,33 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucHistorialClientes));
             materialButton1 = new ReaLTaiizor.Controls.MaterialButton();
             pnlSuperior = new Panel();
-            pictureBox1 = new PictureBox();
+            label16 = new Label();
+            uiSymbolLabel1 = new Sunny.UI.UISymbolLabel();
             lblTitulo = new Label();
             pnlIzquierdo = new Panel();
             dgvClientesNuevo = new DataGridView();
             btnBuscar = new Sunny.UI.UIButton();
             txtBuscar = new Sunny.UI.UITextBox();
             pnlHistorial = new Panel();
+            pnlDatosCliente = new Sunny.UI.UIPanel();
+            lblContacto = new Sunny.UI.UISymbolLabel();
+            uiAvatar1 = new Sunny.UI.UIAvatar();
+            lblNombreCompleto = new Label();
             dgvNuevoHistorial = new DataGridView();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
             pnlSuperiorCliente = new Panel();
             llblTitleVisitas = new Label();
             lblTotalGastado = new Label();
             lblTotalVisitas = new Label();
-            lblContacto = new Label();
-            lblNombreCompleto = new Label();
+            pictureBox2 = new PictureBox();
             pnlSuperior.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlIzquierdo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientesNuevo).BeginInit();
             pnlHistorial.SuspendLayout();
+            pnlDatosCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvNuevoHistorial).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             pnlSuperiorCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // materialButton1
@@ -85,33 +88,46 @@
             // pnlSuperior
             // 
             pnlSuperior.BackColor = Color.FromArgb(235, 239, 240);
-            pnlSuperior.Controls.Add(pictureBox1);
+            pnlSuperior.Controls.Add(label16);
+            pnlSuperior.Controls.Add(uiSymbolLabel1);
             pnlSuperior.Controls.Add(lblTitulo);
             pnlSuperior.Location = new Point(0, 0);
-            pnlSuperior.MaximumSize = new Size(1123, 59);
+            pnlSuperior.MaximumSize = new Size(1236, 88);
             pnlSuperior.MinimumSize = new Size(1123, 59);
             pnlSuperior.Name = "pnlSuperior";
-            pnlSuperior.Size = new Size(1123, 59);
+            pnlSuperior.Size = new Size(1236, 88);
             pnlSuperior.TabIndex = 2;
             // 
-            // pictureBox1
+            // label16
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(31, 15);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(36, 30);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label16.ForeColor = Color.FromArgb(70, 86, 103);
+            label16.Location = new Point(82, 46);
+            label16.Name = "label16";
+            label16.Size = new Size(441, 20);
+            label16.TabIndex = 63;
+            label16.Text = "Consulta el historial de órdenes y equipos registrados por cliente.";
+            // 
+            // uiSymbolLabel1
+            // 
+            uiSymbolLabel1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiSymbolLabel1.Location = new Point(14, 11);
+            uiSymbolLabel1.MinimumSize = new Size(1, 1);
+            uiSymbolLabel1.Name = "uiSymbolLabel1";
+            uiSymbolLabel1.Size = new Size(62, 48);
+            uiSymbolLabel1.Symbol = 61463;
+            uiSymbolLabel1.SymbolColor = Color.FromArgb(0, 165, 155);
+            uiSymbolLabel1.SymbolSize = 40;
+            uiSymbolLabel1.TabIndex = 40;
             // 
             // lblTitulo
             // 
-            lblTitulo.Dock = DockStyle.Left;
-            lblTitulo.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.FromArgb(75, 92, 108);
+            lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.FromArgb(24, 43, 62);
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(569, 59);
+            lblTitulo.Size = new Size(531, 59);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Historial de Equipos por Cliente";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -121,17 +137,25 @@
             pnlIzquierdo.Controls.Add(dgvClientesNuevo);
             pnlIzquierdo.Controls.Add(btnBuscar);
             pnlIzquierdo.Controls.Add(txtBuscar);
-            pnlIzquierdo.Location = new Point(0, 59);
+            pnlIzquierdo.Location = new Point(0, 88);
             pnlIzquierdo.MinimumSize = new Size(274, 705);
             pnlIzquierdo.Name = "pnlIzquierdo";
-            pnlIzquierdo.Size = new Size(274, 773);
+            pnlIzquierdo.Size = new Size(274, 744);
             pnlIzquierdo.TabIndex = 3;
             // 
             // dgvClientesNuevo
             // 
+            dgvClientesNuevo.AllowUserToAddRows = false;
+            dgvClientesNuevo.AllowUserToDeleteRows = false;
+            dgvClientesNuevo.AllowUserToResizeColumns = false;
+            dgvClientesNuevo.AllowUserToResizeRows = false;
+            dgvClientesNuevo.BackgroundColor = Color.White;
+            dgvClientesNuevo.BorderStyle = BorderStyle.None;
             dgvClientesNuevo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClientesNuevo.GridColor = SystemColors.ButtonFace;
             dgvClientesNuevo.Location = new Point(0, 125);
             dgvClientesNuevo.Name = "dgvClientesNuevo";
+            dgvClientesNuevo.RowHeadersVisible = false;
             dgvClientesNuevo.Size = new Size(274, 647);
             dgvClientesNuevo.TabIndex = 22;
             dgvClientesNuevo.CellClick += dgvClientesNuevo_CellClick;
@@ -177,22 +201,89 @@
             // 
             // pnlHistorial
             // 
+            pnlHistorial.Controls.Add(pnlDatosCliente);
             pnlHistorial.Controls.Add(dgvNuevoHistorial);
             pnlHistorial.Controls.Add(label1);
-            pnlHistorial.Controls.Add(pictureBox2);
             pnlHistorial.Controls.Add(pnlSuperiorCliente);
-            pnlHistorial.Location = new Point(274, 59);
+            pnlHistorial.Controls.Add(pictureBox2);
+            pnlHistorial.Location = new Point(274, 88);
             pnlHistorial.Name = "pnlHistorial";
-            pnlHistorial.Size = new Size(851, 773);
+            pnlHistorial.Size = new Size(851, 741);
             pnlHistorial.TabIndex = 5;
             pnlHistorial.Visible = false;
             // 
+            // pnlDatosCliente
+            // 
+            pnlDatosCliente.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            pnlDatosCliente.AutoSize = true;
+            pnlDatosCliente.BackColor = Color.Transparent;
+            pnlDatosCliente.Controls.Add(lblContacto);
+            pnlDatosCliente.Controls.Add(uiAvatar1);
+            pnlDatosCliente.Controls.Add(lblNombreCompleto);
+            pnlDatosCliente.FillColor = Color.White;
+            pnlDatosCliente.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            pnlDatosCliente.ForeColor = Color.Black;
+            pnlDatosCliente.Location = new Point(11, 10);
+            pnlDatosCliente.Margin = new Padding(4, 5, 4, 5);
+            pnlDatosCliente.MinimumSize = new Size(1, 1);
+            pnlDatosCliente.Name = "pnlDatosCliente";
+            pnlDatosCliente.Radius = 12;
+            pnlDatosCliente.RectColor = Color.FromArgb(221, 227, 233);
+            pnlDatosCliente.Size = new Size(834, 104);
+            pnlDatosCliente.TabIndex = 40;
+            pnlDatosCliente.Text = null;
+            pnlDatosCliente.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // lblContacto
+            // 
+            lblContacto.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblContacto.ForeColor = Color.FromArgb(70, 86, 103);
+            lblContacto.Location = new Point(87, 44);
+            lblContacto.MinimumSize = new Size(1, 1);
+            lblContacto.Name = "lblContacto";
+            lblContacto.Size = new Size(156, 26);
+            lblContacto.Symbol = 61589;
+            lblContacto.TabIndex = 61;
+            lblContacto.Text = "ID";
+            lblContacto.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // uiAvatar1
+            // 
+            uiAvatar1.FillColor = Color.FromArgb(232, 248, 247);
+            uiAvatar1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiAvatar1.ForeColor = Color.FromArgb(0, 165, 155);
+            uiAvatar1.Location = new Point(17, 12);
+            uiAvatar1.MinimumSize = new Size(1, 1);
+            uiAvatar1.Name = "uiAvatar1";
+            uiAvatar1.Size = new Size(60, 60);
+            uiAvatar1.TabIndex = 60;
+            uiAvatar1.Text = "uiAvatar1";
+            // 
+            // lblNombreCompleto
+            // 
+            lblNombreCompleto.AutoSize = true;
+            lblNombreCompleto.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNombreCompleto.ForeColor = Color.FromArgb(24, 43, 62);
+            lblNombreCompleto.Location = new Point(83, 12);
+            lblNombreCompleto.Name = "lblNombreCompleto";
+            lblNombreCompleto.Size = new Size(45, 25);
+            lblNombreCompleto.TabIndex = 4;
+            lblNombreCompleto.Text = "xxx";
+            // 
             // dgvNuevoHistorial
             // 
+            dgvNuevoHistorial.AllowUserToAddRows = false;
+            dgvNuevoHistorial.AllowUserToDeleteRows = false;
+            dgvNuevoHistorial.AllowUserToResizeColumns = false;
+            dgvNuevoHistorial.AllowUserToResizeRows = false;
+            dgvNuevoHistorial.BackgroundColor = Color.White;
+            dgvNuevoHistorial.BorderStyle = BorderStyle.None;
             dgvNuevoHistorial.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvNuevoHistorial.GridColor = SystemColors.ButtonFace;
             dgvNuevoHistorial.Location = new Point(0, 125);
             dgvNuevoHistorial.Name = "dgvNuevoHistorial";
-            dgvNuevoHistorial.Size = new Size(851, 648);
+            dgvNuevoHistorial.RowHeadersVisible = false;
+            dgvNuevoHistorial.Size = new Size(851, 619);
             dgvNuevoHistorial.TabIndex = 26;
             dgvNuevoHistorial.CellFormatting += dgvNuevoHistorial_CellFormatting;
             dgvNuevoHistorial.CellPainting += dgvNuevoHistorial_CellPainting;
@@ -208,34 +299,22 @@
             label1.Text = "Selecciona un cliente para ver su historial";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(381, 278);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(89, 74);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 25;
-            pictureBox2.TabStop = false;
-            // 
             // pnlSuperiorCliente
             // 
             pnlSuperiorCliente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSuperiorCliente.Controls.Add(llblTitleVisitas);
             pnlSuperiorCliente.Controls.Add(lblTotalGastado);
             pnlSuperiorCliente.Controls.Add(lblTotalVisitas);
-            pnlSuperiorCliente.Controls.Add(lblContacto);
-            pnlSuperiorCliente.Controls.Add(lblNombreCompleto);
-            pnlSuperiorCliente.Location = new Point(0, 0);
+            pnlSuperiorCliente.Location = new Point(300, 118);
             pnlSuperiorCliente.Name = "pnlSuperiorCliente";
-            pnlSuperiorCliente.Size = new Size(851, 126);
+            pnlSuperiorCliente.Size = new Size(372, 78);
             pnlSuperiorCliente.TabIndex = 0;
             // 
             // llblTitleVisitas
             // 
             llblTitleVisitas.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             llblTitleVisitas.ForeColor = Color.Black;
-            llblTitleVisitas.Location = new Point(521, 53);
+            llblTitleVisitas.Location = new Point(31, 52);
             llblTitleVisitas.Name = "llblTitleVisitas";
             llblTitleVisitas.Size = new Size(58, 20);
             llblTitleVisitas.TabIndex = 6;
@@ -246,7 +325,7 @@
             // 
             lblTotalGastado.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTotalGastado.ForeColor = Color.Black;
-            lblTotalGastado.Location = new Point(626, 23);
+            lblTotalGastado.Location = new Point(175, 18);
             lblTotalGastado.Name = "lblTotalGastado";
             lblTotalGastado.Size = new Size(90, 40);
             lblTotalGastado.TabIndex = 5;
@@ -256,31 +335,21 @@
             // 
             lblTotalVisitas.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTotalVisitas.ForeColor = Color.Black;
-            lblTotalVisitas.Location = new Point(521, 23);
+            lblTotalVisitas.Location = new Point(21, 3);
             lblTotalVisitas.Name = "lblTotalVisitas";
             lblTotalVisitas.Size = new Size(99, 40);
             lblTotalVisitas.TabIndex = 4;
             lblTotalVisitas.Text = "x";
             // 
-            // lblContacto
+            // pictureBox2
             // 
-            lblContacto.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblContacto.ForeColor = Color.Black;
-            lblContacto.Location = new Point(18, 53);
-            lblContacto.Name = "lblContacto";
-            lblContacto.Size = new Size(212, 20);
-            lblContacto.TabIndex = 3;
-            lblContacto.Text = "x";
-            // 
-            // lblNombreCompleto
-            // 
-            lblNombreCompleto.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblNombreCompleto.ForeColor = Color.Black;
-            lblNombreCompleto.Location = new Point(18, 20);
-            lblNombreCompleto.Name = "lblNombreCompleto";
-            lblNombreCompleto.Size = new Size(212, 20);
-            lblNombreCompleto.TabIndex = 2;
-            lblNombreCompleto.Text = "x";
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(381, 278);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(89, 74);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 25;
+            pictureBox2.TabStop = false;
             // 
             // ucHistorialClientes
             // 
@@ -294,13 +363,16 @@
             Size = new Size(1123, 832);
             Load += ucHistorialClientes_Load;
             pnlSuperior.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            pnlSuperior.PerformLayout();
             pnlIzquierdo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvClientesNuevo).EndInit();
             pnlHistorial.ResumeLayout(false);
+            pnlHistorial.PerformLayout();
+            pnlDatosCliente.ResumeLayout(false);
+            pnlDatosCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvNuevoHistorial).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             pnlSuperiorCliente.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -309,7 +381,6 @@
         private Sunny.UI.UIButton btnAcceder;
         private FontAwesome.Sharp.IconDropDownButton iconDropDownButton1;
         private Panel pnlSuperior;
-        private PictureBox pictureBox1;
         private Label lblTitulo;
         private Panel pnlIzquierdo;
         private Sunny.UI.UITextBox txtBuscar;
@@ -317,13 +388,17 @@
         private Panel pnlHistorial;
         private Panel pnlSuperiorCliente;
         private Label lblTotalVisitas;
-        private Label lblContacto;
-        private Label lblNombreCompleto;
+        private Sunny.UI.UISymbolLabel lblContacto;
         private Label lblTotalGastado;
         private PictureBox pictureBox2;
         private Label label1;
         private Label llblTitleVisitas;
         private DataGridView dgvNuevoHistorial;
         private DataGridView dgvClientesNuevo;
+        private Sunny.UI.UISymbolLabel uiSymbolLabel1;
+        private Label label16;
+        private Sunny.UI.UIPanel pnlDatosCliente;
+        private Sunny.UI.UIAvatar uiAvatar1;
+        private Label lblNombreCompleto;
     }
 }

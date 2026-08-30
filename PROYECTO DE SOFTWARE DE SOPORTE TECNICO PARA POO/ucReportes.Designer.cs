@@ -35,25 +35,25 @@
             pnlDatosCliente = new Sunny.UI.UIPanel();
             lblPorcentajeEquiposRecibidos = new Sunny.UI.UISymbolLabel();
             label2 = new Label();
-            label1 = new Label();
+            lblEquiposRecibidos = new Label();
             uiAvatar1 = new Sunny.UI.UIAvatar();
             lblCliente = new Label();
             uiPanel1 = new Sunny.UI.UIPanel();
             uiSymbolLabel2 = new Sunny.UI.UISymbolLabel();
             label3 = new Label();
-            label4 = new Label();
+            lblReparaciones = new Label();
             uiAvatar2 = new Sunny.UI.UIAvatar();
             label5 = new Label();
             uiPanel2 = new Sunny.UI.UIPanel();
             uiSymbolLabel3 = new Sunny.UI.UISymbolLabel();
             label6 = new Label();
-            label7 = new Label();
+            lblIngresos = new Label();
             uiAvatar3 = new Sunny.UI.UIAvatar();
             label8 = new Label();
             uiPanel3 = new Sunny.UI.UIPanel();
             uiSymbolLabel4 = new Sunny.UI.UISymbolLabel();
             label9 = new Label();
-            label10 = new Label();
+            lblPendientes = new Label();
             uiAvatar4 = new Sunny.UI.UIAvatar();
             label11 = new Label();
             uiPanel4 = new Sunny.UI.UIPanel();
@@ -106,7 +106,7 @@
             // uiSymbolLabel1
             // 
             uiSymbolLabel1.Font = new Font("Microsoft Sans Serif", 12F);
-            uiSymbolLabel1.Location = new Point(25, 6);
+            uiSymbolLabel1.Location = new Point(26, 9);
             uiSymbolLabel1.MinimumSize = new Size(1, 1);
             uiSymbolLabel1.Name = "uiSymbolLabel1";
             uiSymbolLabel1.Size = new Size(62, 48);
@@ -133,7 +133,7 @@
             pnlDatosCliente.BackColor = Color.Transparent;
             pnlDatosCliente.Controls.Add(lblPorcentajeEquiposRecibidos);
             pnlDatosCliente.Controls.Add(label2);
-            pnlDatosCliente.Controls.Add(label1);
+            pnlDatosCliente.Controls.Add(lblEquiposRecibidos);
             pnlDatosCliente.Controls.Add(uiAvatar1);
             pnlDatosCliente.Controls.Add(lblCliente);
             pnlDatosCliente.FillColor = Color.White;
@@ -149,6 +149,7 @@
             pnlDatosCliente.TabIndex = 39;
             pnlDatosCliente.Text = null;
             pnlDatosCliente.TextAlignment = ContentAlignment.MiddleCenter;
+            pnlDatosCliente.Click += pnlDatosCliente_Click;
             // 
             // lblPorcentajeEquiposRecibidos
             // 
@@ -175,16 +176,16 @@
             label2.TabIndex = 62;
             label2.Text = "Este mes";
             // 
-            // label1
+            // lblEquiposRecibidos
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(24, 43, 62);
-            label1.Location = new Point(83, 37);
-            label1.Name = "label1";
-            label1.Size = new Size(45, 25);
-            label1.TabIndex = 61;
-            label1.Text = "###";
+            lblEquiposRecibidos.AutoSize = true;
+            lblEquiposRecibidos.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEquiposRecibidos.ForeColor = Color.FromArgb(24, 43, 62);
+            lblEquiposRecibidos.Location = new Point(83, 37);
+            lblEquiposRecibidos.Name = "lblEquiposRecibidos";
+            lblEquiposRecibidos.Size = new Size(45, 25);
+            lblEquiposRecibidos.TabIndex = 61;
+            lblEquiposRecibidos.Text = "###";
             // 
             // uiAvatar1
             // 
@@ -217,7 +218,7 @@
             uiPanel1.BackColor = Color.Transparent;
             uiPanel1.Controls.Add(uiSymbolLabel2);
             uiPanel1.Controls.Add(label3);
-            uiPanel1.Controls.Add(label4);
+            uiPanel1.Controls.Add(lblReparaciones);
             uiPanel1.Controls.Add(uiAvatar2);
             uiPanel1.Controls.Add(label5);
             uiPanel1.FillColor = Color.White;
@@ -259,16 +260,16 @@
             label3.TabIndex = 62;
             label3.Text = "Este mes";
             // 
-            // label4
+            // lblReparaciones
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.FromArgb(24, 43, 62);
-            label4.Location = new Point(83, 37);
-            label4.Name = "label4";
-            label4.Size = new Size(45, 25);
-            label4.TabIndex = 61;
-            label4.Text = "###";
+            lblReparaciones.AutoSize = true;
+            lblReparaciones.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblReparaciones.ForeColor = Color.FromArgb(24, 43, 62);
+            lblReparaciones.Location = new Point(83, 37);
+            lblReparaciones.Name = "lblReparaciones";
+            lblReparaciones.Size = new Size(45, 25);
+            lblReparaciones.TabIndex = 61;
+            lblReparaciones.Text = "###";
             // 
             // uiAvatar2
             // 
@@ -301,7 +302,7 @@
             uiPanel2.BackColor = Color.Transparent;
             uiPanel2.Controls.Add(uiSymbolLabel3);
             uiPanel2.Controls.Add(label6);
-            uiPanel2.Controls.Add(label7);
+            uiPanel2.Controls.Add(lblIngresos);
             uiPanel2.Controls.Add(uiAvatar3);
             uiPanel2.Controls.Add(label8);
             uiPanel2.FillColor = Color.White;
@@ -343,16 +344,16 @@
             label6.TabIndex = 62;
             label6.Text = "Este mes";
             // 
-            // label7
+            // lblIngresos
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.FromArgb(24, 43, 62);
-            label7.Location = new Point(83, 37);
-            label7.Name = "label7";
-            label7.Size = new Size(56, 25);
-            label7.TabIndex = 61;
-            label7.Text = "$###";
+            lblIngresos.AutoSize = true;
+            lblIngresos.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblIngresos.ForeColor = Color.FromArgb(24, 43, 62);
+            lblIngresos.Location = new Point(83, 37);
+            lblIngresos.Name = "lblIngresos";
+            lblIngresos.Size = new Size(56, 25);
+            lblIngresos.TabIndex = 61;
+            lblIngresos.Text = "$###";
             // 
             // uiAvatar3
             // 
@@ -385,7 +386,7 @@
             uiPanel3.BackColor = Color.Transparent;
             uiPanel3.Controls.Add(uiSymbolLabel4);
             uiPanel3.Controls.Add(label9);
-            uiPanel3.Controls.Add(label10);
+            uiPanel3.Controls.Add(lblPendientes);
             uiPanel3.Controls.Add(uiAvatar4);
             uiPanel3.Controls.Add(label11);
             uiPanel3.FillColor = Color.White;
@@ -427,16 +428,16 @@
             label9.TabIndex = 62;
             label9.Text = "Este mes";
             // 
-            // label10
+            // lblPendientes
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.FromArgb(24, 43, 62);
-            label10.Location = new Point(83, 37);
-            label10.Name = "label10";
-            label10.Size = new Size(45, 25);
-            label10.TabIndex = 61;
-            label10.Text = "###";
+            lblPendientes.AutoSize = true;
+            lblPendientes.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPendientes.ForeColor = Color.FromArgb(24, 43, 62);
+            lblPendientes.Location = new Point(83, 37);
+            lblPendientes.Name = "lblPendientes";
+            lblPendientes.Size = new Size(45, 25);
+            lblPendientes.TabIndex = 61;
+            lblPendientes.Text = "###";
             // 
             // uiAvatar4
             // 
@@ -707,6 +708,7 @@
             Controls.Add(pnlSuperior);
             Name = "ucReportes";
             Size = new Size(1123, 832);
+            Load += ucReportes_Load;
             pnlSuperior.ResumeLayout(false);
             pnlSuperior.PerformLayout();
             pnlDatosCliente.ResumeLayout(false);
@@ -735,23 +737,23 @@
         private Label lblCliente;
         private Sunny.UI.UISymbolLabel lblPorcentajeEquiposRecibidos;
         private Label label2;
-        private Label label1;
+        private Label lblEquiposRecibidos;
         private Sunny.UI.UIPanel uiPanel1;
         private Sunny.UI.UISymbolLabel uiSymbolLabel2;
         private Label label3;
-        private Label label4;
+        private Label lblReparaciones;
         private Sunny.UI.UIAvatar uiAvatar2;
         private Label label5;
         private Sunny.UI.UIPanel uiPanel2;
         private Sunny.UI.UISymbolLabel uiSymbolLabel3;
         private Label label6;
-        private Label label7;
+        private Label lblIngresos;
         private Sunny.UI.UIAvatar uiAvatar3;
         private Label label8;
         private Sunny.UI.UIPanel uiPanel3;
         private Sunny.UI.UISymbolLabel uiSymbolLabel4;
         private Label label9;
-        private Label label10;
+        private Label lblPendientes;
         private Sunny.UI.UIAvatar uiAvatar4;
         private Label label11;
         private Sunny.UI.UIPanel uiPanel4;

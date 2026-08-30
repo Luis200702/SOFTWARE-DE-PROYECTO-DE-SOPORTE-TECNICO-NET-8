@@ -8,6 +8,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class ucHistorialClientes : UserControl
     {
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
         public ucHistorialClientes()
         {
             InitializeComponent();
@@ -17,23 +18,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // --- 1. DISEÑO BASE DE AMBAS TABLAS ESTILO WEB ---
         private void AplicarDiseñoGrid()
         {
-            // --------------------------------------------------------
-            // A) TABLA IZQUIERDA (dgvClientesNuevo) - Lista de Clientes
-            // --------------------------------------------------------
-            dgvClientesNuevo.BackgroundColor = Color.White;
-            dgvClientesNuevo.BorderStyle = BorderStyle.None;
             dgvClientesNuevo.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvClientesNuevo.GridColor = Color.FromArgb(240, 240, 240);
-            dgvClientesNuevo.RowHeadersVisible = false;
-            dgvClientesNuevo.AllowUserToAddRows = false;
-            dgvClientesNuevo.AllowUserToDeleteRows = false;
-            dgvClientesNuevo.AllowUserToResizeRows = false;
-            dgvClientesNuevo.AllowUserToResizeColumns = false;
             dgvClientesNuevo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvClientesNuevo.ColumnHeadersVisible = false; // Ocultamos el encabezado para que se vea como una lista limpia
 
             DataGridViewCellStyle estiloFilaIzq = new DataGridViewCellStyle();
-            estiloFilaIzq.BackColor = Color.White;
+            estiloFilaIzq.BackColor = Color.FromArgb(243, 246, 250);
             estiloFilaIzq.ForeColor = Color.FromArgb(60, 60, 60);
             estiloFilaIzq.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular);
             estiloFilaIzq.SelectionBackColor = Color.FromArgb(235, 252, 242); // Verde agua muy claro
@@ -41,23 +31,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             estiloFilaIzq.Padding = new Padding(10); // Espaciado interno
             dgvClientesNuevo.RowsDefaultCellStyle = estiloFilaIzq;
 
-            // --------------------------------------------------------
-            // B) TABLA DERECHA (dgvNuevoHistorial) - Historial de Órdenes
-            // --------------------------------------------------------
-            dgvNuevoHistorial.BackgroundColor = Color.White;
-            dgvNuevoHistorial.BorderStyle = BorderStyle.None;
-            dgvNuevoHistorial.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvNuevoHistorial.GridColor = Color.FromArgb(240, 240, 240);
-            dgvNuevoHistorial.RowHeadersVisible = false;
-            dgvNuevoHistorial.AllowUserToAddRows = false;
-            dgvNuevoHistorial.AllowUserToDeleteRows = false;
-            dgvNuevoHistorial.AllowUserToResizeRows = false;
-            dgvNuevoHistorial.AllowUserToResizeColumns = false;
-            dgvNuevoHistorial.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            dgvNuevoHistorial.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvNuevoHistorial.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvNuevoHistorial.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvNuevoHistorial.ColumnHeadersHeight = 50;
-            dgvNuevoHistorial.RowTemplate.Height = 60; // Filas altas para las píldoras
+            dgvNuevoHistorial.RowTemplate.Height = 60;
 
             dgvNuevoHistorial.EnableHeadersVisualStyles = false;
             DataGridViewCellStyle estiloEncabezadoDer = new DataGridViewCellStyle();
@@ -100,62 +79,37 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarListaClientes(string busqueda)
         {
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+            DataTable HistorialClientes = oCon.retornarRegistrosUsuarios(@"
+                SELECT 
+                    C.id, 
+                    C.nombre + CHAR(13) + CHAR(10) + 
+                    ISNULL(C.telefono, 'Sin teléfono') + CHAR(13) + CHAR(10) + 
+                    CAST(COUNT(O.id) AS VARCHAR) + ' órdenes' AS InfoCliente,
+                    C.nombre,
+                    C.telefono,
+                    C.correo
+                FROM Clientes C
+                LEFT JOIN ordenes O ON C.id = O.cliente_id
+                WHERE C.nombre LIKE '%" + busqueda + @"%' 
+                   OR C.cedula_pasaporte LIKE '%" + busqueda + @"%'
+                   OR C.correo LIKE '%" + busqueda + @"%'
+                GROUP BY C.id, C.nombre, C.telefono, C.correo
+                ORDER BY C.nombre");
+
+            dgvClientesNuevo.Columns.Clear();
+            dgvClientesNuevo.AutoGenerateColumns = false;
+
+            dgvClientesNuevo.Columns.Add(new DataGridViewTextBoxColumn
             {
-                try
-                {
-                    string query = @"
-                        SELECT 
-                            C.id, 
-                            C.nombre + CHAR(13) + CHAR(10) + 
-                            ISNULL(C.telefono, 'Sin teléfono') + CHAR(13) + CHAR(10) + 
-                            CAST(COUNT(O.id) AS VARCHAR) + ' órdenes' AS InfoCliente,
-                            C.nombre,
-                            C.telefono,
-                            C.correo
-                        FROM Clientes C
-                        LEFT JOIN ordenes O ON C.id = O.cliente_id
-                        WHERE C.nombre LIKE '%' + @busqueda + '%' 
-                           OR C.cedula_pasaporte LIKE '%' + @busqueda + '%'
-                           OR C.correo LIKE '%' + @busqueda + '%'
-                        GROUP BY C.id, C.nombre, C.telefono, C.correo
-                        ORDER BY C.nombre";
+                DataPropertyName = "InfoCliente",
+                Name = "InfoCliente",
+                HeaderText = "Clientes",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            });
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@busqueda", busqueda);
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-
-                        // Limpiamos columnas para crearlas nosotros y asegurar el diseño
-                        dgvClientesNuevo.Columns.Clear();
-                        dgvClientesNuevo.AutoGenerateColumns = false;
-
-                        dgvClientesNuevo.Columns.Add(new DataGridViewTextBoxColumn
-                        {
-                            DataPropertyName = "InfoCliente",
-                            Name = "InfoCliente",
-                            HeaderText = "Clientes",
-                            AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                        });
-
-                        dgvClientesNuevo.DataSource = dt;
-                        dgvClientesNuevo.ClearSelection();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al buscar clientes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
-            }
+            dgvClientesNuevo.DataSource = HistorialClientes;
+            dgvClientesNuevo.ClearSelection();
         }
-
         // --- 3. SELECCIÓN DE CLIENTE Y CARGA DEL HISTORIAL ---
         private void dgvClientesNuevo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -192,41 +146,27 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarHistorialOrdenes(int idCliente)
         {
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
-            {
-                try
-                {
-                    // He renombrado los alias (AS ORDEN, AS COSTO) para que el diseño visual coincida exacto
-                    string query = @"
-                        SELECT 
-                            O.numero_orden AS ORDEN,
-                            CONVERT(varchar, O.fecha_ingreso, 103) AS FECHA,
-                            D.marca + ' ' + D.modelo AS DISPOSITIVO,
-                            ISNULL(O.descripcion_problema, 'Reparación general') AS REPARACIÓN,
-                            ISNULL(O.costo_estimado, 0) AS COSTO,
-                            O.estado AS ESTADO,
-                            U.Nombre AS TÉCNICO
-                        FROM ordenes O
-                        INNER JOIN dispositivos D ON O.dispositivo_id = D.id
-                        INNER JOIN Usuarios U ON O.tecnico_id = U.Id
-                        WHERE O.cliente_id = @idCliente
-                        ORDER BY O.fecha_ingreso DESC";
+            DataTable HistorialClientes = oCon.retornarRegistrosUsuarios(@"select
+                            O.numero_orden as ORDEN,
+                            convert(varchar, O.fecha_ingreso, 103) as FECHA,
+                            D.marca + ' ' + D.modelo as DISPOSITIVO,
+                            isnull(O.descripcion_problema, 'Reparación general') as REPARACIÓN,
+                            isnull(O.costo_estimado, 0) as COSTO,
+                            O.estado as ESTADO,
+                            U.Nombre as TÉCNICO
+                        from ordenes O
+                        inner join dispositivos D on O.dispositivo_id = D.id
+                        inner join Usuarios U on O.tecnico_id = U.Id
+                        where O.cliente_id = " + idCliente + @"
+                        order by O.fecha_ingreso desc");
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@idCliente", idCliente);
 
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-
+                       
                         // Usamos AutoGenerateColumns y limpiamos lo previo para no duplicar columnas
                         dgvNuevoHistorial.Columns.Clear();
                         dgvNuevoHistorial.AutoGenerateColumns = true;
-                        dgvNuevoHistorial.DataSource = dt;
+                        dgvNuevoHistorial.DataSource = HistorialClientes;
 
-                        // Ajustes de Ancho para la tabla de la derecha
                         if (dgvNuevoHistorial.Columns.Count > 0)
                         {
                             dgvNuevoHistorial.Columns["ORDEN"].Width = 130;
@@ -245,30 +185,19 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             dgvNuevoHistorial.Columns["TÉCNICO"].Width = 140;
                         }
 
-                        // Actualizamos las estadísticas (Tu lógica)
-                        if (lblTotalVisitas != null) lblTotalVisitas.Text = dt.Rows.Count.ToString();
+                        if (lblTotalVisitas != null) lblTotalVisitas.Text = HistorialClientes.Rows.Count.ToString();
 
                         decimal totalGastado = 0;
-                        foreach (DataRow row in dt.Rows)
+                        foreach (DataRow row in HistorialClientes.Rows)
                         {
                             totalGastado += Convert.ToDecimal(row["COSTO"]);
                         }
                         if (lblTotalGastado != null) lblTotalGastado.Text = $"${totalGastado:0.00}";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al cargar el historial del cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
-            }
+                    
+               
             dgvNuevoHistorial.ClearSelection();
         }
 
-        // --- 4. FORMATO DE TEXTO DE LA TABLA DERECHA (NÚMERO VERDE Y MONEDA) ---
         private void dgvNuevoHistorial_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.Value != null)
@@ -294,7 +223,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // --- 5. PÍLDORAS REDONDEADAS DE LA TABLA DERECHA ---
         private void dgvNuevoHistorial_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
@@ -366,7 +294,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 e.Handled = true;
             }
         }
-
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
 

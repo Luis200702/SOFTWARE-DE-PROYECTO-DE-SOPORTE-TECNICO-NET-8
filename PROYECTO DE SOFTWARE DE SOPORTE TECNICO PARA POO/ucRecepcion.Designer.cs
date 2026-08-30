@@ -100,6 +100,7 @@
             btnGuardarRegistro = new Sunny.UI.UIButton();
             btnCancelar = new Sunny.UI.UIButton();
             btnLimpiar = new Sunny.UI.UIButton();
+            ucReportes1 = new ucReportes();
             pnlSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlInformacion.SuspendLayout();
@@ -159,11 +160,12 @@
             pnlInformacion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlInformacion.AutoSize = true;
             pnlInformacion.BackColor = Color.FromArgb(243, 246, 250);
+            pnlInformacion.Controls.Add(ucReportes1);
             pnlInformacion.Controls.Add(lblFecha);
             pnlInformacion.Controls.Add(lblOrden);
             pnlInformacion.Location = new Point(0, 59);
             pnlInformacion.Name = "pnlInformacion";
-            pnlInformacion.Size = new Size(1123, 59);
+            pnlInformacion.Size = new Size(1845, 856);
             pnlInformacion.TabIndex = 2;
             // 
             // lblFecha
@@ -545,7 +547,7 @@
             tabPage2.Controls.Add(uiPanel1);
             tabPage2.Location = new Point(0, 40);
             tabPage2.Name = "tabPage2";
-            tabPage2.Size = new Size(1123, 550);
+            tabPage2.Size = new Size(200, 60);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Registro de Reparaciones";
             // 
@@ -571,13 +573,13 @@
             pnlDispositivo.Controls.Add(airSeparator4);
             pnlDispositivo.FillColor = Color.White;
             pnlDispositivo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            pnlDispositivo.Location = new Point(14, 87);
+            pnlDispositivo.Location = new Point(-447, 87);
             pnlDispositivo.Margin = new Padding(4, 5, 4, 5);
             pnlDispositivo.MinimumSize = new Size(1, 1);
             pnlDispositivo.Name = "pnlDispositivo";
             pnlDispositivo.Radius = 12;
             pnlDispositivo.RectColor = Color.FromArgb(221, 227, 233);
-            pnlDispositivo.Size = new Size(515, 453);
+            pnlDispositivo.Size = new Size(515, 1);
             pnlDispositivo.TabIndex = 2;
             pnlDispositivo.Text = null;
             pnlDispositivo.TextAlignment = ContentAlignment.MiddleCenter;
@@ -854,7 +856,7 @@
             flpEquipos.Controls.Add(btnAgregarEquipo);
             flpEquipos.FillColor = Color.White;
             flpEquipos.Font = new Font("Microsoft Sans Serif", 12F);
-            flpEquipos.Location = new Point(14, 19);
+            flpEquipos.Location = new Point(-909, 19);
             flpEquipos.Margin = new Padding(4, 5, 4, 5);
             flpEquipos.MinimumSize = new Size(1, 1);
             flpEquipos.Name = "flpEquipos";
@@ -938,13 +940,13 @@
             uiPanel1.Controls.Add(lblDiagnostico);
             uiPanel1.FillColor = Color.White;
             uiPanel1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            uiPanel1.Location = new Point(537, 87);
+            uiPanel1.Location = new Point(-386, 87);
             uiPanel1.Margin = new Padding(4, 5, 4, 5);
             uiPanel1.MinimumSize = new Size(1, 1);
             uiPanel1.Name = "uiPanel1";
             uiPanel1.Radius = 12;
             uiPanel1.RectColor = Color.FromArgb(221, 227, 233);
-            uiPanel1.Size = new Size(573, 453);
+            uiPanel1.Size = new Size(573, 1);
             uiPanel1.TabIndex = 4;
             uiPanel1.Text = null;
             uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
@@ -1326,6 +1328,14 @@
             btnLimpiar.TipsForeColor = Color.Black;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
+            // ucReportes1
+            // 
+            ucReportes1.BackColor = Color.FromArgb(243, 246, 250);
+            ucReportes1.Location = new Point(719, 21);
+            ucReportes1.Name = "ucReportes1";
+            ucReportes1.Size = new Size(1123, 832);
+            ucReportes1.TabIndex = 2;
+            // 
             // ucRecepcion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1437,5 +1447,6 @@
         private Label label1;
         private Label label3;
         private Sunny.UI.UIAvatar uiAvatar1;
+        private ucReportes ucReportes1;
     }
 }
