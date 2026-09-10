@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -307,7 +308,24 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void txtBuscarTecnico_TextChanged(object sender, EventArgs e)
         {
+            if (dgvNuevo.DataSource is DataTable dt)
+            {
+                string texto = txtBuscarTecnico.Text.Trim().Replace("'", "''");
 
+                if (string.IsNullOrWhiteSpace(texto))
+                {
+                    dt.DefaultView.RowFilter = "";
+                }
+                else
+                {
+                    dt.DefaultView.RowFilter =
+                        $"NOMBRE LIKE '%{texto}%' OR " +
+                        $"USUARIO LIKE '%{texto}%' OR " +
+                        $"PERFIL LIKE '%{texto}%' OR " +
+                        $"SUCURSAL LIKE '%{texto}%'";
+                }
+            }
         }
+
     }
 }

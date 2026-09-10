@@ -111,6 +111,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
+            if (UsuarioExisteEnOtroRegistro(txtUsuario.Text))
+            {
+                MessageBox.Show(
+                    "Ese nombre de usuario ya pertenece a otro usuario.",
+                    "Usuario existente",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtUsuario.Focus();
+                return;
+            }
+
             // Determinamos el perfil basándonos en el color ACTIVO (FillColor) del botón
             string perfil = "";
             if (btnAdministrador.FillColor == Color.FromArgb(0, 165, 155))
@@ -161,7 +173,15 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 MessageBox.Show("No se pudo actualizar el usuario");
             }
         }
+        private bool UsuarioExisteEnOtroRegistro(string usuario)
+        {
+            DataTable dt = oCon.retornarRegistrosUsuarios(
+                "SELECT Id FROM Usuarios " +
+                "WHERE Usuario = '" + usuario.Trim() + "' " +
+                "AND Id <> " + idUsuarioActual);
 
+            return dt != null && dt.Rows.Count > 0;
+        }
         private void frmEditarUsuarios_Load(object sender, EventArgs e)
         {
 

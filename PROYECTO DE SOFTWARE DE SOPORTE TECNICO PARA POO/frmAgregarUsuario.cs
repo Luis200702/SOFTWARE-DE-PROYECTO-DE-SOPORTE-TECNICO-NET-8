@@ -53,7 +53,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-   
+            if (UsuarioExiste(txtUsuario.Text))
+            {
+                MessageBox.Show(
+                    "El nombre de usuario ya está registrado. Ingrese uno diferente.",
+                    "Usuario existente",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtUsuario.Focus();
+                return;
+            }
+
             if (perfil == "Administrador")
                 perfil = "Administrador";
             else if (perfil == "Tecnico")
@@ -100,6 +111,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             Boton.SeleccionarBoton(btnAdministrador);
             perfil = "Administrador";
+        }
+
+        private bool UsuarioExiste(string usuario)
+        {
+            DataTable dt = oCon.retornarRegistrosUsuarios(
+                "SELECT Id FROM Usuarios WHERE Usuario = '" + usuario.Trim() + "'");
+
+            return dt != null && dt.Rows.Count > 0;
         }
     }
 }
