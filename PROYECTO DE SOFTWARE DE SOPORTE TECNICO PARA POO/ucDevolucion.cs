@@ -13,6 +13,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class ucDevolucion : UserControl
     {
+        private byte[] comprobantePago = null;
+        private string nombreComprobante = "";
+        private decimal totalOrden = 0;
         public ucDevolucion()
         {
             InitializeComponent();
@@ -210,16 +213,54 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void cmbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbFormaPago.SelectedItem != null && cmbFormaPago.SelectedItem.ToString() == "Transferencia")
+            if (cmbFormaPago.SelectedItem == null)
+                return;
+
+            string formaPago = cmbFormaPago.SelectedItem.ToString();
+
+            if (formaPago == "Transferencia")
             {
-                frmComprobante_Pago Comprobante = new frmComprobante_Pago();
-                Comprobante.ShowDialog();
+                btnComprobante.Visible = true;
+
+                using (frmComprobante_Pago comprobante = new frmComprobante_Pago())
+                {
+                    if (comprobante.ShowDialog() == DialogResult.OK)
+                    {
+                        comprobantePago = comprobante.ComprobanteBytes;
+                        nombreComprobante = comprobante.NombreComprobante;
+
+                        btnComprobante.Text = "Comprobante adjunto";
+                    }
+                }
+            }
+            else
+            {
+                comprobantePago = null;
+                nombreComprobante = "";
+
+                btnComprobante.Visible = false;
+                btnComprobante.Text = "Comprobante";
             }
         }
 
         private void btnComprobante_Click(object sender, EventArgs e)
         {
-            pdComprobante.ShowDialog();
+            if (cmbFormaPago.SelectedItem == null ||
+      cmbFormaPago.SelectedItem.ToString() != "Transferencia")
+            {
+                return;
+            }
+
+            using (frmComprobante_Pago comprobante = new frmComprobante_Pago())
+            {
+                if (comprobante.ShowDialog() == DialogResult.OK)
+                {
+                    comprobantePago = comprobante.ComprobanteBytes;
+                    nombreComprobante = comprobante.NombreComprobante;
+
+                    btnComprobante.Text = "Comprobante adjunto";
+                }
+            }
         }
 
         private void LimpiarCamposResumen()
@@ -290,6 +331,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     // ACTUALIZAR LOS TOTALES EN LA INTERFAZ
                     lblTotalDesglose.Text = $"${totalCosto:F2}";
+                    lblTotalCobrar.Text = $"${totalCosto:F2}";
+
+                    totalOrden = totalCosto;
 
                 }
                 catch (Exception ex)
@@ -300,6 +344,103 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     db.cerrarConexion();
                 }
+            }
+        }
+
+        private void btnRegistraEntrega_Click(object sender, EventArgs e)
+        {
+            if (cmbListaOrdenes.SelectedValue == null)
+            {
+                MessageBox.Show(
+                    "Seleccione una orden.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (cmbFormaPago.SelectedItem == null ||
+                cmbFormaPago.SelectedItem.ToString() == "Seleccionar...")
+            {
+                MessageBox.Show(
+                    "Seleccione una forma de pago.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            string formaPago = cmbFormaPago.SelectedItem.ToString();
+
+            if (formaPago == "Transferencia" && comprobantePago == null)
+            {
+                MessageBox.Show(
+                    "Debe adjuntar el comprobante de la transferencia.",
+                    "Comprobante requerido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            int idOrden = Convert.ToInt32(cmbListaOrdenes.SelectedValue);
+
+            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
+
+            try
+            {
+                if (db.abrirConexion())
+                {
+                    string query = @"
+                UPDATE ordenes
+                SET forma_pago = @formaPago,
+                    monto_pagado = @montoPagado,
+                    fecha_entrega = GETDATE(),
+                    comprobante_pago = @comprobante,
+                    nombre_comprobante = @nombreComprobante,
+                    estado = 'Entregado'
+                WHERE id = @idOrden";
+
+                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    {
+                        cmd.Parameters.AddWithValue("@formaPago", formaPago);
+                        cmd.Parameters.AddWithValue("@montoPagado", totalOrden);
+                        cmd.Parameters.AddWithValue("@idOrden", idOrden);
+
+                        cmd.Parameters.Add("@comprobante", SqlDbType.VarBinary, -1).Value =
+                            comprobantePago != null
+                            ? comprobantePago
+                            : DBNull.Value;
+
+                        cmd.Parameters.AddWithValue(
+                            "@nombreComprobante",
+                            string.IsNullOrEmpty(nombreComprobante)
+                            ? DBNull.Value
+                            : nombreComprobante);
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show(
+                        "La entrega fue registrada correctamente.",
+                        "Entrega registrada",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error al registrar la entrega: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            finally
+            {
+                db.cerrarConexion();
             }
         }
     }

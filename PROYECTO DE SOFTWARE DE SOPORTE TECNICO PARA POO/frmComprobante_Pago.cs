@@ -7,10 +7,11 @@ using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
-    public partial class frmComprobante_Pago : Form // O UIForm
+    public partial class frmComprobante_Pago : Form 
     {
-        // Variable para guardar la ruta del archivo seleccionado
         private string rutaArchivoSeleccionado = "";
+        public byte[] ComprobanteBytes { get; private set; }
+        public string NombreComprobante { get; private set; } = "";
 
         public frmComprobante_Pago()
         {
@@ -19,10 +20,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             ConfigurarDragAndDrop();
         }
 
-        // --- 1. MAGIA VISUAL: COLORES Y ESTILOS ---
+
         private void AplicarDiseñoFigma()
         {
-            // Paleta de colores extraída de tu imagen
+
             Color grisTextoClaro = Color.FromArgb(130, 140, 150);
             Color grisTextoOscuro = Color.FromArgb(70, 80, 90);
             Color verdeBoton = Color.FromArgb(144, 202, 195); // El verde agua suave
@@ -208,12 +209,31 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             if (string.IsNullOrEmpty(rutaArchivoSeleccionado))
             {
-                MessageBox.Show("Por favor, selecciona o arrastra un comprobante primero.", "Falta comprobante", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Por favor, selecciona o arrastra un comprobante primero.",
+                    "Falta comprobante",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
                 return;
             }
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            try
+            {
+                ComprobanteBytes = File.ReadAllBytes(rutaArchivoSeleccionado);
+                NombreComprobante = Path.GetFileName(rutaArchivoSeleccionado);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "No se pudo cargar el comprobante: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }
