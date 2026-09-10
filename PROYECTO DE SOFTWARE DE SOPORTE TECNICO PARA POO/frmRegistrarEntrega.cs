@@ -108,10 +108,29 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            // Para las cantidades, si falla o está vacío, asignamos valores por defecto de forma segura
-            if (!int.TryParse(txtCantidadInicial.Text, out int cantidadInicial)) cantidadInicial = 0;
-            if (!int.TryParse(txtStockMinimo.Text, out int stockMinimo)) stockMinimo = 1;
+            if (!int.TryParse(txtCantidadInicial.Text, out int cantidadInicial)
+                || cantidadInicial < 0)
+            {
+                MessageBox.Show(
+                    "Ingrese una cantidad inicial válida.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
 
+                return;
+            }
+
+            if (!int.TryParse(txtStockMinimo.Text, out int stockMinimo)
+                || stockMinimo < 0)
+            {
+                MessageBox.Show(
+                    "Ingrese un stock mínimo válido.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
             // 3. Unimos la Marca y el Modelo
             string marcaYModelo = $"{cmbMarca.Text.Trim()} {txtModelo.Text.Trim()}";
 
@@ -142,16 +161,36 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     // --- PASO B: Guardar el Inventario (CORRECCIÓN IdSucursal) ---
                     string queryInventario = @"
-                        INSERT INTO InventarioSucursal (IdSucursal, IdRepuesto, StockActual, StockMinimo) 
-                        VALUES (@IdSucursal, @IdRepuesto, @StockActual, @StockMinimo)";
+    INSERT INTO InventarioSucursal
+        (IdSucursal, IdRepuesto, StockActual, StockMinimo)
+    VALUES
+    (
+        (SELECT TOP 1 IdSucursal
+         FROM Sucursales
+         WHERE NombreSucursal = @Sucursal),
+        @IdRepuesto,
+        @StockActual,
+        @StockMinimo
+    )";
 
-                    SqlCommand cmdInventario = new SqlCommand(queryInventario, conexionBD.oCon, transaccion);
+                    SqlCommand cmdInventario =
+                        new SqlCommand(queryInventario, conexionBD.oCon, transaccion);
 
-                    // Asignamos el ID de la sucursal (Asumiendo que 1 corresponde a "Matriz Quevedo" en tu tabla Sucursales)
-                    cmdInventario.Parameters.AddWithValue("@IdSucursal", 1);
-                    cmdInventario.Parameters.AddWithValue("@IdRepuesto", idNuevoRepuesto);
-                    cmdInventario.Parameters.AddWithValue("@StockActual", cantidadInicial);
-                    cmdInventario.Parameters.AddWithValue("@StockMinimo", stockMinimo);
+                    cmdInventario.Parameters.AddWithValue(
+                        "@Sucursal",
+                        Sesion.SucursalActual);
+
+                    cmdInventario.Parameters.AddWithValue(
+                        "@IdRepuesto",
+                        idNuevoRepuesto);
+
+                    cmdInventario.Parameters.AddWithValue(
+                        "@StockActual",
+                        cantidadInicial);
+
+                    cmdInventario.Parameters.AddWithValue(
+                        "@StockMinimo",
+                        stockMinimo);
 
                     cmdInventario.ExecuteNonQuery();
 
