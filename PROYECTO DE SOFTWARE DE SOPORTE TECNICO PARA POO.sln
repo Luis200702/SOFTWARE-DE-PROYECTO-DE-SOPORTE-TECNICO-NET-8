@@ -5,8 +5,6 @@ VisualStudioVersion = 18.9.12105.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROYECTO DE SOFTWARE DE SOPORTE TECNICO PARA POO", "PROYECTO DE SOFTWARE DE SOPORTE TECNICO PARA POO\PROYECTO DE SOFTWARE DE SOPORTE TECNICO PARA POO.csproj", "{D1E10E1A-98A4-409A-96B8-EF9567C84A26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reportes", "..\PROYECTO SOFTWARE NET 8.0\PROYECTO DE SOFTWARE DE SOPORTE TECNICO PARA POO\ReportesK\Reportes\Reportes\Reportes.csproj", "{6246AAB0-1069-401C-A02D-6DD65E2AB09D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{D1E10E1A-98A4-409A-96B8-EF9567C84A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1E10E1A-98A4-409A-96B8-EF9567C84A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1E10E1A-98A4-409A-96B8-EF9567C84A26}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6246AAB0-1069-401C-A02D-6DD65E2AB09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6246AAB0-1069-401C-A02D-6DD65E2AB09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6246AAB0-1069-401C-A02D-6DD65E2AB09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6246AAB0-1069-401C-A02D-6DD65E2AB09D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

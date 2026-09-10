@@ -17,8 +17,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private string ordenActual;
         private string estadoSeleccionado;
 
-        // Creamos una lista para guardar los IDs de los repuestos que se van agregando
-        private List<int> repuestosUsadosIds = new List<int>();
+        // Repuestos ya guardados y repuestos nuevos agregados durante esta edición.
+        // Se separan para no volver a descontar del stock lo que ya estaba registrado.
+        private Dictionary<int, int> repuestosGuardadosCantidades = new Dictionary<int, int>();
+        private Dictionary<int, int> repuestosNuevosCantidades = new Dictionary<int, int>();
+        private Dictionary<int, string> nombresRepuestos = new Dictionary<int, string>();
 
         // Actualizamos el constructor para recibir todos los datos de la grilla
         public frmDetallesOrden(string numeroOrden, string clienteDispositivo, string estadoActual, string tecnicoActual)
@@ -132,15 +135,73 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // --- EVENTO: BOTÓN DE AGREGAR REPUESTO ---
         private void btnAgregarRepuesto_Click(object sender, EventArgs e)
         {
-            if (cmbRepuestos.SelectedValue != null)
-            {
-                // 1. Guardamos el ID del repuesto en nuestra memoria temporal
-                int idSeleccionado = Convert.ToInt32(cmbRepuestos.SelectedValue);
-                repuestosUsadosIds.Add(idSeleccionado);
+            if (cmbRepuestos.SelectedValue == null || cmbRepuestos.SelectedItem == null)
+                return;
 
-                // 2. Mostramos el texto en la lista de la pantalla
-                string repuestoTexto = cmbRepuestos.Text;
-                lstRepuestos.Items.Add("• " + repuestoTexto);
+            int idSeleccionado = Convert.ToInt32(cmbRepuestos.SelectedValue);
+
+            DataRowView filaSeleccionada = cmbRepuestos.SelectedItem as DataRowView;
+
+            if (filaSeleccionada == null)
+                return;
+
+            int stockDisponible = Convert.ToInt32(filaSeleccionada["StockActual"]);
+            string nombreRepuesto = filaSeleccionada["NombreRepuesto"].ToString() ?? "Repuesto";
+
+            int cantidadNuevaActual = repuestosNuevosCantidades.ContainsKey(idSeleccionado)
+                ? repuestosNuevosCantidades[idSeleccionado]
+                : 0;
+
+            if (cantidadNuevaActual + 1 > stockDisponible)
+            {
+                MessageBox.Show(
+                    "No hay suficiente stock disponible para agregar otra unidad de este repuesto.",
+                    "Stock insuficiente",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (repuestosNuevosCantidades.ContainsKey(idSeleccionado))
+                repuestosNuevosCantidades[idSeleccionado]++;
+            else
+                repuestosNuevosCantidades[idSeleccionado] = 1;
+
+            nombresRepuestos[idSeleccionado] = nombreRepuesto;
+
+            ActualizarListaRepuestos();
+        }
+
+        private void ActualizarListaRepuestos()
+        {
+            lstRepuestos.Items.Clear();
+
+            foreach (var item in repuestosGuardadosCantidades)
+            {
+                int idRepuesto = item.Key;
+                int cantidadGuardada = item.Value;
+                int cantidadNueva = repuestosNuevosCantidades.ContainsKey(idRepuesto)
+                    ? repuestosNuevosCantidades[idRepuesto]
+                    : 0;
+
+                int cantidadTotal = cantidadGuardada + cantidadNueva;
+                string nombre = nombresRepuestos.ContainsKey(idRepuesto)
+                    ? nombresRepuestos[idRepuesto]
+                    : "Repuesto";
+
+                lstRepuestos.Items.Add($"• {nombre} x{cantidadTotal}");
+            }
+
+            foreach (var item in repuestosNuevosCantidades)
+            {
+                if (repuestosGuardadosCantidades.ContainsKey(item.Key))
+                    continue;
+
+                string nombre = nombresRepuestos.ContainsKey(item.Key)
+                    ? nombresRepuestos[item.Key]
+                    : "Repuesto";
+
+                lstRepuestos.Items.Add($"• {nombre} x{item.Value}");
             }
         }
 
@@ -171,34 +232,54 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarRepuestosGuardados()
         {
+            repuestosGuardadosCantidades.Clear();
+            nombresRepuestos.Clear();
+
             var db = new Conexion_Base_de_Datos();
+
             if (db.abrirConexion())
             {
                 try
                 {
-                    // Usamos tu tabla DetallesOrden para traer lo que ya se había usado
                     string query = @"
-                SELECT r.NombreRepuesto 
-                FROM DetallesOrden d
-                INNER JOIN Repuestos r ON d.IdRepuesto = r.IdRepuesto
-                INNER JOIN ordenes o ON d.IdOrden = o.id
-                WHERE o.numero_orden = @orden";
+                        SELECT
+                            d.IdRepuesto,
+                            r.NombreRepuesto,
+                            SUM(d.Cantidad) AS Cantidad
+                        FROM DetallesOrden d
+                        INNER JOIN Repuestos r ON d.IdRepuesto = r.IdRepuesto
+                        INNER JOIN ordenes o ON d.IdOrden = o.id
+                        WHERE o.numero_orden = @orden
+                        GROUP BY d.IdRepuesto, r.NombreRepuesto
+                        ORDER BY r.NombreRepuesto";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
                         cmd.Parameters.AddWithValue("@orden", ordenActual);
+
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                lstRepuestos.Items.Add("• " + reader["NombreRepuesto"].ToString());
+                                int idRepuesto = Convert.ToInt32(reader["IdRepuesto"]);
+                                int cantidad = Convert.ToInt32(reader["Cantidad"]);
+                                string nombre = reader["NombreRepuesto"].ToString() ?? "Repuesto";
+
+                                repuestosGuardadosCantidades[idRepuesto] = cantidad;
+                                nombresRepuestos[idRepuesto] = nombre;
                             }
                         }
                     }
+
+                    ActualizarListaRepuestos();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al cargar repuestos guardados: " + ex.Message);
+                    MessageBox.Show(
+                        "Error al cargar repuestos guardados: " + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -217,7 +298,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     // Unimos Repuestos, Inventario, Sucursales y la Orden actual para filtrar por la sucursal correcta
                     string query = @"
                     SELECT 
-                        R.IdRepuesto, 
+                        R.IdRepuesto,
+                        R.NombreRepuesto,
+                        I.StockActual,
                         R.NombreRepuesto + ' (Stock: ' + CAST(I.StockActual AS VARCHAR) + ')' AS Descripcion 
                     FROM Repuestos R
                     INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
@@ -333,39 +416,84 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                         if (filasAfectadas > 0)
                         {
-                            // 2. Descontar stock solo en la sucursal de esta orden
-                            foreach (int idRepuesto in repuestosUsadosIds)
+                            // 2. Descontar del stock únicamente las cantidades nuevas
+                            // que se agregaron durante esta edición.
+                            foreach (var repuesto in repuestosNuevosCantidades)
                             {
+                                int idRepuesto = repuesto.Key;
+                                int cantidad = repuesto.Value;
+
                                 string queryStock = @"
-                                UPDATE InventarioSucursal 
-                                SET StockActual = StockActual - 1 
-                                WHERE IdRepuesto = @id 
-                                AND IdSucursal = (
-                                    SELECT S.IdSucursal 
-                                    FROM Sucursales S 
-                                    INNER JOIN ordenes O ON S.NombreSucursal = O.sucursal 
-                                    WHERE O.numero_orden = @numOrden
-                                )";
+                                    UPDATE InventarioSucursal
+                                    SET StockActual = StockActual - @cantidad
+                                    WHERE IdRepuesto = @id
+                                      AND IdSucursal = (
+                                          SELECT S.IdSucursal
+                                          FROM Sucursales S
+                                          INNER JOIN ordenes O
+                                              ON S.NombreSucursal = O.sucursal
+                                          WHERE O.numero_orden = @numOrden
+                                      )
+                                      AND StockActual >= @cantidad";
 
                                 using (SqlCommand cmdStock = new SqlCommand(queryStock, db.oCon))
                                 {
+                                    cmdStock.Parameters.AddWithValue("@cantidad", cantidad);
                                     cmdStock.Parameters.AddWithValue("@id", idRepuesto);
                                     cmdStock.Parameters.AddWithValue("@numOrden", ordenActual);
-                                    cmdStock.ExecuteNonQuery();
+
+                                    int filasStock = cmdStock.ExecuteNonQuery();
+
+                                    if (filasStock == 0)
+                                    {
+                                        MessageBox.Show(
+                                            "No hay suficiente stock para uno de los repuestos seleccionados.",
+                                            "Stock insuficiente",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Warning);
+                                        return;
+                                    }
                                 }
 
                                 string queryDetalle = @"
-                                    INSERT INTO DetallesOrden (IdOrden, IdRepuesto, Cantidad, PrecioCobrado) 
-                                    VALUES (
-                                        (SELECT id FROM ordenes WHERE numero_orden = @numOrden), 
-                                        @idRepuesto, 
-                                        1, 
-                                        (SELECT PrecioVenta FROM Repuestos WHERE IdRepuesto = @idRepuesto) 
-                                    )";
+                                    DECLARE @idOrden INT =
+                                        (SELECT id FROM ordenes WHERE numero_orden = @numOrden);
+
+                                    IF EXISTS (
+                                        SELECT 1
+                                        FROM DetallesOrden
+                                        WHERE IdOrden = @idOrden
+                                          AND IdRepuesto = @idRepuesto
+                                    )
+                                    BEGIN
+                                        UPDATE DetallesOrden
+                                        SET Cantidad = Cantidad + @cantidad
+                                        WHERE IdDetalle = (
+                                            SELECT TOP 1 IdDetalle
+                                            FROM DetallesOrden
+                                            WHERE IdOrden = @idOrden
+                                              AND IdRepuesto = @idRepuesto
+                                            ORDER BY IdDetalle
+                                        );
+                                    END
+                                    ELSE
+                                    BEGIN
+                                        INSERT INTO DetallesOrden
+                                            (IdOrden, IdRepuesto, Cantidad, PrecioCobrado)
+                                        VALUES
+                                            (@idOrden,
+                                             @idRepuesto,
+                                             @cantidad,
+                                             (SELECT PrecioVenta
+                                              FROM Repuestos
+                                              WHERE IdRepuesto = @idRepuesto));
+                                    END";
+
                                 using (SqlCommand cmdDetalle = new SqlCommand(queryDetalle, db.oCon))
                                 {
                                     cmdDetalle.Parameters.AddWithValue("@numOrden", ordenActual);
                                     cmdDetalle.Parameters.AddWithValue("@idRepuesto", idRepuesto);
+                                    cmdDetalle.Parameters.AddWithValue("@cantidad", cantidad);
                                     cmdDetalle.ExecuteNonQuery();
                                 }
                             }
@@ -407,7 +535,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    // Nota: Uso 'diagnostico_inicial'. Si creaste otra columna como 'observaciones', cámbiala aquí.
+                    // Cargamos el trabajo realizado previamente guardado en la orden.
                     string query =
        "SELECT trabajo_realizado FROM ordenes WHERE numero_orden = @orden";
 
