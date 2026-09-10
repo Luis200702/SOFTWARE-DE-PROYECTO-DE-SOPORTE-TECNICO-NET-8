@@ -40,9 +40,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarDerivacionesSalientesDesdeBD(Sesion.SucursalActual);
         }
 
-        // ==========================================
-        // 1. LÓGICA DE ENTRANTES (RECIBIDAS)
-        // ==========================================
         private void CargarDerivacionesEntrantesDesdeBD(string destinoSucursal)
         {
             if (flpIzquierdoE == null) return;
@@ -60,7 +57,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             c.nombre,
                             d.SucursalOrigen AS Orig,
                             d.SucursalDestino AS Dest,
-                            o.fecha_ingreso
+                            d.FechaDerivacion,
                         FROM dbo.DerivacionesSucursales d
                         INNER JOIN dbo.ordenes o ON d.idOrden = o.id
                         INNER JOIN dbo.clientes c ON o.cliente_id = c.id
@@ -77,7 +74,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 string estado = lector["Estado"].ToString();
                                 string cliente = lector["nombre"].ToString();
                                 string ruta = $"{lector["Orig"]} → {lector["Dest"]}";
-                                string fecha = Convert.ToDateTime(lector["fecha_ingreso"]).ToString("dd/MM/yyyy hh:mm");
+                                string fecha =
+     Convert.ToDateTime(lector["FechaDerivacion"])
+         .ToString("dd/MM/yyyy HH:mm");
 
                                 Panel tarjeta = CrearTarjetaDerivacion(codigo, estado, cliente, ruta, fecha, true);
                                 flpIzquierdoE.Controls.Add(tarjeta);
@@ -114,7 +113,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             c.nombre,
                             d.SucursalOrigen AS Orig,
                             d.SucursalDestino AS Dest,
-                            o.fecha_ingreso,
+                            d.FechaDerivacion,
                             ISNULL(dp.tipo, 'Dispositivo') + ' ' + ISNULL(dp.marca, '') AS DispositivoTexto
                         FROM dbo.DerivacionesSucursales d
                         INNER JOIN dbo.ordenes o ON d.idOrden = o.id
@@ -134,7 +133,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 string cliente = lector["nombre"].ToString();
                                 string dispositivo = lector["DispositivoTexto"].ToString();
                                 string ruta = $"{lector["Orig"]} → {lector["Dest"]}";
-                                string fecha = Convert.ToDateTime(lector["fecha_ingreso"]).ToString("dd/MM/yyyy hh:mm");
+                                string fecha =
+     Convert.ToDateTime(lector["FechaDerivacion"])
+         .ToString("dd/MM/yyyy HH:mm");
 
                                 Panel tarjeta = CrearTarjetaDerivacionSaliente(codigo, estado, cliente, dispositivo, ruta, fecha);
                                 flpIzquierdoS.Controls.Add(tarjeta);
@@ -286,27 +287,32 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 if (db.abrirConexion())
                 {
                     string query = @"
-                        SELECT 
-                            o.numero_orden,
-                            c.nombre AS Cliente,
-                            c.telefono AS Telefono,
-                            ISNULL(dp.tipo, 'N/A') AS TipoDispositivo,
-                            ISNULL(dp.marca, 'N/A') AS Marca,
-                            ISNULL(dp.modelo, 'N/A') AS Modelo,
-                            d.Estado,
-                            d.Detalle AS MotivoDerivacion,
-                            d.SucursalOrigen AS Origen,
-                            d.SucursalDestino AS Destino,
-                            o.fecha_ingreso
-                        FROM dbo.DerivacionesSucursales d
-                        INNER JOIN dbo.ordenes o ON d.idOrden = o.id
-                        INNER JOIN dbo.clientes c ON o.cliente_id = c.id
-                        LEFT JOIN dbo.dispositivos dp ON o.dispositivo_id = dp.id
-                        WHERE o.numero_orden = @NumeroOrden";
+                                    SELECT TOP 1
+                                        o.numero_orden,
+                                        c.nombre AS Cliente,
+                                        c.telefono AS Telefono,
+                                        ISNULL(dp.tipo, 'N/A') AS TipoDispositivo,
+                                        ISNULL(dp.marca, 'N/A') AS Marca,
+                                        ISNULL(dp.modelo, 'N/A') AS Modelo,
+                                        d.Estado,
+                                        d.Detalle AS MotivoDerivacion,
+                                        d.SucursalOrigen AS Origen,
+                                        d.SucursalDestino AS Destino,
+                                        d.FechaDerivacion
+                                    FROM dbo.DerivacionesSucursales d
+                                    INNER JOIN dbo.ordenes o ON d.IdOrden = o.id
+                                    INNER JOIN dbo.clientes c ON o.cliente_id = c.id
+                                    LEFT JOIN dbo.dispositivos dp ON o.dispositivo_id = dp.id
+                                    WHERE o.numero_orden = @NumeroOrden
+                                      AND d.SucursalDestino = @SucursalActual
+                                    ORDER BY d.FechaDerivacion DESC";
+
 
                     using (SqlCommand comando = new SqlCommand(query, db.oCon))
                     {
+                  
                         comando.Parameters.AddWithValue("@NumeroOrden", ordenSeleccionadaActual);
+                        comando.Parameters.AddWithValue("@SucursalActual", Sesion.SucursalActual);
                         using (SqlDataReader lector = comando.ExecuteReader())
                         {
                             if (lector.Read())
@@ -423,9 +429,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             TextRenderer.DrawText(e.Graphics, lbl.Text, lbl.Font, lbl.ClientRectangle, fg, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
 
-        // ==========================================
-        // 5. INICIALIZACIÓN DE PANELES DERECHOS
-        // ==========================================
+
         private void InicializarPanelDerechoEntrantes()
         {
             if (pnlDerechoE == null) return;
@@ -541,40 +545,137 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             if (string.IsNullOrEmpty(ordenSeleccionadaActual))
             {
-                MessageBox.Show("Por favor, seleccione una orden primero.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Por favor, seleccione una orden primero.",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
                 return;
             }
 
             Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
+
             try
             {
                 if (db.abrirConexion())
                 {
-                    string query = @"
-                        UPDATE d 
-                        SET d.Estado = @NuevoEstado
-                        FROM dbo.DerivacionesSucursales d
-                        INNER JOIN dbo.ordenes o ON d.idOrden = o.id
-                        WHERE o.numero_orden = @NumeroOrden";
+                    SqlTransaction transaccion = db.oCon.BeginTransaction();
 
-                    using (SqlCommand comando = new SqlCommand(query, db.oCon))
+                    try
                     {
-                        comando.Parameters.AddWithValue("@NuevoEstado", nuevoEstado);
-                        comando.Parameters.AddWithValue("@NumeroOrden", ordenSeleccionadaActual);
+                        // 1. Actualizamos la derivación pendiente que llegó
+                        // a la sucursal que tiene iniciada la sesión.
+                        string queryDerivacion = @"
+                    UPDATE d
+                    SET d.Estado = @NuevoEstado
+                    FROM DerivacionesSucursales d
+                    INNER JOIN ordenes o
+                        ON d.IdOrden = o.id
+                    WHERE o.numero_orden = @NumeroOrden
+                      AND d.SucursalDestino = @SucursalActual
+                      AND d.Estado = 'Pendiente'";
 
-                        int filas = comando.ExecuteNonQuery();
-                        if (filas > 0)
+                        using (SqlCommand cmd = new SqlCommand(
+                            queryDerivacion,
+                            db.oCon,
+                            transaccion))
                         {
-                            MessageBox.Show($"Orden {ordenSeleccionadaActual} actualizada a estado: {nuevoEstado}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            RefrescarTodo();
+                            cmd.Parameters.AddWithValue(
+                                "@NuevoEstado",
+                                nuevoEstado);
+
+                            cmd.Parameters.AddWithValue(
+                                "@NumeroOrden",
+                                ordenSeleccionadaActual);
+
+                            cmd.Parameters.AddWithValue(
+                                "@SucursalActual",
+                                Sesion.SucursalActual);
+
+                            int filas = cmd.ExecuteNonQuery();
+
+                            if (filas == 0)
+                            {
+                                transaccion.Rollback();
+
+                                MessageBox.Show(
+                                    "La derivación ya fue procesada o no corresponde a esta sucursal.",
+                                    "Aviso",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+
+                                return;
+                            }
                         }
+
+                        // 2. Solo si la sucursal ACEPTA la orden,
+                        // la orden pasa realmente a esa sucursal.
+                        if (nuevoEstado == "Recibido")
+                        {
+                            string queryOrden = @"
+                        UPDATE ordenes
+                        SET sucursal = @SucursalActual,
+                            tecnico_id = NULL,
+                            estado = 'Recibido'
+                        WHERE numero_orden = @NumeroOrden";
+
+                            using (SqlCommand cmd = new SqlCommand(
+                                queryOrden,
+                                db.oCon,
+                                transaccion))
+                            {
+                                cmd.Parameters.AddWithValue(
+                                    "@SucursalActual",
+                                    Sesion.SucursalActual);
+
+                                cmd.Parameters.AddWithValue(
+                                    "@NumeroOrden",
+                                    ordenSeleccionadaActual);
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaccion.Commit();
+
+                        MessageBox.Show(
+                            nuevoEstado == "Recibido"
+                                ? "Orden recibida correctamente en esta sucursal."
+                                : "Derivación rechazada correctamente.",
+                            "Éxito",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+
+                        ordenSeleccionadaActual = "";
+
+                        RefrescarTodo();
+                        InicializarPanelDerechoEntrantes();
                     }
-                    db.cerrarConexion();
+                    catch (Exception ex)
+                    {
+                        transaccion.Rollback();
+
+                        MessageBox.Show(
+                            "Error al procesar la derivación: " + ex.Message,
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        db.cerrarConexion();
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al actualizar el estado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Error de conexión: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 db.cerrarConexion();
             }
         }
