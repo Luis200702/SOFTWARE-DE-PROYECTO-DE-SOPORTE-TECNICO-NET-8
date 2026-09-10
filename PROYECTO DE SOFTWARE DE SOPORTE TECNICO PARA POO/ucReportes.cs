@@ -13,6 +13,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             InitializeComponent();
             CargarTiposReporte();
             CargarSucursales();
+            CargarTecnicos();
         }
 
         private void CargarTiposReporte()
@@ -134,6 +135,66 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         }
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
+        {
+            string tipoReporte = cmbTiposReporte.Text;
+
+            if (string.IsNullOrWhiteSpace(tipoReporte))
+            {
+                MessageBox.Show(
+                    "Selecciona un tipo de reporte.",
+                    "Reportes",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (dtpDesde.Enabled && dtpHasta.Enabled)
+            {
+                if (!ValidarRangoFechas())
+                    return;
+            }
+
+            switch (tipoReporte)
+            {
+                case "Órdenes de reparación":
+                    GenerarReporteOrdenes();
+                    break;
+
+                case "Ingresos por servicios":
+                    MessageBox.Show("Reporte de ingresos pendiente de implementar.");
+                    break;
+
+                case "Consumo de repuestos":
+                    GenerarReporteConsumoRepuestos();
+                    break;
+
+                case "Inventario de repuestos":
+                    MessageBox.Show("Reporte de inventario pendiente de implementar.");
+                    break;
+
+                case "Stock bajo":
+                    MessageBox.Show("Reporte de stock bajo pendiente de implementar.");
+                    break;
+
+                case "Órdenes por técnico":
+                    MessageBox.Show("Reporte de órdenes por técnico pendiente de implementar.");
+                    break;
+
+                case "Derivaciones entre sucursales":
+                    MessageBox.Show("Reporte de derivaciones pendiente de implementar.");
+                    break;
+
+                case "Historial de reparaciones por dispositivo":
+                    MessageBox.Show("Reporte de historial por dispositivo pendiente de implementar.");
+                    break;
+            }
+
+        }
+
+
+
+
+        private void GenerarReporteConsumoRepuestos()
         {
             if (!ValidarRangoFechas())
                 return;
@@ -354,22 +415,265 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(ruta) { UseShellExecute = true });
             MessageBox.Show("Reporte generado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
 
-        private void cmbSucursal_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CargarTecnicos();
         }
-
-        private void cmbTiposReporte_SelectedIndexChanged(object sender, EventArgs e)
+        private void GenerarReporteOrdenes()
         {
-            ConfigurarFiltrosPorReporte();
+            QuestPDF.Settings.License = LicenseType.Community;
+
+            DateTime fechaDesde = dtpDesde.Value.Date;
+            DateTime fechaHasta = dtpHasta.Value.Date;
+
+            string nombreSucursal = cmbSucursal.Text;
+            int tecnicoId = Convert.ToInt32(cmbTecnicos.SelectedValue ?? 0);
+
+            string consulta = @"
+        SELECT
+            O.numero_orden AS NumeroOrden,
+            C.nombre AS Cliente,
+            D.tipo AS Tipo,
+            D.marca AS Marca,
+            D.modelo AS Modelo,
+            D.serie_imei AS SerieImei,
+            ISNULL(U.Nombre, 'Sin asignar') AS Tecnico,
+            O.sucursal AS Sucursal,
+            O.estado AS Estado,
+            O.fecha_ingreso AS FechaIngreso,
+            O.fecha_estimada_entrega AS FechaEstimada,
+            O.costo_estimado AS Costo
+        FROM ordenes O
+        INNER JOIN clientes C
+            ON O.cliente_id = C.id
+        INNER JOIN dispositivos D
+            ON O.dispositivo_id = D.id
+        LEFT JOIN Usuarios U
+            ON O.tecnico_id = U.Id
+        WHERE O.fecha_ingreso >= '" + fechaDesde.ToString("yyyy-MM-dd") + @"'
+          AND O.fecha_ingreso < DATEADD(
+                DAY,
+                1,
+                '" + fechaHasta.ToString("yyyy-MM-dd") + @"'
+          )";
+
+            // Filtrar por sucursal
+            if (nombreSucursal != "Todas")
+            {
+                consulta += @"
+          AND O.sucursal = '" + nombreSucursal + "'";
+            }
+
+            // Filtrar por técnico
+            if (tecnicoId != 0)
+            {
+                consulta += @"
+          AND O.tecnico_id = " + tecnicoId;
+            }
+
+            consulta += @"
+        ORDER BY O.fecha_ingreso DESC";
+
+            DataTable tabla =
+                oCon.retornarRegistrosUsuarios(consulta);
+
+            if (tabla == null || tabla.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "No se encontraron órdenes con los filtros seleccionados.",
+                    "Sin resultados",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            string ruta = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                "ReporteOrdenes.pdf");
+
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Size(PageSizes.A4.Landscape());
+
+                    page.Margin(
+                        1.2f,
+                        Unit.Centimetre);
+
+                    page.DefaultTextStyle(
+                        x => x.FontSize(8));
+
+                    // ENCABEZADO
+                    page.Header().Column(col =>
+                    {
+                        col.Item()
+                            .Text("TECH SERVICE")
+                            .Bold()
+                            .FontSize(18)
+                            .FontColor("#1a73e8");
+
+                        col.Item()
+                            .Text("REPORTE DE ÓRDENES DE REPARACIÓN")
+                            .Bold()
+                            .FontSize(14);
+
+                        col.Item()
+                            .Text(
+                                $"Período: {fechaDesde:dd/MM/yyyy} al {fechaHasta:dd/MM/yyyy}")
+                            .FontColor("#555555");
+
+                        col.Item().Height(5);
+
+                        col.Item()
+                            .Text(
+                                $"Sucursal: {nombreSucursal}   |   Técnico: {cmbTecnicos.Text}")
+                            .FontSize(9);
+
+                        col.Item().Height(8);
+
+                        col.Item()
+                            .LineHorizontal(2)
+                            .LineColor("#1a73e8");
+                    });
+
+                    // CONTENIDO
+                    page.Content().PaddingVertical(10).Table(table =>
+                    {
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.ConstantColumn(80);  // Orden
+                            columns.RelativeColumn(2);   // Cliente
+                            columns.RelativeColumn(2);   // Dispositivo
+                            columns.RelativeColumn(2);   // IMEI
+                            columns.RelativeColumn(2);   // Técnico
+                            columns.RelativeColumn(1.5f);// Sucursal
+                            columns.RelativeColumn(1.5f);// Estado
+                            columns.ConstantColumn(70);  // Fecha
+                            columns.ConstantColumn(60);  // Costo
+                        });
+
+                        table.Header(header =>
+                        {
+                            string fondo = "#1a4f8a";
+
+                            header.Cell().Background(fondo).Padding(4)
+                                .Text("ORDEN").FontColor("#ffffff").Bold();
+
+                            header.Cell().Background(fondo).Padding(4)
+                                .Text("CLIENTE").FontColor("#ffffff").Bold();
+
+                            header.Cell().Background(fondo).Padding(4)
+                                .Text("DISPOSITIVO").FontColor("#ffffff").Bold();
+
+                            header.Cell().Background(fondo).Padding(4)
+                                .Text("IMEI / SERIE").FontColor("#ffffff").Bold();
+
+                            header.Cell().Background(fondo).Padding(4)
+                                .Text("TÉCNICO").FontColor("#ffffff").Bold();
+
+                            header.Cell().Background(fondo).Padding(4)
+                                .Text("SUCURSAL").FontColor("#ffffff").Bold();
+
+                            header.Cell().Background(fondo).Padding(4)
+                                .Text("ESTADO").FontColor("#ffffff").Bold();
+
+                            header.Cell().Background(fondo).Padding(4)
+                                .Text("INGRESO").FontColor("#ffffff").Bold();
+
+                            header.Cell().Background(fondo).Padding(4)
+                                .AlignRight()
+                                .Text("COSTO").FontColor("#ffffff").Bold();
+                        });
+
+                        bool filaPar = false;
+
+                        foreach (DataRow fila in tabla.Rows)
+                        {
+                            string fondo =
+                                filaPar ? "#f0f4ff" : "#ffffff";
+
+                            string dispositivo =
+                                fila["Marca"].ToString() + " " +
+                                fila["Modelo"].ToString();
+
+                            table.Cell().Background(fondo).Padding(4)
+                                .Text(fila["NumeroOrden"].ToString());
+
+                            table.Cell().Background(fondo).Padding(4)
+                                .Text(fila["Cliente"].ToString());
+
+                            table.Cell().Background(fondo).Padding(4)
+                                .Text(dispositivo);
+
+                            table.Cell().Background(fondo).Padding(4)
+                                .Text(fila["SerieImei"].ToString());
+
+                            table.Cell().Background(fondo).Padding(4)
+                                .Text(fila["Tecnico"].ToString());
+
+                            table.Cell().Background(fondo).Padding(4)
+                                .Text(fila["Sucursal"].ToString());
+
+                            table.Cell().Background(fondo).Padding(4)
+                                .Text(fila["Estado"].ToString());
+
+                            DateTime fecha =
+                                Convert.ToDateTime(fila["FechaIngreso"]);
+
+                            table.Cell().Background(fondo).Padding(4)
+                                .Text(fecha.ToString("dd/MM/yyyy"));
+
+                            decimal costo = fila["Costo"] == DBNull.Value
+    ? 0
+    : Convert.ToDecimal(fila["Costo"]);
+
+                            table.Cell().Background(fondo).Padding(4)
+                                .AlignRight()
+                                .Text($"${costo:F2}");
+
+                            filaPar = !filaPar;
+                        }
+                    });
+
+                    // PIE
+                    page.Footer().Row(row =>
+                    {
+                        row.RelativeItem()
+                            .Text(
+                                $"Generado: {DateTime.Now:dd/MM/yyyy HH:mm}")
+                            .FontSize(8)
+                            .FontColor("#555555");
+
+                        row.RelativeItem()
+                            .AlignRight()
+                            .Text(x =>
+                            {
+                                x.Span("Página ");
+                                x.CurrentPageNumber();
+                                x.Span(" de ");
+                                x.TotalPages();
+                            });
+                    });
+                });
+            }).GeneratePdf(ruta);
+
+            System.Diagnostics.Process.Start(
+                new System.Diagnostics.ProcessStartInfo(ruta)
+                {
+                    UseShellExecute = true
+                });
+
+            MessageBox.Show(
+                "Reporte de órdenes generado correctamente.",
+                "Éxito",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
         private void ConfigurarFiltrosPorReporte()
         {
             string tipoReporte = cmbTiposReporte.Text;
 
-            // Por defecto, todos disponibles
+            // Primero habilitamos todos los filtros
             cmbSucursal.Enabled = true;
             cmbTecnicos.Enabled = true;
             dtpDesde.Enabled = true;
@@ -378,43 +682,45 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             switch (tipoReporte)
             {
                 case "Órdenes de reparación":
-                    // Usa sucursal, técnico y fechas
+                    // Sucursal + técnico + fechas
                     break;
 
                 case "Ingresos por servicios":
-                    // Podemos saber cuánto generó una sucursal o un técnico
+                    // Sucursal + técnico + fechas
                     break;
 
                 case "Consumo de repuestos":
-                    // También se puede consultar por sucursal, técnico y periodo
+                    // Sucursal + técnico + fechas
                     break;
 
                 case "Inventario de repuestos":
-                    // El inventario es actual, no necesita técnico ni fechas
+                    // Solo sucursal
                     cmbTecnicos.Enabled = false;
                     dtpDesde.Enabled = false;
                     dtpHasta.Enabled = false;
                     break;
 
                 case "Stock bajo":
-                    // Igual: muestra el stock actual
+                    // Solo sucursal
                     cmbTecnicos.Enabled = false;
                     dtpDesde.Enabled = false;
                     dtpHasta.Enabled = false;
                     break;
 
                 case "Órdenes por técnico":
-                    // Necesita los tres filtros
+                    // Sucursal + técnico + fechas
                     break;
 
                 case "Derivaciones entre sucursales":
-                    // No depende de un técnico
+                    // Sucursal + fechas
                     cmbTecnicos.Enabled = false;
                     break;
 
                 case "Historial de reparaciones por dispositivo":
-                    // No necesitamos técnico para consultar el historial
+                    // Necesitará IMEI/Serie + fechas
                     cmbTecnicos.Enabled = false;
+
+                    // Por ahora podemos mantener sucursal y fechas.
                     break;
             }
         }
