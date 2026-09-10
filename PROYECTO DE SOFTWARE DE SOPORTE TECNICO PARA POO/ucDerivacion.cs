@@ -57,7 +57,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             c.nombre,
                             d.SucursalOrigen AS Orig,
                             d.SucursalDestino AS Dest,
-                            d.FechaDerivacion,
+                            d.FechaDerivacion
                         FROM dbo.DerivacionesSucursales d
                         INNER JOIN dbo.ordenes o ON d.idOrden = o.id
                         INNER JOIN dbo.clientes c ON o.cliente_id = c.id
@@ -176,14 +176,52 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             Label lblEstado = new Label() { Text = "", Font = new Font("Segoe UI", 8.5F, FontStyle.Bold), BackColor = Color.Transparent, Location = new Point(135, 12), Size = new Size(95, 24) };
             lblEstado.Paint += (s, e) =>
             {
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                using (GraphicsPath path = CrearPathRedondeado(0, 0, lblEstado.Width - 1, lblEstado.Height - 1, 12f))
+                lblEstado.Paint += (s, e) =>
                 {
-                    Color bg = estado.ToLower() == "recibido" ? Color.FromArgb(220, 252, 231) : Color.FromArgb(254, 243, 199);
-                    using (SolidBrush brush = new SolidBrush(bg)) { e.Graphics.FillPath(brush, path); }
-                }
-                Color fg = estado.ToLower() == "recibido" ? Color.FromArgb(22, 101, 52) : Color.FromArgb(217, 119, 6);
-                TextRenderer.DrawText(e.Graphics, textoEstado, lblEstado.Font, lblEstado.ClientRectangle, fg, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+                    Color bg;
+                    Color fg;
+
+                    switch (estado.ToLower())
+                    {
+                        case "recibido":
+                            bg = Color.FromArgb(220, 252, 231);
+                            fg = Color.FromArgb(22, 101, 52);
+                            break;
+
+                        case "rechazado":
+                            bg = Color.FromArgb(254, 226, 226);
+                            fg = Color.FromArgb(185, 28, 28);
+                            break;
+
+                        default:
+                            bg = Color.FromArgb(254, 243, 199);
+                            fg = Color.FromArgb(217, 119, 6);
+                            break;
+                    }
+
+                    using (GraphicsPath path = CrearPathRedondeado(
+                        0, 0,
+                        lblEstado.Width - 1,
+                        lblEstado.Height - 1,
+                        12f))
+                    {
+                        using (SolidBrush brush = new SolidBrush(bg))
+                        {
+                            e.Graphics.FillPath(brush, path);
+                        }
+                    }
+
+                    TextRenderer.DrawText(
+                        e.Graphics,
+                        textoEstado,
+                        lblEstado.Font,
+                        lblEstado.ClientRectangle,
+                        fg,
+                        TextFormatFlags.HorizontalCenter |
+                        TextFormatFlags.VerticalCenter);
+                };
             };
 
             Label lblFecha = new Label() { Text = fecha, Font = new Font("Segoe UI", 8.5F), ForeColor = Color.FromArgb(107, 114, 128), Location = new Point(340, 14), AutoSize = true };
@@ -227,14 +265,52 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             Label lblEstado = new Label() { Text = "", Font = new Font("Segoe UI", 8.5F, FontStyle.Bold), BackColor = Color.Transparent, Location = new Point(135, 12), Size = new Size(95, 24) };
             lblEstado.Paint += (s, e) =>
             {
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                using (GraphicsPath path = CrearPathRedondeado(0, 0, lblEstado.Width - 1, lblEstado.Height - 1, 12f))
+                lblEstado.Paint += (s, e) =>
                 {
-                    Color bg = estado.ToLower() == "recibido" ? Color.FromArgb(220, 252, 231) : Color.FromArgb(254, 243, 199);
-                    using (SolidBrush brush = new SolidBrush(bg)) { e.Graphics.FillPath(brush, path); }
-                }
-                Color fg = estado.ToLower() == "recibido" ? Color.FromArgb(22, 101, 52) : Color.FromArgb(217, 119, 6);
-                TextRenderer.DrawText(e.Graphics, textoEstado, lblEstado.Font, lblEstado.ClientRectangle, fg, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+                    Color bg;
+                    Color fg;
+
+                    switch (estado.ToLower())
+                    {
+                        case "recibido":
+                            bg = Color.FromArgb(220, 252, 231);
+                            fg = Color.FromArgb(22, 101, 52);
+                            break;
+
+                        case "rechazado":
+                            bg = Color.FromArgb(254, 226, 226);
+                            fg = Color.FromArgb(185, 28, 28);
+                            break;
+
+                        default:
+                            bg = Color.FromArgb(254, 243, 199);
+                            fg = Color.FromArgb(217, 119, 6);
+                            break;
+                    }
+
+                    using (GraphicsPath path = CrearPathRedondeado(
+                        0, 0,
+                        lblEstado.Width - 1,
+                        lblEstado.Height - 1,
+                        12f))
+                    {
+                        using (SolidBrush brush = new SolidBrush(bg))
+                        {
+                            e.Graphics.FillPath(brush, path);
+                        }
+                    }
+
+                    TextRenderer.DrawText(
+                        e.Graphics,
+                        textoEstado,
+                        lblEstado.Font,
+                        lblEstado.ClientRectangle,
+                        fg,
+                        TextFormatFlags.HorizontalCenter |
+                        TextFormatFlags.VerticalCenter);
+                };
             };
 
             Label lblFecha = new Label() { Text = fecha, Font = new Font("Segoe UI", 8.5F), ForeColor = Color.FromArgb(107, 114, 128), Location = new Point(340, 14), AutoSize = true };
@@ -274,9 +350,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             return path;
         }
 
-        // ==========================================
-        // 3. CARGA DE DETALLES - ENTRANTES
-        // ==========================================
+
         private void CargarDetallesEntrantesDerechos(string numeroOrden)
         {
             ordenSeleccionadaActual = numeroOrden.Trim();
@@ -323,7 +397,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 lblValDispositivo.Text = $"Dispositivo: {lector["TipoDispositivo"]} - {lector["Marca"]} {lector["Modelo"]}";
                                 lblValMotivo.Text = "Motivo: " + lector["MotivoDerivacion"].ToString();
                                 lblValRuta.Text = $"Ruta: {lector["Origen"]} ➔ {lector["Destino"]}";
+
+                                string estadoDerivacion = lector["Estado"].ToString();
+
+                                bool estaPendiente = estadoDerivacion == "Pendiente";
+
+                                pnlAccionBox.Visible = estaPendiente;
+                                btnRecibir.Visible = estaPendiente;
+                                btnRechazar.Visible = estaPendiente;
                                 pnlDerechoE.Refresh();
+
+
                             }
                         }
                     }
@@ -337,9 +421,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // ==========================================
-        // 4. CARGA DE DETALLES - SALIENTES (CORREGIDO CON LA RELACIÓN CORRECTA)
-        // ==========================================
+
         private void CargarDetallesSalientesDerechos(string numeroOrden)
         {
             ordenSalienteSeleccionadaActual = numeroOrden.Trim();
@@ -417,16 +499,53 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void BadgeSaliente_Paint(object sender, PaintEventArgs e)
         {
             Label lbl = sender as Label;
-            if (lbl == null) return;
+
+            if (lbl == null)
+                return;
+
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            using (GraphicsPath path = CrearPathRedondeado(0, 0, lbl.Width - 1, lbl.Height - 1, 12f))
+
+            string estado = lbl.Text.ToLower();
+
+            Color bg;
+            Color fg;
+
+            if (estado.Contains("recibido"))
             {
-                bool esRecibido = lbl.Text.ToLower().Contains("recibido");
-                Color bg = esRecibido ? Color.FromArgb(220, 252, 231) : Color.FromArgb(254, 243, 199);
-                using (SolidBrush brush = new SolidBrush(bg)) { e.Graphics.FillPath(brush, path); }
+                bg = Color.FromArgb(220, 252, 231);
+                fg = Color.FromArgb(22, 101, 52);
             }
-            Color fg = lbl.Text.ToLower().Contains("recibido") ? Color.FromArgb(22, 101, 52) : Color.FromArgb(217, 119, 6);
-            TextRenderer.DrawText(e.Graphics, lbl.Text, lbl.Font, lbl.ClientRectangle, fg, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            else if (estado.Contains("rechazado"))
+            {
+                bg = Color.FromArgb(254, 226, 226);
+                fg = Color.FromArgb(185, 28, 28);
+            }
+            else
+            {
+                bg = Color.FromArgb(254, 243, 199);
+                fg = Color.FromArgb(217, 119, 6);
+            }
+
+            using (GraphicsPath path = CrearPathRedondeado(
+                0, 0,
+                lbl.Width - 1,
+                lbl.Height - 1,
+                12f))
+            {
+                using (SolidBrush brush = new SolidBrush(bg))
+                {
+                    e.Graphics.FillPath(brush, path);
+                }
+            }
+
+            TextRenderer.DrawText(
+                e.Graphics,
+                lbl.Text,
+                lbl.Font,
+                lbl.ClientRectangle,
+                fg,
+                TextFormatFlags.HorizontalCenter |
+                TextFormatFlags.VerticalCenter);
         }
 
 
