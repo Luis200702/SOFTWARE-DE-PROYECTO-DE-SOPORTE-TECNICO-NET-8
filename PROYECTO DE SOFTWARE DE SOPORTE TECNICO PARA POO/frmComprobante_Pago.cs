@@ -18,6 +18,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             InitializeComponent();
             AplicarDiseñoFigma();
             ConfigurarDragAndDrop();
+
+            btnAdjuntar.Enabled = false;
         }
 
 
@@ -183,19 +185,94 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
             }
         }
+        private void MostrarVistaPrevia(string rutaArchivo, string nombreArchivo)
+        {
+            pnlCarga.Controls.Clear();
+
+            PictureBox picComprobante = new PictureBox();
+            picComprobante.Size = new Size(
+                pnlCarga.Width - 40,
+                pnlCarga.Height - 65);
+
+            picComprobante.Location = new Point(20, 15);
+            picComprobante.SizeMode = PictureBoxSizeMode.Zoom;
+            picComprobante.Cursor = Cursors.Hand;
+
+            using (FileStream stream = new FileStream(
+                rutaArchivo,
+                FileMode.Open,
+                FileAccess.Read))
+            {
+                using (Image imagenTemporal = Image.FromStream(stream))
+                {
+                    picComprobante.Image = new Bitmap(imagenTemporal);
+                }
+            }
+
+            Label lblArchivo = new Label();
+            lblArchivo.Text = nombreArchivo;
+            lblArchivo.Font = new Font(
+                "Segoe UI",
+                9F,
+                FontStyle.Regular);
+
+            lblArchivo.ForeColor = Color.FromArgb(70, 80, 90);
+            lblArchivo.BackColor = Color.White;
+            lblArchivo.TextAlign = ContentAlignment.MiddleCenter;
+
+            lblArchivo.Size = new Size(
+                pnlCarga.Width - 20,
+                30);
+
+            lblArchivo.Location = new Point(
+                10,
+                pnlCarga.Height - 40);
+
+            lblArchivo.Cursor = Cursors.Hand;
+
+            // Poder hacer clic otra vez para cambiar el comprobante
+            picComprobante.Click += PnlCarga_Click;
+            lblArchivo.Click += PnlCarga_Click;
+
+            pnlCarga.Controls.Add(picComprobante);
+            pnlCarga.Controls.Add(lblArchivo);
+        }
 
         private void ProcesarArchivo(string rutaArchivo)
         {
             FileInfo fileInfo = new FileInfo(rutaArchivo);
 
+            string extension = Path.GetExtension(rutaArchivo).ToLower();
+
+            if (extension != ".png" &&
+                extension != ".jpg" &&
+                extension != ".jpeg")
+            {
+                MessageBox.Show(
+                    "Solo se permiten imágenes PNG, JPG o JPEG.",
+                    "Formato no válido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
             if (fileInfo.Length > 5 * 1024 * 1024)
             {
-                MessageBox.Show("El archivo es demasiado grande. El límite es 5 MB.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "El archivo es demasiado grande. El límite es 5 MB.",
+                    "Archivo demasiado grande",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
                 return;
             }
 
             rutaArchivoSeleccionado = rutaArchivo;
-            MessageBox.Show($"Archivo cargado exitosamente:\n{fileInfo.Name}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            MostrarVistaPrevia(rutaArchivo, fileInfo.Name);
+
+            btnAdjuntar.Enabled = true;
         }
 
         // --- 4. ACCIONES DE LOS BOTONES ---
