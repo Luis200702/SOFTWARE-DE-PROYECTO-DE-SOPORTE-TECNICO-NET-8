@@ -48,7 +48,6 @@
             uiAvatar1 = new Sunny.UI.UIAvatar();
             btnRecibido = new Sunny.UI.UISymbolButton();
             btnDiagnostico = new Sunny.UI.UISymbolButton();
-            btnEntregado = new Sunny.UI.UISymbolButton();
             btnReparacion = new Sunny.UI.UISymbolButton();
             btnListo = new Sunny.UI.UISymbolButton();
             SuspendLayout();
@@ -362,7 +361,7 @@
             btnRecibido.Name = "btnRecibido";
             btnRecibido.Radius = 12;
             btnRecibido.RectColor = Color.FromArgb(220, 226, 232);
-            btnRecibido.Size = new Size(136, 46);
+            btnRecibido.Size = new Size(162, 46);
             btnRecibido.Symbol = 61468;
             btnRecibido.SymbolColor = Color.FromArgb(70, 86, 103);
             btnRecibido.TabIndex = 59;
@@ -377,38 +376,18 @@
             btnDiagnostico.FillSelectedColor = Color.FromArgb(0, 165, 155);
             btnDiagnostico.Font = new Font("Microsoft Sans Serif", 12F);
             btnDiagnostico.ForeColor = Color.FromArgb(24, 43, 62);
-            btnDiagnostico.Location = new Point(169, 191);
+            btnDiagnostico.Location = new Point(209, 191);
             btnDiagnostico.MinimumSize = new Size(1, 1);
             btnDiagnostico.Name = "btnDiagnostico";
             btnDiagnostico.Radius = 12;
             btnDiagnostico.RectColor = Color.FromArgb(220, 226, 232);
-            btnDiagnostico.Size = new Size(136, 46);
+            btnDiagnostico.Size = new Size(162, 46);
             btnDiagnostico.Symbol = 61442;
             btnDiagnostico.SymbolColor = Color.FromArgb(70, 86, 103);
             btnDiagnostico.TabIndex = 60;
             btnDiagnostico.Text = "Diagnóstico";
             btnDiagnostico.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnDiagnostico.Click += btnDiagnostico_Click;
-            // 
-            // btnEntregado
-            // 
-            btnEntregado.FillColor = Color.White;
-            btnEntregado.FillPressColor = Color.FromArgb(0, 165, 155);
-            btnEntregado.FillSelectedColor = Color.FromArgb(0, 165, 155);
-            btnEntregado.Font = new Font("Microsoft Sans Serif", 12F);
-            btnEntregado.ForeColor = Color.FromArgb(24, 43, 62);
-            btnEntregado.Location = new Point(593, 191);
-            btnEntregado.MinimumSize = new Size(1, 1);
-            btnEntregado.Name = "btnEntregado";
-            btnEntregado.Radius = 12;
-            btnEntregado.RectColor = Color.FromArgb(220, 226, 232);
-            btnEntregado.Size = new Size(136, 46);
-            btnEntregado.Symbol = 61649;
-            btnEntregado.SymbolColor = Color.FromArgb(70, 86, 103);
-            btnEntregado.TabIndex = 61;
-            btnEntregado.Text = "Entregado";
-            btnEntregado.TipsFont = new Font("Microsoft Sans Serif", 9F);
-            btnEntregado.Click += btnEntregado_Click;
             // 
             // btnReparacion
             // 
@@ -417,12 +396,12 @@
             btnReparacion.FillSelectedColor = Color.FromArgb(0, 165, 155);
             btnReparacion.Font = new Font("Microsoft Sans Serif", 12F);
             btnReparacion.ForeColor = Color.FromArgb(24, 43, 62);
-            btnReparacion.Location = new Point(309, 191);
+            btnReparacion.Location = new Point(391, 191);
             btnReparacion.MinimumSize = new Size(1, 1);
             btnReparacion.Name = "btnReparacion";
             btnReparacion.Radius = 12;
             btnReparacion.RectColor = Color.FromArgb(220, 226, 232);
-            btnReparacion.Size = new Size(136, 46);
+            btnReparacion.Size = new Size(162, 46);
             btnReparacion.Symbol = 61613;
             btnReparacion.SymbolColor = Color.FromArgb(70, 86, 103);
             btnReparacion.TabIndex = 62;
@@ -437,12 +416,12 @@
             btnListo.FillSelectedColor = Color.FromArgb(0, 165, 155);
             btnListo.Font = new Font("Microsoft Sans Serif", 12F);
             btnListo.ForeColor = Color.FromArgb(24, 43, 62);
-            btnListo.Location = new Point(451, 191);
+            btnListo.Location = new Point(567, 191);
             btnListo.MinimumSize = new Size(1, 1);
             btnListo.Name = "btnListo";
             btnListo.Radius = 12;
             btnListo.RectColor = Color.FromArgb(220, 226, 232);
-            btnListo.Size = new Size(136, 46);
+            btnListo.Size = new Size(162, 46);
             btnListo.Symbol = 61533;
             btnListo.SymbolColor = Color.FromArgb(70, 86, 103);
             btnListo.TabIndex = 63;
@@ -458,7 +437,6 @@
             ClientSize = new Size(752, 607);
             Controls.Add(btnListo);
             Controls.Add(btnReparacion);
-            Controls.Add(btnEntregado);
             Controls.Add(btnDiagnostico);
             Controls.Add(btnRecibido);
             Controls.Add(uiAvatar1);
@@ -510,7 +488,6 @@
         private Sunny.UI.UIAvatar uiAvatar1;
         private Sunny.UI.UISymbolButton btnRecibido;
         private Sunny.UI.UISymbolButton btnDiagnostico;
-        private Sunny.UI.UISymbolButton btnEntregado;
         private Sunny.UI.UISymbolButton btnReparacion;
         private Sunny.UI.UISymbolButton btnListo;
     }

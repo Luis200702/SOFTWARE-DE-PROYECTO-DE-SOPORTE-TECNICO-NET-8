@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
-    public partial class frmComprobante_Pago : Form 
+    public partial class frmComprobante_Pago : Form
     {
         private string rutaArchivoSeleccionado = "";
-        public byte[] ComprobanteBytes { get; private set; }
+        public byte[] ComprobanteBytes { get; private set; } = Array.Empty<byte>();
         public string NombreComprobante { get; private set; } = "";
 
         public frmComprobante_Pago()
@@ -95,7 +95,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 // C) Texto Secundario (Formatos)
                 Label lblFormato = new Label();
-                lblFormato.Text = "PNG, JPG, WEBP · máx. 5 MB";
+                lblFormato.Text = "PNG, JPG, JPEG · máx. 5 MB";
                 lblFormato.ForeColor = Color.FromArgb(140, 150, 160);
                 lblFormato.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular);
                 lblFormato.AutoSize = false;
@@ -140,18 +140,29 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // --- 3. LÓGICA DE DRAG & DROP (ARRASTRAR Y SOLTAR) ---
         private void ConfigurarDragAndDrop()
         {
-            if (pnlCarga != null)
-            {
-                pnlCarga.AllowDrop = true;
-                pnlCarga.DragEnter += PnlCarga_DragEnter;
-                pnlCarga.DragDrop += PnlCarga_DragDrop;
-                pnlCarga.Click += PnlCarga_Click;
+            if (pnlCarga == null)
+                return;
 
-                foreach (Control c in pnlCarga.Controls)
-                {
-                    c.Click += PnlCarga_Click;
-                }
+            ConfigurarControlParaCarga(pnlCarga);
+
+            foreach (Control control in pnlCarga.Controls)
+            {
+                ConfigurarControlParaCarga(control);
             }
+        }
+
+        private void ConfigurarControlParaCarga(Control control)
+        {
+            control.AllowDrop = true;
+
+            // Evita registrar los mismos eventos más de una vez.
+            control.DragEnter -= PnlCarga_DragEnter;
+            control.DragDrop -= PnlCarga_DragDrop;
+            control.Click -= PnlCarga_Click;
+
+            control.DragEnter += PnlCarga_DragEnter;
+            control.DragDrop += PnlCarga_DragDrop;
+            control.Click += PnlCarga_Click;
         }
 
         private void PnlCarga_DragEnter(object sender, DragEventArgs e)
@@ -164,9 +175,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void PnlCarga_DragDrop(object sender, DragEventArgs e)
         {
-            string[] archivos = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string[]? archivos = e.Data.GetData(DataFormats.FileDrop) as string[];
 
-            if (archivos.Length > 0)
+            if (archivos != null && archivos.Length > 0)
             {
                 ProcesarArchivo(archivos[0]);
             }
@@ -177,7 +188,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Title = "Selecciona el comprobante";
-                ofd.Filter = "Imágenes (*.png;*.jpg;*.jpeg;*.webp)|*.png;*.jpg;*.jpeg;*.webp";
+                ofd.Filter = "Imágenes (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -187,62 +198,72 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         }
         private void MostrarVistaPrevia(string rutaArchivo, string nombreArchivo)
         {
+            foreach (Control control in pnlCarga.Controls)
+            {
+                if (control is PictureBox pictureBox && pictureBox.Image != null)
+                {
+                    pictureBox.Image.Dispose();
+                    pictureBox.Image = null;
+                }
+
+                control.Dispose();
+            }
+
             pnlCarga.Controls.Clear();
 
-            PictureBox picComprobante = new PictureBox();
-            picComprobante.Size = new Size(
-                pnlCarga.Width - 40,
-                pnlCarga.Height - 65);
-
-            picComprobante.Location = new Point(20, 15);
-            picComprobante.SizeMode = PictureBoxSizeMode.Zoom;
-            picComprobante.Cursor = Cursors.Hand;
+            PictureBox picComprobante = new PictureBox
+            {
+                Size = new Size(pnlCarga.Width - 40, pnlCarga.Height - 70),
+                Location = new Point(20, 10),
+                SizeMode = PictureBoxSizeMode.Zoom,
+                BackColor = Color.White,
+                Cursor = Cursors.Hand
+            };
 
             using (FileStream stream = new FileStream(
                 rutaArchivo,
                 FileMode.Open,
-                FileAccess.Read))
+                FileAccess.Read,
+                FileShare.Read))
+            using (Image imagenTemporal = Image.FromStream(stream))
             {
-                using (Image imagenTemporal = Image.FromStream(stream))
-                {
-                    picComprobante.Image = new Bitmap(imagenTemporal);
-                }
+                picComprobante.Image = new Bitmap(imagenTemporal);
             }
 
-            Label lblArchivo = new Label();
-            lblArchivo.Text = nombreArchivo;
-            lblArchivo.Font = new Font(
-                "Segoe UI",
-                9F,
-                FontStyle.Regular);
-
-            lblArchivo.ForeColor = Color.FromArgb(70, 80, 90);
-            lblArchivo.BackColor = Color.White;
-            lblArchivo.TextAlign = ContentAlignment.MiddleCenter;
-
-            lblArchivo.Size = new Size(
-                pnlCarga.Width - 20,
-                30);
-
-            lblArchivo.Location = new Point(
-                10,
-                pnlCarga.Height - 40);
-
-            lblArchivo.Cursor = Cursors.Hand;
-
-            // Poder hacer clic otra vez para cambiar el comprobante
-            picComprobante.Click += PnlCarga_Click;
-            lblArchivo.Click += PnlCarga_Click;
+            Label lblArchivo = new Label
+            {
+                Text = nombreArchivo + "  ·  Haz clic para cambiar",
+                Font = new Font("Segoe UI", 9F, FontStyle.Regular),
+                ForeColor = Color.FromArgb(70, 80, 90),
+                BackColor = Color.White,
+                TextAlign = ContentAlignment.MiddleCenter,
+                AutoEllipsis = true,
+                Size = new Size(pnlCarga.Width - 20, 30),
+                Location = new Point(10, pnlCarga.Height - 45),
+                Cursor = Cursors.Hand
+            };
 
             pnlCarga.Controls.Add(picComprobante);
             pnlCarga.Controls.Add(lblArchivo);
+
+            ConfigurarControlParaCarga(picComprobante);
+            ConfigurarControlParaCarga(lblArchivo);
         }
 
         private void ProcesarArchivo(string rutaArchivo)
         {
-            FileInfo fileInfo = new FileInfo(rutaArchivo);
+            if (string.IsNullOrWhiteSpace(rutaArchivo) || !File.Exists(rutaArchivo))
+            {
+                MessageBox.Show(
+                    "No se pudo encontrar el archivo seleccionado.",
+                    "Archivo no válido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
 
-            string extension = Path.GetExtension(rutaArchivo).ToLower();
+            FileInfo fileInfo = new FileInfo(rutaArchivo);
+            string extension = Path.GetExtension(rutaArchivo).ToLowerInvariant();
 
             if (extension != ".png" &&
                 extension != ".jpg" &&
@@ -253,7 +274,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     "Formato no válido",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
-
                 return;
             }
 
@@ -264,15 +284,27 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     "Archivo demasiado grande",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
-
                 return;
             }
 
-            rutaArchivoSeleccionado = rutaArchivo;
+            try
+            {
+                MostrarVistaPrevia(rutaArchivo, fileInfo.Name);
 
-            MostrarVistaPrevia(rutaArchivo, fileInfo.Name);
+                rutaArchivoSeleccionado = rutaArchivo;
+                btnAdjuntar.Enabled = true;
+            }
+            catch
+            {
+                rutaArchivoSeleccionado = "";
+                btnAdjuntar.Enabled = false;
 
-            btnAdjuntar.Enabled = true;
+                MessageBox.Show(
+                    "El archivo seleccionado no pudo mostrarse como imagen.",
+                    "Imagen no válida",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
         }
 
         // --- 4. ACCIONES DE LOS BOTONES ---

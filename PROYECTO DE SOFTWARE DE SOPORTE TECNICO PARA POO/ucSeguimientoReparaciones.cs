@@ -19,7 +19,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             AplicarDiseñoGrid();
         }
 
-        // DISEÑO BASE DE LA TABLA  
         private void AplicarDiseñoGrid()
         {
             dgvSeguimiento.BackgroundColor = Color.White;
@@ -82,21 +81,26 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
-                    string query = @"SELECT 
-                                        o.numero_orden AS ORDEN,
-                                        c.nombre + ' - ' + d.marca + ' ' + d.modelo AS [CLIENTE \ DISPOSITIVO],
-                                        u.Nombre AS TÉCNICO,
-                                        o.estado AS ESTADO,
-                                        o.fecha_ingreso AS INGRESO,
-                                        o.fecha_estimada_entrega AS [ENTREGA ESTIMADA],
-                                        DATEDIFF(day, o.fecha_ingreso, GETDATE()) AS TIEMPO
-                                    FROM ordenes o
-                                    INNER JOIN clientes c ON o.cliente_id = c.id
-                                    INNER JOIN dispositivos d ON o.dispositivo_id = d.id
-                                    INNER JOIN Usuarios u ON o.tecnico_id = u.Id
-                                    WHERE o.sucursal = @sucursalSesion
-                                      AND (@busqueda = '' OR o.numero_orden LIKE '%' + @busqueda + '%' OR c.nombre LIKE '%' + @busqueda + '%')
-                                      AND (@estado = 'Todos' OR o.estado = @estado)";
+                    string query = @"SELECT
+                    o.numero_orden AS ORDEN,
+                    c.nombre + ' - ' + d.marca + ' ' + d.modelo AS [CLIENTE \ DISPOSITIVO],
+                    u.Nombre AS TÉCNICO,
+                    o.estado AS ESTADO,
+                    o.fecha_ingreso AS INGRESO,
+                    o.fecha_estimada_entrega AS [ENTREGA ESTIMADA],
+                    CASE
+                        WHEN o.fecha_entrega IS NOT NULL
+                            THEN DATEDIFF(day, o.fecha_ingreso, o.fecha_entrega)
+                        ELSE
+                            DATEDIFF(day, o.fecha_ingreso, GETDATE())
+                    END AS TIEMPO
+                FROM ordenes o
+                INNER JOIN clientes c ON o.cliente_id = c.id
+                INNER JOIN dispositivos d ON o.dispositivo_id = d.id
+                INNER JOIN Usuarios u ON o.tecnico_id = u.Id
+                WHERE o.sucursal = @sucursalSesion
+                  AND (@busqueda = '' OR o.numero_orden LIKE '%' + @busqueda + '%' OR c.nombre LIKE '%' + @busqueda + '%')
+                  AND (@estado = 'Todos' OR o.estado = @estado)";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {

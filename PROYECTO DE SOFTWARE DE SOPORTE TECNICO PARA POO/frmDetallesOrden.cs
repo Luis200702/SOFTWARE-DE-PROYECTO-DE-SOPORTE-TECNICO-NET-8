@@ -64,19 +64,47 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void CargarTecnicos()
         {
             var db = new Conexion_Base_de_Datos();
+
             if (db.abrirConexion())
             {
-                // Ajusta el nombre de la tabla si es distinto en tu SQL
-                string query = "SELECT Id, Nombre FROM Usuarios WHERE Perfil = 'Tecnico'";
-                SqlDataAdapter da = new SqlDataAdapter(query, db.oCon);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+                try
+                {
+                    string query = @"
+                SELECT U.Id, U.Nombre
+                FROM Usuarios U
+                INNER JOIN Sucursales S
+                    ON U.IdSucursal = S.IdSucursal
+                INNER JOIN ordenes O
+                    ON O.sucursal = S.NombreSucursal
+                WHERE U.Perfil = 'Tecnico'
+                  AND O.numero_orden = @orden
+                ORDER BY U.Nombre";
 
-                cmbTecnico.DataSource = dt;
-                cmbTecnico.DisplayMember = "Nombre";
-                cmbTecnico.ValueMember = "Id";
+                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    {
+                        cmd.Parameters.AddWithValue("@orden", ordenActual);
 
-                db.cerrarConexion();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        cmbTecnico.DataSource = dt;
+                        cmbTecnico.DisplayMember = "Nombre";
+                        cmbTecnico.ValueMember = "Id";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Error al cargar técnicos: " + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    db.cerrarConexion();
+                }
             }
         }
 
@@ -97,9 +125,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     break;
                 case "Listo":
                     Unsoloboton.SeleccionarBoton(btnListo);
-                    break;
-                case "Entregado":
-                    Unsoloboton.SeleccionarBoton(btnEntregado);
                     break;
             }
         }
@@ -143,11 +168,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             estadoSeleccionado = "Listo";
         }
 
-        private void btnEntregado_Click(object sender, EventArgs e)
-        {
-            Unsoloboton.SeleccionarBoton(btnEntregado);
-            estadoSeleccionado = "Entregado";
-        }
 
         private void CargarRepuestosGuardados()
         {
@@ -295,11 +315,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     // 1. Actualizamos el estado, el técnico Y LAS OBSERVACIONES
                     string query = @"
-                UPDATE ordenes 
-                SET estado = @estado, 
-                    tecnico_id = @tecnico,
-                    diagnostico_inicial = @observaciones
-                WHERE numero_orden = @orden";
+    UPDATE ordenes
+    SET estado = @estado,
+        tecnico_id = @tecnico,
+        trabajo_realizado = @observaciones
+    WHERE numero_orden = @orden";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
@@ -388,7 +408,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 try
                 {
                     // Nota: Uso 'diagnostico_inicial'. Si creaste otra columna como 'observaciones', cámbiala aquí.
-                    string query = "SELECT diagnostico_inicial FROM ordenes WHERE numero_orden = @orden";
+                    string query =
+       "SELECT trabajo_realizado FROM ordenes WHERE numero_orden = @orden";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
