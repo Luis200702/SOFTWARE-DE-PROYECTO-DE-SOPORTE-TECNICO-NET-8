@@ -11,9 +11,29 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         public ucReportes()
         {
             InitializeComponent();
+            CargarTiposReporte();
             CargarSucursales();
         }
 
+        private void CargarTiposReporte()
+        {
+            cmbTiposReporte.Items.Clear();
+
+            cmbTiposReporte.Items.Add("Órdenes de reparación");
+            cmbTiposReporte.Items.Add("Ingresos por servicios");
+            cmbTiposReporte.Items.Add("Consumo de repuestos");
+            cmbTiposReporte.Items.Add("Inventario de repuestos");
+            cmbTiposReporte.Items.Add("Stock bajo");
+            cmbTiposReporte.Items.Add("Órdenes por técnico");
+            cmbTiposReporte.Items.Add("Derivaciones entre sucursales");
+            cmbTiposReporte.Items.Add("Historial de reparaciones por dispositivo");
+
+            if (cmbTiposReporte.Items.Count > 0)
+            {
+                cmbTiposReporte.SelectedIndex = 0;
+                ConfigurarFiltrosPorReporte();
+            }
+        }
         private void ucReportes_Load(object sender, EventArgs e)
         {
             DataTable EquiposRecibidos = oCon.retornarRegistrosUsuarios("select count(fecha_ingreso) as Numero  from Ordenes\r\nwhere month(fecha_ingreso) = month(getdate())\r\nand year(fecha_ingreso) = year(getdate())");
@@ -27,26 +47,96 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             DataTable Pendientes = oCon.retornarRegistrosUsuarios("select count(fecha_ingreso) as Numero_Reparaciones from Ordenes\r\nwhere month(fecha_ingreso) = month(getdate())\r\nand year(fecha_ingreso) = year(getdate()) and not estado = 'Entregado'");
             lblPendientes.Text = Pendientes.Rows[0]["Numero_Reparaciones"].ToString();
-        }
 
+            dtpDesde.Value = new DateTime(
+    DateTime.Now.Year,
+    DateTime.Now.Month,
+    1);
+
+            dtpHasta.Value = DateTime.Now;
+        }
+        private bool ValidarRangoFechas()
+        {
+            if (dtpDesde.Value.Date > dtpHasta.Value.Date)
+            {
+                MessageBox.Show(
+                    "La fecha inicial no puede ser mayor que la fecha final.",
+                    "Rango de fechas",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return false;
+            }
+
+            return true;
+        }
         private void pnlDatosCliente_Click(object sender, EventArgs e)
         {
 
         }
         public void CargarSucursales()
         {
-            DataTable dt = oCon.retornarRegistrosUsuarios("select IdSucursal, NombreSucursal from Sucursales order by NombreSucursal");
+            DataTable dt = oCon.retornarRegistrosUsuarios("select IdSucursal, NombreSucursal " + "from Sucursales " + "order by NombreSucursal");
 
-            if (dt != null && dt.Rows.Count > 0)
+            if (dt != null)
             {
+                DataRow filaTodas = dt.NewRow();
+                filaTodas["IdSucursal"] = 0;
+                filaTodas["NombreSucursal"] = "Todas";
+
+                dt.Rows.InsertAt(filaTodas, 0);
+
                 cmbSucursal.DataSource = dt;
                 cmbSucursal.DisplayMember = "NombreSucursal";
                 cmbSucursal.ValueMember = "IdSucursal";
+                cmbSucursal.SelectedIndex = 0;
+            }
+        }
+
+        private void CargarTecnicos()
+        {
+            DataTable dt;
+
+            if (cmbSucursal.Text == "Todas" ||
+                string.IsNullOrWhiteSpace(cmbSucursal.Text))
+            {
+                dt = oCon.retornarRegistrosUsuarios(@"
+            SELECT Id, Nombre
+            FROM Usuarios
+            WHERE Perfil = 'Tecnico'
+            ORDER BY Nombre");
+            }
+            else
+            {
+                dt = oCon.retornarRegistrosUsuarios(@"
+            SELECT U.Id, U.Nombre
+            FROM Usuarios U
+            INNER JOIN Sucursales S
+                ON U.IdSucursal = S.IdSucursal
+            WHERE U.Perfil = 'Tecnico'
+              AND S.NombreSucursal = '" + cmbSucursal.Text + @"'
+            ORDER BY U.Nombre");
+            }
+
+            if (dt != null)
+            {
+                DataRow filaTodos = dt.NewRow();
+                filaTodos["Id"] = 0;
+                filaTodos["Nombre"] = "Todos";
+
+                dt.Rows.InsertAt(filaTodos, 0);
+
+                cmbTecnicos.DataSource = dt;
+                cmbTecnicos.DisplayMember = "Nombre";
+                cmbTecnicos.ValueMember = "Id";
+                cmbTecnicos.SelectedIndex = 0;
             }
         }
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
+            if (!ValidarRangoFechas())
+                return;
             QuestPDF.Settings.License = LicenseType.Community;
             string sucursal = cmbSucursal.SelectedValue?.ToString() ?? "0";
             string nombreSucursal = cmbSucursal.Text == "" ? "Todas" : cmbSucursal.Text;
@@ -264,6 +354,69 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(ruta) { UseShellExecute = true });
             MessageBox.Show("Reporte generado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void cmbSucursal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarTecnicos();
+        }
+
+        private void cmbTiposReporte_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ConfigurarFiltrosPorReporte();
+        }
+        private void ConfigurarFiltrosPorReporte()
+        {
+            string tipoReporte = cmbTiposReporte.Text;
+
+            // Por defecto, todos disponibles
+            cmbSucursal.Enabled = true;
+            cmbTecnicos.Enabled = true;
+            dtpDesde.Enabled = true;
+            dtpHasta.Enabled = true;
+
+            switch (tipoReporte)
+            {
+                case "Órdenes de reparación":
+                    // Usa sucursal, técnico y fechas
+                    break;
+
+                case "Ingresos por servicios":
+                    // Podemos saber cuánto generó una sucursal o un técnico
+                    break;
+
+                case "Consumo de repuestos":
+                    // También se puede consultar por sucursal, técnico y periodo
+                    break;
+
+                case "Inventario de repuestos":
+                    // El inventario es actual, no necesita técnico ni fechas
+                    cmbTecnicos.Enabled = false;
+                    dtpDesde.Enabled = false;
+                    dtpHasta.Enabled = false;
+                    break;
+
+                case "Stock bajo":
+                    // Igual: muestra el stock actual
+                    cmbTecnicos.Enabled = false;
+                    dtpDesde.Enabled = false;
+                    dtpHasta.Enabled = false;
+                    break;
+
+                case "Órdenes por técnico":
+                    // Necesita los tres filtros
+                    break;
+
+                case "Derivaciones entre sucursales":
+                    // No depende de un técnico
+                    cmbTecnicos.Enabled = false;
+                    break;
+
+                case "Historial de reparaciones por dispositivo":
+                    // No necesitamos técnico para consultar el historial
+                    cmbTecnicos.Enabled = false;
+                    break;
+            }
         }
     }
 

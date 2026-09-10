@@ -24,7 +24,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
 
-       
+
             txtSucursal.Text = Sesion.SucursalActual;
 
             CargarDatosComboBox();
@@ -36,7 +36,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             btnEquipo.Tag = 0;
             btnEquipo.Click += btnEquipo_Click;
 
-            txtIdentificacionCliente.Leave += txtIdentificacionCliente_Leave;
+            // Buscar automáticamente el dispositivo cuando se termina de escribir el IMEI/Serie.
+            txtSerie.Leave -= txtSerie_Leave;
+            txtSerie.Leave += txtSerie_Leave;
 
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, "");
         }
@@ -74,27 +76,42 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void CargarDatosComboBox()
         {
             var db = new Conexion_Base_de_Datos();
+
             if (db.abrirConexion())
             {
                 try
                 {
-                    string ConsultaTecnicos = "SELECT Id, Nombre FROM Usuarios WHERE Perfil = 'Tecnico'";
-                    SqlDataAdapter daTecnicos = new SqlDataAdapter(ConsultaTecnicos, db.oCon);
-                    DataTable dtTecnicos = new DataTable();
-                    daTecnicos.Fill(dtTecnicos);
+                    string ConsultaTecnicos = @"
+                SELECT U.Id, U.Nombre
+                FROM Usuarios U
+                INNER JOIN Sucursales S
+                    ON U.IdSucursal = S.IdSucursal
+                WHERE U.Perfil = 'Tecnico'
+                  AND S.NombreSucursal = @Sucursal
+                ORDER BY U.Nombre";
 
-                    cmbTecnico.DataSource = dtTecnicos;
-                    cmbTecnico.DisplayMember = "Nombre";
-                    cmbTecnico.ValueMember = "Id";
-
-                    if (cmbTecnico.Items.Count > 0)
+                    using (SqlCommand cmd = new SqlCommand(ConsultaTecnicos, db.oCon))
                     {
-                        cmbTecnico.SelectedIndex = 0;
+                        cmd.Parameters.AddWithValue(
+                            "@Sucursal",
+                            Sesion.SucursalActual);
+
+                        SqlDataAdapter daTecnicos = new SqlDataAdapter(cmd);
+                        DataTable dtTecnicos = new DataTable();
+                        daTecnicos.Fill(dtTecnicos);
+
+                        cmbTecnico.DataSource = dtTecnicos;
+                        cmbTecnico.DisplayMember = "Nombre";
+                        cmbTecnico.ValueMember = "Id";
+
+                        if (cmbTecnico.Items.Count > 0)
+                            cmbTecnico.SelectedIndex = 0;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al cargar los datos en los ComboBox: " + ex.Message);
+                    MessageBox.Show(
+                        "Error al cargar los técnicos: " + ex.Message);
                 }
                 finally
                 {
@@ -195,9 +212,34 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 foreach (var eq in listaEquipos)
                 {
-                    if (string.IsNullOrEmpty(eq.Tipo) || string.IsNullOrWhiteSpace(eq.Marca) || string.IsNullOrWhiteSpace(eq.Modelo))
+                    if (string.IsNullOrEmpty(eq.Tipo) ||
+                        string.IsNullOrWhiteSpace(eq.Marca) ||
+                        string.IsNullOrWhiteSpace(eq.Modelo) ||
+                        string.IsNullOrWhiteSpace(eq.Serie))
                     {
-                        MessageBox.Show("Para registrar un dispositivo, debes elegir el Tipo, Marca y Modelo.\n\nSi solo deseas guardar al cliente, limpia los campos del dispositivo y presiona Guardar.", "Faltan datos del equipo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(
+                            "Para registrar un dispositivo, debes elegir el Tipo, Marca, Modelo y escribir su IMEI/Serie.\n\nSi solo deseas guardar al cliente, limpia los campos del dispositivo y presiona Guardar.",
+                            "Faltan datos del equipo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                // Un mismo IMEI/Serie no puede agregarse dos veces en la misma recepción.
+                HashSet<string> seriesUsadas = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                foreach (var eq in listaEquipos)
+                {
+                    string serieActual = eq.Serie.Trim();
+
+                    if (!seriesUsadas.Add(serieActual))
+                    {
+                        MessageBox.Show(
+                            "El IMEI/Serie " + serieActual + " está repetido entre los equipos de esta recepción.",
+                            "Dispositivo repetido",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
                         return;
                     }
                 }
@@ -247,27 +289,84 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (!guardarSoloCliente)
             {
                 int tecnicoId = Convert.ToInt32(cmbTecnico.SelectedValue);
-              
+
                 string sucursal = Sesion.SucursalActual;
 
                 for (int i = 0; i < listaEquipos.Count; i++)
                 {
                     var equipo = listaEquipos[i];
 
-                    string camposDisp = "cliente_id, tipo, marca, modelo, serie_imei, color, estado_llegada";
-                    string datosDisp = idCliente + ",'" + equipo.Tipo + "','" + equipo.Marca.Trim() + "','" +
-                                       equipo.Modelo.Trim() + "','" + equipo.Serie.Trim() + "','" +
-                                       equipo.Color.Trim() + "','" + cmbEstado.Items[equipo.IndiceEstado].ToString() + "'";
-
-                    oCon.insertDatosCliente("dispositivos", camposDisp, datosDisp);
-
                     int idDispositivo = 0;
+                    int idClienteDispositivo = 0;
+
+                    // Igual que con la cédula del cliente:
+                    // primero se verifica si el dispositivo ya existe por su IMEI/Serie.
                     if (oCon.abrirConexion())
                     {
-                        string consultaDisp = "SELECT MAX(id) FROM dispositivos WHERE cliente_id = " + idCliente;
-                        SqlCommand cmdDisp = new SqlCommand(consultaDisp, oCon.oCon);
-                        idDispositivo = Convert.ToInt32(cmdDisp.ExecuteScalar());
+                        string consultaDisp = @"
+                            SELECT TOP 1 id, cliente_id
+                            FROM dispositivos
+                            WHERE serie_imei = @serieImei";
+
+                        using (SqlCommand cmdDisp = new SqlCommand(consultaDisp, oCon.oCon))
+                        {
+                            cmdDisp.Parameters.AddWithValue("@serieImei", equipo.Serie.Trim());
+
+                            using (SqlDataReader reader = cmdDisp.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    idDispositivo = Convert.ToInt32(reader["id"]);
+                                    idClienteDispositivo = Convert.ToInt32(reader["cliente_id"]);
+                                }
+                            }
+                        }
+
                         oCon.cerrarConexion();
+                    }
+
+                    // Si el IMEI/Serie ya pertenece a otro cliente, se detiene el registro
+                    // para evitar relacionar el mismo dispositivo con dos clientes distintos.
+                    if (idDispositivo > 0 && idClienteDispositivo != idCliente)
+                    {
+                        MessageBox.Show(
+                            "El IMEI/Serie " + equipo.Serie.Trim() + " ya está registrado para otro cliente.\n\nVerifica la cédula del cliente o el IMEI/Serie del dispositivo.",
+                            "Dispositivo registrado",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Si no existe, se crea el dispositivo.
+                    if (idDispositivo == 0)
+                    {
+                        string camposDisp = "cliente_id, tipo, marca, modelo, serie_imei, color, estado_llegada";
+                        string datosDisp = idCliente + ",'" + equipo.Tipo + "','" + equipo.Marca.Trim() + "','" +
+                                           equipo.Modelo.Trim() + "','" + equipo.Serie.Trim() + "','" +
+                                           equipo.Color.Trim() + "','" + cmbEstado.Items[equipo.IndiceEstado].ToString() + "'";
+
+                        oCon.insertDatosCliente("dispositivos", camposDisp, datosDisp);
+
+                        // Obtener el ID usando el IMEI/Serie, no MAX(id).
+                        if (oCon.abrirConexion())
+                        {
+                            string consultaIdDisp = @"
+                                SELECT TOP 1 id
+                                FROM dispositivos
+                                WHERE serie_imei = @serieImei";
+
+                            using (SqlCommand cmdIdDisp = new SqlCommand(consultaIdDisp, oCon.oCon))
+                            {
+                                cmdIdDisp.Parameters.AddWithValue("@serieImei", equipo.Serie.Trim());
+
+                                object resultadoDisp = cmdIdDisp.ExecuteScalar();
+
+                                if (resultadoDisp != null)
+                                    idDispositivo = Convert.ToInt32(resultadoDisp);
+                            }
+
+                            oCon.cerrarConexion();
+                        }
                     }
 
                     string costoAjustado = txtCosto.Text.Replace(",", ".");
@@ -545,5 +644,95 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void lblDatosCliente_Click(object sender, EventArgs e) { }
         private void pictureBox4_Click(object sender, EventArgs e) { }
+
+        private void txtSerie_Leave(object sender, EventArgs e)
+        {
+            string serieImei = txtSerie.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(serieImei))
+                return;
+
+            var db = new Conexion_Base_de_Datos();
+
+            if (db.abrirConexion())
+            {
+                try
+                {
+                    string consulta = @"
+                        SELECT TOP 1
+                            d.tipo,
+                            d.marca,
+                            d.modelo,
+                            d.color,
+                            d.estado_llegada,
+                            c.cedula_pasaporte
+                        FROM dispositivos d
+                        INNER JOIN clientes c ON d.cliente_id = c.id
+                        WHERE d.serie_imei = @serieImei";
+
+                    using (SqlCommand cmd = new SqlCommand(consulta, db.oCon))
+                    {
+                        cmd.Parameters.AddWithValue("@serieImei", serieImei);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                tipoDispositivo = reader["tipo"].ToString();
+
+                                if (tipoDispositivo == "telefono")
+                                    SeleccionarBoton(btnTelefono);
+                                else if (tipoDispositivo == "computadora")
+                                    SeleccionarBoton(btnComputadora);
+
+                                CatalogoMarcas.CargarMarcasEnComboBox(
+                                    cmbMarca,
+                                    tipoDispositivo);
+
+                                cmbMarca.Text = reader["marca"].ToString();
+                                txtModelo.Text = reader["modelo"].ToString();
+                                txtColor.Text = reader["color"].ToString();
+
+                                string estado =
+                                    reader["estado_llegada"].ToString();
+
+                                if (cmbEstado.Items.Contains(estado))
+                                    cmbEstado.SelectedItem = estado;
+
+                                string cedulaRegistrada = reader["cedula_pasaporte"].ToString();
+                                string cedulaActual = txtIdentificacionCliente.Text.Trim();
+
+                                if (!string.IsNullOrWhiteSpace(cedulaActual) &&
+                                    !string.Equals(cedulaActual, cedulaRegistrada, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    MessageBox.Show(
+                                        "Este IMEI/Serie ya está registrado para otro cliente.\n\nVerifica la cédula del cliente antes de guardar.",
+                                        "Dispositivo registrado",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(
+                                        "El dispositivo ya se encuentra registrado. Se cargaron sus datos.",
+                                        "Dispositivo encontrado",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Error al buscar el dispositivo: " + ex.Message);
+                }
+                finally
+                {
+                    db.cerrarConexion();
+                }
+            }
+        }
     }
 }

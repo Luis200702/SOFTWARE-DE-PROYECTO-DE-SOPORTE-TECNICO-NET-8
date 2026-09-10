@@ -63,6 +63,35 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 try
                 {
+                    string queryPendiente = @"
+    SELECT COUNT(*)
+    FROM DerivacionesSucursales
+    WHERE IdOrden = @idOrden
+      AND Estado = 'Pendiente'";
+
+                    using (SqlCommand cmdPendiente = new SqlCommand(queryPendiente, db.oCon))
+                    {
+                        cmdPendiente.Parameters.AddWithValue(
+                            "@idOrden",
+                            idOrdenSeleccionada);
+
+                        int pendientes = Convert.ToInt32(
+                            cmdPendiente.ExecuteScalar());
+
+                        if (pendientes > 0)
+                        {
+                            MessageBox.Show(
+                                "Esta orden ya tiene una derivación pendiente.",
+                                "Derivación pendiente",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+
+                            return;
+                        }
+                    }
+
+
+
                     string query = @"
                         INSERT INTO DerivacionesSucursales (
                             IdOrden, SucursalOrigen, SucursalDestino, 

@@ -57,8 +57,10 @@
             uiAvatar4 = new Sunny.UI.UIAvatar();
             label11 = new Label();
             uiPanel4 = new Sunny.UI.UIPanel();
-            this.cmbTecnicos = new Sunny.UI.UIComboBox();
-            this.cmbSucursal = new Sunny.UI.UIComboBox();
+            dtpHasta = new Sunny.UI.UIDatetimePicker();
+            dtpDesde = new Sunny.UI.UIDatetimePicker();
+            cmbTecnicos = new Sunny.UI.UIComboBox();
+            cmbSucursal = new Sunny.UI.UIComboBox();
             cmbTiposReporte = new Sunny.UI.UIComboBox();
             uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             label14 = new Label();
@@ -467,8 +469,10 @@
             // 
             uiPanel4.AutoSize = true;
             uiPanel4.BackColor = Color.Transparent;
-            uiPanel4.Controls.Add(this.cmbTecnicos);
-            uiPanel4.Controls.Add(this.cmbSucursal);
+            uiPanel4.Controls.Add(dtpHasta);
+            uiPanel4.Controls.Add(dtpDesde);
+            uiPanel4.Controls.Add(cmbTecnicos);
+            uiPanel4.Controls.Add(cmbSucursal);
             uiPanel4.Controls.Add(cmbTiposReporte);
             uiPanel4.Controls.Add(uiSymbolButton1);
             uiPanel4.Controls.Add(label14);
@@ -491,53 +495,108 @@
             uiPanel4.Text = null;
             uiPanel4.TextAlignment = ContentAlignment.MiddleCenter;
             // 
+            // dtpHasta
+            // 
+            dtpHasta.BackColor = Color.FromArgb(243, 246, 250);
+            dtpHasta.DateCultureInfo = new System.Globalization.CultureInfo("es-ES");
+            dtpHasta.DateFormat = "yyyy-MM-dd";
+            dtpHasta.FillColor = Color.FromArgb(248, 249, 251);
+            dtpHasta.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpHasta.ForeColor = Color.FromArgb(70, 86, 103);
+            dtpHasta.Location = new Point(666, 91);
+            dtpHasta.Margin = new Padding(4, 5, 4, 5);
+            dtpHasta.MaxLength = 10;
+            dtpHasta.MinimumSize = new Size(63, 0);
+            dtpHasta.Name = "dtpHasta";
+            dtpHasta.Padding = new Padding(0, 0, 30, 2);
+            dtpHasta.Radius = 12;
+            dtpHasta.RectColor = Color.FromArgb(220, 226, 232);
+            dtpHasta.Size = new Size(106, 37);
+            dtpHasta.SymbolDropDown = 61555;
+            dtpHasta.SymbolNormal = 61555;
+            dtpHasta.SymbolSize = 24;
+            dtpHasta.TabIndex = 61;
+            dtpHasta.Text = "2026-08-03";
+            dtpHasta.TextAlignment = ContentAlignment.MiddleLeft;
+            dtpHasta.Value = new DateTime(2026, 8, 3, 0, 0, 0, 0);
+            dtpHasta.Watermark = "";
+            dtpHasta.WatermarkColor = Color.FromArgb(145, 158, 172);
+            // 
+            // dtpDesde
+            // 
+            dtpDesde.BackColor = Color.FromArgb(243, 246, 250);
+            dtpDesde.DateCultureInfo = new System.Globalization.CultureInfo("es-ES");
+            dtpDesde.DateFormat = "yyyy-MM-dd";
+            dtpDesde.FillColor = Color.FromArgb(248, 249, 251);
+            dtpDesde.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpDesde.ForeColor = Color.FromArgb(70, 86, 103);
+            dtpDesde.Location = new Point(541, 92);
+            dtpDesde.Margin = new Padding(4, 5, 4, 5);
+            dtpDesde.MaxLength = 10;
+            dtpDesde.MinimumSize = new Size(63, 0);
+            dtpDesde.Name = "dtpDesde";
+            dtpDesde.Padding = new Padding(0, 0, 30, 2);
+            dtpDesde.Radius = 12;
+            dtpDesde.RectColor = Color.FromArgb(220, 226, 232);
+            dtpDesde.Size = new Size(106, 37);
+            dtpDesde.SymbolDropDown = 61555;
+            dtpDesde.SymbolNormal = 61555;
+            dtpDesde.SymbolSize = 24;
+            dtpDesde.TabIndex = 60;
+            dtpDesde.Text = "2026-08-03";
+            dtpDesde.TextAlignment = ContentAlignment.MiddleLeft;
+            dtpDesde.Value = new DateTime(2026, 8, 3, 0, 0, 0, 0);
+            dtpDesde.Watermark = "";
+            dtpDesde.WatermarkColor = Color.FromArgb(145, 158, 172);
+            // 
             // cmbTecnicos
             // 
-            this.cmbTecnicos.BackColor = Color.Transparent;
-            this.cmbTecnicos.DataSource = null;
-            this.cmbTecnicos.FillColor = Color.FromArgb(248, 249, 251);
-            this.cmbTecnicos.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.cmbTecnicos.ForeColor = Color.FromArgb(70, 86, 103);
-            this.cmbTecnicos.FormattingEnabled = true;
-            this.cmbTecnicos.ItemHoverColor = Color.FromArgb(243, 247, 247);
-            this.cmbTecnicos.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            this.cmbTecnicos.Location = new Point(380, 91);
-            this.cmbTecnicos.Margin = new Padding(4, 5, 4, 5);
-            this.cmbTecnicos.MinimumSize = new Size(63, 0);
-            this.cmbTecnicos.Name = "cmbTecnicos";
-            this.cmbTecnicos.Padding = new Padding(0, 0, 30, 2);
-            this.cmbTecnicos.Radius = 12;
-            this.cmbTecnicos.RectColor = Color.FromArgb(220, 226, 232);
-            this.cmbTecnicos.Size = new Size(143, 37);
-            this.cmbTecnicos.SymbolSize = 24;
-            this.cmbTecnicos.TabIndex = 59;
-            this.cmbTecnicos.TextAlignment = ContentAlignment.MiddleLeft;
-            this.cmbTecnicos.Watermark = "";
-            this.cmbTecnicos.WatermarkColor = Color.FromArgb(198, 199, 189);
+            cmbTecnicos.BackColor = Color.Transparent;
+            cmbTecnicos.DataSource = null;
+            cmbTecnicos.FillColor = Color.FromArgb(248, 249, 251);
+            cmbTecnicos.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbTecnicos.ForeColor = Color.FromArgb(70, 86, 103);
+            cmbTecnicos.FormattingEnabled = true;
+            cmbTecnicos.ItemHoverColor = Color.FromArgb(243, 247, 247);
+            cmbTecnicos.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbTecnicos.Location = new Point(380, 91);
+            cmbTecnicos.Margin = new Padding(4, 5, 4, 5);
+            cmbTecnicos.MinimumSize = new Size(63, 0);
+            cmbTecnicos.Name = "cmbTecnicos";
+            cmbTecnicos.Padding = new Padding(0, 0, 30, 2);
+            cmbTecnicos.Radius = 12;
+            cmbTecnicos.RectColor = Color.FromArgb(220, 226, 232);
+            cmbTecnicos.Size = new Size(143, 37);
+            cmbTecnicos.SymbolSize = 24;
+            cmbTecnicos.TabIndex = 59;
+            cmbTecnicos.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbTecnicos.Watermark = "";
+            cmbTecnicos.WatermarkColor = Color.FromArgb(198, 199, 189);
             // 
             // cmbSucursal
             // 
-            this.cmbSucursal.BackColor = Color.Transparent;
-            this.cmbSucursal.DataSource = null;
-            this.cmbSucursal.FillColor = Color.FromArgb(248, 249, 251);
-            this.cmbSucursal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.cmbSucursal.ForeColor = Color.FromArgb(70, 86, 103);
-            this.cmbSucursal.FormattingEnabled = true;
-            this.cmbSucursal.ItemHoverColor = Color.FromArgb(243, 247, 247);
-            this.cmbSucursal.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            this.cmbSucursal.Location = new Point(208, 91);
-            this.cmbSucursal.Margin = new Padding(4, 5, 4, 5);
-            this.cmbSucursal.MinimumSize = new Size(63, 0);
-            this.cmbSucursal.Name = "cmbSucursal";
-            this.cmbSucursal.Padding = new Padding(0, 0, 30, 2);
-            this.cmbSucursal.Radius = 12;
-            this.cmbSucursal.RectColor = Color.FromArgb(220, 226, 232);
-            this.cmbSucursal.Size = new Size(153, 37);
-            this.cmbSucursal.SymbolSize = 24;
-            this.cmbSucursal.TabIndex = 58;
-            this.cmbSucursal.TextAlignment = ContentAlignment.MiddleLeft;
-            this.cmbSucursal.Watermark = "";
-            this.cmbSucursal.WatermarkColor = Color.FromArgb(198, 199, 189);
+            cmbSucursal.BackColor = Color.Transparent;
+            cmbSucursal.DataSource = null;
+            cmbSucursal.FillColor = Color.FromArgb(248, 249, 251);
+            cmbSucursal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbSucursal.ForeColor = Color.FromArgb(70, 86, 103);
+            cmbSucursal.FormattingEnabled = true;
+            cmbSucursal.ItemHoverColor = Color.FromArgb(243, 247, 247);
+            cmbSucursal.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbSucursal.Location = new Point(208, 91);
+            cmbSucursal.Margin = new Padding(4, 5, 4, 5);
+            cmbSucursal.MinimumSize = new Size(63, 0);
+            cmbSucursal.Name = "cmbSucursal";
+            cmbSucursal.Padding = new Padding(0, 0, 30, 2);
+            cmbSucursal.Radius = 12;
+            cmbSucursal.RectColor = Color.FromArgb(220, 226, 232);
+            cmbSucursal.Size = new Size(153, 37);
+            cmbSucursal.SymbolSize = 24;
+            cmbSucursal.TabIndex = 58;
+            cmbSucursal.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbSucursal.Watermark = "";
+            cmbSucursal.WatermarkColor = Color.FromArgb(198, 199, 189);
+            cmbSucursal.SelectedIndexChanged += cmbSucursal_SelectedIndexChanged;
             // 
             // cmbTiposReporte
             // 
@@ -562,6 +621,7 @@
             cmbTiposReporte.TextAlignment = ContentAlignment.MiddleLeft;
             cmbTiposReporte.Watermark = "";
             cmbTiposReporte.WatermarkColor = Color.FromArgb(198, 199, 189);
+            cmbTiposReporte.SelectedIndexChanged += cmbTiposReporte_SelectedIndexChanged;
             // 
             // uiSymbolButton1
             // 
@@ -772,5 +832,7 @@
         private Sunny.UI.UIPanel uiPanel5;
         private Label label21;
         private ReaLTaiizor.Controls.AirSeparator airSeparator2;
+        private Sunny.UI.UIDatetimePicker dtpHasta;
+        private Sunny.UI.UIDatetimePicker dtpDesde;
     }
 }
