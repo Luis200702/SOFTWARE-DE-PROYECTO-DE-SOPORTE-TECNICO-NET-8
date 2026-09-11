@@ -288,6 +288,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             btnReportes.Visible = true;
             btnGestionUsuarios.Visible = true;
             btnConfiguracionGeneral.Visible = false;
+            lblAdministracion.Visible = true;
+            airSeparator2.Visible = true;
         }
 
         private void frmMenu_FormClosing(object sender, FormClosingEventArgs e)
