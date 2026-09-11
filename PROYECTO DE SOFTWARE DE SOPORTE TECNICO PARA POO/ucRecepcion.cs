@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+﻿
 using Sunny.UI;
 using System.ComponentModel;
 using System.Data;
@@ -75,77 +75,39 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarDatosComboBox()
         {
-            var db = new Conexion_Base_de_Datos();
+            string sucursal = Sesion.SucursalActual.Replace("'", "''");
+            string consulta = "select u.id as Id, u.nombre as Nombre from usuarios u inner join sucursales s on u.idsucursal = s.idsucursal where u.perfil = 'Tecnico' and s.nombresucursal = '" + sucursal + "' order by u.nombre";
 
-            if (db.abrirConexion())
-            {
-                try
-                {
-                    string ConsultaTecnicos = @"
-                SELECT U.Id, U.Nombre
-                FROM Usuarios U
-                INNER JOIN Sucursales S
-                    ON U.IdSucursal = S.IdSucursal
-                WHERE U.Perfil = 'Tecnico'
-                  AND S.NombreSucursal = @Sucursal
-                ORDER BY U.Nombre";
+            DataTable dtTecnicos = oCon.retornarRegistrosUsuarios(consulta);
 
-                    using (SqlCommand cmd = new SqlCommand(ConsultaTecnicos, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue(
-                            "@Sucursal",
-                            Sesion.SucursalActual);
+            cmbTecnico.DataSource = dtTecnicos;
+            cmbTecnico.DisplayMember = "Nombre";
+            cmbTecnico.ValueMember = "Id";
 
-                        SqlDataAdapter daTecnicos = new SqlDataAdapter(cmd);
-                        DataTable dtTecnicos = new DataTable();
-                        daTecnicos.Fill(dtTecnicos);
-
-                        cmbTecnico.DataSource = dtTecnicos;
-                        cmbTecnico.DisplayMember = "Nombre";
-                        cmbTecnico.ValueMember = "Id";
-
-                        if (cmbTecnico.Items.Count > 0)
-                            cmbTecnico.SelectedIndex = 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(
-                        "Error al cargar los técnicos: " + ex.Message);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
-            }
+            if (cmbTecnico.Items.Count > 0)
+                cmbTecnico.SelectedIndex = 0;
         }
 
         private void MostrarNumeroOrden()
         {
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+            try
             {
-                try
+                string consulta = "select isnull(max(id), 0) as ultimoid from ordenes";
+                DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+                if (dt != null && dt.Rows.Count > 0)
                 {
-                    string query = "SELECT ISNULL(MAX(id), 0) FROM ordenes";
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        int ultimoId = Convert.ToInt32(cmd.ExecuteScalar());
-                        lblOrden.Text = "ORD-" + DateTime.Now.Year + "-" + (ultimoId + 1).ToString("D3");
-                    }
+                    int ultimoId = Convert.ToInt32(dt.Rows[0]["ultimoid"]);
+                    lblOrden.Text = "ORD-" + DateTime.Now.Year + "-" + (ultimoId + 1).ToString("D3");
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error al obtener el número de orden: " + ex.Message);
                     lblOrden.Text = "ORD-" + DateTime.Now.Year + "-001";
                 }
-                finally
-                {
-                    db.cerrarConexion();
-                }
             }
-            else
+            catch (Exception ex)
             {
+                MessageBox.Show("Error al obtener el número de orden: " + ex.Message);
                 lblOrden.Text = "ORD-" + DateTime.Now.Year + "-001";
             }
         }
@@ -153,39 +115,28 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void txtIdentificacionCliente_Leave(object sender, EventArgs e)
         {
             string cedula = txtIdentificacionCliente.Text.Trim();
-            if (string.IsNullOrEmpty(cedula)) return;
 
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+            if (string.IsNullOrEmpty(cedula))
+                return;
+
+            cedula = cedula.Replace("'", "''");
+
+            string consulta = "select top 1 nombre, telefono, correo, telefono_alt, direccion from clientes where cedula_pasaporte = '" + cedula + "'";
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            if (dt != null && dt.Rows.Count > 0)
             {
-                try
-                {
-                    string ConsultaCliente = "SELECT TOP 1 nombre, telefono, correo, telefono_alt, direccion FROM clientes WHERE cedula_pasaporte = @cedula";
-                    using (SqlCommand cmd = new SqlCommand(ConsultaCliente, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@cedula", cedula);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                txtNombres.Text = reader["nombre"].ToString();
-                                txtNumeroTelefonico.Text = reader["telefono"].ToString();
-                                txtCorreo.Text = reader["correo"].ToString();
+                DataRow fila = dt.Rows[0];
 
-                                if (txtNumeroTelefonicoAlt != null) txtNumeroTelefonicoAlt.Text = reader["telefono_alt"].ToString();
-                                if (txtDireccion != null) txtDireccion.Text = reader["direccion"].ToString();
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al buscar cliente: " + ex.Message);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
+                txtNombres.Text = fila["nombre"].ToString();
+                txtNumeroTelefonico.Text = fila["telefono"].ToString();
+                txtCorreo.Text = fila["correo"].ToString();
+
+                if (txtNumeroTelefonicoAlt != null)
+                    txtNumeroTelefonicoAlt.Text = fila["telefono_alt"].ToString();
+
+                if (txtDireccion != null)
+                    txtDireccion.Text = fila["direccion"].ToString();
             }
         }
 
@@ -197,14 +148,20 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 string.IsNullOrWhiteSpace(txtNombres.Text) ||
                 string.IsNullOrWhiteSpace(txtNumeroTelefonico.Text))
             {
-                MessageBox.Show("Por favor, llena al menos la Cédula, Nombre y Teléfono del cliente para poder continuar.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Por favor, llena al menos la Cédula, Nombre y Teléfono del cliente para poder continuar.",
+                    "Faltan datos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
             bool guardarSoloCliente = false;
             var primerEquipo = listaEquipos[0];
 
-            if (listaEquipos.Count == 1 && string.IsNullOrEmpty(primerEquipo.Tipo) && string.IsNullOrWhiteSpace(primerEquipo.Modelo))
+            if (listaEquipos.Count == 1 &&
+                string.IsNullOrEmpty(primerEquipo.Tipo) &&
+                string.IsNullOrWhiteSpace(primerEquipo.Modelo))
             {
                 guardarSoloCliente = true;
             }
@@ -226,8 +183,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     }
                 }
 
-                // Un mismo IMEI/Serie no puede agregarse dos veces en la misma recepción.
-                HashSet<string> seriesUsadas = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                HashSet<string> seriesUsadas =
+                    new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
                 foreach (var eq in listaEquipos)
                 {
@@ -246,25 +203,25 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 if (cmbTecnico.SelectedIndex < 0)
                 {
-                    MessageBox.Show("Selecciona un técnico asignado para la reparación.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        "Selecciona un técnico asignado para la reparación.",
+                        "Faltan datos",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                     return;
                 }
             }
 
-            var oCon = new Conexion_Base_de_Datos();
             int idCliente = 0;
 
-            if (oCon.abrirConexion())
-            {
-                string consultaBusqueda = "SELECT id FROM clientes WHERE cedula_pasaporte = '" + txtIdentificacionCliente.Text.Trim() + "'";
-                SqlCommand cmdBusqueda = new SqlCommand(consultaBusqueda, oCon.oCon);
-                object resultado = cmdBusqueda.ExecuteScalar();
+            string cedula = txtIdentificacionCliente.Text.Trim().Replace("'", "''");
+            string consultaCliente = "select id from clientes where cedula_pasaporte = '" + cedula + "'";
 
-                if (resultado != null)
-                {
-                    idCliente = Convert.ToInt32(resultado);
-                }
-                oCon.cerrarConexion();
+            DataTable dtCliente = oCon.retornarRegistrosUsuarios(consultaCliente);
+
+            if (dtCliente != null && dtCliente.Rows.Count > 0)
+            {
+                idCliente = Convert.ToInt32(dtCliente.Rows[0]["id"]);
             }
 
             if (idCliente == 0)
@@ -277,19 +234,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 oCon.insertDatosCliente("clientes", campos, datos);
 
-                if (oCon.abrirConexion())
+                DataTable dtNuevoCliente = oCon.retornarRegistrosUsuarios(consultaCliente);
+
+                if (dtNuevoCliente != null && dtNuevoCliente.Rows.Count > 0)
                 {
-                    string consultaId = "SELECT id FROM clientes WHERE cedula_pasaporte = '" + txtIdentificacionCliente.Text.Trim() + "'";
-                    SqlCommand cmdId = new SqlCommand(consultaId, oCon.oCon);
-                    idCliente = Convert.ToInt32(cmdId.ExecuteScalar());
-                    oCon.cerrarConexion();
+                    idCliente = Convert.ToInt32(dtNuevoCliente.Rows[0]["id"]);
                 }
             }
 
             if (!guardarSoloCliente)
             {
                 int tecnicoId = Convert.ToInt32(cmbTecnico.SelectedValue);
-
                 string sucursal = Sesion.SucursalActual;
 
                 for (int i = 0; i < listaEquipos.Count; i++)
@@ -299,34 +254,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     int idDispositivo = 0;
                     int idClienteDispositivo = 0;
 
-                    // Igual que con la cédula del cliente:
-                    // primero se verifica si el dispositivo ya existe por su IMEI/Serie.
-                    if (oCon.abrirConexion())
+                    string serie = equipo.Serie.Trim().Replace("'", "''");
+                    string consultaDispositivo = "select top 1 id, cliente_id from dispositivos where serie_imei = '" + serie + "'";
+
+                    DataTable dtDispositivo = oCon.retornarRegistrosUsuarios(consultaDispositivo);
+
+                    if (dtDispositivo != null && dtDispositivo.Rows.Count > 0)
                     {
-                        string consultaDisp = @"
-                            SELECT TOP 1 id, cliente_id
-                            FROM dispositivos
-                            WHERE serie_imei = @serieImei";
-
-                        using (SqlCommand cmdDisp = new SqlCommand(consultaDisp, oCon.oCon))
-                        {
-                            cmdDisp.Parameters.AddWithValue("@serieImei", equipo.Serie.Trim());
-
-                            using (SqlDataReader reader = cmdDisp.ExecuteReader())
-                            {
-                                if (reader.Read())
-                                {
-                                    idDispositivo = Convert.ToInt32(reader["id"]);
-                                    idClienteDispositivo = Convert.ToInt32(reader["cliente_id"]);
-                                }
-                            }
-                        }
-
-                        oCon.cerrarConexion();
+                        idDispositivo = Convert.ToInt32(dtDispositivo.Rows[0]["id"]);
+                        idClienteDispositivo = Convert.ToInt32(dtDispositivo.Rows[0]["cliente_id"]);
                     }
 
-                    // Si el IMEI/Serie ya pertenece a otro cliente, se detiene el registro
-                    // para evitar relacionar el mismo dispositivo con dos clientes distintos.
                     if (idDispositivo > 0 && idClienteDispositivo != idCliente)
                     {
                         MessageBox.Show(
@@ -337,7 +275,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         return;
                     }
 
-                    // Si no existe, se crea el dispositivo.
                     if (idDispositivo == 0)
                     {
                         string camposDisp = "cliente_id, tipo, marca, modelo, serie_imei, color, estado_llegada";
@@ -347,25 +284,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                         oCon.insertDatosCliente("dispositivos", camposDisp, datosDisp);
 
-                        // Obtener el ID usando el IMEI/Serie, no MAX(id).
-                        if (oCon.abrirConexion())
+                        DataTable dtNuevoDispositivo = oCon.retornarRegistrosUsuarios(consultaDispositivo);
+
+                        if (dtNuevoDispositivo != null && dtNuevoDispositivo.Rows.Count > 0)
                         {
-                            string consultaIdDisp = @"
-                                SELECT TOP 1 id
-                                FROM dispositivos
-                                WHERE serie_imei = @serieImei";
-
-                            using (SqlCommand cmdIdDisp = new SqlCommand(consultaIdDisp, oCon.oCon))
-                            {
-                                cmdIdDisp.Parameters.AddWithValue("@serieImei", equipo.Serie.Trim());
-
-                                object resultadoDisp = cmdIdDisp.ExecuteScalar();
-
-                                if (resultadoDisp != null)
-                                    idDispositivo = Convert.ToInt32(resultadoDisp);
-                            }
-
-                            oCon.cerrarConexion();
+                            idDispositivo = Convert.ToInt32(dtNuevoDispositivo.Rows[0]["id"]);
                         }
                     }
 
@@ -375,14 +298,21 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     string camposOrd = "numero_orden, cliente_id, dispositivo_id, tecnico_id, sucursal, descripcion_problema, diagnostico_inicial, costo_estimado, fecha_ingreso, fecha_estimada_entrega, estado";
                     string datosOrd = "'" + numOrdenFinal + "'," + idCliente + "," + idDispositivo + "," + tecnicoId + ",'" + sucursal + "','" +
-                                      equipo.Problema.Trim() + "','" + equipo.Observaciones.Trim() + "'," + costoAjustado + ",GETDATE(),'" + fechaEntrega + "','Recibido'";
+                                      equipo.Problema.Trim() + "','" + equipo.Observaciones.Trim() + "'," + costoAjustado + ",getdate(),'" + fechaEntrega + "','Recibido'";
 
                     oCon.insertDatosCliente("ordenes", camposOrd, datosOrd);
                 }
             }
 
-            string mensajeExito = guardarSoloCliente ? "¡Cliente registrado exitosamente en la base de datos!" : "¡Recepción, equipo y orden guardados exitosamente!";
-            MessageBox.Show(mensajeExito, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string mensajeExito = guardarSoloCliente
+                ? "¡Cliente registrado exitosamente en la base de datos!"
+                : "¡Recepción, equipo y orden guardados exitosamente!";
+
+            MessageBox.Show(
+                mensajeExito,
+                "Éxito",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
 
             ReiniciarFormularioCompleto();
         }
@@ -652,85 +582,57 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (string.IsNullOrWhiteSpace(serieImei))
                 return;
 
-            var db = new Conexion_Base_de_Datos();
+            string serie = serieImei.Replace("'", "''");
+            string consulta = "select top 1 d.tipo, d.marca, d.modelo, d.color, d.estado_llegada, c.cedula_pasaporte from dispositivos d inner join clientes c on d.cliente_id = c.id where d.serie_imei = '" + serie + "'";
 
-            if (db.abrirConexion())
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            if (dt != null && dt.Rows.Count > 0)
             {
-                try
-                {
-                    string consulta = @"
-                        SELECT TOP 1
-                            d.tipo,
-                            d.marca,
-                            d.modelo,
-                            d.color,
-                            d.estado_llegada,
-                            c.cedula_pasaporte
-                        FROM dispositivos d
-                        INNER JOIN clientes c ON d.cliente_id = c.id
-                        WHERE d.serie_imei = @serieImei";
+                DataRow fila = dt.Rows[0];
 
-                    using (SqlCommand cmd = new SqlCommand(consulta, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@serieImei", serieImei);
+                tipoDispositivo = fila["tipo"].ToString();
 
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                tipoDispositivo = reader["tipo"].ToString();
+                if (tipoDispositivo == "telefono")
+                    SeleccionarBoton(btnTelefono);
+                else if (tipoDispositivo == "computadora")
+                    SeleccionarBoton(btnComputadora);
 
-                                if (tipoDispositivo == "telefono")
-                                    SeleccionarBoton(btnTelefono);
-                                else if (tipoDispositivo == "computadora")
-                                    SeleccionarBoton(btnComputadora);
+                CatalogoMarcas.CargarMarcasEnComboBox(
+                    cmbMarca,
+                    tipoDispositivo);
 
-                                CatalogoMarcas.CargarMarcasEnComboBox(
-                                    cmbMarca,
-                                    tipoDispositivo);
+                cmbMarca.Text = fila["marca"].ToString();
+                txtModelo.Text = fila["modelo"].ToString();
+                txtColor.Text = fila["color"].ToString();
 
-                                cmbMarca.Text = reader["marca"].ToString();
-                                txtModelo.Text = reader["modelo"].ToString();
-                                txtColor.Text = reader["color"].ToString();
+                string estado = fila["estado_llegada"].ToString();
 
-                                string estado =
-                                    reader["estado_llegada"].ToString();
+                if (cmbEstado.Items.Contains(estado))
+                    cmbEstado.SelectedItem = estado;
 
-                                if (cmbEstado.Items.Contains(estado))
-                                    cmbEstado.SelectedItem = estado;
+                string cedulaRegistrada = fila["cedula_pasaporte"].ToString();
+                string cedulaActual = txtIdentificacionCliente.Text.Trim();
 
-                                string cedulaRegistrada = reader["cedula_pasaporte"].ToString();
-                                string cedulaActual = txtIdentificacionCliente.Text.Trim();
-
-                                if (!string.IsNullOrWhiteSpace(cedulaActual) &&
-                                    !string.Equals(cedulaActual, cedulaRegistrada, StringComparison.OrdinalIgnoreCase))
-                                {
-                                    MessageBox.Show(
-                                        "Este IMEI/Serie ya está registrado para otro cliente.\n\nVerifica la cédula del cliente antes de guardar.",
-                                        "Dispositivo registrado",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Warning);
-                                }
-                                else
-                                {
-                                    MessageBox.Show(
-                                        "El dispositivo ya se encuentra registrado. Se cargaron sus datos.",
-                                        "Dispositivo encontrado",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Information);
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
+                if (!string.IsNullOrWhiteSpace(cedulaActual) &&
+                    !string.Equals(
+                        cedulaActual,
+                        cedulaRegistrada,
+                        StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(
-                        "Error al buscar el dispositivo: " + ex.Message);
+                        "Este IMEI/Serie ya está registrado para otro cliente.\n\nVerifica la cédula del cliente antes de guardar.",
+                        "Dispositivo registrado",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                 }
-                finally
+                else
                 {
-                    db.cerrarConexion();
+                    MessageBox.Show(
+                        "El dispositivo ya se encuentra registrado. Se cargaron sus datos.",
+                        "Dispositivo encontrado",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
             }
         }

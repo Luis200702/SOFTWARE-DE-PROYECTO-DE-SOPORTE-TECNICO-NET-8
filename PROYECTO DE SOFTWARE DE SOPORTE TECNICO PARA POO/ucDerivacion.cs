@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -23,6 +24,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private Label lblSalHistorialTexto;
         private string ordenSalienteSeleccionadaActual = "";
         private UIPanel pnlSalCliBox, pnlSalEnvioBox, pnlSalDispBox, pnlSalHistorialBox;
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
 
         public ucDerivacion()
         {
@@ -42,54 +44,40 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarDerivacionesEntrantesDesdeBD(string destinoSucursal)
         {
-            if (flpIzquierdoE == null) return;
+            if (flpIzquierdoE == null)
+                return;
+
             flpIzquierdoE.Controls.Clear();
 
-            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
             try
             {
-                if (db.abrirConexion())
+                string sucursal = destinoSucursal.Replace("'", "''");
+                string consulta = "select o.numero_orden, d.estado as Estado, c.nombre, d.sucursalorigen as Orig, d.sucursaldestino as Dest, d.fechaderivacion as FechaDerivacion from derivacionessucursales d inner join ordenes o on d.idorden = o.id inner join clientes c on o.cliente_id = c.id where d.sucursaldestino = '" + sucursal + "'";
+
+                DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+                if (dt != null)
                 {
-                    string query = @"
-                        SELECT 
-                            o.numero_orden,
-                            d.Estado,
-                            c.nombre,
-                            d.SucursalOrigen AS Orig,
-                            d.SucursalDestino AS Dest,
-                            d.FechaDerivacion
-                        FROM dbo.DerivacionesSucursales d
-                        INNER JOIN dbo.ordenes o ON d.idOrden = o.id
-                        INNER JOIN dbo.clientes c ON o.cliente_id = c.id
-                        WHERE d.SucursalDestino = @SucursalDestino";
-
-                    using (SqlCommand comando = new SqlCommand(query, db.oCon))
+                    foreach (DataRow fila in dt.Rows)
                     {
-                        comando.Parameters.AddWithValue("@SucursalDestino", destinoSucursal);
-                        using (SqlDataReader lector = comando.ExecuteReader())
-                        {
-                            while (lector.Read())
-                            {
-                                string codigo = lector["numero_orden"].ToString();
-                                string estado = lector["Estado"].ToString();
-                                string cliente = lector["nombre"].ToString();
-                                string ruta = $"{lector["Orig"]} → {lector["Dest"]}";
-                                string fecha =
-     Convert.ToDateTime(lector["FechaDerivacion"])
-         .ToString("dd/MM/yyyy HH:mm");
+                        string codigo = fila["numero_orden"].ToString();
+                        string estado = fila["Estado"].ToString();
+                        string cliente = fila["nombre"].ToString();
+                        string ruta = $"{fila["Orig"]} → {fila["Dest"]}";
+                        string fecha = Convert.ToDateTime(fila["FechaDerivacion"]).ToString("dd/MM/yyyy HH:mm");
 
-                                Panel tarjeta = CrearTarjetaDerivacion(codigo, estado, cliente, ruta, fecha, true);
-                                flpIzquierdoE.Controls.Add(tarjeta);
-                            }
-                        }
+                        Panel tarjeta = CrearTarjetaDerivacion(codigo, estado, cliente, ruta, fecha, true);
+                        flpIzquierdoE.Controls.Add(tarjeta);
                     }
-                    db.cerrarConexion();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar derivaciones entrantes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                db.cerrarConexion();
+                MessageBox.Show(
+                    "Error al cargar derivaciones entrantes: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -98,57 +86,41 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // ==========================================
         private void CargarDerivacionesSalientesDesdeBD(string origenSucursal)
         {
-            if (flpIzquierdoS == null) return;
+            if (flpIzquierdoS == null)
+                return;
+
             flpIzquierdoS.Controls.Clear();
 
-            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
             try
             {
-                if (db.abrirConexion())
+                string sucursal = origenSucursal.Replace("'", "''");
+                string consulta = "select o.numero_orden, d.estado as Estado, c.nombre, d.sucursalorigen as Orig, d.sucursaldestino as Dest, d.fechaderivacion as FechaDerivacion, isnull(dp.tipo, 'Dispositivo') + ' ' + isnull(dp.marca, '') as DispositivoTexto from derivacionessucursales d inner join ordenes o on d.idorden = o.id inner join clientes c on o.cliente_id = c.id left join dispositivos dp on o.dispositivo_id = dp.id where d.sucursalorigen = '" + sucursal + "'";
+
+                DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+                if (dt != null)
                 {
-                    string query = @"
-                        SELECT 
-                            o.numero_orden,
-                            d.Estado,
-                            c.nombre,
-                            d.SucursalOrigen AS Orig,
-                            d.SucursalDestino AS Dest,
-                            d.FechaDerivacion,
-                            ISNULL(dp.tipo, 'Dispositivo') + ' ' + ISNULL(dp.marca, '') AS DispositivoTexto
-                        FROM dbo.DerivacionesSucursales d
-                        INNER JOIN dbo.ordenes o ON d.idOrden = o.id
-                        INNER JOIN dbo.clientes c ON o.cliente_id = c.id
-                        LEFT JOIN dbo.dispositivos dp ON o.dispositivo_id = dp.id
-                        WHERE d.SucursalOrigen = @SucursalOrigen";
-
-                    using (SqlCommand comando = new SqlCommand(query, db.oCon))
+                    foreach (DataRow fila in dt.Rows)
                     {
-                        comando.Parameters.AddWithValue("@SucursalOrigen", origenSucursal);
-                        using (SqlDataReader lector = comando.ExecuteReader())
-                        {
-                            while (lector.Read())
-                            {
-                                string codigo = lector["numero_orden"].ToString();
-                                string estado = lector["Estado"].ToString();
-                                string cliente = lector["nombre"].ToString();
-                                string dispositivo = lector["DispositivoTexto"].ToString();
-                                string ruta = $"{lector["Orig"]} → {lector["Dest"]}";
-                                string fecha =
-     Convert.ToDateTime(lector["FechaDerivacion"])
-         .ToString("dd/MM/yyyy HH:mm");
+                        string codigo = fila["numero_orden"].ToString();
+                        string estado = fila["Estado"].ToString();
+                        string cliente = fila["nombre"].ToString();
+                        string dispositivo = fila["DispositivoTexto"].ToString();
+                        string ruta = $"{fila["Orig"]} → {fila["Dest"]}";
+                        string fecha = Convert.ToDateTime(fila["FechaDerivacion"]).ToString("dd/MM/yyyy HH:mm");
 
-                                Panel tarjeta = CrearTarjetaDerivacionSaliente(codigo, estado, cliente, dispositivo, ruta, fecha);
-                                flpIzquierdoS.Controls.Add(tarjeta);
-                            }
-                        }
+                        Panel tarjeta = CrearTarjetaDerivacionSaliente(codigo, estado, cliente, dispositivo, ruta, fecha);
+                        flpIzquierdoS.Controls.Add(tarjeta);
                     }
-                    db.cerrarConexion();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar derivaciones salientes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                db.cerrarConexion();
+                MessageBox.Show(
+                    "Error al cargar derivaciones salientes: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -354,70 +326,43 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void CargarDetallesEntrantesDerechos(string numeroOrden)
         {
             ordenSeleccionadaActual = numeroOrden.Trim();
-            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
 
             try
             {
-                if (db.abrirConexion())
+                string orden = ordenSeleccionadaActual.Replace("'", "''");
+                string sucursal = Sesion.SucursalActual.Replace("'", "''");
+
+                string consulta = "select top 1 o.numero_orden, c.nombre as Cliente, c.telefono as Telefono, isnull(dp.tipo, 'N/A') as TipoDispositivo, isnull(dp.marca, 'N/A') as Marca, isnull(dp.modelo, 'N/A') as Modelo, d.estado as Estado, d.detalle as MotivoDerivacion, d.sucursalorigen as Origen, d.sucursaldestino as Destino, d.fechaderivacion as FechaDerivacion from derivacionessucursales d inner join ordenes o on d.idorden = o.id inner join clientes c on o.cliente_id = c.id left join dispositivos dp on o.dispositivo_id = dp.id where o.numero_orden = '" + orden + "' and d.sucursaldestino = '" + sucursal + "' order by d.fechaderivacion desc";
+
+                DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+                if (dt != null && dt.Rows.Count > 0)
                 {
-                    string query = @"
-                                    SELECT TOP 1
-                                        o.numero_orden,
-                                        c.nombre AS Cliente,
-                                        c.telefono AS Telefono,
-                                        ISNULL(dp.tipo, 'N/A') AS TipoDispositivo,
-                                        ISNULL(dp.marca, 'N/A') AS Marca,
-                                        ISNULL(dp.modelo, 'N/A') AS Modelo,
-                                        d.Estado,
-                                        d.Detalle AS MotivoDerivacion,
-                                        d.SucursalOrigen AS Origen,
-                                        d.SucursalDestino AS Destino,
-                                        d.FechaDerivacion
-                                    FROM dbo.DerivacionesSucursales d
-                                    INNER JOIN dbo.ordenes o ON d.IdOrden = o.id
-                                    INNER JOIN dbo.clientes c ON o.cliente_id = c.id
-                                    LEFT JOIN dbo.dispositivos dp ON o.dispositivo_id = dp.id
-                                    WHERE o.numero_orden = @NumeroOrden
-                                      AND d.SucursalDestino = @SucursalActual
-                                    ORDER BY d.FechaDerivacion DESC";
+                    DataRow fila = dt.Rows[0];
 
+                    lblValOrden.Text = "Orden: " + fila["numero_orden"].ToString();
+                    lblValCliente.Text = "Cliente: " + fila["Cliente"].ToString();
+                    lblValTelefono.Text = "Tel: " + fila["Telefono"].ToString();
+                    lblValDispositivo.Text = $"Dispositivo: {fila["TipoDispositivo"]} - {fila["Marca"]} {fila["Modelo"]}";
+                    lblValMotivo.Text = "Motivo: " + fila["MotivoDerivacion"].ToString();
+                    lblValRuta.Text = $"Ruta: {fila["Origen"]} ➔ {fila["Destino"]}";
 
-                    using (SqlCommand comando = new SqlCommand(query, db.oCon))
-                    {
-                  
-                        comando.Parameters.AddWithValue("@NumeroOrden", ordenSeleccionadaActual);
-                        comando.Parameters.AddWithValue("@SucursalActual", Sesion.SucursalActual);
-                        using (SqlDataReader lector = comando.ExecuteReader())
-                        {
-                            if (lector.Read())
-                            {
-                                lblValOrden.Text = "Orden: " + lector["numero_orden"].ToString();
-                                lblValCliente.Text = "Cliente: " + lector["Cliente"].ToString();
-                                lblValTelefono.Text = "Tel: " + lector["Telefono"].ToString();
-                                lblValDispositivo.Text = $"Dispositivo: {lector["TipoDispositivo"]} - {lector["Marca"]} {lector["Modelo"]}";
-                                lblValMotivo.Text = "Motivo: " + lector["MotivoDerivacion"].ToString();
-                                lblValRuta.Text = $"Ruta: {lector["Origen"]} ➔ {lector["Destino"]}";
+                    string estadoDerivacion = fila["Estado"].ToString();
+                    bool estaPendiente = estadoDerivacion == "Pendiente";
 
-                                string estadoDerivacion = lector["Estado"].ToString();
-
-                                bool estaPendiente = estadoDerivacion == "Pendiente";
-
-                                pnlAccionBox.Visible = estaPendiente;
-                                btnRecibir.Visible = estaPendiente;
-                                btnRechazar.Visible = estaPendiente;
-                                pnlDerechoE.Refresh();
-
-
-                            }
-                        }
-                    }
-                    db.cerrarConexion();
+                    pnlAccionBox.Visible = estaPendiente;
+                    btnRecibir.Visible = estaPendiente;
+                    btnRechazar.Visible = estaPendiente;
+                    pnlDerechoE.Refresh();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar detalles entrantes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                db.cerrarConexion();
+                MessageBox.Show(
+                    "Error al cargar detalles entrantes: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -425,74 +370,53 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void CargarDetallesSalientesDerechos(string numeroOrden)
         {
             ordenSalienteSeleccionadaActual = numeroOrden.Trim();
-            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
 
             try
             {
-                if (db.abrirConexion())
+                string orden = ordenSalienteSeleccionadaActual.Replace("'", "''");
+                string consulta = "select o.numero_orden, o.fecha_ingreso, c.nombre as Cliente, c.correo as Correo, d.sucursalorigen as Origen, d.sucursaldestino as Destino, d.estado as Estado, isnull(dp.tipo, 'N/A') as TipoDispositivo, isnull(dp.marca, 'N/A') as Marca, isnull(dp.modelo, 'N/A') as Modelo, isnull(dp.serie_imei, 'S/N') as Serial, isnull(dp.estado_llegada, 'En reparación') as EstadoDisp, isnull(d.detalle, 'Ninguna') as Observaciones from derivacionessucursales d inner join ordenes o on d.idorden = o.id inner join clientes c on o.cliente_id = c.id left join dispositivos dp on o.dispositivo_id = dp.id where o.numero_orden = '" + orden + "'";
+
+                DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+                if (dt != null && dt.Rows.Count > 0)
                 {
-                    string query = @"
-                        SELECT 
-                            o.numero_orden,
-                            o.fecha_ingreso,
-                            c.nombre AS Cliente,
-                            c.correo AS Correo,
-                            d.SucursalOrigen AS Origen,
-                            d.SucursalDestino AS Destino,
-                            d.Estado,
-                            ISNULL(dp.tipo, 'N/A') AS TipoDispositivo,
-                            ISNULL(dp.marca, 'N/A') AS Marca,
-                            ISNULL(dp.modelo, 'N/A') AS Modelo,
-                            ISNULL(dp.serie_imei, 'S/N') AS Serial,
-                            ISNULL(dp.estado_llegada, 'En reparación') AS EstadoDisp,
-                            ISNULL(d.Detalle, 'Ninguna') AS Observaciones
-                        FROM dbo.DerivacionesSucursales d
-                        INNER JOIN dbo.ordenes o ON d.idOrden = o.id
-                        INNER JOIN dbo.clientes c ON o.cliente_id = c.id
-                        LEFT JOIN dbo.dispositivos dp ON o.dispositivo_id = dp.id
-                        WHERE o.numero_orden = @NumeroOrden";
+                    DataRow fila = dt.Rows[0];
 
-                    using (SqlCommand comando = new SqlCommand(query, db.oCon))
-                    {
-                        comando.Parameters.AddWithValue("@NumeroOrden", ordenSalienteSeleccionadaActual);
-                        using (SqlDataReader lector = comando.ExecuteReader())
-                        {
-                            if (lector.Read())
-                            {
-                                lblSalValOrden.Text = lector["numero_orden"].ToString();
-                                lblSalValFecha.Text = "Fecha de creación: " + Convert.ToDateTime(lector["fecha_ingreso"]).ToString("dd/MM/yyyy hh:mm");
+                    lblSalValOrden.Text = fila["numero_orden"].ToString();
 
-                                string estadoActual = lector["Estado"].ToString();
-                                lblSalValEstadoBadge.Text = "  ● " + estadoActual;
-                                lblSalValEstadoBadge.Invalidate();
+                    DateTime fechaIngreso = Convert.ToDateTime(fila["fecha_ingreso"]);
+                    lblSalValFecha.Text = "Fecha de creación: " + fechaIngreso.ToString("dd/MM/yyyy hh:mm");
 
-                                lblSalValClienteName.Text = lector["Cliente"].ToString();
-                                lblSalValClienteEmail.Text = lector["Correo"].ToString();
+                    string estadoActual = fila["Estado"].ToString();
+                    lblSalValEstadoBadge.Text = "  ● " + estadoActual;
+                    lblSalValEstadoBadge.Invalidate();
 
-                                lblSalValOrigen.Text = "Sucursal origen\n" + lector["Origen"].ToString();
-                                lblSalValDestino.Text = "Sucursal destino\n" + lector["Destino"].ToString();
-                                lblSalValEnviadoPor.Text = "Enviado por\n" + lector["Cliente"].ToString();
-                                lblSalValFechaEnvio.Text = "Fecha de envío\n" + Convert.ToDateTime(lector["fecha_ingreso"]).ToString("dd/MM/yyyy hh:mm");
+                    lblSalValClienteName.Text = fila["Cliente"].ToString();
+                    lblSalValClienteEmail.Text = fila["Correo"].ToString();
 
-                                lblSalValDispTipo.Text = $"Dispositivo: {lector["TipoDispositivo"]} - {lector["Marca"]} {lector["Modelo"]}";
-                                lblSalValCodOrden.Text = "Código / Orden: " + lector["numero_orden"].ToString();
-                                lblSalValEstadoDisp.Text = "Estado del dispositivo: " + lector["EstadoDisp"].ToString();
-                                lblSalValSerial.Text = "Número de serie: " + lector["Serial"].ToString();
-                                lblSalValObs.Text = "Observaciones: " + lector["Observaciones"].ToString();
+                    lblSalValOrigen.Text = "Sucursal origen\n" + fila["Origen"].ToString();
+                    lblSalValDestino.Text = "Sucursal destino\n" + fila["Destino"].ToString();
+                    lblSalValEnviadoPor.Text = "Enviado por\n" + fila["Cliente"].ToString();
+                    lblSalValFechaEnvio.Text = "Fecha de envío\n" + fechaIngreso.ToString("dd/MM/yyyy hh:mm");
 
-                                lblSalHistorialTexto.Text = $"{Convert.ToDateTime(lector["fecha_ingreso"]).ToString("dd/MM/yyyy hh:mm")}\nDerivación creada desde {lector["Origen"]} hacia {lector["Destino"]}.";
+                    lblSalValDispTipo.Text = $"Dispositivo: {fila["TipoDispositivo"]} - {fila["Marca"]} {fila["Modelo"]}";
+                    lblSalValCodOrden.Text = "Código / Orden: " + fila["numero_orden"].ToString();
+                    lblSalValEstadoDisp.Text = "Estado del dispositivo: " + fila["EstadoDisp"].ToString();
+                    lblSalValSerial.Text = "Número de serie: " + fila["Serial"].ToString();
+                    lblSalValObs.Text = "Observaciones: " + fila["Observaciones"].ToString();
 
-                                pnlDerechoS.Refresh();
-                            }
-                        }
-                    }
-                    db.cerrarConexion();
+                    lblSalHistorialTexto.Text = $"{fechaIngreso.ToString("dd/MM/yyyy hh:mm")}\nDerivación creada desde {fila["Origen"]} hacia {fila["Destino"]}.";
+
+                    pnlDerechoS.Refresh();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar detalles salientes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                db.cerrarConexion();
+                MessageBox.Show(
+                    "Error al cargar detalles salientes: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -683,17 +607,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                     try
                     {
-                        // 1. Actualizamos la derivación pendiente que llegó
-                        // a la sucursal que tiene iniciada la sesión.
-                        string queryDerivacion = @"
-                    UPDATE d
-                    SET d.Estado = @NuevoEstado
-                    FROM DerivacionesSucursales d
-                    INNER JOIN ordenes o
-                        ON d.IdOrden = o.id
-                    WHERE o.numero_orden = @NumeroOrden
-                      AND d.SucursalDestino = @SucursalActual
-                      AND d.Estado = 'Pendiente'";
+                        string queryDerivacion = "update d set d.estado = @NuevoEstado from derivacionessucursales d inner join ordenes o on d.idorden = o.id where o.numero_orden = @NumeroOrden and d.sucursaldestino = @SucursalActual and d.estado = 'Pendiente'";
 
                         using (SqlCommand cmd = new SqlCommand(
                             queryDerivacion,
@@ -728,16 +642,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             }
                         }
 
-                        // 2. Solo si la sucursal ACEPTA la orden,
-                        // la orden pasa realmente a esa sucursal.
                         if (nuevoEstado == "Recibido")
                         {
-                            string queryOrden = @"
-                        UPDATE ordenes
-                        SET sucursal = @SucursalActual,
-                            tecnico_id = NULL,
-                            estado = 'Recibido'
-                        WHERE numero_orden = @NumeroOrden";
+                            string queryOrden = "update ordenes set sucursal = @SucursalActual, tecnico_id = null, estado = 'Recibido' where numero_orden = @NumeroOrden";
 
                             using (SqlCommand cmd = new SqlCommand(
                                 queryOrden,

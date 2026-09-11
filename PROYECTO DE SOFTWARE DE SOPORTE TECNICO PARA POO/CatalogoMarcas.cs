@@ -1,75 +1,94 @@
-﻿using Microsoft.Data.SqlClient;
-using Sunny.UI;
+﻿using Sunny.UI;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     internal class CatalogoMarcas
     {
-        public static void CargarMarcasEnComboBox(UIComboBox cmbMarca, string tipoDispositivo = "")
+        public static void CargarMarcasEnComboBox(
+            UIComboBox cmbMarca,
+            string tipoDispositivo = "")
         {
             cmbMarca.Items.Clear();
-            HashSet<string> marcasUnicas = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            // Lista base general de marcas de ambas categorías por si la BD está vacía
-            var marcasGenerales = new[] {
-                "Samsung", "Apple", "Xiaomi", "Motorola", "Huawei", "Honor", "Oppo", "Realme",
-                "HP", "Dell", "Lenovo", "Asus", "Acer", "MSI", "Toshiba", "Sony", "LG", "ZTE", "Microsoft"
-            };
-            foreach (var m in marcasGenerales) marcasUnicas.Add(m);
+            Conexion_Base_de_Datos oCon =
+                new Conexion_Base_de_Datos();
 
-            // Consultar la base de datos
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+            HashSet<string> marcasUnicas =
+                new HashSet<string>(
+                    StringComparer.OrdinalIgnoreCase);
+
+            var marcasGenerales = new[]
             {
-                try
+                "Samsung", "Apple", "Xiaomi", "Motorola",
+                "Huawei", "Honor", "Oppo", "Realme",
+                "HP", "Dell", "Lenovo", "Asus",
+                "Acer", "MSI", "Toshiba", "Sony",
+                "LG", "ZTE", "Microsoft"
+            };
+
+            foreach (var marca in marcasGenerales)
+            {
+                marcasUnicas.Add(marca);
+            }
+
+            try
+            {
+                string tipo =
+                    tipoDispositivo.Replace("'", "''");
+
+                string consulta;
+
+                if (string.IsNullOrEmpty(tipoDispositivo))
                 {
-                    string query = string.IsNullOrEmpty(tipoDispositivo)
-                        ? "SELECT DISTINCT marca FROM dispositivos WHERE marca IS NOT NULL AND marca <> ''"
-                        : "SELECT DISTINCT marca FROM dispositivos WHERE tipo = @tipo AND marca IS NOT NULL AND marca <> ''";
+                    consulta = @"
+                        select distinct marca
+                        from dispositivos
+                        where marca is not null
+                          and marca <> ''";
+                }
+                else
+                {
+                    consulta = @"
+                        select distinct marca
+                        from dispositivos
+                        where tipo = '" + tipo + @"'
+                          and marca is not null
+                          and marca <> ''";
+                }
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                DataTable dt =
+                    oCon.retornarRegistrosUsuarios(consulta);
+
+                if (dt != null)
+                {
+                    foreach (DataRow fila in dt.Rows)
                     {
-                        if (!string.IsNullOrEmpty(tipoDispositivo))
-                        {
-                            cmd.Parameters.AddWithValue("@tipo", tipoDispositivo);
-                        }
+                        string marcaDb =
+                            fila["marca"].ToString().Trim();
 
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        if (!string.IsNullOrEmpty(marcaDb))
                         {
-                            while (reader.Read())
-                            {
-                                string marcaDb = reader["marca"].ToString().Trim();
-                                if (!string.IsNullOrEmpty(marcaDb))
-                                {
-                                    marcasUnicas.Add(marcaDb);
-                                }
-                            }
+                            marcasUnicas.Add(marcaDb);
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al consultar marcas: " + ex.Message);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    "Error al consultar marcas: " +
+                    ex.Message);
             }
 
-            // Ordenar y añadir al ComboBox
-            List<string> listaFinal = new List<string>(marcasUnicas);
-            listaFinal.Sort();
-
-            foreach (var marca in listaFinal)
+            foreach (string marca in marcasUnicas.OrderBy(m => m))
             {
                 cmbMarca.Items.Add(marca);
             }
         }
     }
 }
+

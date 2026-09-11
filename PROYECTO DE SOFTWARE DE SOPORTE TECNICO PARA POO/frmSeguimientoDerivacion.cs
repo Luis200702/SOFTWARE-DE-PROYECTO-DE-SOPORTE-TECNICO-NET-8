@@ -1,5 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
+﻿using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
@@ -9,43 +9,34 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private int idOrdenSeleccionada;
         private string sucursalOrigenActual;
 
-        // Recibe el ID de la orden y la sucursal actual desde el módulo de Seguimiento
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
+
         public frmSeguimientoDerivacion(int idOrden, string sucursalOrigen)
         {
             InitializeComponent();
+
             idOrdenSeleccionada = idOrden;
             sucursalOrigenActual = sucursalOrigen;
+
             CargarSucursales();
         }
 
         private void CargarSucursales()
         {
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+            string origen = sucursalOrigenActual.Replace("'", "''");
+
+            string consulta = "select nombresucursal from sucursales where nombresucursal <> '" + origen + "'";
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            cmbSucursalDestino.Items.Clear();
+
+            if (dt != null)
             {
-                try
+                foreach (DataRow fila in dt.Rows)
                 {
-                    // Consulta a tu tabla de Sucursales excluyendo la sucursal en la que ya está el equipo
-                    string query = "SELECT NombreSucursal FROM Sucursales WHERE NombreSucursal <> @origen";
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@origen", sucursalOrigenActual);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                cmbSucursalDestino.Items.Add(reader["NombreSucursal"].ToString());
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al cargar sucursales: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
+                    cmbSucursalDestino.Items.Add(
+                        fila["NombreSucursal"].ToString());
                 }
             }
         }
@@ -54,78 +45,87 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             if (cmbSucursalDestino.SelectedIndex == -1)
             {
-                MessageBox.Show("Por favor selecciona una sucursal destino.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Por favor selecciona una sucursal destino.",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
                 return;
             }
 
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+            string consultaPendiente = "select count(*) as cantidad from derivacionessucursales where idorden = " + idOrdenSeleccionada + " and estado = 'Pendiente'";
+
+            DataTable dtPendiente =
+                oCon.retornarRegistrosUsuarios(consultaPendiente);
+
+            int pendientes = 0;
+
+            if (dtPendiente != null &&
+                dtPendiente.Rows.Count > 0)
             {
-                try
-                {
-                    string queryPendiente = @"
-    SELECT COUNT(*)
-    FROM DerivacionesSucursales
-    WHERE IdOrden = @idOrden
-      AND Estado = 'Pendiente'";
+                pendientes = Convert.ToInt32(
+                    dtPendiente.Rows[0]["cantidad"]);
+            }
 
-                    using (SqlCommand cmdPendiente = new SqlCommand(queryPendiente, db.oCon))
-                    {
-                        cmdPendiente.Parameters.AddWithValue(
-                            "@idOrden",
-                            idOrdenSeleccionada);
+            if (pendientes > 0)
+            {
+                MessageBox.Show(
+                    "Esta orden ya tiene una derivación pendiente.",
+                    "Derivación pendiente",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
 
-                        int pendientes = Convert.ToInt32(
-                            cmdPendiente.ExecuteScalar());
+                return;
+            }
 
-                        if (pendientes > 0)
-                        {
-                            MessageBox.Show(
-                                "Esta orden ya tiene una derivación pendiente.",
-                                "Derivación pendiente",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
+            string origen =
+                sucursalOrigenActual.Replace("'", "''");
 
-                            return;
-                        }
-                    }
+            string destino =
+                cmbSucursalDestino.Text.Replace("'", "''");
 
+            string motivo =
+                txtMotivo.Text.Trim().Replace("'", "''");
 
+            string detalle =
+                txtDetalle.Text.Trim().Replace("'", "''");
 
-                    string query = @"
-                        INSERT INTO DerivacionesSucursales (
-                            IdOrden, SucursalOrigen, SucursalDestino, 
-                            Estado, Motivo, Detalle, FechaDerivacion
-                        ) VALUES (
-                            @idOrden, @origen, @destino, 
-                            'Pendiente', @motivo, @detalle, GETDATE()
-                        )";
+            string campos =
+                "idorden, sucursalorigen, sucursaldestino, estado, motivo, detalle, fechaderivacion";
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@idOrden", idOrdenSeleccionada);
-                        cmd.Parameters.AddWithValue("@origen", sucursalOrigenActual);
-                        cmd.Parameters.AddWithValue("@destino", cmbSucursalDestino.Text);
-                        cmd.Parameters.AddWithValue("@motivo", txtMotivo.Text.Trim());
-                        cmd.Parameters.AddWithValue("@detalle", txtDetalle.Text.Trim());
+            string datos =
+                idOrdenSeleccionada + "," +
+                "'" + origen + "'," +
+                "'" + destino + "'," +
+                "'Pendiente'," +
+                "'" + motivo + "'," +
+                "'" + detalle + "'," +
+                "getdate()";
 
-                        int filasAfectadas = cmd.ExecuteNonQuery();
+            bool guardado =
+                oCon.insertDatosCliente(
+                    "derivacionessucursales",
+                    campos,
+                    datos);
 
-                        if (filasAfectadas > 0)
-                        {
-                            MessageBox.Show("¡Equipo derivado con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Close();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al registrar la derivación: " + ex.Message, "Error de BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
+            if (guardado)
+            {
+                MessageBox.Show(
+                    "¡Equipo derivado con éxito!",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "No se pudo registrar la derivación.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 

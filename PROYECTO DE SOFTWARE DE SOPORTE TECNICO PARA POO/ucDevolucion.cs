@@ -10,6 +10,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private byte[]? comprobantePago = null;
         private string nombreComprobante = "";
         private decimal totalOrden = 0;
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
 
         public ucDevolucion()
         {
@@ -32,77 +33,38 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            // En Devolución solo mostramos órdenes que ya están listas para entregar.
-            string query = @"
-                SELECT O.id, O.numero_orden
-                FROM ordenes O
-                INNER JOIN Clientes C ON O.cliente_id = C.id
-                WHERE (C.cedula_pasaporte LIKE @busqueda
-                       OR C.nombre LIKE @busqueda)
-                  AND O.estado = 'Listo'";
+            string busqueda = valorBusqueda.Replace("'", "''");
+            string sucursal = Sesion.SucursalActual.Replace("'", "''");
+            string consulta = "select o.id, o.numero_orden from ordenes o inner join clientes c on o.cliente_id = c.id where o.sucursal = '" + sucursal + "' and o.estado = 'Listo' and (c.cedula_pasaporte like '%" + busqueda + "%' or c.nombre like '%" + busqueda + "%')";
 
-            Conexion_Base_de_Datos conexionBD = new Conexion_Base_de_Datos();
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
 
-            try
+            if (dt != null && dt.Rows.Count > 0)
             {
-                if (conexionBD.abrirConexion())
+                cmbListaOrdenes.SelectedIndexChanged -= cmbListaOrdenes_SelectedIndexChanged;
+                cmbListaOrdenes.DataSource = dt;
+                cmbListaOrdenes.DisplayMember = "numero_orden";
+                cmbListaOrdenes.ValueMember = "id";
+                cmbListaOrdenes.SelectedIndexChanged += cmbListaOrdenes_SelectedIndexChanged;
+
+                if (cmbListaOrdenes.SelectedValue != null &&
+                    int.TryParse(cmbListaOrdenes.SelectedValue.ToString(), out int idPrimeraOrden))
                 {
-                    using (SqlCommand cmd = new SqlCommand(query, conexionBD.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@busqueda", "%" + valorBusqueda + "%");
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            DataTable dt = new DataTable();
-                            da.Fill(dt);
-
-                            if (dt.Rows.Count > 0)
-                            {
-                                // Evita que el evento se ejecute mientras se cambia el DataSource.
-                                cmbListaOrdenes.SelectedIndexChanged -= cmbListaOrdenes_SelectedIndexChanged;
-
-                                cmbListaOrdenes.DataSource = dt;
-                                cmbListaOrdenes.DisplayMember = "numero_orden";
-                                cmbListaOrdenes.ValueMember = "id";
-
-                                cmbListaOrdenes.SelectedIndexChanged += cmbListaOrdenes_SelectedIndexChanged;
-
-                                if (cmbListaOrdenes.SelectedValue != null &&
-                                    int.TryParse(cmbListaOrdenes.SelectedValue.ToString(), out int idPrimeraOrden))
-                                {
-                                    CargarDetallesOrden(idPrimeraOrden);
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show(
-                                    "No se encontraron órdenes listas para entregar con esa cédula o nombre.",
-                                    "No encontrado",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
-
-                                cmbListaOrdenes.DataSource = null;
-                                ReiniciarDatosPago();
-                                LimpiarCamposResumen();
-                                OcultarPaneles();
-                            }
-                        }
-                    }
-
-                    conexionBD.cerrarConexion();
+                    CargarDetallesOrden(idPrimeraOrden);
                 }
             }
-            catch (Exception ex)
+            else
             {
                 MessageBox.Show(
-                    "Error al realizar la búsqueda: " + ex.Message,
-                    "Error de Base de Datos",
+                    "No se encontraron órdenes listas para entregar con esa cédula o nombre.",
+                    "No encontrado",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexionBD.cerrarConexion();
+                    MessageBoxIcon.Information);
+
+                cmbListaOrdenes.DataSource = null;
+                ReiniciarDatosPago();
+                LimpiarCamposResumen();
+                OcultarPaneles();
             }
         }
 
@@ -119,106 +81,41 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarDetallesOrden(int idOrden)
         {
-            // Cada vez que se cambia de orden se elimina cualquier comprobante anterior.
             ReiniciarDatosPago();
 
-            string query = @"
-    SELECT TOP 1
-        O.numero_orden AS numero_orden,
-        C.nombre AS Cliente,
-        C.cedula_pasaporte AS Cedula,
-        C.telefono AS Telefono,
-        CONCAT(D.marca, ' ', D.modelo) AS Dispositivo,
-        T.nombre AS Tecnico,
-        O.fecha_ingreso AS Ingreso,
-        O.trabajo_realizado AS TrabajoRealizado
-    FROM ordenes O
-    INNER JOIN Clientes C ON O.cliente_id = C.id
-    INNER JOIN Dispositivos D ON O.dispositivo_id = D.id
-    INNER JOIN Usuarios T ON O.tecnico_id = T.id
-    WHERE O.id = @idOrden";
+            string consulta = "select top 1 o.numero_orden as numero_orden, c.nombre as Cliente, c.cedula_pasaporte as Cedula, c.telefono as Telefono, concat(d.marca, ' ', d.modelo) as Dispositivo, u.nombre as Tecnico, o.fecha_ingreso as Ingreso, o.trabajo_realizado as TrabajoRealizado from ordenes o inner join clientes c on o.cliente_id = c.id inner join dispositivos d on o.dispositivo_id = d.id left join usuarios u on o.tecnico_id = u.id where o.id = " + idOrden;
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
 
-            Conexion_Base_de_Datos conexionBD = new Conexion_Base_de_Datos();
-
-            try
+            if (dt != null && dt.Rows.Count > 0)
             {
-                if (conexionBD.abrirConexion())
+                DataRow fila = dt.Rows[0];
+
+                pnlResumen.Visible = true;
+                pnlTrabajoRealizado.Visible = true;
+                pnlDesgloseCosto.Visible = true;
+                pnlFormaDePago.Visible = true;
+                btnRegistraEntrega.Visible = true;
+                btnComprobante.Visible = false;
+
+                lblNumeroOrden.Text = fila["numero_orden"] != DBNull.Value ? fila["numero_orden"].ToString() : "S/N";
+                lblCliente.Text = fila["Cliente"] != DBNull.Value ? fila["Cliente"].ToString() : "";
+                lblCedula.Text = fila["Cedula"] != DBNull.Value ? fila["Cedula"].ToString() : "";
+                lblTelefono.Text = fila["Telefono"] != DBNull.Value ? fila["Telefono"].ToString() : "";
+                lblDispositivo.Text = fila["Dispositivo"] != DBNull.Value ? fila["Dispositivo"].ToString() : "Sin dispositivo";
+                lblTecnicoAsignado.Text = fila["Tecnico"] != DBNull.Value ? fila["Tecnico"].ToString() : "Sin técnico";
+
+                if (fila["Ingreso"] != DBNull.Value)
                 {
-                    using (SqlCommand cmd = new SqlCommand(query, conexionBD.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@idOrden", idOrden);
-
-                        using (SqlDataReader lector = cmd.ExecuteReader())
-                        {
-                            if (lector.Read())
-                            {
-                                pnlResumen.Visible = true;
-                                pnlTrabajoRealizado.Visible = true;
-                                pnlDesgloseCosto.Visible = true;
-                                pnlFormaDePago.Visible = true;
-                                btnRegistraEntrega.Visible = true;
-
-                                // El botón de comprobante solo aparece al seleccionar Transferencia.
-                                btnComprobante.Visible = false;
-
-                                lblNumeroOrden.Text = lector["numero_orden"] != DBNull.Value
-                                    ? lector["numero_orden"].ToString()
-                                    : "S/N";
-
-                                lblCliente.Text = lector["Cliente"] != DBNull.Value
-                                    ? lector["Cliente"].ToString()
-                                    : "";
-
-                                lblCedula.Text = lector["Cedula"] != DBNull.Value
-                                    ? lector["Cedula"].ToString()
-                                    : "";
-
-                                lblTelefono.Text = lector["Telefono"] != DBNull.Value
-                                    ? lector["Telefono"].ToString()
-                                    : "";
-
-                                lblDispositivo.Text = lector["Dispositivo"] != DBNull.Value
-                                    ? lector["Dispositivo"].ToString()
-                                    : "Sin dispositivo";
-
-                                lblTecnicoAsignado.Text = lector["Tecnico"] != DBNull.Value
-                                    ? lector["Tecnico"].ToString()
-                                    : "Asignado";
-
-                                if (lector["Ingreso"] != DBNull.Value &&
-                                    DateTime.TryParse(lector["Ingreso"].ToString(), out DateTime fechaIngreso))
-                                {
-                                    lblFechaIngreso.Text = fechaIngreso.ToString("dd/MM/yyyy HH:mm");
-                                }
-                                else
-                                {
-                                    lblFechaIngreso.Text = "Sin fecha";
-                                }
-
-                                // Más adelante cambiaremos esta columna por trabajo_realizado
-                                // cuando la agreguemos a la tabla ordenes.
-                                lblDescripcionTrabajo.Text = lector["TrabajoRealizado"] != DBNull.Value
-                                    ? lector["TrabajoRealizado"].ToString()
-                                    : "Sin observaciones registradas.";
-                            }
-                        }
-                    }
-
-                    CargarDesgloseCostos(idOrden);
-                    conexionBD.cerrarConexion();
+                    DateTime fechaIngreso = Convert.ToDateTime(fila["Ingreso"]);
+                    lblFechaIngreso.Text = fechaIngreso.ToString("dd/MM/yyyy HH:mm");
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Error al cargar los detalles de la orden: " + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexionBD.cerrarConexion();
+                else
+                {
+                    lblFechaIngreso.Text = "Sin fecha";
+                }
+
+                lblDescripcionTrabajo.Text = fila["TrabajoRealizado"] != DBNull.Value ? fila["TrabajoRealizado"].ToString() : "Sin observaciones registradas.";
+                CargarDesgloseCostos(idOrden);
             }
         }
 
@@ -322,91 +219,41 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvDesglose.Rows.Clear();
             decimal totalCosto = 0;
 
-            var db = new Conexion_Base_de_Datos();
+            string consultaRepuestos = "select r.nombrerepuesto as NombreRepuesto, d.cantidad as Cantidad, d.preciocobrado as PrecioCobrado from detallesorden d inner join repuestos r on d.idrepuesto = r.idrepuesto where d.idorden = " + idOrden;
+            DataTable dtRepuestos = oCon.retornarRegistrosUsuarios(consultaRepuestos);
 
-            if (db.abrirConexion())
+            if (dtRepuestos != null)
             {
-                try
+                foreach (DataRow fila in dtRepuestos.Rows)
                 {
-                    // Se usa PrecioCobrado de DetallesOrden para conservar el valor
-                    // que tenía el repuesto cuando se agregó a la orden.
-                    string queryRepuestos = @"
-                        SELECT
-                            r.NombreRepuesto,
-                            d.Cantidad,
-                            d.PrecioCobrado
-                        FROM DetallesOrden d
-                        INNER JOIN Repuestos r ON d.IdRepuesto = r.IdRepuesto
-                        WHERE d.IdOrden = @idOrden";
+                    string descripcion = fila["NombreRepuesto"] != DBNull.Value ? fila["NombreRepuesto"].ToString() : "Repuesto";
+                    int cantidad = fila["Cantidad"] != DBNull.Value ? Convert.ToInt32(fila["Cantidad"]) : 1;
+                    decimal precioUnitario = fila["PrecioCobrado"] != DBNull.Value ? Convert.ToDecimal(fila["PrecioCobrado"]) : 0;
+                    decimal subtotal = precioUnitario * cantidad;
+                    string descripcionFila = cantidad > 1 ? descripcion + " x" + cantidad : descripcion;
 
-                    using (SqlCommand cmd = new SqlCommand(queryRepuestos, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@idOrden", idOrden);
-
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string descripcion = reader["NombreRepuesto"].ToString() ?? "Repuesto";
-                                int cantidad = reader["Cantidad"] != DBNull.Value
-                                    ? Convert.ToInt32(reader["Cantidad"])
-                                    : 1;
-
-                                decimal precioUnitario = reader["PrecioCobrado"] != DBNull.Value
-                                    ? Convert.ToDecimal(reader["PrecioCobrado"])
-                                    : 0;
-
-                                decimal subtotal = precioUnitario * cantidad;
-
-                                string descripcionFila = cantidad > 1
-                                    ? $"{descripcion} x{cantidad}"
-                                    : descripcion;
-
-                                dgvDesglose.Rows.Add(descripcionFila, $"${subtotal:F2}");
-                                totalCosto += subtotal;
-                            }
-                        }
-                    }
-
-                    // Para este proyecto costo_estimado se utiliza como mano de obra.
-                    string queryManoObra =
-                        "SELECT ISNULL(costo_estimado, 0) FROM ordenes WHERE id = @idOrden";
-
-                    using (SqlCommand cmdManoObra = new SqlCommand(queryManoObra, db.oCon))
-                    {
-                        cmdManoObra.Parameters.AddWithValue("@idOrden", idOrden);
-
-                        object? result = cmdManoObra.ExecuteScalar();
-
-                        if (result != null && result != DBNull.Value)
-                        {
-                            decimal costoManoObra = Convert.ToDecimal(result);
-
-                            if (costoManoObra > 0)
-                            {
-                                dgvDesglose.Rows.Add("Mano de obra", $"${costoManoObra:F2}");
-                                totalCosto += costoManoObra;
-                            }
-                        }
-                    }
-
-                    lblTotalDesglose.Text = $"${totalCosto:F2}";
-                    lblTotalCobrar.Text = $"${totalCosto:F2}";
-                    totalOrden = totalCosto;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(
-                        "Error al cargar el desglose de costos: " + ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
+                    dgvDesglose.Rows.Add(descripcionFila, "$" + subtotal.ToString("F2"));
+                    totalCosto += subtotal;
                 }
             }
+
+            string consultaManoObra = "select isnull(costo_estimado, 0) as ManoObra from ordenes where id = " + idOrden;
+            DataTable dtManoObra = oCon.retornarRegistrosUsuarios(consultaManoObra);
+
+            if (dtManoObra != null && dtManoObra.Rows.Count > 0)
+            {
+                decimal costoManoObra = Convert.ToDecimal(dtManoObra.Rows[0]["ManoObra"]);
+
+                if (costoManoObra > 0)
+                {
+                    dgvDesglose.Rows.Add("Mano de obra", "$" + costoManoObra.ToString("F2"));
+                    totalCosto += costoManoObra;
+                }
+            }
+
+            lblTotalDesglose.Text = "$" + totalCosto.ToString("F2");
+            lblTotalCobrar.Text = "$" + totalCosto.ToString("F2");
+            totalOrden = totalCosto;
         }
 
         private void btnRegistraEntrega_Click(object sender, EventArgs e)
@@ -421,8 +268,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            if (cmbFormaPago.SelectedItem == null ||
-                cmbFormaPago.SelectedItem.ToString() == "Seleccionar...")
+            if (cmbFormaPago.SelectedItem == null || cmbFormaPago.SelectedItem.ToString() == "Seleccionar...")
             {
                 MessageBox.Show(
                     "Seleccione una forma de pago.",
@@ -451,30 +297,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 if (db.abrirConexion())
                 {
-                    string query = @"
-                        UPDATE ordenes
-                        SET forma_pago = @formaPago,
-                            monto_pagado = @montoPagado,
-                            fecha_entrega = GETDATE(),
-                            comprobante_pago = @comprobante,
-                            nombre_comprobante = @nombreComprobante,
-                            estado = 'Entregado'
-                        WHERE id = @idOrden";
+                    string consulta = "update ordenes set forma_pago = @formaPago, monto_pagado = @montoPagado, fecha_entrega = getdate(), comprobante_pago = @comprobante, nombre_comprobante = @nombreComprobante, estado = 'Entregado' where id = @idOrden and estado = 'Listo' and sucursal = @sucursal";
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
+                    using (SqlCommand cmd = new SqlCommand(consulta, db.oCon))
                     {
                         cmd.Parameters.AddWithValue("@formaPago", formaPago);
                         cmd.Parameters.AddWithValue("@montoPagado", totalOrden);
                         cmd.Parameters.AddWithValue("@idOrden", idOrden);
-
-                        cmd.Parameters.Add("@comprobante", SqlDbType.VarBinary, -1).Value =
-                            (object?)comprobantePago ?? DBNull.Value;
-
-                        cmd.Parameters.AddWithValue(
-                            "@nombreComprobante",
-                            string.IsNullOrEmpty(nombreComprobante)
-                                ? DBNull.Value
-                                : nombreComprobante);
+                        cmd.Parameters.AddWithValue("@sucursal", Sesion.SucursalActual);
+                        cmd.Parameters.Add("@comprobante", SqlDbType.VarBinary, -1).Value = (object?)comprobantePago ?? DBNull.Value;
+                        cmd.Parameters.AddWithValue("@nombreComprobante", string.IsNullOrEmpty(nombreComprobante) ? DBNull.Value : nombreComprobante);
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
 
@@ -485,7 +317,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 "Entrega registrada",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
-
                             LimpiarDespuesDeEntrega();
                         }
                         else
@@ -509,7 +340,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
             finally
             {
-                db.cerrarConexion();
+                if (db.oCon != null && db.oCon.State == ConnectionState.Open)
+                {
+                    db.cerrarConexion();
+                }
             }
         }
 

@@ -700,7 +700,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     page.Header().Column(col =>
                     {
                         col.Item()
-                            .Text("TECH SERVICE")
+                            .Text("TECH DKV")
                             .Bold()
                             .FontSize(18)
                             .FontColor("#1a73e8");

@@ -16,6 +16,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         ucRecepcion Unsoloboton = new ucRecepcion();
         private string ordenActual;
         private string estadoSeleccionado;
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
 
         // Repuestos ya guardados y repuestos nuevos agregados durante esta edición.
         // Se separan para no volver a descontar del stock lo que ya estaba registrado.
@@ -66,49 +67,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         // --- MÉTODOS DE CARGA DE BASE DE DATOS ---
         private void CargarTecnicos()
         {
-            var db = new Conexion_Base_de_Datos();
+            string orden = ordenActual.Replace("'", "''");
+            string consulta = "select u.id as Id, u.nombre as Nombre from usuarios u inner join sucursales s on u.idsucursal = s.idsucursal inner join ordenes o on o.sucursal = s.nombresucursal where u.perfil = 'Tecnico' and o.numero_orden = '" + orden + "' order by u.nombre";
 
-            if (db.abrirConexion())
-            {
-                try
-                {
-                    string query = @"
-                SELECT U.Id, U.Nombre
-                FROM Usuarios U
-                INNER JOIN Sucursales S
-                    ON U.IdSucursal = S.IdSucursal
-                INNER JOIN ordenes O
-                    ON O.sucursal = S.NombreSucursal
-                WHERE U.Perfil = 'Tecnico'
-                  AND O.numero_orden = @orden
-                ORDER BY U.Nombre";
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@orden", ordenActual);
-
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-
-                        cmbTecnico.DataSource = dt;
-                        cmbTecnico.DisplayMember = "Nombre";
-                        cmbTecnico.ValueMember = "Id";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(
-                        "Error al cargar técnicos: " + ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
-            }
+            cmbTecnico.DataSource = dt;
+            cmbTecnico.DisplayMember = "Nombre";
+            cmbTecnico.ValueMember = "Id";
         }
 
         // --- LÓGICA DE INTERFAZ Y EFECTOS VISUALES ---
@@ -235,100 +201,37 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             repuestosGuardadosCantidades.Clear();
             nombresRepuestos.Clear();
 
-            var db = new Conexion_Base_de_Datos();
+            string orden = ordenActual.Replace("'", "''");
+            string consulta = "select d.idrepuesto as IdRepuesto, r.nombrerepuesto as NombreRepuesto, sum(d.cantidad) as Cantidad from detallesorden d inner join repuestos r on d.idrepuesto = r.idrepuesto inner join ordenes o on d.idorden = o.id where o.numero_orden = '" + orden + "' group by d.idrepuesto, r.nombrerepuesto order by r.nombrerepuesto";
 
-            if (db.abrirConexion())
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            if (dt != null)
             {
-                try
+                foreach (DataRow fila in dt.Rows)
                 {
-                    string query = @"
-                        SELECT
-                            d.IdRepuesto,
-                            r.NombreRepuesto,
-                            SUM(d.Cantidad) AS Cantidad
-                        FROM DetallesOrden d
-                        INNER JOIN Repuestos r ON d.IdRepuesto = r.IdRepuesto
-                        INNER JOIN ordenes o ON d.IdOrden = o.id
-                        WHERE o.numero_orden = @orden
-                        GROUP BY d.IdRepuesto, r.NombreRepuesto
-                        ORDER BY r.NombreRepuesto";
+                    int idRepuesto = Convert.ToInt32(fila["IdRepuesto"]);
+                    int cantidad = Convert.ToInt32(fila["Cantidad"]);
+                    string nombre = fila["NombreRepuesto"].ToString() ?? "Repuesto";
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@orden", ordenActual);
-
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                int idRepuesto = Convert.ToInt32(reader["IdRepuesto"]);
-                                int cantidad = Convert.ToInt32(reader["Cantidad"]);
-                                string nombre = reader["NombreRepuesto"].ToString() ?? "Repuesto";
-
-                                repuestosGuardadosCantidades[idRepuesto] = cantidad;
-                                nombresRepuestos[idRepuesto] = nombre;
-                            }
-                        }
-                    }
-
-                    ActualizarListaRepuestos();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(
-                        "Error al cargar repuestos guardados: " + ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
+                    repuestosGuardadosCantidades[idRepuesto] = cantidad;
+                    nombresRepuestos[idRepuesto] = nombre;
                 }
             }
+
+            ActualizarListaRepuestos();
         }
 
         private void CargarRepuestosStock()
         {
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
-            {
-                try
-                {
-                    // Unimos Repuestos, Inventario, Sucursales y la Orden actual para filtrar por la sucursal correcta
-                    string query = @"
-                    SELECT 
-                        R.IdRepuesto,
-                        R.NombreRepuesto,
-                        I.StockActual,
-                        R.NombreRepuesto + ' (Stock: ' + CAST(I.StockActual AS VARCHAR) + ')' AS Descripcion 
-                    FROM Repuestos R
-                    INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
-                    INNER JOIN Sucursales S ON I.IdSucursal = S.IdSucursal
-                    INNER JOIN ordenes O ON S.NombreSucursal = O.sucursal
-                    WHERE O.numero_orden = @orden AND I.StockActual > 0";
+            string orden = ordenActual.Replace("'", "''");
+            string consulta = "select r.idrepuesto as IdRepuesto, r.nombrerepuesto as NombreRepuesto, i.stockactual as StockActual, r.nombrerepuesto + ' (Stock: ' + cast(i.stockactual as varchar) + ')' as Descripcion from repuestos r inner join inventariosucursal i on r.idrepuesto = i.idrepuesto inner join sucursales s on i.idsucursal = s.idsucursal inner join ordenes o on s.nombresucursal = o.sucursal where o.numero_orden = '" + orden + "' and i.stockactual > 0";
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@orden", ordenActual);
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
 
-                        cmbRepuestos.DataSource = dt;
-                        cmbRepuestos.DisplayMember = "Descripcion";
-                        cmbRepuestos.ValueMember = "IdRepuesto";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al cargar repuestos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
-            }
+            cmbRepuestos.DataSource = dt;
+            cmbRepuestos.DisplayMember = "Descripcion";
+            cmbRepuestos.ValueMember = "IdRepuesto";
         }
 
         private void btnMarcarListo_Click(object sender, EventArgs e)
@@ -336,79 +239,61 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             int idOrdenReal = 0;
             string sucursalOrigen = "";
 
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+            string orden = ordenActual.Replace("'", "''");
+            string consulta = "select id, sucursal from ordenes where numero_orden = '" + orden + "'";
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            if (dt != null && dt.Rows.Count > 0)
             {
-                try
-                {
-                    // Buscamos el ID numérico y la sucursal actual
-                    string query = "SELECT id, sucursal FROM ordenes WHERE numero_orden = @orden";
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@orden", ordenActual);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                idOrdenReal = Convert.ToInt32(reader["id"]);
-                                sucursalOrigen = reader["sucursal"].ToString();
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al consultar datos para la derivación: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
+                idOrdenReal = Convert.ToInt32(dt.Rows[0]["id"]);
+                sucursalOrigen = dt.Rows[0]["sucursal"].ToString();
             }
 
-            // Si encontramos la orden, abrimos el modal de derivación
             if (idOrdenReal > 0)
             {
-                frmSeguimientoDerivacion modalDerivacion = new frmSeguimientoDerivacion(idOrdenReal, sucursalOrigen);
+                frmSeguimientoDerivacion modalDerivacion =
+                    new frmSeguimientoDerivacion(
+                        idOrdenReal,
+                        sucursalOrigen);
+
                 modalDerivacion.ShowDialog();
 
-                // Cerramos los detalles automáticamente porque el equipo ya no está en esta sucursal
+                // Se mantiene la lógica original:
+                // al terminar la derivación se cierra el detalle de la orden.
                 this.Close();
             }
             else
             {
-                MessageBox.Show("No se pudo identificar la orden.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "No se pudo identificar la orden.",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
 
         private void btnListoEntrega_Click(object sender, EventArgs e)
         {
-            var db = new Conexion_Base_de_Datos();
+            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
+
             if (db.abrirConexion())
             {
                 try
                 {
-                    // Recopilamos todos los textos del ListBox en un solo bloque de texto (separados por un salto de línea)
                     string observacionesFinales = "";
+
                     foreach (var item in lstObservaciones.Items)
                     {
                         observacionesFinales += item.ToString() + Environment.NewLine;
                     }
 
-                    // 1. Actualizamos el estado, el técnico Y LAS OBSERVACIONES
-                    string query = @"
-    UPDATE ordenes
-    SET estado = @estado,
-        tecnico_id = @tecnico,
-        trabajo_realizado = @observaciones
-    WHERE numero_orden = @orden";
+                    string query = "update ordenes set estado = @estado, tecnico_id = @tecnico, trabajo_realizado = @observaciones where numero_orden = @orden";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.oCon))
                     {
                         cmd.Parameters.AddWithValue("@estado", estadoSeleccionado);
                         cmd.Parameters.AddWithValue("@tecnico", cmbTecnico.SelectedValue);
-                        // Pasamos el bloque de texto limpio a la base de datos
                         cmd.Parameters.AddWithValue("@observaciones", observacionesFinales.Trim());
                         cmd.Parameters.AddWithValue("@orden", ordenActual);
 
@@ -416,25 +301,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                         if (filasAfectadas > 0)
                         {
-                            // 2. Descontar del stock únicamente las cantidades nuevas
-                            // que se agregaron durante esta edición.
                             foreach (var repuesto in repuestosNuevosCantidades)
                             {
                                 int idRepuesto = repuesto.Key;
                                 int cantidad = repuesto.Value;
 
-                                string queryStock = @"
-                                    UPDATE InventarioSucursal
-                                    SET StockActual = StockActual - @cantidad
-                                    WHERE IdRepuesto = @id
-                                      AND IdSucursal = (
-                                          SELECT S.IdSucursal
-                                          FROM Sucursales S
-                                          INNER JOIN ordenes O
-                                              ON S.NombreSucursal = O.sucursal
-                                          WHERE O.numero_orden = @numOrden
-                                      )
-                                      AND StockActual >= @cantidad";
+                                string queryStock = "update inventariosucursal set stockactual = stockactual - @cantidad where idrepuesto = @id and idsucursal = (select s.idsucursal from sucursales s inner join ordenes o on s.nombresucursal = o.sucursal where o.numero_orden = @numOrden) and stockactual >= @cantidad";
 
                                 using (SqlCommand cmdStock = new SqlCommand(queryStock, db.oCon))
                                 {
@@ -455,39 +327,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                     }
                                 }
 
-                                string queryDetalle = @"
-                                    DECLARE @idOrden INT =
-                                        (SELECT id FROM ordenes WHERE numero_orden = @numOrden);
-
-                                    IF EXISTS (
-                                        SELECT 1
-                                        FROM DetallesOrden
-                                        WHERE IdOrden = @idOrden
-                                          AND IdRepuesto = @idRepuesto
-                                    )
-                                    BEGIN
-                                        UPDATE DetallesOrden
-                                        SET Cantidad = Cantidad + @cantidad
-                                        WHERE IdDetalle = (
-                                            SELECT TOP 1 IdDetalle
-                                            FROM DetallesOrden
-                                            WHERE IdOrden = @idOrden
-                                              AND IdRepuesto = @idRepuesto
-                                            ORDER BY IdDetalle
-                                        );
-                                    END
-                                    ELSE
-                                    BEGIN
-                                        INSERT INTO DetallesOrden
-                                            (IdOrden, IdRepuesto, Cantidad, PrecioCobrado)
-                                        VALUES
-                                            (@idOrden,
-                                             @idRepuesto,
-                                             @cantidad,
-                                             (SELECT PrecioVenta
-                                              FROM Repuestos
-                                              WHERE IdRepuesto = @idRepuesto));
-                                    END";
+                                string queryDetalle = "declare @idOrden int = (select id from ordenes where numero_orden = @numOrden); if exists (select 1 from detallesorden where idorden = @idOrden and idrepuesto = @idRepuesto) begin update detallesorden set cantidad = cantidad + @cantidad where iddetalle = (select top 1 iddetalle from detallesorden where idorden = @idOrden and idrepuesto = @idRepuesto order by iddetalle); end else begin insert into detallesorden (idorden, idrepuesto, cantidad, preciocobrado) values (@idOrden, @idRepuesto, @cantidad, (select precioventa from repuestos where idrepuesto = @idRepuesto)); end";
 
                                 using (SqlCommand cmdDetalle = new SqlCommand(queryDetalle, db.oCon))
                                 {
@@ -498,14 +338,23 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 }
                             }
 
-                            MessageBox.Show("¡Los cambios se guardaron correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(
+                                "¡Los cambios se guardaron correctamente!",
+                                "Éxito",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
                             this.Close();
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al guardar los cambios: " + ex.Message, "Error de BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        "Error al guardar los cambios: " + ex.Message,
+                        "Error de BD",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -530,38 +379,25 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarObservacionesGuardadas()
         {
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+            string orden = ordenActual.Replace("'", "''");
+            string consulta = "select trabajo_realizado from ordenes where numero_orden = '" + orden + "'";
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            if (dt != null &&
+                dt.Rows.Count > 0 &&
+                dt.Rows[0]["trabajo_realizado"] != DBNull.Value)
             {
-                try
-                {
-                    // Cargamos el trabajo realizado previamente guardado en la orden.
-                    string query =
-       "SELECT trabajo_realizado FROM ordenes WHERE numero_orden = @orden";
+                string[] obsGuardadas =
+                    dt.Rows[0]["trabajo_realizado"]
+                    .ToString()
+                    .Split(
+                        new[] { '\r', '\n' },
+                        StringSplitOptions.RemoveEmptyEntries);
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@orden", ordenActual);
-                        object resultado = cmd.ExecuteScalar();
-
-                        if (resultado != null && resultado != DBNull.Value)
-                        {
-                            // Separamos el texto guardado por saltos de línea para meterlo a la lista
-                            string[] obsGuardadas = resultado.ToString().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                            foreach (string obs in obsGuardadas)
-                            {
-                                lstObservaciones.Items.Add(obs);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
+                foreach (string obs in obsGuardadas)
                 {
-                    MessageBox.Show("Error al cargar las observaciones: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
+                    lstObservaciones.Items.Add(obs);
                 }
             }
         }
