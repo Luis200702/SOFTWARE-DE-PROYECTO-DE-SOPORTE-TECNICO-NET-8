@@ -85,7 +85,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             r.nombrerepuesto as NOMBRE,
             s.nombresucursal as SUCURSAL,
             isnull(r.categoria, '—') as CATEGORÍA,
-            isnull(r.compatibilidad, '—') as COMPATIBLE,
             concat(i.stockactual, ' / ', i.stockminimo) as STOCK,
             r.preciocosto as COSTO,
             r.precioventa as VENTA,
@@ -162,12 +161,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             if (dgvNuevo.Columns.Contains("CATEGORÍA"))
                 dgvNuevo.Columns["CATEGORÍA"].Width = 120;
-
-            if (dgvNuevo.Columns.Contains("COMPATIBLE"))
-            {
-                dgvNuevo.Columns["COMPATIBLE"].AutoSizeMode =
-                    DataGridViewAutoSizeColumnMode.Fill;
-            }
 
             if (dgvNuevo.Columns.Contains("STOCK"))
                 dgvNuevo.Columns["STOCK"].Width = 110;

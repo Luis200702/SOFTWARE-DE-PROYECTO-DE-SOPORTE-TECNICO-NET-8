@@ -577,7 +577,7 @@
             pnlDispositivo.Name = "pnlDispositivo";
             pnlDispositivo.Radius = 12;
             pnlDispositivo.RectColor = Color.FromArgb(221, 227, 233);
-            pnlDispositivo.Size = new Size(515, 491);
+            pnlDispositivo.Size = new Size(515, 453);
             pnlDispositivo.TabIndex = 2;
             pnlDispositivo.Text = null;
             pnlDispositivo.TextAlignment = ContentAlignment.MiddleCenter;
@@ -945,7 +945,7 @@
             uiPanel1.Name = "uiPanel1";
             uiPanel1.Radius = 12;
             uiPanel1.RectColor = Color.FromArgb(221, 227, 233);
-            uiPanel1.Size = new Size(573, 491);
+            uiPanel1.Size = new Size(573, 453);
             uiPanel1.TabIndex = 4;
             uiPanel1.Text = null;
             uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
