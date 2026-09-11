@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using FontAwesome.Sharp;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class ucStock : UserControl
     {
-        // Variables para controlar el botón de alertas
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
         private bool mostrandoAlertas = false;
         private int cantidadAlertas = 0;
 
@@ -22,24 +23,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             cmbCategorias.SelectedIndexChanged += cmbCategorias_SelectedIndexChanged;
         }
 
-        // DISEÑO BASE DE LA TABLA 
         private void AplicarDiseñoGrid()
         {
-            dgvNuevo.BackgroundColor = Color.White;
-            dgvNuevo.BorderStyle = BorderStyle.None;
-            dgvNuevo.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvNuevo.GridColor = Color.FromArgb(240, 240, 240);
-            dgvNuevo.RowHeadersVisible = false;
-
-            dgvNuevo.AllowUserToAddRows = false;
-            dgvNuevo.AllowUserToDeleteRows = false;
-            dgvNuevo.AllowUserToResizeRows = false;
-            dgvNuevo.AllowUserToResizeColumns = false;
             dgvNuevo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            dgvNuevo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvNuevo.ColumnHeadersHeight = 50;
-            dgvNuevo.RowTemplate.Height = 55;
 
             dgvNuevo.EnableHeadersVisualStyles = false;
             DataGridViewCellStyle estiloEncabezado = new DataGridViewCellStyle();
@@ -75,156 +61,166 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarDatos();
         }
 
-        // CARGAR DATOS Y APLICAR FILTROS (Búsqueda + Categoría + Alertas + Sucursal de Sesión)
         private void CargarDatos()
         {
             string textoBusqueda = txtBuscar.Text.Trim();
+
             string categoriaSeleccionada = cmbCategorias.SelectedItem != null
                 ? cmbCategorias.SelectedItem.ToString()
                 : "Todas las categorías";
 
-           
-            string query = @"
-        SELECT 
-            R.IdRepuesto, 
-            I.IdSucursal, 
-            R.NombreRepuesto AS NOMBRE, 
-            S.NombreSucursal AS SUCURSAL,
-            ISNULL(R.Categoria, '—') AS CATEGORÍA, 
-            ISNULL(R.Compatibilidad, '—') AS COMPATIBLE, 
-            CONCAT(I.StockActual, ' / ', I.StockMinimo) AS STOCK, 
-            R.PrecioCosto AS COSTO, 
-            R.PrecioVenta AS VENTA, 
-            ISNULL(R.Proveedor, '—') AS PROVEEDOR,
-            CASE 
-                WHEN I.StockActual = 0 THEN 'Sin stock'
-                WHEN I.StockActual <= I.StockMinimo THEN 'Stock bajo'
-                ELSE 'Normal'
-            END AS ESTADO
-        FROM Repuestos R
-        INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
-        INNER JOIN Sucursales S ON I.IdSucursal = S.IdSucursal
-        WHERE S.NombreSucursal = @SucursalUsuario
-          AND (@SoloAlertas = 0 OR I.StockActual <= I.StockMinimo)
-          AND (@Texto = '' OR R.NombreRepuesto LIKE '%' + @Texto + '%' 
-                            OR R.Compatibilidad LIKE '%' + @Texto + '%'
-                            OR R.Proveedor LIKE '%' + @Texto + '%')
-          AND (@Categoria = 'Todas las categorías' OR @Categoria = '' OR @Categoria = 'Todas' OR R.Categoria = @Categoria)";
+            string sucursal = Sesion.SucursalActual;
 
-            Conexion_Base_de_Datos conexionBD = new Conexion_Base_de_Datos();
+            // Evitar problemas si el texto contiene comillas simples
+            textoBusqueda = textoBusqueda.Replace("'", "''");
+            categoriaSeleccionada = categoriaSeleccionada.Replace("'", "''");
+            sucursal = sucursal.Replace("'", "''");
 
-            try
+            int soloAlertas = mostrandoAlertas ? 1 : 0;
+
+            string consulta = @"
+        select
+            r.idrepuesto as IdRepuesto,
+            i.idsucursal as IdSucursal,
+            r.nombrerepuesto as NOMBRE,
+            s.nombresucursal as SUCURSAL,
+            isnull(r.categoria, '—') as CATEGORÍA,
+            isnull(r.compatibilidad, '—') as COMPATIBLE,
+            concat(i.stockactual, ' / ', i.stockminimo) as STOCK,
+            r.preciocosto as COSTO,
+            r.precioventa as VENTA,
+            isnull(r.proveedor, '—') as PROVEEDOR,
+            case
+                when i.stockactual = 0 then 'Sin stock'
+                when i.stockactual <= i.stockminimo then 'Stock bajo'
+                else 'Normal'
+            end as ESTADO
+        from repuestos r
+        inner join inventariosucursal i
+            on r.idrepuesto = i.idrepuesto
+        inner join sucursales s
+            on i.idsucursal = s.idsucursal
+        where s.nombresucursal = '" + sucursal + @"'
+          and (
+                " + soloAlertas + @" = 0
+                or i.stockactual <= i.stockminimo
+              )
+          and (
+                '" + textoBusqueda + @"' = ''
+                or r.nombrerepuesto like '%" + textoBusqueda + @"%'
+                or r.compatibilidad like '%" + textoBusqueda + @"%'
+                or r.proveedor like '%" + textoBusqueda + @"%'
+              )
+          and (
+                '" + categoriaSeleccionada + @"' = 'Todas las categorías'
+                or '" + categoriaSeleccionada + @"' = ''
+                or '" + categoriaSeleccionada + @"' = 'Todas'
+                or r.categoria = '" + categoriaSeleccionada + @"'
+              )";
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            dgvNuevo.DataSource = dt;
+
+            if (dgvNuevo.Columns.Contains("IdRepuesto"))
+                dgvNuevo.Columns["IdRepuesto"].Visible = false;
+
+            if (dgvNuevo.Columns.Contains("IdSucursal"))
+                dgvNuevo.Columns["IdSucursal"].Visible = false;
+
+            if (!dgvNuevo.Columns.Contains("Agregar"))
             {
-                if (conexionBD.abrirConexion())
+                DataGridViewButtonColumn btnAgregar = new DataGridViewButtonColumn
                 {
-                    using (SqlCommand cmd = new SqlCommand(query, conexionBD.oCon))
-                    {
-                        // Pasamos la sucursal activa de la sesión y los demás parámetros
-                        cmd.Parameters.AddWithValue("@SucursalUsuario", Sesion.SucursalActual);
-                        cmd.Parameters.AddWithValue("@SoloAlertas", mostrandoAlertas ? 1 : 0);
-                        cmd.Parameters.AddWithValue("@Texto", textoBusqueda);
-                        cmd.Parameters.AddWithValue("@Categoria", categoriaSeleccionada);
+                    Name = "Agregar",
+                    HeaderText = "",
+                    Width = 45,
+                    FlatStyle = FlatStyle.Flat
+                };
 
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            using (DataTable dt = new DataTable())
-                            {
-                                da.Fill(dt);
-                                dgvNuevo.DataSource = dt;
-                            }
-                        }
-
-                        if (dgvNuevo.Columns.Contains("IdRepuesto")) dgvNuevo.Columns["IdRepuesto"].Visible = false;
-                        if (dgvNuevo.Columns.Contains("IdSucursal")) dgvNuevo.Columns["IdSucursal"].Visible = false;
-
-                        if (!dgvNuevo.Columns.Contains("Agregar"))
-                        {
-                            DataGridViewButtonColumn btnAgregar = new DataGridViewButtonColumn
-                            {
-                                Name = "Agregar",
-                                HeaderText = "",
-                                Width = 45,
-                                FlatStyle = FlatStyle.Flat
-                            };
-                            dgvNuevo.Columns.Add(btnAgregar);
-                        }
-
-                        if (!dgvNuevo.Columns.Contains("Delete"))
-                        {
-                            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn
-                            {
-                                Name = "Delete",
-                                HeaderText = "",
-                                Width = 45,
-                                FlatStyle = FlatStyle.Flat
-                            };
-                            dgvNuevo.Columns.Add(btnDelete);
-                        }
-
-                        if (dgvNuevo.Columns.Count > 0)
-                        {
-                            if (dgvNuevo.Columns.Contains("NOMBRE")) dgvNuevo.Columns["NOMBRE"].Width = 160;
-                            if (dgvNuevo.Columns.Contains("SUCURSAL")) dgvNuevo.Columns["SUCURSAL"].Width = 120;
-                            if (dgvNuevo.Columns.Contains("CATEGORÍA")) dgvNuevo.Columns["CATEGORÍA"].Width = 120;
-                            if (dgvNuevo.Columns.Contains("COMPATIBLE")) dgvNuevo.Columns["COMPATIBLE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                            if (dgvNuevo.Columns.Contains("STOCK")) dgvNuevo.Columns["STOCK"].Width = 110;
-
-                            if (dgvNuevo.Columns.Contains("COSTO"))
-                            {
-                                dgvNuevo.Columns["COSTO"].Width = 100;
-                                dgvNuevo.Columns["COSTO"].DefaultCellStyle.Format = "N2";
-                            }
-                            if (dgvNuevo.Columns.Contains("VENTA"))
-                            {
-                                dgvNuevo.Columns["VENTA"].Width = 100;
-                                dgvNuevo.Columns["VENTA"].DefaultCellStyle.Format = "N2";
-                            }
-
-                            if (dgvNuevo.Columns.Contains("PROVEEDOR")) dgvNuevo.Columns["PROVEEDOR"].Width = 160;
-                            if (dgvNuevo.Columns.Contains("ESTADO")) dgvNuevo.Columns["ESTADO"].Width = 140;
-                        }
-
-                        dgvNuevo.ClearSelection();
-                    }
-                }
+                dgvNuevo.Columns.Add(btnAgregar);
             }
-            catch (Exception ex)
+
+            if (!dgvNuevo.Columns.Contains("Delete"))
             {
-                MessageBox.Show("Error al cargar los datos de stock: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn
+                {
+                    Name = "Delete",
+                    HeaderText = "",
+                    Width = 45,
+                    FlatStyle = FlatStyle.Flat
+                };
+
+                dgvNuevo.Columns.Add(btnDelete);
             }
-            finally
+
+            if (dgvNuevo.Columns.Contains("NOMBRE"))
+                dgvNuevo.Columns["NOMBRE"].Width = 160;
+
+            if (dgvNuevo.Columns.Contains("SUCURSAL"))
+                dgvNuevo.Columns["SUCURSAL"].Width = 120;
+
+            if (dgvNuevo.Columns.Contains("CATEGORÍA"))
+                dgvNuevo.Columns["CATEGORÍA"].Width = 120;
+
+            if (dgvNuevo.Columns.Contains("COMPATIBLE"))
             {
-                conexionBD.cerrarConexion();
+                dgvNuevo.Columns["COMPATIBLE"].AutoSizeMode =
+                    DataGridViewAutoSizeColumnMode.Fill;
             }
+
+            if (dgvNuevo.Columns.Contains("STOCK"))
+                dgvNuevo.Columns["STOCK"].Width = 110;
+
+            if (dgvNuevo.Columns.Contains("COSTO"))
+            {
+                dgvNuevo.Columns["COSTO"].Width = 100;
+                dgvNuevo.Columns["COSTO"].DefaultCellStyle.Format = "N2";
+            }
+
+            if (dgvNuevo.Columns.Contains("VENTA"))
+            {
+                dgvNuevo.Columns["VENTA"].Width = 100;
+                dgvNuevo.Columns["VENTA"].DefaultCellStyle.Format = "N2";
+            }
+
+            if (dgvNuevo.Columns.Contains("PROVEEDOR"))
+                dgvNuevo.Columns["PROVEEDOR"].Width = 160;
+
+            if (dgvNuevo.Columns.Contains("ESTADO"))
+                dgvNuevo.Columns["ESTADO"].Width = 140;
+
+            dgvNuevo.ClearSelection();
 
             ActualizarContadorAlertas();
         }
 
-        // CONTAR ALERTAS (Stock Mínimo solo para la sucursal actual)
         private void ActualizarContadorAlertas()
         {
-            string query = @"
-                SELECT COUNT(*) 
-                FROM InventarioSucursal I
-                INNER JOIN Sucursales S ON I.IdSucursal = S.IdSucursal
-                WHERE S.NombreSucursal = @SucursalUsuario AND I.StockActual <= I.StockMinimo";
+            string sucursal = Sesion.SucursalActual.Replace("'", "''");
 
-            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
-            try
+            string consulta = @"
+        select count(*) as cantidad
+        from inventariosucursal i
+        inner join sucursales s
+            on i.idsucursal = s.idsucursal
+        where s.nombresucursal = '" + sucursal + @"'
+          and i.stockactual <= i.stockminimo";
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            if (dt != null && dt.Rows.Count > 0)
             {
-                if (db.abrirConexion())
-                {
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@SucursalUsuario", Sesion.SucursalActual);
-                        cantidadAlertas = Convert.ToInt32(cmd.ExecuteScalar());
-                    }
-
-                    if (pnlInfo != null) pnlInfo.Invalidate();
-                }
+                cantidadAlertas = Convert.ToInt32(
+                    dt.Rows[0]["cantidad"]);
             }
-            catch { }
-            finally { db.cerrarConexion(); }
+            else
+            {
+                cantidadAlertas = 0;
+            }
+
+            if (pnlInfo != null)
+                pnlInfo.Invalidate();
         }
 
         private void dgvNuevo_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

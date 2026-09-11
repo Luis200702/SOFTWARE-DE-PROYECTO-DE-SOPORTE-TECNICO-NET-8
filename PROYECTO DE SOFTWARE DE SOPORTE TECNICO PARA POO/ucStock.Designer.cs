@@ -194,10 +194,20 @@
             // 
             // dgvNuevo
             // 
+            dgvNuevo.AllowUserToAddRows = false;
+            dgvNuevo.AllowUserToDeleteRows = false;
+            dgvNuevo.AllowUserToResizeColumns = false;
+            dgvNuevo.AllowUserToResizeRows = false;
+            dgvNuevo.BackgroundColor = Color.White;
+            dgvNuevo.BorderStyle = BorderStyle.None;
             dgvNuevo.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvNuevo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvNuevo.ColumnHeadersHeight = 50;
+            dgvNuevo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvNuevo.GridColor = SystemColors.ButtonFace;
             dgvNuevo.Location = new Point(0, 133);
             dgvNuevo.Name = "dgvNuevo";
+            dgvNuevo.RowHeadersVisible = false;
+            dgvNuevo.RowTemplate.Height = 55;
             dgvNuevo.Size = new Size(1123, 699);
             dgvNuevo.TabIndex = 4;
             dgvNuevo.CellContentClick += dgvNuevo_CellContentClick;
