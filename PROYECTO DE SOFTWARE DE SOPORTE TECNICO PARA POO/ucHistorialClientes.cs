@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.IO;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
@@ -13,6 +14,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             dgvClientesNuevo.RowPostPaint +=
                 dgvClientesNuevo_RowPostPaint;
+
+            dgvNuevoHistorial.CellContentClick -= dgvNuevoHistorial_CellContentClick;
+            dgvNuevoHistorial.CellContentClick += dgvNuevoHistorial_CellContentClick;
         }
 
         private void AplicarDiseñoGrid()
@@ -175,7 +179,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvClientesNuevo.ClearSelection();
         }
 
-   
+
         private void dgvClientesNuevo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -211,19 +215,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarHistorialOrdenes(int idCliente)
         {
-            DataTable HistorialClientes = oCon.retornarRegistrosUsuarios(@"select
-                        O.numero_orden as ORDEN,
-                        convert(varchar, O.fecha_ingreso, 103) as FECHA,
-                        D.marca + ' ' + D.modelo as DISPOSITIVO,
-                        isnull(O.descripcion_problema, 'Reparación general') as REPARACIÓN,
-                        isnull(O.costo_estimado, 0) as COSTO,
-                        O.estado as ESTADO,
-                        U.Nombre as TÉCNICO
-                        from ordenes O
-                        inner join dispositivos D on O.dispositivo_id = D.id
-                        inner join Usuarios U on O.tecnico_id = U.Id
-                        where O.cliente_id = " + idCliente + @"
-                        order by O.fecha_ingreso desc");
+            string consulta = "select o.numero_orden as ORDEN, convert(varchar, o.fecha_ingreso, 103) as FECHA, d.marca + ' ' + d.modelo as DISPOSITIVO, isnull(o.descripcion_problema, 'Reparación general') as REPARACIÓN, isnull(o.costo_estimado, 0) as COSTO, o.estado as ESTADO, isnull(u.nombre, 'Sin asignar') as TÉCNICO, isnull(o.forma_pago, '') as FORMA_PAGO, o.comprobante_pago as COMPROBANTE, o.nombre_comprobante as NOMBRE_COMPROBANTE from ordenes o inner join dispositivos d on o.dispositivo_id = d.id left join usuarios u on o.tecnico_id = u.id where o.cliente_id = " + idCliente + " order by o.fecha_ingreso desc";
+
+            DataTable HistorialClientes = oCon.retornarRegistrosUsuarios(consulta);
 
             dgvNuevoHistorial.Columns.Clear();
             dgvNuevoHistorial.AutoGenerateColumns = true;
@@ -245,42 +239,89 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 dgvNuevoHistorial.Columns["COSTO"].Width = 90;
                 dgvNuevoHistorial.Columns["ESTADO"].Width = 130;
                 dgvNuevoHistorial.Columns["TÉCNICO"].Width = 140;
+
+                dgvNuevoHistorial.Columns["FORMA_PAGO"].Visible = false;
+                dgvNuevoHistorial.Columns["COMPROBANTE"].Visible = false;
+                dgvNuevoHistorial.Columns["NOMBRE_COMPROBANTE"].Visible = false;
             }
 
-            if (lblTotalVisitas != null) lblTotalVisitas.Text = HistorialClientes.Rows.Count.ToString();
+            DataGridViewButtonColumn btnComprobante = new DataGridViewButtonColumn
+            {
+                Name = "VER_COMPROBANTE",
+                HeaderText = "COMPROBANTE",
+                Width = 120,
+                FlatStyle = FlatStyle.Flat,
+                UseColumnTextForButtonValue = false
+            };
+
+            btnComprobante.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvNuevoHistorial.Columns.Add(btnComprobante);
+
+            if (lblTotalVisitas != null)
+                lblTotalVisitas.Text = HistorialClientes.Rows.Count.ToString();
 
             decimal totalGastado = 0;
+
             foreach (DataRow row in HistorialClientes.Rows)
             {
                 totalGastado += Convert.ToDecimal(row["COSTO"]);
             }
-            if (lblTotalGastado != null) lblTotalGastado.Text = $"${totalGastado:0.00}";
+
+            if (lblTotalGastado != null)
+                lblTotalGastado.Text = $"${totalGastado:0.00}";
 
             dgvNuevoHistorial.ClearSelection();
         }
 
         private void dgvNuevoHistorial_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.Value != null)
-            {
-                string nombreColumna = dgvNuevoHistorial.Columns[e.ColumnIndex].Name;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
 
-                if (nombreColumna == "ORDEN")
+            string nombreColumna = dgvNuevoHistorial.Columns[e.ColumnIndex].Name;
+
+            if (nombreColumna == "ORDEN" && e.Value != null)
+            {
+                e.CellStyle.ForeColor = Color.FromArgb(0, 160, 130);
+                e.CellStyle.Font = new Font(dgvNuevoHistorial.Font, FontStyle.Bold);
+            }
+
+            if (nombreColumna == "COSTO" && e.Value != null)
+            {
+                if (decimal.TryParse(e.Value.ToString(), out decimal valor))
                 {
-                    e.CellStyle.ForeColor = Color.FromArgb(0, 160, 130);
+                    e.Value = $"${valor:N0}";
+                    e.CellStyle.ForeColor = Color.FromArgb(80, 80, 80);
+                    e.CellStyle.Font = new Font(dgvNuevoHistorial.Font, FontStyle.Bold);
+                    e.FormattingApplied = true;
+                }
+            }
+
+            if (nombreColumna == "VER_COMPROBANTE")
+            {
+                DataGridViewRow fila = dgvNuevoHistorial.Rows[e.RowIndex];
+
+                string formaPago = fila.Cells["FORMA_PAGO"].Value?.ToString() ?? "";
+                object comprobante = fila.Cells["COMPROBANTE"].Value;
+
+                bool tieneComprobante =
+                    formaPago.Equals("Transferencia", StringComparison.OrdinalIgnoreCase) &&
+                    comprobante != null &&
+                    comprobante != DBNull.Value;
+
+                e.Value = tieneComprobante ? "Ver" : "—";
+
+                if (tieneComprobante)
+                {
+                    e.CellStyle.ForeColor = Color.FromArgb(0, 165, 155);
                     e.CellStyle.Font = new Font(dgvNuevoHistorial.Font, FontStyle.Bold);
                 }
-
-                if (nombreColumna == "COSTO")
+                else
                 {
-                    if (decimal.TryParse(e.Value.ToString(), out decimal valor))
-                    {
-                        e.Value = $"${valor:N0}";
-                        e.CellStyle.ForeColor = Color.FromArgb(80, 80, 80);
-                        e.CellStyle.Font = new Font(dgvNuevoHistorial.Font, FontStyle.Bold);
-                        e.FormattingApplied = true;
-                    }
+                    e.CellStyle.ForeColor = Color.FromArgb(140, 150, 160);
                 }
+
+                e.FormattingApplied = true;
             }
         }
 
@@ -352,6 +393,105 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
 
                 e.Handled = true;
+            }
+        }
+
+        private void dgvNuevoHistorial_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            if (dgvNuevoHistorial.Columns[e.ColumnIndex].Name != "VER_COMPROBANTE")
+                return;
+
+            DataGridViewRow fila = dgvNuevoHistorial.Rows[e.RowIndex];
+
+            string formaPago = fila.Cells["FORMA_PAGO"].Value?.ToString() ?? "";
+            object valorComprobante = fila.Cells["COMPROBANTE"].Value;
+
+            if (!formaPago.Equals("Transferencia", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show(
+                    "Esta orden no fue pagada mediante transferencia.",
+                    "Comprobante",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
+            if (valorComprobante == null || valorComprobante == DBNull.Value)
+            {
+                MessageBox.Show(
+                    "Esta orden no tiene un comprobante registrado.",
+                    "Comprobante",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
+            byte[] imagenBytes = (byte[])valorComprobante;
+
+            string nombreArchivo =
+                fila.Cells["NOMBRE_COMPROBANTE"].Value?.ToString() ?? "Comprobante";
+
+            MostrarComprobante(imagenBytes, nombreArchivo);
+        }
+
+        private void MostrarComprobante(byte[] imagenBytes, string nombreArchivo)
+        {
+            try
+            {
+                using MemoryStream ms = new MemoryStream(imagenBytes);
+                using Image imagenTemporal = Image.FromStream(ms);
+
+                Bitmap imagen = new Bitmap(imagenTemporal);
+
+                Form frm = new Form
+                {
+                    Text = "TECH DKV - Comprobante de pago",
+                    StartPosition = FormStartPosition.CenterParent,
+                    Size = new Size(750, 650),
+                    BackColor = Color.White,
+                    MinimizeBox = false,
+                    MaximizeBox = true
+                };
+
+                Label lblNombre = new Label
+                {
+                    Text = nombreArchivo,
+                    Dock = DockStyle.Top,
+                    Height = 45,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(24, 43, 62),
+                    BackColor = Color.White
+                };
+
+                PictureBox pic = new PictureBox
+                {
+                    Dock = DockStyle.Fill,
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    Image = imagen,
+                    BackColor = Color.FromArgb(245, 247, 249)
+                };
+
+                frm.Controls.Add(pic);
+                frm.Controls.Add(lblNombre);
+
+                frm.FormClosed += (s, e) =>
+                {
+                    pic.Image?.Dispose();
+                };
+
+                frm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "No se pudo mostrar el comprobante: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
