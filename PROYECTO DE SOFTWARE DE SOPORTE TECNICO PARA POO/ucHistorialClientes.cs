@@ -17,9 +17,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void AplicarDiseñoGrid()
         {
-            // =====================================================
-            // LISTA DE CLIENTES - LADO IZQUIERDO
-            // =====================================================
 
             dgvClientesNuevo.BackgroundColor = Color.White;
             dgvClientesNuevo.BorderStyle = BorderStyle.None;
@@ -67,12 +64,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             dgvClientesNuevo.RowsDefaultCellStyle = estiloCliente;
 
-            // Evitar que WinForms cambie los colores automáticamente
+
+
             dgvClientesNuevo.EnableHeadersVisualStyles = false;
 
-            // =====================================================
-            // HISTORIAL - LADO DERECHO
-            // =====================================================
 
             dgvNuevoHistorial.CellBorderStyle =
                 DataGridViewCellBorderStyle.SingleHorizontal;
@@ -180,7 +175,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvClientesNuevo.ClearSelection();
         }
 
-        // --- 3. SELECCIÓN DE CLIENTE Y CARGA DEL HISTORIAL ---
+   
         private void dgvClientesNuevo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try

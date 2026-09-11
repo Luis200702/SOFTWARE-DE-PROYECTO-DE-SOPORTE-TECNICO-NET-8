@@ -1,8 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Data;
+﻿using FontAwesome.Sharp;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class ucSeguimientoReparaciones : UserControl
     {
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
         public ucSeguimientoReparaciones()
         {
             InitializeComponent();
@@ -73,73 +75,64 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             dgvSeguimiento.ClearSelection();
         }
 
-        // CONSULTAR A LA BASE DE DATOS Y ANCHO DE COLUMNAS
         private void CargarSeguimiento(string filtroBusqueda = "", string filtroEstado = "Todos")
         {
-            var db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+            string sucursal = Sesion.SucursalActual.Replace("'", "''");
+            string busqueda = filtroBusqueda.Replace("'", "''");
+            string estado = filtroEstado.Replace("'", "''");
+
+            string consulta = @"
+        select
+            o.numero_orden as ORDEN,
+            c.nombre + ' - ' + d.marca + ' ' + d.modelo as [CLIENTE \ DISPOSITIVO],
+            u.nombre as TÉCNICO,
+            o.estado as ESTADO,
+            o.fecha_ingreso as INGRESO,
+            o.fecha_estimada_entrega as [ENTREGA ESTIMADA],
+            case
+                when o.fecha_entrega is not null
+                    then datediff(day, o.fecha_ingreso, o.fecha_entrega)
+                else
+                    datediff(day, o.fecha_ingreso, getdate())
+            end as TIEMPO
+        from ordenes o
+        inner join clientes c
+            on o.cliente_id = c.id
+        inner join dispositivos d
+            on o.dispositivo_id = d.id
+        inner join usuarios u
+            on o.tecnico_id = u.id
+        where o.sucursal = '" + sucursal + @"'
+          and (
+                '" + busqueda + @"' = ''
+                or o.numero_orden like '%" + busqueda + @"%'
+                or c.nombre like '%" + busqueda + @"%'
+              )
+          and (
+                '" + estado + @"' = 'Todos'
+                or o.estado = '" + estado + @"'
+              )";
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            dgvSeguimiento.AutoGenerateColumns = true;
+            dgvSeguimiento.DataSource = dt;
+
+            if (dgvSeguimiento.Columns.Count > 0)
             {
-                try
-                {
-                    string query = @"SELECT
-                    o.numero_orden AS ORDEN,
-                    c.nombre + ' - ' + d.marca + ' ' + d.modelo AS [CLIENTE \ DISPOSITIVO],
-                    u.Nombre AS TÉCNICO,
-                    o.estado AS ESTADO,
-                    o.fecha_ingreso AS INGRESO,
-                    o.fecha_estimada_entrega AS [ENTREGA ESTIMADA],
-                    CASE
-                        WHEN o.fecha_entrega IS NOT NULL
-                            THEN DATEDIFF(day, o.fecha_ingreso, o.fecha_entrega)
-                        ELSE
-                            DATEDIFF(day, o.fecha_ingreso, GETDATE())
-                    END AS TIEMPO
-                FROM ordenes o
-                INNER JOIN clientes c ON o.cliente_id = c.id
-                INNER JOIN dispositivos d ON o.dispositivo_id = d.id
-                INNER JOIN Usuarios u ON o.tecnico_id = u.Id
-                WHERE o.sucursal = @sucursalSesion
-                  AND (@busqueda = '' OR o.numero_orden LIKE '%' + @busqueda + '%' OR c.nombre LIKE '%' + @busqueda + '%')
-                  AND (@estado = 'Todos' OR o.estado = @estado)";
+                dgvSeguimiento.Columns["ORDEN"].Width = 130;
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        string sucursalActual = Sesion.SucursalActual;
+                dgvSeguimiento.Columns["CLIENTE \\ DISPOSITIVO"].AutoSizeMode =
+                    DataGridViewAutoSizeColumnMode.Fill;
 
-                        cmd.Parameters.AddWithValue("@sucursalSesion", sucursalActual);
-                        cmd.Parameters.AddWithValue("@busqueda", filtroBusqueda);
-                        cmd.Parameters.AddWithValue("@estado", filtroEstado);
-
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-
-                        dgvSeguimiento.AutoGenerateColumns = true;
-                        dgvSeguimiento.DataSource = dt;
-
-                        if (dgvSeguimiento.Columns.Count > 0)
-                        {
-                            dgvSeguimiento.Columns["ORDEN"].Width = 130;
-                            dgvSeguimiento.Columns["CLIENTE \\ DISPOSITIVO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                            dgvSeguimiento.Columns["TÉCNICO"].Width = 140;
-                            dgvSeguimiento.Columns["ESTADO"].Width = 140;
-                            dgvSeguimiento.Columns["INGRESO"].Width = 140;
-                            dgvSeguimiento.Columns["ENTREGA ESTIMADA"].Width = 140;
-                            dgvSeguimiento.Columns["TIEMPO"].Width = 90;
-                        }
-
-                        dgvSeguimiento.ClearSelection();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al cargar el seguimiento de reparaciones: " + ex.Message);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
+                dgvSeguimiento.Columns["TÉCNICO"].Width = 140;
+                dgvSeguimiento.Columns["ESTADO"].Width = 140;
+                dgvSeguimiento.Columns["INGRESO"].Width = 140;
+                dgvSeguimiento.Columns["ENTREGA ESTIMADA"].Width = 140;
+                dgvSeguimiento.Columns["TIEMPO"].Width = 90;
             }
+
+            dgvSeguimiento.ClearSelection();
         }
 
         private void txtBuscarOrden_TextChanged(object sender, EventArgs e)
@@ -279,8 +272,5 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e) { }
-        private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void dgvSeguimiento_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
     }
 }

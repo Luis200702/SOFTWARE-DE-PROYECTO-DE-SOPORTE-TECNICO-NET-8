@@ -48,7 +48,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         }
         private void ucReportes_Load(object sender, EventArgs e)
         {
-            // EQUIPOS RECIBIDOS ESTE MES
             DataTable equiposRecibidos = oCon.retornarRegistrosUsuarios(@"
                 SELECT COUNT(*) AS Numero
                 FROM ordenes
@@ -58,7 +57,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             lblEquiposRecibidos.Text =
                 equiposRecibidos.Rows[0]["Numero"].ToString();
 
-            // REPARACIONES ENTREGADAS ESTE MES
             DataTable reparaciones = oCon.retornarRegistrosUsuarios(@"
                 SELECT COUNT(*) AS Numero
                 FROM ordenes
@@ -70,7 +68,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             lblReparaciones.Text =
                 reparaciones.Rows[0]["Numero"].ToString();
 
-            // INGRESOS REALMENTE COBRADOS ESTE MES
             DataTable ingresos = oCon.retornarRegistrosUsuarios(@"
                 SELECT ISNULL(SUM(monto_pagado), 0) AS Total
                 FROM ordenes
@@ -84,7 +81,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             lblIngresos.Text = "$ " + totalIngresos.ToString("F2");
 
-            // ÓRDENES QUE YA ESTÁN LISTAS Y AÚN NO HAN SIDO ENTREGADAS
             DataTable pendientes = oCon.retornarRegistrosUsuarios(@"
                 SELECT COUNT(*) AS Numero
                 FROM ordenes
@@ -93,10 +89,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             lblPendientes.Text =
                 pendientes.Rows[0]["Numero"].ToString();
 
-            // Esta tarjeta representa el estado actual, no solo el mes.
             label9.Text = "Actualmente";
 
-            // RANGO DE FECHAS POR DEFECTO: DESDE EL PRIMER DÍA DEL MES HASTA HOY
             dtpDesde.Value = new DateTime(
                 DateTime.Now.Year,
                 DateTime.Now.Month,
@@ -239,16 +233,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
 
         }
-
-
-
-
-
-        // =========================================================
-        // REPORTES GENERADOS
-        // Se guardan en SQL Server para conservar el historial
-        // aunque se cierre y se vuelva a abrir la aplicación.
-        // =========================================================
 
         private void InicializarHistorialReportes()
         {
@@ -605,10 +589,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     UseShellExecute = true
                 });
         }
-
-        // =========================================================
-        // MÉTODOS GENERALES PARA REPORTES
-        // =========================================================
 
         private DateTime FechaDesde()
         {
@@ -1252,33 +1232,27 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     break;
 
                 case "Inventario de repuestos":
-                    // Solo sucursal
                     cmbTecnicos.Enabled = false;
                     dtpDesde.Enabled = false;
                     dtpHasta.Enabled = false;
                     break;
 
                 case "Stock bajo":
-                    // Solo sucursal
                     cmbTecnicos.Enabled = false;
                     dtpDesde.Enabled = false;
                     dtpHasta.Enabled = false;
                     break;
 
                 case "Órdenes por técnico":
-                    // Sucursal + técnico + fechas
                     break;
 
                 case "Derivaciones entre sucursales":
-                    // Sucursal + fechas
                     cmbTecnicos.Enabled = false;
                     break;
 
                 case "Historial de reparaciones por dispositivo":
-                    // Necesitará IMEI/Serie + fechas
                     cmbTecnicos.Enabled = false;
 
-                    // Por ahora podemos mantener sucursal y fechas.
                     break;
             }
         }
