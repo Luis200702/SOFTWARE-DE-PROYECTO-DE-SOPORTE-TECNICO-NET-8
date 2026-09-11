@@ -596,7 +596,6 @@
             cmbSucursal.TextAlignment = ContentAlignment.MiddleLeft;
             cmbSucursal.Watermark = "";
             cmbSucursal.WatermarkColor = Color.FromArgb(198, 199, 189);
-            cmbSucursal.SelectedIndexChanged += cmbSucursal_SelectedIndexChanged;
             // 
             // cmbTiposReporte
             // 
@@ -621,7 +620,6 @@
             cmbTiposReporte.TextAlignment = ContentAlignment.MiddleLeft;
             cmbTiposReporte.Watermark = "";
             cmbTiposReporte.WatermarkColor = Color.FromArgb(198, 199, 189);
-            cmbTiposReporte.SelectedIndexChanged += cmbTiposReporte_SelectedIndexChanged;
             // 
             // uiSymbolButton1
             // 

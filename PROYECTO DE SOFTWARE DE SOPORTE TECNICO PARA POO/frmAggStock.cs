@@ -1,15 +1,15 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class frmAggStock : Form
     {
-        // Variables globales para guardar los datos que nos envía la pantalla anterior
+        Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
         private int idRepuestoActual;
         private int idSucursalActual;
         private int stockActual = 0;
 
-        // Modificamos el constructor para recibir los 4 parámetros
         public frmAggStock(int idRepuesto, int idSucursal, string nombreRepuesto, string nombreSucursal)
         {
             InitializeComponent();
@@ -17,7 +17,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             idRepuestoActual = idRepuesto;
             idSucursalActual = idSucursal;
 
-            // Mostramos el nombre del producto y la sucursal en el título de la ventana
             lblProducto.Text = $"{nombreRepuesto} ({nombreSucursal})";
         }
 
@@ -26,41 +25,27 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarStockActual();
         }
 
-        // Consultamos la base de datos para obtener el stock real de ese repuesto en ESA sucursal
+  
         private void CargarStockActual()
         {
-            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
-            {
-                try
-                {
-                    string query = "SELECT StockActual FROM InventarioSucursal WHERE IdRepuesto = @idRepuesto AND IdSucursal = @idSucursal";
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@idRepuesto", idRepuestoActual);
-                        cmd.Parameters.AddWithValue("@idSucursal", idSucursalActual);
+            DataTable dt = oCon.retornarRegistrosUsuarios("select StockActual " + "from InventarioSucursal " + "where IdRepuesto = " + idRepuestoActual +" and IdSucursal = " + idSucursalActual);
 
-                        object resultado = cmd.ExecuteScalar();
-                        if (resultado != null)
-                        {
-                            stockActual = Convert.ToInt32(resultado);
-                            llbStockA.Text = stockActual.ToString();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al consultar el stock: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                stockActual = Convert.ToInt32(
+                    dt.Rows[0]["StockActual"]);
+
+                llbStockA.Text = stockActual.ToString();
             }
+            else
+            {
+                stockActual = 0;
+                llbStockA.Text = "0";
+            }
+
             CalcularStockResultante();
         }
 
-        // Se ejecuta cada vez que el usuario escribe un número en la caja de texto
         private void udoAgg_TextChanged(object sender, EventArgs e)
         {
             CalcularStockResultante();
@@ -82,7 +67,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
-        // OJO: Debes hacer doble clic en tu botón verde "Confirmar" en el diseño para enlazar este evento
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             int cantidadAgregar = 0;
@@ -94,40 +78,25 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
-            if (db.abrirConexion())
+
+            if (oCon.actualizarDatos("InventarioSucursal", "StockActual = StockActual + " + cantidadAgregar, "IdRepuesto = " + idRepuestoActual +" and IdSucursal = " + idSucursalActual))
             {
-                try
-                {
-                    // Actualizamos EXCLUSIVAMENTE el inventario de la sucursal seleccionada
-                    string query = @"
-                        UPDATE InventarioSucursal 
-                        SET StockActual = StockActual + @cantidad 
-                        WHERE IdRepuesto = @idRepuesto AND IdSucursal = @idSucursal";
+                MessageBox.Show(
+                    "Stock actualizado correctamente.",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.oCon))
-                    {
-                        cmd.Parameters.AddWithValue("@cantidad", cantidadAgregar);
-                        cmd.Parameters.AddWithValue("@idRepuesto", idRepuestoActual);
-                        cmd.Parameters.AddWithValue("@idSucursal", idSucursalActual);
-
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    MessageBox.Show("Stock actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Cerramos indicando que todo salió bien para que la tabla principal se recargue
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al guardar el stock: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    db.cerrarConexion();
-                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "No se pudo actualizar el stock.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -137,7 +106,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             this.Close();
         }
 
-        // (Los eventos vacíos que no uses puedes eliminarlos sin problema)
         private void txtCompatible_TextChanged(object sender, EventArgs e) { }
         private void lblProducto_Click(object sender, EventArgs e) { }
         private void llbStockA_Click(object sender, EventArgs e) { }

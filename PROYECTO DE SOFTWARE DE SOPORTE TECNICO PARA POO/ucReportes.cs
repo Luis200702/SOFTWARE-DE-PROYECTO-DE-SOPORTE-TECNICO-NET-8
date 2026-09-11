@@ -1,19 +1,30 @@
-﻿using QuestPDF.Fluent;
+﻿using Microsoft.Data.SqlClient;
+using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using System.Data;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using System.Drawing;
+using Color = System.Drawing.Color;
+using Size = System.Drawing.Size;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
     public partial class ucReportes : UserControl
     {
         Conexion_Base_de_Datos oCon = new Conexion_Base_de_Datos();
+
+        private FlowLayoutPanel flpReportesGenerados;
+        private Label lblSinReportes;
         public ucReportes()
         {
             InitializeComponent();
+            InicializarHistorialReportes();
             CargarTiposReporte();
             CargarSucursales();
             CargarTecnicos();
+            CargarReportesGuardados();
         }
 
         private void CargarTiposReporte()
@@ -37,25 +48,63 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         }
         private void ucReportes_Load(object sender, EventArgs e)
         {
-            DataTable EquiposRecibidos = oCon.retornarRegistrosUsuarios("select count(fecha_ingreso) as Numero  from Ordenes\r\nwhere month(fecha_ingreso) = month(getdate())\r\nand year(fecha_ingreso) = year(getdate())");
-            lblEquiposRecibidos.Text = EquiposRecibidos.Rows[0]["Numero"].ToString();
+            // EQUIPOS RECIBIDOS ESTE MES
+            DataTable equiposRecibidos = oCon.retornarRegistrosUsuarios(@"
+                SELECT COUNT(*) AS Numero
+                FROM ordenes
+                WHERE MONTH(fecha_ingreso) = MONTH(GETDATE())
+                  AND YEAR(fecha_ingreso) = YEAR(GETDATE())");
 
-            DataTable NumeroReparaciones = oCon.retornarRegistrosUsuarios("select count(fecha_ingreso) as Numero_Reparaciones from Ordenes\r\nwhere month(fecha_ingreso) = month(getdate())\r\nand year(fecha_ingreso) = year(getdate()) and estado = 'Entregado'");
-            lblReparaciones.Text = NumeroReparaciones.Rows[0]["Numero_Reparaciones"].ToString();
+            lblEquiposRecibidos.Text =
+                equiposRecibidos.Rows[0]["Numero"].ToString();
 
-            DataTable TotalIngresos = oCon.retornarRegistrosUsuarios("select sum(D.PrecioCobrado) as Total\r\nfrom DetallesOrden D inner join ordenes O on D.IdDetalle = O.Id\r\nwhere month(O.fecha_ingreso) = month(getdate())");
-            lblIngresos.Text = "$ " + TotalIngresos.Rows[0]["Total"].ToString();
+            // REPARACIONES ENTREGADAS ESTE MES
+            DataTable reparaciones = oCon.retornarRegistrosUsuarios(@"
+                SELECT COUNT(*) AS Numero
+                FROM ordenes
+                WHERE estado = 'Entregado'
+                  AND fecha_entrega IS NOT NULL
+                  AND MONTH(fecha_entrega) = MONTH(GETDATE())
+                  AND YEAR(fecha_entrega) = YEAR(GETDATE())");
 
-            DataTable Pendientes = oCon.retornarRegistrosUsuarios("select count(fecha_ingreso) as Numero_Reparaciones from Ordenes\r\nwhere month(fecha_ingreso) = month(getdate())\r\nand year(fecha_ingreso) = year(getdate()) and not estado = 'Entregado'");
-            lblPendientes.Text = Pendientes.Rows[0]["Numero_Reparaciones"].ToString();
+            lblReparaciones.Text =
+                reparaciones.Rows[0]["Numero"].ToString();
 
+            // INGRESOS REALMENTE COBRADOS ESTE MES
+            DataTable ingresos = oCon.retornarRegistrosUsuarios(@"
+                SELECT ISNULL(SUM(monto_pagado), 0) AS Total
+                FROM ordenes
+                WHERE estado = 'Entregado'
+                  AND fecha_entrega IS NOT NULL
+                  AND MONTH(fecha_entrega) = MONTH(GETDATE())
+                  AND YEAR(fecha_entrega) = YEAR(GETDATE())");
+
+            decimal totalIngresos =
+                Convert.ToDecimal(ingresos.Rows[0]["Total"]);
+
+            lblIngresos.Text = "$ " + totalIngresos.ToString("F2");
+
+            // ÓRDENES QUE YA ESTÁN LISTAS Y AÚN NO HAN SIDO ENTREGADAS
+            DataTable pendientes = oCon.retornarRegistrosUsuarios(@"
+                SELECT COUNT(*) AS Numero
+                FROM ordenes
+                WHERE estado = 'Listo'");
+
+            lblPendientes.Text =
+                pendientes.Rows[0]["Numero"].ToString();
+
+            // Esta tarjeta representa el estado actual, no solo el mes.
+            label9.Text = "Actualmente";
+
+            // RANGO DE FECHAS POR DEFECTO: DESDE EL PRIMER DÍA DEL MES HASTA HOY
             dtpDesde.Value = new DateTime(
-    DateTime.Now.Year,
-    DateTime.Now.Month,
-    1);
+                DateTime.Now.Year,
+                DateTime.Now.Month,
+                1);
 
             dtpHasta.Value = DateTime.Now;
         }
+
         private bool ValidarRangoFechas()
         {
             if (dtpDesde.Value.Date > dtpHasta.Value.Date)
@@ -161,7 +210,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     break;
 
                 case "Ingresos por servicios":
-                    MessageBox.Show("Reporte de ingresos pendiente de implementar.");
+                    GenerarReporteIngresos();
                     break;
 
                 case "Consumo de repuestos":
@@ -169,23 +218,23 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     break;
 
                 case "Inventario de repuestos":
-                    MessageBox.Show("Reporte de inventario pendiente de implementar.");
+                    GenerarReporteInventario();
                     break;
 
                 case "Stock bajo":
-                    MessageBox.Show("Reporte de stock bajo pendiente de implementar.");
+                    GenerarReporteStockBajo();
                     break;
 
                 case "Órdenes por técnico":
-                    MessageBox.Show("Reporte de órdenes por técnico pendiente de implementar.");
+                    GenerarReporteOrdenesPorTecnico();
                     break;
 
                 case "Derivaciones entre sucursales":
-                    MessageBox.Show("Reporte de derivaciones pendiente de implementar.");
+                    GenerarReporteDerivaciones();
                     break;
 
                 case "Historial de reparaciones por dispositivo":
-                    MessageBox.Show("Reporte de historial por dispositivo pendiente de implementar.");
+                    GenerarReporteHistorialDispositivos();
                     break;
             }
 
@@ -194,316 +243,480 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
 
 
-        private void GenerarReporteConsumoRepuestos()
+
+        // =========================================================
+        // REPORTES GENERADOS
+        // Se guardan en SQL Server para conservar el historial
+        // aunque se cierre y se vuelva a abrir la aplicación.
+        // =========================================================
+
+        private void InicializarHistorialReportes()
         {
-            if (!ValidarRangoFechas())
-                return;
-            QuestPDF.Settings.License = LicenseType.Community;
-            string sucursal = cmbSucursal.SelectedValue?.ToString() ?? "0";
-            string nombreSucursal = cmbSucursal.Text == "" ? "Todas" : cmbSucursal.Text;
-            DataTable tabla = oCon.retornarRegistrosUsuarios(@"
-         SELECT 
-        R.idRepuesto AS Codigo,
-        R.NombreRepuesto,
-        R.Categoria,
-        R.Compatibilidad AS Marca,
-        SUM(D.Cantidad) AS TotalUsado,
-        R.PrecioCosto,
-        SUM(D.Cantidad * R.PrecioCosto) AS TotalCosto
-    FROM DetallesOrden D
-    INNER JOIN Repuestos R ON D.IdRepuesto = R.idRepuesto
-    INNER JOIN ordenes O ON D.IdOrden = O.id
-    INNER JOIN Sucursales S ON O.sucursal = S.IdSucursal
-    WHERE MONTH(O.fecha_ingreso) = MONTH(GETDATE())
-    AND YEAR(O.fecha_ingreso) = YEAR(GETDATE())
-    AND (O.sucursal = '" + sucursal + @"' OR '" + sucursal + @"' = '0')    
-    GROUP BY R.idRepuesto, R.NombreRepuesto, R.Categoria, R.Compatibilidad, R.PrecioCosto
-    ORDER BY TotalUsado DESC");
-
-            int totalItems = 0;
-            int tiposRepuestos = tabla.Rows.Count;
-            decimal totalCosto = 0;
-
-
-            foreach (DataRow fila in tabla.Rows)
+            flpReportesGenerados = new FlowLayoutPanel
             {
-                totalItems += Convert.ToInt32(fila["TotalUsado"]);
-                totalCosto += Convert.ToDecimal(fila["TotalCosto"]);
-            }
+                Location = new Point(17, 52),
+                Size = new Size(uiPanel5.Width - 34, uiPanel5.Height - 69),
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom |
+                         AnchorStyles.Left | AnchorStyles.Right,
+                AutoScroll = true,
+                FlowDirection = FlowDirection.TopDown,
+                WrapContents = false,
+                BackColor = Color.Transparent
+            };
 
-            decimal promedioDiario = totalCosto / DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
-
-            string ruta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "ReporteRepuestos.pdf");
-
-            Document.Create(container =>
+            lblSinReportes = new Label
             {
-                container.Page(page =>
-                {
-                    page.Size(PageSizes.A4);
-                    page.Margin(1.5f, Unit.Centimetre);
-                    page.DefaultTextStyle(x => x.FontSize(9));
+                Text = "Todavía no se han generado reportes.",
+                AutoSize = true,
+                Font = new Font("Segoe UI", 10F),
+                ForeColor = Color.FromArgb(120, 130, 140),
+                Margin = new Padding(8, 10, 0, 0)
+            };
 
-                    // ENCABEZADO
-                    page.Header().Column(col =>
-                    {
-                        col.Item().Row(row =>
-                        {
-                            // Logo texto
-                            row.RelativeItem().Column(c =>
-                            {
-                                c.Item().Text("⚙ TECH SERVICE").Bold().FontSize(20).FontColor("#1a73e8");
-                                c.Item().Text("SERVICIO TÉCNICO ESPECIALIZADO").FontSize(8).FontColor("#555555");
-                            });
-
-                            // Info empresa
-                            row.ConstantItem(200).Column(c =>
-                            {
-                                c.Item().AlignRight().Text("📍 Sucursal Centro").FontSize(8);
-                                c.Item().AlignRight().Text("📞 098 765 4321").FontSize(8);
-                                c.Item().AlignRight().Text("✉ contacto@techservice.com").FontSize(8);
-                            });
-                        });
-
-                        col.Item().Height(8);
-                        col.Item().LineHorizontal(2).LineColor("#1a73e8");
-                        col.Item().Height(8);
-
-                        col.Item().AlignCenter().Text("REPORTE DE CONSUMO DE REPUESTOS").Bold().FontSize(14);
-                        col.Item().AlignCenter().Text($"Período: 01/{DateTime.Now.Month:D2}/{DateTime.Now.Year} al {DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)}/{DateTime.Now.Month:D2}/{DateTime.Now.Year}").FontSize(9).FontColor("#555555");
-                        col.Item().Height(8);
-                    });
-
-                    page.Content().Column(col =>
-                    {
-                        // FILTROS APLICADOS
-                        col.Item().Border(1).BorderColor("#1a73e8").Padding(8).Column(f =>
-                        {
-                            f.Item().Text("FILTROS APLICADOS").Bold().FontSize(9).FontColor("#1a73e8");
-                            f.Item().Height(5);
-                            f.Item().Row(row =>
-                            {
-                                row.RelativeItem().Column(c =>
-                                {
-                                    c.Item().Text("Período:").Bold();
-                                    c.Item().Text($"01/{DateTime.Now.Month:D2}/{DateTime.Now.Year} al {DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)}/{DateTime.Now.Month:D2}/{DateTime.Now.Year}");
-                                });
-                                row.RelativeItem().Column(c =>
-                                {
-                                    c.Item().Text("Categoría:").Bold();
-                                    c.Item().Text("Todas");
-                                });
-                                row.RelativeItem().Column(c =>
-                                {
-                                    c.Item().Text("Sucursal:").Bold();
-                                    c.Item().Text(nombreSucursal);  // <-- así queda
-                                });
-                                row.RelativeItem().Column(c =>
-                                {
-                                    c.Item().Text("Técnico:").Bold();
-                                    c.Item().Text("Todos");
-                                });
-                            });
-                        });
-
-                        col.Item().Height(10);
-
-                        // TARJETAS RESUMEN
-                        col.Item().Row(row =>
-                        {
-                            void Tarjeta(RowDescriptor r, string titulo, string valor)
-                            {
-                                r.RelativeItem().Border(1).BorderColor("#dddddd").Padding(8).Column(c =>
-                                {
-                                    c.Item().Text(titulo).FontSize(8).FontColor("#555555").Bold();
-                                    c.Item().Text(valor).FontSize(16).Bold().FontColor("#1a73e8");
-                                });
-                            }
-
-                            Tarjeta(row, "TOTAL DE ÍTEMS", totalItems.ToString());
-                            row.ConstantItem(5);
-                            Tarjeta(row, "TIPOS DE REPUESTOS", tiposRepuestos.ToString());
-                            row.ConstantItem(5);
-                            Tarjeta(row, "COSTO TOTAL", $"${totalCosto:F2}");
-                            row.ConstantItem(5);
-                            Tarjeta(row, "PROMEDIO DIARIO", $"${promedioDiario:F2}");
-                        });
-
-                        col.Item().Height(10);
-
-                        // TABLA
-                        col.Item().Table(table =>
-                        {
-                            table.ColumnsDefinition(columns =>
-                            {
-                                columns.ConstantColumn(55);
-                                columns.RelativeColumn(3);
-                                columns.RelativeColumn(2);
-                                columns.RelativeColumn(2);
-                                columns.ConstantColumn(50);
-                                columns.ConstantColumn(60);
-                                columns.ConstantColumn(60);
-                            });
-
-                            table.Header(header =>
-                            {
-                                string bg = "#1a4f8a";
-                                header.Cell().Background(bg).Padding(4).Text("CÓDIGO").FontColor("#ffffff").Bold().FontSize(8);
-                                header.Cell().Background(bg).Padding(4).Text("REPUESTO").FontColor("#ffffff").Bold().FontSize(8);
-                                header.Cell().Background(bg).Padding(4).Text("CATEGORÍA").FontColor("#ffffff").Bold().FontSize(8);
-                                header.Cell().Background(bg).Padding(4).Text("MARCA").FontColor("#ffffff").Bold().FontSize(8);
-                                header.Cell().Background(bg).Padding(4).AlignCenter().Text("CANT.").FontColor("#ffffff").Bold().FontSize(8);
-                                header.Cell().Background(bg).Padding(4).AlignRight().Text("C. UNIT.").FontColor("#ffffff").Bold().FontSize(8);
-                                header.Cell().Background(bg).Padding(4).AlignRight().Text("C. TOTAL").FontColor("#ffffff").Bold().FontSize(8);
-                            });
-
-                            bool par = false;
-                            foreach (DataRow fila in tabla.Rows)
-                            {
-                                string bg = par ? "#f0f4ff" : "#ffffff";
-                                table.Cell().Background(bg).Padding(4).Text($"REP-{fila["Codigo"]:D4}").FontSize(8);
-                                table.Cell().Background(bg).Padding(4).Text(fila["NombreRepuesto"].ToString()).FontSize(8);
-                                table.Cell().Background(bg).Padding(4).Text(fila["Categoria"].ToString()).FontSize(8);
-                                table.Cell().Background(bg).Padding(4).Text(fila["Marca"].ToString()).FontSize(8);
-                                table.Cell().Background(bg).Padding(4).AlignCenter().Text(fila["TotalUsado"].ToString()).FontSize(8);
-                                table.Cell().Background(bg).Padding(4).AlignRight().Text($"${fila["PrecioCosto"]:F2}").FontSize(8);
-                                table.Cell().Background(bg).Padding(4).AlignRight().Text($"${fila["TotalCosto"]:F2}").FontSize(8);
-                                par = !par;
-                            }
-                        });
-
-                        col.Item().Height(10);
-
-                        // TOP 5
-                        col.Item().Text("TOP 5 REPUESTOS MÁS CONSUMIDOS").Bold().FontSize(10).FontColor("#1a73e8");
-                        col.Item().Height(5);
-
-                        int top = 1;
-                        foreach (DataRow fila in tabla.AsEnumerable().Take(5))
-                        {
-                            col.Item().Row(row =>
-                            {
-                                row.ConstantItem(20).Background("#1a4f8a").AlignCenter().AlignMiddle().Text(top.ToString()).FontColor("#ffffff").Bold().FontSize(9);
-                                row.ConstantItem(5);
-                                row.RelativeItem().BorderBottom(1).BorderColor("#dddddd").Padding(4).Text(fila["NombreRepuesto"].ToString()).FontSize(9);
-                                row.ConstantItem(60).BorderBottom(1).BorderColor("#dddddd").Padding(4).AlignRight().Text($"{fila["TotalUsado"]} und").FontSize(9);
-                            });
-                            col.Item().Height(3);
-                            top++;
-                        }
-
-                        col.Item().Height(10);
-
-                        // OBSERVACIONES
-                        col.Item().Text("Observaciones:").Bold().FontSize(8);
-                        col.Item().Text("Reporte generado automáticamente desde el sistema.").FontSize(8).FontColor("#555555");
-                    });
-
-                    // PIE DE PÁGINA
-                    page.Footer().Row(row =>
-                    {
-                        row.RelativeItem().Text($"Fecha de generación: {DateTime.Now:dd/MM/yyyy HH:mm}").FontSize(8).FontColor("#555555");
-                        row.RelativeItem().AlignCenter().Text(x =>
-                        {
-                            x.Span("Página ").FontSize(8);
-                            x.CurrentPageNumber().FontSize(8);
-                            x.Span(" de ").FontSize(8);
-                            x.TotalPages().FontSize(8);
-                        });
-                    });
-                });
-            }).GeneratePdf(ruta);
-
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(ruta) { UseShellExecute = true });
-            MessageBox.Show("Reporte generado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            flpReportesGenerados.Controls.Add(lblSinReportes);
+            uiPanel5.Controls.Add(flpReportesGenerados);
+            flpReportesGenerados.BringToFront();
         }
-        private void GenerarReporteOrdenes()
+
+        private void CargarReportesGuardados()
         {
-            QuestPDF.Settings.License = LicenseType.Community;
+            if (flpReportesGenerados == null)
+                return;
 
-            DateTime fechaDesde = dtpDesde.Value.Date;
-            DateTime fechaHasta = dtpHasta.Value.Date;
+            DataTable tabla = oCon.retornarRegistrosUsuarios(@"
+                SELECT
+                    TipoReporte,
+                    RutaArchivo,
+                    FechaGeneracion,
+                    Sucursal,
+                    Tecnico,
+                    FechaDesde,
+                    FechaHasta
+                FROM ReportesGenerados
+                ORDER BY FechaGeneracion DESC");
 
-            string nombreSucursal = cmbSucursal.Text;
-            int tecnicoId = Convert.ToInt32(cmbTecnicos.SelectedValue ?? 0);
-
-            string consulta = @"
-        SELECT
-            O.numero_orden AS NumeroOrden,
-            C.nombre AS Cliente,
-            D.tipo AS Tipo,
-            D.marca AS Marca,
-            D.modelo AS Modelo,
-            D.serie_imei AS SerieImei,
-            ISNULL(U.Nombre, 'Sin asignar') AS Tecnico,
-            O.sucursal AS Sucursal,
-            O.estado AS Estado,
-            O.fecha_ingreso AS FechaIngreso,
-            O.fecha_estimada_entrega AS FechaEstimada,
-            O.costo_estimado AS Costo
-        FROM ordenes O
-        INNER JOIN clientes C
-            ON O.cliente_id = C.id
-        INNER JOIN dispositivos D
-            ON O.dispositivo_id = D.id
-        LEFT JOIN Usuarios U
-            ON O.tecnico_id = U.Id
-        WHERE O.fecha_ingreso >= '" + fechaDesde.ToString("yyyy-MM-dd") + @"'
-          AND O.fecha_ingreso < DATEADD(
-                DAY,
-                1,
-                '" + fechaHasta.ToString("yyyy-MM-dd") + @"'
-          )";
-
-            // Filtrar por sucursal
-            if (nombreSucursal != "Todas")
-            {
-                consulta += @"
-          AND O.sucursal = '" + nombreSucursal + "'";
-            }
-
-            // Filtrar por técnico
-            if (tecnicoId != 0)
-            {
-                consulta += @"
-          AND O.tecnico_id = " + tecnicoId;
-            }
-
-            consulta += @"
-        ORDER BY O.fecha_ingreso DESC";
-
-            DataTable tabla =
-                oCon.retornarRegistrosUsuarios(consulta);
+            flpReportesGenerados.Controls.Clear();
 
             if (tabla == null || tabla.Rows.Count == 0)
             {
-                MessageBox.Show(
-                    "No se encontraron órdenes con los filtros seleccionados.",
-                    "Sin resultados",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                flpReportesGenerados.Controls.Add(lblSinReportes);
                 return;
             }
 
+            foreach (DataRow fila in tabla.Rows)
+            {
+                string titulo = fila["TipoReporte"].ToString();
+                string ruta = fila["RutaArchivo"].ToString();
+
+                DateTime fechaGeneracion =
+                    Convert.ToDateTime(fila["FechaGeneracion"]);
+
+                string sucursal =
+                    fila["Sucursal"] == DBNull.Value
+                        ? "Todas"
+                        : fila["Sucursal"].ToString();
+
+                string tecnico =
+                    fila["Tecnico"] == DBNull.Value
+                        ? ""
+                        : fila["Tecnico"].ToString();
+
+                DateTime? fechaDesde =
+                    fila["FechaDesde"] == DBNull.Value
+                        ? null
+                        : Convert.ToDateTime(fila["FechaDesde"]);
+
+                DateTime? fechaHasta =
+                    fila["FechaHasta"] == DBNull.Value
+                        ? null
+                        : Convert.ToDateTime(fila["FechaHasta"]);
+
+                CrearTarjetaReporte(
+                    titulo,
+                    ruta,
+                    fechaGeneracion,
+                    sucursal,
+                    tecnico,
+                    fechaDesde,
+                    fechaHasta);
+            }
+        }
+
+        private void RegistrarReporteGenerado(
+            string titulo,
+            string ruta,
+            bool mostrarTecnico)
+        {
+            DateTime fechaGeneracion = DateTime.Now;
+
+            string sucursal = string.IsNullOrWhiteSpace(cmbSucursal.Text)
+                ? "Todas"
+                : cmbSucursal.Text;
+
+            string tecnico = mostrarTecnico
+                ? cmbTecnicos.Text
+                : "";
+
+            DateTime? fechaDesde = null;
+            DateTime? fechaHasta = null;
+
+            if (dtpDesde.Enabled && dtpHasta.Enabled)
+            {
+                fechaDesde = FechaDesde();
+                fechaHasta = FechaHasta();
+            }
+
+            GuardarReporteEnBD(
+                titulo,
+                ruta,
+                fechaGeneracion,
+                sucursal,
+                tecnico,
+                fechaDesde,
+                fechaHasta);
+
+            CrearTarjetaReporte(
+                titulo,
+                ruta,
+                fechaGeneracion,
+                sucursal,
+                tecnico,
+                fechaDesde,
+                fechaHasta,
+                true);
+        }
+
+        private void GuardarReporteEnBD(
+            string titulo,
+            string ruta,
+            DateTime fechaGeneracion,
+            string sucursal,
+            string tecnico,
+            DateTime? fechaDesde,
+            DateTime? fechaHasta)
+        {
+            Conexion_Base_de_Datos db = new Conexion_Base_de_Datos();
+
+            try
+            {
+                if (db.abrirConexion())
+                {
+                    string consulta = @"
+                        INSERT INTO ReportesGenerados
+                        (
+                            TipoReporte,
+                            RutaArchivo,
+                            FechaGeneracion,
+                            Sucursal,
+                            Tecnico,
+                            FechaDesde,
+                            FechaHasta
+                        )
+                        VALUES
+                        (
+                            @TipoReporte,
+                            @RutaArchivo,
+                            @FechaGeneracion,
+                            @Sucursal,
+                            @Tecnico,
+                            @FechaDesde,
+                            @FechaHasta
+                        )";
+
+                    using (SqlCommand cmd =
+                        new SqlCommand(consulta, db.oCon))
+                    {
+                        cmd.Parameters.AddWithValue(
+                            "@TipoReporte",
+                            titulo);
+
+                        cmd.Parameters.AddWithValue(
+                            "@RutaArchivo",
+                            ruta);
+
+                        cmd.Parameters.AddWithValue(
+                            "@FechaGeneracion",
+                            fechaGeneracion);
+
+                        cmd.Parameters.AddWithValue(
+                            "@Sucursal",
+                            string.IsNullOrWhiteSpace(sucursal)
+                                ? (object)DBNull.Value
+                                : sucursal);
+
+                        cmd.Parameters.AddWithValue(
+                            "@Tecnico",
+                            string.IsNullOrWhiteSpace(tecnico)
+                                ? (object)DBNull.Value
+                                : tecnico);
+
+                        cmd.Parameters.AddWithValue(
+                            "@FechaDesde",
+                            fechaDesde.HasValue
+                                ? (object)fechaDesde.Value
+                                : DBNull.Value);
+
+                        cmd.Parameters.AddWithValue(
+                            "@FechaHasta",
+                            fechaHasta.HasValue
+                                ? (object)fechaHasta.Value
+                                : DBNull.Value);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "El PDF se generó, pero no se pudo guardar " +
+                    "en el historial:\n" + ex.Message,
+                    "Historial de reportes",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                if (db.oCon != null &&
+                    db.oCon.State == ConnectionState.Open)
+                {
+                    db.cerrarConexion();
+                }
+            }
+        }
+
+        private void CrearTarjetaReporte(
+            string titulo,
+            string ruta,
+            DateTime fechaGeneracion,
+            string sucursal,
+            string tecnico,
+            DateTime? fechaDesde,
+            DateTime? fechaHasta,
+            bool colocarPrimero = false)
+        {
+            if (flpReportesGenerados == null)
+                return;
+
+            if (lblSinReportes.Parent == flpReportesGenerados)
+                flpReportesGenerados.Controls.Remove(lblSinReportes);
+
+            Panel tarjeta = new Panel
+            {
+                Width = Math.Max(
+                    650,
+                    flpReportesGenerados.ClientSize.Width - 25),
+
+                Height = 72,
+                BackColor = Color.FromArgb(248, 249, 251),
+                Margin = new Padding(4, 4, 4, 6),
+                Tag = ruta
+            };
+
+            Label lblTituloReporte = new Label
+            {
+                Text = titulo,
+                Location = new Point(14, 10),
+                Size = new Size(tarjeta.Width - 125, 22),
+                Font = new Font(
+                    "Segoe UI Semibold",
+                    10F,
+                    FontStyle.Bold),
+                ForeColor = Color.FromArgb(24, 43, 62),
+                AutoEllipsis = true
+            };
+
+            string detalle =
+                $"Generado: {fechaGeneracion:dd/MM/yyyy HH:mm} | " +
+                $"Sucursal: {sucursal}";
+
+            if (!string.IsNullOrWhiteSpace(tecnico))
+                detalle += $" | Técnico: {tecnico}";
+
+            if (fechaDesde.HasValue &&
+                fechaHasta.HasValue)
+            {
+                detalle +=
+                    $" | {fechaDesde.Value:dd/MM/yyyy} - " +
+                    $"{fechaHasta.Value:dd/MM/yyyy}";
+            }
+
+            Label lblDetalleReporte = new Label
+            {
+                Text = detalle,
+                Location = new Point(14, 38),
+                Size = new Size(tarjeta.Width - 125, 20),
+                Font = new Font("Segoe UI", 8.5F),
+                ForeColor = Color.FromArgb(100, 110, 120),
+                AutoEllipsis = true
+            };
+
+            Button btnAbrir = new Button
+            {
+                Text = "Abrir",
+                Size = new Size(82, 30),
+                Location = new Point(
+                    tarjeta.Width - 98,
+                    21),
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.FromArgb(0, 165, 155),
+                ForeColor = Color.White,
+                Font = new Font(
+                    "Segoe UI",
+                    9F,
+                    FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+
+            btnAbrir.FlatAppearance.BorderSize = 0;
+
+            btnAbrir.Click +=
+                (s, e) => AbrirReporteGenerado(ruta);
+
+            tarjeta.Controls.Add(lblTituloReporte);
+            tarjeta.Controls.Add(lblDetalleReporte);
+            tarjeta.Controls.Add(btnAbrir);
+
+            flpReportesGenerados.Controls.Add(tarjeta);
+
+            if (colocarPrimero)
+            {
+                flpReportesGenerados.Controls
+                    .SetChildIndex(tarjeta, 0);
+            }
+        }
+
+        private void AbrirReporteGenerado(string ruta)
+        {
+            if (!File.Exists(ruta))
+            {
+                MessageBox.Show(
+                    "El archivo del reporte ya no se encuentra " +
+                    "en la ubicación guardada.",
+                    "Archivo no encontrado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            System.Diagnostics.Process.Start(
+                new System.Diagnostics.ProcessStartInfo(ruta)
+                {
+                    UseShellExecute = true
+                });
+        }
+
+        // =========================================================
+        // MÉTODOS GENERALES PARA REPORTES
+        // =========================================================
+
+        private DateTime FechaDesde()
+        {
+            return dtpDesde.Value.Date;
+        }
+
+        private DateTime FechaHasta()
+        {
+            return dtpHasta.Value.Date;
+        }
+
+        private int TecnicoSeleccionado()
+        {
+            return Convert.ToInt32(cmbTecnicos.SelectedValue ?? 0);
+        }
+
+        private void AgregarFiltroSucursal(ref string consulta, string campoSucursal)
+        {
+            if (cmbSucursal.Text != "Todas")
+                consulta += " AND " + campoSucursal + " = '" + cmbSucursal.Text + "'";
+        }
+
+        private void AgregarFiltroTecnico(ref string consulta, string campoTecnico)
+        {
+            int tecnicoId = TecnicoSeleccionado();
+
+            if (tecnicoId != 0)
+                consulta += " AND " + campoTecnico + " = " + tecnicoId;
+        }
+
+        private string FormatearValorReporte(object valor, string columna)
+        {
+            if (valor == null || valor == DBNull.Value)
+                return "—";
+
+            if (valor is DateTime fecha)
+            {
+                if (fecha.TimeOfDay.TotalSeconds > 0)
+                    return fecha.ToString("dd/MM/yyyy HH:mm");
+
+                return fecha.ToString("dd/MM/yyyy");
+            }
+
+            if (valor is decimal || valor is double || valor is float)
+            {
+                decimal numero = Convert.ToDecimal(valor);
+
+                if (columna.Contains("Costo", StringComparison.OrdinalIgnoreCase) ||
+                    columna.Contains("Monto", StringComparison.OrdinalIgnoreCase) ||
+                    columna.Contains("Precio", StringComparison.OrdinalIgnoreCase) ||
+                    columna.Contains("Ingreso", StringComparison.OrdinalIgnoreCase) ||
+                    columna.Contains("Valor", StringComparison.OrdinalIgnoreCase) ||
+                    columna.Contains("Promedio", StringComparison.OrdinalIgnoreCase))
+                {
+                    return $"${numero:F2}";
+                }
+
+                return numero.ToString("F2");
+            }
+
+            return valor.ToString();
+        }
+
+        private void GenerarPdfTabla(
+            string titulo,
+            DataTable datos,
+            string nombreArchivo,
+            string[] columnas,
+            string[] encabezados,
+            Dictionary<string, string> resumen = null,
+            bool mostrarTecnico = false)
+        {
+            if (datos == null || datos.Rows.Count == 0)
+            {
+                MessageBox.Show(
+                    "No se encontraron datos con los filtros seleccionados.",
+                    "Sin resultados",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
+            QuestPDF.Settings.License = LicenseType.Community;
+
+            string nombreBase =
+                Path.GetFileNameWithoutExtension(nombreArchivo);
+
+            string extension =
+                Path.GetExtension(nombreArchivo);
+
+            string nombreUnico =
+                nombreBase + "_" +
+                DateTime.Now.ToString("yyyyMMdd_HHmmss") +
+                extension;
+
             string ruta = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                "ReporteOrdenes.pdf");
+                Environment.GetFolderPath(
+                    Environment.SpecialFolder.Desktop),
+                nombreUnico);
 
             Document.Create(container =>
             {
                 container.Page(page =>
                 {
                     page.Size(PageSizes.A4.Landscape());
+                    page.Margin(1.2f, Unit.Centimetre);
+                    page.DefaultTextStyle(x => x.FontSize(columnas.Length >= 8 ? 7 : 8));
 
-                    page.Margin(
-                        1.2f,
-                        Unit.Centimetre);
-
-                    page.DefaultTextStyle(
-                        x => x.FontSize(8));
-
-                    // ENCABEZADO
                     page.Header().Column(col =>
                     {
                         col.Item()
@@ -513,134 +726,105 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             .FontColor("#1a73e8");
 
                         col.Item()
-                            .Text("REPORTE DE ÓRDENES DE REPARACIÓN")
+                            .Text(titulo)
                             .Bold()
                             .FontSize(14);
 
-                        col.Item()
-                            .Text(
-                                $"Período: {fechaDesde:dd/MM/yyyy} al {fechaHasta:dd/MM/yyyy}")
-                            .FontColor("#555555");
-
-                        col.Item().Height(5);
-
-                        col.Item()
-                            .Text(
-                                $"Sucursal: {nombreSucursal}   |   Técnico: {cmbTecnicos.Text}")
-                            .FontSize(9);
-
-                        col.Item().Height(8);
-
-                        col.Item()
-                            .LineHorizontal(2)
-                            .LineColor("#1a73e8");
-                    });
-
-                    // CONTENIDO
-                    page.Content().PaddingVertical(10).Table(table =>
-                    {
-                        table.ColumnsDefinition(columns =>
+                        if (dtpDesde.Enabled && dtpHasta.Enabled)
                         {
-                            columns.ConstantColumn(80);  // Orden
-                            columns.RelativeColumn(2);   // Cliente
-                            columns.RelativeColumn(2);   // Dispositivo
-                            columns.RelativeColumn(2);   // IMEI
-                            columns.RelativeColumn(2);   // Técnico
-                            columns.RelativeColumn(1.5f);// Sucursal
-                            columns.RelativeColumn(1.5f);// Estado
-                            columns.ConstantColumn(70);  // Fecha
-                            columns.ConstantColumn(60);  // Costo
-                        });
-
-                        table.Header(header =>
-                        {
-                            string fondo = "#1a4f8a";
-
-                            header.Cell().Background(fondo).Padding(4)
-                                .Text("ORDEN").FontColor("#ffffff").Bold();
-
-                            header.Cell().Background(fondo).Padding(4)
-                                .Text("CLIENTE").FontColor("#ffffff").Bold();
-
-                            header.Cell().Background(fondo).Padding(4)
-                                .Text("DISPOSITIVO").FontColor("#ffffff").Bold();
-
-                            header.Cell().Background(fondo).Padding(4)
-                                .Text("IMEI / SERIE").FontColor("#ffffff").Bold();
-
-                            header.Cell().Background(fondo).Padding(4)
-                                .Text("TÉCNICO").FontColor("#ffffff").Bold();
-
-                            header.Cell().Background(fondo).Padding(4)
-                                .Text("SUCURSAL").FontColor("#ffffff").Bold();
-
-                            header.Cell().Background(fondo).Padding(4)
-                                .Text("ESTADO").FontColor("#ffffff").Bold();
-
-                            header.Cell().Background(fondo).Padding(4)
-                                .Text("INGRESO").FontColor("#ffffff").Bold();
-
-                            header.Cell().Background(fondo).Padding(4)
-                                .AlignRight()
-                                .Text("COSTO").FontColor("#ffffff").Bold();
-                        });
-
-                        bool filaPar = false;
-
-                        foreach (DataRow fila in tabla.Rows)
-                        {
-                            string fondo =
-                                filaPar ? "#f0f4ff" : "#ffffff";
-
-                            string dispositivo =
-                                fila["Marca"].ToString() + " " +
-                                fila["Modelo"].ToString();
-
-                            table.Cell().Background(fondo).Padding(4)
-                                .Text(fila["NumeroOrden"].ToString());
-
-                            table.Cell().Background(fondo).Padding(4)
-                                .Text(fila["Cliente"].ToString());
-
-                            table.Cell().Background(fondo).Padding(4)
-                                .Text(dispositivo);
-
-                            table.Cell().Background(fondo).Padding(4)
-                                .Text(fila["SerieImei"].ToString());
-
-                            table.Cell().Background(fondo).Padding(4)
-                                .Text(fila["Tecnico"].ToString());
-
-                            table.Cell().Background(fondo).Padding(4)
-                                .Text(fila["Sucursal"].ToString());
-
-                            table.Cell().Background(fondo).Padding(4)
-                                .Text(fila["Estado"].ToString());
-
-                            DateTime fecha =
-                                Convert.ToDateTime(fila["FechaIngreso"]);
-
-                            table.Cell().Background(fondo).Padding(4)
-                                .Text(fecha.ToString("dd/MM/yyyy"));
-
-                            decimal costo = fila["Costo"] == DBNull.Value
-    ? 0
-    : Convert.ToDecimal(fila["Costo"]);
-
-                            table.Cell().Background(fondo).Padding(4)
-                                .AlignRight()
-                                .Text($"${costo:F2}");
-
-                            filaPar = !filaPar;
+                            col.Item()
+                                .Text($"Período: {FechaDesde():dd/MM/yyyy} al {FechaHasta():dd/MM/yyyy}")
+                                .FontColor("#555555");
                         }
+
+                        string filtros = $"Sucursal: {cmbSucursal.Text}";
+
+                        if (mostrarTecnico)
+                            filtros += $"   |   Técnico: {cmbTecnicos.Text}";
+
+                        col.Item().Text(filtros).FontSize(9);
+                        col.Item().Height(8);
+                        col.Item().LineHorizontal(2).LineColor("#1a73e8");
                     });
 
-                    // PIE
+                    page.Content().PaddingVertical(10).Column(col =>
+                    {
+                        if (resumen != null && resumen.Count > 0)
+                        {
+                            col.Item().Row(row =>
+                            {
+                                foreach (KeyValuePair<string, string> dato in resumen)
+                                {
+                                    row.RelativeItem()
+                                        .Border(1)
+                                        .BorderColor("#dddddd")
+                                        .Padding(7)
+                                        .Column(c =>
+                                        {
+                                            c.Item()
+                                                .Text(dato.Key)
+                                                .FontSize(7)
+                                                .FontColor("#555555")
+                                                .Bold();
+
+                                            c.Item()
+                                                .Text(dato.Value)
+                                                .FontSize(13)
+                                                .Bold()
+                                                .FontColor("#1a73e8");
+                                        });
+
+                                    row.ConstantItem(4);
+                                }
+                            });
+
+                            col.Item().Height(12);
+                        }
+
+                        col.Item().Table(table =>
+                        {
+                            table.ColumnsDefinition(columnsDefinition =>
+                            {
+                                foreach (string columna in columnas)
+                                    columnsDefinition.RelativeColumn();
+                            });
+
+                            table.Header(header =>
+                            {
+                                foreach (string encabezado in encabezados)
+                                {
+                                    header.Cell()
+                                        .Background("#1a4f8a")
+                                        .Padding(4)
+                                        .Text(encabezado)
+                                        .FontColor("#ffffff")
+                                        .Bold();
+                                }
+                            });
+
+                            bool filaPar = false;
+
+                            foreach (DataRow fila in datos.Rows)
+                            {
+                                string fondo = filaPar ? "#f0f4ff" : "#ffffff";
+
+                                foreach (string columna in columnas)
+                                {
+                                    table.Cell()
+                                        .Background(fondo)
+                                        .Padding(4)
+                                        .Text(FormatearValorReporte(fila[columna], columna));
+                                }
+
+                                filaPar = !filaPar;
+                            }
+                        });
+                    });
+
                     page.Footer().Row(row =>
                     {
                         row.RelativeItem()
-                            .Text(
-                                $"Generado: {DateTime.Now:dd/MM/yyyy HH:mm}")
+                            .Text($"Generado: {DateTime.Now:dd/MM/yyyy HH:mm}")
                             .FontSize(8)
                             .FontColor("#555555");
 
@@ -657,6 +841,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 });
             }).GeneratePdf(ruta);
 
+            RegistrarReporteGenerado(titulo, ruta, mostrarTecnico);
+
             System.Diagnostics.Process.Start(
                 new System.Diagnostics.ProcessStartInfo(ruta)
                 {
@@ -664,16 +850,391 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 });
 
             MessageBox.Show(
-                "Reporte de órdenes generado correctamente.",
+                "Reporte generado correctamente.",
                 "Éxito",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
+
+
+        private void GenerarReporteOrdenes()
+        {
+            string consulta = @"
+        SELECT
+            O.numero_orden AS Orden,
+            C.nombre AS Cliente,
+            CONCAT(D.marca, ' ', D.modelo) AS Dispositivo,
+            D.serie_imei AS SerieImei,
+            ISNULL(U.Nombre, 'Sin asignar') AS Tecnico,
+            O.sucursal AS Sucursal,
+            O.estado AS Estado,
+            O.fecha_ingreso AS FechaIngreso,
+            ISNULL(O.costo_estimado, 0) AS Costo
+        FROM ordenes O
+        INNER JOIN clientes C ON O.cliente_id = C.id
+        INNER JOIN dispositivos D ON O.dispositivo_id = D.id
+        LEFT JOIN Usuarios U ON O.tecnico_id = U.Id
+        WHERE O.fecha_ingreso >= '" + FechaDesde().ToString("yyyy-MM-dd") + @"'
+          AND O.fecha_ingreso < DATEADD(DAY, 1, '" + FechaHasta().ToString("yyyy-MM-dd") + "')";
+
+            AgregarFiltroSucursal(ref consulta, "O.sucursal");
+            AgregarFiltroTecnico(ref consulta, "O.tecnico_id");
+
+            consulta += " ORDER BY O.fecha_ingreso DESC";
+
+            DataTable tabla = oCon.retornarRegistrosUsuarios(consulta);
+
+            GenerarPdfTabla(
+                "REPORTE DE ÓRDENES DE REPARACIÓN",
+                tabla,
+                "ReporteOrdenes.pdf",
+                new[] { "Orden", "Cliente", "Dispositivo", "SerieImei", "Tecnico", "Sucursal", "Estado", "FechaIngreso", "Costo" },
+                new[] { "ORDEN", "CLIENTE", "DISPOSITIVO", "IMEI / SERIE", "TÉCNICO", "SUCURSAL", "ESTADO", "INGRESO", "COSTO" },
+                null,
+                true);
+        }
+
+        private void GenerarReporteIngresos()
+        {
+            string consulta = @"
+        SELECT
+            O.numero_orden AS Orden,
+            C.nombre AS Cliente,
+            ISNULL(U.Nombre, 'Sin asignar') AS Tecnico,
+            O.sucursal AS Sucursal,
+            ISNULL(O.forma_pago, 'No especificado') AS FormaPago,
+            O.fecha_entrega AS FechaEntrega,
+            ISNULL(O.monto_pagado, 0) AS MontoPagado
+        FROM ordenes O
+        INNER JOIN clientes C ON O.cliente_id = C.id
+        LEFT JOIN Usuarios U ON O.tecnico_id = U.Id
+        WHERE O.fecha_entrega >= '" + FechaDesde().ToString("yyyy-MM-dd") + @"'
+          AND O.fecha_entrega < DATEADD(DAY, 1, '" + FechaHasta().ToString("yyyy-MM-dd") + @"')
+          AND O.estado = 'Entregado'
+          AND O.monto_pagado IS NOT NULL";
+
+            AgregarFiltroSucursal(ref consulta, "O.sucursal");
+            AgregarFiltroTecnico(ref consulta, "O.tecnico_id");
+
+            consulta += " ORDER BY O.fecha_entrega DESC";
+
+            DataTable tabla = oCon.retornarRegistrosUsuarios(consulta);
+
+            decimal total = 0;
+            decimal efectivo = 0;
+            decimal transferencia = 0;
+
+            if (tabla != null)
+            {
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    decimal monto = Convert.ToDecimal(fila["MontoPagado"]);
+                    total += monto;
+
+                    string formaPago = fila["FormaPago"].ToString();
+
+                    if (formaPago.Equals("Efectivo", StringComparison.OrdinalIgnoreCase))
+                        efectivo += monto;
+                    else if (formaPago.Equals("Transferencia", StringComparison.OrdinalIgnoreCase))
+                        transferencia += monto;
+                }
+            }
+
+            int cantidad = tabla?.Rows.Count ?? 0;
+            decimal promedio = cantidad > 0 ? total / cantidad : 0;
+
+            Dictionary<string, string> resumen = new Dictionary<string, string>
+            {
+                { "INGRESOS", $"${total:F2}" },
+                { "SERVICIOS", cantidad.ToString() },
+                { "EFECTIVO", $"${efectivo:F2}" },
+                { "TRANSFERENCIAS", $"${transferencia:F2}" },
+                { "PROMEDIO", $"${promedio:F2}" }
+            };
+
+            GenerarPdfTabla(
+                "REPORTE DE INGRESOS POR SERVICIOS",
+                tabla,
+                "ReporteIngresos.pdf",
+                new[] { "Orden", "Cliente", "Tecnico", "Sucursal", "FormaPago", "FechaEntrega", "MontoPagado" },
+                new[] { "ORDEN", "CLIENTE", "TÉCNICO", "SUCURSAL", "FORMA DE PAGO", "FECHA", "MONTO" },
+                resumen,
+                true);
+        }
+
+        private void GenerarReporteConsumoRepuestos()
+        {
+            string consulta = @"
+        SELECT
+            R.idRepuesto AS Codigo,
+            R.NombreRepuesto AS Repuesto,
+            R.Categoria AS Categoria,
+            R.Compatibilidad AS Compatibilidad,
+            SUM(D.Cantidad) AS Cantidad,
+            R.PrecioCosto,
+            SUM(D.Cantidad * R.PrecioCosto) AS CostoTotal
+        FROM DetallesOrden D
+        INNER JOIN Repuestos R ON D.IdRepuesto = R.idRepuesto
+        INNER JOIN ordenes O ON D.IdOrden = O.id
+        WHERE O.fecha_ingreso >= '" + FechaDesde().ToString("yyyy-MM-dd") + @"'
+          AND O.fecha_ingreso < DATEADD(DAY, 1, '" + FechaHasta().ToString("yyyy-MM-dd") + "')";
+
+            AgregarFiltroSucursal(ref consulta, "O.sucursal");
+            AgregarFiltroTecnico(ref consulta, "O.tecnico_id");
+
+            consulta += @"
+        GROUP BY R.idRepuesto, R.NombreRepuesto, R.Categoria, R.Compatibilidad, R.PrecioCosto
+        ORDER BY Cantidad DESC";
+
+            DataTable tabla = oCon.retornarRegistrosUsuarios(consulta);
+
+            int items = 0;
+            decimal costo = 0;
+
+            if (tabla != null)
+            {
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    items += Convert.ToInt32(fila["Cantidad"]);
+                    costo += Convert.ToDecimal(fila["CostoTotal"]);
+                }
+            }
+
+            int dias = (FechaHasta() - FechaDesde()).Days + 1;
+
+            Dictionary<string, string> resumen = new Dictionary<string, string>
+            {
+                { "ÍTEMS USADOS", items.ToString() },
+                { "TIPOS", (tabla?.Rows.Count ?? 0).ToString() },
+                { "COSTO TOTAL", $"${costo:F2}" },
+                { "PROMEDIO DIARIO", $"${(dias > 0 ? costo / dias : 0):F2}" }
+            };
+
+            GenerarPdfTabla(
+                "REPORTE DE CONSUMO DE REPUESTOS",
+                tabla,
+                "ReporteRepuestos.pdf",
+                new[] { "Codigo", "Repuesto", "Categoria", "Compatibilidad", "Cantidad", "PrecioCosto", "CostoTotal" },
+                new[] { "CÓDIGO", "REPUESTO", "CATEGORÍA", "COMPATIBLE", "CANT.", "COSTO UNIT.", "COSTO TOTAL" },
+                resumen,
+                true);
+        }
+
+        private void GenerarReporteInventario()
+        {
+            string consulta = @"
+        SELECT
+            R.idRepuesto AS Codigo,
+            R.NombreRepuesto AS Repuesto,
+            S.NombreSucursal AS Sucursal,
+            R.Categoria AS Categoria,
+            R.Compatibilidad AS Compatibilidad,
+            I.StockActual,
+            I.StockMinimo,
+            R.PrecioCosto,
+            R.PrecioVenta,
+            R.Proveedor
+        FROM Repuestos R
+        INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
+        INNER JOIN Sucursales S ON I.IdSucursal = S.IdSucursal
+        WHERE 1 = 1";
+
+            AgregarFiltroSucursal(ref consulta, "S.NombreSucursal");
+            consulta += " ORDER BY S.NombreSucursal, R.NombreRepuesto";
+
+            DataTable tabla = oCon.retornarRegistrosUsuarios(consulta);
+
+            int unidades = 0;
+            decimal valor = 0;
+
+            if (tabla != null)
+            {
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    int stock = Convert.ToInt32(fila["StockActual"]);
+                    decimal costo = fila["PrecioCosto"] == DBNull.Value ? 0 : Convert.ToDecimal(fila["PrecioCosto"]);
+
+                    unidades += stock;
+                    valor += stock * costo;
+                }
+            }
+
+            Dictionary<string, string> resumen = new Dictionary<string, string>
+            {
+                { "TIPOS DE REPUESTOS", (tabla?.Rows.Count ?? 0).ToString() },
+                { "UNIDADES", unidades.ToString() },
+                { "VALOR INVENTARIO", $"${valor:F2}" }
+            };
+
+            GenerarPdfTabla(
+                "REPORTE DE INVENTARIO DE REPUESTOS",
+                tabla,
+                "ReporteInventario.pdf",
+                new[] { "Codigo", "Repuesto", "Sucursal", "Categoria", "Compatibilidad", "StockActual", "StockMinimo", "PrecioCosto", "PrecioVenta", "Proveedor" },
+                new[] { "CÓDIGO", "REPUESTO", "SUCURSAL", "CATEGORÍA", "COMPATIBLE", "STOCK", "MÍN.", "COSTO", "VENTA", "PROVEEDOR" },
+                resumen);
+        }
+
+        private void GenerarReporteStockBajo()
+        {
+            string consulta = @"
+        SELECT
+            R.idRepuesto AS Codigo,
+            R.NombreRepuesto AS Repuesto,
+            S.NombreSucursal AS Sucursal,
+            R.Categoria AS Categoria,
+            I.StockActual,
+            I.StockMinimo,
+            R.Proveedor,
+            CASE
+                WHEN I.StockActual = 0 THEN 'Sin stock'
+                ELSE 'Stock bajo'
+            END AS Estado
+        FROM Repuestos R
+        INNER JOIN InventarioSucursal I ON R.IdRepuesto = I.IdRepuesto
+        INNER JOIN Sucursales S ON I.IdSucursal = S.IdSucursal
+        WHERE I.StockActual <= I.StockMinimo";
+
+            AgregarFiltroSucursal(ref consulta, "S.NombreSucursal");
+            consulta += " ORDER BY I.StockActual, R.NombreRepuesto";
+
+            DataTable tabla = oCon.retornarRegistrosUsuarios(consulta);
+
+            int sinStock = 0;
+
+            if (tabla != null)
+            {
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    if (Convert.ToInt32(fila["StockActual"]) == 0)
+                        sinStock++;
+                }
+            }
+
+            Dictionary<string, string> resumen = new Dictionary<string, string>
+            {
+                { "ALERTAS", (tabla?.Rows.Count ?? 0).ToString() },
+                { "SIN STOCK", sinStock.ToString() }
+            };
+
+            GenerarPdfTabla(
+                "REPORTE DE STOCK BAJO",
+                tabla,
+                "ReporteStockBajo.pdf",
+                new[] { "Codigo", "Repuesto", "Sucursal", "Categoria", "StockActual", "StockMinimo", "Proveedor", "Estado" },
+                new[] { "CÓDIGO", "REPUESTO", "SUCURSAL", "CATEGORÍA", "ACTUAL", "MÍNIMO", "PROVEEDOR", "ESTADO" },
+                resumen);
+        }
+
+        private void GenerarReporteOrdenesPorTecnico()
+        {
+            string consulta = @"
+        SELECT
+            U.Nombre AS Tecnico,
+            O.sucursal AS Sucursal,
+            COUNT(*) AS TotalOrdenes,
+            SUM(CASE WHEN O.estado = 'Entregado' THEN 1 ELSE 0 END) AS Entregadas,
+            SUM(CASE WHEN O.estado = 'Listo' THEN 1 ELSE 0 END) AS Listas,
+            SUM(CASE
+                    WHEN O.estado IN ('Recibido', 'En diagnóstico', 'En reparación')
+                    THEN 1 ELSE 0
+                END) AS EnProceso
+        FROM ordenes O
+        INNER JOIN Usuarios U ON O.tecnico_id = U.Id
+        WHERE O.fecha_ingreso >= '" + FechaDesde().ToString("yyyy-MM-dd") + @"'
+          AND O.fecha_ingreso < DATEADD(DAY, 1, '" + FechaHasta().ToString("yyyy-MM-dd") + "')";
+
+            AgregarFiltroSucursal(ref consulta, "O.sucursal");
+            AgregarFiltroTecnico(ref consulta, "O.tecnico_id");
+
+            consulta += @"
+        GROUP BY U.Nombre, O.sucursal
+        ORDER BY TotalOrdenes DESC";
+
+            DataTable tabla = oCon.retornarRegistrosUsuarios(consulta);
+
+            GenerarPdfTabla(
+                "REPORTE DE ÓRDENES POR TÉCNICO",
+                tabla,
+                "ReporteOrdenesTecnicos.pdf",
+                new[] { "Tecnico", "Sucursal", "TotalOrdenes", "Entregadas", "Listas", "EnProceso" },
+                new[] { "TÉCNICO", "SUCURSAL", "TOTAL", "ENTREGADAS", "LISTAS", "EN PROCESO" },
+                null,
+                true);
+        }
+
+        private void GenerarReporteDerivaciones()
+        {
+            string consulta = @"
+        SELECT
+            O.numero_orden AS Orden,
+            C.nombre AS Cliente,
+            D.SucursalOrigen AS Origen,
+            D.SucursalDestino AS Destino,
+            D.Estado,
+            ISNULL(D.Motivo, '—') AS Motivo,
+            ISNULL(D.Detalle, '—') AS Detalle,
+            D.FechaDerivacion
+        FROM DerivacionesSucursales D
+        INNER JOIN ordenes O ON D.IdOrden = O.id
+        INNER JOIN clientes C ON O.cliente_id = C.id
+        WHERE D.FechaDerivacion >= '" + FechaDesde().ToString("yyyy-MM-dd") + @"'
+          AND D.FechaDerivacion < DATEADD(DAY, 1, '" + FechaHasta().ToString("yyyy-MM-dd") + "')";
+
+            if (cmbSucursal.Text != "Todas")
+            {
+                consulta += " AND (D.SucursalOrigen = '" + cmbSucursal.Text +
+                            "' OR D.SucursalDestino = '" + cmbSucursal.Text + "')";
+            }
+
+            consulta += " ORDER BY D.FechaDerivacion DESC";
+
+            DataTable tabla = oCon.retornarRegistrosUsuarios(consulta);
+
+            GenerarPdfTabla(
+                "REPORTE DE DERIVACIONES ENTRE SUCURSALES",
+                tabla,
+                "ReporteDerivaciones.pdf",
+                new[] { "Orden", "Cliente", "Origen", "Destino", "Estado", "Motivo", "Detalle", "FechaDerivacion" },
+                new[] { "ORDEN", "CLIENTE", "ORIGEN", "DESTINO", "ESTADO", "MOTIVO", "DETALLE", "FECHA" });
+        }
+
+        private void GenerarReporteHistorialDispositivos()
+        {
+            string consulta = @"
+        SELECT
+            D.serie_imei AS SerieImei,
+            CONCAT(D.marca, ' ', D.modelo) AS Dispositivo,
+            C.nombre AS Cliente,
+            O.numero_orden AS Orden,
+            O.fecha_ingreso AS FechaIngreso,
+            O.fecha_entrega AS FechaEntrega,
+            O.estado AS Estado,
+            ISNULL(O.trabajo_realizado, '—') AS TrabajoRealizado,
+            ISNULL(O.costo_estimado, 0) AS Costo
+        FROM ordenes O
+        INNER JOIN dispositivos D ON O.dispositivo_id = D.id
+        INNER JOIN clientes C ON O.cliente_id = C.id
+        WHERE O.fecha_ingreso >= '" + FechaDesde().ToString("yyyy-MM-dd") + @"'
+          AND O.fecha_ingreso < DATEADD(DAY, 1, '" + FechaHasta().ToString("yyyy-MM-dd") + "')";
+
+            AgregarFiltroSucursal(ref consulta, "O.sucursal");
+            consulta += " ORDER BY D.serie_imei, O.fecha_ingreso DESC";
+
+            DataTable tabla = oCon.retornarRegistrosUsuarios(consulta);
+
+            GenerarPdfTabla(
+                "HISTORIAL DE REPARACIONES POR DISPOSITIVO",
+                tabla,
+                "ReporteHistorialDispositivos.pdf",
+                new[] { "SerieImei", "Dispositivo", "Cliente", "Orden", "FechaIngreso", "FechaEntrega", "Estado", "TrabajoRealizado", "Costo" },
+                new[] { "IMEI / SERIE", "DISPOSITIVO", "CLIENTE", "ORDEN", "INGRESO", "ENTREGA", "ESTADO", "TRABAJO REALIZADO", "COSTO" });
+        }
+
         private void ConfigurarFiltrosPorReporte()
         {
             string tipoReporte = cmbTiposReporte.Text;
 
-            // Primero habilitamos todos los filtros
             cmbSucursal.Enabled = true;
             cmbTecnicos.Enabled = true;
             dtpDesde.Enabled = true;
@@ -682,15 +1243,12 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             switch (tipoReporte)
             {
                 case "Órdenes de reparación":
-                    // Sucursal + técnico + fechas
                     break;
 
                 case "Ingresos por servicios":
-                    // Sucursal + técnico + fechas
                     break;
 
                 case "Consumo de repuestos":
-                    // Sucursal + técnico + fechas
                     break;
 
                 case "Inventario de repuestos":
