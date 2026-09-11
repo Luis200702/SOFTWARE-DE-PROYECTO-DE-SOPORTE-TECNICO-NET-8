@@ -166,6 +166,7 @@
             lblPorcentajeEquiposRecibidos.SymbolSize = 20;
             lblPorcentajeEquiposRecibidos.TabIndex = 63;
             lblPorcentajeEquiposRecibidos.Text = "##%";
+            lblPorcentajeEquiposRecibidos.Visible = false;
             // 
             // label2
             // 
@@ -250,6 +251,7 @@
             uiSymbolLabel2.SymbolSize = 20;
             uiSymbolLabel2.TabIndex = 63;
             uiSymbolLabel2.Text = "##%";
+            uiSymbolLabel2.Visible = false;
             // 
             // label3
             // 
@@ -334,6 +336,7 @@
             uiSymbolLabel3.SymbolSize = 20;
             uiSymbolLabel3.TabIndex = 63;
             uiSymbolLabel3.Text = "##%";
+            uiSymbolLabel3.Visible = false;
             // 
             // label6
             // 
@@ -418,6 +421,7 @@
             uiSymbolLabel4.SymbolSize = 20;
             uiSymbolLabel4.TabIndex = 63;
             uiSymbolLabel4.Text = "##%";
+            uiSymbolLabel4.Visible = false;
             // 
             // label9
             // 

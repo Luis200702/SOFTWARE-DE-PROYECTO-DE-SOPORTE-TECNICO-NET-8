@@ -224,7 +224,7 @@
             btnHistorialCliente.ForeColor = Color.FromArgb(235, 239, 240);
             btnHistorialCliente.ImageIndex = 7;
             btnHistorialCliente.ImageList = imageListBarrraMenu;
-            btnHistorialCliente.Location = new Point(14, 371);
+            btnHistorialCliente.Location = new Point(14, 289);
             btnHistorialCliente.Name = "btnHistorialCliente";
             btnHistorialCliente.Size = new Size(230, 35);
             btnHistorialCliente.TabIndex = 10;
@@ -250,6 +250,7 @@
             btnTradeIn.TextAlign = ContentAlignment.MiddleLeft;
             btnTradeIn.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnTradeIn.UseVisualStyleBackColor = false;
+            btnTradeIn.Visible = false;
             btnTradeIn.Click += btnTradeIn_Click;
             // 
             // btnVentaDispositivos
@@ -268,6 +269,7 @@
             btnVentaDispositivos.TextAlign = ContentAlignment.MiddleLeft;
             btnVentaDispositivos.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnVentaDispositivos.UseVisualStyleBackColor = false;
+            btnVentaDispositivos.Visible = false;
             btnVentaDispositivos.Click += btnVentaDispositivos_Click;
             // 
             // btnDerivacionOrdenes
