@@ -24,6 +24,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarTiposReporte();
             CargarSucursales();
             CargarTecnicos();
+            cmbTiposReporte.SelectedIndexChanged += (s, e) => ConfigurarFiltrosPorReporte();
             CargarReportesGuardados();
         }
 
@@ -38,12 +39,29 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             cmbTiposReporte.Items.Add("Stock bajo");
             cmbTiposReporte.Items.Add("Órdenes por técnico");
             cmbTiposReporte.Items.Add("Derivaciones entre sucursales");
-            cmbTiposReporte.Items.Add("Historial de reparaciones por dispositivo");
+            cmbTiposReporte.Items.Add("Historial de reparaciones por cliente");
 
             if (cmbTiposReporte.Items.Count > 0)
             {
                 cmbTiposReporte.SelectedIndex = 0;
                 ConfigurarFiltrosPorReporte();
+            }
+        }
+        private void CargarClientesEnCombo()
+        {
+            string consulta = "select id, nombre + ' - ' + isnull(cedula_pasaporte, 'Sin cédula') as Nombre from clientes order by nombre";
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            if (dt != null)
+            {
+                cmbTecnicos.DataSource = null;
+                cmbTecnicos.DataSource = dt;
+                cmbTecnicos.DisplayMember = "Nombre";
+                cmbTecnicos.ValueMember = "id";
+
+                if (cmbTecnicos.Items.Count > 0)
+                    cmbTecnicos.SelectedIndex = 0;
             }
         }
         private void ucReportes_Load(object sender, EventArgs e)
@@ -227,8 +245,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     GenerarReporteDerivaciones();
                     break;
 
-                case "Historial de reparaciones por dispositivo":
-                    GenerarReporteHistorialDispositivos();
+                case "Historial de reparaciones por cliente":
+                    GenerarReporteHistorialCliente();
                     break;
             }
 
@@ -515,7 +533,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 $"Sucursal: {sucursal}";
 
             if (!string.IsNullOrWhiteSpace(tecnico))
-                detalle += $" | Técnico: {tecnico}";
+            {
+                bool esReporteCliente =
+                    titulo.Contains("POR CLIENTE", StringComparison.OrdinalIgnoreCase);
+
+                detalle += esReporteCliente
+                    ? $" | Cliente: {tecnico}"
+                    : $" | Técnico: {tecnico}";
+            }
 
             if (fechaDesde.HasValue &&
                 fechaHasta.HasValue)
@@ -720,7 +745,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         string filtros = $"Sucursal: {cmbSucursal.Text}";
 
                         if (mostrarTecnico)
-                            filtros += $"   |   Técnico: {cmbTecnicos.Text}";
+                        {
+                            string nombreFiltro =
+                                cmbTiposReporte.Text == "Historial de reparaciones por cliente"
+                                    ? "Cliente"
+                                    : "Técnico";
+
+                            filtros += $"   |   {nombreFiltro}: {cmbTecnicos.Text}";
+                        }
 
                         col.Item().Text(filtros).FontSize(9);
                         col.Item().Height(8);
@@ -1179,36 +1211,36 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 new[] { "ORDEN", "CLIENTE", "ORIGEN", "DESTINO", "ESTADO", "MOTIVO", "DETALLE", "FECHA" });
         }
 
-        private void GenerarReporteHistorialDispositivos()
+        private void GenerarReporteHistorialCliente()
         {
-            string consulta = @"
-        SELECT
-            D.serie_imei AS SerieImei,
-            CONCAT(D.marca, ' ', D.modelo) AS Dispositivo,
-            C.nombre AS Cliente,
-            O.numero_orden AS Orden,
-            O.fecha_ingreso AS FechaIngreso,
-            O.fecha_entrega AS FechaEntrega,
-            O.estado AS Estado,
-            ISNULL(O.trabajo_realizado, '—') AS TrabajoRealizado,
-            ISNULL(O.costo_estimado, 0) AS Costo
-        FROM ordenes O
-        INNER JOIN dispositivos D ON O.dispositivo_id = D.id
-        INNER JOIN clientes C ON O.cliente_id = C.id
-        WHERE O.fecha_ingreso >= '" + FechaDesde().ToString("yyyy-MM-dd") + @"'
-          AND O.fecha_ingreso < DATEADD(DAY, 1, '" + FechaHasta().ToString("yyyy-MM-dd") + "')";
+            if (cmbTecnicos.SelectedValue == null)
+            {
+                MessageBox.Show(
+                    "Selecciona un cliente.",
+                    "Reportes",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
 
-            AgregarFiltroSucursal(ref consulta, "O.sucursal");
-            consulta += " ORDER BY D.serie_imei, O.fecha_ingreso DESC";
+            int idCliente = Convert.ToInt32(cmbTecnicos.SelectedValue);
+
+            string consulta = "select concat(d.marca, ' ', d.modelo) as Dispositivo, d.serie_imei as SerieImei, o.numero_orden as Orden, o.fecha_ingreso as FechaIngreso, o.fecha_entrega as FechaEntrega, o.estado as Estado, isnull(u.nombre, 'Sin asignar') as Tecnico, isnull(o.trabajo_realizado, '—') as TrabajoRealizado, isnull(o.costo_estimado, 0) as Costo from ordenes o inner join clientes c on o.cliente_id = c.id inner join dispositivos d on o.dispositivo_id = d.id left join usuarios u on o.tecnico_id = u.id where c.id = " + idCliente + " and o.fecha_ingreso >= '" + FechaDesde().ToString("yyyy-MM-dd") + "' and o.fecha_ingreso < dateadd(day, 1, '" + FechaHasta().ToString("yyyy-MM-dd") + "')";
+
+            AgregarFiltroSucursal(ref consulta, "o.sucursal");
+
+            consulta += " order by o.fecha_ingreso desc";
 
             DataTable tabla = oCon.retornarRegistrosUsuarios(consulta);
 
             GenerarPdfTabla(
-                "HISTORIAL DE REPARACIONES POR DISPOSITIVO",
+                "HISTORIAL DE REPARACIONES POR CLIENTE",
                 tabla,
-                "ReporteHistorialDispositivos.pdf",
-                new[] { "SerieImei", "Dispositivo", "Cliente", "Orden", "FechaIngreso", "FechaEntrega", "Estado", "TrabajoRealizado", "Costo" },
-                new[] { "IMEI / SERIE", "DISPOSITIVO", "CLIENTE", "ORDEN", "INGRESO", "ENTREGA", "ESTADO", "TRABAJO REALIZADO", "COSTO" });
+                "ReporteHistorialCliente.pdf",
+                new[] { "Dispositivo", "SerieImei", "Orden", "FechaIngreso", "FechaEntrega", "Estado", "Tecnico", "TrabajoRealizado", "Costo" },
+                new[] { "DISPOSITIVO", "IMEI / SERIE", "ORDEN", "INGRESO", "ENTREGA", "ESTADO", "TÉCNICO", "TRABAJO REALIZADO", "COSTO" },
+                null,
+                true);
         }
 
         private void ConfigurarFiltrosPorReporte()
@@ -1219,6 +1251,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             cmbTecnicos.Enabled = true;
             dtpDesde.Enabled = true;
             dtpHasta.Enabled = true;
+
+            if (tipoReporte == "Historial de reparaciones por cliente")
+            {
+                label13.Text = "Cliente";
+                CargarClientesEnCombo();
+                return;
+            }
+
+            label13.Text = "Técnico";
+            CargarTecnicos();
 
             switch (tipoReporte)
             {
@@ -1248,11 +1290,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 case "Derivaciones entre sucursales":
                     cmbTecnicos.Enabled = false;
-                    break;
-
-                case "Historial de reparaciones por dispositivo":
-                    cmbTecnicos.Enabled = false;
-
                     break;
             }
         }
