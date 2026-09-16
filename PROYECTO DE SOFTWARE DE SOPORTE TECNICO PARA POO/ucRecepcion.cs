@@ -14,6 +14,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private int contadorEquipos = 1;
         private UIButton botonSeleccionado = null;
         private string tipoDispositivo = "";
+        private DataTable dtClientes;
+        private bool cargandoClientes = false;
 
         public ucRecepcion()
         {
@@ -28,6 +30,8 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             txtSucursal.Text = Sesion.SucursalActual;
 
             CargarDatosComboBox();
+            CargarClientes();
+
             cmbEstado.SelectedIndex = 0;
             MostrarNumeroOrden();
 
@@ -255,24 +259,54 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     int idClienteDispositivo = 0;
 
                     string serie = equipo.Serie.Trim().Replace("'", "''");
-                    string consultaDispositivo = "select top 1 id, cliente_id from dispositivos where serie_imei = '" + serie + "'";
+                    string consultaDispositivo = @"
+                    select top 1
+                    d.id,
+                    d.cliente_id,
+                    o.estado as estado_orden
+                    from dispositivos d
+                    left join ordenes o on o.dispositivo_id = d.id
+                    where d.serie_imei = '" + serie + @"'
+                    order by o.id desc";
 
                     DataTable dtDispositivo = oCon.retornarRegistrosUsuarios(consultaDispositivo);
+                    string estadoOrden = "";
 
                     if (dtDispositivo != null && dtDispositivo.Rows.Count > 0)
                     {
-                        idDispositivo = Convert.ToInt32(dtDispositivo.Rows[0]["id"]);
-                        idClienteDispositivo = Convert.ToInt32(dtDispositivo.Rows[0]["cliente_id"]);
-                    }
+                        DataRow filaDispositivo = dtDispositivo.Rows[0];
 
-                    if (idDispositivo > 0 && idClienteDispositivo != idCliente)
+                        idDispositivo = Convert.ToInt32(filaDispositivo["id"]);
+                        idClienteDispositivo = Convert.ToInt32(filaDispositivo["cliente_id"]);
+
+                        if (filaDispositivo["estado_orden"] != DBNull.Value)
+                        {
+                            estadoOrden = filaDispositivo["estado_orden"].ToString();
+                        }
+                    }
+                    if (idDispositivo > 0 && !string.IsNullOrWhiteSpace(estadoOrden) &&  estadoOrden != "Entregado")
                     {
                         MessageBox.Show(
-                            "El IMEI/Serie " + equipo.Serie.Trim() + " ya está registrado para otro cliente.\n\nVerifica la cédula del cliente o el IMEI/Serie del dispositivo.",
-                            "Dispositivo registrado",
+                            "El IMEI/Serie " + equipo.Serie.Trim() +
+                            " todavía tiene una reparación activa.\n\n" +
+                            "Estado actual: " + estadoOrden +
+                            "\n\nNo puede ser registrado nuevamente hasta que sea entregado.",
+                            "Dispositivo no disponible",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning);
+
                         return;
+                    }
+
+                    if (idDispositivo > 0 && estadoOrden == "Entregado")
+                    {
+                        string camposActualizar = "cliente_id = " + idCliente;
+                        string condicionActualizar = "id = " + idDispositivo;
+
+                        oCon.actualizarDatos(
+                            "dispositivos",
+                            camposActualizar,
+                            condicionActualizar);
                     }
 
                     if (idDispositivo == 0)
@@ -323,6 +357,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             txtNumeroTelefonico.Clear();
             txtCorreo.Clear();
             txtIdentificacionCliente.Clear();
+            cmbBuscarCliente.Clear();
 
             if (txtNumeroTelefonicoAlt != null) txtNumeroTelefonicoAlt.Clear();
             if (txtDireccion != null) txtDireccion.Clear();
@@ -396,7 +431,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             equipo.Marca = cmbMarca.Text;
             equipo.Modelo = txtModelo.Text;
             equipo.Serie = txtSerie.Text;
-            equipo.Color = txtColor.Text;
+            equipo.Color = cmbColor.Text;
             equipo.IndiceEstado = cmbEstado.SelectedIndex;
             equipo.Problema = txtDescripcionProblema.Text;
             equipo.Observaciones = txtObservaciones.Text;
@@ -413,7 +448,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
             txtModelo.Text = equipo.Modelo;
             txtSerie.Text = equipo.Serie;
-            txtColor.Text = equipo.Color;
+            cmbColor.Text = equipo.Color;
             cmbEstado.SelectedIndex = equipo.IndiceEstado >= 0 ? equipo.IndiceEstado : 0;
             txtDescripcionProblema.Text = equipo.Problema;
             txtObservaciones.Text = equipo.Observaciones;
@@ -583,14 +618,46 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
 
             string serie = serieImei.Replace("'", "''");
-            string consulta = "select top 1 d.tipo, d.marca, d.modelo, d.color, d.estado_llegada, c.cedula_pasaporte from dispositivos d inner join clientes c on d.cliente_id = c.id where d.serie_imei = '" + serie + "'";
+            string consulta = @"
+            select top 1
+            d.id,
+            d.tipo,
+            d.marca,
+            d.modelo,
+            d.color,
+            d.estado_llegada,
+            c.cedula_pasaporte,
+            o.estado as estado_orden
+            from dispositivos d
+            inner join clientes c on d.cliente_id = c.id
+            left join ordenes o on o.dispositivo_id = d.id
+            where d.serie_imei = '" + serie + @"'
+            order by o.id desc";
 
             DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
 
             if (dt != null && dt.Rows.Count > 0)
             {
                 DataRow fila = dt.Rows[0];
+                string estadoOrden = "";
 
+                if (fila["estado_orden"] != DBNull.Value)
+                {
+                    estadoOrden = fila["estado_orden"].ToString();
+                }
+
+                if (!string.IsNullOrWhiteSpace(estadoOrden) &&
+                    estadoOrden != "Entregado")
+                {
+                    MessageBox.Show(
+                        "Este dispositivo todavía tiene una reparación activa.\n\n" +
+                        "Estado actual: " + estadoOrden +
+                        "\n\nNo puede ser registrado nuevamente hasta que sea entregado.",
+                        "Dispositivo no disponible",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
                 tipoDispositivo = fila["tipo"].ToString();
 
                 if (tipoDispositivo == "telefono")
@@ -604,36 +671,105 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 cmbMarca.Text = fila["marca"].ToString();
                 txtModelo.Text = fila["modelo"].ToString();
-                txtColor.Text = fila["color"].ToString();
+                string colorRegistrado = fila["color"].ToString().Trim();
+
+                for (int i = 0; i < cmbColor.Items.Count; i++)
+                {
+                    if (cmbColor.Items[i].ToString().Trim() == colorRegistrado)
+                    {
+                        cmbColor.SelectedIndex = i;
+                        break;
+                    }
+                }
 
                 string estado = fila["estado_llegada"].ToString();
 
                 if (cmbEstado.Items.Contains(estado))
                     cmbEstado.SelectedItem = estado;
 
-                string cedulaRegistrada = fila["cedula_pasaporte"].ToString();
-                string cedulaActual = txtIdentificacionCliente.Text.Trim();
+            }
+        }
+        private void CargarClientes()
+        {
+            cargandoClientes = true;
 
-                if (!string.IsNullOrWhiteSpace(cedulaActual) &&
-                    !string.Equals(
-                        cedulaActual,
-                        cedulaRegistrada,
-                        StringComparison.OrdinalIgnoreCase))
+            string consulta = "select id, nombre, cedula_pasaporte from clientes order by nombre";
+
+            dtClientes = oCon.retornarRegistrosUsuarios(consulta);
+
+            cmbBuscarCliente.DataSource = dtClientes;
+            cmbBuscarCliente.DisplayMember = "nombre";
+            cmbBuscarCliente.ValueMember = "id";
+
+            cmbBuscarCliente.SelectedIndex = -1;
+            cmbBuscarCliente.Text = "";
+
+            cargandoClientes = false;
+        }
+        private void txtIdentificacionCliente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void cmbBuscarCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cargandoClientes)
+                return;
+
+            if (cmbBuscarCliente.SelectedIndex < 0)
+                return;
+
+            DataRowView filaSeleccionada = cmbBuscarCliente.SelectedItem as DataRowView;
+
+            if (filaSeleccionada == null)
+                return;
+
+            int idCliente = Convert.ToInt32(filaSeleccionada["id"]);
+
+            string consulta = "select nombre, telefono, correo, cedula_pasaporte, telefono_alt, direccion " +
+                              "from clientes where id = " + idCliente;
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                DataRow fila = dt.Rows[0];
+
+                txtIdentificacionCliente.Text = fila["cedula_pasaporte"].ToString();
+                txtNombres.Text = fila["nombre"].ToString();
+                txtNumeroTelefonico.Text = fila["telefono"].ToString();
+                txtCorreo.Text = fila["correo"].ToString();
+
+                if (txtNumeroTelefonicoAlt != null)
+                    txtNumeroTelefonicoAlt.Text = fila["telefono_alt"].ToString();
+
+                if (txtDireccion != null)
+                    txtDireccion.Text = fila["direccion"].ToString();
+            }
+        }
+        private void cmbBuscarCliente_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (dtClientes == null)
+                return;
+
+            string texto = cmbBuscarCliente.Text.Trim();
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(texto))
                 {
-                    MessageBox.Show(
-                        "Este IMEI/Serie ya está registrado para otro cliente.\n\nVerifica la cédula del cliente antes de guardar.",
-                        "Dispositivo registrado",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                    dtClientes.DefaultView.RowFilter = "";
                 }
                 else
                 {
-                    MessageBox.Show(
-                        "El dispositivo ya se encuentra registrado. Se cargaron sus datos.",
-                        "Dispositivo encontrado",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    texto = texto.Replace("'", "''");
+
+                    dtClientes.DefaultView.RowFilter =
+                        "nombre LIKE '" + texto + "%'";
                 }
+            }
+            catch
+            {
+                dtClientes.DefaultView.RowFilter = "";
             }
         }
     }

@@ -237,7 +237,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 int x = e.CellBounds.Left + 15;
                 int y = e.CellBounds.Top + (e.CellBounds.Height - altoBadge) / 2;
 
-                
+
                 using (System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath())
                 {
                     int radio = 10;
@@ -272,5 +272,9 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
+        private void dgvSeguimiento_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

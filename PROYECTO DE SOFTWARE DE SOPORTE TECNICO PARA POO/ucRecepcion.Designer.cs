@@ -39,6 +39,8 @@
             tabPestañas = new Sunny.UI.UITabControl();
             tbClientes = new TabPage();
             pnlDatosCliente = new Sunny.UI.UIPanel();
+            label4 = new Label();
+            cmbBuscarCliente = new Sunny.UI.UIComboBox();
             label3 = new Label();
             uiAvatar1 = new Sunny.UI.UIAvatar();
             txtDireccion = new Sunny.UI.UITextBox();
@@ -57,6 +59,7 @@
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             tabPage2 = new TabPage();
             pnlDispositivo = new Sunny.UI.UIPanel();
+            cmbColor = new Sunny.UI.UIComboBox();
             cmbMarca = new Sunny.UI.UIComboBox();
             lblEstado = new Label();
             cmbEstado = new Sunny.UI.UIComboBox();
@@ -64,7 +67,6 @@
             lblTipoDispositivo = new Label();
             txtModelo = new Sunny.UI.UITextBox();
             btnComputadora = new Sunny.UI.UIButton();
-            txtColor = new Sunny.UI.UITextBox();
             txtSerie = new Sunny.UI.UITextBox();
             lblColor = new Label();
             lblSerie = new Label();
@@ -245,6 +247,8 @@
             pnlDatosCliente.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlDatosCliente.AutoSize = true;
             pnlDatosCliente.BackColor = Color.Transparent;
+            pnlDatosCliente.Controls.Add(label4);
+            pnlDatosCliente.Controls.Add(cmbBuscarCliente);
             pnlDatosCliente.Controls.Add(label3);
             pnlDatosCliente.Controls.Add(uiAvatar1);
             pnlDatosCliente.Controls.Add(txtDireccion);
@@ -274,6 +278,43 @@
             pnlDatosCliente.TabIndex = 3;
             pnlDatosCliente.Text = null;
             pnlDatosCliente.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(24, 43, 62);
+            label4.Location = new Point(790, 103);
+            label4.Name = "label4";
+            label4.Size = new Size(118, 21);
+            label4.TabIndex = 62;
+            label4.Text = "Buscar Cliente";
+            // 
+            // cmbBuscarCliente
+            // 
+            cmbBuscarCliente.BackColor = Color.Transparent;
+            cmbBuscarCliente.DataSource = null;
+            cmbBuscarCliente.FillColor = Color.FromArgb(243, 246, 250);
+            cmbBuscarCliente.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbBuscarCliente.ForeColor = Color.Black;
+            cmbBuscarCliente.FormattingEnabled = true;
+            cmbBuscarCliente.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbBuscarCliente.Items.AddRange(new object[] { "Pantalla", "Bateria", "Conector", "Placa", "Cámara", "Bóton", "Tapa", "Parlante", "Micrófono", "Otro" });
+            cmbBuscarCliente.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbBuscarCliente.Location = new Point(790, 129);
+            cmbBuscarCliente.Margin = new Padding(4, 5, 4, 5);
+            cmbBuscarCliente.MinimumSize = new Size(63, 0);
+            cmbBuscarCliente.Name = "cmbBuscarCliente";
+            cmbBuscarCliente.Padding = new Padding(0, 0, 30, 2);
+            cmbBuscarCliente.Radius = 12;
+            cmbBuscarCliente.RectColor = Color.FromArgb(148, 163, 184);
+            cmbBuscarCliente.Size = new Size(215, 46);
+            cmbBuscarCliente.SymbolSize = 24;
+            cmbBuscarCliente.TabIndex = 54;
+            cmbBuscarCliente.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbBuscarCliente.Watermark = "Seleccione un cliente";
+            cmbBuscarCliente.SelectedIndexChanged += cmbBuscarCliente_SelectedIndexChanged;
+            cmbBuscarCliente.KeyUp += cmbBuscarCliente_KeyUp;
             // 
             // label3
             // 
@@ -401,6 +442,7 @@
             txtIdentificacionCliente.TextAlignment = ContentAlignment.MiddleLeft;
             txtIdentificacionCliente.Watermark = "Ej. 1203807183";
             txtIdentificacionCliente.WatermarkColor = Color.FromArgb(145, 158, 172);
+            txtIdentificacionCliente.TextChanged += txtIdentificacionCliente_TextChanged;
             txtIdentificacionCliente.KeyPress += txtSoloNumeros_KeyPress;
             txtIdentificacionCliente.Leave += txtIdentificacionCliente_Leave;
             // 
@@ -553,6 +595,7 @@
             // 
             pnlDispositivo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             pnlDispositivo.BackColor = Color.Transparent;
+            pnlDispositivo.Controls.Add(cmbColor);
             pnlDispositivo.Controls.Add(cmbMarca);
             pnlDispositivo.Controls.Add(lblEstado);
             pnlDispositivo.Controls.Add(cmbEstado);
@@ -560,7 +603,6 @@
             pnlDispositivo.Controls.Add(lblTipoDispositivo);
             pnlDispositivo.Controls.Add(txtModelo);
             pnlDispositivo.Controls.Add(btnComputadora);
-            pnlDispositivo.Controls.Add(txtColor);
             pnlDispositivo.Controls.Add(txtSerie);
             pnlDispositivo.Controls.Add(lblColor);
             pnlDispositivo.Controls.Add(lblSerie);
@@ -577,10 +619,35 @@
             pnlDispositivo.Name = "pnlDispositivo";
             pnlDispositivo.Radius = 12;
             pnlDispositivo.RectColor = Color.FromArgb(221, 227, 233);
-            pnlDispositivo.Size = new Size(515, 453);
+            pnlDispositivo.Size = new Size(515, 491);
             pnlDispositivo.TabIndex = 2;
             pnlDispositivo.Text = null;
             pnlDispositivo.TextAlignment = ContentAlignment.MiddleCenter;
+            // 
+            // cmbColor
+            // 
+            cmbColor.BackColor = Color.Transparent;
+            cmbColor.DataSource = null;
+            cmbColor.DisplayMember = "Azul";
+            cmbColor.FillColor = Color.FromArgb(243, 246, 250);
+            cmbColor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbColor.ForeColor = Color.Black;
+            cmbColor.FormattingEnabled = true;
+            cmbColor.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbColor.Items.AddRange(new object[] { "Negro", "Blanco", "Gris", "Plata", "Azul", "Verde", "Rojo", "Dorado", "Rosado", "Morado", "Otros" });
+            cmbColor.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbColor.Location = new Point(259, 234);
+            cmbColor.Margin = new Padding(4, 5, 4, 5);
+            cmbColor.MinimumSize = new Size(63, 0);
+            cmbColor.Name = "cmbColor";
+            cmbColor.Padding = new Padding(0, 0, 30, 2);
+            cmbColor.Radius = 12;
+            cmbColor.RectColor = Color.FromArgb(148, 163, 184);
+            cmbColor.Size = new Size(236, 37);
+            cmbColor.SymbolSize = 24;
+            cmbColor.TabIndex = 55;
+            cmbColor.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbColor.Watermark = "color del dispostivo";
             // 
             // cmbMarca
             // 
@@ -720,27 +787,6 @@
             btnComputadora.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnComputadora.TipsForeColor = Color.Transparent;
             btnComputadora.Click += btnComputadora_Click;
-            // 
-            // txtColor
-            // 
-            txtColor.FillColor = Color.FromArgb(240, 244, 248);
-            txtColor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtColor.ForeColor = Color.FromArgb(75, 92, 108);
-            txtColor.Location = new Point(259, 234);
-            txtColor.Margin = new Padding(4, 5, 4, 5);
-            txtColor.MaxLength = 255;
-            txtColor.Minimum = 0D;
-            txtColor.MinimumSize = new Size(1, 16);
-            txtColor.Name = "txtColor";
-            txtColor.Padding = new Padding(5);
-            txtColor.Radius = 12;
-            txtColor.RectColor = Color.FromArgb(220, 226, 232);
-            txtColor.ShowText = false;
-            txtColor.Size = new Size(236, 37);
-            txtColor.TabIndex = 40;
-            txtColor.TextAlignment = ContentAlignment.MiddleLeft;
-            txtColor.Watermark = "Ej. Negro";
-            txtColor.WatermarkColor = Color.FromArgb(145, 158, 172);
             // 
             // txtSerie
             // 
@@ -945,7 +991,7 @@
             uiPanel1.Name = "uiPanel1";
             uiPanel1.Radius = 12;
             uiPanel1.RectColor = Color.FromArgb(221, 227, 233);
-            uiPanel1.Size = new Size(573, 453);
+            uiPanel1.Size = new Size(573, 491);
             uiPanel1.TabIndex = 4;
             uiPanel1.Text = null;
             uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
@@ -1374,7 +1420,6 @@
         private Label lblOrden;
         private Panel pnlCentral;
         private Sunny.UI.UIPanel pnlDispositivo;
-        private Sunny.UI.UITextBox txtColor;
         private Sunny.UI.UITextBox txtSerie;
         private Label lblColor;
         private Label lblSerie;
@@ -1438,5 +1483,8 @@
         private Label label1;
         private Label label3;
         private Sunny.UI.UIAvatar uiAvatar1;
+        private Sunny.UI.UIComboBox cmbBuscarCliente;
+        private Label label4;
+        private Sunny.UI.UIComboBox cmbColor;
     }
 }
