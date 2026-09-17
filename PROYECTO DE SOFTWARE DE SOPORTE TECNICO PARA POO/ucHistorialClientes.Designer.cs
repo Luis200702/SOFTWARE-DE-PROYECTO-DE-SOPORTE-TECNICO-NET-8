@@ -166,6 +166,7 @@
             dgvClientesNuevo.Size = new Size(274, 647);
             dgvClientesNuevo.TabIndex = 22;
             dgvClientesNuevo.CellClick += dgvClientesNuevo_CellClick;
+            dgvClientesNuevo.CellContentClick += dgvClientesNuevo_CellContentClick;
             dgvClientesNuevo.RowPostPaint += dgvClientesNuevo_RowPostPaint;
             // 
             // btnBuscar
@@ -440,6 +441,7 @@
             dgvNuevoHistorial.AllowUserToDeleteRows = false;
             dgvNuevoHistorial.AllowUserToResizeColumns = false;
             dgvNuevoHistorial.AllowUserToResizeRows = false;
+            dgvNuevoHistorial.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvNuevoHistorial.BackgroundColor = Color.White;
             dgvNuevoHistorial.BorderStyle = BorderStyle.None;
             dgvNuevoHistorial.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -449,7 +451,6 @@
             dgvNuevoHistorial.RowHeadersVisible = false;
             dgvNuevoHistorial.Size = new Size(851, 619);
             dgvNuevoHistorial.TabIndex = 26;
-            dgvNuevoHistorial.CellContentClick += dgvNuevoHistorial_CellContentClick_1;
             dgvNuevoHistorial.CellFormatting += dgvNuevoHistorial_CellFormatting;
             dgvNuevoHistorial.CellPainting += dgvNuevoHistorial_CellPainting;
             // 

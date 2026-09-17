@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Printing;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using System.IO;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
@@ -19,6 +23,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             InitializeComponent();
             documentoImpresion.PrintPage += DocumentoImpresion_PrintPage;
+            QuestPDF.Settings.License = LicenseType.Community;
         }
         public frmFactura(
       string numeroFactura,
@@ -33,6 +38,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
       decimal total)
         {
             InitializeComponent();
+            QuestPDF.Settings.License = LicenseType.Community;
             documentoImpresion.PrintPage += DocumentoImpresion_PrintPage;
             ConfigurarDataGridView();
 
@@ -84,6 +90,132 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 "TOTAL",
                 "$" + total.ToString("F2")
             );
+        }
+            public byte[] GenerarPDF()
+            {
+            using MemoryStream stream = new MemoryStream();
+
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Size(PageSizes.A4);
+                    page.Margin(35);
+
+                    page.DefaultTextStyle(x =>
+                        x.FontSize(11));
+
+                    page.Content().Column(col =>
+                    {
+                        col.Spacing(8);
+
+                        col.Item()
+                            .Text("TECH_DKV")
+                            .Bold()
+                            .FontSize(20);
+
+                        col.Item()
+                            .Text("Factura / Comprobante")
+                            .Bold()
+                            .FontSize(16);
+
+                        col.Item().LineHorizontal(1);
+
+                        col.Item().Text(
+                            $"Número de Factura: {lblNumeroFactura.Text}");
+
+                        col.Item().Text(
+                            $"Fecha: {lblFecha.Text}");
+
+                        col.Item().Text(
+                            $"Orden: {lblOrden.Text}");
+
+                        col.Item()
+                            .PaddingTop(10)
+                            .Text("Datos del Cliente")
+                            .Bold()
+                            .FontSize(14);
+
+                        col.Item().Text(
+                            $"Cédula de Identidad: {lblCedula.Text}");
+
+                        col.Item().Text(
+                            $"Nombre: {lblNombre.Text}");
+
+                        col.Item().Text(
+                            $"Teléfono / Celular: {lblTelefono.Text}");
+
+                        col.Item()
+                            .PaddingTop(10)
+                            .Text("Datos del Dispositivo")
+                            .Bold()
+                            .FontSize(14);
+
+                        col.Item().Text(
+                            $"Tipo de dispositivo: {lblDispositivo.Text}");
+
+                        col.Item().Text(
+                            $"Técnico asignado: {lblTecnico.Text}");
+
+                        col.Item()
+                            .PaddingTop(10)
+                            .Text($"Forma de pago: {lblFormaPago.Text}");
+
+                        col.Item()
+                            .PaddingTop(10)
+                            .Text("Detalles")
+                            .Bold()
+                            .FontSize(14);
+
+                        col.Item().Table(tabla =>
+                        {
+                            tabla.ColumnsDefinition(columnas =>
+                            {
+                                columnas.RelativeColumn(3);
+                                columnas.RelativeColumn(1);
+                            });
+
+                            tabla.Header(header =>
+                            {
+                                header.Cell()
+                                    .Padding(5)
+                                    .Text("Descripción")
+                                    .Bold();
+
+                                header.Cell()
+                                    .Padding(5)
+                                    .AlignRight()
+                                    .Text("Valor")
+                                    .Bold();
+                            });
+
+                            foreach (DataGridViewRow fila in dgvDetalleFactura.Rows)
+                            {
+                                if (fila.IsNewRow)
+                                    continue;
+
+                                string descripcion =
+                                    fila.Cells[0].Value?.ToString() ?? "";
+
+                                string valor =
+                                    fila.Cells[1].Value?.ToString() ?? "";
+
+                                tabla.Cell()
+                                    .Padding(5)
+                                    .Text(descripcion);
+
+                                tabla.Cell()
+                                    .Padding(5)
+                                    .AlignRight()
+                                    .Text(valor);
+                            }
+                        });
+                    });
+                });
+            })
+            .GeneratePdf(stream);
+
+            return stream.ToArray();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

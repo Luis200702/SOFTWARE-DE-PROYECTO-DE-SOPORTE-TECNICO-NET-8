@@ -215,7 +215,30 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void CargarHistorialOrdenes(int idCliente)
         {
-            string consulta = "select o.numero_orden as ORDEN, convert(varchar, o.fecha_ingreso, 103) as FECHA, d.marca + ' ' + d.modelo as DISPOSITIVO, isnull(o.descripcion_problema, 'Reparación general') as REPARACIÓN, isnull(o.costo_estimado, 0) as COSTO, o.estado as ESTADO, isnull(u.nombre, 'Sin asignar') as TÉCNICO, isnull(o.forma_pago, '') as FORMA_PAGO, o.comprobante_pago as COMPROBANTE, o.nombre_comprobante as NOMBRE_COMPROBANTE from ordenes o inner join dispositivos d on o.dispositivo_id = d.id left join usuarios u on o.tecnico_id = u.id where o.cliente_id = " + idCliente + " order by o.fecha_ingreso desc";
+            string consulta = @"
+            SELECT
+            o.numero_orden AS ORDEN,
+            CONVERT(varchar, o.fecha_ingreso, 103) AS FECHA,
+            d.marca + ' ' + d.modelo AS DISPOSITIVO,
+            ISNULL(o.descripcion_problema, 'Reparación general') AS REPARACIÓN,
+            ISNULL(o.costo_estimado, 0) AS COSTO,
+            o.estado AS ESTADO,
+            ISNULL(u.nombre, 'Sin asignar') AS TÉCNICO,
+            ISNULL(o.forma_pago, '') AS FORMA_PAGO,
+            o.comprobante_pago AS COMPROBANTE,
+            o.nombre_comprobante AS NOMBRE_COMPROBANTE,
+            f.factura_pdf AS FACTURA_PDF,
+            f.nombre_factura AS NOMBRE_FACTURA,
+            f.numero_factura AS NUMERO_FACTURA
+            FROM ordenes o
+            INNER JOIN dispositivos d
+            ON o.dispositivo_id = d.id
+            LEFT JOIN usuarios u
+            ON o.tecnico_id = u.id
+            LEFT JOIN facturas f
+            ON f.orden_id = o.id
+            WHERE o.cliente_id = " + idCliente + @"
+            ORDER BY o.fecha_ingreso DESC";
 
             DataTable HistorialClientes = oCon.retornarRegistrosUsuarios(consulta);
 
@@ -243,6 +266,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 dgvNuevoHistorial.Columns["FORMA_PAGO"].Visible = false;
                 dgvNuevoHistorial.Columns["COMPROBANTE"].Visible = false;
                 dgvNuevoHistorial.Columns["NOMBRE_COMPROBANTE"].Visible = false;
+
+                dgvNuevoHistorial.Columns["FACTURA_PDF"].Visible = false;
+                dgvNuevoHistorial.Columns["NOMBRE_FACTURA"].Visible = false;
+                dgvNuevoHistorial.Columns["NUMERO_FACTURA"].Visible = false;
             }
 
             DataGridViewButtonColumn btnComprobante = new DataGridViewButtonColumn
@@ -253,6 +280,19 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 FlatStyle = FlatStyle.Flat,
                 UseColumnTextForButtonValue = false
             };
+            DataGridViewButtonColumn btnFactura = new DataGridViewButtonColumn
+            {
+                Name = "VER_FACTURA",
+                HeaderText = "FACTURA",
+                Width = 110,
+                FlatStyle = FlatStyle.Flat,
+                UseColumnTextForButtonValue = false
+            };
+
+            btnFactura.DefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+
+            dgvNuevoHistorial.Columns.Add(btnFactura);
 
             btnComprobante.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvNuevoHistorial.Columns.Add(btnComprobante);
@@ -319,6 +359,39 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 else
                 {
                     e.CellStyle.ForeColor = Color.FromArgb(140, 150, 160);
+                }
+
+                e.FormattingApplied = true;
+            }
+            if (nombreColumna == "VER_FACTURA")
+            {
+                DataGridViewRow fila =
+                    dgvNuevoHistorial.Rows[e.RowIndex];
+
+                object factura =
+                    fila.Cells["FACTURA_PDF"].Value;
+
+                bool tieneFactura =
+                    factura != null &&
+                    factura != DBNull.Value;
+
+                e.Value = tieneFactura ? "Ver" : "—";
+
+                if (tieneFactura)
+                {
+                    e.CellStyle.ForeColor =
+                        Color.FromArgb(0, 165, 155);
+
+                    e.CellStyle.Font =
+                        new Font(
+                            dgvNuevoHistorial.Font,
+                            FontStyle.Bold
+                        );
+                }
+                else
+                {
+                    e.CellStyle.ForeColor =
+                        Color.FromArgb(140, 150, 160);
                 }
 
                 e.FormattingApplied = true;
@@ -401,42 +474,91 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 
-            if (dgvNuevoHistorial.Columns[e.ColumnIndex].Name != "VER_COMPROBANTE")
-                return;
+            string nombreColumna =
+                dgvNuevoHistorial.Columns[e.ColumnIndex].Name;
 
-            DataGridViewRow fila = dgvNuevoHistorial.Rows[e.RowIndex];
+            DataGridViewRow fila =
+                dgvNuevoHistorial.Rows[e.RowIndex];
 
-            string formaPago = fila.Cells["FORMA_PAGO"].Value?.ToString() ?? "";
-            object valorComprobante = fila.Cells["COMPROBANTE"].Value;
-
-            if (!formaPago.Equals("Transferencia", StringComparison.OrdinalIgnoreCase))
+            if (nombreColumna == "VER_COMPROBANTE")
             {
-                MessageBox.Show(
-                    "Esta orden no fue pagada mediante transferencia.",
-                    "Comprobante",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                string formaPago =
+                    fila.Cells["FORMA_PAGO"].Value?.ToString() ?? "";
+
+                object valorComprobante =
+                    fila.Cells["COMPROBANTE"].Value;
+
+                if (!formaPago.Equals(
+                    "Transferencia",
+                    StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show(
+                        "Esta orden no fue pagada mediante transferencia.",
+                        "Comprobante",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    return;
+                }
+
+                if (valorComprobante == null ||
+                    valorComprobante == DBNull.Value)
+                {
+                    MessageBox.Show(
+                        "Esta orden no tiene un comprobante registrado.",
+                        "Comprobante",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    return;
+                }
+
+                byte[] imagenBytes =
+                    (byte[])valorComprobante;
+
+                string nombreArchivo =
+                    fila.Cells["NOMBRE_COMPROBANTE"]
+                        .Value?.ToString() ?? "Comprobante";
+
+                MostrarComprobante(
+                    imagenBytes,
+                    nombreArchivo
+                );
+
                 return;
             }
-
-            if (valorComprobante == null || valorComprobante == DBNull.Value)
+            if (nombreColumna == "VER_FACTURA")
             {
-                MessageBox.Show(
-                    "Esta orden no tiene un comprobante registrado.",
-                    "Comprobante",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                object valorFactura =
+                    fila.Cells["FACTURA_PDF"].Value;
+
+                if (valorFactura == null ||
+                    valorFactura == DBNull.Value)
+                {
+                    MessageBox.Show(
+                        "Esta orden no tiene una factura registrada.",
+                        "Factura",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    return;
+                }
+
+                byte[] facturaBytes =
+                    (byte[])valorFactura;
+
+                string nombreFactura =
+                    fila.Cells["NOMBRE_FACTURA"]
+                        .Value?.ToString() ?? "Factura.pdf";
+
+                MostrarFacturaPDF(
+                    facturaBytes,
+                    nombreFactura
+                );
+
                 return;
             }
-
-            byte[] imagenBytes = (byte[])valorComprobante;
-
-            string nombreArchivo =
-                fila.Cells["NOMBRE_COMPROBANTE"].Value?.ToString() ?? "Comprobante";
-
-            MostrarComprobante(imagenBytes, nombreArchivo);
         }
-
         private void MostrarComprobante(byte[] imagenBytes, string nombreArchivo)
         {
             try
@@ -537,10 +659,49 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
             }
         }
-
-        private void dgvNuevoHistorial_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        private void MostrarFacturaPDF(
+        byte[] pdfBytes,
+        string nombreArchivo)
         {
+            try
+            {
+                if (!nombreArchivo.EndsWith(
+                    ".pdf",
+                    StringComparison.OrdinalIgnoreCase))
+                {
+                    nombreArchivo += ".pdf";
+                }
 
+                string rutaTemporal = Path.Combine(
+                    Path.GetTempPath(),
+                    nombreArchivo
+                );
+
+                File.WriteAllBytes(
+                    rutaTemporal,
+                    pdfBytes
+                );
+
+                System.Diagnostics.Process.Start(
+                    new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = rutaTemporal,
+                        UseShellExecute = true
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "No se pudo abrir la factura: " + ex.Message,
+                    "Factura",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvClientesNuevo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
         }
     }
 }

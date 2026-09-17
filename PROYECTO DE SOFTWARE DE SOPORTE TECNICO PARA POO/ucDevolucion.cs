@@ -384,7 +384,16 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             detallesFactura,
                             totalOrden
 );
+                            byte[] pdfBytes = factura.GenerarPDF();
 
+                            string nombreFactura = numeroFactura + ".pdf";
+
+                            GuardarPdfFactura(
+                                db.oCon,
+                                idOrden,
+                                pdfBytes,
+                                nombreFactura
+                            );
                             factura.ShowDialog();
 
                             LimpiarDespuesDeEntrega();
@@ -416,7 +425,39 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 }
             }
         }
+        private void GuardarPdfFactura(
+        SqlConnection conexion,
+        int idOrden,
+        byte[] pdfBytes,
+        string nombreFactura)
+        {
+            string consulta = @"
+        UPDATE facturas
+        SET factura_pdf = @facturaPdf,
+            nombre_factura = @nombreFactura
+        WHERE orden_id = @idOrden";
 
+            using (SqlCommand cmd = new SqlCommand(consulta, conexion))
+            {
+                cmd.Parameters.Add(
+                    "@facturaPdf",
+                    SqlDbType.VarBinary,
+                    -1
+                ).Value = pdfBytes;
+
+                cmd.Parameters.AddWithValue(
+                    "@nombreFactura",
+                    nombreFactura
+                );
+
+                cmd.Parameters.AddWithValue(
+                    "@idOrden",
+                    idOrden
+                );
+
+                cmd.ExecuteNonQuery();
+            }
+        }
         private void ReiniciarDatosPago()
         {
             comprobantePago = null;
