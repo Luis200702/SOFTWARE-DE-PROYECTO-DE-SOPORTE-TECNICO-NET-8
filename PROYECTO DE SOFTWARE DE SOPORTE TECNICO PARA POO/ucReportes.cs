@@ -40,6 +40,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             cmbTiposReporte.Items.Add("Órdenes por técnico");
             cmbTiposReporte.Items.Add("Derivaciones entre sucursales");
             cmbTiposReporte.Items.Add("Historial de reparaciones por cliente");
+            cmbTiposReporte.Items.Add("Facturas emitidas");
 
             if (cmbTiposReporte.Items.Count > 0)
             {
@@ -223,6 +224,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 case "Ingresos por servicios":
                     GenerarReporteIngresos();
+                    break;
+
+                case "Facturas emitidas":
+                    GenerarReporteFacturas();
                     break;
 
                 case "Consumo de repuestos":
@@ -1292,6 +1297,148 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     cmbTecnicos.Enabled = false;
                     break;
             }
+        }
+        private void GenerarReporteFacturas()
+        {
+            string consulta = @"
+        SELECT
+            F.numero_factura AS NumeroFactura,
+            F.fecha_emision AS FechaEmision,
+            O.numero_orden AS Orden,
+            C.nombre AS Cliente,
+            C.cedula_pasaporte AS Cedula,
+            CONCAT(D.marca, ' ', D.modelo) AS Dispositivo,
+            ISNULL(U.nombre, 'Sin asignar') AS Tecnico,
+            O.sucursal AS Sucursal,
+            F.forma_pago AS FormaPago,
+            F.total AS Total,
+            F.estado AS Estado
+        FROM facturas F
+        INNER JOIN ordenes O
+            ON F.orden_id = O.id
+        INNER JOIN clientes C
+            ON O.cliente_id = C.id
+        INNER JOIN dispositivos D
+            ON O.dispositivo_id = D.id
+        LEFT JOIN usuarios U
+            ON O.tecnico_id = U.id
+        WHERE F.fecha_emision >= '" + FechaDesde().ToString("yyyy-MM-dd") + @"'
+          AND F.fecha_emision < DATEADD(
+                DAY,
+                1,
+                '" + FechaHasta().ToString("yyyy-MM-dd") + @"'
+          )";
+
+            AgregarFiltroSucursal(
+                ref consulta,
+                "O.sucursal"
+            );
+
+            AgregarFiltroTecnico(
+                ref consulta,
+                "O.tecnico_id"
+            );
+
+            consulta += " ORDER BY F.fecha_emision DESC";
+
+            DataTable tabla =
+                oCon.retornarRegistrosUsuarios(consulta);
+
+
+            decimal totalFacturado = 0;
+            decimal efectivo = 0;
+            decimal transferencia = 0;
+
+            if (tabla != null)
+            {
+                foreach (DataRow fila in tabla.Rows)
+                {
+                    decimal total =
+                        Convert.ToDecimal(fila["Total"]);
+
+                    totalFacturado += total;
+
+                    string formaPago =
+                        fila["FormaPago"].ToString();
+
+                    if (formaPago.Equals(
+                        "Efectivo",
+                        StringComparison.OrdinalIgnoreCase))
+                    {
+                        efectivo += total;
+                    }
+                    else if (formaPago.Equals(
+                        "Transferencia",
+                        StringComparison.OrdinalIgnoreCase))
+                    {
+                        transferencia += total;
+                    }
+                }
+            }
+
+            int cantidadFacturas =
+                tabla?.Rows.Count ?? 0;
+
+            Dictionary<string, string> resumen =
+                new Dictionary<string, string>
+            {
+        {
+            "FACTURAS",
+            cantidadFacturas.ToString()
+        },
+        {
+            "TOTAL FACTURADO",
+            $"${totalFacturado:F2}"
+        },
+        {
+            "EFECTIVO",
+            $"${efectivo:F2}"
+        },
+        {
+            "TRANSFERENCIA",
+            $"${transferencia:F2}"
+        }
+            };
+
+
+            GenerarPdfTabla(
+                "REPORTE DE FACTURAS EMITIDAS",
+                tabla,
+                "ReporteFacturas.pdf",
+
+                new[]
+                {
+            "NumeroFactura",
+            "FechaEmision",
+            "Orden",
+            "Cliente",
+            "Cedula",
+            "Dispositivo",
+            "Tecnico",
+            "Sucursal",
+            "FormaPago",
+            "Total",
+            "Estado"
+                },
+
+                new[]
+                {
+            "FACTURA",
+            "FECHA",
+            "ORDEN",
+            "CLIENTE",
+            "CÉDULA",
+            "DISPOSITIVO",
+            "TÉCNICO",
+            "SUCURSAL",
+            "PAGO",
+            "TOTAL",
+            "ESTADO"
+                },
+
+                resumen,
+                true
+            );
         }
     }
 
