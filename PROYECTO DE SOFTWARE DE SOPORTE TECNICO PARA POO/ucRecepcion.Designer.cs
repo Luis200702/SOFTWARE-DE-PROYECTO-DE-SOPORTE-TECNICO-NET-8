@@ -284,7 +284,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(24, 43, 62);
-            label4.Location = new Point(790, 103);
+            label4.Location = new Point(697, 103);
             label4.Name = "label4";
             label4.Size = new Size(118, 21);
             label4.TabIndex = 62;
@@ -301,14 +301,14 @@
             cmbBuscarCliente.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbBuscarCliente.Items.AddRange(new object[] { "Pantalla", "Bateria", "Conector", "Placa", "Cámara", "Bóton", "Tapa", "Parlante", "Micrófono", "Otro" });
             cmbBuscarCliente.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbBuscarCliente.Location = new Point(790, 129);
+            cmbBuscarCliente.Location = new Point(697, 129);
             cmbBuscarCliente.Margin = new Padding(4, 5, 4, 5);
             cmbBuscarCliente.MinimumSize = new Size(63, 0);
             cmbBuscarCliente.Name = "cmbBuscarCliente";
             cmbBuscarCliente.Padding = new Padding(0, 0, 30, 2);
             cmbBuscarCliente.Radius = 12;
             cmbBuscarCliente.RectColor = Color.FromArgb(148, 163, 184);
-            cmbBuscarCliente.Size = new Size(215, 46);
+            cmbBuscarCliente.Size = new Size(256, 46);
             cmbBuscarCliente.SymbolSize = 24;
             cmbBuscarCliente.TabIndex = 54;
             cmbBuscarCliente.TextAlignment = ContentAlignment.MiddleLeft;
@@ -1070,6 +1070,7 @@
             dtmFecha.Value = new DateTime(2026, 8, 3, 0, 0, 0, 0);
             dtmFecha.Watermark = "";
             dtmFecha.WatermarkColor = Color.FromArgb(145, 158, 172);
+            dtmFecha.ValueChanged += dtmFecha_ValueChanged;
             // 
             // cmbTecnico
             // 

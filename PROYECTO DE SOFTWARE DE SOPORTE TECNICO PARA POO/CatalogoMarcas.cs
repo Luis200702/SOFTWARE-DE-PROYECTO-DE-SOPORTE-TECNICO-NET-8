@@ -27,7 +27,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 "Huawei", "Honor", "Oppo", "Realme",
                 "HP", "Dell", "Lenovo", "Asus",
                 "Acer", "MSI", "Toshiba", "Sony",
-                "LG", "ZTE", "Microsoft"
+                "LG", "ZTE", "Microsoft", "Otro"
             };
 
             foreach (var marca in marcasGenerales)

@@ -46,9 +46,9 @@
             txtPrecioCosto = new Sunny.UI.UITextBox();
             txtPrecioVenta = new Sunny.UI.UITextBox();
             lblPrecioVenta = new Label();
-            txtProveedor = new Sunny.UI.UITextBox();
             lblProveedor = new Label();
             cmbMarca = new Sunny.UI.UIComboBox();
+            cmbProveedor = new Sunny.UI.UIComboBox();
             SuspendLayout();
             // 
             // lblModeloCompatible
@@ -77,9 +77,9 @@
             txtCantidadInicial.ShowText = false;
             txtCantidadInicial.Size = new Size(213, 46);
             txtCantidadInicial.TabIndex = 42;
-            txtCantidadInicial.Text = "0";
             txtCantidadInicial.TextAlignment = ContentAlignment.MiddleLeft;
-            txtCantidadInicial.Watermark = "";
+            txtCantidadInicial.Watermark = "0";
+            txtCantidadInicial.KeyPress += txtCantidadInicial_KeyPress;
             // 
             // btnCancelar
             // 
@@ -163,9 +163,9 @@
             lblPrecio.AutoSize = true;
             lblPrecio.Location = new Point(242, 288);
             lblPrecio.Name = "lblPrecio";
-            lblPrecio.Size = new Size(89, 15);
+            lblPrecio.Size = new Size(55, 15);
             lblPrecio.TabIndex = 34;
-            lblPrecio.Text = "Precio costo ($)";
+            lblPrecio.Text = "Costo ($)";
             // 
             // lblStockMinimo
             // 
@@ -259,9 +259,9 @@
             txtStockMinimo.ShowText = false;
             txtStockMinimo.Size = new Size(209, 46);
             txtStockMinimo.TabIndex = 47;
-            txtStockMinimo.Text = "0";
             txtStockMinimo.TextAlignment = ContentAlignment.MiddleLeft;
-            txtStockMinimo.Watermark = "";
+            txtStockMinimo.Watermark = "0";
+            txtStockMinimo.KeyPress += txtStockMinimo_KeyPress;
             // 
             // txtPrecioCosto
             // 
@@ -283,6 +283,7 @@
             txtPrecioCosto.TabIndex = 48;
             txtPrecioCosto.TextAlignment = ContentAlignment.MiddleLeft;
             txtPrecioCosto.Watermark = "0,00";
+            txtPrecioCosto.KeyPress += txtPrecioCosto_KeyPress;
             // 
             // txtPrecioVenta
             // 
@@ -304,6 +305,7 @@
             txtPrecioVenta.TabIndex = 49;
             txtPrecioVenta.TextAlignment = ContentAlignment.MiddleLeft;
             txtPrecioVenta.Watermark = "0,00";
+            txtPrecioVenta.KeyPress += txtPrecioVenta_KeyPress;
             // 
             // lblPrecioVenta
             // 
@@ -313,26 +315,6 @@
             lblPrecioVenta.Size = new Size(93, 15);
             lblPrecioVenta.TabIndex = 50;
             lblPrecioVenta.Text = "Precio a la venta";
-            // 
-            // txtProveedor
-            // 
-            txtProveedor.FillColor = Color.Empty;
-            txtProveedor.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtProveedor.ForeColor = Color.White;
-            txtProveedor.Location = new Point(28, 448);
-            txtProveedor.Margin = new Padding(4, 5, 4, 5);
-            txtProveedor.MaxLength = 255;
-            txtProveedor.Minimum = 0D;
-            txtProveedor.MinimumSize = new Size(1, 16);
-            txtProveedor.Name = "txtProveedor";
-            txtProveedor.Padding = new Padding(5);
-            txtProveedor.Radius = 12;
-            txtProveedor.RectColor = Color.FromArgb(39, 53, 72);
-            txtProveedor.ShowText = false;
-            txtProveedor.Size = new Size(429, 46);
-            txtProveedor.TabIndex = 51;
-            txtProveedor.TextAlignment = ContentAlignment.MiddleLeft;
-            txtProveedor.Watermark = "Nombre del proveedor";
             // 
             // lblProveedor
             // 
@@ -366,6 +348,31 @@
             cmbMarca.TabIndex = 53;
             cmbMarca.TextAlignment = ContentAlignment.MiddleLeft;
             cmbMarca.Watermark = "Selecciona una marca";
+            cmbMarca.SelectedIndexChanged += cmbMarca_SelectedIndexChanged;
+            // 
+            // cmbProveedor
+            // 
+            cmbProveedor.BackColor = Color.Transparent;
+            cmbProveedor.DataSource = null;
+            cmbProveedor.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            cmbProveedor.FillColor = Color.FromArgb(243, 246, 250);
+            cmbProveedor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbProveedor.ForeColor = Color.Black;
+            cmbProveedor.FormattingEnabled = true;
+            cmbProveedor.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbProveedor.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbProveedor.Location = new Point(27, 448);
+            cmbProveedor.Margin = new Padding(4, 5, 4, 5);
+            cmbProveedor.MinimumSize = new Size(63, 0);
+            cmbProveedor.Name = "cmbProveedor";
+            cmbProveedor.Padding = new Padding(0, 0, 30, 2);
+            cmbProveedor.Radius = 12;
+            cmbProveedor.RectColor = Color.FromArgb(148, 163, 184);
+            cmbProveedor.Size = new Size(430, 46);
+            cmbProveedor.SymbolSize = 24;
+            cmbProveedor.TabIndex = 40;
+            cmbProveedor.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbProveedor.Watermark = "Escoja el Proveedor";
             // 
             // frmRegistrarEntrega
             // 
@@ -373,9 +380,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 246, 250);
             ClientSize = new Size(488, 568);
+            Controls.Add(cmbProveedor);
             Controls.Add(cmbMarca);
             Controls.Add(lblProveedor);
-            Controls.Add(txtProveedor);
             Controls.Add(lblPrecioVenta);
             Controls.Add(txtPrecioVenta);
             Controls.Add(txtPrecioCosto);
@@ -424,8 +431,8 @@
         private Sunny.UI.UITextBox txtPrecioCosto;
         private Sunny.UI.UITextBox txtPrecioVenta;
         private Label lblPrecioVenta;
-        private Sunny.UI.UITextBox txtProveedor;
         private Label lblProveedor;
         private Sunny.UI.UIComboBox cmbMarca;
+        private Sunny.UI.UIComboBox cmbProveedor;
     }
 }

@@ -33,6 +33,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             CargarClientes();
 
             cmbEstado.SelectedIndex = 0;
+            dtmFecha.Value = DateTime.Today;
             MostrarNumeroOrden();
 
             listaEquipos.Add(new DispositivoTemporal());
@@ -146,6 +147,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void GuardarRecepcion()
         {
+            if (dtmFecha.Value.Date < DateTime.Today)
+            {
+                MessageBox.Show(
+                    "La fecha estimada de entrega no puede ser anterior a la fecha de hoy.",
+                    "Fecha no válida",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                dtmFecha.Value = DateTime.Today;
+                return;
+            }
+
             GuardarDatosEnMemoria();
 
             if (string.IsNullOrWhiteSpace(txtIdentificacionCliente.Text) ||
@@ -284,7 +297,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                             estadoOrden = filaDispositivo["estado_orden"].ToString();
                         }
                     }
-                    if (idDispositivo > 0 && !string.IsNullOrWhiteSpace(estadoOrden) &&  estadoOrden != "Entregado")
+                    if (idDispositivo > 0 && !string.IsNullOrWhiteSpace(estadoOrden) && estadoOrden != "Entregado")
                     {
                         MessageBox.Show(
                             "El IMEI/Serie " + equipo.Serie.Trim() +
@@ -530,35 +543,45 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
         {
             UITextBox txt = sender as UITextBox;
+
             if (txt == null) return;
+
             if (char.IsControl(e.KeyChar)) return;
 
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != ',')
-            {
-                e.Handled = true;
+            if (char.IsDigit(e.KeyChar))
                 return;
-            }
 
-            if (e.KeyChar == ',' && txt.Text.Contains(","))
-            {
-                e.Handled = true;
-            }
+            if (e.KeyChar == ',' && !txt.Text.Contains(","))
+                return;
+
+            e.Handled = true;
         }
 
         private void txtCosto_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtCosto.Text)) return;
+            if (string.IsNullOrWhiteSpace(txtCosto.Text))
+                return;
 
             string texto = txtCosto.Text.Replace('.', ',');
             texto = texto.Replace(',', '.');
 
-            if (decimal.TryParse(texto, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal precio) && precio >= 0)
+            if (decimal.TryParse(
+                texto,
+                System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out decimal precio) && precio >= 0)
             {
                 txtCosto.Text = precio.ToString("0.00").Replace('.', ',');
             }
             else
             {
-                MessageBox.Show("El costo debe ser un número positivo.\nEjemplo: 150,50", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                "El costo debe ser un número positivo, por favor ingresa un valor válido.",
+                "Valor no válido",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+
+
                 txtCosto.Focus();
                 txtCosto.SelectAll();
             }
@@ -770,6 +793,20 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             catch
             {
                 dtClientes.DefaultView.RowFilter = "";
+            }
+        }
+
+        private void dtmFecha_ValueChanged(object sender, DateTime value)
+        {
+            if (dtmFecha.Value.Date < DateTime.Today)
+            {
+                MessageBox.Show(
+                    "La fecha estimada de entrega no puede ser anterior a la fecha de hoy.",
+                    "Fecha no válida",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                dtmFecha.Value = DateTime.Today;
             }
         }
     }

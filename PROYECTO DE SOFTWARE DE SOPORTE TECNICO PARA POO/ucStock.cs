@@ -139,20 +139,6 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                 dgvNuevo.Columns.Add(btnAgregar);
             }
-
-            if (!dgvNuevo.Columns.Contains("Delete"))
-            {
-                DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn
-                {
-                    Name = "Delete",
-                    HeaderText = "",
-                    Width = 45,
-                    FlatStyle = FlatStyle.Flat
-                };
-
-                dgvNuevo.Columns.Add(btnDelete);
-            }
-
             if (dgvNuevo.Columns.Contains("NOMBRE"))
                 dgvNuevo.Columns["NOMBRE"].Width = 160;
 
@@ -316,17 +302,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 e.Handled = true;
             }
 
-            if (nombreColumna == "Agregar" || nombreColumna == "Delete")
+            if (nombreColumna == "Agregar")
             {
                 e.PaintBackground(e.CellBounds, true);
                 e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                bool esAgregar = (nombreColumna == "Agregar");
+                bool esAgregar = true;
 
-                Color bgColor = esAgregar ? Color.FromArgb(235, 252, 242) : Color.FromArgb(255, 240, 240);
-                Color borderColor = esAgregar ? Color.FromArgb(170, 235, 190) : Color.FromArgb(255, 200, 200);
-                Color textColor = esAgregar ? Color.FromArgb(50, 170, 100) : Color.FromArgb(230, 70, 70);
-                string text = esAgregar ? "↓" : "↑";
+                Color bgColor = Color.FromArgb(235, 252, 242);
+                Color borderColor = Color.FromArgb(170, 235, 190);
+                Color textColor = Color.FromArgb(50, 170, 100);
+                string text = "↓";
 
                 int btnSize = 32;
                 int x = e.CellBounds.Left + (e.CellBounds.Width - btnSize) / 2;

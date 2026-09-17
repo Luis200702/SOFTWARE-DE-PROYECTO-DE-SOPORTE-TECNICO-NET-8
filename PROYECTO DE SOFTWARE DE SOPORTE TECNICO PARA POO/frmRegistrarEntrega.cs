@@ -17,11 +17,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         public frmRegistrarEntrega()
         {
             InitializeComponent();
+            cmbMarca.SelectedIndexChanged += cmbMarca_SelectedIndexChanged;
 
-            // 🔥 Disparamos la magia visual apenas arranca el formulario
             AplicarDiseñoWeb();
 
-            // 🏷️ Cargamos todas las marcas disponibles en el ComboBox de marcas
+
             CatalogoMarcas.CargarMarcasEnComboBox(cmbMarca, "");
         }
 
@@ -56,7 +56,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 if (txtModelo != null) { txtModelo.Symbol = 61707; txtModelo.Watermark = "Ej. Galaxy S22"; }
                 if (txtCantidadInicial != null) { txtCantidadInicial.Symbol = 61893; }
                 if (txtStockMinimo != null) { txtStockMinimo.Symbol = 61528; }
-                if (txtProveedor != null) { txtProveedor.Symbol = 61447; txtProveedor.Watermark = "Nombre del proveedor"; }
+                if (cmbProveedor != null) { cmbProveedor.Watermark = "Nombre del proveedor"; }
 
                 if (btnCancelar != null)
                 {
@@ -93,26 +93,17 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         {
             // 1. Validaciones básicas de campos vacíos
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
-                string.IsNullOrWhiteSpace(txtPrecioCosto.Text) ||
-                string.IsNullOrWhiteSpace(txtPrecioVenta.Text))
+            string.IsNullOrWhiteSpace(txtPrecioCosto.Text) ||
+            string.IsNullOrWhiteSpace(txtPrecioVenta.Text) ||
+            cmbProveedor.SelectedIndex == -1)
             {
                 MessageBox.Show("Por favor, completa los campos obligatorios.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            // 2. CORRECCIÓN: Validación ESTRICTA de tipos numéricos
-            if (!decimal.TryParse(txtPrecioCosto.Text, out decimal precioCosto) ||
-                !decimal.TryParse(txtPrecioVenta.Text, out decimal precioVenta))
-            {
-                MessageBox.Show("Los precios deben ser valores numéricos válidos.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!int.TryParse(txtCantidadInicial.Text, out int cantidadInicial)
-                || cantidadInicial < 0)
+            if (cmbProveedor.SelectedIndex == -1)
             {
                 MessageBox.Show(
-                    "Ingrese una cantidad inicial válida.",
+                    "Seleccione un proveedor.",
                     "Atención",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
@@ -120,11 +111,130 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 return;
             }
 
-            if (!int.TryParse(txtStockMinimo.Text, out int stockMinimo)
-                || stockMinimo < 0)
+            if (cmbProveedor.Text.Trim() != cmbMarca.Text.Trim() &&
+                cmbProveedor.Text.Trim() != "Otro")
             {
                 MessageBox.Show(
-                    "Ingrese un stock mínimo válido.",
+                    "El proveedor debe coincidir con la marca seleccionada o seleccionar 'Otro'.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+            // 2. CORRECCIÓN: Validación ESTRICTA de tipos numéricos
+            if (!decimal.TryParse(txtPrecioCosto.Text, out decimal precioCosto))
+            {
+                MessageBox.Show(
+                    "El precio de costo debe ser un número válido.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (precioCosto <= 0)
+            {
+                MessageBox.Show(
+                    "El precio de costo debe ser mayor que 0.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+
+            if (!decimal.TryParse(txtPrecioVenta.Text, out decimal precioVenta))
+            {
+                MessageBox.Show(
+                    "El precio de venta debe ser un número válido.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (precioVenta <= 0)
+            {
+                MessageBox.Show(
+                    "El precio de venta debe ser mayor que 0.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+
+            // El precio de venta debe ser mayor al costo
+            if (precioVenta <= precioCosto)
+            {
+                MessageBox.Show(
+                    "El precio de venta debe ser mayor que el precio de costo.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+
+            // 3. Validación de cantidad inicial
+            if (!int.TryParse(txtCantidadInicial.Text, out int cantidadInicial))
+            {
+                MessageBox.Show(
+                    "La cantidad inicial debe ser un número entero válido.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (cantidadInicial < 0)
+            {
+                MessageBox.Show(
+                    "La cantidad inicial no puede ser negativa.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+
+            // 4. Validación de stock mínimo
+            if (!int.TryParse(txtStockMinimo.Text, out int stockMinimo))
+            {
+                MessageBox.Show(
+                    "El stock mínimo debe ser un número entero válido.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (stockMinimo < 0)
+            {
+                MessageBox.Show(
+                    "El stock mínimo no puede ser negativo.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+
+            // El stock mínimo no puede superar al stock inicial
+            if (stockMinimo > cantidadInicial)
+            {
+                MessageBox.Show(
+                    "El stock mínimo no puede ser mayor que la cantidad inicial.",
                     "Atención",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
@@ -155,23 +265,23 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                     cmdRepuesto.Parameters.AddWithValue("@Compatibilidad", marcaYModelo.Trim());
                     cmdRepuesto.Parameters.AddWithValue("@Costo", precioCosto);
                     cmdRepuesto.Parameters.AddWithValue("@Venta", precioVenta);
-                    cmdRepuesto.Parameters.AddWithValue("@Proveedor", txtProveedor.Text.Trim());
+                    cmdRepuesto.Parameters.AddWithValue("@Proveedor", cmbProveedor.Text.Trim());
 
                     int idNuevoRepuesto = Convert.ToInt32(cmdRepuesto.ExecuteScalar());
 
                     // --- PASO B: Guardar el Inventario (CORRECCIÓN IdSucursal) ---
                     string queryInventario = @"
-    INSERT INTO InventarioSucursal
-        (IdSucursal, IdRepuesto, StockActual, StockMinimo)
-    VALUES
-    (
-        (SELECT TOP 1 IdSucursal
-         FROM Sucursales
-         WHERE NombreSucursal = @Sucursal),
-        @IdRepuesto,
-        @StockActual,
-        @StockMinimo
-    )";
+                    INSERT INTO InventarioSucursal
+                    (IdSucursal, IdRepuesto, StockActual, StockMinimo)
+                    VALUES
+                    (
+                    (SELECT TOP 1 IdSucursal
+                    FROM Sucursales
+                    WHERE NombreSucursal = @Sucursal),
+                    @IdRepuesto,
+                    @StockActual,
+                    @StockMinimo
+                    )";
 
                     SqlCommand cmdInventario =
                         new SqlCommand(queryInventario, conexionBD.oCon, transaccion);
@@ -213,6 +323,72 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 MessageBox.Show("No se pudo conectar a la base de datos.", "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtCantidadInicial_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrecioCosto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.' && txtPrecioCosto.Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtStockMinimo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrecioVenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.' && txtPrecioVenta.Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cmbMarca_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbProveedor.Items.Clear();
+
+            if (cmbMarca.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            string marcaSeleccionada = cmbMarca.Text.Trim();
+
+            if (marcaSeleccionada == "Otro")
+            {
+                cmbProveedor.Items.Add("Otro");
+            }
+            else
+            {
+                cmbProveedor.Items.Add(marcaSeleccionada);
+                cmbProveedor.Items.Add("Otro");
+            }
+
+            cmbProveedor.SelectedIndex = -1;
         }
     }
 }
