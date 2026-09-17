@@ -153,26 +153,68 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             {
                 if (e.RowIndex >= 0)
                 {
-                    DataRowView filaSeleccionada = (DataRowView)dgvSeguimiento.Rows[e.RowIndex].DataBoundItem;
+                    DataRowView filaSeleccionada =
+                        (DataRowView)dgvSeguimiento.Rows[e.RowIndex].DataBoundItem;
 
                     if (filaSeleccionada != null)
                     {
-                        string numeroOrden = filaSeleccionada["ORDEN"].ToString();
-                        string clienteDispositivo = filaSeleccionada["CLIENTE \\ DISPOSITIVO"].ToString();
-                        string estado = filaSeleccionada["ESTADO"].ToString();
-                        string tecnico = filaSeleccionada["TÉCNICO"].ToString();
+                        string numeroOrden =
+                            filaSeleccionada["ORDEN"].ToString();
 
-                        frmDetallesOrden frm = new frmDetallesOrden(numeroOrden, clienteDispositivo, estado, tecnico);
+                        string clienteDispositivo =
+                            filaSeleccionada["CLIENTE \\ DISPOSITIVO"].ToString();
+
+                        string estado =
+                            filaSeleccionada["ESTADO"].ToString();
+
+                        string tecnico =
+                            filaSeleccionada["TÉCNICO"].ToString();
+
+                        // SI YA FUE ENTREGADO, NO SE PUEDE MODIFICAR
+                        if (estado.Equals(
+                            "Entregado",
+                            StringComparison.OrdinalIgnoreCase))
+                        {
+                            MessageBox.Show(
+                                "Esta orden ya fue entregada.",
+                                "Orden entregada",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information
+                            );
+
+                            return;
+                        }
+
+                        frmDetallesOrden frm =
+                            new frmDetallesOrden(
+                                numeroOrden,
+                                clienteDispositivo,
+                                estado,
+                                tecnico
+                            );
+
                         frm.ShowDialog();
 
-                        string estadoFiltro = cmbEstado.Text == "Todos los estados" ? "Todos" : cmbEstado.Text;
-                        CargarSeguimiento(txtBuscarOrden.Text.Trim(), estadoFiltro);
+                        string estadoFiltro =
+                            cmbEstado.Text == "Todos los estados"
+                                ? "Todos"
+                                : cmbEstado.Text;
+
+                        CargarSeguimiento(
+                            txtBuscarOrden.Text.Trim(),
+                            estadoFiltro
+                        );
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al abrir la orden: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Error al abrir la orden: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
