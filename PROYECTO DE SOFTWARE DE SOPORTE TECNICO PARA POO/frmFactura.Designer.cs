@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             lblNombreNegocio = new Label();
             lblFacturaComprobante = new Label();
             Fecha = new Label();
@@ -68,8 +68,10 @@
             airSeparator3 = new ReaLTaiizor.Controls.AirSeparator();
             airSeparator1 = new ReaLTaiizor.Controls.AirSeparator();
             airSeparator2 = new ReaLTaiizor.Controls.AirSeparator();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvDetalleFactura).BeginInit();
             pnlFactura.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lblNombreNegocio
@@ -77,7 +79,7 @@
             lblNombreNegocio.AutoSize = true;
             lblNombreNegocio.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNombreNegocio.ForeColor = Color.FromArgb(24, 43, 62);
-            lblNombreNegocio.Location = new Point(19, 9);
+            lblNombreNegocio.Location = new Point(161, 9);
             lblNombreNegocio.Name = "lblNombreNegocio";
             lblNombreNegocio.Size = new Size(117, 30);
             lblNombreNegocio.TabIndex = 5;
@@ -88,7 +90,7 @@
             lblFacturaComprobante.AutoSize = true;
             lblFacturaComprobante.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblFacturaComprobante.ForeColor = Color.FromArgb(24, 43, 62);
-            lblFacturaComprobante.Location = new Point(163, 9);
+            lblFacturaComprobante.Location = new Point(104, 39);
             lblFacturaComprobante.Name = "lblFacturaComprobante";
             lblFacturaComprobante.Size = new Size(228, 30);
             lblFacturaComprobante.TabIndex = 6;
@@ -99,7 +101,7 @@
             Fecha.AutoSize = true;
             Fecha.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             Fecha.ForeColor = Color.FromArgb(24, 43, 62);
-            Fecha.Location = new Point(19, 92);
+            Fecha.Location = new Point(19, 126);
             Fecha.Name = "Fecha";
             Fecha.Size = new Size(54, 21);
             Fecha.TabIndex = 7;
@@ -110,7 +112,7 @@
             lblFactuaranumero.AutoSize = true;
             lblFactuaranumero.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblFactuaranumero.ForeColor = Color.FromArgb(24, 43, 62);
-            lblFactuaranumero.Location = new Point(19, 60);
+            lblFactuaranumero.Location = new Point(17, 92);
             lblFactuaranumero.Name = "lblFactuaranumero";
             lblFactuaranumero.Size = new Size(156, 21);
             lblFactuaranumero.TabIndex = 8;
@@ -121,7 +123,7 @@
             Orden.AutoSize = true;
             Orden.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             Orden.ForeColor = Color.FromArgb(24, 43, 62);
-            Orden.Location = new Point(19, 126);
+            Orden.Location = new Point(19, 154);
             Orden.Name = "Orden";
             Orden.Size = new Size(57, 21);
             Orden.TabIndex = 9;
@@ -131,7 +133,7 @@
             // 
             lblCliente.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblCliente.ForeColor = Color.FromArgb(24, 43, 62);
-            lblCliente.Location = new Point(104, 166);
+            lblCliente.Location = new Point(104, 193);
             lblCliente.Name = "lblCliente";
             lblCliente.Size = new Size(227, 25);
             lblCliente.TabIndex = 10;
@@ -143,7 +145,7 @@
             Cedula.AutoSize = true;
             Cedula.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Cedula.ForeColor = Color.FromArgb(24, 43, 62);
-            Cedula.Location = new Point(19, 216);
+            Cedula.Location = new Point(18, 242);
             Cedula.Name = "Cedula";
             Cedula.Size = new Size(164, 21);
             Cedula.TabIndex = 23;
@@ -154,7 +156,7 @@
             lblTelefono.AutoSize = true;
             lblTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTelefono.ForeColor = Color.FromArgb(24, 43, 62);
-            lblTelefono.Location = new Point(220, 284);
+            lblTelefono.Location = new Point(220, 314);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(19, 21);
             lblTelefono.TabIndex = 19;
@@ -162,21 +164,20 @@
             // 
             // lblDatosCliente
             // 
-            lblDatosCliente.AutoSize = true;
             lblDatosCliente.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDatosCliente.ForeColor = Color.FromArgb(24, 43, 62);
-            lblDatosCliente.Location = new Point(19, 249);
+            lblDatosCliente.Location = new Point(19, 278);
             lblDatosCliente.Name = "lblDatosCliente";
-            lblDatosCliente.Size = new Size(14, 21);
+            lblDatosCliente.Size = new Size(100, 21);
             lblDatosCliente.TabIndex = 18;
-            lblDatosCliente.Text = " ";
+            lblDatosCliente.Text = " Nombre";
             // 
             // label5
             // 
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.FromArgb(24, 43, 62);
-            label5.Location = new Point(104, 340);
+            label5.Location = new Point(104, 373);
             label5.Name = "label5";
             label5.Size = new Size(227, 25);
             label5.TabIndex = 24;
@@ -189,7 +190,7 @@
             lblTipoDispositivo.BackColor = Color.Transparent;
             lblTipoDispositivo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTipoDispositivo.ForeColor = Color.FromArgb(24, 43, 62);
-            lblTipoDispositivo.Location = new Point(19, 376);
+            lblTipoDispositivo.Location = new Point(18, 415);
             lblTipoDispositivo.Name = "lblTipoDispositivo";
             lblTipoDispositivo.Size = new Size(155, 21);
             lblTipoDispositivo.TabIndex = 25;
@@ -201,7 +202,7 @@
             Tecnico.BackColor = Color.Transparent;
             Tecnico.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Tecnico.ForeColor = Color.FromArgb(24, 43, 62);
-            Tecnico.Location = new Point(19, 406);
+            Tecnico.Location = new Point(18, 447);
             Tecnico.Name = "Tecnico";
             Tecnico.Size = new Size(142, 21);
             Tecnico.TabIndex = 28;
@@ -212,7 +213,7 @@
             lblDetalle.BackColor = Color.Transparent;
             lblDetalle.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDetalle.ForeColor = Color.FromArgb(24, 43, 62);
-            lblDetalle.Location = new Point(104, 452);
+            lblDetalle.Location = new Point(104, 496);
             lblDetalle.Name = "lblDetalle";
             lblDetalle.Size = new Size(227, 25);
             lblDetalle.TabIndex = 29;
@@ -221,50 +222,50 @@
             // 
             // dgvDetalleFactura
             // 
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(235, 243, 255);
-            dgvDetalleFactura.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(235, 243, 255);
+            dgvDetalleFactura.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             dgvDetalleFactura.BackgroundColor = Color.FromArgb(235, 239, 240);
             dgvDetalleFactura.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvDetalleFactura.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(80, 160, 255);
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvDetalleFactura.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(80, 160, 255);
+            dataGridViewCellStyle14.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            dgvDetalleFactura.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             dgvDetalleFactura.ColumnHeadersHeight = 32;
             dgvDetalleFactura.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvDetalleFactura.ColumnHeadersVisible = false;
             dgvDetalleFactura.Columns.AddRange(new DataGridViewColumn[] { colDescripcion, colCosto });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(48, 48, 48);
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgvDetalleFactura.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = SystemColors.Window;
+            dataGridViewCellStyle16.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle16.ForeColor = Color.FromArgb(48, 48, 48);
+            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
+            dgvDetalleFactura.DefaultCellStyle = dataGridViewCellStyle16;
             dgvDetalleFactura.EnableHeadersVisualStyles = false;
             dgvDetalleFactura.Font = new Font("Microsoft Sans Serif", 12F);
             dgvDetalleFactura.GridColor = Color.FromArgb(80, 160, 255);
-            dgvDetalleFactura.Location = new Point(19, 526);
+            dgvDetalleFactura.Location = new Point(18, 559);
             dgvDetalleFactura.Name = "dgvDetalleFactura";
             dgvDetalleFactura.RectColor = Color.FromArgb(41, 53, 72);
             dgvDetalleFactura.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(235, 243, 255);
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle5.ForeColor = Color.FromArgb(48, 48, 48);
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(80, 160, 255);
-            dataGridViewCellStyle5.SelectionForeColor = Color.White;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgvDetalleFactura.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = Color.FromArgb(235, 243, 255);
+            dataGridViewCellStyle17.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle17.ForeColor = Color.FromArgb(48, 48, 48);
+            dataGridViewCellStyle17.SelectionBackColor = Color.FromArgb(80, 160, 255);
+            dataGridViewCellStyle17.SelectionForeColor = Color.White;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            dgvDetalleFactura.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
             dgvDetalleFactura.RowHeadersVisible = false;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 12F);
-            dgvDetalleFactura.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.BackColor = Color.White;
+            dataGridViewCellStyle18.Font = new Font("Microsoft Sans Serif", 12F);
+            dgvDetalleFactura.RowsDefaultCellStyle = dataGridViewCellStyle18;
             dgvDetalleFactura.SelectedIndex = -1;
             dgvDetalleFactura.Size = new Size(385, 154);
             dgvDetalleFactura.StripeOddColor = Color.FromArgb(235, 243, 255);
@@ -282,8 +283,8 @@
             // 
             colCosto.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             colCosto.DataPropertyName = "colCosto";
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
-            colCosto.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colCosto.DefaultCellStyle = dataGridViewCellStyle15;
             colCosto.HeaderText = "";
             colCosto.Name = "colCosto";
             colCosto.ReadOnly = true;
@@ -295,7 +296,7 @@
             lblTotal.BackColor = Color.Transparent;
             lblTotal.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTotal.ForeColor = Color.FromArgb(24, 43, 62);
-            lblTotal.Location = new Point(24, 490);
+            lblTotal.Location = new Point(19, 521);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(124, 21);
             lblTotal.TabIndex = 34;
@@ -306,7 +307,7 @@
             lblNumeroFactura.AutoSize = true;
             lblNumeroFactura.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblNumeroFactura.ForeColor = Color.FromArgb(24, 43, 62);
-            lblNumeroFactura.Location = new Point(220, 60);
+            lblNumeroFactura.Location = new Point(220, 92);
             lblNumeroFactura.Name = "lblNumeroFactura";
             lblNumeroFactura.Size = new Size(19, 21);
             lblNumeroFactura.TabIndex = 40;
@@ -317,7 +318,7 @@
             lblFecha.AutoSize = true;
             lblFecha.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblFecha.ForeColor = Color.FromArgb(24, 43, 62);
-            lblFecha.Location = new Point(220, 92);
+            lblFecha.Location = new Point(220, 126);
             lblFecha.Name = "lblFecha";
             lblFecha.Size = new Size(19, 21);
             lblFecha.TabIndex = 41;
@@ -328,7 +329,7 @@
             lblOrden.AutoSize = true;
             lblOrden.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblOrden.ForeColor = Color.FromArgb(24, 43, 62);
-            lblOrden.Location = new Point(220, 126);
+            lblOrden.Location = new Point(220, 154);
             lblOrden.Name = "lblOrden";
             lblOrden.Size = new Size(19, 21);
             lblOrden.TabIndex = 42;
@@ -339,7 +340,7 @@
             lblCedula.AutoSize = true;
             lblCedula.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblCedula.ForeColor = Color.FromArgb(24, 43, 62);
-            lblCedula.Location = new Point(220, 216);
+            lblCedula.Location = new Point(220, 242);
             lblCedula.Name = "lblCedula";
             lblCedula.Size = new Size(19, 21);
             lblCedula.TabIndex = 43;
@@ -350,7 +351,7 @@
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNombre.ForeColor = Color.FromArgb(24, 43, 62);
-            lblNombre.Location = new Point(220, 249);
+            lblNombre.Location = new Point(220, 278);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(19, 21);
             lblNombre.TabIndex = 44;
@@ -362,7 +363,7 @@
             lblDispositivo.BackColor = Color.Transparent;
             lblDispositivo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDispositivo.ForeColor = Color.FromArgb(24, 43, 62);
-            lblDispositivo.Location = new Point(220, 376);
+            lblDispositivo.Location = new Point(220, 415);
             lblDispositivo.Name = "lblDispositivo";
             lblDispositivo.Size = new Size(19, 21);
             lblDispositivo.TabIndex = 45;
@@ -374,7 +375,7 @@
             lblTecnico.BackColor = Color.Transparent;
             lblTecnico.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTecnico.ForeColor = Color.FromArgb(24, 43, 62);
-            lblTecnico.Location = new Point(220, 406);
+            lblTecnico.Location = new Point(220, 447);
             lblTecnico.Name = "lblTecnico";
             lblTecnico.Size = new Size(19, 21);
             lblTecnico.TabIndex = 46;
@@ -386,7 +387,7 @@
             lblFormaPago.BackColor = Color.Transparent;
             lblFormaPago.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblFormaPago.ForeColor = Color.FromArgb(24, 43, 62);
-            lblFormaPago.Location = new Point(220, 490);
+            lblFormaPago.Location = new Point(220, 521);
             lblFormaPago.Name = "lblFormaPago";
             lblFormaPago.Size = new Size(19, 21);
             lblFormaPago.TabIndex = 47;
@@ -397,7 +398,7 @@
             Telefono.AutoSize = true;
             Telefono.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Telefono.ForeColor = Color.FromArgb(24, 43, 62);
-            Telefono.Location = new Point(19, 284);
+            Telefono.Location = new Point(19, 314);
             Telefono.Name = "Telefono";
             Telefono.Size = new Size(146, 21);
             Telefono.TabIndex = 48;
@@ -410,7 +411,7 @@
             btnCerrar.FillHoverColor = Color.FromArgb(232, 248, 247);
             btnCerrar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCerrar.ForeColor = Color.FromArgb(0, 145, 137);
-            btnCerrar.Location = new Point(24, 702);
+            btnCerrar.Location = new Point(19, 734);
             btnCerrar.MinimumSize = new Size(1, 1);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Radius = 12;
@@ -428,7 +429,7 @@
             btnPDF.FillHoverColor = Color.FromArgb(232, 248, 247);
             btnPDF.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPDF.ForeColor = Color.FromArgb(0, 145, 137);
-            btnPDF.Location = new Point(151, 702);
+            btnPDF.Location = new Point(159, 734);
             btnPDF.MinimumSize = new Size(1, 1);
             btnPDF.Name = "btnPDF";
             btnPDF.Radius = 12;
@@ -446,7 +447,7 @@
             btnImprimir.FillHoverColor = Color.FromArgb(232, 248, 247);
             btnImprimir.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnImprimir.ForeColor = Color.FromArgb(0, 145, 137);
-            btnImprimir.Location = new Point(289, 702);
+            btnImprimir.Location = new Point(284, 734);
             btnImprimir.MinimumSize = new Size(1, 1);
             btnImprimir.Name = "btnImprimir";
             btnImprimir.Radius = 12;
@@ -459,6 +460,7 @@
             // 
             // pnlFactura
             // 
+            pnlFactura.Controls.Add(pictureBox1);
             pnlFactura.Controls.Add(Orden);
             pnlFactura.Controls.Add(dgvDetalleFactura);
             pnlFactura.Controls.Add(Fecha);
@@ -495,7 +497,7 @@
             pnlFactura.Name = "pnlFactura";
             pnlFactura.Radius = 12;
             pnlFactura.RectColor = Color.FromArgb(225, 230, 235);
-            pnlFactura.Size = new Size(430, 694);
+            pnlFactura.Size = new Size(430, 726);
             pnlFactura.TabIndex = 68;
             pnlFactura.Text = null;
             pnlFactura.TextAlignment = ContentAlignment.MiddleCenter;
@@ -507,7 +509,7 @@
             airSeparator4.Customization = "";
             airSeparator4.Font = new Font("Verdana", 8F);
             airSeparator4.Image = null;
-            airSeparator4.Location = new Point(12, 448);
+            airSeparator4.Location = new Point(12, 483);
             airSeparator4.Name = "airSeparator4";
             airSeparator4.NoRounding = false;
             airSeparator4.Size = new Size(391, 1);
@@ -521,7 +523,7 @@
             airSeparator3.Customization = "";
             airSeparator3.Font = new Font("Verdana", 8F);
             airSeparator3.Image = null;
-            airSeparator3.Location = new Point(12, 324);
+            airSeparator3.Location = new Point(12, 353);
             airSeparator3.Name = "airSeparator3";
             airSeparator3.NoRounding = false;
             airSeparator3.Size = new Size(391, 1);
@@ -535,7 +537,7 @@
             airSeparator1.Customization = "";
             airSeparator1.Font = new Font("Verdana", 8F);
             airSeparator1.Image = null;
-            airSeparator1.Location = new Point(12, 153);
+            airSeparator1.Location = new Point(12, 178);
             airSeparator1.Name = "airSeparator1";
             airSeparator1.NoRounding = false;
             airSeparator1.Size = new Size(391, 1);
@@ -549,20 +551,31 @@
             airSeparator2.Customization = "";
             airSeparator2.Font = new Font("Verdana", 8F);
             airSeparator2.Image = null;
-            airSeparator2.Location = new Point(12, 42);
+            airSeparator2.Location = new Point(12, 88);
             airSeparator2.Name = "airSeparator2";
             airSeparator2.NoRounding = false;
-            airSeparator2.Size = new Size(391, 1);
+            airSeparator2.Size = new Size(384, 1);
             airSeparator2.TabIndex = 1;
             airSeparator2.Text = "airSeparator2";
             airSeparator2.Transparent = false;
+            airSeparator2.Click += airSeparator2_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.ChatGPT_Image_17_sept_2026__02_26_32_p_m_;
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(95, 82);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 51;
+            pictureBox1.TabStop = false;
             // 
             // frmFactura
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 246, 250);
-            ClientSize = new Size(428, 744);
+            ClientSize = new Size(428, 776);
             Controls.Add(btnImprimir);
             Controls.Add(btnPDF);
             Controls.Add(btnCerrar);
@@ -573,6 +586,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvDetalleFactura).EndInit();
             pnlFactura.ResumeLayout(false);
             pnlFactura.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -613,5 +627,6 @@
         private ReaLTaiizor.Controls.AirSeparator airSeparator4;
         private ReaLTaiizor.Controls.AirSeparator airSeparator3;
         private ReaLTaiizor.Controls.AirSeparator airSeparator1;
+        private PictureBox pictureBox1;
     }
 }

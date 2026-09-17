@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
@@ -126,6 +127,7 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 cmbFormaPago.SelectedIndex = 0;
 
             OcultarPaneles();
+            CargarClientesListos();
         }
 
         private void OcultarPaneles()
@@ -181,6 +183,33 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             }
         }
 
+        private void CargarClientesListos()
+        {
+            string sucursal = Sesion.SucursalActual.Replace("'", "''");
+
+            string consulta = @"
+            SELECT DISTINCT
+            c.id,
+            c.nombre + ' - ' + ISNULL(c.cedula_pasaporte, 'Sin cédula') AS Cliente
+            FROM clientes c
+            INNER JOIN ordenes o
+            ON o.cliente_id = c.id
+            WHERE o.estado = 'Listo'
+            AND o.sucursal = '" + sucursal + @"'
+            ORDER BY Cliente";
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            cmbBuscarCliente.SelectedIndexChanged -= cmbBuscarCliente_SelectedIndexChanged;
+
+            cmbBuscarCliente.DataSource = dt;
+            cmbBuscarCliente.DisplayMember = "Cliente";
+            cmbBuscarCliente.ValueMember = "id";
+
+            cmbBuscarCliente.SelectedIndex = -1;
+
+            cmbBuscarCliente.SelectedIndexChanged += cmbBuscarCliente_SelectedIndexChanged;
+        }
         private void btnComprobante_Click(object sender, EventArgs e)
         {
             if (cmbFormaPago.SelectedItem == null ||
@@ -313,14 +342,24 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
                         if (filasAfectadas > 0)
                         {
+                            string numeroFactura =
+                                lblNumeroOrden.Text.Replace("ORD-", "FAC-");
+
+                            GuardarFactura(
+                                db.oCon,
+                                idOrden,
+                                numeroFactura,
+                                formaPago
+                            );
+
                             MessageBox.Show(
                                 "La entrega fue registrada correctamente.",
                                 "Entrega registrada",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
 
-                            string numeroFactura = lblNumeroOrden.Text.Replace("ORD-", "FAC-");
-                            List<DetalleFactura> detallesFactura = new List<DetalleFactura>();
+                            List<DetalleFactura> detallesFactura =
+                                new List<DetalleFactura>();
 
                             foreach (DataGridViewRow fila in dgvDesglose.Rows)
                             {
@@ -390,7 +429,101 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             if (cmbFormaPago.Items.Count > 0)
                 cmbFormaPago.SelectedIndex = 0;
         }
+        private void GuardarFactura(
+        SqlConnection conexion,
+        int idOrden,
+        string numeroFactura,
+        string formaPago)
+        {
+            string sqlFactura = @"
+        INSERT INTO facturas
+        (
+            orden_id,
+            numero_factura,
+            forma_pago,
+            total
+        )
+        OUTPUT INSERTED.id
+        VALUES
+        (
+            @ordenId,
+            @numeroFactura,
+            @formaPago,
+            @total
+        )";
 
+            int idFactura;
+
+            using (SqlCommand cmdFactura = new SqlCommand(sqlFactura, conexion))
+            {
+                cmdFactura.Parameters.AddWithValue("@ordenId", idOrden);
+                cmdFactura.Parameters.AddWithValue("@numeroFactura", numeroFactura);
+                cmdFactura.Parameters.AddWithValue("@formaPago", formaPago);
+                cmdFactura.Parameters.AddWithValue("@total", totalOrden);
+
+                idFactura = Convert.ToInt32(cmdFactura.ExecuteScalar());
+            }
+
+            foreach (DataGridViewRow fila in dgvDesglose.Rows)
+            {
+                if (fila.IsNewRow)
+                    continue;
+
+                string descripcion =
+                    fila.Cells[0].Value?.ToString() ?? "";
+
+                string valorTexto =
+                    fila.Cells[1].Value?.ToString() ?? "0";
+
+                valorTexto = valorTexto
+                    .Replace("$", "")
+                    .Trim();
+
+                decimal valor = 0;
+
+                decimal.TryParse(
+                    valorTexto,
+                    NumberStyles.Any,
+                    CultureInfo.CurrentCulture,
+                    out valor
+                );
+
+                string sqlDetalle = @"
+            INSERT INTO detalle_factura
+            (
+                factura_id,
+                descripcion,
+                valor
+            )
+            VALUES
+            (
+                @facturaId,
+                @descripcion,
+                @valor
+            )";
+
+                using (SqlCommand cmdDetalle =
+                    new SqlCommand(sqlDetalle, conexion))
+                {
+                    cmdDetalle.Parameters.AddWithValue(
+                        "@facturaId",
+                        idFactura
+                    );
+
+                    cmdDetalle.Parameters.AddWithValue(
+                        "@descripcion",
+                        descripcion
+                    );
+
+                    cmdDetalle.Parameters.AddWithValue(
+                        "@valor",
+                        valor
+                    );
+
+                    cmdDetalle.ExecuteNonQuery();
+                }
+            }
+        }
         private void LimpiarDespuesDeEntrega()
         {
             ReiniciarDatosPago();
@@ -408,6 +541,65 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             OcultarPaneles();
 
             txtBuscarOrden.Focus();
+            CargarClientesListos();
+        }
+
+        private void cmbBuscarCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbBuscarCliente.SelectedValue == null)
+                return;
+
+            if (!int.TryParse(
+                cmbBuscarCliente.SelectedValue.ToString(),
+                out int idCliente))
+            {
+                return;
+            }
+
+            CargarOrdenesCliente(idCliente);
+        }
+        private void CargarOrdenesCliente(int idCliente)
+        {
+            string sucursal = Sesion.SucursalActual.Replace("'", "''");
+
+            string consulta = @"
+            SELECT
+            o.id,
+            o.numero_orden
+            FROM ordenes o
+            WHERE o.cliente_id = " + idCliente + @"
+            AND o.estado = 'Listo'
+            AND o.sucursal = '" + sucursal + @"'
+            ORDER BY o.fecha_ingreso DESC";
+
+            DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
+
+            cmbListaOrdenes.SelectedIndexChanged -=
+                cmbListaOrdenes_SelectedIndexChanged;
+
+            cmbListaOrdenes.DataSource = dt;
+            cmbListaOrdenes.DisplayMember = "numero_orden";
+            cmbListaOrdenes.ValueMember = "id";
+
+            cmbListaOrdenes.SelectedIndexChanged +=
+                cmbListaOrdenes_SelectedIndexChanged;
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                cmbListaOrdenes.SelectedIndex = 0;
+
+                int idOrden =
+                    Convert.ToInt32(cmbListaOrdenes.SelectedValue);
+
+                CargarDetallesOrden(idOrden);
+            }
+            else
+            {
+                cmbListaOrdenes.DataSource = null;
+
+                LimpiarCamposResumen();
+                OcultarPaneles();
+            }
         }
     }
 }

@@ -449,6 +449,7 @@
             dgvNuevoHistorial.RowHeadersVisible = false;
             dgvNuevoHistorial.Size = new Size(851, 619);
             dgvNuevoHistorial.TabIndex = 26;
+            dgvNuevoHistorial.CellContentClick += dgvNuevoHistorial_CellContentClick_1;
             dgvNuevoHistorial.CellFormatting += dgvNuevoHistorial_CellFormatting;
             dgvNuevoHistorial.CellPainting += dgvNuevoHistorial_CellPainting;
             // 

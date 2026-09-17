@@ -40,10 +40,11 @@
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
             pnlInformacion = new Panel();
+            cmbBuscarCliente = new Sunny.UI.UIComboBox();
+            txtBuscarOrden = new Sunny.UI.UITextBox();
             cmbListaOrdenes = new Sunny.UI.UIComboBox();
             btnBuscar = new Sunny.UI.UIButton();
             lblOrden = new Label();
-            txtBuscarOrden = new Sunny.UI.UITextBox();
             pnlPrincipal = new Panel();
             btnComprobante = new Sunny.UI.UISymbolButton();
             btnRegistraEntrega = new Sunny.UI.UISymbolButton();
@@ -145,15 +146,68 @@
             // 
             pnlInformacion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlInformacion.BackColor = Color.FromArgb(243, 246, 250);
+            pnlInformacion.Controls.Add(cmbBuscarCliente);
+            pnlInformacion.Controls.Add(txtBuscarOrden);
             pnlInformacion.Controls.Add(cmbListaOrdenes);
             pnlInformacion.Controls.Add(btnBuscar);
             pnlInformacion.Controls.Add(lblOrden);
-            pnlInformacion.Controls.Add(txtBuscarOrden);
             pnlInformacion.ForeColor = Color.White;
             pnlInformacion.Location = new Point(0, 59);
             pnlInformacion.Name = "pnlInformacion";
             pnlInformacion.Size = new Size(1125, 100);
             pnlInformacion.TabIndex = 2;
+            // 
+            // cmbBuscarCliente
+            // 
+            cmbBuscarCliente.BackColor = Color.Transparent;
+            cmbBuscarCliente.DataSource = null;
+            cmbBuscarCliente.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            cmbBuscarCliente.FillColor = Color.White;
+            cmbBuscarCliente.FillColor2 = Color.FromArgb(240, 252, 251);
+            cmbBuscarCliente.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbBuscarCliente.ForeColor = Color.FromArgb(70, 86, 103);
+            cmbBuscarCliente.ForeDisableColor = Color.FromArgb(0, 165, 155);
+            cmbBuscarCliente.FormattingEnabled = true;
+            cmbBuscarCliente.ItemHoverColor = Color.FromArgb(155, 200, 255);
+            cmbBuscarCliente.Items.AddRange(new object[] { "Seleccionar...", "Efectivo", "Transferencia" });
+            cmbBuscarCliente.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
+            cmbBuscarCliente.Location = new Point(350, 45);
+            cmbBuscarCliente.Margin = new Padding(4, 5, 4, 5);
+            cmbBuscarCliente.MinimumSize = new Size(63, 0);
+            cmbBuscarCliente.Name = "cmbBuscarCliente";
+            cmbBuscarCliente.Padding = new Padding(0, 0, 30, 2);
+            cmbBuscarCliente.Radius = 12;
+            cmbBuscarCliente.RectColor = Color.FromArgb(220, 226, 232);
+            cmbBuscarCliente.RectDisableColor = Color.FromArgb(0, 165, 155);
+            cmbBuscarCliente.Size = new Size(278, 37);
+            cmbBuscarCliente.SymbolSize = 24;
+            cmbBuscarCliente.TabIndex = 25;
+            cmbBuscarCliente.Text = "Buscar Cliente";
+            cmbBuscarCliente.TextAlignment = ContentAlignment.MiddleLeft;
+            cmbBuscarCliente.Watermark = "";
+            cmbBuscarCliente.WatermarkColor = Color.FromArgb(145, 158, 172);
+            cmbBuscarCliente.SelectedIndexChanged += cmbBuscarCliente_SelectedIndexChanged;
+            // 
+            // txtBuscarOrden
+            // 
+            txtBuscarOrden.ButtonRectHoverColor = Color.FromArgb(0, 165, 155);
+            txtBuscarOrden.ButtonRectPressColor = Color.FromArgb(0, 165, 155);
+            txtBuscarOrden.ButtonStyleInherited = false;
+            txtBuscarOrden.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBuscarOrden.ForeColor = Color.FromArgb(70, 86, 103);
+            txtBuscarOrden.Location = new Point(32, 45);
+            txtBuscarOrden.Margin = new Padding(4, 5, 4, 5);
+            txtBuscarOrden.MinimumSize = new Size(1, 16);
+            txtBuscarOrden.Name = "txtBuscarOrden";
+            txtBuscarOrden.Padding = new Padding(5);
+            txtBuscarOrden.Radius = 12;
+            txtBuscarOrden.RectColor = Color.FromArgb(220, 226, 232);
+            txtBuscarOrden.ShowText = false;
+            txtBuscarOrden.Size = new Size(294, 37);
+            txtBuscarOrden.Symbol = 62144;
+            txtBuscarOrden.TabIndex = 3;
+            txtBuscarOrden.TextAlignment = ContentAlignment.MiddleLeft;
+            txtBuscarOrden.Watermark = "Ej. 0953485638";
             // 
             // cmbListaOrdenes
             // 
@@ -167,7 +221,7 @@
             cmbListaOrdenes.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cmbListaOrdenes.Items.AddRange(new object[] { "Seleccionar...", "Efectivo", "Transferencia" });
             cmbListaOrdenes.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
-            cmbListaOrdenes.Location = new Point(351, 45);
+            cmbListaOrdenes.Location = new Point(656, 45);
             cmbListaOrdenes.Margin = new Padding(4, 5, 4, 5);
             cmbListaOrdenes.MinimumSize = new Size(63, 0);
             cmbListaOrdenes.Name = "cmbListaOrdenes";
@@ -185,7 +239,7 @@
             // 
             btnBuscar.FillColor = Color.FromArgb(0, 150, 137);
             btnBuscar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnBuscar.Location = new Point(677, 45);
+            btnBuscar.Location = new Point(978, 45);
             btnBuscar.MinimumSize = new Size(1, 1);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Radius = 12;
@@ -206,27 +260,6 @@
             lblOrden.Size = new Size(311, 21);
             lblOrden.TabIndex = 19;
             lblOrden.Text = "Ingrese el número de cedula y elija la orden";
-            // 
-            // txtBuscarOrden
-            // 
-            txtBuscarOrden.ButtonRectHoverColor = Color.FromArgb(0, 165, 155);
-            txtBuscarOrden.ButtonRectPressColor = Color.FromArgb(0, 165, 155);
-            txtBuscarOrden.ButtonStyleInherited = false;
-            txtBuscarOrden.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtBuscarOrden.ForeColor = Color.FromArgb(70, 86, 103);
-            txtBuscarOrden.Location = new Point(28, 45);
-            txtBuscarOrden.Margin = new Padding(4, 5, 4, 5);
-            txtBuscarOrden.MinimumSize = new Size(1, 16);
-            txtBuscarOrden.Name = "txtBuscarOrden";
-            txtBuscarOrden.Padding = new Padding(5);
-            txtBuscarOrden.Radius = 12;
-            txtBuscarOrden.RectColor = Color.FromArgb(220, 226, 232);
-            txtBuscarOrden.ShowText = false;
-            txtBuscarOrden.Size = new Size(294, 37);
-            txtBuscarOrden.Symbol = 62144;
-            txtBuscarOrden.TabIndex = 3;
-            txtBuscarOrden.TextAlignment = ContentAlignment.MiddleLeft;
-            txtBuscarOrden.Watermark = "Ej. 0953485638";
             // 
             // pnlPrincipal
             // 
@@ -1077,5 +1110,6 @@
         private Label label4;
         private Sunny.UI.UISymbolButton btnRegistraEntrega;
         private Sunny.UI.UISymbolButton btnComprobante;
+        private Sunny.UI.UIComboBox cmbBuscarCliente;
     }
 }
