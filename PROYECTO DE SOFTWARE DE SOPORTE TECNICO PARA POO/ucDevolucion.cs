@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 {
@@ -317,6 +318,36 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 "Entrega registrada",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
+
+                            string numeroFactura = lblNumeroOrden.Text.Replace("ORD-", "FAC-");
+                            List<DetalleFactura> detallesFactura = new List<DetalleFactura>();
+
+                            foreach (DataGridViewRow fila in dgvDesglose.Rows)
+                            {
+                                if (fila.IsNewRow)
+                                    continue;
+
+                                detallesFactura.Add(new DetalleFactura
+                                {
+                                    Descripcion = fila.Cells[0].Value?.ToString() ?? "",
+                                    Valor = fila.Cells[1].Value?.ToString() ?? "$0.00"
+                                });
+                            }
+                            frmFactura factura = new frmFactura(
+                            numeroFactura,
+                            lblNumeroOrden.Text,
+                            lblCedula.Text,
+                            lblCliente.Text,
+                            lblTelefono.Text,
+                            lblDispositivo.Text,
+                            lblTecnicoAsignado.Text,
+                            formaPago,
+                            detallesFactura,
+                            totalOrden
+);
+
+                            factura.ShowDialog();
+
                             LimpiarDespuesDeEntrega();
                         }
                         else
