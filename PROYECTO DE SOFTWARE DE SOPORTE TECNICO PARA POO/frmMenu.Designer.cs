@@ -52,10 +52,10 @@
             btnLogoMenu = new Button();
             ImagenListLogoMenu = new ImageList(components);
             pnlContenedorSalir = new Panel();
-            btnSalirApp = new Sunny.UI.UIButton();
             pnlInterfaces = new Panel();
             imageListLogoPrincipal = new ImageList(components);
             timerDesplazamiento = new System.Windows.Forms.Timer(components);
+            btnCerrarSecion = new Sunny.UI.UIButton();
             pnlContenedorMenu.SuspendLayout();
             pnlContenedorLogotipo.SuspendLayout();
             pnlContenedorSalir.SuspendLayout();
@@ -414,36 +414,11 @@
             // 
             pnlContenedorSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             pnlContenedorSalir.BackColor = Color.FromArgb(28, 43, 60);
-            pnlContenedorSalir.Controls.Add(btnSalirApp);
+            pnlContenedorSalir.Controls.Add(btnCerrarSecion);
             pnlContenedorSalir.Location = new Point(0, 739);
             pnlContenedorSalir.Name = "pnlContenedorSalir";
             pnlContenedorSalir.Size = new Size(260, 90);
             pnlContenedorSalir.TabIndex = 2;
-            // 
-            // btnSalirApp
-            // 
-            btnSalirApp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSalirApp.BackColor = Color.Transparent;
-            btnSalirApp.FillColor = Color.FromArgb(0, 150, 137);
-            btnSalirApp.FillHoverColor = Color.FromArgb(255, 128, 128);
-            btnSalirApp.FillPressColor = Color.FromArgb(0, 150, 137);
-            btnSalirApp.FillSelectedColor = Color.FromArgb(0, 150, 137);
-            btnSalirApp.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSalirApp.ForeColor = Color.FromArgb(235, 239, 240);
-            btnSalirApp.Location = new Point(49, 18);
-            btnSalirApp.MinimumSize = new Size(1, 1);
-            btnSalirApp.Name = "btnSalirApp";
-            btnSalirApp.Radius = 12;
-            btnSalirApp.RectColor = Color.FromArgb(0, 150, 137);
-            btnSalirApp.RectHoverColor = Color.FromArgb(255, 128, 128);
-            btnSalirApp.RectPressColor = Color.FromArgb(0, 150, 137);
-            btnSalirApp.RectSelectedColor = Color.FromArgb(0, 150, 137);
-            btnSalirApp.Size = new Size(160, 35);
-            btnSalirApp.TabIndex = 16;
-            btnSalirApp.Text = "SALIR";
-            btnSalirApp.TipsFont = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSalirApp.TipsForeColor = Color.Black;
-            btnSalirApp.Click += btnSalirApp_Click;
             // 
             // pnlInterfaces
             // 
@@ -465,6 +440,31 @@
             // timerDesplazamiento
             // 
             timerDesplazamiento.Interval = 1;
+            // 
+            // btnCerrarSecion
+            // 
+            btnCerrarSecion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCerrarSecion.BackColor = Color.Transparent;
+            btnCerrarSecion.FillColor = Color.FromArgb(0, 150, 137);
+            btnCerrarSecion.FillHoverColor = Color.FromArgb(255, 128, 128);
+            btnCerrarSecion.FillPressColor = Color.FromArgb(0, 150, 137);
+            btnCerrarSecion.FillSelectedColor = Color.FromArgb(0, 150, 137);
+            btnCerrarSecion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCerrarSecion.ForeColor = Color.FromArgb(235, 239, 240);
+            btnCerrarSecion.Location = new Point(45, 27);
+            btnCerrarSecion.MinimumSize = new Size(1, 1);
+            btnCerrarSecion.Name = "btnCerrarSecion";
+            btnCerrarSecion.Radius = 12;
+            btnCerrarSecion.RectColor = Color.FromArgb(0, 150, 137);
+            btnCerrarSecion.RectHoverColor = Color.FromArgb(255, 128, 128);
+            btnCerrarSecion.RectPressColor = Color.FromArgb(0, 150, 137);
+            btnCerrarSecion.RectSelectedColor = Color.FromArgb(0, 150, 137);
+            btnCerrarSecion.Size = new Size(160, 35);
+            btnCerrarSecion.TabIndex = 17;
+            btnCerrarSecion.Text = "Cerrar Secion";
+            btnCerrarSecion.TipsFont = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCerrarSecion.TipsForeColor = Color.Black;
+            btnCerrarSecion.Click += btnCerrarSecion_Click;
             // 
             // frmMenu
             // 
@@ -517,7 +517,7 @@
         private ReaLTaiizor.Controls.AirSeparator airSeparator3;
         private ReaLTaiizor.Controls.AirSeparator airSeparator2;
         private ReaLTaiizor.Controls.AirSeparator airSeparator1;
-        private Sunny.UI.UIButton btnSalirApp;
+        private Sunny.UI.UIButton btnCerrarSecion;
         //private ToggleSwitch toggleSwitch1; =================================================================================================================
     }
 }

@@ -361,9 +361,22 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
 
         private void btnSalirApp_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿Desea salir?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+        //    if (MessageBox.Show("¿Desea salir?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+        //    {
+        //        Application.Exit();
+        //    }
+        }
+
+        private void btnCerrarSecion_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Está seguro que desea cerrar sesión?",
+    "Cerrar sesión",
+    MessageBoxButtons.YesNo,
+    MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Application.Exit();
+                frmInicioSesion inicio = new frmInicioSesion();
+                inicio.Show();
+                this.Hide();
             }
         }
     }
