@@ -167,9 +167,9 @@
             lblDatosCliente.ForeColor = Color.FromArgb(24, 43, 62);
             lblDatosCliente.Location = new Point(19, 249);
             lblDatosCliente.Name = "lblDatosCliente";
-            lblDatosCliente.Size = new Size(150, 21);
+            lblDatosCliente.Size = new Size(14, 21);
             lblDatosCliente.TabIndex = 18;
-            lblDatosCliente.Text = "Nombre completo";
+            lblDatosCliente.Text = " ";
             // 
             // label5
             // 
@@ -499,7 +499,6 @@
             pnlFactura.TabIndex = 68;
             pnlFactura.Text = null;
             pnlFactura.TextAlignment = ContentAlignment.MiddleCenter;
-            pnlFactura.Visible = false;
             pnlFactura.Click += pnlTrabajoRealizado_Click;
             // 
             // airSeparator4
