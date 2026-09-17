@@ -225,7 +225,23 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void CargarRepuestosStock()
         {
             string orden = ordenActual.Replace("'", "''");
-            string consulta = "select r.idrepuesto as IdRepuesto, r.nombrerepuesto as NombreRepuesto, i.stockactual as StockActual, r.nombrerepuesto + ' (Stock: ' + cast(i.stockactual as varchar) + ')' as Descripcion from repuestos r inner join inventariosucursal i on r.idrepuesto = i.idrepuesto inner join sucursales s on i.idsucursal = s.idsucursal inner join ordenes o on s.nombresucursal = o.sucursal where o.numero_orden = '" + orden + "' and i.stockactual > 0";
+
+            // Obtenemos la marca del dispositivo
+            string marca = lblDispositivo.Text.Trim().Split(' ')[0];
+
+            marca = marca.Replace("'", "''");
+
+            string consulta = "select r.idrepuesto as IdRepuesto, " +
+                              "r.nombrerepuesto as NombreRepuesto, " +
+                              "i.stockactual as StockActual, " +
+                              "r.nombrerepuesto + ' (Stock: ' + cast(i.stockactual as varchar) + ')' as Descripcion " +
+                              "from repuestos r " +
+                              "inner join inventariosucursal i on r.idrepuesto = i.idrepuesto " +
+                              "inner join sucursales s on i.idsucursal = s.idsucursal " +
+                              "inner join ordenes o on s.nombresucursal = o.sucursal " +
+                              "where o.numero_orden = '" + orden + "' " +
+                              "and i.stockactual > 0 " +
+                              "and r.compatibilidad like '" + marca + "%'";
 
             DataTable dt = oCon.retornarRegistrosUsuarios(consulta);
 
@@ -405,6 +421,11 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
         private void lblObservaciones_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

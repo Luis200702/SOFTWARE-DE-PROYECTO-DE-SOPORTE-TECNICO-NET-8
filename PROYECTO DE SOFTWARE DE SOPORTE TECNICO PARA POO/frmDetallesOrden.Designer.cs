@@ -50,6 +50,7 @@
             btnDiagnostico = new Sunny.UI.UISymbolButton();
             btnReparacion = new Sunny.UI.UISymbolButton();
             btnListo = new Sunny.UI.UISymbolButton();
+            btnCancelar = new Sunny.UI.UIButton();
             SuspendLayout();
             // 
             // btnListoEntrega
@@ -58,7 +59,7 @@
             btnListoEntrega.FillColor = Color.FromArgb(0, 165, 155);
             btnListoEntrega.FillHoverColor = Color.FromArgb(0, 145, 137);
             btnListoEntrega.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnListoEntrega.Location = new Point(171, 548);
+            btnListoEntrega.Location = new Point(258, 548);
             btnListoEntrega.MinimumSize = new Size(1, 1);
             btnListoEntrega.Name = "btnListoEntrega";
             btnListoEntrega.Radius = 12;
@@ -76,7 +77,7 @@
             btnDerivar.FillHoverColor = Color.FromArgb(232, 248, 247);
             btnDerivar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDerivar.ForeColor = Color.FromArgb(0, 145, 137);
-            btnDerivar.Location = new Point(372, 548);
+            btnDerivar.Location = new Point(500, 548);
             btnDerivar.MinimumSize = new Size(1, 1);
             btnDerivar.Name = "btnDerivar";
             btnDerivar.Radius = 12;
@@ -429,12 +430,31 @@
             btnListo.TipsFont = new Font("Microsoft Sans Serif", 9F);
             btnListo.Click += btnListo_Click;
             // 
+            // btnCancelar
+            // 
+            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCancelar.FillColor = Color.White;
+            btnCancelar.FillHoverColor = Color.FromArgb(232, 248, 247);
+            btnCancelar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCancelar.ForeColor = Color.FromArgb(0, 145, 137);
+            btnCancelar.Location = new Point(80, 548);
+            btnCancelar.MinimumSize = new Size(1, 1);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Radius = 12;
+            btnCancelar.RectColor = Color.FromArgb(0, 165, 155);
+            btnCancelar.Size = new Size(119, 30);
+            btnCancelar.TabIndex = 64;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            btnCancelar.Click += btnCancelar_Click;
+            // 
             // frmDetallesOrden
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 246, 250);
             ClientSize = new Size(752, 607);
+            Controls.Add(btnCancelar);
             Controls.Add(btnListo);
             Controls.Add(btnReparacion);
             Controls.Add(btnDiagnostico);
@@ -490,5 +510,6 @@
         private Sunny.UI.UISymbolButton btnDiagnostico;
         private Sunny.UI.UISymbolButton btnReparacion;
         private Sunny.UI.UISymbolButton btnListo;
+        private Sunny.UI.UIButton btnCancelar;
     }
 }

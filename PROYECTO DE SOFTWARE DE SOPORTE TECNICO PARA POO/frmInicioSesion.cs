@@ -37,12 +37,14 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                     "Acceso concedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     menu.MostrarAdministrador();
                     menu.Show();
+                    this.Hide();
                 }
                 else if (Sesion.PerfilActual == "Tecnico")
                 {
                     MessageBox.Show($"¡Bienvenido Técnico! Ingresando a {Sesion.SucursalActual}...",
                                     "Acceso concedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     menu.Show();
+                    this.Hide();
                 }
             }
             else
