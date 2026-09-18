@@ -1,4 +1,7 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO.Reportes;
+using System.Diagnostics;
+using System.IO;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -286,6 +289,74 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
             totalOrden = totalCosto;
         }
 
+        private List<DetalleFacturaModel> ObtenerDetallesFactura(int idOrden)
+        {
+            List<DetalleFacturaModel> detalles = new List<DetalleFacturaModel>();
+
+            string consultaRepuestos = @"
+        SELECT 
+            r.nombrerepuesto AS Descripcion,
+            d.cantidad AS Cantidad,
+            d.preciocobrado AS PrecioUnitario
+        FROM detallesorden d
+        INNER JOIN repuestos r
+            ON d.idrepuesto = r.idrepuesto
+        WHERE d.idorden = " + idOrden;
+
+            DataTable dtRepuestos =
+                oCon.retornarRegistrosUsuarios(consultaRepuestos);
+
+            if (dtRepuestos != null)
+            {
+                foreach (DataRow fila in dtRepuestos.Rows)
+                {
+                    detalles.Add(new DetalleFacturaModel
+                    {
+                        Descripcion =
+                            fila["Descripcion"]?.ToString() ?? "Repuesto",
+
+                        Cantidad =
+                            fila["Cantidad"] != DBNull.Value
+                                ? Convert.ToInt32(fila["Cantidad"])
+                                : 1,
+
+                        PrecioUnitario =
+                            fila["PrecioUnitario"] != DBNull.Value
+                                ? Convert.ToDecimal(fila["PrecioUnitario"])
+                                : 0
+                    });
+                }
+            }
+
+            string consultaManoObra = @"
+        SELECT ISNULL(costo_estimado, 0) AS ManoObra
+        FROM ordenes
+        WHERE id = " + idOrden;
+
+            DataTable dtManoObra =
+                oCon.retornarRegistrosUsuarios(consultaManoObra);
+
+            if (dtManoObra != null &&
+                dtManoObra.Rows.Count > 0)
+            {
+                decimal manoObra =
+                    Convert.ToDecimal(
+                        dtManoObra.Rows[0]["ManoObra"]
+                    );
+
+                if (manoObra > 0)
+                {
+                    detalles.Add(new DetalleFacturaModel
+                    {
+                        Descripcion = "Mano de obra",
+                        Cantidad = 1,
+                        PrecioUnitario = manoObra
+                    });
+                }
+            }
+
+            return detalles;
+        }
         private void btnRegistraEntrega_Click(object sender, EventArgs e)
         {
             if (cmbListaOrdenes.SelectedValue == null)
@@ -343,7 +414,10 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                         if (filasAfectadas > 0)
                         {
                             string numeroFactura =
-                                lblNumeroOrden.Text.Replace("ORD-", "FAC-");
+                                lblNumeroOrden.Text.Replace(
+                                    "ORD-",
+                                    "FAC-"
+                                );
 
                             GuardarFactura(
                                 db.oCon,
@@ -352,41 +426,40 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 formaPago
                             );
 
-                            MessageBox.Show(
-                                "La entrega fue registrada correctamente.",
-                                "Entrega registrada",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-
-                            List<DetalleFactura> detallesFactura =
-                                new List<DetalleFactura>();
-
-                            foreach (DataGridViewRow fila in dgvDesglose.Rows)
+                            FacturaModel factura = new FacturaModel
                             {
-                                if (fila.IsNewRow)
-                                    continue;
+                                NumeroFactura = numeroFactura,
+                                Fecha = DateTime.Now,
 
-                                detallesFactura.Add(new DetalleFactura
-                                {
-                                    Descripcion = fila.Cells[0].Value?.ToString() ?? "",
-                                    Valor = fila.Cells[1].Value?.ToString() ?? "$0.00"
-                                });
-                            }
-                            frmFactura factura = new frmFactura(
-                            numeroFactura,
-                            lblNumeroOrden.Text,
-                            lblCedula.Text,
-                            lblCliente.Text,
-                            lblTelefono.Text,
-                            lblDispositivo.Text,
-                            lblTecnicoAsignado.Text,
-                            formaPago,
-                            detallesFactura,
-                            totalOrden
-);
-                            byte[] pdfBytes = factura.GenerarPDF();
+                                NumeroOrden = lblNumeroOrden.Text,
 
-                            string nombreFactura = numeroFactura + ".pdf";
+                                Cedula = lblCedula.Text,
+                                NombreCliente = lblCliente.Text,
+                                Telefono = lblTelefono.Text,
+                                Correo = "",
+
+                                Dispositivo = lblDispositivo.Text,
+                                Tecnico = lblTecnicoAsignado.Text,
+
+                                TrabajoRealizado =
+                                    lblDescripcionTrabajo.Text,
+
+                                Observaciones =
+                                    txtObservaciones.Text.Trim(),
+
+                                FormaPago = formaPago,
+
+                                Total = totalOrden,
+
+                                Detalles =
+                                    ObtenerDetallesFactura(idOrden)
+                            };
+
+                            byte[] pdfBytes =
+                                FacturaPdf.Generar(factura);
+
+                            string nombreFactura =
+                                numeroFactura + ".pdf";
 
                             GuardarPdfFactura(
                                 db.oCon,
@@ -394,7 +467,18 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                                 pdfBytes,
                                 nombreFactura
                             );
-                            factura.ShowDialog();
+
+                            MessageBox.Show(
+                                "La entrega y la factura fueron registradas correctamente.",
+                                "Entrega registrada",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information
+                            );
+
+                            AbrirFacturaPdf(
+                                pdfBytes,
+                                nombreFactura
+                            );
 
                             LimpiarDespuesDeEntrega();
                         }
@@ -423,6 +507,43 @@ namespace PROYECTO_DE_SOFTWARE_DE_SOPORTE_TECNICO_PARA_POO
                 {
                     db.cerrarConexion();
                 }
+            }
+        }
+
+        private void AbrirFacturaPdf(
+    byte[] pdfBytes,
+    string nombreFactura)
+        {
+            try
+            {
+                string rutaTemporal =
+                    Path.Combine(
+                        Path.GetTempPath(),
+                        nombreFactura
+                    );
+
+                File.WriteAllBytes(
+                    rutaTemporal,
+                    pdfBytes
+                );
+
+                Process.Start(
+                    new ProcessStartInfo
+                    {
+                        FileName = rutaTemporal,
+                        UseShellExecute = true
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "La factura fue generada, pero no se pudo abrir.\n\n" +
+                    ex.Message,
+                    "Factura",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
             }
         }
         private void GuardarPdfFactura(
